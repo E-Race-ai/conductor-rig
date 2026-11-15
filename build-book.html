@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Conductor Build Book</title>
+<meta name="description" content="Project Conductor: our AI orchestration workstation. Threadripper PRO 9975WX, 256 GB ECC, RTX PRO 5000 Blackwell. Option A vs B, sourced bill of materials and the build.">
+<meta property="og:title" content="Project Conductor"><meta property="og:description" content="Project Conductor: our AI orchestration workstation. Threadripper PRO 9975WX, 256 GB ECC, RTX PRO 5000 Blackwell. Option A vs B, sourced bill of materials and the build.">
+<meta property="og:image" content="img/gpu.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+</head><body style="margin:0">
+<div style="position:relative;z-index:30;background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))"><span>Shared with the build team for 24 hours · link stops working Mon, Nov 16, 10:00 AM ET</span><span style="display:flex;gap:14px"><a href="./" style="color:#0A0D14;text-decoration:none;opacity:.8">Showcase</a><a href="build-book.html" style="color:#0A0D14;text-decoration:underline;font-weight:800">Build book</a><a href="research.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Research</a></span></div>
+<style>
+/* Layout: workbench — sticky spec strip on top, parts rail left, case drawing + fit checks right; tabs for models and assembly. */
+:root{
+  --bg:#EDF1EF; --panel:#FFFFFF; --sunk:#E3E9E6; --ink:#14201C; --muted:#5A6B65; --line:#C9D4CF;
+  --accent:#0C7A63; --accent-soft:#D3ECE4; --pcb:#DCE9E3; --pcb-line:#9FC2B4;
+  --ok:#2B7A4B; --warn:#A8670F; --bad:#C0352B; --info:#2F5FA8;
+  --ok-soft:#DDF0E3; --warn-soft:#F7EAD2; --bad-soft:#F8DEDB; --info-soft:#DCE6F5;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1412; --panel:#151D1A; --sunk:#1B2521; --ink:#E2EBE7; --muted:#8FA29B; --line:#2B3833;
+  --accent:#3BC29E; --accent-soft:#163A30; --pcb:#13241E; --pcb-line:#2F5A4B;
+  --ok:#5BC27F; --warn:#E0A445; --bad:#F0796E; --info:#7FA8E8;
+  --ok-soft:#173222; --warn-soft:#3A2D14; --bad-soft:#3D1D1A; --info-soft:#1B2A42; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1412; --panel:#151D1A; --sunk:#1B2521; --ink:#E2EBE7; --muted:#8FA29B; --line:#2B3833;
+  --accent:#3BC29E; --accent-soft:#163A30; --pcb:#13241E; --pcb-line:#2F5A4B;
+  --ok:#5BC27F; --warn:#E0A445; --bad:#F0796E; --info:#7FA8E8;
+  --ok-soft:#173222; --warn-soft:#3A2D14; --bad-soft:#3D1D1A; --info-soft:#1B2A42; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+.wrap{max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:85%;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:22px;font-weight:800}
+h2{font-size:18px;font-weight:700}
+h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);border-bottom:1px solid var(--line)}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding-block:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand small{color:var(--muted);font-size:12px}
+.specs{display:flex;flex-wrap:wrap;gap:6px 18px;margin-left:auto}
+.spec{display:flex;flex-direction:column;min-width:64px}
+.spec b{font-family:var(--mono);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.spec span{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tabs{display:flex;gap:2px;overflow-x:auto}
+.tabs a{padding:8px 14px;text-decoration:none;color:var(--muted);font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.status.ok{background:var(--ok-soft);color:var(--ok)} .status.warn{background:var(--warn-soft);color:var(--warn)} .status.bad{background:var(--bad-soft);color:var(--bad)}
+
+main{padding-block:20px 60px}
+.view[hidden]{display:none}
+
+/* build view */
+.build{display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.build{grid-template-columns:1fr}}
+.rail{display:flex;flex-direction:column;gap:10px}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--panel);padding:5px 10px;border-radius:6px;font-size:12.5px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.part{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:6px}
+.part.flag-bad{box-shadow:inset 3px 0 0 var(--bad)} .part.flag-warn{box-shadow:inset 3px 0 0 var(--warn)}
+.part-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.part label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.part select{width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--sunk)}
+.part .meta{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.row2{display:grid;grid-template-columns:1fr 84px;gap:8px}
+.price{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.price input{width:76px;padding:2px 6px;border:1px solid transparent;border-radius:4px;background:transparent;text-align:right;font-family:var(--mono);font-size:12.5px}
+.price input:hover,.price input:focus{border-color:var(--line);background:var(--sunk)}
+.stepper{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--sunk)}
+.stepper button{border:0;background:transparent;width:28px;cursor:pointer;font-weight:700}
+.stepper output{flex:1;text-align:center;align-self:center;font-family:var(--mono)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:6px;padding:7px 12px;font-weight:600;cursor:pointer}
+.btn.solid{background:var(--accent);color:var(--panel)}
+
+.stage{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.drawing{overflow-x:auto}
+.drawing svg{display:block;width:100%;min-width:520px;height:auto}
+svg text{font-family:var(--mono)}
+.gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 24px}
+.gauge{display:grid;gap:4px}
+.gauge-top{display:flex;justify-content:space-between;font-size:12.5px;gap:8px}
+.gauge-top span:last-child{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{position:relative;height:8px;background:var(--sunk);border-radius:4px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:4px}
+.checks{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.checks li{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:start;padding:8px 10px;border-radius:6px;background:var(--sunk)}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 0;text-align:center;border-radius:4px}
+.tag.bad{background:var(--bad-soft);color:var(--bad)} .tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.info{background:var(--info-soft);color:var(--info)}
+.checks b{font-weight:600}
+.checks p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.note{font-size:12px;color:var(--muted);max-width:75ch}
+
+/* models */
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.fit{display:inline-block;min-width:118px;padding:3px 8px;border-radius:5px;font-family:var(--mono);font-size:12px}
+.fit.gpu{background:var(--ok-soft);color:var(--ok)} .fit.split{background:var(--warn-soft);color:var(--warn)} .fit.no{background:var(--sunk);color:var(--muted);text-decoration:line-through}
+.model-name{font-weight:600} .model-name small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+
+/* assembly */
+.asm{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:start}
+@media (max-width:900px){.asm{grid-template-columns:1fr}}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:step}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;counter-increment:step}
+.step.done{opacity:.6}
+.step input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);margin-top:2px}
+.step h4{margin:0;font-family:var(--display);font-stretch:85%;font-size:16px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.step h4::before{content:counter(step,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--accent)}
+.step ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
+.step li{max-width:80ch}
+.crit{color:var(--bad);font-weight:600}
+.badge{font-family:var(--body);font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);letter-spacing:.03em}
+.side{position:sticky;top:120px;display:grid;gap:12px}
+.progress{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent)}
+.tools li{font-size:13px}
+/* overview */
+.count{font-family:var(--mono);font-size:11px;background:var(--warn-soft);color:var(--warn);padding:0 6px;border-radius:999px}
+.hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.lede{font-family:var(--display);font-stretch:85%;font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.15;text-wrap:balance;margin:6px 0 12px;max-width:26ch}
+.prose{max-width:68ch;color:var(--ink)} .prose p{margin:0 0 10px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tile{background:var(--panel);padding:12px 14px;display:grid;gap:2px;min-width:0}
+.tile b{font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.tile span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tile small{color:var(--muted);font-size:12px}
+.cost{width:100%;min-width:0;border-collapse:collapse}
+.cost td{padding:6px 0;border-bottom:1px dashed var(--line)}
+.cost td:last-child{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.cost tr.sum td{border-bottom:0;border-top:1px solid var(--ink);font-weight:600;padding-top:8px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.findings{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.findings li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:10px;border-radius:8px;background:var(--sunk)}
+.findings p{margin:3px 0 0;color:var(--muted);font-size:13px;max-width:80ch}
+.who{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.who img{width:18px;height:18px;border-radius:50%}
+/* parts */
+.bom{min-width:760px}
+.bom td{vertical-align:top}
+.bom .src{font-size:12px;color:var(--muted)}
+.bom .spec{font-size:12.5px;color:var(--muted);max-width:52ch}
+.linkbtn{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;color:var(--accent);white-space:nowrap}
+.linkbtn:hover{border-color:var(--accent)}
+/* decisions */
+.decs{display:grid;gap:16px}
+.dec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px}
+.dec.open{box-shadow:inset 3px 0 0 var(--warn)}
+.dec-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.opt{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:6px;align-content:start;background:var(--bg)}
+.opt.rec{border-color:var(--accent);background:var(--accent-soft)}
+.opt.mine{outline:2px solid var(--accent);outline-offset:1px}
+.opt h5{margin:0;font-size:14px;font-weight:600;display:flex;gap:6px;flex-wrap:wrap;align-items:baseline}
+.opt p{margin:0;font-size:12.5px;color:var(--muted)}
+.opt .votes{display:flex;gap:4px;flex-wrap:wrap;min-height:20px}
+.opt .votes img{width:20px;height:20px;border-radius:50%;border:1px solid var(--panel)}
+.opt-actions{display:flex;gap:6px;flex-wrap:wrap}
+.banner{padding:10px 12px;border-radius:8px;background:var(--info-soft);color:var(--info);font-size:13px}
+@media (prefers-reduced-motion:no-preference){.bar i,.progress i{transition:width .3s ease}}
+</style>
+
+<header>
+  <div class="wrap head">
+    <div class="brand"><h1>AI Orchestration Rig</h1><small>team build book</small></div>
+    <span id="overall" class="status ok">All fits pass</span>
+    <div class="specs" id="specs"></div>
+  </div>
+  <div class="wrap"><nav class="tabs" aria-label="Views">
+    <a href="#overview" data-view="overview">Overview</a>
+    <a href="#compare" data-view="compare">Option A vs B</a>
+    <a href="#parts" data-view="parts">Parts</a>
+    <a href="#build" data-view="build">Fit check</a>
+    <a href="#decisions" data-view="decisions">Decisions <span class="count" id="deccount"></span></a>
+    <a href="#models" data-view="models">What it runs</a>
+    <a href="#assembly" data-view="assembly">Assembly guide</a>
+  </nav></div>
+</header>
+
+<main class="wrap">
+  <!-- OVERVIEW -->
+  <section class="view" id="view-overview">
+    <div class="hero">
+      <div class="card">
+        <div class="eyebrow">What we're building</div>
+        <p class="lede">One EPYC workstation that runs our AI agents, local models and tool servers side by side.</p>
+        <div class="prose">
+          <p>The machine is an orchestration hub. It runs many agent sessions at once, each calling cloud models (Claude, OpenAI) and local tools: MCP servers, headless browsers, vector search and containers. A local GPU serves small models for routing, embeddings and fallback, so not every call leaves the building.</p>
+          <p>We have two Micro Center quotes: <b>Option A</b>, the EPYC build and our baseline, and <b>Option B</b>, an upgrade to Threadripper PRO with twice the cores, all memory channels filled and a 48 GB pro GPU. <a href="#compare">Compare them →</a></p>
+          <p>That workload uses system memory first, then CPU cores, then GPU memory. Six parallel coding agents measured about 70 processes and 43.5 GB of RAM. The SP5 platform gives us room to grow on all three: 8 memory channels, 7 full-speed GPU slots and 128 PCIe lanes.</p>
+        </div>
+        <div class="pills" id="ovpills"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:8px">Cost of the selected build</h3>
+        <table class="cost" id="ovcost"></table>
+        <p class="note" style="margin-top:8px">Uses the parts selected on the Fit check page. Tax is the 7% rate on the Micro Center quote. Prices marked as estimates are not quotes.</p>
+      </div>
+    </div>
+    <div class="tiles" id="ovtiles" style="margin-top:16px"></div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card">
+        <div class="card-head"><h2>What the research found</h2><span class="note">Nov 15, 2026</span></div>
+        <ul class="findings" id="ovfind"></ul>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Open decisions</h2><a href="#decisions" class="note">Vote →</a></div>
+        <ul class="checks" id="ovdec"></ul>
+        <div class="card-head" style="margin-top:16px"><h2>Fit check</h2><a href="#build" class="note">Details →</a></div>
+        <ul class="checks" id="ovfit"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="view" id="view-compare" hidden>
+    <div class="card" style="margin-bottom:16px">
+      <div class="eyebrow">Option A vs Option B</div>
+      <h2 style="margin:4px 0 10px">Which build do we buy?</h2>
+      <div class="prose" id="cmprec"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>Side by side</h2><span class="note">Both include 2× Kioxia CD6-R drives, cables, a case and 7% tax</span></div>
+      <div class="table-wrap"><table id="cmp"></table></div>
+      <div class="actions" style="margin-top:12px" id="cmpload"></div>
+      <p class="note" style="margin-top:8px">The agent estimate uses ~7 GB of RAM per coding agent (6 agents measured at 43.5 GB) after reserving 24 GB for the OS and services. Treat it as a rough guide.</p>
+    </div>
+  </section>
+
+  <!-- PARTS -->
+  <section class="view" id="view-parts" hidden>
+    <div class="card">
+      <div class="card-head"><h2>Bill of materials</h2><span class="note" id="bomnote"></span></div>
+      <div class="table-wrap"><table class="bom" id="bom"></table></div>
+      <p class="note" style="margin-top:10px">Shows the parts selected on the Fit check page. Use <b>Discuss</b> to comment on a part; the whole team sees the thread.</p>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section class="view" id="view-decisions" hidden>
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-head"><h2>Decisions before Thursday</h2><span class="note" id="decdeadline"></span></div>
+      <p class="note">Each card shows the research recommendation. Pick your choice to vote; the team's votes show on each option. <b>Try it</b> loads that option into the Fit check so you can see what changes.</p>
+      <div class="banner" id="votebanner" hidden></div>
+    </div>
+    <div class="decs" id="decs"></div>
+  </section>
+
+  <!-- BUILD -->
+  <section class="view" id="view-build">
+    <div class="build">
+      <div class="rail">
+        <div class="card" style="padding:12px">
+          <h3 style="margin-bottom:8px">Start from</h3>
+          <div class="presets" id="presets"></div>
+        </div>
+        <div id="parts" class="rail"></div>
+        <div class="part">
+          <label for="wall">Wall outlet</label>
+          <select id="wall">
+            <option value="120">120 V / 15 A (standard US outlet)</option>
+            <option value="120x20">120 V / 20 A circuit</option>
+            <option value="230">230 V (EU/UK/AU, or US 240 V line)</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button class="btn solid" id="copy" type="button">Copy parts list</button>
+          <button class="btn" id="reset" type="button">Reset prices</button>
+        </div>
+        <p class="note">Specs and prices are starting estimates from manufacturer data and recent street prices. Click any price to edit it. GPU and DDR5 prices have moved a lot since late 2025, so check before buying.</p>
+      </div>
+
+      <div class="stage">
+        <div class="card">
+          <div class="card-head">
+            <h2>Inside the case</h2>
+            <div class="legend">
+              <span><i style="background:var(--pcb)"></i>Motherboard</span>
+              <span><i style="background:var(--accent)"></i>GPU</span>
+              <span><i style="background:var(--muted)"></i>PSU / cooler</span>
+              <span><i style="background:var(--bad)"></i>Limit / clash</span>
+            </div>
+          </div>
+          <div class="drawing" id="drawing"></div>
+          <p class="note">Side-panel view to scale in millimetres, rear of case on the left. GPU length is measured from the rear slot bracket. Slot positions are approximate; confirm against the board manual.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Clearances</h2></div>
+          <div class="gauges" id="gauges"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Fit checks</h2><span class="note" id="checkcount"></span></div>
+          <ul class="checks" id="checks"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section class="view" id="view-models" hidden>
+    <div class="card">
+      <div class="card-head">
+        <h2>What this build can run</h2>
+        <div class="legend">
+          <span><i style="background:var(--ok)"></i>Fits in GPU memory (fast)</span>
+          <span><i style="background:var(--warn)"></i>Needs system RAM offload (slow)</span>
+          <span><i style="background:var(--muted)"></i>Does not fit</span>
+        </div>
+      </div>
+      <p class="note" id="memline"></p>
+      <div class="table-wrap"><table id="models"></table></div>
+      <p class="note">Estimates: weights × bytes per parameter, plus about 10% and 1.5 GB for KV cache at moderate context (8–16k tokens) and runtime overhead. Long contexts need more. Mixture-of-experts models (MoE) run tolerably with RAM offload because only active experts are read each token; dense models crawl. QLoRA column assumes 4-bit base weights, LoRA adapters, gradient checkpointing, and that the model is split across the GPUs.</p>
+    </div>
+  </section>
+
+  <!-- ASSEMBLY -->
+  <section class="view" id="view-assembly" hidden>
+    <div class="asm">
+      <ol class="steps" id="steps"></ol>
+      <aside class="side">
+        <div class="card">
+          <h3>Team progress</h3>
+          <p class="mono" id="progtext" style="margin:6px 0">0 / 0</p>
+          <div class="progress"><i id="progbar" style="width:0%"></i></div>
+          <div class="actions" style="margin-top:10px"><button class="btn" id="clearsteps" type="button">Clear checkmarks</button></div>
+        </div>
+        <div class="card">
+          <h3>On the bench</h3>
+          <ul class="tools" id="tools"></ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ===== Catalog (edit here as research comes in) ===== */
+const CAT = {
+cpu:[
+ {id:'epyc9175f',src:'Micro Center bundle · SKU 999999',name:'AMD EPYC 9175F (Micro Center bundle)',plat:'SP5',cores:16,watts:320,chan:12,lanes:128,price:5999.99,meta:'16C/32T Zen 5 · SP5 · 320 W · 512 MB L3 · 12-ch DDR5 · 128 PCIe 5.0 lanes. Price is the whole bundle: CPU + TURIND8X-2T + 128 GB kit.'},
+ {id:'tr9975wxb',name:'AMD Threadripper PRO 9975WX (Micro Center bundle)',plat:'TRPRO',cores:32,watts:350,chan:8,lanes:128,price:7999.99,src:'Micro Center bundle · SKU 999999',meta:'32C/64T Zen 5 · sTR5 · 350 W · 8-ch DDR5 · 128 PCIe 5.0 lanes. Price is the whole bundle: CPU + WRX90E-SAGE SE + 128 GB kit.'},
+ {id:'epyc9355p',name:'AMD EPYC 9355P (if Micro Center will swap it into the bundle)',plat:'SP5',cores:32,watts:280,chan:12,lanes:128,price:5999.99,src:'Ask Micro Center',meta:'32C/64T Zen 5 · SP5 · 280 W · 256 MB L3 · street ~$2.3–3.4k, at or below the 9175F. Price assumes the same bundle price.'},
+ {id:'9950x3d',name:'AMD Ryzen 9 9950X3D',plat:'AM5',cores:16,watts:200,chan:2,lanes:24,price:699,meta:'16C/32T · AM5 · 170 W TDP / 200 W PPT · 24 usable PCIe 5.0 lanes'},
+ {id:'9950x',name:'AMD Ryzen 9 9950X',plat:'AM5',cores:16,watts:200,chan:2,lanes:24,price:549,meta:'16C/32T · AM5 · 170 W TDP · 24 usable PCIe 5.0 lanes'},
+ {id:'285k',name:'Intel Core Ultra 9 285K',plat:'LGA1851',cores:24,watts:250,chan:2,lanes:24,price:589,meta:'8P+16E · LGA1851 · 250 W turbo · 20× PCIe 5.0 + 4× 4.0'},
+ {id:'tr9970x',name:'AMD Threadripper 9970X',plat:'TR',cores:32,watts:350,chan:4,lanes:88,price:2499,meta:'32C/64T · sTR5 (TRX50) · 350 W · 4-ch DDR5 RDIMM · 80+ PCIe lanes'},
+ {id:'tr9980x',name:'AMD Threadripper 9980X',plat:'TR',cores:64,watts:350,chan:4,lanes:88,price:4999,meta:'64C/128T · sTR5 (TRX50) · 350 W · 4-ch DDR5 RDIMM'},
+ {id:'tr9975wx',name:'AMD Threadripper PRO 9975WX',plat:'TRPRO',cores:32,watts:350,chan:8,lanes:128,price:4099,meta:'32C/64T · sTR5 (WRX90) · 350 W · 8-ch DDR5 RDIMM · 128 PCIe 5.0 lanes'},
+],
+board:[
+ {id:'turind8x',name:'ASRock Rack TURIND8X-2T (in bundle)',accepts:['SP5'],form:'EEB',w:330,dimm:8,mem:'RDIMM',maxMem:2048,gpuSlots:[1,2,3,4,5,6,7],m2:2,u2:4,price:0,bmc:true,
+  eps:3,src:'Micro Center bundle · SKU 999999',meta:'EEB 12.63×13 in · 8× DDR5 RDIMM, 1 per channel (8 of the CPU\'s 12 channels), up to DDR5-6400 · 7× PCIe 5.0 x16 + 1× x8, single-slot pitch · 2× M.2 Gen5 x4 · 4× MCIO Gen5 x4 (3 also SATA) · dual 10 GbE (Broadcom BCM57416) · AST2600 BMC, VGA-only onboard video · 24-pin + 3× EPS 8-pin · CPUs up to 500 W',
+  slotNote:'Seven x16 slots at single-slot pitch: two-slot cards fit four across (slots 1/3/5/7).'},
+ {id:'wrx90b',name:'ASUS Pro WS WRX90E-SAGE SE (in bundle)',accepts:['TRPRO'],form:'EEB',w:330,dimm:8,mem:'RDIMM',maxMem:2048,gpuSlots:[1,2,3,4,5,6,7],m2:4,u2:2,eps:2,cpuPcie:2,slotPwr:2,bmc:true,price:0,src:'Micro Center bundle · SKU 999999',
+  meta:'EEB 12×13 in · 8× DDR5 RDIMM (8 channels) · 7× PCIe 5.0 x16 · 4× M.2 Gen5 x4 · 2× SlimSAS (NVMe, Gen4 x4) · Intel X710 dual 10 GbE + 1 GbE management · AST2600 BMC · power: 24-pin + 2× EPS + 2× 8-pin PCIe-to-CPU + 2× 8-pin slot power',slotNote:'Seven x16 slots at single-slot pitch: two-slot cards fit four across (slots 1/3/5/7).'},
+ {id:'x870e',name:'ASUS ProArt X870E-Creator WiFi',accepts:['AM5'],form:'ATX',w:244,dimm:4,mem:'UDIMM',maxMem:256,gpuSlots:[1,4,6],m2:4,price:479,
+  meta:'ATX · 4× DDR5 · 2× PCIe 5.0 x16 slots (x8/x8 with two cards) · 3rd slot x4 chipset',slotNote:'With two GPUs, slots 1 and 2 each run PCIe 5.0 x8. A third GPU gets chipset x4.'},
+ {id:'z890',name:'ASUS ProArt Z890-Creator WiFi',accepts:['LGA1851'],form:'ATX',w:244,dimm:4,mem:'UDIMM',maxMem:256,gpuSlots:[1,4,6],m2:4,price:479,
+  meta:'ATX · 4× DDR5 · 2× PCIe 5.0 x16 slots (x8/x8) · 3rd slot x4 chipset',slotNote:'With two GPUs, slots 1 and 2 each run x8. A third GPU gets chipset x4.'},
+ {id:'trx50',name:'ASUS Pro WS TRX50-SAGE WiFi',accepts:['TR','TRPRO'],form:'CEB',w:267,dimm:4,mem:'RDIMM',maxMem:1024,gpuSlots:[1,3,5],m2:4,price:899,needsBios:true,
+  meta:'CEB (12×10.5 in) · 4× DDR5 RDIMM · 3× full-length PCIe x16 (two 5.0, one 4.0)',slotNote:'Two-slot cards fit three across. Thicker cards drop that to two.'},
+ {id:'wrx90',name:'ASUS Pro WS WRX90E-SAGE SE',accepts:['TRPRO'],form:'EEB',w:330,dimm:8,mem:'RDIMM',maxMem:2048,gpuSlots:[1,2,3,4,5,6,7],m2:4,u2:2,eps:2,cpuPcie:2,slotPwr:2,bmc:true,price:1299,needsBios:true,
+  meta:'EEB (12×13 in) · 8× DDR5 RDIMM · 7× PCIe 5.0 x16',slotNote:'Seven x16 slots at single-slot pitch: two-slot cards fit four across (slots 1/3/5/7).'},
+],
+ram:[
+ {id:'kfrp4x32',name:'128 GB (4×32) Kingston Fury Renegade Pro DDR5-5600 RDIMM (in bundle)',type:'RDIMM',sticks:4,gb:128,price:0,src:'Micro Center bundle · SKU 999999'},
+ {id:'kfrp8x32',name:'256 GB (8×32): bundle kit + 2nd Kingston KF556R28RBE2K4-128 kit',type:'RDIMM',sticks:8,gb:256,price:4589.99,src:'Micro Center · SKU 873000 (sold with a bundle only)',meta:'Fills all 8 channels: ~358 GB/s vs ~179 GB/s · DDR5-5600 CL28 ECC RDIMM, same part as the bundle kit'},
+ {id:'u2x48',name:'96 GB (2×48) DDR5-6000 CL30',type:'UDIMM',sticks:2,gb:96,price:520},
+ {id:'u2x64',name:'128 GB (2×64) DDR5-5600',type:'UDIMM',sticks:2,gb:128,price:780},
+ {id:'u4x48',name:'192 GB (4×48) DDR5-5600',type:'UDIMM',sticks:4,gb:192,price:1050},
+ {id:'u4x64',name:'256 GB (4×64) DDR5-5200',type:'UDIMM',sticks:4,gb:256,price:1560},
+ {id:'r4x32',name:'128 GB (4×32) DDR5-6400 ECC RDIMM',type:'RDIMM',sticks:4,gb:128,price:1100},
+ {id:'r4x64',name:'256 GB (4×64) DDR5-6400 ECC RDIMM',type:'RDIMM',sticks:4,gb:256,price:2200},
+ {id:'r8x32',name:'256 GB (8×32) DDR5-6400 ECC RDIMM',type:'RDIMM',sticks:8,gb:256,price:2200},
+ {id:'r8x64',name:'512 GB (8×64) DDR5-6400 ECC RDIMM',type:'RDIMM',sticks:8,gb:512,price:4400},
+],
+gpu:[
+ {id:'5070tipa',src:'Micro Center · SKU 936120',name:'ASUS ProArt RTX 5070 Ti OC 16 GB',vram:16,watts:300,len:304,slots:2.5,c12:1,p8:0,blower:false,price:1699.99,meta:'16 GB GDDR7 · ~300 W · ~304 mm · 2.5-slot · 1× 12V-2x6. Quoted $1,699.99: MSRP $749, ProArt list $1,069.99, Nov 2026 street $1,229–1,500.'},
+ {id:'r9700',name:'AMD Radeon AI PRO R9700 32 GB',vram:32,watts:300,len:280,slots:2,c12:1,p8:0,blower:true,price:1700,src:'Micro Center (~$1,700)',meta:'32 GB · ~300 W · 2-slot blower · ROCm, not CUDA: vLLM and llama.cpp work, some tools don\'t. Size and power not verified.'},
+ {id:'b60',name:'Intel Arc Pro B60 24 GB',vram:24,watts:200,len:270,slots:2,c12:0,p8:1,blower:true,price:1000,meta:'24 GB · ~200 W · 2-slot · cheapest VRAM (~$42/GB) but weakest software support. Size and power not verified.'},
+ {id:'pro5000',name:'NVIDIA RTX PRO 5000 Blackwell 48 GB (OEM)',vram:48,watts:300,len:267,slots:2,c12:1,p8:0,blower:true,price:7199.99,src:'Micro Center · SKU 044628',meta:'48 GB GDDR7 ECC · 300 W · 267 mm · 2-slot blower · 1× 12V-2x6. Price matches the 48 GB OEM part; confirm on the box.'},
+ {id:'pro5000x72',name:'NVIDIA RTX PRO 5000 Blackwell 72 GB (OEM)',vram:72,watts:300,len:267,slots:2,c12:1,p8:0,blower:true,price:7999.99,src:'Central Computer (~$7,999.99); ask Micro Center',meta:'72 GB GDDR7 ECC · 300 W · 2-slot blower · runs gpt-oss-120b class models fully on the GPU'},
+ {id:'5090fe',name:'NVIDIA RTX 5090 Founders Edition',vram:32,watts:575,len:304,slots:2,c12:1,p8:0,blower:false,price:4300,meta:'Street ~$4,300–7,700 (Nov 2026) · 32 GB GDDR7 · 575 W · 304 mm · 2-slot flow-through · 1× 12V-2x6'},
+ {id:'5090aib',name:'RTX 5090 partner card (large triple-fan)',vram:32,watts:600,len:357,slots:3.5,c12:1,p8:0,blower:false,price:4800,meta:'32 GB · ~600 W · ~357 mm · 3.5-slot · 1× 12V-2x6'},
+ {id:'pro6000',name:'NVIDIA RTX PRO 6000 Blackwell Workstation',vram:96,watts:600,len:304,slots:2,c12:1,p8:0,blower:false,price:8565,meta:'96 GB GDDR7 ECC · 600 W · 304 mm · 2-slot flow-through'},
+ {id:'pro6000q',name:'NVIDIA RTX PRO 6000 Blackwell Max-Q',vram:96,watts:300,len:267,slots:2,c12:1,p8:0,blower:true,price:8565,meta:'96 GB · 300 W · 267 mm · 2-slot blower (stacks tightly)'},
+ {id:'5080',name:'NVIDIA RTX 5080 Founders Edition',vram:16,watts:360,len:304,slots:2,c12:1,p8:0,blower:false,price:1600,meta:'Street ~$1,579–2,200 · 16 GB GDDR7 · 360 W · 304 mm · 2-slot'},
+ {id:'4090',name:'RTX 4090 (used)',vram:24,watts:450,len:304,slots:3,c12:1,p8:0,blower:false,price:1800,meta:'24 GB GDDR6X · 450 W · 304 mm · 3-slot · 1× 12VHPWR'},
+ {id:'3090',name:'RTX 3090 (used)',vram:24,watts:350,len:313,slots:3,c12:0,p8:2,blower:false,price:1300,src:'eBay used (~$1,100–1,630 sold)',meta:'24 GB GDDR6X · 350 W · ~313 mm · 3-slot · 2× 8-pin · only GeForce card with NVLink · ~$46–68 per GB'},
+],
+cooler:[
+ {id:'xe360sp5',name:'SilverStone XE360-SP5',kind:'aio',rad:360,fits:['SP5'],price:379.99,src:'Micro Center · SKU 069492',meta:'360 mm AIO for EPYC SP5 · 28 mm radiator · mount as top exhaust'},
+ {id:'freezer4usp5',name:'Arctic Freezer 4U-SP5',kind:'air',h:145,fits:['SP5'],price:80,meta:'Air · 145 mm tall · rated 360 W · 2× 120 mm · no pump to fail (better for 24/7) · louder at full load. Price is an estimate.'},
+ {id:'aw420',name:'Thermaltake AW420 (420 mm AIO)',kind:'aio',rad:420,fits:['TRPRO','TR','SP6'],ihsUnverified:true,price:449.99,src:'Micro Center · SKU 921551',meta:'420 mm AIO · rated 625 W · radiator 456×138.5×27 mm · supports sTR5/SP6 and LGA4677'},
+ {id:'d15g2',name:'Noctua NH-D15 G2',kind:'air',h:168,fits:['AM5','LGA1851'],price:150,meta:'Dual-tower air · 168 mm tall'},
+ {id:'lf3',name:'Arctic Liquid Freezer III Pro 360',kind:'aio',rad:360,fits:['AM5','LGA1851'],price:120,meta:'360 mm AIO · 38 mm thick radiator'},
+ {id:'u14str5',name:'Noctua NH-U14S TR5-SP6',kind:'air',h:165,fits:['TR','TRPRO'],price:110,meta:'Single-tower air for sTR5 · 165 mm tall · full IHS coverage'},
+ {id:'xe360tr5',name:'SilverStone XE360-TR5',kind:'aio',rad:360,fits:['TR','TRPRO'],price:260,meta:'360 mm AIO for sTR5'},
+],
+psu:[
+ {id:'leadex7-1200',name:'Super Flower Leadex VII Platinum PRO 1200W (ATX 3.1)',watts:1200,len:150,c12:1,p8:4,eps:2,price:189.99,src:'Micro Center · SKU 848499',meta:'1200 W · Platinum · ~150 mm · 1× 12V-2x6 (600 W) · 2× EPS 4+4 · 4× PCIe 6+2'},
+ {id:'tc1650t',name:'ASRock Taichi TC-1650T 1650W Titanium (ATX 3.1)',watts:1650,len:180,c12:2,p8:8,eps:2,price:549.99,src:'Micro Center · SKU 883967',meta:'1650 W · Titanium · 180 mm · 2× 12V-2x6 · 2× EPS · 8× PCIe 6+2 · 12× SATA'},
+ {id:'rm1000x',name:'Corsair RM1000x Shift (ATX 3.1)',watts:1000,len:180,c12:1,p8:4,price:200,meta:'1000 W · Gold · 180 mm · 1× 12V-2x6'},
+ {id:'hx1500i',name:'Corsair HX1500i (ATX 3.1)',watts:1500,len:180,c12:2,p8:6,price:380,meta:'1500 W · Platinum · 180 mm · 2× 12V-2x6'},
+ {id:'tx1600',name:'Seasonic PRIME TX-1600 (ATX 3.1)',watts:1600,len:210,c12:2,p8:6,price:520,meta:'1600 W · Titanium · 210 mm · 2× 12V-2x6'},
+ {id:'thor1600',name:'ASUS ROG Thor 1600W Titanium III',watts:1600,len:190,c12:2,p8:6,price:560,meta:'1600 W · Titanium · 190 mm · 2× 12V-2x6'},
+ {id:'hela2050',name:'SilverStone HELA 2050R Platinum',watts:2050,w120:1650,len:200,c12:2,p8:8,price:600,meta:'2050 W at 230 V · ~1650 W on 115–120 V · 200 mm'},
+],
+case:[
+ {id:'antec900',name:'Antec 900 (2025)',forms:['ATX','EATX','CEB','EEB'],gpu:465,cooler:190,psu:230,slots:8,rad:420,radTop:360,radFront:420,price:199.99,src:'Micro Center · SKU 028738',meta:'SSI-EEB listed · GPU 465 mm with front fans (495 without) · cooler 190 mm · PSU 230 mm · 8 slots · 420 mm radiator front only (top max 360) · 9 drive bays incl. 5× 2.5"'},
+ {id:'enthoo2',name:'Phanteks Enthoo Pro 2 Server Edition',forms:['ATX','EATX','CEB','EEB'],gpu:503,cooler:195,psu:250,slots:11,rad:480,radTop:360,radFront:480,price:185,meta:'SSI-EEB (listed) · GPU 503 mm · cooler 195 mm · 11 slots · GPU fan bracket · server PSU support · ~78 L. Best value for multi-GPU.'},
+ {id:'v3000p',name:'Lian Li V3000 Plus',forms:['ATX','EATX','CEB','EEB'],gpu:589,cooler:198,psu:220,slots:8,rad:480,price:430,meta:'Lian Li lists EEB, not SSI-EEB; confirm standoffs · GPU 589 mm (358 mm rotated) · cooler 198 mm · 8 slots · 480 mm radiators front/top/bottom · ~128 L. Best for a water-cooled multi-GPU build.'},
+ {id:'ax500',name:'Thermaltake AX500',forms:['ATX','EATX','CEB','EEB'],gpu:460,cooler:185,psu:200,slots:8,rad:420,price:230,meta:'SSI-EEB (per retailers) · GPU 460 mm · cooler 185 mm · PSU 200 mm · 8 slots · 4× 140 mm fans + GPU support bracket included · ~75 L'},
+ {id:'meshify2xl',name:'Fractal Design Meshify 2 XL',forms:['ATX','EATX','CEB','EEB'],gpu:530,cooler:185,psu:250,slots:9,rad:420,price:250,meta:'SSI-EEB (listed) · GPU 530 mm open layout, ~340 mm with storage layout · cooler 185 mm · 9 slots · mesh front · 77 L'},
+ {id:'d7xl',name:'Fractal Design Define 7 XL',forms:['ATX','EATX','CEB','EEB'],gpu:530,cooler:185,psu:250,slots:9,rad:480,quiet:true,price:275,meta:'SSI-EEB (listed) · GPU 530 mm · cooler 185 mm · 9 slots · sound-dampened, less airflow · 78 L'},
+ {id:'c9000d',name:'Corsair 9000D RGB Airflow',forms:['ATX','EATX','CEB','EEB'],gpu:400,cooler:180,psu:250,slots:8,rad:480,price:520,meta:'SSI-EEB (listed) · GPU 400 mm (official) · cooler 180 mm · 8 slots · ~150 L super-tower'},
+ {id:'rm52',name:'SilverStone RM52 (5U rackmount)',forms:['ATX','EATX','CEB','EEB'],gpu:365,cooler:192,psu:190,slots:8,rad:360,price:550,meta:'SSI-EEB · GPU 365 mm with radiators · cooler 192 mm · PSU 190 mm · 8 slots · 5U rack'},
+ {id:'o11xl',name:'Lian Li O11 Dynamic EVO XL',forms:['ATX','EATX','CEB'],gpu:460,cooler:167,psu:220,slots:8,rad:420,price:230,meta:'Dual-chamber · E-ATX up to ~280 mm wide (no SSI-EEB) · GPU 460 mm · 8 slots'},
+ {id:'torrent',name:'Fractal Design Torrent',forms:['ATX','EATX','CEB'],gpu:461,cooler:188,psu:230,slots:7,rad:420,price:220,meta:'Airflow tower · GPU 461 mm · cooler 188 mm · 7 slots'},
+ {id:'northxl',name:'Fractal Design North XL',forms:['ATX','EATX'],gpu:413,cooler:185,psu:255,slots:7,rad:420,price:180,meta:'GPU 413 mm · cooler 185 mm · 7 slots'},
+],
+drive:[
+ {id:'none',name:'None',tb:0,price:0,meta:''},
+ {id:'cd6r768',name:'Kioxia CD6-R 7.68 TB U.3 (HP P21842-003)',tb:7.68,bus:'u2',price:2449,src:'Amazon · B0HPR72914',meta:'Enterprise 2.5" U.3 · PCIe 4.0 x4 · ~6.2 GB/s read · 1 DWPD · needs an MCIO or SlimSAS cable and a 2.5" bay'},
+ {id:'9100pro4',name:'Samsung 9100 PRO 4 TB (PCIe 5.0)',tb:4,price:450,meta:'Gen5 · ~14 GB/s read · model loading'},
+ {id:'t705-2',name:'Crucial T705 2 TB (PCIe 5.0)',tb:2,price:250,meta:'Gen5 · OS / scratch'},
+ {id:'990pro4',name:'Samsung 990 PRO 4 TB (PCIe 4.0)',tb:4,price:320,meta:'Gen4 · reliable bulk'},
+ {id:'sn850x8',name:'WD_BLACK SN850X 8 TB (PCIe 4.0)',tb:8,price:700,meta:'Gen4 · model library / datasets'},
+],
+extras:[
+ {id:'mc-mcio',src:'Micro Center + Amazon B0CWP5X4M7',name:'6× Arctic P12 Pro + CPF04 hub + 2× MCIO→U.2 cables',cables:'mcio',cableN:2,price:175.93,meta:'Fans $71.94 + hub $27.99 (Micro Center) · 2× chenyang MCIO 4i → U.2 0.5 m, ~$38 each (Amazon B0CWP5X4M7)'},
+ {id:'mc-slimsas',name:'6× Arctic P12 Pro + CPF04 hub + 2× SlimSAS→U.2 cables',cables:'slimsas',cableN:2,price:149.93,meta:'Fans + hub · 2× DiLinker SlimSAS 4i → U.2 75 cm, ~$25 each (Amazon B099DYK9CW), for ASUS WRX90'},
+ {id:'slimsas',name:'2× SlimSAS→U.2 cables',cables:'slimsas',cableN:2,price:50,src:'Amazon · B099DYK9CW',meta:'DiLinker SFF-8654 4i → U.2, 75 cm, ~$25 each, for the WRX90E-SAGE SE'},
+ {id:'mc-fans',name:'6× Arctic P12 Pro + CPF04 fan hub',price:99.93,meta:'From the Micro Center quote'},
+ {id:'none',name:'None',price:0,meta:''},
+],
+};
+const PRESETS = [
+ {name:'Option B: Threadripper PRO',s:{cpu:'tr9975wxb',board:'wrx90b',ram:'kfrp8x32',gpu:'pro5000',gpuN:1,cooler:'aw420',psu:'tc1650t',case:'antec900',drive1:'cd6r768',drive2:'cd6r768',extras:'slimsas'}},
+ {name:'Option A: EPYC 9175F',s:{cpu:'epyc9175f',board:'turind8x',ram:'kfrp4x32',gpu:'5070tipa',gpuN:1,cooler:'xe360sp5',psu:'leadex7-1200',case:'enthoo2',drive1:'cd6r768',drive2:'cd6r768',extras:'mc-mcio'}},
+ {name:'Single 5090',s:{cpu:'9950x',board:'x870e',ram:'u2x64',gpu:'5090fe',gpuN:1,cooler:'d15g2',psu:'hx1500i',case:'d7xl',drive1:'9100pro4',drive2:'sn850x8'}},
+ {name:'Dual 5090',s:{cpu:'9950x3d',board:'x870e',ram:'u2x64',gpu:'5090fe',gpuN:2,cooler:'lf3',psu:'tx1600',case:'d7xl',drive1:'9100pro4',drive2:'sn850x8'}},
+ {name:'Threadripper + 2× PRO 6000',s:{cpu:'tr9970x',board:'trx50',ram:'r4x64',gpu:'pro6000',gpuN:2,cooler:'u14str5',psu:'tx1600',case:'enthoo2',drive1:'9100pro4',drive2:'sn850x8'}},
+ {name:'WRX90 + 4× Max-Q',s:{cpu:'tr9975wx',board:'wrx90',ram:'r8x64',gpu:'pro6000q',gpuN:4,cooler:'u14str5',psu:'hela2050',case:'d7xl',drive1:'9100pro4',drive2:'sn850x8'}},
+ {name:'Budget 2× 3090',s:{cpu:'9950x',board:'x870e',ram:'u2x48',gpu:'3090',gpuN:2,cooler:'d15g2',psu:'hx1500i',case:'d7xl',drive1:'990pro4',drive2:'none'}},
+];
+const MODELS = [
+ {p:8,name:'Llama 3.1 8B',cls:'Small dense · chat, tools, RAG'},
+ {p:32,name:'Qwen3 32B',cls:'Mid dense · strong coding & reasoning'},
+ {p:70,name:'Llama 3.3 70B',cls:'Large dense'},
+ {p:117,name:'gpt-oss-120b',cls:'MoE · ~5B active per token · ships at ~4-bit (61 GB)',moe:true,q4:61},
+ {p:235,name:'Qwen3-235B-A22B',cls:'MoE · 22B active',moe:true},
+ {p:405,name:'Llama 3.1 405B',cls:'Huge dense'},
+ {p:671,name:'DeepSeek V3 / R1',cls:'MoE · 37B active',moe:true},
+ {p:1000,name:'Kimi K2 (1T)',cls:'MoE · 32B active',moe:true},
+];
+const SLOT = 20.32; // mm per expansion slot
+
+/* ===== State ===== */
+PRESETS.slice(1).forEach(p=>p.s.extras=p.s.extras||'none');
+const DEFAULT = {...PRESETS[1].s, wall:'120'};
+const store = {
+  get(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let S = Object.assign({}, DEFAULT, store.get('rig.state2',{}));
+let PRICE = store.get('rig.prices',{});
+let DONE = store.get('rig.steps',{});
+const find = (cat,id)=>CAT[cat].find(x=>x.id===id)||CAT[cat][0];
+const priceOf = (cat,item)=>PRICE[cat+':'+item.id] ?? item.price;
+const fmt$ = n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* ===== Parts rail ===== */
+const PARTS = [
+ ['cpu','Processor'],['board','Motherboard'],['ram','Memory'],['gpu','Graphics cards'],
+ ['cooler','CPU cooler'],['psu','Power supply'],['case','Case'],['drive1','Storage · drive 1'],['drive2','Storage · drive 2'],['extras','Fans, hub & cables'],
+];
+const catOf = k=>k.startsWith('drive')?'drive':k;
+function renderParts(flags){
+  const el=document.getElementById('parts');
+  el.innerHTML = PARTS.map(([k,label])=>{
+    const cat=catOf(k), item=find(cat,S[k]);
+    const opts=CAT[cat].map(o=>`<option value="${o.id}"${o.id===item.id?' selected':''}>${o.name}</option>`).join('');
+    const qty = k==='gpu' ? S.gpuN : 1;
+    const isGpu = k==='gpu';
+    const f = flags[k]||'';
+    return `<div class="part ${f?'flag-'+f:''}">
+      <div class="part-top"><label for="sel-${k}">${label}</label>
+        ${item.price?`<span class="price">${qty>1?qty+'× ':''}$<input id="price-${k}" data-k="${k}" inputmode="numeric" value="${priceOf(cat,item)}" aria-label="${label} price"></span>`:''}</div>
+      <div class="${isGpu?'row2':''}">
+        <select id="sel-${k}" data-k="${k}">${opts}</select>
+        ${isGpu?`<div class="stepper"><button type="button" data-step="-1" aria-label="Fewer GPUs">−</button><output id="gpuN">${S.gpuN}</output><button type="button" data-step="1" aria-label="More GPUs">+</button></div>`:''}
+      </div>
+      ${item.meta?`<div class="meta">${item.meta}</div>`:''}
+    </div>`;
+  }).join('');
+}
+document.getElementById('parts').addEventListener('change',e=>{
+  if(e.target.matches('select')){S[e.target.dataset.k]=e.target.value;update();}
+});
+document.getElementById('parts').addEventListener('input',e=>{
+  if(e.target.matches('.price input')){
+    const k=e.target.dataset.k, cat=catOf(k), item=find(cat,S[k]);
+    const v=parseFloat(e.target.value.replace(/[^0-9.]/g,''));
+    if(!isNaN(v)){PRICE[cat+':'+item.id]=v;store.set('rig.prices',PRICE);renderSpecs(evaluate());}
+  }
+});
+document.getElementById('parts').addEventListener('click',e=>{
+  const b=e.target.closest('[data-step]'); if(!b)return;
+  S.gpuN=Math.max(0,Math.min(7,S.gpuN+parseInt(b.dataset.step)));update();
+});
+document.getElementById('presets').innerHTML = PRESETS.map((p,i)=>`<button class="chip" type="button" data-p="${i}">${p.name}</button>`).join('');
+document.getElementById('presets').addEventListener('click',e=>{
+  const b=e.target.closest('[data-p]'); if(!b)return;
+  S=Object.assign({},S,PRESETS[b.dataset.p].s); update();
+});
+document.getElementById('wall').addEventListener('change',e=>{S.wall=e.target.value;update();});
+document.getElementById('reset').addEventListener('click',()=>{PRICE={};store.set('rig.prices',PRICE);update();});
+
+/* ===== Evaluation ===== */
+function placeGPUs(board,gpu,n,caseSlots){
+  const t=Math.ceil(gpu.slots), out=[]; let next=1;
+  for(const p of board.gpuSlots){ if(out.length>=n)break; if(p>=next){out.push({pos:p,end:p+t-1,over:p+t-1>caseSlots});next=p+t;} }
+  return out;
+}
+function evaluate(){
+  const cpu=find('cpu',S.cpu), board=find('board',S.board), ram=find('ram',S.ram), gpu=find('gpu',S.gpu),
+        cooler=find('cooler',S.cooler), psu=find('psu',S.psu), cs=find('case',S.case),
+        d1=find('drive',S.drive1), d2=find('drive',S.drive2), ex=find('extras',S.extras), n=S.gpuN;
+  const PN={AM5:'AM5 Ryzen',LGA1851:'Intel LGA1851',TR:'Threadripper',TRPRO:'Threadripper PRO',SP5:'EPYC SP5'};
+  const big=['TR','TRPRO','SP5'].includes(cpu.plat);
+  const C=[], flags={};
+  const add=(lvl,part,title,detail)=>{C.push({lvl,title,detail}); if(part&&(lvl==='bad'||(lvl==='warn'&&flags[part]!=='bad')))flags[part]=lvl;};
+
+  // socket
+  if(!board.accepts.includes(cpu.plat)) add('bad','board',`${cpu.name} does not fit this motherboard`,`The board takes ${board.accepts.map(a=>PN[a]).join(' / ')} processors. Pick a matching board or CPU.`);
+  else add('ok',null,'CPU and motherboard socket match',`${cpu.name} on ${board.name}.`);
+  if(cpu.plat==='TRPRO'&&board.id==='trx50') add('info',null,'Threadripper PRO on TRX50 runs in reduced mode','You get 4 memory channels and TRX50 lane counts instead of the 8 channels and 128 lanes a WRX90 board would give.');
+  if(board.bmc) add('info',null,'Server board with a BMC (IPMI)','You can power on, view the console and flash the BIOS from a browser on your network, even with the OS down. Change the default BMC password on first boot. The board\'s onboard VGA is for the BMC; plug your monitor into the GPU.');
+  if(cpu.plat==='SP5'&&cpu.cores<=16) add('info',null,'EPYC 9175F trades cores for clock speed and cache','16 fast cores and 512 MB of cache suit feeding GPUs and single-thread work. Heavy CPU-side inference or compiling prefers more cores. The real draw is the platform: 128 PCIe 5.0 lanes and 7 full-speed x16 slots for adding GPUs later.');
+  if(board.needsBios&&(cpu.id.startsWith('tr9'))) add('warn','board','Check the board BIOS supports Threadripper 9000',`Boards made before the 9000 launch need a BIOS update. ${board.name} has BIOS Flashback, so you can flash from USB without a CPU installed.`);
+
+  // memory
+  if(ram.type!==board.mem) add('bad','ram',`${ram.type} memory won't work on this board`,`${board.name} needs ${board.mem==='RDIMM'?'registered ECC (RDIMM)':'standard unbuffered (UDIMM)'} DDR5.`);
+  else if(ram.sticks>board.dimm) add('bad','ram',`${ram.sticks} sticks but only ${board.dimm} slots`,'Choose a kit with fewer, larger modules.');
+  else if(ram.gb>board.maxMem) add('bad','ram',`${ram.gb} GB exceeds the board maximum of ${board.maxMem} GB`,'');
+  else {
+    add('ok',null,`${ram.gb} GB ${ram.type} fits`,`${ram.sticks} of ${board.dimm} DIMM slots used.`);
+    if(ram.type==='UDIMM'&&ram.sticks===4) add('warn','ram','Four DDR5 sticks on a desktop platform run slower','Expect around DDR5-5200 or lower instead of the rated EXPO/XMP speed, and a first boot memory training pass that can take 5–15 minutes with a blank screen. Two larger sticks are faster if they cover your needs.');
+    const ch=Math.min(cpu.chan,board.dimm);
+    if(ram.sticks<ch&&board.mem==='RDIMM') add('warn','ram',`Only ${ram.sticks} of ${ch} memory channels populated`,`Memory bandwidth drops by ${Math.round((1-ram.sticks/ch)*100)}% (about ${Math.round(ram.sticks*5.6*8)} GB/s instead of ${Math.round(ch*5.6*8)} GB/s at DDR5-5600). This hurts CPU-side inference and RAM offload. Add ${ch-ram.sticks} more matched modules later to fill every channel.`);
+  }
+  // RAM vs VRAM rule of thumb
+  const vram=gpu.vram*n;
+  if(n>0&&vram<24) add('warn','gpu',`${vram} GB of GPU memory is the bottleneck in this build`,`It fits models up to about 14B at 8-bit, or 24B at 4-bit. 32B+ models spill into system RAM and slow down sharply. The platform can take ${board.gpuSlots.length>4?'several':'more'} GPUs, so this is easy to grow later. For the same money, one 24–32 GB card usually does more for AI work than a 16 GB card.`);
+  if(n>0&&ram.gb<vram) add('warn','ram',`System RAM (${ram.gb} GB) is less than total GPU memory (${vram} GB)`,'Loaders often stage weights through system RAM. A common rule is at least as much RAM as VRAM, ideally 1.5–2×.');
+
+  // case form
+  if(!cs.forms.includes(board.form)) add('bad','case',`${board.form} board does not fit ${cs.name}`,`This case supports ${cs.forms.join(', ')}.`);
+  else add('ok',null,`${board.form} motherboard fits the case`,board.form==='EEB'?'Confirm the case standoffs line up with every SSI-EEB mounting hole around the CPU socket; patterns vary. Check the case manual before buying.':'');
+  if(cs.quiet&&n*gpu.watts>=900) add('warn','case','Sound-dampened case with high GPU heat',`${n*gpu.watts} W of GPU heat needs strong airflow. Consider the Meshify 2 XL (same layout, mesh front) or the Enthoo Pro 2 Server.`);
+
+  // cooler
+  if(!cooler.fits.includes(cpu.plat)) add('bad','cooler',`${cooler.name} does not mount on ${PN[cpu.plat]}`,big?'Threadripper (sTR5) and EPYC (SP5) need coolers made for that socket; they look alike but the mounting holes differ.':'Pick a cooler that lists this socket.');
+  if(cooler.kind==='air'){
+    if(cooler.h>cs.cooler) add('bad','cooler',`Cooler is ${cooler.h} mm tall; case allows ${cs.cooler} mm`,'The side panel will not close.');
+    else add('ok',null,`Air cooler clears the side panel by ${cs.cooler-cooler.h} mm`,'');
+  } else {
+    const rt=cs.radTop??cs.rad, rf=cs.radFront??cs.rad;
+    if(cooler.rad>Math.max(rt,rf)) add('bad','cooler',`${cooler.rad} mm radiator not supported`,`The case takes up to ${Math.max(rt,rf)} mm.`);
+    else if(cooler.rad>rt) add('info',null,`${cooler.rad} mm radiator fits in the front only`,`The top takes ${rt} mm at most. Mount it in front as intake with the tubes at the bottom, so air collects in the radiator and not the pump. It pre-warms the air reaching the GPU slightly.`);
+    else add('ok',null,`${cooler.rad} mm radiator mounts in the case`,'Top-mount as exhaust, or front-mount as intake with tubes at the bottom so air collects in the radiator, not the pump.');
+    if(cooler.ihsUnverified&&big) add('info',null,'Check the AW420 cold plate covers the Threadripper',`Thermaltake supports sTR5 and rates it for 625 W, but doesn't publish the cold-plate size. The heat spreader is ~58×75 mm. Check that the pre-applied paste and plate reach all chiplets when you mount it.`);
+  }
+  if(big&&cooler.kind==='air') add('info',null,'Threadripper at 350 W on air','The NH-U14S TR5-SP6 handles it, but all-core loads will run hot and loud. Front-to-back airflow matters more than usual.');
+
+  // GPUs
+  const placed = n>0?placeGPUs(board,gpu,n,cs.slots):[];
+  if(n>0){
+    if(placed.length<n) add('bad','gpu',`Only ${placed.length} of ${n} GPUs physically fit`,`${gpu.name.replace(/\s*\(.*\)/,'')} is ${gpu.slots}-slot; board x16 slots are at positions ${board.gpuSlots.join(', ')}. Use thinner cards (2-slot or blower), PCIe riser cables, or a board with more slots.`);
+    const over=placed.filter(p=>p.over);
+    if(over.length) add('bad','case',`GPU in slot ${over[0].pos} runs past the case's ${cs.slots} expansion slots`,'The card hits the PSU shroud or case floor. Pick a case with more expansion slots.');
+    if(gpu.len>cs.gpu) add('bad','gpu',`Card is ${gpu.len} mm; case allows ${cs.gpu} mm`,'');
+    else add('ok',null,`GPU length clears with ${cs.gpu-gpu.len} mm to spare`,'');
+    for(let i=1;i<placed.length;i++){
+      if(placed[i].pos===placed[i-1].end+1&&!gpu.blower){add('warn','gpu','GPUs are sandwiched with no air gap',`Card ${i} sits directly on card ${i+1}'s intake. The upper card will throttle under sustained load. Options: leave a slot empty, use blower (Max-Q) cards, power-limit the cards, or add a side-panel fan.`);break;}
+    }
+    if(n>=3&&board.accepts.includes('AM5')||n>=3&&board.accepts.includes('LGA1851')) add('warn','board','Desktop platforms have limited PCIe lanes','A third GPU runs at x4 through the chipset. Fine for inference across separate models, slow for tensor-parallel splits. Threadripper is the next step up.');
+    else if(n===2&&board.form==='ATX') add('info',null,board.slotNote,'For LLM inference, x8 PCIe 5.0 per card costs very little speed.');
+    if(gpu.id==='3090'||gpu.id==='4090') add('info',null,'Used cards: check before buying','Test under load, check for re-pasted or mined cards, and confirm the connector shows no browning.');
+  } else add('info',null,'No GPU selected','The build will run CPU-only inference from system RAM.');
+
+  // power
+  const drives=[d1,d2].filter(d=>d.tb>0).length;
+  const load = cpu.watts + gpu.watts*n + 60 + ram.sticks*6 + drives*8 + (cooler.kind==='aio'?25:10);
+  const psuW = (S.wall!=='230'&&psu.w120)?psu.w120:psu.watts;
+  const wall = load/0.92;
+  const circuit = S.wall==='120'?1440:S.wall==='120x20'?1920:2990;
+  if(psu.w120&&S.wall!=='230') add('info',null,`${psu.name} delivers about ${psu.w120} W on 120 V`,'It only reaches its full rating on 230 V input.');
+  if(load>psuW) add('bad','psu',`Estimated load ${Math.round(load)} W exceeds the ${psuW} W PSU`,'Pick a larger PSU, fewer GPUs, or power-limit the cards (see tip below).');
+  else if(load>psuW*0.85) add('warn','psu',`PSU will run at ${Math.round(load/psuW*100)}% under full load`,'ATX 3.1 units handle GPU spikes, but 60–80% is the efficient, quiet range. Consider the next size up or a GPU power limit.');
+  else add('ok',null,`PSU headroom: ${Math.round(load)} W of ${psuW} W (${Math.round(load/psuW*100)}%)`,'');
+  if(psu.len>cs.psu) add('bad','psu',`PSU is ${psu.len} mm; case fits ${cs.psu} mm`,'');
+  if(wall>circuit) add('bad','psu',`Wall draw (~${Math.round(wall)} W) exceeds a ${S.wall==='120'?'15 A':'20 A'} 120 V circuit's continuous limit (${circuit} W)`,'The breaker will trip under sustained training loads. Use a dedicated 20 A or 240 V circuit, or cap GPU power.');
+  else if(S.wall==='120'&&wall>1200) add('warn','psu',`Wall draw near ${Math.round(wall)} W on a 15 A circuit`,'Keep other loads (space heaters, laser printers, monitors) off this circuit, or run a dedicated 20 A line.');
+  const need12=gpu.c12*n, need8=gpu.p8*n;
+  if(need12>psu.c12) add('warn','psu',`GPUs need ${need12}× 12V-2x6 cables; PSU has ${psu.c12} native`,'Avoid daisy-chained adapters on 575–600 W cards. Use a PSU with enough native 12V-2x6 connectors.');
+  if(need8>psu.p8) add('warn','psu',`GPUs need ${need8}× 8-pin PCIe cables; PSU has ${psu.p8}`,'Use one dedicated cable per 8-pin socket; avoid pigtails on 350 W+ cards.');
+  if(n>=2&&gpu.watts>=450) add('info',null,`Tip: cap each GPU at ~${Math.round(gpu.watts*0.75)} W`,`Running "sudo nvidia-smi -pl ${Math.round(gpu.watts*0.75)}" drops power ~25% for roughly 5–10% less inference speed. It cuts heat, noise and circuit load.`);
+
+  if(board.cpuPcie||board.slotPwr){const needP8=(board.cpuPcie||0)+(board.slotPwr||0)+gpu.p8*n;
+    if(needP8>psu.p8) add('warn','psu',`Board + GPUs need ${needP8}× 8-pin PCIe cables; PSU has ${psu.p8}`,'The WRX90E-SAGE SE takes 2× 8-pin "PCIe to CPU" plus 2× 8-pin slot power on top of the EPS cables.');
+    else add('ok',null,`PSU covers every board power input (24-pin, ${board.eps}× EPS, ${needP8}× 8-pin PCIe)`,'Check the manual for which CPU and slot power inputs are required for your GPU count.');}
+  const needEps=board.eps||2, haveEps=psu.eps??2;
+  if(needEps>haveEps) add('warn','psu',`Board has ${needEps} EPS 8-pin sockets; PSU has ${haveEps} EPS cables`,'Check the board manual for how many are required for your CPU. Many server boards boot with two; the third adds headroom for 400–500 W CPUs. If all three are required, you need a PSU with three EPS outputs.');
+  // storage
+  const dl=[d1,d2].filter(d=>d.tb>0), nU2=dl.filter(d=>d.bus==='u2').length, nM2=dl.length-nU2;
+  if(nM2>board.m2) add('bad','board',`${nM2} M.2 drives but ${board.m2} M.2 slots`,'');
+  if(nU2){
+    const ports=board.u2||0, want=board.id.startsWith('wrx90')?'slimsas':'mcio';
+    if(nU2>ports) add('bad','board',`${nU2} U.2/U.3 drives but the board has ${ports} MCIO/SlimSAS ports`,'Use a PCIe-to-U.2 adapter card, or switch to M.2 drives.');
+    else if(ex.cables!==want||ex.cableN<nU2) add('warn','extras',`U.3 drives need ${nU2}× ${want==='mcio'?'MCIO':'SlimSAS'} → U.2 cables`,`${board.name} uses ${want==='mcio'?'MCIO':'SlimSAS'} ports. Pick the matching cable option under "Fans, hub & cables".`);
+    else add('ok',null,`${nU2} U.3 drive${nU2>1?'s':''} cabled to ${want==='mcio'?'MCIO':'SlimSAS'} ports`,'Each cable has a SATA power lead; plan two free SATA power plugs from the PSU.');
+    add('info',null,'U.3 enterprise drives need a 2.5" bay and airflow','They run warm (up to ~20 W) and have no fan. Mount them in a 2.5" bay in the path of an intake fan. Make sure the case has two 2.5" mounts.');
+    if(dl.some(d=>d.id==='cd6r768')) add('info',null,'The two U.3 drives cost ~$4,900 together','You get 15 TB of enterprise-grade storage. 2× 8 TB consumer M.2 Gen4 drives would cost ~$1,400 and need no cables, with less write endurance. Enterprise drives make sense for heavy dataset writes or 24/7 use.');
+  }
+
+  const total = [['cpu',cpu,1],['board',board,1],['ram',ram,1],['gpu',gpu,n],['cooler',cooler,1],['psu',psu,1],['case',cs,1],['drive',d1,1],['drive',d2,1],['extras',ex,1]]
+    .reduce((a,[c,i,q])=>a+priceOf(c,i)*q,0);
+  const order={bad:0,warn:1,info:2,ok:3}; C.sort((a,b)=>order[a.lvl]-order[b.lvl]);
+  return {cpu,board,ram,gpu,cooler,psu,cs,d1,d2,ex,big,n,placed,load,psuW,wall,circuit,vram,total,checks:C,flags,drives};
+}
+
+/* ===== Render: header specs ===== */
+function renderSpecs(E){
+  const sp=[[E.vram+' GB','GPU memory'],[E.ram.gb+' GB','System RAM'],[E.cpu.cores,'CPU cores'],[Math.round(E.load)+' W','Peak load'],[fmt$(E.total),'Est. cost']];
+  document.getElementById('specs').innerHTML=sp.map(([b,s])=>`<div class="spec"><b>${b}</b><span>${s}</span></div>`).join('');
+  const bad=E.checks.filter(c=>c.lvl==='bad').length, warn=E.checks.filter(c=>c.lvl==='warn').length;
+  const o=document.getElementById('overall');
+  o.className='status '+(bad?'bad':warn?'warn':'ok');
+  o.textContent=bad?`${bad} won't fit`+(warn?` · ${warn} warning${warn>1?'s':''}`:''):warn?`${warn} warning${warn>1?'s':''}`:'All fits pass';
+}
+function renderChecks(E){
+  document.getElementById('checks').innerHTML=E.checks.map(c=>`<li><span class="tag ${c.lvl}">${{bad:'Clash',warn:'Watch',info:'Note',ok:'Fits'}[c.lvl]}</span><div><b>${c.title}</b>${c.detail?`<p>${c.detail}</p>`:''}</div></li>`).join('');
+  document.getElementById('checkcount').textContent=`${E.checks.length} checks`;
+}
+function gauge(label,val,max,unit,lim){
+  const pct=Math.min(100,val/max*100), lvl=val>max?'bad':(lim&&val>max*lim)?'warn':'ok';
+  return `<div class="gauge"><div class="gauge-top"><span>${label}</span><span>${Math.round(val)} / ${Math.round(max)} ${unit}</span></div><div class="bar"><i style="width:${pct}%;background:var(--${lvl})"></i></div></div>`;
+}
+function renderGauges(E){
+  const g=[];
+  if(E.n>0) g.push(gauge('GPU length',E.gpu.len,E.cs.gpu,'mm',.95));
+  if(E.n>0) g.push(gauge('Expansion slots used',E.placed.length?Math.max(...E.placed.map(p=>p.end)):0,E.cs.slots,'slots'));
+  g.push(E.cooler.kind==='air'?gauge('Cooler height',E.cooler.h,E.cs.cooler,'mm',.97):gauge('Radiator size',E.cooler.rad,E.cs.rad,'mm'));
+  g.push(gauge('PSU length',E.psu.len,E.cs.psu,'mm',.95));
+  g.push(gauge('Power load',E.load,E.psuW,'W',.85));
+  g.push(gauge('Wall circuit',E.wall,E.circuit,'W',.83));
+  g.push(gauge('Memory slots',E.ram.sticks,E.board.dimm,'DIMMs'));
+  g.push(gauge('M.2 slots',E.drives,E.board.m2,'drives'));
+  document.getElementById('gauges').innerHTML=g.join('');
+}
+
+/* ===== Render: case drawing (mm) ===== */
+function renderDrawing(E){
+  const b=E.board, cs=E.cs, top=46, left=14;
+  const slotY=p=>top+138+(p-1)*SLOT;
+  const slotsEnd=slotY(cs.slots)+SLOT;
+  const shroudTop=Math.max(top+305,slotsEnd)+10;
+  const W=Math.max(cs.gpu+left+40,b.w+left+170), H=shroudTop+110;
+  const out=[];
+  out.push(`<svg viewBox="-30 -10 ${W+60} ${H+40}" role="img" aria-label="Side view of the case interior with components to scale">`);
+  // case shell
+  out.push(`<rect x="0" y="0" width="${W}" height="${H}" rx="6" fill="var(--sunk)" stroke="var(--line)" stroke-width="2"/>`);
+  out.push(`<text x="4" y="${H+22}" font-size="12" fill="var(--muted)">REAR</text><text x="${W-4}" y="${H+22}" font-size="12" text-anchor="end" fill="var(--muted)">FRONT</text>`);
+  // expansion slot ticks
+  for(let i=1;i<=cs.slots;i++){out.push(`<rect x="-14" y="${slotY(i)-4}" width="10" height="${SLOT-3}" fill="var(--panel)" stroke="var(--line)"/>`);}
+  out.push(`<text x="-18" y="${slotY(1)-10}" font-size="10" fill="var(--muted)">slots 1–${cs.slots}</text>`);
+  // shroud + psu
+  out.push(`<rect x="0" y="${shroudTop}" width="${W}" height="${H-shroudTop}" fill="var(--line)" opacity=".45"/>`);
+  out.push(`<rect x="${left}" y="${shroudTop+18}" width="${E.psu.len}" height="86" rx="4" fill="var(--muted)" opacity=".85"/>`);
+  out.push(`<text x="${left+10}" y="${shroudTop+66}" font-size="13" fill="var(--panel)">PSU ${E.psu.watts} W · ${E.psu.len} mm</text>`);
+  out.push(`<line x1="${cs.psu+left}" y1="${shroudTop+8}" x2="${cs.psu+left}" y2="${H-4}" stroke="var(--bad)" stroke-dasharray="5 4" stroke-width="1.5"/>`);
+  // motherboard
+  const bx=left, by=top, fitsCase=cs.forms.includes(b.form);
+  out.push(`<rect x="${bx}" y="${by}" width="${b.w}" height="305" rx="3" fill="var(--pcb)" stroke="${fitsCase?'var(--pcb-line)':'var(--bad)'}" stroke-width="${fitsCase?1.5:3}"/>`);
+  out.push(`<text x="${bx+8}" y="${by+300}" font-size="11" fill="var(--muted)">${b.form} · ${b.w}×305 mm</text>`);
+  // rear IO
+  out.push(`<rect x="${bx}" y="${by+6}" width="22" height="120" fill="var(--pcb-line)" opacity=".7"/>`);
+  // socket + cooler
+  const isTR=E.big;
+  const sw=isTR?58:40, sh=isTR?75:40, sx=bx+(b.w>300?110:95), sy=by+(isTR?40:60);
+  if(E.cooler.kind==='air'){
+    out.push(`<rect x="${sx-(150-sw)/2}" y="${sy-(isTR?28:50)}" width="150" height="${isTR?130:140}" rx="6" fill="var(--muted)" opacity=".18" stroke="var(--muted)" stroke-dasharray="4 3"/>`);
+    out.push(`<text x="${sx+sw/2}" y="${sy-(isTR?34:56)}" font-size="10" text-anchor="middle" fill="var(--muted)">air cooler footprint</text>`);
+  }
+  out.push(`<rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" rx="2" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.2"/>`);
+  out.push(`<text x="${sx+sw/2}" y="${sy+sh/2+4}" font-size="10" text-anchor="middle" fill="var(--ink)">${E.cpu.plat==='SP5'?'SP5':isTR?'sTR5':E.cpu.plat}</text>`);
+  if(E.cooler.kind==='aio'){
+    out.push(`<rect x="${sx+sw/2-30}" y="${sy+sh/2-30}" width="60" height="60" rx="8" fill="var(--muted)" opacity=".35"/>`);
+    const rl=E.cooler.rad+37, rx=Math.max(bx+40,W-rl-20), ok=E.cooler.rad<=cs.rad;
+    out.push(`<rect x="${rx}" y="6" width="${rl}" height="30" rx="3" fill="var(--muted)" opacity=".6" stroke="${ok?'none':'var(--bad)'}" stroke-width="3"/>`);
+    out.push(`<text x="${rx+8}" y="26" font-size="11" fill="var(--panel)">${E.cooler.rad} mm radiator (top)</text>`);
+    out.push(`<path d="M${sx+sw/2} ${sy+sh/2-30} C ${sx+sw/2} 60, ${rx+20} 70, ${rx+20} 36" fill="none" stroke="var(--muted)" stroke-width="3"/>`);
+  }
+  // DIMMs
+  const dimmTot=b.dimm, per=dimmTot>4?dimmTot/2:dimmTot, used=E.ram.sticks;
+  const drawDimms=(x0,start,count)=>{for(let i=0;i<count;i++){const idx=start+i,filled=idx<used;
+    out.push(`<rect x="${x0+i*9}" y="${by+20}" width="6" height="133" rx="1" fill="${filled?'var(--accent)':'var(--panel)'}" stroke="var(--pcb-line)"/>`);}};
+  if(dimmTot>4){drawDimms(sx-48,0,per);drawDimms(sx+sw+14,per,per);}
+  else drawDimms(sx+sw+(isTR?14:22),0,per);
+  // PCIe slots on board
+  for(const p of b.gpuSlots){out.push(`<rect x="${bx+30}" y="${slotY(p)-4}" width="89" height="6" fill="var(--ink)" opacity=".55"/>`);}
+  // GPUs
+  E.placed.forEach((pl,i)=>{
+    const y=slotY(pl.pos)-4, h=E.gpu.slots*SLOT-3, over=pl.over||E.gpu.len>cs.gpu;
+    out.push(`<rect x="0" y="${y}" width="${E.gpu.len}" height="${h}" rx="4" fill="var(--accent)" opacity="${.92-i*.08}" stroke="${over?'var(--bad)':'none'}" stroke-width="3"/>`);
+    out.push(`<text x="${30}" y="${y+Math.min(h,40)/2+5}" font-size="12" fill="var(--panel)">GPU ${i+1} · slot ${pl.pos} · ${E.gpu.vram} GB · ${E.gpu.len} mm</text>`);
+  });
+  const missing=E.n-E.placed.length;
+  if(missing>0) out.push(`<text x="${W-10}" y="${shroudTop-8}" font-size="13" text-anchor="end" fill="var(--bad)">${missing} GPU${missing>1?'s':''} can't be placed</text>`);
+  // GPU limit line
+  if(E.n>0){out.push(`<line x1="${cs.gpu}" y1="${top+120}" x2="${cs.gpu}" y2="${shroudTop}" stroke="var(--bad)" stroke-dasharray="6 4" stroke-width="1.5"/>`);
+   out.push(`<text x="${cs.gpu-4}" y="${top+112}" font-size="11" text-anchor="end" fill="var(--bad)">max GPU ${cs.gpu} mm</text>`);}
+  // front fans
+  out.push(`<rect x="${W-30}" y="${top+20}" width="24" height="${shroudTop-top-40}" fill="none" stroke="var(--muted)" stroke-dasharray="3 4"/>`);
+  out.push(`<text x="${W-38}" y="${top+30}" font-size="10" text-anchor="end" fill="var(--muted)">intake →</text>`);
+  out.push(`</svg>`);
+  document.getElementById('drawing').innerHTML=out.join('');
+}
+
+/* ===== Models ===== */
+function renderModels(E){
+  const vram=E.vram, ram=E.ram.gb, usableRam=Math.max(0,ram-16);
+  document.getElementById('memline').textContent=`${vram} GB across ${E.n} GPU${E.n===1?'':'s'} · ${ram} GB system RAM (about ${usableRam} GB usable for offload after the OS).`;
+  const need=(p,bpp,m)=>bpp<0.6&&m&&m.q4?m.q4+4:p*bpp*1.1+1.5;
+  const cell=(gb,m,qlora)=>{
+    let cls='no',txt=`${Math.round(gb)} GB`;
+    if(gb<=vram*0.95) cls='gpu';
+    else if(!qlora&&gb<=vram+usableRam) {cls='split';txt+=m.moe?' · offload':' · slow'}
+    return `<span class="fit ${cls}">${txt}</span>`;
+  };
+  const rows=MODELS.map(m=>`<tr><td><div class="model-name">${m.name}<small>${m.cls}</small></div></td>
+    <td class="num">${m.p>=1000?(m.p/1000)+'T':m.p+'B'}</td>
+    <td>${cell(need(m.p,2),m)}</td><td>${cell(need(m.p,1.06),m)}</td><td>${cell(need(m.p,0.58,m),m)}</td><td>${cell(m.p*0.7+6,m,true)}</td></tr>`).join('');
+  document.getElementById('models').innerHTML=`<thead><tr><th>Model</th><th>Params</th><th>16-bit</th><th>8-bit</th><th>4-bit</th><th>QLoRA fine-tune</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+/* ===== Assembly ===== */
+function steps(E){
+  const tr=E.big, am5=E.cpu.plat==='AM5', intel=E.cpu.plat==='LGA1851', sp5=E.cpu.plat==='SP5';
+  const aio=E.cooler.kind==='aio', n=E.n, s=[];
+  s.push({id:'prep',t:'Prep the bench and the BIOS',b:[
+    'Work on a hard, non-carpeted surface. Touch bare case metal before handling parts, or wear a wrist strap clipped to the case.',
+    E.board.needsBios||tr?'<span class="crit">Flash the latest BIOS first</span> using BIOS Flashback: copy the file to a FAT32 USB stick with the name from the manual, plug it into the Flashback port, connect the 24-pin + EPS, press the button. No CPU needed.':'Download the latest BIOS to a FAT32 USB stick. You can update with EZ Flash after first boot, or with BIOS Flashback before.',
+    E.board.id.startsWith('wrx90')?'WRX90E-SAGE SE: the BIOS file for Flashback must be renamed <b>A5496.CAP</b>. Older boards need BIOS 1203 or newer for Threadripper 9000.':null,
+    'Keep every box until the build passes stress tests; RMAs go faster with original packaging.'].filter(Boolean)});
+  s.push({id:'cpu',t:'Install the CPU',tag:E.cpu.name,b: tr?[
+    sp5?'Use a Torx T20 torque driver set to 1.6 N·m (≈14 in·lb); EPYC boxes do not always include one, so buy one ahead. Loosen the three socket screws in order <b>3 → 2 → 1</b>.':'Use the Torx T20 driver that comes with the CPU. Loosen the three socket screws in order <b>3 → 2 → 1</b>.',
+    'Lift the force frame, then the rail frame. Slide the CPU in its orange carrier into the rail frame until it clicks.',
+    'Close the rail frame, remove the socket cover, close the force frame, and tighten <b>1 → 2 → 3</b> with the torque driver until it clicks. Uneven torque causes memory channels to go missing.',
+    sp5?'The SP5 socket has 6,096 pins. Never touch them, and keep the socket cover for warranty returns.':null].filter(Boolean):am5?[
+    'Lift the retention lever and open the load plate. Leave the plastic cover on; it pops off when you close the plate.',
+    'Match the gold triangle on the CPU to the triangle on the socket corner. Lower it straight down; do not slide it.',
+    'Close the plate and push the lever under the hook. Firm pressure is normal. Keep the cover for warranty returns.']:[
+    'Open the load lever and plate. Align the notches on the CPU with the socket keys, lower straight in.',
+    'Close the plate; the plastic cover pops off. Firm lever pressure is normal.']});
+  s.push({id:'ram',t:`Install ${E.ram.sticks} memory modules`,tag:E.ram.name,b:[
+    E.ram.sticks===2&&E.board.dimm===4?'Use slots <b>A2 and B2</b> (second and fourth from the CPU). Check the manual diagram.':E.ram.sticks<E.board.dimm?`With ${E.ram.sticks} of ${E.board.dimm} slots filled, use the exact slots the manual lists for ${E.ram.sticks} DIMMs. They spread across both sides of the socket so each stick gets its own channel.`:`Populate all ${E.ram.sticks} slots${E.board.dimm===8?' (one per channel across both sides of the socket)':''}.`,
+    'Open the latches, line up the notch, press both ends down until the latches click. It takes more force than most people expect.',
+    am5||intel?'First boot will sit on a blank screen for memory training. With large kits this takes 5–15 minutes. Do not power off.':'RDIMM training on Threadripper takes several minutes on first boot. The Q-code display will cycle; wait it out.']});
+  const drv=[E.d1,E.d2].filter(d=>d.tb>0&&d.bus!=='u2');
+  const u2d=[E.d1,E.d2].filter(d=>d.bus==='u2');
+  if(u2d.length) s.push({id:'u2',t:`Mount and cable ${u2d.length} U.3 drive${u2d.length>1?'s':''}`,tag:u2d[0].name.split(' (')[0],b:[
+    'Screw each 2.5" drive into a drive sled or bay where an intake fan blows across it.',
+    `Plug the ${E.board.id.startsWith('wrx90')?'SlimSAS':'MCIO'} end into the board ports the manual marks for NVMe (on the TURIND8X-2T, MCIO ports may need setting to NVMe mode in the BIOS; on the WRX90E-SAGE SE use the two SlimSAS ports).`,
+    'Plug the U.2 end into the drive, then connect the cable\'s SATA power lead to the PSU.',
+    'Route the cables flat before the GPUs go in; the ports sit under where long cards end.']});
+  if(drv.length) s.push({id:'m2',t:`Install ${drv.length} M.2 drive${drv.length>1?'s':''}`,b:[
+    `Put ${drv[0].name} in <b>M.2_1</b>, the CPU-attached Gen5 slot nearest the socket.`,
+    'Remove the slot heatsink. <span class="crit">Peel the plastic film off the heatsink thermal pad</span> before refitting it.',
+    'Insert at 30°, press flat, and lock with the latch or screw. Skip drive-side heatsinks when the board provides one.']});
+  if(tr||aio) s.push({id:'cooler-pre',t:'Mount the cooler hardware on the board',b:[
+    aio?'Fit the AIO mounting brackets to the pump block now, while the board is on the bench.':'Fit the sTR5 mounting standoffs to the socket screw posts.',
+    tr?'Threadripper\'s IHS is huge: spread paste over the whole surface, or use the pre-applied paste on the cold plate.':'Apply a pea-sized dot of paste (or the pre-applied pad) to the CPU center.',
+    '<span class="crit">Remove the protective plastic from the cold plate.</span>']});
+  s.push({id:'bench',t:'Optional: bench test outside the case',b:[
+    'Board on its box, CPU + cooler + memory + one GPU + PSU. Short the two power-switch pins with a screwdriver tip.',
+    'Confirm the board posts to BIOS and shows all memory. Fixing a dead stick here is far easier than inside a full case.']});
+  s.push({id:'case',t:`Prepare the ${E.cs.name}`,b:[
+    'Remove both side panels, the front panel, and the top cover. Bag the screws separately.',
+    E.board.form!=='ATX'?`Install the extra standoffs for a <b>${E.board.form}</b> board (${E.board.w} mm wide). Count holes on the board against standoffs before lowering it.`:'Confirm the nine ATX standoffs are in place, and that none sits where the board has no hole.',
+    `Remove expansion slot covers ${E.placed.length?E.placed.map(p=>p.pos+'–'+p.end).join(', '):''} for the GPUs.`,
+    aio?`Mount the ${E.cooler.rad} mm radiator at the top with fans exhausting up, or in front with fans pulling air in and the tube ends at the bottom.`:'Set front fans as intake and rear/top fans as exhaust.']});
+  s.push({id:'psu',t:'Install the PSU and pre-route cables',tag:E.psu.name,b:[
+    'Fan facing down if the case has a bottom filter, otherwise up. Screw it in from the rear.',
+    `Route the 24-pin, both 8-pin EPS CPU cables${sp5?' (the EPYC board needs both; check the manual for any extra 8-pin connectors near the PCIe slots)':tr?' (Threadripper boards need both)':''}, and ${E.gpu.c12*n?E.gpu.c12*n+'× 12V-2x6':E.gpu.p8*n+'× 8-pin PCIe'} GPU cables now. The top EPS sockets are nearly impossible to reach once the board is in.`,
+    E.board.id.startsWith('wrx90')||E.board.id==='trx50'?'This workstation board has extra PCIe slot-power connectors. Connect them when running more than two GPUs; the manual lists which ones.':'Leave the cables loose for now.']});
+  s.push({id:'board',t:'Install the motherboard',b:[
+    'Fit the I/O shield first if the board does not have one built in.',
+    'Lower the board at an angle, I/O ports first, and align it on the standoff guide pin.',
+    'Start all screws loosely, then tighten in a cross pattern. Snug, not torqued.']});
+  s.push({id:'cooler',t:'Install the CPU cooler',tag:E.cooler.name,b:[
+    aio?'Attach the pump block, tightening opposite corners a few turns at a time. Plug the pump into AIO_PUMP and fans into CPU_FAN.':'Mount the heatsink, tightening the two screws alternately until they stop. Fans blow front to back.',
+    '<span class="crit">Confirm the cold-plate film is off.</span>',
+    E.cooler.kind==='air'?`Check side-panel clearance: ${E.cs.cooler-E.cooler.h} mm spare.`:'Keep the pump below the radiator\'s highest point so air collects in the radiator.']});
+  for(let i=0;i<n;i++){
+    const pl=E.placed[i];
+    s.push({id:'gpu'+i,t:`Install GPU ${i+1}${pl?' in slot '+pl.pos:''}`,tag:E.gpu.name.replace(/\s*\(.*\)/,''),b:[
+      pl?`Push straight into the x16 slot at position ${pl.pos} until the latch clicks. Screw the bracket to the case.`:'<span class="crit">This card has no free slot.</span> Revisit the board or card choice, or plan a vertical mount with a PCIe 5.0 riser.',
+      E.gpu.c12?'<span class="crit">Seat the 12V-2x6 plug fully</span>: no visible gap at the connector edge. Do not bend the cable within 35 mm of the plug. Use a native PSU cable, not an adapter.':'Use one dedicated 8-pin cable per socket, not a daisy-chained pigtail.',
+      E.gpu.len>300?'Fit the anti-sag support bracket. A 2 kg card bends the slot over time.':'Check the card sits level.',
+      i>0&&!E.gpu.blower&&pl&&E.placed[i-1]&&pl.pos===E.placed[i-1].end+1?'This card sits flush against the one above. Plan for power limits or extra side airflow.':null].filter(Boolean)});
+  }
+  s.push({id:'front',t:'Connect front panel, fans and USB',b:[
+    'Power switch, reset, and LEDs to the front-panel header (polarity matters only for LEDs).',
+    'Front USB-C to the board\'s USB 3.2 Gen2x2 header, USB-A to the 19-pin header, audio to HD_AUDIO.',
+    'Fans to CHA_FAN headers, or one fan hub. Note which header drives which fan for the BIOS curves.']});
+  s.push({id:'cables',t:'Cable management',b:[
+    'Tie runs together behind the motherboard tray. Keep the area in front of GPU intakes clear.',
+    'Re-check every connector: 24-pin, both EPS, every GPU plug, pump header.']});
+  s.push({id:'post',t:'First boot and BIOS setup',b:[
+    'Plug the monitor into the GPU, not the motherboard. Power on and wait through memory training.',
+    E.board.bmc?'Connect the BMC network port to your router. Find its IP in the router, log in from a browser, and change the default password straight away. Server boards may need the BIOS set to use the PCIe GPU as the primary display.':null,
+    `Confirm the BIOS shows ${E.ram.gb} GB and ${n} GPU${n===1?'':'s'}${n>1?' at the expected PCIe link width':''}.`,
+    E.ram.type==='UDIMM'?'Enable EXPO/XMP. With four sticks, if it fails to train, drop one speed step.':'Kingston RDIMMs boot at DDR5-4800. Enable the EXPO profile for 5600 CL28, then confirm all 8 channels report. On the WRX90E-SAGE SE, connect a fan to CPU_FAN or the BMC log fills with warnings.',
+    'Enable Above 4G Decoding and Resizable BAR. Set fan curves on CPU and GPU temperature.'].filter(Boolean)});
+  s.push({id:'os',t:'Operating system and AI stack',b:[
+    'Install Ubuntu 24.04 LTS (or Windows 11 + WSL2). Ubuntu gives the fewest surprises for multi-GPU work.',
+    E.gpu.id.match(/5090|5080|5070|pro6000/)?'Blackwell cards need the <b>open</b> NVIDIA kernel driver (570 series or newer) and CUDA 12.8 or newer.':'Install the current NVIDIA driver and CUDA toolkit.',
+    '<span class="mono">nvidia-smi</span> should list every GPU. Then install your runtimes: Ollama or llama.cpp for quick local models, vLLM for serving, PyTorch for training.',
+    n>1?`Optional: set a power cap at boot with a systemd unit running <span class="mono">nvidia-smi -pl ${Math.round(E.gpu.watts*0.75)}</span>.`:null].filter(Boolean)});
+  s.push({id:'stress',t:'Burn-in and stress test',b:[
+    'Run MemTest86 for one full pass (several hours with large kits).',
+    'Run gpu-burn or a long vLLM benchmark for 30+ minutes. Watch GPU hotspot and memory temperatures.',
+    'Check the 12V-2x6 plugs by hand after an hour of load; warm is fine, hot is not. Watch the breaker on long runs.']});
+  return s;
+}
+function renderAssembly(E){
+  const S2=steps(E);
+  const ro=TEAM.live&&!TEAM.canWrite;
+  document.getElementById('steps').innerHTML=S2.map(st=>{const dn=isDone(st.id),rec=TEAM.steps[st.id];return `<li class="step${dn?' done':''}">
+    <input type="checkbox" id="st-${st.id}" data-id="${st.id}"${dn?' checked':''}${ro?' disabled':''} aria-label="Mark step done">
+    <div><h4><label for="st-${st.id}">${st.t}</label>${st.tag?`<span class="badge">${st.tag}</span>`:''}</h4><ul>${st.b.map(x=>`<li>${x}</li>`).join('')}</ul>
+    ${TEAM.live&&dn&&rec&&rec.by?`<p class="who" style="margin:8px 0 0">${pav(rec.by)}Done by ${esc(pname(rec.by))} · ${new Date(rec.at).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</p>`:''}</div></li>`;}).join('');
+  document.getElementById('clearsteps').hidden=TEAM.live;
+  const d=S2.filter(x=>isDone(x.id)).length;
+  document.getElementById('progtext').textContent=`${d} / ${S2.length} steps`;
+  document.getElementById('progbar').style.width=(d/S2.length*100)+'%';
+  const tools=['Phillips #2 magnetic screwdriver','Torx T20 torque driver (Threadripper includes one; buy one for EPYC)','Zip ties or velcro straps + flush cutters','Flashlight or headlamp','FAT32 USB stick for BIOS','Thermal paste (if not pre-applied)','Isopropyl alcohol 90%+ and lint-free wipes','GPU support bracket'];
+  document.getElementById('tools').innerHTML=tools.filter(t=>tr(E)||!t.includes('T20')).map(t=>`<li>${t}</li>`).join('');
+}
+const tr=E=>E.cpu.plat.startsWith('TR');
+document.getElementById('steps').addEventListener('change',e=>{
+  if(!e.target.dataset.id)return; setDone(e.target.dataset.id,e.target.checked);
+});
+document.getElementById('clearsteps').addEventListener('click',()=>{DONE={};store.set('rig.steps',DONE);renderAssembly(evaluate());});
+
+/* ===== Copy ===== */
+document.getElementById('copy').addEventListener('click',async e=>{
+  const E=evaluate();
+  const lines=[`AI rig build — est. ${fmt$(E.total)}`,
+    `CPU: ${E.cpu.name}`,`Board: ${E.board.name}`,`RAM: ${E.ram.name}`,`GPU: ${E.n}× ${E.gpu.name}`,
+    `Cooler: ${E.cooler.name}`,`PSU: ${E.psu.name}`,`Case: ${E.cs.name}`,
+    ...[E.d1,E.d2].filter(d=>d.tb).map(d=>`Drive: ${d.name}`),
+    ...(E.ex.price?[`Extras: ${E.ex.name}`]:[]),
+    `Totals: ${E.vram} GB VRAM · ${E.ram.gb} GB RAM · ~${Math.round(E.load)} W peak`,
+    'Open issues:',...E.checks.filter(c=>c.lvl==='bad'||c.lvl==='warn').map(c=>`- [${c.lvl}] ${c.title}`)];
+  const txt=lines.join('\n');
+  try{await navigator.clipboard.writeText(txt);e.target.textContent='Copied';}
+  catch(err){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();e.target.textContent='Selected — press Ctrl/⌘+C';}
+  setTimeout(()=>e.target.textContent='Copy parts list',2000);
+});
+
+/* ===== Research findings (Nov 15, 2026) ===== */
+const FINDINGS = [
+ {lvl:'bad',t:'The RTX PRO 5000 48 GB is quoted ~58% over launch price',d:'Micro Center quotes $7,199.99; NVIDIA launched the 48 GB card at $4,569 (CG Channel). Price-check other resellers or ask Micro Center to match before Thursday.'},
+ {lvl:'warn',t:'Two 4-stick memory kits are not a matched set of eight',d:'Kingston advises one matched 8-module kit for 8-channel boards. Ask whether the 8×32 GB kit (KF556R28RBE2K8-256) is available instead of two K4-128 kits. Either way, the sticks run at DDR5-4800 until EXPO is turned on.'},
+ {lvl:'info',t:'The Antec 900 ships with six fans',d:'3× 140 mm front, 2× 120 mm reverse-flow under the GPU, 1× 140 mm rear. The extra fans and hub from the original quote aren\'t needed with this case. The AW420 radiator plus fans is exactly 52 mm, the case\'s front-mount limit.'},
+ {lvl:'bad',t:'The RTX 5070 Ti is overpriced at $1,699.99',d:'MSRP is $749, ASUS lists the ProArt at $1,069.99, and Nov 2026 street price is $1,229–1,500. That is ~$106 per GB of GPU memory, and 16 GB limits local models to the ~20B class (gpt-oss-20b nearly fills it).'},
+ {lvl:'warn',t:'Memory runs out before CPU or GPU on agent workloads',d:'Measured: 6 parallel coding agents spawned ~70 processes using ~43.5 GB. Each session starts its own MCP servers (44–300 MB each); each headless browser adds 150–400 MB. 128 GB is the floor; 192–256 GB suits 10–20 agents.'},
+ {lvl:'warn',t:'Only 4 of 8 memory channels are filled',d:'~179 GB/s instead of ~358 GB/s at DDR5-5600. The board wires 8 of the CPU\'s 12 channels, one DIMM each. DDR5 RDIMM prices are still rising (64 GB: ~$873 in Q1 2026, projected ~$1,586 by Q4), so filling them sooner costs less.'},
+ {lvl:'warn',t:'16 cores is light for many agents running builds, tests and browsers',d:'The EPYC 9355P has 32 cores and sells for about the same or less than the 9175F ($2.3–3.4k vs $3.0–3.7k). Ask Micro Center whether they can swap it into the bundle.'},
+ {lvl:'warn',t:'The wall outlet is part of the build',d:'Long AI jobs count as continuous load: 1,440 W max on a 15 A circuit, 1,920 W on 20 A. One big GPU puts the system near 1,150 W at the wall. Plan a dedicated 20 A circuit; 3–4 GPUs need 240 V. Size a UPS at 1.25–1.5× wall watts.'},
+ {lvl:'ok',t:'The $5,999.99 bundle price is fair',d:'CPU ($3.0–3.7k street) plus board ($1.1–1.3k) is $4.1–5.0k, leaving $1.0–1.9k for 128 GB of RDIMM. That is at or below what the memory costs today.'},
+ {lvl:'ok',t:'$2,449 per Kioxia CD6-R is market price',d:'~$319/TB, below the Micron 7450 PRO 7.68 TB ($2,860–3,130), with ~2.9× the endurance of 8 TB consumer drives. HP-branded units are often server pulls: check SMART power-on hours on arrival and confirm the part number on HPE PartSurfer.'},
+ {lvl:'info',t:'The 1200 W PSU suits one GPU, not two big ones',d:'1× 12V-2x6, 2× EPS, 4× PCIe 8-pin. Two 600 W GPUs need 1600 W+. Three or four need two PSUs with each GPU powered entirely from one of them.'},
+ {lvl:'info',t:'A 16-core EPYC can still run huge models from RAM',d:'One report: a CPU-only 9175F with 12 channels ran DeepSeek-V3.2 at ~14–15 tokens/s and Kimi-K2.5 (1T) at 10–13 tokens/s. Our board has 8 channels, so expect less. This is the case for filling memory.'},
+];
+
+/* ===== Decisions ===== */
+const DECISIONS = [
+ {id:'build',q:'Option A or Option B?',ctx:'Option A (EPYC) is the baseline. Option B adds 16 cores (+$2,000), fills all memory channels (+$4,590) and swaps the 16 GB card for a 48 GB RTX PRO 5000 (+$5,500). The middle option takes the platform and memory upgrades and puts in a cheaper GPU for now.',rec:'middle',opts:[
+  {id:'original',label:'Option A: EPYC 9175F build',d:'~$14.5K all-in · 16 cores · 128 GB on 4 channels · 16 GB GPU',apply:{cpu:'epyc9175f',board:'turind8x',ram:'kfrp4x32',gpu:'5070tipa',gpuN:1,cooler:'xe360sp5',psu:'leadex7-1200',case:'enthoo2',extras:'mc-mcio'}},
+  {id:'middle',label:'B platform + memory, cheaper GPU now',d:'~$21K all-in · 32 cores · 256 GB on 8 channels · used 24 GB RTX 3090 · add a pro GPU later',apply:{cpu:'tr9975wxb',board:'wrx90b',ram:'kfrp8x32',gpu:'3090',gpuN:1,cooler:'aw420',psu:'tc1650t',case:'antec900',extras:'slimsas'}},
+  {id:'upgrade',label:'Option B: full quote',d:'~$27.7K all-in · 32 cores · 256 GB on 8 channels · 48 GB RTX PRO 5000',apply:{cpu:'tr9975wxb',board:'wrx90b',ram:'kfrp8x32',gpu:'pro5000',gpuN:1,cooler:'aw420',psu:'tc1650t',case:'antec900',extras:'slimsas'}},
+ ]},
+ {id:'gpu',q:'Which GPU goes in on day one?',ctx:'The GPU serves local router, embedding and fallback models; most agent calls go to cloud APIs. 48 GB runs 30B-class models comfortably and 70B at 4-bit with short contexts; 72 GB also runs the 120B class (gpt-oss-120b, GLM-4.5-Air) fully on the GPU.',rec:'3090x1',opts:[
+  {id:'pro5000',label:'RTX PRO 5000 48 GB (upgrade quote)',d:'$7,199.99 · ~$150 per GB · 300 W blower, stacks 4 across · ECC, pro drivers',apply:{gpu:'pro5000',gpuN:1}},
+  {id:'pro5000x72',label:'RTX PRO 5000 72 GB',d:'~$7,999.99 · ~$111 per GB · +$800 for +24 GB · ask Micro Center if they can get it',apply:{gpu:'pro5000x72',gpuN:1}},
+  {id:'5070ti',label:'Keep the RTX 5070 Ti 16 GB',d:'$1,699.99 · fastest per token on small models · 16 GB ceiling · CUDA',apply:{gpu:'5070tipa',gpuN:1}},
+  {id:'3090x1',label:'1× used RTX 3090 24 GB',d:'~$1,100–1,630 · 24 GB fits 30B-class models · CUDA · add a second later with a bigger PSU',apply:{gpu:'3090',gpuN:1}},
+  {id:'r9700',label:'AMD Radeon AI PRO R9700 32 GB',d:'~$1,700 at Micro Center · 32 GB for the same money · ROCm, not CUDA: some tools lag',apply:{gpu:'r9700',gpuN:1}},
+  {id:'3090x2',label:'2× used RTX 3090 (48 GB)',d:'~$2,200–3,200 · same 48 GB as the PRO 5000 for ~$4–5K less · 700 W of heat, sandwiched cards, a 20 A circuit',apply:{gpu:'3090',gpuN:2}},
+ ]},
+ {id:'ram',q:'Fill all 8 memory channels now?',ctx:'The bundle fills 4 of 8 slots. Memory is the first thing agent workloads run out of, and RDIMM prices are rising.',rec:'fill',opts:[
+  {id:'keep',label:'Keep 128 GB (4 channels)',d:'$0 extra · ~179 GB/s · tight for 10+ agents',apply:{ram:'kfrp4x32'}},
+  {id:'fill',label:'Add the second Kingston kit: 256 GB',d:'$4,589.99 (Micro Center SKU 873000, sold with a bundle) · ~358 GB/s · same part as the bundle kit',apply:{ram:'kfrp8x32'}},
+ ]},
+ {id:'cpu',q:'If we keep the original: ask for a 32-core EPYC?',ctx:'Only applies to the original build. The 9175F has 16 fast cores and 512 MB of cache. The 9355P has 32 cores and costs about the same or less on the street. The upgrade build already has 32 cores.',rec:'ask',opts:[
+  {id:'keep',label:'Keep the EPYC 9175F (16 cores)',d:'Highest clocks · fine if agents mostly wait on cloud APIs',apply:{cpu:'epyc9175f'}},
+  {id:'ask',label:'Ask Micro Center to swap in a 9355P (32 cores)',d:'Twice the cores for builds, tests and browsers · 280 W · keep the 9175F if they can\'t',apply:{cpu:'epyc9355p'}},
+ ]},
+ {id:'case',q:'Which case?',ctx:'Both boards are SSI-EEB (12 × 13 in). The case also needs mounts for two 2.5" U.3 drives with airflow and room for 2–4 GPUs later.',rec:'antec900',opts:[
+  {id:'antec900',label:'Antec 900 (upgrade quote)',d:'$199.99 at Micro Center · SSI-EEB listed · GPU 465 mm · 8 slots · 420 mm radiator front only · 5× 2.5" bays',apply:{case:'antec900'}},
+  {id:'enthoo2',label:'Phanteks Enthoo Pro 2 Server Edition',d:'~$185 · SSI-EEB listed · 11 slots · 503 mm GPUs · 11× 2.5" mounts · server PSU support',apply:{case:'enthoo2'}},
+  {id:'meshify2xl',label:'Fractal Meshify 2 XL',d:'~$250 · SSI-EEB listed · strong airflow · GPU limit drops to ~340 mm with drive cages in',apply:{case:'meshify2xl'}},
+  {id:'v3000p',label:'Lian Li V3000 Plus',d:'~$430 · huge, 480 mm radiators · Lian Li lists EEB, not SSI-EEB · may be discontinued',apply:{case:'v3000p'}},
+  {id:'ax500',label:'Thermaltake AX500',d:'~$230 · SSI-EEB per retailers only, not confirmed by Thermaltake · 8 slots',apply:{case:'ax500'}},
+ ]},
+ {id:'cooler',q:'Which CPU cooler?',ctx:'The machine will run around the clock. The cooler must match the platform: SP5 for EPYC, sTR5 for Threadripper PRO.',rec:'aw420',opts:[
+  {id:'aw420',label:'Thermaltake AW420 (upgrade quote, Threadripper)',d:'$449.99 · 420 mm, rated 625 W · front mount in the Antec 900 · confirm plate coverage when mounting',apply:{cooler:'aw420'}},
+  {id:'aio',label:'SilverStone XE360-SP5 AIO (original quote, EPYC)',d:'$379.99 · quieter under load · the pump is a failure point',apply:{cooler:'xe360sp5'}},
+  {id:'air',label:'Arctic Freezer 4U-SP5 air (EPYC)',d:'~$80 (estimate) · rated 360 W · no pump · louder at full load',apply:{cooler:'freezer4usp5'}},
+ ]},
+ {id:'storage',q:'Buy both U.3 drives now?',ctx:'Two Kioxia CD6-R 7.68 TB drives cost ~$4,900. HP-branded units are often used server pulls.',rec:'one',opts:[
+  {id:'two',label:'Buy both now',d:'~$4,898 + cables · 15.4 TB enterprise storage',apply:{drive1:'cd6r768',drive2:'cd6r768'}},
+  {id:'one',label:'Buy one, check it, then the second',d:'~$2,449 now · check SMART hours and warranty before ordering the next',apply:{drive1:'cd6r768',drive2:'none'}},
+  {id:'m2',label:'Use the board\'s M.2 slots instead',d:'Gen5 M.2 reads faster for model loading · lower endurance · 8 TB prices have spiked too',apply:{drive1:'9100pro4',drive2:'none'}},
+ ]},
+ {id:'power',q:'Where does it plug in?',ctx:'Continuous loads are capped at 80% of the breaker rating.',rec:'20a',opts:[
+  {id:'15a',label:'Existing 15 A outlet',d:'1,440 W continuous · OK for one modest GPU, nothing else on the circuit',apply:{wall:'120'}},
+  {id:'20a',label:'Dedicated 20 A circuit',d:'1,920 W continuous · handles one big GPU or two power-limited',apply:{wall:'120x20'}},
+  {id:'240',label:'240 V circuit',d:'For 3–4 GPUs later',apply:{wall:'230'}},
+ ]},
+];
+
+/* ===== Team layer: shared checklist, votes, comments ===== */
+const TEAM = {db:null,user:null,comments:null,me:null,canWrite:true,steps:{},votes:{},prof:{},live:false};
+const esc = t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function loadProfiles(){
+  if(!TEAM.user) return;
+  const ids=new Set(Object.keys(TEAM.votes)); Object.values(TEAM.steps).forEach(s=>s.by&&ids.add(s.by));
+  const need=[...ids].filter(i=>!TEAM.prof[i]); if(!need.length) return;
+  try{Object.assign(TEAM.prof,await TEAM.user.profiles(need));}catch(e){}
+  refresh();
+}
+const pname = id=>(TEAM.prof[id]&&TEAM.prof[id].name)||'Someone';
+const pav = id=>TEAM.prof[id]?`<img src="${esc(TEAM.prof[id].avatarUrl)}" alt="" title="${esc(pname(id))}">`:'';
+(async()=>{
+  if(!window.claude||!window.claude.use) return;
+  try{
+    const [db,user,comments]=await Promise.all([claude.use('db'),claude.use('user'),claude.use('comments')]);
+    TEAM.user=user; TEAM.comments=comments;
+    if(user){ TEAM.me=await user.id(); const c=await user.can('data.write'); TEAM.canWrite=c!==false; }
+    if(db){
+      TEAM.db=db; TEAM.live=true;
+      db.collection('steps').onSnapshot(snap=>{TEAM.steps={};snap.docs.forEach(d=>TEAM.steps[d.id]=d.data());refresh();loadProfiles();},()=>{});
+      db.collection('votes').onSnapshot(snap=>{TEAM.votes={};snap.docs.forEach(d=>TEAM.votes[d.id]=(d.data()||{}).choices||{});refresh();loadProfiles();},()=>{});
+    }
+    refresh();
+  }catch(e){}
+})();
+function isDone(id){return TEAM.live?!!(TEAM.steps[id]&&TEAM.steps[id].done):!!DONE[id];}
+function setDone(id,val){
+  if(TEAM.live){
+    TEAM.steps[id]={done:val,by:TEAM.me,at:new Date().toISOString()}; refresh();
+    TEAM.db.doc('steps/'+id).set({done:val,by:TEAM.me||'',at:new Date().toISOString()}).catch(()=>{TEAM.canWrite=false;refresh();});
+  } else { DONE[id]=val; store.set('rig.steps',DONE); refresh(); }
+}
+function myVotes(){return (TEAM.me&&TEAM.votes[TEAM.me])||store.get('rig.votes',{});}
+function castVote(dec,opt){
+  const mine={...myVotes(),[dec]:opt};
+  if(TEAM.live&&TEAM.me){
+    TEAM.votes[TEAM.me]=mine; refresh();
+    TEAM.db.doc('votes/'+TEAM.me).set({choices:mine,at:new Date().toISOString()}).catch(()=>{TEAM.canWrite=false;refresh();});
+  } else { store.set('rig.votes',mine); refresh(); }
+}
+function tally(dec){const t={};Object.entries(TEAM.live?TEAM.votes:{local:store.get('rig.votes',{})}).forEach(([uid,ch])=>{if(ch&&ch[dec])(t[ch[dec]]=t[ch[dec]]||[]).push(uid);});return t;}
+
+/* ===== Overview / Parts / Decisions renderers ===== */
+const DEADLINE=new Date('2026-11-19T23:59:00-05:00');
+function daysLeft(){return Math.floor((DEADLINE-Date.now())/864e5);}
+function renderOverview(E){
+  const dl=daysLeft(), bad=E.checks.filter(c=>c.lvl==='bad').length, warn=E.checks.filter(c=>c.lvl==='warn').length;
+  const steps_=steps(E), done=steps_.filter(s=>isDone(s.id)).length;
+  const openD=DECISIONS.filter(d=>!Object.keys(tally(d.id)).length).length;
+  document.getElementById('ovpills').innerHTML=[
+    `<span class="status ${dl<=1?'bad':dl<=4?'warn':'ok'}">${dl>0?`Quote price held ${dl} more day${dl>1?'s':''} (to Thu Nov 19)`:'Quote price guarantee has expired'}</span>`,
+    `<span class="status ${bad?'bad':warn?'warn':'ok'}">${bad?bad+' fit problem'+(bad>1?'s':''):'Everything fits'}${warn?` · ${warn} to watch`:''}</span>`,
+    `<span class="status ${openD?'warn':'ok'}">${openD} of ${DECISIONS.length} decisions without a vote</span>`,
+    `<span class="status ok">Build ${done} / ${steps_.length} steps${TEAM.live?' · shared':''}</span>`].join('');
+  const tb=[E.d1,E.d2].reduce((a,d)=>a+(d.tb||0),0);
+  document.getElementById('ovtiles').innerHTML=[
+    [E.cpu.cores+' cores',E.cpu.name.replace(/\s*\(.*\)/,''),'Processor'],
+    [E.ram.gb+' GB',`${E.ram.sticks} of ${E.board.dimm} slots · ${E.ram.type}`,'System memory'],
+    [E.vram+' GB',E.n?`${E.n}× ${E.gpu.name.replace(/\s*\(.*\)/,'')}`:'No GPU','GPU memory'],
+    [tb.toFixed(tb%1?2:0)+' TB',[E.d1,E.d2].filter(d=>d.tb).length+' drive(s)','Storage'],
+    [Math.round(E.load)+' W',`${E.psu.watts} W PSU · ~${Math.round(E.wall)} W at the wall`,'Peak power'],
+    [E.board.gpuSlots.length+' slots',E.board.name.replace(/\s*\(.*\)/,''),'GPU expansion'],
+  ].map(([b,sm,sp])=>`<div class="tile"><span>${sp}</span><b>${esc(b)}</b><small>${esc(sm)}</small></div>`).join('');
+  const lines=[['Processor + board + memory',E.cpu,'cpu',1],['Memory upgrade',E.ram,'ram',1],['GPU',E.gpu,'gpu',E.n],['CPU cooler',E.cooler,'cooler',1],['Power supply',E.psu,'psu',1],['Case',E.cs,'case',1],['Drive 1',E.d1,'drive',1],['Drive 2',E.d2,'drive',1],['Fans, hub & cables',E.ex,'extras',1]]
+    .map(([l,i,c,q])=>[l+(q>1?` (${q}×)`:''),priceOf(c,i)*q]).filter(r=>r[1]>0);
+  const sub=lines.reduce((a,r)=>a+r[1],0), tax=sub*0.07;
+  document.getElementById('ovcost').innerHTML=lines.map(([l,v])=>`<tr><td>${l}</td><td>${fmt$(v)}</td></tr>`).join('')+
+    `<tr><td>Sales tax (7%)</td><td>${fmt$(tax)}</td></tr><tr class="sum"><td>Total</td><td>${fmt$(sub+tax)}</td></tr>`;
+  document.getElementById('ovfind').innerHTML=FINDINGS.map(f=>`<li><span class="tag ${f.lvl}">${{bad:'Change',warn:'Watch',ok:'Good',info:'Note'}[f.lvl]}</span><div><b>${f.t}</b><p>${f.d}</p></div></li>`).join('');
+  document.getElementById('ovdec').innerHTML=DECISIONS.map(d=>{const t=tally(d.id),lead=Object.entries(t).sort((a,b)=>b[1].length-a[1].length)[0],rec=d.opts.find(o=>o.id===d.rec);
+    return `<li><span class="tag ${lead?'ok':'warn'}">${lead?'Voted':'Open'}</span><div><b>${d.q}</b><p>${lead?`Leading: ${esc(d.opts.find(o=>o.id===lead[0]).label)} (${lead[1].length})`:`Recommended: ${esc(rec.label)}`}</p></div></li>`;}).join('');
+  const top=E.checks.filter(c=>c.lvl==='bad'||c.lvl==='warn').slice(0,5);
+  document.getElementById('ovfit').innerHTML=top.length?top.map(c=>`<li><span class="tag ${c.lvl}">${c.lvl==='bad'?'Clash':'Watch'}</span><div><b>${c.title}</b></div></li>`).join(''):'<li><span class="tag ok">Fits</span><div><b>No clashes or warnings</b></div></li>';
+}
+function renderBOM(E){
+  const rows=[['Processor',E.cpu,'cpu',1],['Motherboard',E.board,'board',1],['Memory',E.ram,'ram',1],['Graphics',E.gpu,'gpu',E.n],['CPU cooler',E.cooler,'cooler',1],['Power supply',E.psu,'psu',1],['Case',E.cs,'case',1],['Drive 1',E.d1,'drive',1],['Drive 2',E.d2,'drive',1],['Fans, hub & cables',E.ex,'extras',1]]
+    .filter(([,i,,q])=>q>0&&i.id!=='none');
+  const canDiscuss=!!(TEAM.comments&&TEAM.comments.openComposer);
+  document.getElementById('bom').innerHTML=`<thead><tr><th>Part</th><th>Item</th><th>Key specs</th><th>Source</th><th style="text-align:right">Price</th>${canDiscuss?'<th></th>':''}</tr></thead><tbody>`+
+    rows.map(([l,i,c,q],ix)=>{const p=priceOf(c,i)*q;return `<tr data-row="${ix}"><td><b>${l}</b></td><td>${q>1?q+'× ':''}${esc(i.name)}</td><td class="spec">${i.meta||''}</td><td class="src">${esc(i.src||'Not sourced yet')}</td><td class="num" style="text-align:right">${p?fmt$(p):'<span class="src">in bundle</span>'}</td>${canDiscuss?`<td><button class="linkbtn" type="button" data-discuss="${ix}">Discuss</button></td>`:''}</tr>`;}).join('')+'</tbody>';
+  document.getElementById('bomnote').textContent=`${rows.length} line items`;
+}
+document.getElementById('bom').addEventListener('click',e=>{
+  const b=e.target.closest('[data-discuss]'); if(!b||!TEAM.comments)return;
+  TEAM.comments.openComposer({element:b.closest('tr')}).catch(()=>{});
+});
+function renderDecisions(E){
+  const mine=myVotes(), dl=daysLeft();
+  document.getElementById('decdeadline').textContent=dl>0?`Quote held ${dl} more day${dl>1?'s':''}`:'Quote guarantee expired';
+  const open=DECISIONS.filter(d=>!Object.keys(tally(d.id)).length).length;
+  document.getElementById('deccount').textContent=open||'';
+  const bn=document.getElementById('votebanner');
+  bn.hidden=TEAM.live&&TEAM.canWrite;
+  bn.textContent=!TEAM.live?'Team voting is unavailable in this view, so your picks are saved in this browser only.':'You have view-only access. Ask the owner for Contributor access to vote.';
+  document.getElementById('decs').innerHTML=DECISIONS.map(d=>{const t=tally(d.id),voted=Object.keys(t).length;
+    return `<article class="dec ${voted?'':'open'}"><div class="dec-head"><h2>${d.q}</h2><span class="tag ${voted?'ok':'warn'}" style="padding:2px 8px">${voted?'Voting':'Open'}</span></div>
+    <p class="note" style="margin:0">${d.ctx}</p>
+    <div class="opts">${d.opts.map(o=>{const v=t[o.id]||[];return `<div class="opt${o.id===d.rec?' rec':''}${mine[d.id]===o.id?' mine':''}">
+      <h5>${esc(o.label)}${o.id===d.rec?'<span class="badge">Recommended</span>':''}</h5><p>${o.d}</p>
+      <div class="votes">${TEAM.live?v.map(pav).join(''):''}${v.length?`<span class="who">${v.length} vote${v.length>1?'s':''}</span>`:''}</div>
+      <div class="opt-actions"><button class="btn${mine[d.id]===o.id?' solid':''}" type="button" data-vote="${d.id}:${o.id}"${TEAM.live&&!TEAM.canWrite?' disabled':''}>${mine[d.id]===o.id?'Your pick':'Pick this'}</button>
+      <button class="linkbtn" type="button" data-try="${d.id}:${o.id}">Try it</button></div></div>`;}).join('')}</div></article>`;}).join('');
+}
+document.getElementById('decs').addEventListener('click',e=>{
+  const v=e.target.closest('[data-vote]'), t=e.target.closest('[data-try]');
+  if(v){const [d,o]=v.dataset.vote.split(':');castVote(d,o);}
+  if(t){const [d,o]=t.dataset.try.split(':');const opt=DECISIONS.find(x=>x.id===d).opts.find(x=>x.id===o);Object.assign(S,opt.apply);update();location.hash='#build';}
+});
+
+
+/* ===== Compare quotes ===== */
+function evalFor(st){const save=S;S=Object.assign({},S,st);const E=evaluate();S=save;return E;}
+function costOf(E){const items=[[E.cpu,'cpu',1],[E.board,'board',1],[E.ram,'ram',1],[E.gpu,'gpu',E.n],[E.cooler,'cooler',1],[E.psu,'psu',1],[E.cs,'case',1],[E.d1,'drive',1],[E.d2,'drive',1],[E.ex,'extras',1]];
+  const sub=items.reduce((a,[i,c,q])=>a+priceOf(c,i)*q,0);return {sub,total:sub*1.07};}
+function largestOnGPU(E){const fit=MODELS.filter(m=>(m.q4?m.q4+4:m.p*0.58*1.1+1.5)<=E.vram*0.95);return fit.length?fit[fit.length-1].name:'None';}
+const CMP=[
+ {key:'original',name:'Option A',sub:'EPYC 9175F',st:()=>DECISIONS[0].opts[0].apply},
+ {key:'middle',name:'B + cheaper GPU',sub:'B platform & memory',st:()=>DECISIONS[0].opts[1].apply},
+ {key:'upgrade',name:'Option B',sub:'Threadripper PRO quote',st:()=>DECISIONS[0].opts[2].apply},
+ {key:'mine',name:'Current selection',sub:'From the Fit check',st:()=>({})},
+];
+function renderCompare(){
+  const Es=CMP.map(c=>evalFor(c.st()));
+  const bw=E=>Math.round(Math.min(E.ram.sticks,E.board.dimm,E.cpu.chan)*5.6*8);
+  const agents=E=>Math.max(0,Math.floor((E.ram.gb-24)/7));
+  const free=E=>{const used=E.placed.length?Math.max(...E.placed.map(p=>p.end)):0;return E.board.gpuSlots.filter(p=>p>used).length;};
+  const rows=[
+   ['All-in cost',E=>fmt$(costOf(E).total),E=>costOf(E).total,'low'],
+   ['CPU cores',E=>E.cpu.cores,E=>E.cpu.cores,'high'],
+   ['System memory',E=>`${E.ram.gb} GB · ${Math.min(E.ram.sticks,E.board.dimm)} of ${E.board.dimm} channels`,E=>E.ram.gb,'high'],
+   ['Memory bandwidth',E=>`~${bw(E)} GB/s`,bw,'high'],
+   ['Parallel coding agents (est.)',E=>'~'+agents(E),agents,'high'],
+   ['GPU memory',E=>E.vram+' GB',E=>E.vram,'high'],
+   ['Largest model fully on GPU (4-bit)',largestOnGPU,E=>E.vram,'high'],
+   ['Free x16 slots for more GPUs',free,free,'high'],
+   ['M.2 slots / U.2 ports',E=>`${E.board.m2} / ${E.board.u2||0}`,E=>E.board.m2,'high'],
+   ['Peak power · at the wall',E=>`${Math.round(E.load)} W · ~${Math.round(E.wall)} W`,E=>-E.load,'high'],
+   ['PSU headroom',E=>Math.round((1-E.load/E.psuW)*100)+'%',E=>1-E.load/E.psuW,'high'],
+   ['Fit issues',E=>{const b=E.checks.filter(c=>c.lvl==='bad').length,w=E.checks.filter(c=>c.lvl==='warn').length;return b?`${b} clash · ${w} watch`:w?`${w} to watch`:'None';},E=>-(E.checks.filter(c=>c.lvl==='bad').length*10+E.checks.filter(c=>c.lvl==='warn').length),'high'],
+  ];
+  const head=`<thead><tr><th></th>${CMP.map(c=>`<th>${c.name}<div style="text-transform:none;letter-spacing:0;font-weight:400">${c.sub}</div></th>`).join('')}</tr></thead>`;
+  const body=rows.map(([l,f,v,dir])=>{const vals=Es.slice(0,3).map(v);const best=dir==='low'?Math.min(...vals):Math.max(...vals);
+    return `<tr><td><b>${l}</b></td>${Es.map((E,i)=>`<td class="num"${i<3&&v(E)===best&&new Set(vals).size>1?' style="color:var(--ok);font-weight:600"':''}>${esc(f(E))}</td>`).join('')}</tr>`;}).join('');
+  document.getElementById('cmp').innerHTML=head+'<tbody>'+body+'</tbody>';
+  document.getElementById('cmpload').innerHTML=CMP.slice(0,3).map(c=>`<button class="btn" type="button" data-load="${c.key}">Load ${c.name.toLowerCase()} into Fit check</button>`).join('');
+  const [o,m,u]=Es, d1=costOf(m).total-costOf(o).total, d2=costOf(u).total-costOf(m).total;
+  document.getElementById('cmprec').innerHTML=`
+   <p><b>Recommendation: take Option B's platform and memory, and decide the GPU on its own.</b> That is the "B + cheaper GPU" column.</p>
+   <p><b>The platform upgrade is the best $2,000 in either quote.</b> It doubles the cores to 32 and adds the ASUS workstation board (4 M.2 slots, Intel dual 10 GbE, BMC). Both boards top out at 8 memory channels, so neither has a bandwidth edge.</p>
+   <p><b>The second memory kit ($4,589.99) fixes the first bottleneck the research found.</b> It takes you from ~${agents(o)} to ~${agents(m)} parallel coding agents and doubles bandwidth. Prices are still rising, so buy it now on whichever platform you choose.</p>
+   <p><b>The RTX PRO 5000 48 GB is the biggest single line and the one to weigh.</b> At ~$150 per GB it runs 30B-class models with long contexts, and 70B at 4-bit only with short contexts. It can't hold the 120B class. If you want a pro card, ask for the <b>72 GB</b> version (~$800 more), which runs gpt-oss-120b fully on the GPU. If most agent calls go to cloud APIs, start with a used 24 GB RTX 3090. The 1650 W PSU and 7 slots let you add a pro card later.</p>
+   <p class="note">The middle path costs ${fmt$(d1)} more than Option A; full Option B costs another ${fmt$(d2)}. Before paying: confirm the GPU box says 48 GB or 72 GB, and plan to mount the AW420 radiator in the front of the Antec 900.</p>`;
+}
+document.getElementById('cmpload').addEventListener('click',e=>{const b=e.target.closest('[data-load]');if(!b)return;const c=CMP.find(x=>x.key===b.dataset.load);Object.assign(S,c.st());update();location.hash='#build';});
+
+/* ===== Routing + update ===== */
+function route(){
+  const v=(location.hash||'#overview').slice(1), ok=['overview','compare','parts','build','decisions','models','assembly'].includes(v)?v:'overview';
+  document.querySelectorAll('.view').forEach(x=>x.hidden=x.id!=='view-'+ok);
+  document.querySelectorAll('.tabs a').forEach(a=>a.dataset.view===ok?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+}
+window.addEventListener('hashchange',route);
+function update(){
+  store.set('rig.state2',S);
+  document.getElementById('wall').value=S.wall;
+  const E=evaluate();
+  renderParts(E.flags); renderSpecs(E); renderChecks(E); renderGauges(E); renderDrawing(E); renderModels(E);
+  renderAssembly(E); renderOverview(E); renderBOM(E); renderDecisions(E); renderCompare();
+}
+function refresh(){const E=evaluate(); renderAssembly(E); renderOverview(E); renderDecisions(E); renderBOM(E);}
+update(); route();
+</script>
+
+</body></html>
