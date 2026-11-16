@@ -214,8 +214,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .line .alt a{color:var(--dim)}
 .line .px{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 .line .px b{display:block;font-size:17px;color:var(--text);font-weight:500}
-.line .px small{color:var(--faint);font-size:11px}
-@media (max-width:560px){.line{grid-template-columns:56px minmax(0,1fr)}.thumb{width:56px;height:56px}.line .px{grid-column:2;text-align:left}}
+.line .px small{color:var(--faint);font-size:11px;display:block;white-space:normal;max-width:22ch;margin-left:auto}
+@media (max-width:560px){.line{grid-template-columns:56px minmax(0,1fr)}.thumb{width:56px;height:56px}.line .px{grid-column:2;text-align:left}.line .px small{margin-left:0;max-width:none}}
 .opt-toggle{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim);margin-top:8px;cursor:pointer}
 .opt-toggle input{accent-color:#A78BFA;width:16px;height:16px}
 .sum{position:sticky;top:calc(72px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
@@ -278,13 +278,129 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .flag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 
 
+
+/* ===== v3 plain-English layer ===== */
+.ab-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel);gap:2px}
+.ab-toggle button{all:unset;cursor:pointer;padding:7px 14px;border-radius:999px;font:700 13px/1 var(--body);color:var(--dim);white-space:nowrap}
+.ab-toggle button[aria-pressed="true"]{background:var(--film);color:#0A0D14}
+.ab-toggle button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* tour */
+.tour{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);align-items:start;margin-top:34px}
+@media (max-width:860px){.tour{grid-template-columns:1fr}}
+.rig{position:relative;background:radial-gradient(120% 90% at 60% 30%,#121a2a,var(--bg2));border:1px solid var(--line);border-radius:20px;padding:14px}
+.rig svg{width:100%;height:auto;display:block;max-height:560px}
+.rig [data-part]{cursor:pointer;transition:opacity .25s,filter .25s}
+.rig.focus [data-part]:not(.on){opacity:.28}
+.rig [data-part].on{filter:drop-shadow(0 0 8px rgba(110,231,249,.75))}
+.rig .hs{cursor:pointer}
+.rig .hs circle.ring{fill:#0A0D14;stroke:url(#filmS);stroke-width:2}
+.rig .hs text{font:700 13px var(--mono);fill:var(--text);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.rig .hs.on circle.ring{fill:url(#filmS);stroke:#fff}
+.rig .hs.on text{fill:#0A0D14}
+.rig .pulse{fill:none;stroke:var(--cy);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:hsPulse 2.4s ease-out infinite}
+@keyframes hsPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+@keyframes fanSpin{to{transform:rotate(360deg)}}
+.rig .fan{transform-box:fill-box;transform-origin:center;animation:fanSpin 2.2s linear infinite}
+.rig .flow{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+@media (prefers-reduced-motion:reduce){.rig .pulse,.rig .fan,.rig .flow{animation:none}}
+.rig-hint{position:absolute;left:18px;bottom:14px;font:500 11px var(--mono);color:var(--faint);letter-spacing:.06em}
+
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.pcard .ph{background:#F3F4F7;aspect-ratio:16/10;display:grid;place-items:center;position:relative;overflow:hidden}
+.pcard .ph img{width:88%;height:88%;object-fit:contain;transition:opacity .3s,transform .5s}
+.pcard .ph.swap img{opacity:0;transform:scale(.96)}
+.pcard .ph .tag{position:absolute;left:12px;top:12px;font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:#0A0D14;color:#fff;padding:5px 9px;border-radius:999px}
+.pcard .ph.dark{background:#050505}
+.pcard .ph .noimg{font:800 64px var(--display);color:#c9ced8}
+.pcard .bd{padding:22px 22px 18px;display:grid;gap:14px}
+.pcard h3{font-size:clamp(28px,3vw,40px)}
+.pcard .model{font:500 13px var(--mono);color:var(--dim);margin-top:4px}
+.pcard .what{font-size:17px;line-height:1.55;margin:0}
+.pcard .like{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0;color:var(--dim);font-size:15px}
+.pcard .like b{color:var(--text)}
+.pcard .like .ico{font-size:22px;line-height:1}
+.pcard .big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pcard .big b{font:900 clamp(44px,5vw,64px)/1 var(--display)}
+.pcard .big span{color:var(--dim);font-size:14px}
+.pcard .vs{font-size:13px;color:var(--faint);font-family:var(--mono)}
+.tour-nav{display:flex;align-items:center;gap:10px;padding:0 22px 20px;flex-wrap:wrap}
+.tour-nav .dots{display:flex;gap:6px;margin-right:auto}
+.tour-nav .dots button{all:unset;cursor:pointer;width:9px;height:9px;border-radius:50%;background:var(--line)}
+.tour-nav .dots button[aria-current="true"]{background:var(--cy);width:22px;border-radius:9px}
+.tour-nav .step{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font:700 13px var(--body);color:var(--text);background:var(--bg2)}
+.tour-nav .step.prime{background:var(--film);color:#0A0D14;border-color:transparent}
+.tour-nav .step:focus-visible,.tour-nav .dots button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* fit: what can it run */
+.fit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:34px}
+@media (max-width:860px){.fit-grid{grid-template-columns:1fr}}
+.fitc{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}
+.fitc h3{font-size:clamp(24px,2.4vw,30px)}
+.fitc .q{color:var(--dim);margin:8px 0 16px;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--bg2);display:grid;gap:2px}
+.chips button b{font:700 14px var(--body);color:var(--text)}
+.chips button small{font:500 11px var(--mono);color:var(--faint)}
+.chips button[aria-pressed="true"]{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy) inset;background:color-mix(in srgb,var(--cy) 10%,var(--bg2))}
+.chips button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.meter{display:grid;gap:4px;margin-top:14px}
+.meter .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.meter .row b{font-weight:700}
+.meter .row span{color:var(--dim);font-family:var(--mono);font-size:12px;white-space:nowrap}
+.bar{position:relative;height:16px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:999px;transition:width .6s cubic-bezier(.2,.8,.2,1),background .3s}
+.bar i.ok{background:linear-gradient(90deg,#34D399,#6EE7F9)}
+.bar i.no{background:repeating-linear-gradient(135deg,#F87171 0 8px,#FB923C 8px 16px)}
+.meter .vd{font-size:13px;font-weight:600}
+.meter .vd.ok{color:#6EE7B7}.meter .vd.no{color:#FCA5A5}
+.slider{display:flex;align-items:center;gap:14px;margin:4px 0 18px}
+.slider input{flex:1;accent-color:#A78BFA;height:28px}
+.slider output{font:900 44px/1 var(--display);min-width:2.2ch;text-align:right}
+.agents-viz{display:flex;flex-wrap:wrap;gap:4px;min-height:24px;margin-bottom:6px}
+.agents-viz i{width:14px;height:14px;border-radius:4px;background:var(--film);animation:pop .3s ease-out}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.agents-viz i{animation:none}.bar i{transition:none}}
+.fit-note{margin-top:14px;font-size:13px;color:var(--faint)}
+
+/* build day */
+.day-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-top:30px;scrollbar-width:thin}
+.day{scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.day .ph{background:#F3F4F7;aspect-ratio:4/3;display:grid;place-items:center;position:relative}
+.day .ph img{width:84%;height:84%;object-fit:contain}
+.day .ph .n{position:absolute;left:10px;top:10px;width:34px;height:34px;border-radius:50%;background:#0A0D14;color:#fff;display:grid;place-items:center;font:800 16px var(--mono)}
+.day .ph .t{position:absolute;right:10px;top:12px;font:700 11px var(--mono);background:#fff;color:#0A0D14;border-radius:999px;padding:4px 8px;border:1px solid #d8dbe2}
+.day .ph .emoji{font-size:64px}
+.day .bd{padding:16px 16px 18px;display:grid;gap:8px}
+.day h4{margin:0;font:800 22px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.day p{margin:0;font-size:14.5px;color:var(--dim)}
+.day .warn{font-size:13px;color:#FDE68A;background:rgba(252,211,77,.08);border:1px solid rgba(252,211,77,.25);border-radius:10px;padding:8px 10px}
+.day-bar{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.day-bar i{display:block;height:100%;width:0;background:var(--film)}
+.day-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px;font:500 12px var(--mono);color:var(--faint)}
+.day-arrows{display:flex;gap:8px}
+.day-arrows button{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;color:var(--text);font-size:18px}
+.day-arrows button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* jargon decoder */
+.jg{border-bottom:1.5px dotted color-mix(in srgb,var(--cy) 70%,transparent);cursor:help;text-decoration:none}
+.jg:focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:2px}
+#jgpop{position:fixed;z-index:60;max-width:300px;background:#F5F7FB;color:#0A0D14;border-radius:14px;padding:12px 14px;box-shadow:0 18px 50px rgba(0,0,0,.5);font:500 14px/1.45 var(--body);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
+#jgpop.show{opacity:1;transform:none}
+#jgpop b{display:block;font:800 13px var(--mono);letter-spacing:.04em;margin-bottom:3px;color:#5B21B6}
+.jg-pill{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:600 12px var(--body);color:var(--dim);box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center;transition:opacity .4s}
+.jg-pill i{font-style:normal;border-bottom:1.5px dotted var(--cy);color:var(--text)}
+.jg-pill button{all:unset;cursor:pointer;color:var(--faint);padding:0 2px}
+.jg-pill.gone{opacity:0;pointer-events:none}
+
 </style>
 
 <nav class="top" aria-label="Sections">
   <div class="wrap">
     <a class="mark" href="#top">CONDUCTOR<span></span></a>
     <div class="navlinks">
-      <a href="#numbers">Numbers</a><a class="keep" href="#options">A vs B</a><a href="#silicon">Silicon</a><a href="#build">The build</a><a href="#orchestra">Orchestra</a><a href="#proof">Proof</a><a href="#airflow">Power</a><a href="#parts">Parts</a><a class="keep" href="#bom">Bill of materials</a>
+      <a class="keep" href="#tour">Start here</a><a href="#numbers">Numbers</a><a class="keep" href="#options">A vs B</a><a href="#fit">What it runs</a><a href="#silicon">Silicon</a><a href="#build">The build</a><a href="#day">Build day</a><a href="#orchestra">Orchestra</a><a href="#proof">Proof</a><a href="#airflow">Power</a><a href="#parts">Parts</a><a class="keep" href="#bom">Bill of materials</a>
     </div>
   </div>
 </nav>
@@ -304,7 +420,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <div>Agents · <b>ready</b></div>
       </div>
       <div class="cta">
-        <a class="btn prime" href="#build">See it assemble ↓</a>
+        <a class="btn prime" href="#tour">Start here: 60-second tour ↓</a>
+        <a class="btn" href="#build">See it assemble</a>
         <a class="btn" href="#bom">Bill of materials</a>
         <a class="btn" href="build-book.html">Team build book ↗</a>
       </div>
@@ -316,6 +433,98 @@ footer li{break-inside:avoid;margin-bottom:6px}
     </div>
   </div>
 </header>
+
+<section class="band" id="tour">
+  <div class="wrap">
+    <div class="kicker">Start here · the machine in 60 seconds</div>
+    <h2 style="margin-top:14px">Eight parts.<br><span class="film">One simple idea.</span></h2>
+    <p class="lead">A computer is a team. <b>Tap any part</b> of the machine below to see what it does in plain English. Flip between <b>Option A</b> (the original quote) and <b>Option B</b> (the upgrade) to see what changes.</p>
+    <div style="margin-top:22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <div class="ab-toggle" role="group" aria-label="Choose build option">
+        <button type="button" data-opt="A" aria-pressed="false">Option A · $8,956</button>
+        <button type="button" data-opt="B" aria-pressed="true">Option B · $22,459</button>
+      </div>
+      <span class="src">Dotted words like <span class="jg" tabindex="0" data-k="VRAM">VRAM</span> explain themselves when you hover or tap.</span>
+    </div>
+    <div class="tour">
+      <div class="rig" id="rig">
+        <svg viewBox="0 0 360 470" role="img" aria-label="Side view of the computer with each part highlighted">
+          <defs>
+            <linearGradient id="filmS" x1="0" x2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".4" stop-color="#A78BFA"/><stop offset=".7" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".06"/><stop offset=".5" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".04"/></linearGradient>
+            <g id="fanG"><circle r="25" fill="#0B0F18" stroke="#2A3448" stroke-width="2"/><g class="fan"><path d="M0-4C6-20 18-14 4 0M4 0C20 6 14 18 0 4M0 4C-6 20-18 14-4 0M-4 0C-20-6-14-18 0-4" fill="#3A465E"/></g><circle r="4" fill="#586178"/></g>
+          </defs>
+          <!-- case -->
+          <g data-part="case">
+            <rect x="8" y="8" width="344" height="454" rx="16" fill="#0C111B" stroke="#2A3448" stroke-width="2"/>
+            <rect x="8" y="8" width="344" height="454" rx="16" fill="url(#glass)"/>
+            <use href="#fanG" x="325" y="78"/>
+            <rect x="14" y="356" width="332" height="2" fill="#2A3448"/>
+          </g>
+          <!-- motherboard -->
+          <g data-part="board">
+            <rect x="104" y="28" width="230" height="312" rx="6" fill="#131B2A" stroke="#33405A"/>
+            <g stroke="#26324A" stroke-width="1"><path d="M120 150h60M120 160h44M300 300v-60M290 300v-40M120 320h90"/></g>
+            <rect x="122" y="240" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="270" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="300" width="200" height="8" rx="2" fill="#2A3448"/>
+          </g>
+          <!-- RAM -->
+          <g data-part="ram">
+            <g fill="#3B2F6B" stroke="#A78BFA" stroke-width="1"><rect x="164" y="48" width="7" height="92" rx="1.5"/><rect x="174" y="48" width="7" height="92" rx="1.5"/><rect x="184" y="48" width="7" height="92" rx="1.5"/><rect x="194" y="48" width="7" height="92" rx="1.5"/></g>
+            <g fill="#3B2F6B" stroke="#A78BFA" stroke-width="1" id="ram2"><rect x="271" y="48" width="7" height="92" rx="1.5"/><rect x="281" y="48" width="7" height="92" rx="1.5"/><rect x="291" y="48" width="7" height="92" rx="1.5"/><rect x="301" y="48" width="7" height="92" rx="1.5"/></g>
+          </g>
+          <!-- CPU -->
+          <g data-part="cpu">
+            <rect x="208" y="64" width="56" height="62" rx="5" fill="#1D2638" stroke="#6EE7F9" stroke-width="1.5"/>
+            <circle cx="236" cy="95" r="17" fill="#0B0F18" stroke="#6EE7F9" stroke-width="1.5"/>
+            <text x="236" y="99" fill="#6EE7F9" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">CPU</text>
+          </g>
+          <!-- cooler: radiator + tubes + front fans -->
+          <g data-part="cooler">
+            <rect x="20" y="40" width="40" height="300" rx="5" fill="#141C2B" stroke="#33405A"/>
+            <g stroke="#6EE7F9" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"><path class="flow" d="M60 70C120 70 150 84 219 84"/><path class="flow" d="M219 106C150 106 120 120 60 120" style="animation-direction:reverse"/></g>
+            <use href="#fanG" x="40" y="88"/><use href="#fanG" x="40" y="190"/><use href="#fanG" x="40" y="292"/>
+          </g>
+          <!-- GPU -->
+          <g data-part="gpu">
+            <rect x="96" y="174" width="232" height="52" rx="6" fill="#1A2233" stroke="#F0ABFC" stroke-width="1.5"/>
+            <rect x="96" y="222" width="232" height="6" rx="2" fill="#F0ABFC" opacity=".55"/>
+            <text x="300" y="204" fill="#F0ABFC" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="end">GPU</text>
+          </g>
+          <!-- drives -->
+          <g data-part="ssd">
+            <rect x="34" y="374" width="78" height="22" rx="3" fill="#1A2233" stroke="#FCD34D" stroke-width="1.2"/>
+            <rect x="34" y="402" width="78" height="22" rx="3" fill="#1A2233" stroke="#FCD34D" stroke-width="1.2"/>
+            <circle cx="104" cy="385" r="2.2" fill="#34D399"/><circle cx="104" cy="413" r="2.2" fill="#34D399"/>
+          </g>
+          <!-- PSU -->
+          <g data-part="psu">
+            <rect x="196" y="370" width="146" height="78" rx="6" fill="#141C2B" stroke="#FCD34D" stroke-width="1.5"/>
+            <circle cx="269" cy="409" r="26" fill="none" stroke="#3A465E" stroke-width="2"/>
+            <path d="M262 398l-6 13h10l-6 13" stroke="#FCD34D" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+          </g>
+          <!-- hotspots -->
+          <g id="hotspots"></g>
+        </svg>
+        <span class="rig-hint">SIDE VIEW · TAP A NUMBER</span>
+      </div>
+      <article class="pcard" aria-live="polite">
+        <div class="ph" id="tph"><span class="tag" id="ttag">01 · The brain</span><img id="timg" alt=""></div>
+        <div class="bd">
+          <div><h3 id="tname">Processor</h3><div class="model" id="tmodel"></div></div>
+          <p class="what" id="twhat"></p>
+          <p class="like"><span class="ico" id="tico">🎼</span><span id="tlike"></span></p>
+          <div class="big"><b class="film" id="tbig"></b><span id="tbigl"></span></div>
+          <div class="vs" id="tvs"></div>
+        </div>
+        <div class="tour-nav">
+          <div class="dots" id="tdots"></div>
+          <button type="button" class="step" id="tprev">← Back</button>
+          <button type="button" class="step prime" id="tnext">Next part →</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section class="band" id="numbers">
   <div class="wrap">
@@ -366,6 +575,31 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <ul><li>The +$2,000 platform step doubles cores and adds the better board. It is the best-value line in either quote</li><li>The +$4,590 memory kit doubles agents and bandwidth</li><li>The RTX PRO 5000 is quoted at $7,199.99 against a $4,569 launch price. Negotiate it, source it elsewhere, or start with a cheaper 24–32 GB card</li></ul></div>
       <div class="verdict"><div class="flag" style="color:var(--vi)">Choose B as quoted if</div><h4>Local AI is core work</h4>
         <ul><li>You need 30B-class models running fast and private, with no cloud calls</li><li>You want ECC GPU memory and pro drivers</li><li>You plan to add three more 2-slot GPUs on the same platform</li><li>One-stop pickup before Thursday matters more than the GPU premium</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="fit">
+  <div class="wrap">
+    <div class="kicker">What can it actually run?</div>
+    <h2 style="margin-top:14px">Pick a job.<br><span class="film">See if it fits.</span></h2>
+    <p class="lead">The two questions that matter for an AI computer: <b>how big a model fits on the graphics card</b>, and <b>how many agents can work at the same time</b>. Pick one below and watch the bars.</p>
+    <div class="fit-grid">
+      <div class="fitc">
+        <h3>Local AI models</h3>
+        <p class="q">A model has to fit in the graphics card's memory to run fast. Pick a model size:</p>
+        <div class="chips" id="mchips"></div>
+        <div id="mbars"></div>
+        <p class="fit-note">Sizes assume 4-bit compressed models (the normal way to run them locally) plus room for the conversation. Not fitting doesn't mean it won't run — it spills into system memory and runs roughly 5–10× slower.</p>
+      </div>
+      <div class="fitc">
+        <h3>Agents at once</h3>
+        <p class="q">Each AI coding agent with its tools, browser and containers uses about 7 GB of system memory. Slide to set how many run together:</p>
+        <div class="slider"><input type="range" id="agents" min="1" max="40" value="12" aria-label="Number of agents running at once"><output id="agentsOut" for="agents">12</output></div>
+        <div class="agents-viz" id="agentsViz" aria-hidden="true"></div>
+        <div id="abars"></div>
+        <p class="fit-note">Estimate: 24 GB kept for the operating system, databases and model servers, then ~7 GB per agent.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -429,6 +663,22 @@ footer li{break-inside:avoid;margin-bottom:6px}
       </div>
       <div class="xp-svg"><svg id="xpsvg" viewBox="-260 -300 1520 1560" role="img" aria-label="Exploded view of the workstation: case, motherboard, CPU and cooler, memory, GPU, power supply, drives and radiator"></svg></div>
     </div>
+  </div>
+</section>
+
+<section class="band" id="day">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+      <div>
+        <div class="kicker">Build day</div>
+        <h2 style="margin-top:14px">From boxes to boot<br><span class="film">in nine steps</span></h2>
+      </div>
+      <div class="day-arrows"><button type="button" id="dprev" aria-label="Previous step">←</button><button type="button" id="dnext" aria-label="Next step">→</button></div>
+    </div>
+    <p class="lead">About <b>4 hours</b> for two people, start to finish. Swipe through the order we'll put it together. The full checklist, with boxes to tick off on the day, is in the <a href="build-book.html">build book</a>.</p>
+    <div class="day-track" id="dayTrack" tabindex="0" aria-label="Build steps, scroll sideways"></div>
+    <div class="day-bar"><i id="dayFill"></i></div>
+    <div class="day-meta"><span id="dayNow">Step 1 of 9</span><span>Total ≈ 4 h · 2 people · 1 anti-static strap</span></div>
   </div>
 </section>
 
@@ -928,6 +1178,270 @@ const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundle
   if(typeof RM!=='undefined'&&!RM){const box=document.getElementById('versus'); const r=box.getBoundingClientRect(); if(r.top>innerHeight){const is=[...box.querySelectorAll('.t i')];
     is.forEach(i=>{i.dataset.w=i.style.getPropertyValue('--w');i.style.width='0';i.style.transition='width 1s cubic-bezier(.2,.7,.2,1)';});
     let done=false; new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!done){done=true;is.forEach((i,k)=>setTimeout(()=>i.style.width=i.dataset.w,k*40));}}),{threshold:.2}).observe(box);}}
+})();
+</script>
+<script>
+(()=>{
+const IM = {"board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let OPT='B';
+const pic=(...keys)=>{for(const k of keys) if(IM[k]) return IM[k]; return null;};
+
+/* ---------- 1. tour ---------- */
+const PARTS=[
+ {id:'cpu',  role:'The brain', name:'Processor (CPU)', ico:'🎼', hs:[236,40],
+  what:'Runs everything that isn\'t the AI model itself: the agents, their tools, databases, browsers and containers. More cores means more jobs at the same time.',
+  like:'<b>The conductor.</b> It hands out the work and keeps every agent in time.',
+  A:{model:'AMD EPYC 9175F', big:'16', bigl:'cores · 5.0 GHz', img:['a-cpu']},
+  B:{model:'AMD Threadripper PRO 9975WX', big:'32', bigl:'cores · 5.4 GHz', img:['cpu']}},
+ {id:'ram',  role:'The workbench', name:'Memory (RAM)', ico:'🧰', hs:[184,154],
+  what:'Holds everything the machine is working on right now. Every open agent, document and dataset sits here. Run out and everything slows to a crawl.',
+  like:'<b>The workbench.</b> A bigger bench lets more people work at once without clearing space.',
+  A:{model:'Kingston FURY Renegade Pro · 4 × 32 GB', big:'128 GB', bigl:'4 of 8 slots filled', img:['ram']},
+  B:{model:'Kingston FURY Renegade Pro · 8 × 32 GB', big:'256 GB', bigl:'all 8 slots · twice the speed', img:['ram']}},
+ {id:'gpu',  role:'The AI engine', name:'Graphics card (GPU)', ico:'⚡', hs:[78,201],
+  what:'Runs our own AI models on the machine, with no cloud bill and no data leaving the building. Its memory decides how big a model fits.',
+  like:'<b>The engine room.</b> Thousands of tiny workers doing the math of AI in parallel.',
+  A:{model:'ASUS ProArt RTX 5070 Ti · 16 GB', big:'16 GB', bigl:'GPU memory', img:['a-gpu']},
+  B:{model:'NVIDIA RTX PRO 5000 Blackwell · 48 GB', big:'48 GB', bigl:'GPU memory · 3× Option A', img:['gpu','gpu-back']}},
+ {id:'board',role:'The city', name:'Motherboard', ico:'🏙️', hs:[150,316],
+  what:'The big circuit board everything plugs into. It decides how many graphics cards, drives and memory sticks the machine can ever hold.',
+  like:'<b>The city streets.</b> Every part is a building; the board is the roads between them.',
+  A:{model:'ASRock Rack TURIND8X-2T', big:'7', bigl:'full-size card slots · room to grow', img:['a-board']},
+  B:{model:'ASUS Pro WS WRX90E-SAGE SE', big:'7', bigl:'full-size card slots · room to grow', img:['board']}},
+ {id:'ssd',  role:'The library', name:'Storage drives', ico:'📚', hs:[73,446],
+  what:'Long-term storage for AI models, code and data. These are enterprise drives built to run 24/7 and survive a power cut mid-write. Recommended by our consultant at Expertly.Ai.',
+  like:'<b>The library.</b> Everything we own lives here, ready to be pulled onto the workbench.',
+  A:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']},
+  B:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']}},
+ {id:'cooler',role:'The radiator', name:'Liquid cooler', ico:'❄️', hs:[40,24],
+  what:'Pulls heat off the processor with liquid and blows it out through the front fans, the same way a car radiator works. It keeps the machine fast and quiet under load.',
+  like:'<b>The car radiator.</b> Hot liquid in, cool liquid out, all day long.',
+  A:{model:'SilverStone XE360-SP5 · 360 mm', big:'360 mm', bigl:'radiator', img:['a-cooler']},
+  B:{model:'Thermaltake AW420 · 420 mm', big:'420 mm', bigl:'radiator · fits the Antec 900 exactly', img:['cooler']}},
+ {id:'psu',  role:'The power plant', name:'Power supply (PSU)', ico:'🔌', hs:[320,354],
+  what:'Turns wall power into clean, steady power for every part. It has to be big enough for today and for a second graphics card later.',
+  like:'<b>The power plant.</b> Feeds the whole city, with headroom for new buildings.',
+  A:{model:'Super Flower Leadex VII Platinum PRO', big:'1,200 W', bigl:'Platinum efficiency', img:['a-psu']},
+  B:{model:'ASRock Taichi TC-1650T', big:'1,650 W', bigl:'Titanium · most efficient grade', img:['psu']}},
+ {id:'case', role:'The body', name:'Case & fans', ico:'🌬️', hs:[325,34],
+  what:'Holds it all together and moves air through it: cool air in at the front, hot air out the back and top. It needs to fit an extra-large server board.',
+  like:'<b>The body and lungs.</b> Breathes cool air in, hot air out.',
+  A:{model:'Case not on the quote yet · 6 × Arctic P12 Pro fans', big:'6', bigl:'fans · case still to pick (~$185)', img:['a-fans','case']},
+  B:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included', img:['case','case-inside']}},
+];
+let ti=0;
+const rig=$('#rig'), hsG=$('#hotspots');
+if(rig){
+  const NS='http://www.w3.org/2000/svg';
+  PARTS.forEach((p,i)=>{
+    const g=document.createElementNS(NS,'g'); g.setAttribute('class','hs'); g.dataset.i=i;
+    g.setAttribute('transform',`translate(${p.hs[0]} ${p.hs[1]})`);
+    g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',p.name);
+    g.innerHTML=`<circle class="pulse" r="12" style="animation-delay:${i*.3}s"/><circle class="ring" r="12"/><text>${i+1}</text>`;
+    hsG.appendChild(g);
+  });
+  $('#tdots').innerHTML=PARTS.map((p,i)=>`<button type="button" aria-label="${p.name}" data-i="${i}"></button>`).join('');
+  const show=(i,anim=true)=>{
+    ti=(i+PARTS.length)%PARTS.length; const p=PARTS[ti], o=p[OPT], other=p[OPT==='A'?'B':'A'];
+    rig.classList.add('focus');
+    $$('#rig [data-part]').forEach(el=>el.classList.toggle('on',el.dataset.part===p.id));
+    $$('#hotspots .hs').forEach(el=>el.classList.toggle('on',+el.dataset.i===ti));
+    $$('#tdots button').forEach(el=>el.setAttribute('aria-current',+el.dataset.i===ti));
+    $('#ttag').textContent=String(ti+1).padStart(2,'0')+' · '+p.role;
+    $('#tname').textContent=p.name; $('#tmodel').textContent=o.model;
+    $('#twhat').innerHTML=p.what; $('#tlike').innerHTML=p.like; $('#tico').textContent=p.ico;
+    $('#tbig').textContent=o.big; $('#tbigl').textContent=o.bigl;
+    $('#tvs').textContent=o.big===other.big&&o.model===other.model?'Same in both options':`Option ${OPT==='A'?'B':'A'}: ${other.big} · ${other.model}`;
+    const src=pic(...o.img), ph=$('#tph'), im=$('#timg');
+    const set=()=>{ ph.querySelector('.noimg')?.remove();
+      if(src){im.hidden=false; im.src=src; im.alt=o.model;} else {im.hidden=true; ph.insertAdjacentHTML('beforeend',`<span class="noimg">${p.ico}</span>`);}
+      ph.classList.toggle('dark',/(^|\/)(a-)?cpu\./.test(src||'')); ph.classList.remove('swap'); };
+    if(anim&&!RM){ph.classList.add('swap'); setTimeout(set,180);} else set();
+    // ram: dim half the sticks for option A
+    const r2=$('#ram2'); if(r2) r2.style.opacity=OPT==='A'?'.18':'1';
+    window.decodeJargon&&window.decodeJargon($('#tour .pcard'));
+  };
+  hsG.addEventListener('click',e=>{const g=e.target.closest('.hs'); if(g) show(+g.dataset.i);});
+  hsG.addEventListener('keydown',e=>{const g=e.target.closest('.hs'); if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(+g.dataset.i);}});
+  rig.querySelector('svg').addEventListener('click',e=>{const el=e.target.closest('[data-part]'); if(el){const i=PARTS.findIndex(p=>p.id===el.dataset.part); if(i>=0) show(i);}});
+  $('#tdots').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) show(+b.dataset.i);});
+  $('#tnext').onclick=()=>show(ti+1); $('#tprev').onclick=()=>show(ti-1);
+  window.__tourShow=show;
+  show(0,false);
+}
+
+/* ---------- shared A/B toggle ---------- */
+const setOpt=o=>{OPT=o; $$('.ab-toggle button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.opt===o));
+  window.__tourShow&&window.__tourShow(ti,true); drawModels(); drawAgents();};
+$$('.ab-toggle').forEach(t=>t.addEventListener('click',e=>{const b=e.target.closest('button[data-opt]'); if(b) setOpt(b.dataset.opt);}));
+
+/* ---------- 2. what can it run ---------- */
+const MODELS=[
+ {n:'Small helper',s:'8B · e.g. Llama 3.1 8B',gb:6},
+ {n:'Fast coder',s:'gpt-oss-20b',gb:14},
+ {n:'Strong coder',s:'32B · e.g. Qwen 32B',gb:20},
+ {n:'Big brain',s:'70B · e.g. Llama 3.3 70B',gb:40},
+ {n:'Frontier-class open',s:'gpt-oss-120b',gb:61},
+];
+const GPUS=[{k:'A',n:'Option A · RTX 5070 Ti',gb:16},{k:'B',n:'Option B · RTX PRO 5000',gb:48},{k:'B+',n:'Option B + 72 GB card upgrade',gb:72}];
+let mi=1;
+function drawModels(){
+  const mc=$('#mchips'), mb=$('#mbars'); if(!mc) return;
+  mc.innerHTML=MODELS.map((m,i)=>`<button type="button" aria-pressed="${i===mi}" data-i="${i}"><b>${m.n}</b><small>${m.s} · ~${m.gb} GB</small></button>`).join('');
+  const m=MODELS[mi];
+  mb.innerHTML=GPUS.map(g=>{const fit=m.gb<=g.gb, pct=Math.min(100,m.gb/g.gb*100), copies=Math.floor(g.gb/m.gb);
+    return `<div class="meter"${g.k[0]===OPT?'':' style="opacity:.6"'}><div class="row"><b>${g.n}</b><span>${m.gb} of ${g.gb} GB</span></div>
+      <div class="bar"><i class="${fit?'ok':'no'}" style="width:0" data-w="${pct}"></i></div>
+      <div class="vd ${fit?'ok':'no'}">${fit?(copies>1?`✓ Fits, fast. Room for ${copies} copies at once.`:'✓ Fits, fast.'):`✗ Too big for this card. Runs partly from system memory, much slower.`}</div></div>`;}).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#mbars .bar i').forEach(i=>i.style.width=i.dataset.w+'%')));
+}
+$('#mchips')?.addEventListener('click',e=>{const b=e.target.closest('button'); if(b){mi=+b.dataset.i; drawModels();}});
+const RAMS=[{k:'A',n:'Option A · 128 GB',gb:128},{k:'B',n:'Option B · 256 GB',gb:256}];
+function drawAgents(){
+  const a=$('#agents'); if(!a) return; const n=+a.value; $('#agentsOut').textContent=n;
+  const viz=$('#agentsViz'); const cur=viz.children.length;
+  if(n>cur) for(let k=cur;k<n;k++) viz.appendChild(document.createElement('i')); else while(viz.children.length>n) viz.lastChild.remove();
+  const need=24+n*7;
+  $('#abars').innerHTML=RAMS.map(r=>{const fit=need<=r.gb, pct=Math.min(100,need/r.gb*100), max=Math.floor((r.gb-24)/7);
+    return `<div class="meter"${r.k===OPT?'':' style="opacity:.6"'}><div class="row"><b>${r.n}</b><span>${need} of ${r.gb} GB</span></div>
+      <div class="bar"><i class="${fit?'ok':'no'}" style="width:${pct}%"></i></div>
+      <div class="vd ${fit?'ok':'no'}">${fit?`✓ Comfortable. Tops out around ${max} agents.`:`✗ Out of memory. This option tops out around ${max} agents.`}</div></div>`;}).join('');
+}
+$('#agents')?.addEventListener('input',drawAgents);
+drawModels(); drawAgents();
+
+/* ---------- 3. build day ---------- */
+const STEPS=[
+ {t:'Prep the bench',m:'15 min',img:['case-inside','case'],e:'🧤',d:'Clear a big table, open every box, and lay parts out in build order. Clip on the anti-static strap.',w:'Keep the CPU and memory in their packaging until their step.'},
+ {t:'Processor into the board',m:'20 min',img:['cpu','a-cpu'],e:'🧠',d:'With the board flat on its box, open the socket frame, slide the CPU carrier in, and tighten the screws in the printed order.',w:'Never touch the socket pins. Use the included torque screwdriver.'},
+ {t:'Memory sticks',m:'10 min',img:['ram'],e:'🧰',d:'Press each stick in until both latches click. Option B fills all 8 slots; Option A fills the 4 slots the manual marks first.',w:'Two 4-stick kits aren\'t a matched set. Test them first (step 9).'},
+ {t:'Cooler mount',m:'25 min',img:['cooler','a-cooler'],e:'❄️',d:'Fit the radiator to the case front with fans pulling air in, then lower the pump block onto the CPU (paste comes pre-applied).',w:'Peel the plastic film off the cold plate!'},
+ {t:'Board into the case',m:'30 min',img:['board','a-board'],e:'🏙️',d:'Install extra standoffs for the extra-large board, then lower it in and screw it down. Plug in the cooler pump and fan cables.',w:'Count the standoffs against the board\'s holes. A stray one can short it.'},
+ {t:'Storage drives',m:'20 min',img:['ssd','cable'],e:'📚',d:'Mount the two Kioxia drives and connect each one with its data and power cable to the board\'s drive ports.',w:'These run warm. Put them where a fan blows on them.'},
+ {t:'Graphics card',m:'15 min',img:['gpu','a-gpu'],e:'⚡',d:'Seat the card in the top full-size slot and screw it to the case. Plug in its power cable firmly.',w:'Push the GPU power plug until it clicks flush. A half-seated plug can overheat.'},
+ {t:'Power it all',m:'40 min',img:['psu','a-psu'],e:'🔌',d:'Install the power supply, then run every cable: board, CPU (2–3 plugs), GPU, drives, fans. Tie cables back for airflow.',w:'Use only the cables that came with this power supply. Never mix brands.'},
+ {t:'First boot',m:'60 min',img:['board-io'],e:'🚀',d:'Power on. Log in to the remote-management port, update the BIOS, turn on memory speed (EXPO), then run an overnight memory test.',w:'The first boot can take several minutes while memory trains. That\'s normal; don\'t power off.'},
+];
+const tr=$('#dayTrack');
+if(tr){
+  tr.innerHTML=STEPS.map((s,i)=>{const src=pic(...s.img);
+    return `<article class="day"><div class="ph"><span class="n">${i+1}</span><span class="t">${s.m}</span>${src?`<img src="${src}" alt="" loading="lazy" decoding="async">`:`<span class="emoji">${s.e}</span>`}</div>
+      <div class="bd"><h4>${s.t}</h4><p>${s.d}</p><div class="warn">⚠ ${s.w}</div></div></article>`;}).join('');
+  const W=()=>tr.querySelector('.day').getBoundingClientRect().width+16;
+  const upd=()=>{const max=tr.scrollWidth-tr.clientWidth; const f=max>0?tr.scrollLeft/max:1;
+    $('#dayFill').style.width=(Math.max(f,1/STEPS.length)*100)+'%';
+    const i=Math.min(STEPS.length-1,Math.round(tr.scrollLeft/W())); $('#dayNow').textContent=`Step ${i+1} of ${STEPS.length}`+(f>.98?' · done 🎉':'');};
+  tr.addEventListener('scroll',upd,{passive:true}); upd();
+  $('#dnext').onclick=()=>tr.scrollBy({left:W(),behavior:RM?'auto':'smooth'});
+  $('#dprev').onclick=()=>tr.scrollBy({left:-W(),behavior:RM?'auto':'smooth'});
+}
+
+/* ---------- 4. jargon decoder ---------- */
+const G={
+ 'CPU':'The processor: the general-purpose brain of the computer.',
+ 'GPU':'Graphics card. Its thousands of small cores make it the engine for running AI models.',
+ 'VRAM':'Memory on the graphics card. A model must fit here to run fast.',
+ 'GDDR7':'The newest, fastest type of graphics-card memory.',
+ 'RAM':'System memory: the workbench for everything currently running.',
+ 'ECC':'Error-correcting memory. Catches and fixes tiny memory errors, so a machine running 24/7 doesn\'t crash or corrupt data.',
+ 'RDIMM':'Server-grade memory stick (registered). Required by EPYC and Threadripper PRO boards.',
+ 'DDR5':'The current generation of system memory.',
+ 'PCIe':'The high-speed roads that connect graphics cards and drives to the processor.',
+ 'lanes':'Individual PCIe roads. More lanes means more cards and drives at full speed.',
+ 'NVMe':'The fast, modern way SSDs talk to the computer.',
+ 'U.3':'A connector used by enterprise data-center drives. Needs a special cable on desktop boards.',
+ 'U.2':'Older version of the U.3 enterprise drive connector. They share the same plug.',
+ 'MCIO':'A compact high-speed connector on server boards, used here to cable in the enterprise drives.',
+ 'SlimSAS':'A slim cable connector on the ASUS board that links to enterprise drives.',
+ 'EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
+ 'SSI-EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
+ 'AIO':'"All-in-one" liquid cooler: pump, tubes and radiator come pre-filled and sealed.',
+ 'TDP':'How much heat a chip is designed to put out, in watts. Your cooler has to handle it.',
+ 'BMC':'A tiny separate computer on the board that lets us power-cycle and fix the machine remotely, even when it\'s off.',
+ 'EXPO':'A BIOS setting that runs the memory at its full rated speed. Off by default.',
+ 'BIOS':'The firmware that starts the machine before the operating system loads.',
+ 'PSU':'Power supply unit.',
+ 'TOPS':'Trillions of operations per second: a rough measure of AI math speed.',
+ 'FP4':'A very compact 4-bit number format that makes AI models smaller and faster.',
+ 'AVX-512':'Wide math instructions in AMD Zen 5 cores that speed up data and AI work on the CPU.',
+ 'chiplets':'The processor is built from several small chips in one package, instead of one big chip.',
+ 'CCD':'Core chiplet: a small die holding 8 CPU cores.',
+ 'GbE':'Gigabit Ethernet: wired network speed. 10 GbE is 10× a normal office port.',
+ 'Titanium':'The highest power-supply efficiency rating: less power is wasted as heat.',
+ 'Platinum':'A high power-supply efficiency rating, one step below Titanium.',
+ 'threads':'Jobs a core can juggle at once. Each core here runs 2 threads.',
+ 'channels':'Separate paths between the processor and memory. Filling more channels makes memory faster.',
+ 'quantized':'Compressed so a model fits in less memory, with a small quality trade-off.',
+ '4-bit':'Each model weight stored in 4 bits. It shrinks models about 4× versus full size.',
+ 'vLLM':'Popular open-source software for serving AI models to many users or agents at once.',
+ 'MCP':'Model Context Protocol: the standard way AI agents connect to tools and data.',
+ 'LLM':'Large language model: the kind of AI behind ChatGPT and Claude.',
+ 'inference':'Running a trained AI model to get answers, as opposed to training it.',
+ 'tokens':'Chunks of words that AI models read and write. Speed is measured in tokens per second.',
+ 'EPYC':'AMD\'s server processor family (Option A).',
+ 'Threadripper PRO':'AMD\'s workstation processor family (Option B).',
+ 'Blackwell':'NVIDIA\'s current generation of GPU chips.',
+ 'Zen 5':'AMD\'s current CPU core design.',
+ '12V-2x6':'The 16-pin power plug on modern NVIDIA graphics cards. Must be fully seated.',
+ 'SKU':'The store\'s product number.',
+};
+const keys=Object.keys(G).sort((a,b)=>b.length-a.length);
+const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const RX=new RegExp('(?<![\\w-])('+keys.map(esc).join('|')+')(?![\\w-])');
+const SKIP='a,button,h1,h2,h3,h4,code,svg,canvas,script,style,.jg,.kicker,.src,.boot,small,nav,label,input,output,.tag,.plate-tag,.chips,#jgpop,.jg-pill,select,option,.model';
+function decode(root){
+  if(!root) return;
+  const seen=new Set();
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{
+    const p=n.parentElement; if(!p||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+    if(p.closest(SKIP)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT;}});
+  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  for(const node of nodes){
+    let n=node, m;
+    while(n && (m=RX.exec(n.nodeValue))){
+      const k=m[1];
+      if(seen.has(k)){ // only decorate first use per block; continue after it
+        const rest=n.splitText(m.index+k.length); n=rest; continue; }
+      seen.add(k);
+      const after=n.splitText(m.index); const rest=after.splitText(k.length);
+      const sp=document.createElement('span'); sp.className='jg'; sp.tabIndex=0; sp.dataset.k=k; sp.textContent=k;
+      after.replaceWith(sp); n=rest;
+    }
+  }
+}
+window.decodeJargon=decode;
+const pop=document.createElement('div'); pop.id='jgpop'; pop.setAttribute('role','tooltip'); document.body.appendChild(pop);
+let cur=null;
+const showPop=el=>{const k=el.dataset.k, t=G[k]; if(!t) return; cur=el;
+  pop.innerHTML=`<b>${k}</b>${t}`; pop.classList.add('show');
+  const r=el.getBoundingClientRect(), pw=Math.min(300,innerWidth-32); pop.style.maxWidth=pw+'px';
+  const ph=pop.offsetHeight; let x=Math.max(16,Math.min(innerWidth-pw-16,r.left+r.width/2-pw/2));
+  let y=r.top-ph-10; if(y<12) y=r.bottom+10; pop.style.left=x+'px'; pop.style.top=y+'px';};
+const hidePop=()=>{cur=null; pop.classList.remove('show');};
+document.addEventListener('mouseover',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el); else if(cur&&!e.target.closest?.('.jg')) hidePop();});
+document.addEventListener('focusin',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el);});
+document.addEventListener('focusout',e=>{if(e.target.closest?.('.jg')) hidePop();});
+document.addEventListener('click',e=>{const el=e.target.closest?.('.jg'); if(el){e.preventDefault(); cur===el&&pop.classList.contains('show')?hidePop():showPop(el);} else hidePop();});
+addEventListener('scroll',()=>cur&&hidePop(),{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') hidePop();});
+// decorate every content block once (per paragraph/cell so each term is explained where it appears)
+const blocks=$$('main p, main li, main td, section p, section li, section td, section .lead, header .lead, header .sub, .num p, .vd');
+blocks.forEach(b=>{ if(!b.closest('#jgpop')) decode(b); });
+// late-rendered content (BOM, parts, options tables) — decorate after they render
+const mo=new MutationObserver(muts=>{for(const mu of muts) for(const nd of mu.addedNodes){ if(nd.nodeType===1){
+  if(nd.closest('#jgpop')||nd.closest('.jg')) continue;
+  nd.querySelectorAll?.('p,li,td').forEach(decode); if(nd.matches?.('p,li,td')) decode(nd);}}});
+$$('section').forEach(s=>mo.observe(s,{childList:true,subtree:true}));
+setTimeout(()=>mo.disconnect(),8000);
+// helper pill
+let pillGone=false; try{pillGone=localStorage.getItem('jgpill')==='1';}catch(e){}
+if(!pillGone){const pill=document.createElement('div'); pill.className='jg-pill';
+  pill.innerHTML='<span>New to this? Tap any <i>dotted word</i> for a plain-English meaning.</span><button type="button" aria-label="Dismiss">✕</button>';
+  document.body.appendChild(pill);
+  pill.querySelector('button').onclick=()=>{pill.classList.add('gone'); try{localStorage.setItem('jgpill','1');}catch(e){}};
+  setTimeout(()=>pill.classList.add('gone'),14000);}
 })();
 </script>
 
