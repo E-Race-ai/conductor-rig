@@ -2,9 +2,9 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Project Conductor</title>
-<meta name="description" content="Project Conductor: our AI orchestration workstation. Threadripper PRO 9975WX, 256 GB ECC, RTX PRO 5000 Blackwell. Option A vs B, sourced bill of materials and the build.">
-<meta property="og:title" content="Project Conductor"><meta property="og:description" content="Project Conductor: our AI orchestration workstation. Threadripper PRO 9975WX, 256 GB ECC, RTX PRO 5000 Blackwell. Option A vs B, sourced bill of materials and the build.">
-<meta property="og:image" content="img/gpu.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<meta property="og:title" content="Project Conductor"><meta property="og:description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<meta property="og:image" content="img/a-cpu.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -410,12 +410,12 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div>
       <div class="kicker">AI orchestration workstation · 2026</div>
       <h1 style="margin-top:18px"><span class="film">Conductor</span></h1>
-      <p class="sub">32 cores. 256 GB. 48 GB of Blackwell.<br>Every agent, in concert.</p>
-      <p class="lead">One machine that runs our whole fleet of AI agents, their tools and our own local models side by side. Built on <b>AMD Threadripper PRO 9975WX</b> and <b>NVIDIA RTX PRO 5000 Blackwell</b>.</p>
+      <p class="sub">16 cores. 128 GB. 16 GB of Blackwell.<br>Every agent, in concert.</p>
+      <p class="lead">One machine that runs our whole fleet of AI agents, their tools and our own local models side by side. Built on <b>AMD EPYC 9175F</b> and <b>NVIDIA GeForce RTX 5070 Ti</b>, in an Antec 900.</p>
       <div class="boot" id="boot" aria-live="off">
-        <div>POST · <b>32 cores / 64 threads</b> online</div>
-        <div>Memory · <b>8 channels</b> · <b>256 GB</b> ECC trained</div>
-        <div>GPU · <b>48 GB GDDR7</b> · <b>1,344 GB/s</b></div>
+        <div>POST · <b>16 cores / 32 threads</b> online</div>
+        <div>Memory · <b>4 channels</b> · <b>128 GB</b> ECC trained</div>
+        <div>GPU · <b>16 GB GDDR7</b> · <b>896 GB/s</b></div>
         <div>Fabric · <b>128 lanes</b> PCIe 5.0 · link up <b>2× 10 GbE</b></div>
         <div>Agents · <b>ready</b></div>
       </div>
@@ -429,7 +429,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="wafer-box" aria-hidden="true">
       <canvas id="wafer"></canvas>
       <span class="wafer-tag" style="left:2%;top:4%">ZEN 5 · CCD WAFER</span>
-      <span class="wafer-tag" style="right:2%;bottom:4%">8 CORES / DIE</span>
+      <span class="wafer-tag" style="right:2%;bottom:4%">8 CORES / DIE · 1 ENABLED</span>
     </div>
   </div>
 </header>
@@ -438,12 +438,9 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <div class="kicker">Start here · the machine in 60 seconds</div>
     <h2 style="margin-top:14px">Eight parts.<br><span class="film">One simple idea.</span></h2>
-    <p class="lead">A computer is a team. <b>Tap any part</b> of the machine below to see what it does in plain English. Flip between <b>Option A</b> (the original quote) and <b>Option B</b> (the upgrade) to see what changes.</p>
+    <p class="lead">A computer is a team. <b>Tap any part</b> of our final build below to see what it does in plain English, and what we can upgrade later.</p>
     <div style="margin-top:22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
-      <div class="ab-toggle" role="group" aria-label="Choose build option">
-        <button type="button" data-opt="A" aria-pressed="false">Option A · $8,956</button>
-        <button type="button" data-opt="B" aria-pressed="true">Option B · $22,459</button>
-      </div>
+      <span class="ab-toggle"><button type="button" aria-pressed="true" tabindex="-1" style="cursor:default">✓ Final build · EPYC 9175F in the Antec 900</button></span>
       <span class="src">Dotted words like <span class="jg" tabindex="0" data-k="VRAM">VRAM</span> explain themselves when you hover or tap.</span>
     </div>
     <div class="tour">
@@ -459,6 +456,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
             <rect x="8" y="8" width="344" height="454" rx="16" fill="#0C111B" stroke="#2A3448" stroke-width="2"/>
             <rect x="8" y="8" width="344" height="454" rx="16" fill="url(#glass)"/>
             <use href="#fanG" x="325" y="78"/>
+            <use href="#fanG" x="40" y="110"/><use href="#fanG" x="40" y="200"/><use href="#fanG" x="40" y="290"/>
             <rect x="14" y="356" width="332" height="2" fill="#2A3448"/>
           </g>
           <!-- motherboard -->
@@ -480,9 +478,9 @@ footer li{break-inside:avoid;margin-bottom:6px}
           </g>
           <!-- cooler: radiator + tubes + front fans -->
           <g data-part="cooler">
-            <rect x="20" y="40" width="40" height="300" rx="5" fill="#141C2B" stroke="#33405A"/>
-            <g stroke="#6EE7F9" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"><path class="flow" d="M60 70C120 70 150 84 219 84"/><path class="flow" d="M219 106C150 106 120 120 60 120" style="animation-direction:reverse"/></g>
-            <use href="#fanG" x="40" y="88"/><use href="#fanG" x="40" y="190"/><use href="#fanG" x="40" y="292"/>
+            <rect x="96" y="12" width="206" height="26" rx="5" fill="#141C2B" stroke="#33405A"/>
+            <g fill="none" stroke="#3A465E" stroke-width="1.5"><circle cx="131" cy="25" r="10"/><circle cx="199" cy="25" r="10"/><circle cx="267" cy="25" r="10"/></g>
+            <g stroke="#6EE7F9" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"><path class="flow" d="M226 38C226 50 224 60 226 78"/><path class="flow" d="M246 78C248 60 246 50 246 38" style="animation-direction:reverse"/></g>
           </g>
           <!-- GPU -->
           <g data-part="gpu">
@@ -505,7 +503,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
           <!-- hotspots -->
           <g id="hotspots"></g>
         </svg>
-        <span class="rig-hint">SIDE VIEW · TAP A NUMBER</span>
+        <span class="rig-hint">SIDE VIEW · FRONT ON THE LEFT · TAP A NUMBER</span>
       </div>
       <article class="pcard" aria-live="polite">
         <div class="ph" id="tph"><span class="tag" id="ttag">01 · The brain</span><img id="timg" alt=""></div>
@@ -531,29 +529,29 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="kicker">By the numbers</div>
     <h2 style="margin-top:14px">Built to never<br><span class="film">wait on hardware</span></h2>
     <div class="nums">
-      <div class="num"><b><span class="count" data-to="32">32</span></b><span>Zen 5 cores</span><p>64 threads, boosting to 5.4 GHz, with a full 512-bit AVX-512 datapath.</p></div>
-      <div class="num"><b><span class="count" data-to="256">256</span><small>GB</small></b><span>ECC system memory</span><p>Eight DDR5-5600 RDIMMs, one in every channel.</p></div>
-      <div class="num"><b><span class="count" data-to="358">358</span><small>GB/s</small></b><span>Memory bandwidth</span><p>Theoretical peak across 8 channels at 5600 MT/s.</p></div>
-      <div class="num"><b><span class="count" data-to="48">48</span><small>GB</small></b><span>GPU memory</span><p>GDDR7 with ECC on a 384-bit bus, 1,344 GB/s.</p></div>
-      <div class="num"><b><span class="count" data-to="128">128</span></b><span>PCIe 5.0 lanes</span><p>Seven full-length x16 slots: room for four GPUs.</p></div>
-      <div class="num"><b><span class="count" data-to="2064" data-sep="1">2,064</span></b><span>AI TOPS</span><p>FP4 with sparsity, from 14,080 CUDA cores.</p></div>
+      <div class="num"><b><span class="count" data-to="16">16</span></b><span>Zen 5 cores</span><p>32 threads, boosting to 5.0 GHz, each core with its own 32 MB of L3 cache.</p></div>
+      <div class="num"><b><span class="count" data-to="128">128</span><small>GB</small></b><span>ECC system memory</span><p>Four 32 GB DDR5-5600 RDIMMs, with four slots free to double it.</p></div>
+      <div class="num"><b><span class="count" data-to="179">179</span><small>GB/s</small></b><span>Memory bandwidth</span><p>Theoretical, 4 channels at 5600 MT/s. Doubles to 358 GB/s with four more sticks.</p></div>
+      <div class="num"><b><span class="count" data-to="16">16</span><small>GB</small></b><span>GPU memory</span><p>GDDR7 on a 256-bit bus, 896 GB/s.</p></div>
+      <div class="num"><b><span class="count" data-to="128">128</span></b><span>PCIe 5.0 lanes</span><p>Seven full-length slots; four run at full x16 with no lane sharing.</p></div>
+      <div class="num"><b><span class="count" data-to="1406" data-sep="1">1,406</span></b><span>AI TOPS</span><p>FP4 with sparsity, from 8,960 CUDA cores.</p></div>
       <div class="num"><b><span class="count" data-to="15.36" data-dec="2">15.36</span><small>TB</small></b><span>Enterprise NVMe</span><p>Two Kioxia CD6-R U.3 drives with power-loss protection.</p></div>
-      <div class="num"><b><span class="count" data-to="1650" data-sep="1">1,650</span><small>W</small></b><span>Titanium power</span><p>93.6% efficient at half load, 10-year warranty.</p></div>
+      <div class="num"><b><span class="count" data-to="1200" data-sep="1">1,200</span><small>W</small></b><span>Platinum power</span><p>ATX 3.1 with a native 12V-2x6 cable for the GPU.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band" id="options">
   <div class="wrap">
-    <div class="kicker">Option A vs Option B</div>
-    <h2 style="margin-top:14px">Two quotes.<br><span class="film">One decision.</span></h2>
-    <p class="lead">Both quotes come from Micro Center Miami (store 185) and are <b>price-guaranteed until Thursday, Nov 19, 2026</b>. Option A is our EPYC baseline. Option B upgrades every part that limits an agent fleet.</p>
+    <div class="kicker">The decision · Nov 17</div>
+    <h2 style="margin-top:14px">Two quotes.<br><span class="film">We chose A.</span></h2>
+    <p class="lead">Both quotes come from Micro Center Miami (store 185) and are <b>price-guaranteed until Thursday, Nov 19, 2026</b>. <b>We're building Option A, the EPYC 9175F, in the Antec 900 case.</b> Option B, the Threadripper PRO upgrade, would have cost $13,503 more. Here is what we compared and why A wins for now.</p>
     <div class="duo">
-      <article class="opt-card"><span class="letter">A</span><div class="who">Option A · baseline</div><h3>EPYC 9175F</h3>
-        <div class="price">$8,956<small>quote total with tax</small></div>
-        <ul><li><b>16 cores</b> · ASRock Rack TURIND8X-2T server board</li><li><b>128 GB</b> on 4 of 8 memory channels</li><li><b>RTX 5070 Ti 16 GB</b></li><li>1,200 W Platinum · 360 mm AIO · <b>no case</b> on the quote</li></ul></article>
-      <article class="opt-card b"><span class="letter film">B</span><div class="who">Option B · upgrade</div><h3>Threadripper PRO 9975WX</h3>
-        <div class="price film">$22,459<small>quote total with tax</small></div>
+      <article class="opt-card" style="border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),0 30px 60px -30px rgba(110,231,249,.45)"><span class="letter film">A</span><div class="who" style="color:var(--cy)">✓ Chosen · the final build</div><h3>EPYC 9175F</h3>
+        <div class="price film">$9,063<small>with tax + case</small></div>
+        <ul><li><b>16 cores</b> · ASRock Rack TURIND8X-2T server board</li><li><b>128 GB</b> on 4 of 8 memory channels</li><li><b>RTX 5070 Ti 16 GB</b></li><li>1,200 W Platinum · 360 mm AIO · <b>+ Antec 900</b> ($199.99, 6 fans included)</li></ul></article>
+      <article class="opt-card b" style="opacity:.62"><span class="letter">B</span><div class="who">Option B · considered, not chosen</div><h3>Threadripper PRO 9975WX</h3>
+        <div class="price">$22,459<small>quote total with tax</small></div>
         <ul><li><b>32 cores</b> · ASUS WRX90E-SAGE SE workstation board</li><li><b>256 GB</b> on all 8 memory channels</li><li><b>RTX PRO 5000 48 GB</b></li><li>1,650 W Titanium · 420 mm AIO · Antec 900 with 6 fans</li></ul></article>
     </div>
 
@@ -564,17 +562,17 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <h3 style="margin-top:64px">Line by line</h3>
     <div class="tbl"><table class="qt" id="qt"></table></div>
 
-    <h3 style="margin-top:64px">Where the extra $13,503 goes</h3>
+    <h3 style="margin-top:64px">What the extra $13,503 would have bought</h3>
     <div class="stackbar" id="stackbar"></div>
     <div class="legend2" id="stacklegend"></div>
 
     <div class="verdicts">
-      <div class="verdict"><div class="flag" style="color:var(--dim)">Choose A if</div><h4>Agents mostly call the cloud</h4>
-        <ul><li>Fewer than ~15 agents at a time</li><li>Local models stay small (≤ 20B)</li><li>Budget matters most. Still swap the 5070 Ti: $1,700 is over twice its $749 MSRP</li><li>Add a case (~$185) and fill the other 4 memory slots later</li></ul></div>
-      <div class="verdict pick"><div class="flag" style="color:var(--au)">Our pick</div><h4>B's platform + memory, priced GPU</h4>
-        <ul><li>The +$2,000 platform step doubles cores and adds the better board. It is the best-value line in either quote</li><li>The +$4,590 memory kit doubles agents and bandwidth</li><li>The RTX PRO 5000 is quoted at $7,199.99 against a $4,569 launch price. Negotiate it, source it elsewhere, or start with a cheaper 24–32 GB card</li></ul></div>
-      <div class="verdict"><div class="flag" style="color:var(--vi)">Choose B as quoted if</div><h4>Local AI is core work</h4>
-        <ul><li>You need 30B-class models running fast and private, with no cloud calls</li><li>You want ECC GPU memory and pro drivers</li><li>You plan to add three more 2-slot GPUs on the same platform</li><li>One-stop pickup before Thursday matters more than the GPU premium</li></ul></div>
+      <div class="verdict pick"><div class="flag" style="color:var(--cy)">Why A</div><h4>Most of the power for 40% of the price</h4>
+        <ul><li>Our agents mostly call cloud models, so we don't need a giant local GPU on day one</li><li>Same server-class platform: 7 full-size card slots, 128 PCIe lanes, 10 GbE and remote management</li><li>Same Kioxia drives as B, so storage is identical</li><li>Saves $13,503 now, to spend later only when we need it</li></ul></div>
+      <div class="verdict"><div class="flag" style="color:var(--dim)">What we give up, for now</div><h4>Half the cores, memory and VRAM</h4>
+        <ul><li>16 cores instead of 32</li><li>128 GB instead of 256 GB: about 14 agents at once instead of 33</li><li>16 GB of GPU memory instead of 48 GB, so 30B–70B models run slower, partly from system memory</li></ul></div>
+      <div class="verdict"><div class="flag" style="color:var(--vi)">How we close the gap</div><h4>Upgrade in this order</h4>
+        <ul><li><b>1. Memory:</b> fill the 4 empty slots for 256 GB and twice the bandwidth</li><li><b>2. GPU:</b> add or swap in a 48 GB card; the board has 4 full x16 slots</li><li><b>3. Power:</b> a bigger PSU only when a second big GPU goes in</li></ul></div>
     </div>
   </div>
 </section>
@@ -583,7 +581,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <div class="kicker">What can it actually run?</div>
     <h2 style="margin-top:14px">Pick a job.<br><span class="film">See if it fits.</span></h2>
-    <p class="lead">The two questions that matter for an AI computer: <b>how big a model fits on the graphics card</b>, and <b>how many agents can work at the same time</b>. Pick one below and watch the bars.</p>
+    <p class="lead">The two questions that matter for an AI computer: <b>how big a model fits on the graphics card</b>, and <b>how many agents can work at the same time</b>. The bright bar is our build today; the faded bar shows the planned upgrade.</p>
     <div class="fit-grid">
       <div class="fitc">
         <h3>Local AI models</h3>
@@ -607,43 +605,38 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="silicon">
   <div class="wrap">
     <div class="kicker">The silicon</div>
-    <h2 style="margin-top:14px">Four chiplets.<br><span class="film">One brain.</span></h2>
+    <h2 style="margin-top:14px">Sixteen chiplets.<br><span class="film">One core each.</span></h2>
     <div class="split">
       <div class="die reveal">
-        <svg viewBox="0 0 585 754" role="img" aria-label="Stylized Threadripper PRO 9975WX package: four 8-core CCDs linked to a central I/O die">
+        <svg viewBox="0 0 720 754" role="img" aria-label="Stylized EPYC 9175F package: sixteen compute dies, each with one active core, linked to a central I/O die">
           <defs>
             <linearGradient id="gfilm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".4" stop-color="#A78BFA"/><stop offset=".7" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
             <pattern id="pins" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2" fill="#1C2433"/></pattern>
           </defs>
-          <rect x="2" y="2" width="581" height="750" rx="18" fill="#0B1019" stroke="#2A3448" stroke-width="2"/>
-          <rect x="2" y="2" width="581" height="750" rx="18" fill="url(#pins)" opacity=".7"/>
-          <rect x="40" y="56" width="505" height="642" rx="12" fill="none" stroke="#2A3448" stroke-dasharray="4 6"/>
-          <!-- fabric links -->
-          <g stroke="url(#gfilm)" stroke-width="3" fill="none" opacity=".9">
-            <path class="fabric" d="M160 210 C 200 300, 240 320, 260 330"/>
-            <path class="fabric" d="M425 210 C 385 300, 345 320, 325 330"/>
-            <path class="fabric" d="M160 544 C 200 454, 240 434, 260 424"/>
-            <path class="fabric" d="M425 544 C 385 454, 345 434, 325 424"/>
-          </g>
+          <rect x="2" y="2" width="716" height="750" rx="18" fill="#0B1019" stroke="#2A3448" stroke-width="2"/>
+          <rect x="2" y="2" width="716" height="750" rx="18" fill="url(#pins)" opacity=".7"/>
+          <rect x="24" y="40" width="672" height="660" rx="12" fill="none" stroke="#2A3448" stroke-dasharray="4 6"/>
+          <g id="fabric" stroke="url(#gfilm)" stroke-width="2" fill="none" opacity=".85"></g>
           <!-- IOD -->
-          <rect x="196" y="300" width="193" height="154" rx="8" fill="#141B2A" stroke="url(#gfilm)" stroke-width="2"/>
-          <text x="292.5" y="366" text-anchor="middle" fill="#E9EDF5" font-family="JetBrains Mono, monospace" font-size="17">I/O DIE</text>
-          <text x="292.5" y="392" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="12">8 × DDR5 · 128 × PCIe 5.0</text>
+          <rect x="290" y="170" width="140" height="414" rx="8" fill="#141B2A" stroke="url(#gfilm)" stroke-width="2"/>
+          <text x="360" y="356" text-anchor="middle" fill="#E9EDF5" font-family="JetBrains Mono, monospace" font-size="16">I/O DIE</text>
+          <text x="360" y="382" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">12 × DDR5</text>
+          <text x="360" y="400" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">128 × PCIe 5.0</text>
           <!-- CCDs -->
           <g id="ccds"></g>
-          <text x="292.5" y="730" text-anchor="middle" fill="#586178" font-family="JetBrains Mono, monospace" font-size="12">sTR5 · 58.5 × 75.4 mm package</text>
+          <text x="360" y="730" text-anchor="middle" fill="#586178" font-family="JetBrains Mono, monospace" font-size="12">SP5 · LGA 6096 · 72 × 75.4 mm package</text>
         </svg>
       </div>
       <div>
-        <p class="lead" style="margin-top:0">AMD builds the <b>Threadripper PRO 9975WX</b> from four 8-core Zen 5 compute dies around one I/O die. That I/O die drives eight memory channels and 128 lanes of PCIe 5.0. It is the same platform AMD sells for its 96-core flagship.</p>
+        <p class="lead" style="margin-top:0">AMD builds the <b>EPYC 9175F</b> an unusual way: sixteen Zen 5 compute dies with <b>just one core switched on in each</b>, around a single I/O die. Every core gets its own 32 MB of L3 cache and its own link to memory. It is AMD's high-frequency part for databases and GPU host machines.</p>
         <ul class="facts" style="margin-top:24px">
-          <li><b>5.4<small style="font-size:.5em"> GHz</small></b><span><strong>Boost clock</strong> on a 4.0 GHz base, at 350 W.</span></li>
-          <li><b>128<small style="font-size:.5em"> MB</small></b><span><strong>L3 cache</strong>, 32 MB on each compute die.</span></li>
-          <li><b>512-bit</b><span><strong>Full-width AVX-512</strong>, a first for Threadripper. Vector math runs in one pass, not two halves.</span></li>
-          <li><b>4,844</b><span><strong>Socket contacts</strong> under a 58.5 × 75.4 mm package (reported figures).</span></li>
-          <li><b>+14%</b><span><strong>Cinebench 2024 multi-core</strong> over the previous-generation 7975WX, at the same 32 cores.</span></li>
+          <li><b>5.0<small style="font-size:.5em"> GHz</small></b><span><strong>Boost clock</strong> on a 4.2 GHz base, at 320 W.</span></li>
+          <li><b>512<small style="font-size:.5em"> MB</small></b><span><strong>L3 cache</strong>: 32 MB for every single core.</span></li>
+          <li><b>16</b><span><strong>Memory links</strong>, one per compute die, so the CPU can saturate whatever memory we install.</span></li>
+          <li><b>512-bit</b><span><strong>Full-width AVX-512</strong>. Vector math runs in one pass, not two halves.</span></li>
+          <li><b>12 → 4</b><span><strong>Memory channels</strong>: the CPU is rated for 12 (614 GB/s). This board wires 8, and we fill 4 today.</span></li>
         </ul>
-        <p class="src" style="margin-top:14px">Sources: AMD, Puget Systems, ServeTheHome, KitGuru, Igor's Lab.</p>
+        <p class="src" style="margin-top:14px">Sources: AMD, Level1Techs, PassMark, ASRock Rack spec sheet (via Central Computer).</p>
       </div>
     </div>
   </div>
@@ -685,13 +678,13 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="orchestra">
   <div class="wrap">
     <div class="kicker">The orchestra</div>
-    <h2 style="margin-top:14px">Dozens of agents.<br><span class="film">One conductor.</span></h2>
+    <h2 style="margin-top:14px">A crew of agents.<br><span class="film">One conductor.</span></h2>
     <div class="orch">
-      <canvas id="orch" aria-label="Animated illustration: agents on a ring sending calls to cloud models, the local GPU, tools and a vector database" role="img"></canvas>
+      <canvas id="orch" aria-label="Animated illustration: 14 agents on a ring sending calls to cloud models, the local GPU, tools and a vector database" role="img"></canvas>
       <div class="stack">
-        <div><div class="big film">~33</div><p><b>coding agents running at once</b>, our estimate. Six agents measured ~43.5 GB of RAM, about 7 GB each. 256 GB leaves room for ~33 after the OS and services.</p></div>
-        <p><b>Memory runs out first in agent work.</b> Every session starts its own tool servers, browsers and containers. That is why this build fills all eight channels instead of buying a bigger GPU.</p>
-        <p><b>Local models take the routine calls.</b> Routing, embeddings, reranking and fallback run on the 48 GB GPU. Frontier work goes to cloud models.</p>
+        <div><div class="big film">~14</div><p><b>coding agents running at once</b>, our estimate. Six agents measured ~43.5 GB of RAM, about 7 GB each. 128 GB leaves room for ~14 after the OS and services, and <b>~33</b> once we add four more memory sticks.</p></div>
+        <p><b>Memory runs out first in agent work.</b> Every session starts its own tool servers, browsers and containers. That is why memory is the first upgrade on our list: four empty slots are waiting.</p>
+        <p><b>Local models take the routine calls.</b> A fast 20B-class model handles routing, tool calls and fallback on the 16 GB GPU, or an embedding and reranking pair for search. Frontier work goes to cloud models like Claude.</p>
         <p class="src">Illustration, not a live feed. Memory figure from a Claude Code issue report (June 2026).</p>
       </div>
     </div>
@@ -704,20 +697,24 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <h2 style="margin-top:14px">Measured,<br><span class="film">not promised</span></h2>
     <div class="cols">
       <div class="panel">
-        <h3>Local AI on the RTX PRO 5000</h3>
-        <p class="src" style="margin-top:6px">Ollama, 4-bit, single user · tokens per second</p>
+        <h3>Local AI on the RTX 5070 Ti</h3>
+        <p class="src" style="margin-top:6px">gpt-oss-20b · llama.cpp llama-bench · generation tokens per second</p>
         <div class="bars" id="gpubars"></div>
         <div class="stat-strip">
-          <div><b class="film">2,879</b><span>tok/s · gpt-oss-20b batched (vLLM)</span></div>
-          <div><b>2,114</b><span>tok/s · Llama 3.1 8B FP16 batched</span></div>
+          <div><b class="film">6,340</b><span>tok/s · gpt-oss-20b prompt processing</span></div>
+          <div><b>125</b><span>tok/s · Llama 3.1 8B Q4 (Ollama)</span></div>
         </div>
-        <p class="src" style="margin-top:16px">Sources: Database Mart Ollama and vLLM benchmarks; Trooper.ai. Hosting-provider tests; 70B fits only with short context.</p>
+        <p class="src" style="margin-top:16px">Sources: llama.cpp discussion #15396 (community llama-bench results); ComputingForGeeks. gpt-oss-20b needs ~15.5 GB at 32K context, so it fills the card.</p>
       </div>
       <div class="panel">
-        <h3>9975WX vs last generation</h3>
-        <p class="src" style="margin-top:6px">Puget Systems · higher is better · <span style="color:var(--text)">■ 9975WX</span> vs <span>■ 7975WX</span></p>
+        <h3>Memory sets the pace</h3>
+        <p class="src" style="margin-top:6px">Theoretical memory bandwidth · GB/s · higher is faster for CPU-side AI</p>
         <div class="bars" id="cpubars"></div>
-        <p class="src" style="margin-top:16px">Source: Puget Systems Threadripper PRO 9000WX review (July 2025). Unreal Engine code compiles in 85% of the time. On a small model, llama.cpp token generation was 7% slower than the 7975WX.</p>
+        <div class="stat-strip">
+          <div><b class="film">25–30</b><span>tok/s · gpt-oss-120b, GPU + RAM hybrid (tuned rigs)</span></div>
+          <div><b>~3×</b><span>speed-up from faster RAM on that model</span></div>
+        </div>
+        <p class="src" style="margin-top:16px">Bandwidth = channels × 8 bytes × MT/s. AMD rates the 9175F at 614 GB/s across 12 channels. Hybrid results from carteakey.dev and hardware-corner (consumer rigs, not this machine): ~10–11 tok/s at DDR5-2000 vs ~30 tok/s at DDR5-6000.</p>
       </div>
     </div>
   </div>
@@ -728,15 +725,15 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="kicker">Power &amp; air</div>
     <h2 style="margin-top:14px">Cool, quiet,<br><span class="film">on one outlet</span></h2>
     <div class="cols" style="align-items:center">
-      <div class="air panel" style="padding:12px"><svg id="airsvg" viewBox="0 0 900 640" role="img" aria-label="Airflow diagram: three 140 mm fans pull air through the front 420 mm radiator, across the board and GPU, and out the rear; two reverse-flow fans push air up from the shroud"></svg></div>
+      <div class="air panel" style="padding:12px"><svg id="airsvg" viewBox="0 0 900 640" role="img" aria-label="Airflow diagram: three 140 mm front fans pull cool air in; it crosses the board and GPU and leaves through the rear fan and the 360 mm radiator on top; two reverse-flow fans push air up from the shroud"></svg></div>
       <div>
-        <p class="lead" style="margin-top:0"><b>Air enters through a 420 mm radiator</b> and three 140 mm fans in front. It crosses the board and leaves through the rear fan and the GPU's own exhaust. Two reverse-flow fans in the shroud push cool air up into the GPU.</p>
+        <p class="lead" style="margin-top:0"><b>Cool air enters through three 140 mm fans in front.</b> It crosses the board and the GPU, then leaves through the rear fan and the <b>360 mm radiator on top</b>, which cools the CPU. Two reverse-flow fans in the shroud push cool air up into the GPU. All six case fans come with the Antec 900.</p>
         <div class="gauges">
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.53"></svg><b>~880 W</b><span>full-load estimate at the wall, of a 1,650 W PSU</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.49"></svg><b>~7.4 A</b><span>of a standard 15 A, 120 V circuit</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.936"></svg><b>93.6%</b><span>PSU efficiency at half load (Cybenetics Titanium)</span></div>
+          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.71"></svg><b>~850 W</b><span>full-load estimate at the wall, of a 1,200 W PSU</span></div>
+          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.47"></svg><b>~7.1 A</b><span>of a standard 15 A, 120 V circuit</span></div>
+          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.29"></svg><b>~350 W</b><span>spare PSU capacity for upgrades (80 Plus Platinum)</span></div>
         </div>
-        <p class="src" style="margin-top:16px">Wall power is an estimate from component ratings. KitGuru measured 880 W for a 9980X + RTX 5080 in the same case. Sources: HWBusters, Cybenetics, Antec, Gamers Nexus.</p>
+        <p class="src" style="margin-top:16px">Wall power is an estimate from component ratings: 320 W CPU + 300 W GPU + ~150 W for memory, drives, fans and board ≈ 770 W, plus PSU losses. A UPS of 1,500 VA is tight; 2,200 VA is recommended. Sources: AMD, NVIDIA, Super Flower, Antec, Gamers Nexus.</p>
       </div>
     </div>
   </div>
@@ -745,8 +742,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="parts">
   <div class="wrap">
     <div class="kicker">Meet the parts</div>
-    <h2 style="margin-top:14px">Eight parts,<br><span class="film">hand-picked</span></h2>
-    <p class="lead">Each part was chosen for one reason: <b>keep dozens of agents and our local models fed</b> without waiting on memory, cores or I/O. Click through to the exact product pages.</p>
+    <h2 style="margin-top:14px">The final build,<br><span class="film">part by part</span></h2>
+    <p class="lead">This is what we're buying: <b>the EPYC build in the Antec 900.</b> Each part was chosen to keep our agents and local models fed without waiting on memory, cores or storage. Click through to the exact product pages.</p>
     <div class="chapters" id="chapters"></div>
   </div>
 </section>
@@ -755,7 +752,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <div class="kicker">Bill of materials</div>
     <h2 style="margin-top:14px">Where every part<br><span class="film">comes from</span></h2>
-    <p class="lead">Sourced <b>Micro Center first</b>, from the Miami store quote held until Thursday, Nov 19. Amazon and specialist suppliers only fill what Micro Center doesn't carry. Toggle alternatives and extras to see the total update.</p>
+    <p class="lead">Sourced <b>Micro Center first</b>, from the Miami store quote held until Thursday, Nov 19. Amazon and specialist suppliers only fill what Micro Center doesn't carry. The Kioxia drives and their cables come from Amazon because Micro Center doesn't carry enterprise drives. Tick extras on or off to see the total update.</p>
     <div class="bom-grid">
       <div class="lines" id="bomlines"></div>
       <aside class="sum" id="bomsum" aria-live="polite"></aside>
@@ -771,7 +768,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     </div>
     <p style="max-width:70ch">Specs come from manufacturer datasheets and the reviews below, checked in November 2026. Figures marked as estimates or reported have not been measured on this exact machine.</p>
     <ol id="sources"></ol>
-    <p class="src" id="photocred">Product photos: AMD; ASRock; ASUS; Antec; CDW; KIOXIA; Micro SATA Cables; PNY (NVIDIA board partner); SilverStone; Super Flower; Thermaltake. Shown for identification; all trademarks belong to their owners.</p>
+    <p class="src" id="photocred">Product photos: AMD; ASRock; ASRock Rack (via Scan Computers); ASUS; Antec; CDW; KIOXIA; Micro SATA Cables; PNY (NVIDIA board partner); SilverStone; Super Flower; Thermaltake. Shown for identification; all trademarks belong to their owners.</p>
   </div>
 </footer>
 
@@ -851,11 +848,17 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 
 /* ---------- Die CCDs ---------- */
 (function(){
-  const g=$('#ccds'); const pos=[[70,110],[325,110],[70,474],[325,474]]; let s='';
-  pos.forEach(([x,y],k)=>{ s+=`<g><rect x="${x}" y="${y}" width="190" height="170" rx="8" fill="#121927" stroke="#2F3A52" stroke-width="1.5"/>`;
-    for(let q=0;q<8;q++){const cx=x+18+(q%4)*42, cy=y+20+Math.floor(q/4)*48; s+=`<rect class="core" style="animation-delay:${(k*8+q)*0.11}s" x="${cx}" y="${cy}" width="34" height="38" rx="3" fill="url(#gfilm)" opacity=".7"/>`;}
-    s+=`<rect x="${x+18}" y="${y+118}" width="154" height="34" rx="3" fill="#1B2436"/><text x="${x+95}" y="${y+140}" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="12">32 MB L3 · CCD ${k}</text></g>`; });
-  g.innerHTML=s;
+  const g=$('#ccds'), f=$('#fabric'); const cols=[44,160,460,576], rows=[62,222,382,542]; let s='', l='', k=0;
+  cols.forEach((x,ci)=>rows.forEach((y,ri)=>{ const w=100,h=140, left=ci<2;
+    const ex=left?290:430, ey=190+ri*100+ (ci%2?20:50);
+    l+=`<path class="fabric" d="M${left?x+w:x} ${y+h/2} C ${left?x+w+60:x-60} ${y+h/2}, ${left?ex-50:ex+50} ${ey}, ${ex} ${ey}"/>`;
+    s+=`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="#121927" stroke="#2F3A52" stroke-width="1.5"/>`;
+    for(let q=0;q<8;q++){const cx=x+10+(q%4)*21, cy=y+12+Math.floor(q/4)*30, on=q===0;
+      s+=on?`<rect class="core" style="animation-delay:${k*0.19}s" x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="url(#gfilm)"/>`
+           :`<rect x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="#1B2436" opacity=".7"/>`;}
+    s+=`<rect x="${x+10}" y="${y+78}" width="${w-20}" height="44" rx="3" fill="#1B2436"/><text x="${x+w/2}" y="${y+97}" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">32 MB L3</text><text x="${x+w/2}" y="${y+113}" text-anchor="middle" fill="#586178" font-family="JetBrains Mono, monospace" font-size="10">CCD ${k}</text></g>`;
+    k++; }));
+  g.innerHTML=s; f.innerHTML=l;
 })();
 
 /* ---------- Exploded build ---------- */
@@ -869,35 +872,36 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
   // case shell (anchor)
   h+=`<g id="p-case"><rect x="40" y="40" width="${250*S*0+920}" height="1040" rx="22" fill="#0A0E17" stroke="#2A3448" stroke-width="3"/><rect x="40" y="860" width="920" height="220" fill="#0D1220" stroke="#2A3448" stroke-width="2"/>
     ${fan(310,860,0)}<text x="60" y="1120" fill="#8E98AC">ANTEC 900 · 85 L · SSI-EEB</text><text x="940" y="1120" text-anchor="end" fill="#586178">FRONT →</text>
-    <g>${[260,420].map(x=>fan(x,980,52)).join('')}</g><rect x="58" y="120" width="40" height="238" rx="4" fill="#121927" stroke="#2F3A52"/></g>`;
+    <g>${[260,420].map(x=>fan(x,980,52)).join('')}</g><g>${[300,520,740].map(y=>fan(915,y,40)).join('')}</g><rect x="58" y="120" width="40" height="238" rx="4" fill="#121927" stroke="#2F3A52"/></g>`;
   // board
   let slots=''; for(let n=1;n<=7;n++){slots+=`<rect x="${bx+40}" y="${slotY(n)}" width="${150}" height="9" rx="2" fill="#2F3A52"/>`;}
   h+=part('board',0,0,`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="8" fill="#0F1A1A" stroke="#2C5B50" stroke-width="2"/>
     <rect x="${bx}" y="${by+10}" width="34" height="200" fill="#1C2A2A"/>${slots}
-    <rect x="${bx+260}" y="${by+380}" width="250" height="90" rx="6" fill="#152222" stroke="#2C5B50"/><text x="${bx+385}" y="${by+432}" text-anchor="middle" class="lbl-sub" style="font-size:15px">4 × M.2 GEN5</text>`,
-    'ASUS PRO WS WRX90E-SAGE SE','EEB 12×13 in · 7× PCIe 5.0 x16',bx+250,by+bh+50);
+    <rect x="${bx+260}" y="${by+380}" width="250" height="90" rx="6" fill="#152222" stroke="#2C5B50"/><text x="${bx+385}" y="${by+432}" text-anchor="middle" class="lbl-sub" style="font-size:15px">2 × M.2 · 4 × MCIO</text>`,
+    'ASROCK RACK TURIND8X-2T','EEB 12.6×13 in · 7× PCIe 5.0 x16 · 2× 10 GbE',bx+250,by+bh+50);
   // CPU + cooler block
   const sx=bx+250, sy=by+120;
-  h+=part('cpu',0,-330,`<rect x="${sx-20}" y="${sy-30}" width="${58.5*S+40}" height="${75.4*S+60}" rx="14" fill="#141B2A" stroke="url(#xfilm)" stroke-width="3"/><circle cx="${sx+50}" cy="${sy+64}" r="40" fill="none" stroke="url(#xfilm)" stroke-width="3" opacity=".7"/><text x="${sx+50}" y="${sy+70}" text-anchor="middle" style="font-size:16px">sTR5</text>`,
-    'THREADRIPPER PRO 9975WX + AW420','32 cores · 350 W · 625 W-rated AIO',sx-40,sy-60);
+  h+=part('cpu',0,-330,`<rect x="${sx-20}" y="${sy-30}" width="${72*S+40}" height="${75.4*S+60}" rx="14" fill="#141B2A" stroke="url(#xfilm)" stroke-width="3"/><circle cx="${sx+61}" cy="${sy+64}" r="40" fill="none" stroke="url(#xfilm)" stroke-width="3" opacity=".7"/><text x="${sx+61}" y="${sy+70}" text-anchor="middle" style="font-size:16px">SP5</text>`,
+    'EPYC 9175F + XE360-SP5 PUMP','16 cores · 320 W · 360 mm AIO',sx-40,sy-60);
   // DIMMs
   const dimm=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="url(#xfilm)" opacity=".85"/>`;
-  h+=part('ramL',-230,-120,[0,1,2,3].map(k=>dimm(sx-90+k*18)).join(''),'256 GB DDR5','8 × 32 GB · 8 channels',sx-330,by+30);
-  h+=part('ramR',240,-160,[0,1,2,3].map(k=>dimm(sx+150+k*18)).join(''),'','',0,0);
+  const slotE=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="none" stroke="#2F3A52" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+  h+=`<g>${[0,1,2,3].map(k=>slotE(sx+165+k*18)).join('')}</g>`;
+  h+=part('ramL',-230,-120,[0,1,2,3].map(k=>dimm(sx-90+k*18)).join(''),'128 GB DDR5','4 × 32 GB · 4 of 8 slots',sx-330,by+30);
   // GPU slot 1
   const gy=slotY(1)-6;
-  h+=part('gpu',-120,250,`<rect x="${bx-60}" y="${gy}" width="${267*S}" height="${2*20.32*S}" rx="8" fill="#10151F" stroke="url(#xfilm)" stroke-width="3"/><rect x="${bx-60}" y="${gy+50}" width="${267*S}" height="10" fill="url(#xfilm)" opacity=".5"/><circle cx="${bx+267*S-90}" cy="${gy+35}" r="26" fill="#0B1019" stroke="#2F3A52"/>`,
-    'RTX PRO 5000 BLACKWELL','48 GB GDDR7 · 300 W · 2-slot',bx,gy+130);
-  // radiator + fans at front
-  const rx=850, ry=130, rl=456;
-  h+=part('rad',300,0,`<rect x="${rx}" y="${ry}" width="80" height="${rl*1.6}" rx="8" fill="#0D1220" stroke="#2F3A52" stroke-width="2"/>${[0,1,2].map(k=>fan(rx+40,ry+120+k*240,38)).join('')}`,
-    '420 MM RADIATOR','3 × 140 mm · 4000 RPM pump',rx-60,ry-30);
+  h+=part('gpu',-120,250,`<rect x="${bx-60}" y="${gy}" width="${304*S}" height="${2.5*20.32*S}" rx="8" fill="#10151F" stroke="url(#xfilm)" stroke-width="3"/><rect x="${bx-60}" y="${gy+70}" width="${304*S}" height="10" fill="url(#xfilm)" opacity=".5"/>${[0,1,2].map(k=>`<circle cx="${bx+40+k*150}" cy="${gy+40}" r="30" fill="#0B1019" stroke="#2F3A52"/>`).join('')}`,
+    'RTX 5070 TI · ASUS PROART','16 GB GDDR7 · 300 W · ~304 mm',bx,gy+150);
+  // 360 mm radiator, top exhaust
+  const rx=340, ry=48;
+  h+=part('rad',150,-300,`<rect x="${rx}" y="${ry}" width="600" height="58" rx="8" fill="#0D1220" stroke="#2F3A52" stroke-width="2"/>${[0,1,2].map(k=>fan(rx+100+k*200,ry+29,26)).join('')}`,
+    '360 MM RADIATOR · TOP','3 × 120 mm · exhausts up',rx,ry-52);
   // PSU
-  h+=part('psu',-200,260,`<rect x="70" y="900" width="${180*S}" height="${86*S}" rx="8" fill="#141B2A" stroke="#2F3A52" stroke-width="2"/>${fan(70+90*S,900+43*S,48)}`,
-    'TAICHI TC-1650T','1650 W · Titanium',70,1150);
+  h+=part('psu',-200,260,`<rect x="70" y="900" width="${150*S}" height="${86*S}" rx="8" fill="#141B2A" stroke="#2F3A52" stroke-width="2"/>${fan(70+75*S,900+43*S,48)}`,
+    'LEADEX VII PLATINUM PRO','1200 W · Platinum · ATX 3.1',70,1150);
   // Drives
   h+=part('ssd',260,240,`<rect x="620" y="920" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/><rect x="620" y="980" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/>`,
-    '2 × KIOXIA CD6-R','15.36 TB · U.3 via SlimSAS',600,1150);
+    '2 × KIOXIA CD6-R','15.36 TB · U.3 via MCIO',600,1150);
   svg.innerHTML=h;
   const parts=[...svg.querySelectorAll('[data-dx]')], lbls=[...svg.querySelectorAll('.lbl')];
   const bar=$('#xpbar'), state=$('#xpstate'), sec=$('#xp');
@@ -916,9 +920,9 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 /* ---------- Orchestra ---------- */
 (function(){
   const c=$('#orch'), ctx=c.getContext('2d'); let W,H,run=false,raf; const pulses=[];
-  const SVC=[['Claude API','#A78BFA'],['OpenAI API','#F0ABFC'],['Local GPU · 48 GB','#6EE7F9'],['Vector DB','#FCD34D'],['MCP tools','#6EE7F9'],['Browsers','#F0ABFC']];
+  const SVC=[['Claude API','#A78BFA'],['OpenAI API','#F0ABFC'],['Local GPU · 16 GB','#6EE7F9'],['Vector DB','#FCD34D'],['MCP tools','#6EE7F9'],['Browsers','#F0ABFC']];
   function size(){const r=c.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0);}
-  const N=33;
+  const N=14;
   function nodes(t){const cx=W/2,cy=H/2,r1=Math.min(W,H)*0.27,r2=Math.min(W,H)*0.44;
     const ag=[...Array(N)].map((_,i)=>{const a=i/N*Math.PI*2+t*0.04;return [cx+Math.cos(a)*r1,cy+Math.sin(a)*r1];});
     const sv=SVC.map((s,i)=>{const a=i/SVC.length*Math.PI*2-Math.PI/2;return [cx+Math.cos(a)*r2,cy+Math.sin(a)*r2*0.92];});
@@ -947,12 +951,10 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 
 /* ---------- Bars ---------- */
 (function(){
-  const gpu=[['gpt-oss-20b','175'],['32B class (Qwen)','~50'],['70B class · short context','~26']];
-  $('#gpubars').innerHTML=gpu.map(([n,v])=>`<div class="bar-row"><div class="bar-top"><span>${n}</span><span>${v} tok/s</span></div><div class="track"><i style="--w:${parseFloat(v.replace('~',''))/175*100}%"></i></div></div>`).join('');
-  const cpu=[['Cinebench 2024 multi',4070.24,3566.23,'+14%'],['Blender CPU',1092.5,960.07,'+14%'],['V-Ray CPU',87274.33,70902.33,'+23%'],['llama.cpp prompt processing (t/s)',246.41,208.06,'+18%']];
-  const f=v=>v>=1000?Math.round(v).toLocaleString('en-US'):v.toFixed(1);
-  $('#cpubars').innerHTML=cpu.map(([n,a,b,d])=>`<div class="bar-row"><div class="bar-top"><span>${n}</span><span class="film" style="font-weight:700">${d}</span></div>
-    <div class="pair"><div class="track"><i style="--w:100%"></i></div><div class="who">9975WX · ${f(a)}</div><div class="track"><i class="old" style="--w:${b/a*100}%"></i></div><div class="who">7975WX · ${f(b)}</div></div></div>`).join('');
+  const gpu=[['RTX 5060 Ti 16 GB',111.5],['RTX 3090 24 GB',161.8],['RTX 5070 Ti 16 GB · ours',189.5,1],['RTX 5080 16 GB',204.9],['RTX 4090 24 GB',221.9],['RTX 5090 32 GB',282.5]];
+  $('#gpubars').innerHTML=gpu.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} tok/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/282.5*100}%"></i></div></div>`).join('');
+  const mem=[['Today · 4 channels × DDR5-5600',179,1],['After upgrade · 8 channels × DDR5-5600',358],['Board maximum · 8 channels × DDR5-6400',410],['CPU rating · 12 channels × DDR5-6400',614]];
+  $('#cpubars').innerHTML=mem.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} GB/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/614*100}%"></i></div></div>`).join('');
   if(RM)return;
   document.querySelectorAll('.bars').forEach(box=>{const is=[...box.querySelectorAll('.track i')]; let done=false;
     const r=box.getBoundingClientRect(); if(r.top<innerHeight)return;
@@ -964,20 +966,22 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 (function(){
   const s=$('#airsvg');
   const paths=[
-    ['M880 140 C 760 150, 600 170, 470 200 S 160 230, 40 230','#6EE7F9'],
-    ['M880 300 C 760 300, 620 300, 500 290 S 220 260, 40 240','#A78BFA'],
-    ['M880 460 C 760 430, 600 380, 420 370 S 140 360, 40 350','#F0ABFC'],
-    ['M420 560 C 420 500, 380 440, 300 400 S 120 380, 40 370','#FCD34D'],
-    ['M600 560 C 600 500, 560 450, 480 420 S 200 400, 40 380','#FCD34D'],
+    ['M850 150 C 740 160, 600 180, 470 200 S 160 230, 40 200','#6EE7F9'],
+    ['M850 300 C 740 290, 600 260, 520 200 S 470 90, 440 10','#A78BFA'],
+    ['M850 300 C 760 300, 560 230, 360 160 S 260 60, 240 10','#A78BFA'],
+    ['M850 450 C 740 430, 600 380, 420 370 S 140 360, 40 330','#F0ABFC'],
+    ['M420 560 C 420 500, 380 440, 300 400 S 120 380, 40 350','#FCD34D'],
+    ['M600 560 C 600 500, 560 450, 480 420 S 200 400, 40 360','#FCD34D'],
   ];
   let h=`<rect x="20" y="20" width="860" height="600" rx="18" fill="#0A0E17" stroke="#2A3448" stroke-width="2"/>
-    <rect x="70" y="60" width="560" height="440" rx="8" fill="#0F1A1A" stroke="#2C5B50"/>
-    <rect x="300" y="110" width="100" height="120" rx="10" fill="#141B2A" stroke="#2F3A52"/><text x="350" y="176" text-anchor="middle" fill="#E9EDF5">CPU</text>
-    <rect x="40" y="330" width="460" height="64" rx="8" fill="#10151F" stroke="#2F3A52"/><text x="270" y="368" text-anchor="middle" fill="#E9EDF5">GPU · blower exhaust ←</text>
-    <rect x="800" y="60" width="60" height="460" rx="8" fill="#0D1220" stroke="#2F3A52"/><text x="830" y="600" text-anchor="middle">420 RAD</text>
+    <rect x="70" y="80" width="560" height="420" rx="8" fill="#0F1A1A" stroke="#2C5B50"/>
+    <rect x="300" y="120" width="100" height="110" rx="10" fill="#141B2A" stroke="#2F3A52"/><text x="350" y="182" text-anchor="middle" fill="#E9EDF5">CPU</text>
+    <rect x="40" y="320" width="500" height="70" rx="8" fill="#10151F" stroke="#2F3A52"/><text x="290" y="361" text-anchor="middle" fill="#E9EDF5">GPU · RTX 5070 Ti</text>
+    <rect x="150" y="26" width="480" height="40" rx="8" fill="#0D1220" stroke="#2F3A52"/><text x="390" y="52" text-anchor="middle">360 RAD · TOP EXHAUST ↑</text>
+    <circle cx="840" cy="150" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="300" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="450" r="40" fill="none" stroke="#2F3A52"/>
     <rect x="20" y="520" width="860" height="100" fill="#0D1220" stroke="#2A3448"/>
     <circle cx="420" cy="570" r="34" fill="none" stroke="#2F3A52"/><circle cx="600" cy="570" r="34" fill="none" stroke="#2F3A52"/>
-    <rect x="22" y="90" width="22" height="180" fill="#141B2A" stroke="#2F3A52"/><text x="56" y="84">REAR EXHAUST</text><text x="640" y="48">FRONT INTAKE →</text>`;
+    <rect x="22" y="110" width="22" height="160" fill="#141B2A" stroke="#2F3A52"/><text x="56" y="104">← REAR EXHAUST</text><text x="690" y="96">FRONT INTAKE 3×140</text>`;
   paths.forEach(([d,c],i)=>{h+=`<path d="${d}" fill="none" stroke="${c}" stroke-opacity=".22" stroke-width="2" stroke-dasharray="3 7"/>`;
     if(!RM)for(let k=0;k<4;k++)h+=`<circle r="4" fill="${c}"><animateMotion dur="${3.4+i*0.3}s" begin="${-k*0.85-i*0.4}s" repeatCount="indefinite" path="${d}"/></circle>`;});
   s.innerHTML=h;
@@ -993,32 +997,31 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 /* ---------- Spec sheet + sources ---------- */
 (function(){
   const SPECS=[
-    ['Processor','AMD Threadripper PRO 9975WX',['<b>32 cores / 64 threads</b>, Zen 5 "Shimada Peak"','4.0 GHz base · <b>5.4 GHz</b> boost · 350 W','<b>128 MB L3</b> · 4 CCDs + I/O die','8-channel DDR5-6400 ECC RDIMM · <b>128 PCIe 5.0 lanes</b>','Full 512-bit AVX-512']],
-    ['Motherboard','ASUS Pro WS WRX90E-SAGE SE',['EEB 12 × 13 in · <b>32+3+3+3 power stages</b>','<b>7× PCIe 5.0 x16</b> (ASUS layout for 4 GPUs: slots 1/3/5/7)','4× M.2 Gen5 · 2× SlimSAS NVMe · 4× SATA','Intel X710 <b>dual 10 GbE</b> · 2× USB4','AST2600 BMC on its own 1 GbE port']],
-    ['Memory','256 GB Kingston FURY Renegade Pro',['8 × 32 GB DDR5-5600 <b>CL28</b> ECC RDIMM','2× kit KF556R28RBE2K4-128','EXPO / XMP 3.0 profile at 1.35 V','<b>358.4 GB/s</b> theoretical across 8 channels']],
-    ['Graphics','NVIDIA RTX PRO 5000 Blackwell',['<b>48 GB GDDR7 ECC</b> · 384-bit · 1,344 GB/s','<b>14,080 CUDA cores</b> · 5th-gen Tensor cores','2,064 AI TOPS (FP4, sparse) · 65 TFLOPS FP32','300 W · dual-slot · 4× DisplayPort 2.1b','MIG: up to 2 isolated instances']],
-    ['Cooling','Thermaltake AW420',['420 mm radiator, front-mounted','3× TOUGHFAN 14 Pro · 500–2,000 RPM','4,000 RPM pump in the radiator','Rated for <b>625 W</b> · sTR5 / SP6 / LGA4677']],
-    ['Power','ASRock Taichi TC-1650T',['<b>1,650 W</b> · Cybenetics Titanium','91.6% average efficiency at 115 V','2× native 12V-2x6 (600 W each)','26.5 ms hold-up · <b>10-year warranty</b>','HWBusters score 9.3 / 10']],
-    ['Chassis','Antec 900 (2026)',['547 × 250 × 622 mm · ~85 L · 15 kg','SSI-EEB and Threadripper boards','<b>6 PWM fans included</b> (3× 140 front, 2× 120 reverse shroud, 1× 140 rear)','GPU up to 465 mm with front fans · 9 drive bays']],
-    ['Storage','2× Kioxia CD6-R 7.68 TB',['<b>15.36 TB</b> U.3 NVMe · PCIe 4.0 x4','6,200 / 4,000 MB/s sequential','<b>1,000,000</b> random read IOPS','1 DWPD · power-loss protection','Connected through the board\'s two SlimSAS ports']],
+    ['Processor','AMD EPYC 9175F',['<b>16 cores / 32 threads</b>, Zen 5 "Turin"','4.2 GHz base · <b>5.0 GHz</b> boost · 320 W','<b>512 MB L3</b> · 16 CCDs, one core each','Rated for 12-channel DDR5-6400 · <b>128 PCIe 5.0 lanes</b>','Full 512-bit AVX-512 · SP5 socket']],
+    ['Motherboard','ASRock Rack TURIND8X-2T',['EEB 12.63 × 13 in · CPUs up to 500 W','<b>7× PCIe 5.0 x16</b> + 1× x8. GPU goes in slot 0, 2, 4 or 6','2× M.2 Gen5 · 4× MCIO Gen5 x4','Broadcom <b>dual 10 GbE</b> + dedicated IPMI port','AST2600 BMC (onboard video is VGA only) · 24-pin + 3× EPS']],
+    ['Memory','128 GB Kingston FURY Renegade Pro',['4 × 32 GB DDR5-5600 <b>CL28</b> ECC RDIMM','Kit KF556R28RBE2K4-128 · 4 of 8 slots','Runs DDR5-4800 until EXPO is enabled','<b>~179 GB/s</b> theoretical · ~358 GB/s with 4 more sticks']],
+    ['Graphics','ASUS ProArt GeForce RTX 5070 Ti OC',['<b>16 GB GDDR7</b> · 256-bit · 896 GB/s','<b>8,960 CUDA cores</b> · Blackwell','~1,406 AI TOPS (FP4, sparse)','300 W · one 12V-2x6 plug · ~2.5-slot, ~304 mm']],
+    ['Cooling','SilverStone XE360-SP5',['360 mm AIO built for SP5','Mounted as <b>top exhaust</b> in the Antec 900','28 mm radiator · 3× 120 mm fans','Front stays free for the case\'s 3× 140 mm intake fans']],
+    ['Power','Super Flower Leadex VII Platinum PRO',['<b>1,200 W</b> · 80 Plus Platinum · ATX 3.1','1× native 12V-2x6 (600 W) for the GPU','2× EPS 4+4 · 4× PCIe 6+2 · ~150 mm long','<b>Open check:</b> the board has 3 EPS inputs. Confirm in its manual that 2 are enough for a 320 W CPU']],
+    ['Chassis','Antec 900 (2026)',['547 × 250 × 622 mm · ~85 L · 15 kg','SSI-EEB server boards supported','<b>6 PWM fans included</b> (3× 140 front, 2× 120 reverse shroud, 1× 140 rear)','GPU up to 465 mm · 360 mm radiator on top · 9 drive bays']],
+    ['Storage','2× Kioxia CD6-R 7.68 TB',['<b>15.36 TB</b> U.3 NVMe · PCIe 4.0 x4','6,200 / 4,000 MB/s sequential','<b>1,000,000</b> random read IOPS','1 DWPD · power-loss protection','Cabled to the board\'s MCIO ports (≤50 cm cables)']],
   ];
   const _sp=$('#specs'); if(_sp) _sp.innerHTML=SPECS.map(([r,n,l])=>`<article class="spec"><div class="role">${r}</div><h3>${n}</h3><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
   const SRC=[
-    ['AMD: Zen 5-based Ryzen Threadripper PRO announcement','https://www.amd.com/en/blogs/2025/amd-introduces-new-zen-5-based-ryzen-threadripper-pro.html'],
-    ['Puget Systems: Threadripper PRO 9000WX content creation review','https://www.pugetsystems.com/labs/articles/amd-ryzen-threadripper-pro-9000wx-content-creation-review/'],
-    ['Puget Systems: Threadripper 9000 vs Threadripper PRO 9000WX','https://www.pugetsystems.com/labs/articles/amd-threadripper-9000-vs-threadripper-pro-9000wx/'],
-    ['KitGuru: Threadripper PRO 9000WX specs and pricing','https://www.kitguru.net/components/cpu/joao-silva/amd-reveals-ryzen-threadripper-pro-9000wx-specs-and-pricing/'],
-    ['Igor\'s Lab: Threadripper 9000 WX series','https://www.igorslab.de/en/amd-ryzen-threadripper-9000-wx-series-zen-5-workstation-power-in-neuer-dimension/'],
-    ['ASUS: Pro WS WRX90E-SAGE SE tech specs','https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/techspec/'],
-    ['Kingston: memory for the Pro WS WRX90E-SAGE SE','https://kingston.com/en/memory/search/model/108920/asus-pro-ws-wrx90e-sage-se-motherboard'],
-    ['PNY: NVIDIA RTX PRO 5000 Blackwell datasheet','https://www.pny.com/File%20Library/Company/Support/Product%20Brochures/NVIDIA%20RTX/English/nvidia-rtx-pro-5000-blackwell.pdf'],
-    ['Database Mart: Ollama benchmark, RTX PRO 5000','https://www.databasemart.com/blog/ollama-gpu-benchmark-pro5000'],
-    ['Database Mart: vLLM benchmark, RTX PRO 5000','https://www.databasemart.com/blog/vllm-gpu-benchmark-pro5000'],
-    ['Trooper.ai: RTX PRO 5000 vs RTX PRO 6000 Blackwell','https://www.trooper.ai/benchmarks-compare-RTX-Pro-5000-Blackwell-with-RTX-Pro-6000-Blackwell'],
-    ['HWBusters: ASRock Taichi TC-1650T review','https://hwbusters.com/psus/asrock-taichi-tc-1650t-atx-v3-1-psu-review'],
+    ['AMD: EPYC 9175F product page','https://www.amd.com/en/products/processors/server/epyc/9005-series/amd-epyc-9175f.html'],
+    ['Level1Techs: EPYC Turin 9175F build (16 CCDs, one core each)','https://forum.level1techs.com/t/epyc-turin-gaming-build-9175f/228698/3'],
+    ['PassMark: AMD EPYC 9175F','https://www.cpubenchmark.net/cpu.php?cpu=AMD+EPYC+9175F'],
+    ['Central Computer: ASRock Rack TURIND8X-2T spec sheet','https://www.centralcomputer.com/asrock-rack-turind8x-2t-500w-server-motherboard-single-socket-sp5-supports-amd-epyc-9005-9004-processors-8x-ddr5-rdimm-slots.html'],
+    ['Chips and Cheese: AMD Turin launch analysis','https://chipsandcheese.com/p/amds-turin-5th-gen-epyc-launched'],
+    ['llama.cpp discussion #15396: gpt-oss llama-bench results by GPU','https://github.com/ggml-org/llama.cpp/discussions/15396'],
+    ['ComputingForGeeks: local LLM GPU benchmarks','https://computingforgeeks.com/black-friday-gpu-deals/'],
+    ['carteakey.dev: optimizing gpt-oss-120b local inference','https://carteakey.dev/blog/local-inference/optimizing-gpt-oss-120b-local-inference/'],
+    ['Hardware Corner: gpt-oss MoE layer offloading','https://www.hardware-corner.net/gpt-oss-offloading-moe-layers/'],
+    ['ASUS: ProArt GeForce RTX 5070 Ti OC','https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/'],
+    ['SilverStone: XE360-SP5','https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/'],
+    ['Super Flower: Leadex VII Platinum PRO','https://www.super-flower.com.tw/products-detail/LVII-P-PRO/'],
     ['Antec: 900 case specifications','https://antec.com/product/case/900'],
     ['Gamers Nexus: Antec 900 (2026) review and thermals','https://gamersnexus.net/cases/goat-antec-900-case-revisit-new-900-2026-review-benchmarks-and-thermals'],
-    ['Gaming-ST: Thermaltake AW360 / AW420 workstation AIO','https://gaming-st.com/pcparts/thermaltake-aw360-aw420-workstation-aio-625w-tdp/'],
     ['Kioxia: CD6-R data center SSD','https://europe.kioxia.com/nl-nl/business/ssd/data-center-ssd/cd6-r.html'],
   ];
   $('#sources').innerHTML=SRC.map(([t,u])=>`<li><a href="${u}">${t}</a></li>`).join('');
@@ -1026,9 +1029,9 @@ const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);ret
 </script>
 <script>
 /* ---------- v2: chapters + BOM ---------- */
-const BOM = [{"id": "cpu-bundle", "role": "CPU + motherboard + 128GB RAM bundle (in-store)", "name": "Micro Center Computer Build Bundle: AMD Ryzen Threadripper PRO 9975WX + ASUS Pro WS WRX90E-SAGE SE + Kingston FURY Renegade Pro 128GB DDR5-5600 ECC RDIMM quad kit", "mpn": "100-100000723WOF + 90MB1FW0-M0EAY0 + KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/5007472/amd-ryzen-threadripper-pro-9975wx,-asus-wrx90e-sage-pro-ws-se-str5,-kingston-fury-renegade-pro-128gb-ddr5-5600-quad-kit,-computer-build-bundle", "price": 7999.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Search snippet of Micro Center bundle page also shows $7,999.99 sale vs $9,519.97 regular.", "stock": "In-store only; limit 1 bundle per customer (Micro Center bundle terms). Miami stock not visible.", "sku": "999999", "alt": [], "notes": "Saves about $1,490 vs the separate Micro Center prices (CPU $3,699.99 + board ~$1,189.99 + RAM $4,599.99). The bundle has to be returned as a whole. Micro Center also lists a variant with 4x G.Skill 64GB kits for $12,499.99 (search snippet)."}, {"id": "cpu", "role": "CPU (included in bundle; individual listing for reference)", "name": "AMD Ryzen Threadripper PRO 9975WX Shimada Peak 4GHz 32-Core sTR5 Boxed Processor - Heatsink Not Included", "mpn": "100-100000723WOF", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/product/698657/amd-ryzen-threadripper-pro-9975wx-shimada-peak-4ghz-32-core-str5-boxed-processor-heatsink-not-included", "price": 3699.99, "priceNote": "Search snippet of Micro Center product page: $3,699.99 (orig $4,099.99), in-store only. Other store snapshots show $3,799.99.", "stock": "In-store only, limit 1. Snapshots: 1 at North Jersey, 2 at Yonkers/Rockville. Miami not visible.", "sku": "900043", "alt": [{"source": "Central Computer", "url": "https://www.centralcomputer.com/amd-ryzen-threadripper-pro-9975wx-processor-32-cores-64-threads-4-0ghz-base-5-4ghz-max-boost-str5-socket-128mb-cache-350w.html", "price": 3999.99}, {"source": "CDW", "url": "https://www.cdw.com/product/amd-ryzen-threadripper-pro-9975wx-32-cores/9042679", "price": 4348.99}], "notes": "qty 0 because the CPU comes in the cpu-bundle. 350W TDP, 32C/64T."}, {"id": "board", "role": "Motherboard (included in bundle; individual listing for reference)", "name": "ASUS Pro WS WRX90E-SAGE SE AMD sTR5 EEB Motherboard", "mpn": "90MB1FW0-M0EAY0", "qty": 0, "source": "Micro Center", "url": "https://microcenter.com/product/677978/asus-wrx90e-sage-pro-ws-se-amd-str5-eeb-motherboard", "price": 1189.99, "priceNote": "Search snippet of Micro Center page structured data: $1,189.99 (orig $1,299.99). Another Micro Center listing shows $1,199.99.", "stock": "Snapshots: 3 at Brentwood, 2 at Brooklyn. Miami not visible.", "sku": "676635", "alt": [{"source": "Newegg", "url": "https://www.newegg.com/asus-pro-ws-wrx90e-sage-se-eeb-motherboard-amd-wrx90-str5/p/N82E16813119667", "price": 1219.99}, {"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1800235-REG/asus_pro_ws_wrx90e_sage_se.html", "price": null}], "notes": "qty 0 because the board comes in the cpu-bundle. The SKU comes from a search snippet; check it against the quote. 8x DDR5 RDIMM slots, 7x PCIe 5.0 x16 slots, 4x M.2 slots."}, {"id": "ram-kit2", "role": "Second 128GB RDIMM kit, filling all 8 channels to 256GB", "name": "Kingston FURY Renegade Pro 128GB (4 x 32GB) DDR5-5600 PC5-44800 CL28 Quad Channel ECC Registered Memory Modules - Black (Bundle Only)", "mpn": "KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black?ob=1&storeid=145", "price": 4589.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. A Micro Center search snippet shows $4,599.99 (orig $4,999.99).", "stock": "'Bundle Only' at Micro Center. Snapshot: 25+ at Westbury. Miami not visible.", "sku": "873000", "alt": [{"source": "CDW", "url": "https://www.cdw.com/product/kingston-fury-renegade-pro-ddr5-kit-128-gb-4-x-32-gb-dimm-288-pin/7922358", "price": 3888.99}, {"source": "Newegg (search page, 'from' price)", "url": "https://www.newegg.com/p/pl?d=kingston+fury+renegade+pro", "price": 4269.99}], "notes": "CDW price is inconsistent across snippets ($3,888.99 and $5,549.99). Running two 4-kits as 8 DIMMs is not validated as one matched set at the EXPO/5600 profile, so you may have to run JEDEC speed. The K8 kit (ram-k8-alt) is the validated option."}, {"id": "ram-k8-alt", "role": "Alternative: single validated 256GB 8-DIMM kit (instead of bundle RAM + ram-kit2)", "name": "Kingston FURY Renegade Pro 256GB (8 x 32GB) DDR5-5600 CL28 ECC Registered RDIMM Kit, Black, EXPO", "mpn": "KF556R28RBE2K8-256", "qty": 0, "source": "Other (CompSource)", "url": "https://www.compsource.com/buy/KF556R28RBE2K8256/Kingston-229", "price": 6894.02, "priceNote": "Search snippet, 'as of' 2026-08-16. Not found at Micro Center or Amazon.", "stock": "Unknown. Several sellers show it out of stock, backordered or EOL.", "sku": null, "alt": [{"source": "IT Devices", "url": "https://www.itdevicesonline.com/product-details/1320480", "price": 8250.0}, {"source": "Zoro (out of stock)", "url": "https://www.zoro.com/kingston-256gb-5600mts-ddr5-ecc-reg-cl28-dimm-kit-of-8-fury-renegade-pro-expo-kf556r28rbe2k8-256/i/G621708269/", "price": 9167.99}, {"source": "DirectDial (backordered)", "url": "https://www.directdial.com/us/item/kingston-256gb-8-x-32gb-ddr5-5600mt-s-cl28-fury-renegade-pro-rdimm-black-expo/kf556r28rbe2k8-256", "price": 4833.0}, {"source": "SHI (EOL)", "url": "https://www.shi.com/product/47807331/Kingston-FURY-Renegade-Pro", "price": 9568.0}], "notes": "Not sold at Micro Center (no listing found). Listings around $1,260–$1,640 are stale prices from before the DRAM price rise; ignore them. If you buy the K8 kit, you would skip the Micro Center bundle (or the second kit), and the bundle saving is lost."}, {"id": "gpu", "role": "GPU", "name": "NVIDIA RTX PRO 5000 Blackwell Single-Fan AI & Workstation Graphics Card (OEM), 48GB GDDR7, PCIe 5.0 x16", "mpn": "900-5G153-2250-000-01", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/711668/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "price": 7199.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center NVIDIA brand page snippet: $7,199.99 (orig $8,999.99), in-store only.", "stock": "In-store only. Miami not visible.", "sku": "044628", "alt": [{"source": "Newegg", "url": "https://www.newegg.com/nvidia-blackwell-900-5g153-2250-000-rtx-pro-5000-48gb-graphics-card/p/N82E16814132111", "price": 7299.99}, {"source": "Central Computer", "url": "https://www.centralcomputer.com/nvidia-rtx-pro-5000-blackwell-non-retail-48gb-gddr7-14-080-cuda-cores-pci-express-5-0-x16-300w-900-5g153-2250-000-01.html", "price": 7999.99}, {"source": "Micro Center (PNY retail version)", "url": "https://www.microcenter.com/product/697035/pny-nvidia-rtx-pro-5000-blackwell-single-fan-48gb-gddr7-pcie-50-graphics-card", "price": null}], "notes": "Launched at about $4,569. The street price is now about $7.2k–$8k. The Newegg price comes from Pangoly's price history (changed 2026-10-31). The 12-month low was about $4,400 (gpuprix). The OEM card has a limited/OEM warranty path; the PNY retail card has a 3-yr warranty. 300W, dual slot."}, {"id": "gpu-72-alt", "role": "Alternative GPU: 72GB variant", "name": "NVIDIA RTX PRO 5000 Blackwell Single-Fan AI & Workstation Graphics Card (OEM), 72GB GDDR7, PCIe 5.0 x16", "mpn": "900-5G153-2270-000-01", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/product/711667/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "price": 8999.99, "priceNote": "Search snippet of Micro Center product page: $8,999.99. A category snapshot shows $8,799.99 (Parkville).", "stock": "Product structured data showed out of stock; a category snapshot showed in stock at Parkville. In-store only.", "sku": "044610", "alt": [{"source": "Central Computer", "url": "https://www.centralcomputer.com/nvidia-rtx-pro-5000-blackwell-workstation-72gb-oem-gddr7-14080-cuda-cores-pci-express-5-0-x16-300w-900-5g153-2270-000-01.html", "price": null}, {"source": "rtx.live price tracker", "url": "https://rtx.live/gpus/rtx-pro-5000-blackwell-72gb", "price": 8900.0}], "notes": "A PNY-branded 72GB card (MC SKU 013417) was also seen at $8,999.99 at the Denver store. A Micro Center brand page also shows an OEM RTX PRO 5000 at $9,999.99 (orig $11,999.99); it is not clear which listing that price belongs to. This card costs about $1,800 more than the 48GB card for 50% more VRAM."}, {"id": "case", "role": "Case", "name": "Antec 900 Tempered Glass eATX Full Tower Computer Case - Black", "mpn": "ANTEC 900 (UPC 0-761345-10272-8)", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "price": 199.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center snippet: $199.99 sale (orig $219.99).", "stock": "In-store pickup only. Phoenix in stock; no longer carried at Austin. Miami not visible.", "sku": "028738", "alt": [{"source": "Best Buy", "url": "https://www.bestbuy.com/product/antec-900-full-tower-case-ai-workstation-gaming-chassis-supports-e-atx-threadripper-back-connect-mb-6-pwm-fans-included-black/JXVWSWSRY2", "price": 299.99}, {"source": "Amazon", "url": "https://www.amazon.com/Antec-900-Workstation-Threadripper-Back-Connect/dp/B0GMSPXMM2", "price": null}], "notes": "Supports E-ATX/SSI-EEB. Comes with 6 PWM fans. Takes up to a 420mm radiator."}, {"id": "psu", "role": "Power supply", "name": "ASRock Taichi TC-1650T 1650 Watt 80 Plus Titanium ATX Fully Modular Power Supply - ATX 3.1 Compatible", "mpn": "PSU-TC-1650T (TC-1650T)", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/697062/asrock-tc-1650t-1650-watt-80-plus-titanium-atx-fully-modular-power-supply-atx-31-compatible", "price": 549.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center product-page structured data in a snippet showed $449.99; the search listing showed $549.99.", "stock": "Snapshot: 1 at Duluth. Miami not visible.", "sku": "883967", "alt": [{"source": "Newegg", "url": "https://www.newegg.com/asrock-atx3-1-pcie5-1-1650-w-cybenetics-titanium-power-supply-black-tc-1650t/p/N82E16817955001", "price": 479.99}], "notes": "Ask Micro Center Miami to price-match its own $449.99 listing, or Newegg at $479.99. The quote's $549.99 is MSRP. Has 2x 12V-2x6 connectors and a 10-yr warranty (ASRock)."}, {"id": "cooler", "role": "CPU cooler (sTR5 AIO)", "name": "Thermaltake AW420 420mm All in One Liquid CPU Cooling Kit - Black", "mpn": "CL-W445-PL14BL-A", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/699609/thermaltake-aw420-420mm-all-in-one-liquid-cpu-cooling-kit-black", "price": 449.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. A Micro Center snippet also shows $449.99.", "stock": "Micro Center brand page: usually ships in 5-7 business days. Miami in-store stock not visible.", "sku": "921551", "alt": [{"source": "Best Buy", "url": "https://www.bestbuy.com/product/thermaltake-aw420-liquid-cooler-lga-4677-sp6-420mm-rad-3x140mm-pwm-fans-cu-block-cl-w445-pl14bl-a-black/J39ZPC6GF4", "price": 458.99}, {"source": "CDW", "url": "https://www.cdw.com/product/thermaltake-aw420-processor-liquid-cooling-system/8567949", "price": 506.99}], "notes": "Supports sTR5/SP6/LGA4677 and a rated 625W TDP. Its 420mm radiator fits the Antec 900."}, {"id": "ssd-u3", "role": "Storage (×2)", "name": "Kioxia CD6-R 7.68 TB U.3 NVMe (HP P21842-003)", "mpn": "KCD6XLUL7T68 / P21842-003", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0HPR72914", "price": 2449.0, "priceNote": "Amazon listing, Nov 15", "stock": "Unknown. The listing mentions a 2-yr seller warranty.", "sku": "B0HPR72914", "alt": [{"source": "Newegg", "url": "https://www.newegg.com/kioxia-cd6-r-7-68tb/p/N82E16820988003", "price": null}, {"source": "Yobitech", "url": "https://www.yobitech.com/KCD6XLUL7T68-p/kcd6xlul7t68.htm", "price": 2275.0}, {"source": "ServerPartDeals (recertified, out of stock)", "url": "https://serverpartdeals.com/products/kioxia-cd6-r-kcd6xlul7t68-7-68tb-1-dwpd-pcie-gen-4-0-x4-8gb-s-u-3-nvme-2-5-recertified-solid-state-drive", "price": 789.99}], "notes": "Recommended by our consultant, Expertly.Ai. Micro Center does not carry enterprise U.3 drives. Check SMART hours and the warranty on arrival."}, {"id": "cable-slimsas", "role": "Drive cables (×2)", "name": "DiLinker SlimSAS 4i (SFF-8654) to U.2 (SFF-8639) cable, 75 cm, with power", "mpn": "SFF-8654 → SFF-8639", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B099DYK9CW", "price": 25.0, "priceNote": "approx.", "stock": "Unknown on amazon.com (amazon.de shows unavailable).", "sku": "B099DYK9CW", "alt": [{"source": "Micro SATA Cables (SLM-2187-U2, 50cm)", "url": "https://www.microsatacables.com/slim-sas-sff-8654-4i-straight-to-sff-8639-u-2-cable", "price": 34.75}], "notes": "Connects each U.3 drive to the WRX90E-SAGE SE SlimSAS ports (Option B)."}, {"id": "paste", "role": "Thermal paste (large tube, for the Threadripper IHS)", "name": "ARCTIC MX-6 Thermal Paste - 8 g", "mpn": "ACTCP00081A", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/683102/arctic-cooling-mx-6-thermal-paste-8-g", "price": null, "priceNote": "Micro Center price not visible in search results. About $8–$11 elsewhere (Walmart $10.99).", "stock": "Unknown.", "sku": null, "alt": [{"source": "Amazon (MX-6 8g)", "url": "https://www.amazon.com/ARCTIC-MX-6-Conductivity-Non-Conductive-Non-capacitive/dp/B09VDLH5M6", "price": null}, {"source": "Newegg (Noctua NT-H2 10g)", "url": "https://www.newegg.com/noctua-nt-h2-10g/p/2MB-0026-00006", "price": 28.84}], "notes": "The AW420 likely ships with paste pre-applied. Get a large tube anyway for re-mounts on the large sTR5 IHS. Micro Center only lists NT-H2 in 3.5g (quickview 698093), not 10g."}, {"id": "boot-ssd", "role": "Optional Gen5 M.2 boot SSD", "name": "Samsung 9100 PRO 2TB PCIe Gen 5 x4 NVMe M.2 Internal SSD", "mpn": "MZ-VAP2T0B/AM", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/691300/samsung-9100-pro-2tb-samsung-v-nand-tlc-nand-(v8)-pcie-gen-5-x4-and-pcie-gen-5-x4-nvme-m2-internal-ssd", "price": 399.99, "priceNote": "Cached Micro Center product page snippet: $399.99 (orig $899.99), in-store only. The cache may be stale.", "stock": "In-store only. Snapshot: 25+ at St. Louis Park.", "sku": "815258", "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1878199-REG/samsung_mz_vap2t0b_am_2tb_9100_pro_pcie.html", "price": null}, {"source": "Newegg (Crucial T705 2TB, CT2000T705SSD3)", "url": "https://www.newegg.com/crucial-2tb-t705-nvme/p/N82E16820156398", "price": 379.99}], "notes": "A price tracker shows Amazon at $399.95 (2026-11-14). The Crucial T705 2TB was seen at Micro Center Yonkers for $369.99, but only on a search-results page, so there is no product URL for it."}, {"id": "ups", "role": "UPS (pure sine, active-PFC compatible)", "name": "CyberPower PFC Sinewave Series UPS CP1500PFCLCD, 1500 VA / 1000 W, 120 V, 10 outlets", "mpn": "CP1500PFCLCD", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/353897/cyberpower-systems-pfc-sinewave-series-ups-(cp1500pfclcd)", "price": 239.99, "priceNote": "Micro Center product page snippet: $239.99 (orig $259.99).", "stock": "Snapshots: in stock at Westbury and Denver (7). Miami not visible.", "sku": null, "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1513053-REG/cyberpower_cp1500pfclcd_pfc_sinewave_ups.html", "price": 239.95}, {"source": "CDW", "url": "https://www.cdw.com/product/cyberpower-intelligent-pfc-lcd-cp1500pfclcd/2190609", "price": 239.95}], "notes": "Rated 1000W. Full load (CPU 350W + GPU 300W + platform) can reach about 800–900W, which gives only a short runtime. A 2000–2200VA unit would be better, but none was found at Micro Center in searches. Consider CyberPower OR2200PFCLCD or APC SMT2200C from CDW/B&H (not sourced here)."}, {"id": "esd", "role": "Anti-static wrist strap", "name": "Kingwin Anti-Static Wrist Strap", "mpn": "ATA-W24", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/336438/Anti-Static_Wrist_Strap", "price": 4.99, "priceNote": "Micro Center product page snippet: $4.99. An older snippet shows $3.99.", "stock": "Snapshots: 6 at Parkville, 9 at Fairfax. Miami not visible.", "sku": "740001", "alt": [{"source": "Micro Center (iFixit strap)", "url": "https://www.microcenter.com/quickview/442494/ifixit-anti-static-wrist-strap", "price": 5.99}], "notes": ""}];
-const CREDITS = {"cpu": {"file": "cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/9000-wx-series/amd-ryzen-threadripper-pro-9975wx.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/3513563-threadripper-pro-9000-series.jpg", "owner": "AMD"}, "board": {"file": "board.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/096fe01b-a516-48d6-833b-46901887982d/", "owner": "ASUS"}, "board-io": {"file": "board-io.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/d1de116c-6ba0-49ff-bab4-7abb594ab2ef/", "owner": "ASUS"}, "ram": {"file": "ram.jpg", "sourcePage": "https://www.cdw.com/product/kingston-fury-renegade-pro-ddr5-kit-128-gb-4-x-32-gb-dimm-288-pin/7922358", "imageUrl": "https://webobjects2.cdw.com/is/image/CDW/7922358?wid=1200&hei=900&qlt=95", "owner": "CDW"}, "gpu": {"file": "gpu.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/3-rtx-pro-5000-3qtr-front-left.jpg", "owner": "PNY (NVIDIA board partner)"}, "case": {"file": "case.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-01.jpg", "owner": "Antec"}, "psu": {"file": "psu.jpg", "sourcePage": "https://www.asrock.com/Power-Supply/Taichi/TC-1650T/", "imageUrl": "https://www.asrock.com/Power-Supply/photo/TC-1650T(L1).png", "owner": "ASRock"}, "cooler": {"file": "cooler.jpg", "sourcePage": "https://uk.thermaltake.com/aw420-aio-liquid-cooler.html", "imageUrl": "https://uk.thermaltake.com/media/catalog/product/c/l/cl-w445-pl14bl-a_01.jpg", "owner": "Thermaltake"}, "ssd": {"file": "ssd.jpg", "sourcePage": "https://americas.kioxia.com/en-us/business/ssd/data-center-ssd/cd6-r.html", "imageUrl": "https://americas.kioxia.com/content/dam/kioxia/shared/business/ssd/data-center-ssd/img/cd6-r_img_001.png", "owner": "KIOXIA"}, "cable": {"file": "cable.jpg", "sourcePage": "https://www.microsatacables.com/slimsas-8i-sff-8654-cable-to-two-u-2-connectors-50-cm", "imageUrl": "https://www.microsatacables.com/media/catalog/product/1/8/1857a.jpg", "owner": "Micro SATA Cables"}, "a-cpu": {"file": "a-cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/server/epyc/9005-series.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/epyc/2909511-epyc-9005-teaser.jpg", "owner": "AMD"}, "a-gpu": {"file": "a-gpu.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/4cf11703-9459-4f83-a5f4-8c5da154bfe6/", "owner": "ASUS"}, "a-cooler": {"file": "a-cooler.jpg", "sourcePage": "https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/", "imageUrl": "https://www.silverstonetek.com/upload/detail/xe360-sp5-0.jpg", "owner": "SilverStone"}, "a-psu": {"file": "a-psu.jpg", "sourcePage": "https://www.super-flower.com.tw/products-detail/LVII-P-PRO/", "imageUrl": "https://www.super-flower.com.tw/upload/catalog_color_b/2024%20web_IM_2505_VII%20P_01__26E26j3vti.png", "owner": "Super Flower"}, "case-inside": {"file": "case-inside.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-02.jpg", "owner": "Antec"}, "gpu-back": {"file": "gpu-back.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/2-rtx-pro-5000-3qtr-back-right.jpg", "owner": "PNY (NVIDIA board partner)"}};
-const IMGS = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
+const BOM = [{"id": "cpu-bundle", "role": "CPU + motherboard + 128 GB memory bundle", "name": "Micro Center Computer Build Bundle: AMD EPYC 9175F + ASRock Rack TURIND8X-2T + Kingston FURY Renegade Pro 128 GB DDR5-5600 ECC RDIMM quad kit", "mpn": "TURIND8X-2T + KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/site/products/amd_bundles.aspx", "price": 5999.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "999999", "notes": "Listed on Micro Center's AMD bundle deals page. Ask the store for the bundle by SKU.", "alt": [], "stock": ""}, {"id": "cpu", "role": "CPU (in the bundle)", "name": "AMD EPYC 9175F, 16 cores, SP5", "mpn": "", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "board", "role": "Motherboard (in the bundle)", "name": "ASRock Rack TURIND8X-2T, SP5, SSI-EEB", "mpn": "TURIND8X-2T", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "ram", "role": "Memory (in the bundle)", "name": "Kingston FURY Renegade Pro 128 GB (4 × 32 GB) DDR5-5600 CL28 ECC RDIMM, KF556R28RBE2K4-128", "mpn": "KF556R28RBE2K4-128", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "gpu", "role": "Graphics card", "name": "ASUS ProArt GeForce RTX 5070 Ti OC 16 GB GDDR7", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "price": 1699.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "936120", "notes": "Install in slot 0, 2, 4 or 6 (full x16 slots that do not share lanes with the drive ports).", "alt": [], "stock": ""}, {"id": "case", "role": "Case", "name": "Antec 900 Tempered Glass eATX Full Tower Computer Case - Black", "mpn": "ANTEC 900 (UPC 0-761345-10272-8)", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "price": 199.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center snippet: $199.99 sale (orig $219.99).", "stock": "In-store pickup only. Phoenix in stock; no longer carried at Austin. Miami not visible.", "sku": "028738", "alt": [{"source": "Best Buy", "url": "https://www.bestbuy.com/product/antec-900-full-tower-case-ai-workstation-gaming-chassis-supports-e-atx-threadripper-back-connect-mb-6-pwm-fans-included-black/JXVWSWSRY2", "price": 299.99}, {"source": "Amazon", "url": "https://www.amazon.com/Antec-900-Workstation-Threadripper-Back-Connect/dp/B0GMSPXMM2", "price": null}], "notes": "Supports E-ATX/SSI-EEB. Comes with 6 PWM fans. Takes up to a 420mm radiator."}, {"id": "psu", "role": "Power supply", "name": "Super Flower LEADEX VII Platinum PRO 1200 W, 80 Plus Platinum, ATX 3.1, fully modular", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "price": 189.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "848499", "notes": "Open check: the board has 3 EPS 8-pin inputs and this unit ships 2 EPS cables. Confirm in the TURIND8X-2T manual that 2 are enough for a 320 W CPU.", "alt": [], "stock": ""}, {"id": "cooler", "role": "CPU cooler (SP5 AIO)", "name": "SilverStone XE360-SP5 360 mm All-in-One Liquid CPU Cooler for EPYC SP5", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "price": 379.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "069492", "notes": "Mount the radiator at the top of the Antec 900 as exhaust. The front keeps the case's three 140 mm intake fans.", "alt": [], "stock": ""}, {"id": "ssd-u3", "role": "Storage (×2)", "name": "Kioxia CD6-R 7.68 TB U.3 NVMe (HP P21842-003)", "mpn": "KCD6XLUL7T68 / P21842-003", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0HPR72914", "price": 2449.0, "priceNote": "Amazon listing, Nov 15", "notes": "Recommended by our consultant, Expertly.Ai. Micro Center does not carry enterprise U.3 drives. Check SMART hours and the warranty on arrival.", "alt": [], "stock": ""}, {"id": "cable-mcio", "role": "Drive cables (×2)", "name": "MCIO 4i (SFF-TA-1016) to U.2 (SFF-8639) cable, 0.5 m, with SATA power", "mpn": "MCIO 4i → SFF-8639", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0CWP5X4M7", "price": 38.0, "priceNote": "approx.", "notes": "Connects each Kioxia drive to the TURIND8X-2T MCIO ports. Give each drive its own SATA power lead.", "alt": [], "stock": ""}, {"id": "fans-opt", "role": "Optional: extra fans (on the original quote)", "name": "6× ARCTIC P12 Pro 120 mm + SilverStone CPF04 PWM fan hub", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "price": 99.93, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "953612 · 133009", "notes": "The Antec 900 already ships with 6 PWM fans, so these are optional. Skip them to save about $100.", "alt": [], "stock": ""}, {"id": "ram-up", "role": "Later: memory upgrade to 256 GB", "name": "4 more Kingston FURY Renegade Pro 32 GB DDR5-5600 RDIMMs (same kit, KF556R28RBE2K4-128)", "mpn": "KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black?ob=1&storeid=145", "price": 4589.99, "priceNote": "Micro Center list price for the 4-stick kit (Nov 15). Bundle math implies about $475 a stick, so ask.", "sku": "873000", "notes": "Fills all 8 slots: 256 GB and twice the memory bandwidth. The first upgrade to make.", "alt": [], "stock": ""}, {"id": "paste", "role": "Thermal paste (spare, for re-mounts)", "name": "ARCTIC MX-6 Thermal Paste - 8 g", "mpn": "ACTCP00081A", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/683102/arctic-cooling-mx-6-thermal-paste-8-g", "price": null, "priceNote": "Micro Center price not visible in search results. About $8–$11 elsewhere (Walmart $10.99).", "stock": "Unknown.", "sku": null, "alt": [{"source": "Amazon (MX-6 8g)", "url": "https://www.amazon.com/ARCTIC-MX-6-Conductivity-Non-Conductive-Non-capacitive/dp/B09VDLH5M6", "price": null}, {"source": "Newegg (Noctua NT-H2 10g)", "url": "https://www.newegg.com/noctua-nt-h2-10g/p/2MB-0026-00006", "price": 28.84}], "notes": "The AW420 likely ships with paste pre-applied. Get a large tube anyway for re-mounts on the large sTR5 IHS. Micro Center only lists NT-H2 in 3.5g (quickview 698093), not 10g."}, {"id": "boot-ssd", "role": "Optional Gen5 M.2 boot SSD", "name": "Samsung 9100 PRO 2TB PCIe Gen 5 x4 NVMe M.2 Internal SSD", "mpn": "MZ-VAP2T0B/AM", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/691300/samsung-9100-pro-2tb-samsung-v-nand-tlc-nand-(v8)-pcie-gen-5-x4-and-pcie-gen-5-x4-nvme-m2-internal-ssd", "price": 399.99, "priceNote": "Cached Micro Center product page snippet: $399.99 (orig $899.99), in-store only. The cache may be stale.", "stock": "In-store only. Snapshot: 25+ at St. Louis Park.", "sku": "815258", "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1878199-REG/samsung_mz_vap2t0b_am_2tb_9100_pro_pcie.html", "price": null}, {"source": "Newegg (Crucial T705 2TB, CT2000T705SSD3)", "url": "https://www.newegg.com/crucial-2tb-t705-nvme/p/N82E16820156398", "price": 379.99}], "notes": "A price tracker shows Amazon at $399.95 (2026-11-14). The Crucial T705 2TB was seen at Micro Center Yonkers for $369.99, but only on a search-results page, so there is no product URL for it."}, {"id": "ups", "role": "UPS (pure sine, active-PFC compatible)", "name": "CyberPower PFC Sinewave Series UPS CP1500PFCLCD, 1500 VA / 1000 W, 120 V, 10 outlets", "mpn": "CP1500PFCLCD", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/353897/cyberpower-systems-pfc-sinewave-series-ups-(cp1500pfclcd)", "price": 239.99, "priceNote": "Micro Center product page snippet: $239.99 (orig $259.99).", "stock": "Snapshots: in stock at Westbury and Denver (7). Miami not visible.", "sku": null, "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1513053-REG/cyberpower_cp1500pfclcd_pfc_sinewave_ups.html", "price": 239.95}, {"source": "CDW", "url": "https://www.cdw.com/product/cyberpower-intelligent-pfc-lcd-cp1500pfclcd/2190609", "price": 239.95}], "notes": "Rated 1000W. Full load (CPU 350W + GPU 300W + platform) can reach about 800–900W, which gives only a short runtime. A 2000–2200VA unit would be better, but none was found at Micro Center in searches. Consider CyberPower OR2200PFCLCD or APC SMT2200C from CDW/B&H (not sourced here)."}, {"id": "esd", "role": "Anti-static wrist strap", "name": "Kingwin Anti-Static Wrist Strap", "mpn": "ATA-W24", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/336438/Anti-Static_Wrist_Strap", "price": 4.99, "priceNote": "Micro Center product page snippet: $4.99. An older snippet shows $3.99.", "stock": "Snapshots: 6 at Parkville, 9 at Fairfax. Miami not visible.", "sku": "740001", "alt": [{"source": "Micro Center (iFixit strap)", "url": "https://www.microcenter.com/quickview/442494/ifixit-anti-static-wrist-strap", "price": 5.99}], "notes": ""}];
+const CREDITS = {"cpu": {"file": "cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/9000-wx-series/amd-ryzen-threadripper-pro-9975wx.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/3513563-threadripper-pro-9000-series.jpg", "owner": "AMD"}, "board": {"file": "board.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/096fe01b-a516-48d6-833b-46901887982d/", "owner": "ASUS"}, "board-io": {"file": "board-io.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/d1de116c-6ba0-49ff-bab4-7abb594ab2ef/", "owner": "ASUS"}, "ram": {"file": "ram.jpg", "sourcePage": "https://www.cdw.com/product/kingston-fury-renegade-pro-ddr5-kit-128-gb-4-x-32-gb-dimm-288-pin/7922358", "imageUrl": "https://webobjects2.cdw.com/is/image/CDW/7922358?wid=1200&hei=900&qlt=95", "owner": "CDW"}, "gpu": {"file": "gpu.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/3-rtx-pro-5000-3qtr-front-left.jpg", "owner": "PNY (NVIDIA board partner)"}, "case": {"file": "case.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-01.jpg", "owner": "Antec"}, "psu": {"file": "psu.jpg", "sourcePage": "https://www.asrock.com/Power-Supply/Taichi/TC-1650T/", "imageUrl": "https://www.asrock.com/Power-Supply/photo/TC-1650T(L1).png", "owner": "ASRock"}, "cooler": {"file": "cooler.jpg", "sourcePage": "https://uk.thermaltake.com/aw420-aio-liquid-cooler.html", "imageUrl": "https://uk.thermaltake.com/media/catalog/product/c/l/cl-w445-pl14bl-a_01.jpg", "owner": "Thermaltake"}, "ssd": {"file": "ssd.jpg", "sourcePage": "https://americas.kioxia.com/en-us/business/ssd/data-center-ssd/cd6-r.html", "imageUrl": "https://americas.kioxia.com/content/dam/kioxia/shared/business/ssd/data-center-ssd/img/cd6-r_img_001.png", "owner": "KIOXIA"}, "cable": {"file": "cable.jpg", "sourcePage": "https://www.microsatacables.com/slimsas-8i-sff-8654-cable-to-two-u-2-connectors-50-cm", "imageUrl": "https://www.microsatacables.com/media/catalog/product/1/8/1857a.jpg", "owner": "Micro SATA Cables"}, "a-cpu": {"file": "a-cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/server/epyc/9005-series.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/epyc/2909511-epyc-9005-teaser.jpg", "owner": "AMD"}, "a-gpu": {"file": "a-gpu.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/4cf11703-9459-4f83-a5f4-8c5da154bfe6/", "owner": "ASUS"}, "a-cooler": {"file": "a-cooler.jpg", "sourcePage": "https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/", "imageUrl": "https://www.silverstonetek.com/upload/detail/xe360-sp5-0.jpg", "owner": "SilverStone"}, "a-psu": {"file": "a-psu.jpg", "sourcePage": "https://www.super-flower.com.tw/products-detail/LVII-P-PRO/", "imageUrl": "https://www.super-flower.com.tw/upload/catalog_color_b/2024%20web_IM_2505_VII%20P_01__26E26j3vti.png", "owner": "Super Flower"}, "case-inside": {"file": "case-inside.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-02.jpg", "owner": "Antec"}, "gpu-back": {"file": "gpu-back.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/2-rtx-pro-5000-3qtr-back-right.jpg", "owner": "PNY (NVIDIA board partner)"}, "a-board": {"file": "a-board.jpg", "sourcePage": "https://www.scan.co.uk/products/asrock-rack-turind8x-2t-500w-amd-epyc-9004-9005-sp5-ddr5-7x-pcie-50-x16-2x-m2-2x-10gbe-ssi-eeb", "imageUrl": "https://www.scan.co.uk/images/products/super/3783823-l-b.jpg", "owner": "ASRock Rack (via Scan Computers)"}};
+const IMGS = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
 (function(){
   const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const B=id=>BOM.find(b=>b.id===id)||null;
@@ -1041,29 +1044,29 @@ const IMGS = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu":
 
   /* chapters */
   const CH=[
-   {img:'cpu',bom:'cpu-bundle',role:'Processor',name:'AMD Threadripper PRO 9975WX',
-    why:'<b>32 Zen 5 cores, 8 memory channels and 128 PCIe 5.0 lanes.</b> Enough cores for builds, tests and browsers across dozens of agents, and enough lanes for four GPUs later.',
-    kv:[['32 / 64','cores / threads'],['5.4 GHz','boost clock'],['128 MB','L3 cache'],['350 W','TDP']]},
-   {img:'board',bom:'board',role:'Motherboard',name:'ASUS Pro WS WRX90E-SAGE SE',
-    why:'<b>A workstation board built for four GPUs.</b> It has 32+3+3+3 power stages, Intel dual 10 GbE and a BMC, so we can power-cycle and watch the machine from a browser.',
-    kv:[['7× x16','PCIe 5.0 slots'],['8','DDR5 RDIMM slots'],['4 + 2','M.2 Gen5 + SlimSAS'],['2× 10 GbE','Intel X710']]},
-   {img:'ram',bom:'ram-kit2',role:'Memory',name:'Kingston FURY Renegade Pro DDR5 RDIMM',
-    why:'<b>Memory is the first thing agent fleets run out of.</b> Eight 32 GB sticks fill every channel for 256 GB and about 358 GB/s. Turn on EXPO in the BIOS to get the rated 5600 CL28.',
-    kv:[['256 GB','8 × 32 GB ECC'],['5600','MT/s · CL28'],['358 GB/s','theoretical'],['1.35 V','EXPO profile']]},
-   {img:'gpu',bom:'gpu',role:'Graphics',name:'NVIDIA RTX PRO 5000 Blackwell',
-    why:'<b>48 GB of ECC GDDR7 in a 300 W, two-slot card.</b> It runs our local routers, embedders and 30B-class models fast. Three more fit beside it.',
-    kv:[['48 GB','GDDR7 ECC'],['1,344 GB/s','bandwidth'],['14,080','CUDA cores'],['300 W','dual-slot']]},
-   {img:'cooler',bom:'cooler',role:'Cooling',name:'Thermaltake AW420',
-    why:'<b>A 420 mm AIO made for workstation chips</b>, rated for 625 W with sTR5 support. It mounts in the front of the case as intake.',
-    kv:[['420 mm','radiator'],['3 × 140','TOUGHFAN 14 Pro'],['625 W','rated TDP'],['52 mm','rad + fan stack']]},
-   {img:'psu',bom:'psu',role:'Power',name:'ASRock Taichi TC-1650T',
-    why:'<b>Titanium efficiency and headroom to grow.</b> Two native 12V-2x6 cables and eight PCIe 8-pin cables power the board\'s extra inputs and future GPUs.',
-    kv:[['1,650 W','Titanium'],['93.6%','at 50% load'],['2 × 12V-2x6','native'],['10 yr','warranty']]},
+   {img:'a-cpu',bom:'cpu-bundle',role:'Processor',name:'AMD EPYC 9175F',
+    why:'<b>16 fast Zen 5 cores, each on its own chiplet with its own 32 MB of cache.</b> Clocks up to 5.0 GHz keep agent tools, builds and browsers snappy, and the server platform brings 128 PCIe 5.0 lanes for more GPUs later.',
+    kv:[['16 / 32','cores / threads'],['5.0 GHz','boost clock'],['512 MB','L3 cache'],['320 W','TDP']]},
+   {img:'a-board',bom:'cpu-bundle',role:'Motherboard',name:'ASRock Rack TURIND8X-2T',
+    why:'<b>A server board in a workstation case.</b> Seven full-length PCIe 5.0 slots, dual 10 GbE and a BMC, so we can power-cycle and watch the machine from a browser. Its MCIO ports connect the Kioxia drives.',
+    kv:[['7× x16','PCIe 5.0 slots'],['8','DDR5 RDIMM slots'],['2 + 4','M.2 Gen5 + MCIO'],['2× 10 GbE','Broadcom']]},
+   {img:'ram',bom:'cpu-bundle',role:'Memory',name:'Kingston FURY Renegade Pro DDR5 RDIMM',
+    why:'<b>128 GB of ECC memory in 4 of the 8 slots</b>, enough for about 14 agents at once. Turn on EXPO in the BIOS for the rated 5600 speed. The four empty slots are the first upgrade: 256 GB and double the bandwidth.',
+    kv:[['128 GB','4 × 32 GB ECC'],['5600','MT/s · CL28'],['~179 GB/s','theoretical'],['4 free','slots to grow']]},
+   {img:'a-gpu',bom:'gpu',role:'Graphics',name:'ASUS ProArt RTX 5070 Ti',
+    why:'<b>16 GB of GDDR7 for the local models that do the routine work</b>: routers, embedders and fast 8–20B models. Bigger work goes to cloud models. The board has room for a 48 GB card later.',
+    kv:[['16 GB','GDDR7'],['896 GB/s','bandwidth'],['8,960','CUDA cores'],['300 W','12V-2x6']]},
+   {img:'a-cooler',bom:'cooler',role:'Cooling',name:'SilverStone XE360-SP5',
+    why:'<b>A 360 mm liquid cooler made for EPYC\'s big SP5 socket.</b> In the Antec 900 it mounts at the top as exhaust, so the case\'s front fans keep pulling in cool air.',
+    kv:[['360 mm','radiator'],['SP5','native mount'],['Top','exhaust in the Antec 900'],['28 mm','radiator thickness']]},
+   {img:'a-psu',bom:'psu',role:'Power',name:'Super Flower Leadex VII Platinum PRO',
+    why:'<b>1,200 W of Platinum power for a build that peaks around 850 W.</b> A native 12V-2x6 cable feeds the GPU. One check before build day: confirm two CPU power cables are enough for this board.',
+    kv:[['1,200 W','Platinum'],['ATX 3.1','12V-2x6 native'],['2× EPS','CPU cables'],['~850 W','peak draw']]},
    {img:'case',bom:'case',role:'Chassis',name:'Antec 900',
-    why:'<b>A full tower that takes our 12 × 13 in board</b> and ships with six fans. It has nine drive bays and room for a 465 mm GPU.',
+    why:'<b>A full tower that takes our 12 × 13 in server board</b> and ships with six fans, so we don\'t need to buy more. It has nine drive bays and room for a 465 mm GPU.',
     kv:[['85 L','547×250×622 mm'],['6','PWM fans included'],['SSI-EEB','board support'],['9','drive bays']]},
    {img:'ssd',bom:'ssd-u3',role:'Storage',name:'Kioxia CD6-R 7.68 TB × 2',
-    why:'<b>Data-center NVMe with power-loss protection.</b> Two drives cabled to the board\'s SlimSAS ports hold the model library, datasets and vector indexes.',
+    why:'<b>Data-center NVMe with power-loss protection</b>, recommended by our consultant at Expertly.Ai. Two drives on the board\'s MCIO ports hold the model library, datasets and vector indexes.',
     kv:[['15.36 TB','total'],['6.2 GB/s','sequential read'],['1M','random read IOPS'],['1 DWPD','endurance']]},
   ];
   document.getElementById('chapters').innerHTML=CH.map((c,i)=>{const b=B(c.bom);
@@ -1083,10 +1086,10 @@ const IMGS = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu":
     p.addEventListener('pointerleave',()=>{p.style.setProperty('--ry','0deg');p.style.setProperty('--rx','0deg');p.style.setProperty('--sheen','-60%');});});}
 
   /* BOM */
-  const st={gpu:'gpu',extras:{paste:true,'boot-ssd':false,ups:true,esd:true}};
-  const CORE=[['cpu-bundle','cpu'],['ram-kit2','ram'],['GPU','gpu'],['case','case'],['psu','psu'],['cooler','cooler'],['ssd-u3','ssd'],['cable-slimsas','cable']];
-  const EXTRAS=['paste','boot-ssd','ups','esd'];
-  const REF=[['cpu','cpu'],['board','board']];
+  const st={gpu:'gpu',extras:{'fans-opt':false,'ram-up':false,paste:false,'boot-ssd':false,ups:true,esd:true}};
+  const CORE=[['cpu-bundle','a-cpu'],['GPU','a-gpu'],['case','case'],['psu','a-psu'],['cooler','a-cooler'],['ssd-u3','ssd'],['cable-mcio','cable']];
+  const EXTRAS=['ups','esd','fans-opt','ram-up','paste','boot-ssd'];
+  const REF=[['cpu','a-cpu'],['board','a-board'],['ram','ram']];
   function lineHTML(b,thumb,opts){opts=opts||{};if(!b)return '';const q=b.qty||1, p=b.price;
     const alts=(b.alt||[]).filter(a=>a&&a.url).slice(0,2);
     return `<div class="line${opts.off?' off':''}${opts.ref?' ref':''}">
@@ -1106,10 +1109,9 @@ const IMGS = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu":
       rows.push(lineHTML(b,th,{toggle:tog})); lines.push(b);});
     rows.push('<div class="group-h">Included in the CPU bundle</div>');
     REF.forEach(([id,th])=>rows.push(lineHTML(B(id),th,{ref:true})));
-    if(B('ram-k8-alt'))rows.push(lineHTML(B('ram-k8-alt'),'ram',{ref:true}));
-    rows.push('<div class="group-h">Bench extras</div>');
+    rows.push('<div class="group-h">Extras, optional and later upgrades</div>');
     EXTRAS.forEach(id=>{const b=B(id); if(!b)return; const on=!!st.extras[id];
-      rows.push(lineHTML(b,id,{off:!on,toggle:`<label class="opt-toggle"><input type="checkbox" data-extra="${id}" ${on?'checked':''}> Include</label>`})); if(on)lines.push(b);});
+      rows.push(lineHTML(b,({'fans-opt':'a-fans','ram-up':'ram'})[id]||id,{off:!on,toggle:`<label class="opt-toggle"><input type="checkbox" data-extra="${id}" ${on?'checked':''}> Include</label>`})); if(on)lines.push(b);});
     document.getElementById('bomlines').innerHTML=rows.join('');
     const byStore={}; lines.forEach(b=>{if(b.price==null)return;const k=srcKind(b.source)==='mc'?'Micro Center':srcKind(b.source)==='amz'?'Amazon':(b.source||'Other');byStore[k]=(byStore[k]||0)+b.price*(b.qty||1);});
     const sub=Object.values(byStore).reduce((a,v)=>a+v,0), tax=sub*0.07;
@@ -1134,7 +1136,7 @@ const IMGS = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu":
 </script>
 <script>
 /* ---------- Option A vs B ---------- */
-const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundles.aspx", "a-psu": "https://www.microcenter.com/quickView/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "a-hub": "https://www.microcenter.com/quickview/625314/silverstone-cpf04-pwm-fan-hub", "a-ram": "https://www.microcenter.com/quickview/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k41-black", "b-bundle": "https://www.microcenter.com/site/content/bundle-and-save.aspx?bundle=amd", "b-cpu": "https://www.microcenter.com/quickview/698657/amd-ryzen-threadripper-pro-9975wx-shimada-peak-4ghz-32-core-str5-boxed-processor-heatsink-not-included", "b-board": "https://www.microcenter.com/product/677978/WRX90E-SAGE_Pro_WS_SE_AMD_sTR5_EEB_Motherboard", "b-ram": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black?ob=1&storeid=145", "b-gpu": "https://www.microcenter.com/product/711668/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "b-cooler": "https://www.microcenter.com/product/699609/thermaltake-aw420-420mm-all-in-one-liquid-cpu-cooling-kit-black", "b-psu": "https://www.microcenter.com/product/697062/asrock-tc-1650t-1650-watt-80-plus-titanium-atx-fully-modular-power-supply-atx-31-compatible", "b-case": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "a-gpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "a-cooler": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "a-fan": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "a-cpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "a-board": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "ssd": "https://www.amazon.com/dp/B0HPR72914", "cable-a": "https://www.amazon.com/dp/B0CWP5X4M7", "cable-b": "https://www.amazon.com/dp/B099DYK9CW"};
+const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundles.aspx", "a-psu": "https://www.microcenter.com/quickView/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "a-hub": "https://www.microcenter.com/quickview/625314/silverstone-cpf04-pwm-fan-hub", "a-ram": "https://www.microcenter.com/quickview/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k41-black", "b-bundle": "https://www.microcenter.com/site/content/bundle-and-save.aspx?bundle=amd", "b-cpu": "https://www.microcenter.com/quickview/698657/amd-ryzen-threadripper-pro-9975wx-shimada-peak-4ghz-32-core-str5-boxed-processor-heatsink-not-included", "b-board": "https://www.microcenter.com/product/677978/WRX90E-SAGE_Pro_WS_SE_AMD_sTR5_EEB_Motherboard", "b-ram": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "b-gpu": "https://www.microcenter.com/product/711668/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "b-cooler": "https://www.microcenter.com/product/699609/thermaltake-aw420-420mm-all-in-one-liquid-cpu-cooling-kit-black", "b-psu": "https://www.microcenter.com/product/697062/asrock-tc-1650t-1650-watt-80-plus-titanium-atx-fully-modular-power-supply-atx-31-compatible", "b-case": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "a-gpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "a-cooler": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "a-fan": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "a-cpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "a-board": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "ssd": "https://www.amazon.com/dp/B0HPR72914", "cable-a": "https://www.amazon.com/dp/B0CWP5X4M7", "cable-b": "https://www.amazon.com/dp/B099DYK9CW"};
 (function(){
   const L=(id,txt)=>LINKS[id]?`<a href="${LINKS[id]}" style="color:var(--text)">${txt} ↗</a>`:txt;
   const m=n=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -1159,7 +1161,7 @@ const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundle
     ['Graphics','ASUS ProArt RTX 5070 Ti OC 16 GB','SKU 936120',1699.99,'NVIDIA RTX PRO 5000 Blackwell 48 GB (OEM)','SKU 044628',7199.99,'a-gpu','b-gpu'],
     ['CPU cooler','SilverStone XE360-SP5 360 mm AIO','SKU 069492',379.99,'Thermaltake AW420 420 mm AIO','SKU 921551',449.99,'a-cooler','b-cooler'],
     ['Power supply','Super Flower Leadex VII Platinum PRO 1200 W','SKU 848499',189.99,'ASRock Taichi TC-1650T 1650 W Titanium','SKU 883967',549.99,'a-psu','b-psu'],
-    ['Case','Not on quote (needs one, ~$185)','',0,'Antec 900 tempered-glass full tower','SKU 028738',199.99,null,'b-case'],
+    ['Case','Not on the quote · we added the Antec 900 ($199.99)','',0,'Antec 900 tempered-glass full tower','SKU 028738',199.99,null,'b-case'],
     ['Fans','6× Arctic P12 Pro + SilverStone CPF04 hub','SKU 953612 · 133009',99.93,'Included with the Antec 900 (6 fans)','',0,'a-fan','a-hub'],
   ];
   const tA=Q.reduce((s,r)=>s+r[3],0), tB=Q.reduce((s,r)=>s+r[6],0);
@@ -1170,7 +1172,7 @@ const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundle
     `<tr class="tot"><td>Subtotal</td><td></td><td class="n">${m(tA)}</td><td></td><td class="n">${m(tB)}</td><td class="n">${d(tB-tA)}</td></tr>
      <tr><td>Sales tax (quoted)</td><td></td><td class="n">${m(585.89)}</td><td></td><td class="n">${m(1469.30)}</td><td class="n">${d(1469.30-585.89)}</td></tr>
      <tr class="tot"><td>Quote total</td><td></td><td class="n">${m(8955.78)}</td><td></td><td class="n">${m(22459.24)}</td><td class="n">${d(22459.24-8955.78)}</td></tr>
-     <tr><td><b>Both still need</b></td><td colspan="5" style="color:var(--dim)">${L('ssd','2× Kioxia CD6-R 7.68 TB')} (~$4,898 on Amazon), recommended by our consultant Expertly.Ai. Micro Center doesn't carry enterprise drives. Plus 2 cables: ${L('cable-a','MCIO→U.2')} for A (~$76) or ${L('cable-b','SlimSAS→U.2')} for B (~$50). Option A also needs a case. With the Micro Center card's 5% off, pre-tax totals drop to $7,951.40 (A) and $19,940.44 (B).</td></tr></tbody>`;
+     <tr><td><b>Both still need</b></td><td colspan="5" style="color:var(--dim)">${L('ssd','2× Kioxia CD6-R 7.68 TB')} (~$4,898 on Amazon), recommended by our consultant Expertly.Ai. Micro Center doesn't carry enterprise drives. Plus 2 cables: ${L('cable-a','MCIO→U.2')} for A (~$76) or ${L('cable-b','SlimSAS→U.2')} for B (~$50). Option A also needs a case: we chose the ${L('b-case','Antec 900')} ($199.99). With the Micro Center card's 5% off, pre-tax totals drop to $7,951.40 (A) and $19,940.44 (B).</td></tr></tbody>`;
   const S=[['Platform: 32 vs 16 cores, workstation board',2000,'#6EE7F9'],['Memory: +128 GB, all 8 channels',4589.99,'#A78BFA'],['GPU: 48 GB PRO 5000 vs 16 GB 5070 Ti',5500,'#F0ABFC'],['PSU, cooler, case, fans',530.05,'#FCD34D'],['Extra sales tax',883.41,'#8E98AC']];
   const T=S.reduce((s,x)=>s+x[1],0);
   document.getElementById('stackbar').innerHTML=S.map(([l,v,c])=>`<div style="flex:${v};background:${c}" title="${l}: ${m(v)}">${v/T>.09?Math.round(v/T*100)+'%':''}</div>`).join('');
@@ -1182,10 +1184,10 @@ const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundle
 </script>
 <script>
 (()=>{
-const IM = {"a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
+const IM = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let OPT='B';
+let OPT='A';
 const pic=(...keys)=>{for(const k of keys) if(IM[k]) return IM[k]; return null;};
 
 /* ---------- 1. tour ---------- */
@@ -1193,42 +1195,42 @@ const PARTS=[
  {id:'cpu',  role:'The brain', name:'Processor (CPU)', ico:'🎼', hs:[236,40],
   what:'Runs everything that isn\'t the AI model itself: the agents, their tools, databases, browsers and containers. More cores means more jobs at the same time.',
   like:'<b>The conductor.</b> It hands out the work and keeps every agent in time.',
-  A:{model:'AMD EPYC 9175F', big:'16', bigl:'cores · 5.0 GHz', img:['a-cpu']},
+  A:{model:'AMD EPYC 9175F', big:'16', bigl:'cores · 5.0 GHz · 512 MB cache', img:['a-cpu','cpu']},
   B:{model:'AMD Threadripper PRO 9975WX', big:'32', bigl:'cores · 5.4 GHz', img:['cpu']}},
  {id:'ram',  role:'The workbench', name:'Memory (RAM)', ico:'🧰', hs:[184,154],
   what:'Holds everything the machine is working on right now. Every open agent, document and dataset sits here. Run out and everything slows to a crawl.',
   like:'<b>The workbench.</b> A bigger bench lets more people work at once without clearing space.',
-  A:{model:'Kingston FURY Renegade Pro · 4 × 32 GB', big:'128 GB', bigl:'4 of 8 slots filled', img:['ram']},
+  A:{model:'Kingston FURY Renegade Pro · 4 × 32 GB', big:'128 GB', bigl:'4 of 8 slots filled', img:['ram'], up:'Upgrade later: fill the 4 empty slots for 256 GB and twice the speed.'},
   B:{model:'Kingston FURY Renegade Pro · 8 × 32 GB', big:'256 GB', bigl:'all 8 slots · twice the speed', img:['ram']}},
  {id:'gpu',  role:'The AI engine', name:'Graphics card (GPU)', ico:'⚡', hs:[78,201],
   what:'Runs our own AI models on the machine, with no cloud bill and no data leaving the building. Its memory decides how big a model fits.',
   like:'<b>The engine room.</b> Thousands of tiny workers doing the math of AI in parallel.',
-  A:{model:'ASUS ProArt RTX 5070 Ti · 16 GB', big:'16 GB', bigl:'GPU memory', img:['a-gpu']},
+  A:{model:'ASUS ProArt RTX 5070 Ti · 16 GB', big:'16 GB', bigl:'GPU memory', img:['a-gpu'], up:'Upgrade later: add or swap in a 48 GB card. The board has 4 full-speed slots.'},
   B:{model:'NVIDIA RTX PRO 5000 Blackwell · 48 GB', big:'48 GB', bigl:'GPU memory · 3× Option A', img:['gpu','gpu-back']}},
  {id:'board',role:'The city', name:'Motherboard', ico:'🏙️', hs:[150,316],
   what:'The big circuit board everything plugs into. It decides how many graphics cards, drives and memory sticks the machine can ever hold.',
   like:'<b>The city streets.</b> Every part is a building; the board is the roads between them.',
-  A:{model:'ASRock Rack TURIND8X-2T', big:'7', bigl:'full-size card slots · room to grow', img:['a-board']},
+  A:{model:'ASRock Rack TURIND8X-2T', big:'7', bigl:'full-size card slots · room to grow', img:['a-board','board']},
   B:{model:'ASUS Pro WS WRX90E-SAGE SE', big:'7', bigl:'full-size card slots · room to grow', img:['board']}},
  {id:'ssd',  role:'The library', name:'Storage drives', ico:'📚', hs:[73,446],
   what:'Long-term storage for AI models, code and data. These are enterprise drives built to run 24/7 and survive a power cut mid-write. Recommended by our consultant at Expertly.Ai.',
   like:'<b>The library.</b> Everything we own lives here, ready to be pulled onto the workbench.',
   A:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']},
   B:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']}},
- {id:'cooler',role:'The radiator', name:'Liquid cooler', ico:'❄️', hs:[40,24],
-  what:'Pulls heat off the processor with liquid and blows it out through the front fans, the same way a car radiator works. It keeps the machine fast and quiet under load.',
+ {id:'cooler',role:'The radiator', name:'Liquid cooler', ico:'❄️', hs:[84,25],
+  what:'Pulls heat off the processor with liquid and blows it out of the top of the case, the same way a car radiator works. It keeps the machine fast and quiet under load.',
   like:'<b>The car radiator.</b> Hot liquid in, cool liquid out, all day long.',
-  A:{model:'SilverStone XE360-SP5 · 360 mm', big:'360 mm', bigl:'radiator', img:['a-cooler']},
+  A:{model:'SilverStone XE360-SP5 · 360 mm', big:'360 mm', bigl:'radiator · mounted at the top as exhaust', img:['a-cooler']},
   B:{model:'Thermaltake AW420 · 420 mm', big:'420 mm', bigl:'radiator · fits the Antec 900 exactly', img:['cooler']}},
  {id:'psu',  role:'The power plant', name:'Power supply (PSU)', ico:'🔌', hs:[320,354],
   what:'Turns wall power into clean, steady power for every part. It has to be big enough for today and for a second graphics card later.',
   like:'<b>The power plant.</b> Feeds the whole city, with headroom for new buildings.',
-  A:{model:'Super Flower Leadex VII Platinum PRO', big:'1,200 W', bigl:'Platinum efficiency', img:['a-psu']},
+  A:{model:'Super Flower Leadex VII Platinum PRO', big:'1,200 W', bigl:'Platinum · the build peaks around 850 W', img:['a-psu'], up:'Check before build day: the board has 3 CPU power sockets and this PSU has 2 cables.'},
   B:{model:'ASRock Taichi TC-1650T', big:'1,650 W', bigl:'Titanium · most efficient grade', img:['psu']}},
  {id:'case', role:'The body', name:'Case & fans', ico:'🌬️', hs:[325,34],
   what:'Holds it all together and moves air through it: cool air in at the front, hot air out the back and top. It needs to fit an extra-large server board.',
   like:'<b>The body and lungs.</b> Breathes cool air in, hot air out.',
-  A:{model:'Case not on the quote yet · 6 × Arctic P12 Pro fans', big:'6', bigl:'fans · case still to pick (~$185)', img:['a-fans','case']},
+  A:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included · 9 drive bays', img:['case','case-inside']},
   B:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included', img:['case','case-inside']}},
 ];
 let ti=0;
@@ -1253,7 +1255,7 @@ if(rig){
     $('#tname').textContent=p.name; $('#tmodel').textContent=o.model;
     $('#twhat').innerHTML=p.what; $('#tlike').innerHTML=p.like; $('#tico').textContent=p.ico;
     $('#tbig').textContent=o.big; $('#tbigl').textContent=o.bigl;
-    $('#tvs').textContent=o.big===other.big&&o.model===other.model?'Same in both options':`Option ${OPT==='A'?'B':'A'}: ${other.big} · ${other.model}`;
+    $('#tvs').textContent=o.up||'';
     const src=pic(...o.img), ph=$('#tph'), im=$('#timg');
     const set=()=>{ ph.querySelector('.noimg')?.remove();
       if(src){im.hidden=false; im.src=src; im.alt=o.model;} else {im.hidden=true; ph.insertAdjacentHTML('beforeend',`<span class="noimg">${p.ico}</span>`);}
@@ -1285,7 +1287,7 @@ const MODELS=[
  {n:'Big brain',s:'70B · e.g. Llama 3.3 70B',gb:40},
  {n:'Frontier-class open',s:'gpt-oss-120b',gb:61},
 ];
-const GPUS=[{k:'A',n:'Option A · RTX 5070 Ti',gb:16},{k:'B',n:'Option B · RTX PRO 5000',gb:48},{k:'B+',n:'Option B + 72 GB card upgrade',gb:72}];
+const GPUS=[{k:'A',n:'Our build · RTX 5070 Ti',gb:16},{k:'U',n:'After a GPU upgrade · 48 GB card',gb:48}];
 let mi=1;
 function drawModels(){
   const mc=$('#mchips'), mb=$('#mbars'); if(!mc) return;
@@ -1298,7 +1300,7 @@ function drawModels(){
   requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#mbars .bar i').forEach(i=>i.style.width=i.dataset.w+'%')));
 }
 $('#mchips')?.addEventListener('click',e=>{const b=e.target.closest('button'); if(b){mi=+b.dataset.i; drawModels();}});
-const RAMS=[{k:'A',n:'Option A · 128 GB',gb:128},{k:'B',n:'Option B · 256 GB',gb:256}];
+const RAMS=[{k:'A',n:'Our build · 128 GB',gb:128},{k:'U',n:'After the memory upgrade · 256 GB',gb:256}];
 function drawAgents(){
   const a=$('#agents'); if(!a) return; const n=+a.value; $('#agentsOut').textContent=n;
   const viz=$('#agentsViz'); const cur=viz.children.length;
@@ -1307,7 +1309,7 @@ function drawAgents(){
   $('#abars').innerHTML=RAMS.map(r=>{const fit=need<=r.gb, pct=Math.min(100,need/r.gb*100), max=Math.floor((r.gb-24)/7);
     return `<div class="meter"${r.k===OPT?'':' style="opacity:.6"'}><div class="row"><b>${r.n}</b><span>${need} of ${r.gb} GB</span></div>
       <div class="bar"><i class="${fit?'ok':'no'}" style="width:${pct}%"></i></div>
-      <div class="vd ${fit?'ok':'no'}">${fit?`✓ Comfortable. Tops out around ${max} agents.`:`✗ Out of memory. This option tops out around ${max} agents.`}</div></div>`;}).join('');
+      <div class="vd ${fit?'ok':'no'}">${fit?`✓ Comfortable. Tops out around ${max} agents.`:`✗ Too many. Tops out around ${max} agents.`}</div></div>`;}).join('');
 }
 $('#agents')?.addEventListener('input',drawAgents);
 drawModels(); drawAgents();
@@ -1315,14 +1317,14 @@ drawModels(); drawAgents();
 /* ---------- 3. build day ---------- */
 const STEPS=[
  {t:'Prep the bench',m:'15 min',img:['case-inside','case'],e:'🧤',d:'Clear a big table, open every box, and lay parts out in build order. Clip on the anti-static strap.',w:'Keep the CPU and memory in their packaging until their step.'},
- {t:'Processor into the board',m:'20 min',img:['cpu','a-cpu'],e:'🧠',d:'With the board flat on its box, open the socket frame, slide the CPU carrier in, and tighten the screws in the printed order.',w:'Never touch the socket pins. Use the included torque screwdriver.'},
- {t:'Memory sticks',m:'10 min',img:['ram'],e:'🧰',d:'Press each stick in until both latches click. Option B fills all 8 slots; Option A fills the 4 slots the manual marks first.',w:'Two 4-stick kits aren\'t a matched set. Test them first (step 9).'},
- {t:'Cooler mount',m:'25 min',img:['cooler','a-cooler'],e:'❄️',d:'Fit the radiator to the case front with fans pulling air in, then lower the pump block onto the CPU (paste comes pre-applied).',w:'Peel the plastic film off the cold plate!'},
- {t:'Board into the case',m:'30 min',img:['board','a-board'],e:'🏙️',d:'Install extra standoffs for the extra-large board, then lower it in and screw it down. Plug in the cooler pump and fan cables.',w:'Count the standoffs against the board\'s holes. A stray one can short it.'},
- {t:'Storage drives',m:'20 min',img:['ssd','cable'],e:'📚',d:'Mount the two Kioxia drives and connect each one with its data and power cable to the board\'s drive ports.',w:'These run warm. Put them where a fan blows on them.'},
- {t:'Graphics card',m:'15 min',img:['gpu','a-gpu'],e:'⚡',d:'Seat the card in the top full-size slot and screw it to the case. Plug in its power cable firmly.',w:'Push the GPU power plug until it clicks flush. A half-seated plug can overheat.'},
- {t:'Power it all',m:'40 min',img:['psu','a-psu'],e:'🔌',d:'Install the power supply, then run every cable: board, CPU (2–3 plugs), GPU, drives, fans. Tie cables back for airflow.',w:'Use only the cables that came with this power supply. Never mix brands.'},
- {t:'First boot',m:'60 min',img:['board-io'],e:'🚀',d:'Power on. Log in to the remote-management port, update the BIOS, turn on memory speed (EXPO), then run an overnight memory test.',w:'The first boot can take several minutes while memory trains. That\'s normal; don\'t power off.'},
+ {t:'Processor into the board',m:'20 min',img:['a-cpu','cpu'],e:'🧠',d:'With the board flat on its box, open the SP5 socket frame, slide the EPYC in its orange carrier into the rail, then close it and tighten the screws in the printed order.',w:'Never touch the socket pins. Use the torque screwdriver that comes with the CPU.'},
+ {t:'Memory sticks',m:'10 min',img:['ram'],e:'🧰',d:'Press each of the 4 sticks in until the latches click, using the 4 slots the board manual marks for a 4-stick setup.',w:'Leave the other 4 slots empty for the upgrade. Memory runs slower until EXPO is turned on (step 9).'},
+ {t:'Cooler mount',m:'25 min',img:['a-cooler','cooler'],e:'❄️',d:'Fit the 360 mm radiator to the top of the case with its fans blowing out, then lower the pump block onto the CPU and screw it down evenly.',w:'Peel the plastic film off the cold plate! The front stays as the case\'s 3 intake fans.'},
+ {t:'Board into the case',m:'30 min',img:['a-board','board'],e:'🏙️',d:'Install extra standoffs for the extra-large board, then lower it in and screw it down. Plug in the cooler pump and fan cables.',w:'Count the standoffs against the board\'s holes. A stray one can short it.'},
+ {t:'Storage drives',m:'20 min',img:['ssd','cable'],e:'📚',d:'Mount the two Kioxia drives in 2.5" bays and connect each one to a board MCIO port with its own cable and a SATA power lead.',w:'Use the short (0.5 m) cables, and put the drives where a fan blows on them.'},
+ {t:'Graphics card',m:'15 min',img:['a-gpu','gpu'],e:'⚡',d:'Seat the card in slot 0, 2, 4 or 6, not slot 1 or 7, which share lanes with the drive ports. Screw it in and plug in its power cable firmly.',w:'Push the GPU power plug until it clicks flush. A half-seated plug can overheat.'},
+ {t:'Power it all',m:'40 min',img:['a-psu','psu'],e:'🔌',d:'Install the power supply, then run every cable: board, CPU, GPU, drives, fans. Tie cables back for airflow.',w:'The board has 3 CPU power sockets and the PSU has 2 cables. Check the manual before build day. Use only this PSU\'s own cables.'},
+ {t:'First boot',m:'60 min',img:['board-io'],e:'🚀',d:'Power on. Log in to the remote-management port, update the BIOS, turn on memory speed (EXPO), then run an overnight memory test.',w:'The first boot can take several minutes while memory trains. Plug the monitor into the GPU; the board\'s own video is VGA only.'},
 ];
 const tr=$('#dayTrack');
 if(tr){
@@ -1386,6 +1388,9 @@ const G={
  'Zen 5':'AMD\'s current CPU core design.',
  '12V-2x6':'The 16-pin power plug on modern NVIDIA graphics cards. Must be fully seated.',
  'SKU':'The store\'s product number.',
+ 'SP5':'The socket (the CPU\'s seat on the board) used by AMD EPYC server processors.',
+ 'EPS':'The 8-pin power plug that feeds the processor.',
+ 'IPMI':'The remote-management system run by the BMC: power on/off, console and sensors from a browser.',
 };
 const keys=Object.keys(G).sort((a,b)=>b.length-a.length);
 const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
