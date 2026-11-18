@@ -8,6 +8,8 @@
 <meta name="theme-color" content="#0B0D10"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23A3E635'/%3E%3Cstop offset='.5' stop-color='%23FACC15'/%3E%3Cstop offset='1' stop-color='%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Cpath d='M7 22 L13 10 L19 22 L25 10' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="3d/fu-viewer.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><link rel="stylesheet" href="eng.css"><script src="eng.js"></script>
 </head><body style="margin:0">
 <div class="eng-bar" style="position:relative;z-index:30;color:#9AA3AE;font:500 12.5px/1.4 IBM Plex Mono,ui-monospace,monospace;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#0E1014;border-bottom:1px solid #232830;border-top:2px solid #E8A33D"><a href="./" style="color:#9AA3AE;text-decoration:none">← Project index</a><b style="font-weight:600;color:#E8A33D;letter-spacing:.06em">PRJ-02 · FIELD UNIT</b><span style="display:flex;gap:14px"><a href="field-unit.html" style="color:#E4E7EB;text-decoration:none;padding:0 2px;border-bottom:1px solid #E8A33D">Overview</a><a href="fu-build-plan.html" style="color:#9AA3AE;text-decoration:none;padding:0 2px;border-bottom:1px solid transparent">Build plan</a><a href="field-unit-research.html" style="color:#9AA3AE;text-decoration:none;padding:0 2px;border-bottom:1px solid transparent">Research</a></span><span style="color:#6B7480">Shared with the build team · link stops working Fri, Nov 20, 7:00 PM ET</span></div>
@@ -515,8 +517,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
         </tbody></table></div>
     </div>
     <figure style="margin:0">
-      <div class="ph"><img src="img/dog-go2-3q.jpg" alt="Unitree Go2, three-quarter view"></div>
-      <figcaption class="src">Gen-0 carrier: Unitree Go2 X (product render, Unitree Robotics). Shown without payload.</figcaption>
+      <div class="ph"><img src="3d/renders/fu-gen1-hero.jpg" srcset="3d/renders/fu-gen1-hero-1200.jpg 1200w, 3d/renders/fu-gen1-hero.jpg 2400w" sizes="(max-width:900px) 100vw, 46vw" alt="Go2 X carrier with the Gen-1 capture payload: Insta360 X4 on rear mast, survey LiDAR and global-shutter camera on the front bracket" data-full="3d/renders/fu-gen1-hero.jpg"></div>
+      <figcaption class="src">Gen-1 capture configuration on the Go2 X carrier (CAD render). Go2 geometry: Unitree Robotics, unitree_mujoco (BSD-3-Clause). Payload modelled to datasheet dimensions; planning layout.</figcaption>
     </figure>
   </div>
 </header>
@@ -526,50 +528,20 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="kicker">FU-SYS-001 · Overview</div>
     <h2>System overview and concept of operations</h2>
     <p class="lead">The MRCS is a legged carrier with a time-synchronised sensor head (survey LiDAR, global-shutter camera, 360° camera) and an onboard logger. It records raw data offline on site; accuracy is established afterwards by registering short SLAM segments to a surveyed control network on the Conductor workstation. The carrier is replaceable; the capture and QA workflow is the product.</p>
+    <figure class="ms-fig fu3d-fig">
+      <div class="fu3d" id="fu3d" data-nolb data-fu-viewer data-config="gen1" data-view="iso" data-callout="balloon" data-ui="false"
+           data-poster="3d/renders/fu-gen1-hero-1200.jpg" data-fallback="3d/renders/fu-gen1-iso-callouts.jpg"></div>
+      <div class="fu3d-ctl" id="fu3dctl" role="group" aria-label="3D viewer controls">
+        <div class="g"><span class="l">View</span><span class="seg" data-k="view"><button type="button" data-v="iso" aria-pressed="true">Iso</button><button type="button" data-v="side" aria-pressed="false">Side</button><button type="button" data-v="top" aria-pressed="false">Top</button><button type="button" data-v="front" aria-pressed="false">Front</button></span></div>
+        <div class="g"><span class="l">Configuration</span><span class="seg" data-k="config"><button type="button" data-v="gen0" aria-pressed="false">Gen-0</button><button type="button" data-v="gen1" aria-pressed="true">Gen-1</button></span></div>
+        <div class="g"><label class="l" for="fu3dx">Exploded</label><input id="fu3dx" type="range" min="0" max="100" value="0"></div>
+        <div class="g"><label class="ck2"><input type="checkbox" id="fu3dd"> Dimensions</label><label class="ck2"><input type="checkbox" id="fu3dl" checked> Callouts</label></div>
+      </div>
+      <figcaption>Field Unit Gen-1 capture configuration, interactive. Drag to orbit, scroll to zoom. Go2 geometry: Unitree Robotics, unitree_mujoco (BSD-3-Clause). Payload modelled to datasheet dimensions; planning layout.</figcaption>
+    </figure>
     <figure class="ms-fig">
-      <div class="sc"><svg viewBox="0 0 1080 360" role="img" aria-label="System elements of the MRCS, side elevation, lettered A to H" style="min-width:760px">
-        <defs><pattern id="fgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1C2129" stroke-width="1"/></pattern></defs>
-        <rect width="1080" height="360" fill="url(#fgrid)"/>
-        <line x1="250" y1="320" x2="720" y2="320" stroke="#5B6470" stroke-width="1.5"/>
-        <g fill="none" stroke="#6B7480" stroke-width="1.5" stroke-linejoin="round">
-          <path d="M296 226 L280 270 L300 318"/><path d="M334 226 L322 272 L344 318"/><path d="M556 226 L540 270 L562 318"/><path d="M594 226 L582 272 L604 318"/>
-          <rect x="270" y="185" width="350" height="52" rx="6" fill="#151920"/>
-          <path d="M620 190 L668 184 L686 208 L668 232 L620 232 Z" fill="#151920"/>
-          <rect x="270" y="175" width="340" height="8" fill="#1E232B"/>
-        </g>
-        <circle cx="672" cy="208" r="8" fill="#0B0D10" stroke="#9AA3AE" stroke-width="1.2"/>
-        <rect x="276" y="205" width="12" height="12" fill="#0B0D10" stroke="#9AA3AE" stroke-width="1.2"/>
-        <g stroke-width="1.2" fill="#141820">
-          <rect x="276" y="160" width="22" height="15" stroke="#9AA3AE"/>
-          <line x1="310" y1="175" x2="310" y2="90" stroke="#9AA3AE" stroke-width="2"/>
-          <rect x="301" y="54" width="18" height="36" rx="3" stroke="#E8A33D"/>
-          <rect x="380" y="145" width="70" height="30" stroke="#E8A33D"/>
-          <rect x="458" y="151" width="62" height="24" stroke="#9AA3AE"/>
-          <path d="M600 175 V140" stroke="#9AA3AE" stroke-width="2" fill="none"/>
-          <rect x="575" y="100" width="40" height="38" rx="3" stroke="#E8A33D"/>
-          <line x1="575" y1="114" x2="615" y2="114" stroke="#E8A33D" stroke-opacity=".5"/>
-          <rect x="618" y="124" width="24" height="16" stroke="#E8A33D"/>
-        </g>
-        <g fill="none" stroke="#6B7480" stroke-width="1">
-          <path d="M301 72 H244"/><path d="M276 167 H244"/><path d="M276 211 H244"/>
-          <path d="M415 145 V38 H702"/><path d="M489 151 V64 H702"/><path d="M615 110 H702"/><path d="M642 132 H702"/><path d="M686 212 H702"/>
-        </g>
-        <g fill="#C9CED4"><circle cx="301" cy="72" r="2.5"/><circle cx="276" cy="167" r="2.5"/><circle cx="276" cy="211" r="2.5"/><circle cx="415" cy="145" r="2.5"/><circle cx="489" cy="151" r="2.5"/><circle cx="615" cy="110" r="2.5"/><circle cx="642" cy="132" r="2.5"/><circle cx="686" cy="212" r="2.5"/></g>
-        <g font-family="IBM Plex Mono,monospace" font-size="12" fill="#D5DAE0">
-          <text x="238" y="68" text-anchor="end">A · 360° camera</text><text x="238" y="84" text-anchor="end" fill="#8E98AC">Insta360 X4 · mast 25–40 cm</text>
-          <text x="238" y="163" text-anchor="end">G · GbE switch</text><text x="238" y="179" text-anchor="end" fill="#8E98AC">IF-01 / IF-02</text>
-          <text x="238" y="215" text-anchor="end">H · Rear Ethernet port</text><text x="238" y="231" text-anchor="end" fill="#8E98AC">carrier, 192.168.123.0/24</text>
-          <text x="708" y="42">D · Compute / logger <tspan fill="#8E98AC">Jetson · PTP master</tspan></text>
-          <text x="708" y="68">E · Payload power <tspan fill="#8E98AC">24 V pack · fused PDB · e-stop</tspan></text>
-          <text x="708" y="114">B · Survey LiDAR <tspan fill="#8E98AC">L2 / XT32M2X</tspan></text>
-          <text x="708" y="136">C · Global-shutter camera <tspan fill="#8E98AC">Gen-1</tspan></text>
-          <text x="708" y="216">F · Head LiDAR <tspan fill="#8E98AC">carrier navigation</tspan></text>
-        </g>
-        <g font-family="IBM Plex Mono,monospace" font-size="11" fill="#8E98AC">
-          <text x="250" y="344">Carrier: Unitree Go2 X · 8 kg rated payload · payload 2.2–3.5 kg (est.) · schematic, not to scale</text>
-        </g>
-      </svg></div>
-      <figcaption>System elements, side view. Layout from the Building #1 capture plan; masses are estimates until weighed.</figcaption>
+      <img src="3d/renders/fu-gen1-side-drawing.png" alt="FU-DWG-001 side elevation of the Go2 X carrier with the Gen-1 capture payload: X4 on a 320 mm mast, survey LiDAR and global-shutter camera on the front bracket, Jetson and accessory battery on the deck; 715 mm overall length, 818 mm to top of X4" loading="lazy" width="2880" height="1620" style="width:100%;height:auto;display:block" data-full="3d/renders/fu-gen1-side-drawing.png">
+      <figcaption>FU-DWG-001 Rev A, Gen-1 capture configuration, side elevation (NTS): 715 mm overall length, 818 mm to top of X4, 320 mm mast. Go2 geometry: Unitree Robotics, unitree_mujoco (BSD-3-Clause).</figcaption>
     </figure>
     <div class="ms-grid">
       <div class="ms-tw"><table class="ms-t n">
@@ -623,7 +595,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><td class="m">FU-REQ-007</td><td>Segment discipline</td><td>15–20 min segments; start/end on control; ≥2 shared targets; loop every 100–200 m</td><td>Segment log review</td><td><span class="chip base">process</span></td></tr>
         <tr><td class="m">FU-REQ-008</td><td>Data integrity</td><td>Zero unrecoverable loss; SHA-256 manifest on every offload; 2 copies before leaving site</td><td>Manifest verification at ingest</td><td><span class="chip ver">verify G1</span></td></tr>
         <tr><td class="m">FU-REQ-009</td><td>Offline operation</td><td>Full capture with no WAN; 4G modem removed</td><td>Site run with WAN disconnected</td><td><span class="chip ver">verify G1</span></td></tr>
-        <tr><td class="m">FU-REQ-010</td><td>Time synchronisation</td><td>LiDAR + GS camera on Jetson PTP clock, target &lt;10 µs; X4 post-sync ≈10 ms (≈5 mm at 0.5 m/s)</td><td>Sync report per segment (flash/stomp event)</td><td><span class="chip ver">verify G1</span></td></tr>
+        <tr><td class="m">FU-REQ-010</td><td>Time synchronisation</td><td>LiDAR + GS camera on Jetson PTP clock, target &lt;10 µs; X4 post-sync ≈10 ms (≈5 mm at 0.5 m/s). Hardware PTP timestamping on Orin Nano/NX not guaranteed: see R-14</td><td>Sync report per segment (flash/stomp event)</td><td><span class="chip ver">verify G1</span></td></tr>
         <tr><td class="m">FU-REQ-011</td><td>Security posture</td><td>Air-gapped; Bluetooth off; no client Wi-Fi; firmware frozen</td><td>Client IT sign-off checklist (§8)</td><td><span class="chip base">process</span></td></tr>
         <tr><td class="m">FU-REQ-012</td><td>Safety</td><td>Site risk assessment; exclusion zone; payload e-stop; forklift-free windows</td><td>Pre-mission checklist (§10)</td><td><span class="chip base">process</span></td></tr>
         <tr><td class="m">FU-REQ-013</td><td>Payload mass</td><td class="m">≤3.5 kg (est. 2.2–3.5) vs 8 kg rated</td><td>Weigh-in, configured</td><td><span class="chip ver">verify G0</span></td></tr>
@@ -678,7 +650,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
       <tbody>
         <tr><td class="m">IF-01</td><th>Ethernet 1 GbE</th><td>Jetson ↔ switch ↔ Go2 X rear port</td><td class="m">192.168.123.0/24 · CycloneDDS (if exposed) or WebRTC</td><td>Go2 motion board .161; Jetson static .99; avoid .18 / .100. Flat-edge RJ45 under deck plate</td></tr>
         <tr><td class="m">IF-02</td><th>Ethernet 1 GbE</th><td>Survey LiDAR ↔ switch</td><td class="m">UDP point packets · PTPv2/gPTP</td><td>Re-IP onto 192.168.123.x (defaults: L2 192.168.1.62; Hesai XT 192.168.1.201). Record raw packets, not decoded clouds</td></tr>
-        <tr><td class="m">IF-03</td><th>USB3 + GPIO trigger</th><td>Global-shutter camera ↔ Jetson</td><td class="m">Hardware trigger · Jetson-clock timestamps</td><td>Reconcile monotonic vs system clock domains</td></tr>
+        <tr><td class="m">IF-03</td><th>GigE, direct (Gen-1)</th><td>Blackfly S BFS-PGE ↔ dedicated Jetson Ethernet port (no switch in the timing path)</td><td class="m">IEEE 1588 PTP · Jetson = master (ptp4l + phc2sys) · camera = slave</td><td>Power via PoE+ injector or 24 V GPIO. Needs a second Ethernet port on the Gen-1 compute (TBD). HW timestamping on Orin Nano/NX not guaranteed (R-14)</td></tr>
         <tr><td class="m">IF-04</td><th>USB</th><td>Insta360 X4 ↔ Jetson</td><td class="m">Insta360 Desktop Camera SDK (Linux AArch64)</td><td>Start/stop only; cannot set bitrate. Runs on own battery</td></tr>
         <tr><td class="m">IF-05</td><th>DC power</th><td>Accessory pack → PDB → loads</td><td class="m">19 V (Jetson barrel) · 12 V (switch, 9–18 V devices) · 24 V (XT-class 9–36 V)</td><td>Main fuse + branch fuses; latching e-stop; single-point ground</td></tr>
         <tr><td class="m">IF-06</td><th>Wi-Fi 5 GHz</th><td>Zone router ↔ Jetson / operator tablet</td><td class="m">Isolated SSID, NAT, no uplink</td><td>Never bridged to 192.168.123.x or client networks</td></tr>
@@ -700,9 +672,14 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><th>Compute</th><td>Jetson Orin Nano Super Developer Kit (945-13766-0000-000), 8 GB</td><td>Seeed reComputer Robotics J4012 (Orin NX 16 GB, 19–54 V in) or Neousys NRU-220S (AGX Orin, 8–48 V, 4× PoE+)</td><td class="m">Dev kit 7–25 W, 19 V barrel · J4012 ~$1.4–2.6k · NRU-220S from $5,060</td></tr>
         <tr><th>Storage</th><td>1 TB NVMe</td><td>1–2 TB NVMe</td><td class="m">Raw: 0.4–0.7 TB per field day (est.)</td></tr>
         <tr><th>Power</th><td>24 V ~200 Wh pack, 19 V + 12 V bucks, inline fuses, e-stop</td><td>Bioenno BLF-2410A 24 V 10 Ah LFP (2.4 kg) or Core SWX Helix Max dual-voltage; fused PDB with latching e-stop</td><td class="m">BLF-2410A $189.99 · Helix Max quote · PDB quote · payload 60–80 W (est.)</td></tr>
-        <tr><th>Network</th><td>12 V unmanaged 5-port GbE switch</td><td>Moxa EDS-G205A-4PoE (PoE+, 12/24/48 V, no PTP) or PTP-managed industrial switch; M12 locking Ethernet; IP-rated enclosures</td><td class="m">Moxa ~$1,144 · PTP switch TBD/quote · M12/enclosures quote</td></tr>
+        <tr><th>Network</th><td>12 V unmanaged 5-port GbE switch</td><td>Jetson PTP master cabled directly to the Blackfly S (no switch in the timing path); PTP switch only if required (Moxa EDS-405A-PTP 10/100, ATOP EHG7504); M12 X-coded Ethernet; IP-rated enclosures</td><td class="m">EDS-405A-PTP $1,255.79 · EHG7504 quote · M12 $73–80 each · enclosures quote</td></tr>
         <tr><th>Carrier</th><td colspan="2">Unitree Go2 X: 15 kg, 8 kg rated payload, ~16 cm max step, 5–35 °C, no IP rating</td><td class="m">Gen-2 carrier selected at G3 (§14)</td></tr>
       </tbody></table></div>
+    <div class="ms-grid">
+      <figure class="ms-fig" style="margin-top:0"><img src="3d/renders/fu-gen0-iso.jpg" alt="Gen-0 configuration: Go2 X with Jetson logger and accessory battery only" loading="lazy" style="width:100%;height:auto;display:block" data-full="3d/renders/fu-gen0-iso.jpg"><figcaption>Gen-0 validation configuration: Go2 X, Jetson Orin Nano Super logger and accessory battery (CAD render).</figcaption></figure>
+      <figure class="ms-fig" style="margin-top:0"><img src="3d/renders/fu-gen1-top-plan.jpg" alt="Gen-1 deck layout, top plan, lettered" loading="lazy" style="width:100%;height:auto;display:block" data-full="3d/renders/fu-gen1-top-plan.jpg"><figcaption>Gen-1 deck layout, top plan. Heavy items low and between the hips; LiDAR and camera on the front bracket; X4 mast at the rear.</figcaption></figure>
+    </div>
+    <figure class="ms-fig"><img src="3d/renders/fu-gen1-exploded.jpg" alt="Gen-1 payload exploded in build order" loading="lazy" style="width:100%;height:auto;display:block" data-full="3d/renders/fu-gen1-exploded.jpg"><figcaption>Gen-1 payload, exploded in build order (CAD render). Go2 geometry: Unitree Robotics, unitree_mujoco (BSD-3-Clause).</figcaption></figure>
     <div class="ph-grid">
       <figure><div class="ph"><img src="img/dog-xt32.jpg" alt="Hesai XT32 LiDAR" loading="lazy"></div><figcaption><b>Survey LiDAR (Gen-1 class)</b>Hesai XT32. Source: Hesai.</figcaption></figure>
       <figure><div class="ph"><img src="img/dog-x4.jpg" alt="Insta360 X4 360-degree camera" loading="lazy"></div><figcaption><b>360° camera</b>Insta360 X4. Photo: ItzANormalFioko, CC BY-SA 4.0, Wikimedia Commons.</figcaption></figure>
@@ -913,6 +890,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><td class="m">R-12</td><td>Insurance excludes laser scanning / robotic operations</td><td class="m">M</td><td class="m">H</td><td>Broker endorsements before first contract</td><td>Build team</td></tr>
         <tr><td class="m">R-13</td><td>Client security questionnaire without SOC 2</td><td class="m">M</td><td class="m">M</td><td>Questionnaire pack + air-gap statement; SOC 2 Type I as interim step if volume justifies</td><td>Build team</td></tr>
         <tr><td class="m">R-10</td><td>Survey control cost or schedule</td><td class="m">M</td><td class="m">M</td><td>Early surveyor quote; traverse one day ahead</td><td>Build team</td></tr>
+        <tr><td class="m">R-14</td><td>PTP hardware timestamping: confirmed on AGX Orin MGBE ports, not guaranteed on Orin Nano/NX; open linuxptp offset bugs on JetPack 6.2</td><td class="m">M</td><td class="m">H</td><td>Validate PTP offset on Gen-0 at G0/G1; else move to a PTP-capable carrier or a PTP switch as grandmaster (Moxa EDS-405A-PTP $1,255.79, 10/100 only; ATOP EHG7504 quote)</td><td>Build team</td></tr>
       </tbody></table></div>
     <p class="src" style="margin-top:8px">L = likelihood, I = impact (Low / Medium / High), build-team assessment.</p>
   </div>
@@ -929,25 +907,27 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><th>Carrier</th><td>Unitree Go2 X</td><td class="m">1</td><td class="m">$4,500 list</td><td><span class="chip base">baseline</span></td></tr>
         <tr><th>Compute</th><td>NVIDIA Jetson Orin Nano Super Dev Kit · 945-13766-0000-000</td><td class="m">1</td><td class="m">$399 list</td><td><span class="chip base">baseline</span></td></tr>
         <tr class="sub"><td colspan="5">Gen-0 · procure</td></tr>
-        <tr><th>Main battery</th><td>Unitree 15 Ah long-endurance pack (BT2-06)</td><td class="m">3</td><td class="m">$1,200 + shipping</td><td><span class="chip proc">procure</span></td></tr>
-        <tr><th>Charger</th><td>Unitree 33.6 V 9 A fast charger</td><td class="m">2</td><td class="m">quote</td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>Main battery</th><td>Unitree 15 Ah long-endurance pack (BT2-06, 432 Wh)</td><td class="m">3</td><td class="m">$665–800 <small style="color:#E5B567">verify before order</small></td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>Charger</th><td>Unitree GO2-FCHARGER, 33.6 V 9 A (≈1.5 h per BT2-06)</td><td class="m">2</td><td class="m">$229.19 <small style="color:#E5B567">verify before order</small></td><td><span class="chip proc">procure</span></td></tr>
         <tr><th>Survey LiDAR (validation)</th><td>Unitree L2</td><td class="m">1</td><td class="m">$419</td><td><span class="chip proc">procure</span></td></tr>
-        <tr><th>360° camera</th><td>Insta360 X4 + 4–5 batteries + V30 512 GB–1 TB cards</td><td class="m">1</td><td class="m">quote</td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>360° camera</th><td>Insta360 X4 (baseline) + 4–5 spare batteries + fast charge hub + V30 512 GB–1 TB cards</td><td class="m">1</td><td class="m">X4 $424.99–499 · battery $22.99 · hub $21.99 · cards quote <small style="color:#E5B567">verify before order</small></td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>360° camera (alt.)</th><td>Insta360 X5 (current flagship, larger battery, replaceable lenses)</td><td class="m">1</td><td class="m">≈$660–670 <small style="color:#E5B567">verify before order</small></td><td><span class="chip open">evaluate</span></td></tr>
         <tr><th>Storage</th><td>1 TB NVMe SSD</td><td class="m">1</td><td class="m">$80–120</td><td><span class="chip proc">procure</span></td></tr>
-        <tr><th>Payload power</th><td>24 V ~200 Wh pack + charger; 19 V/12 V DC-DC, fuses, e-stop</td><td class="m">1 set</td><td class="m">$230–500</td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>Payload power</th><td>24 V ~200 Wh pack + charger; Mean Well DDR-60G-12 (9–36 V → 12 V/5 A) ≈$33; latching e-stop $6–17; fuses. 19 V rail: TBD (no DDR 19 V model)</td><td class="m">1 set</td><td class="m">$230–500</td><td><span class="chip proc">procure</span></td></tr>
         <tr><th>Network</th><td>12 V 5-port GbE switch</td><td class="m">1</td><td class="m">$30–60</td><td><span class="chip proc">procure</span></td></tr>
         <tr><th>Mounting</th><td>Deck plate (open CAD) or rail kit</td><td class="m">1</td><td class="m">$0–100</td><td><span class="chip proc">procure</span></td></tr>
-        <tr><th>Field media</th><td>4 TB SSDs for nightly copies</td><td class="m">2</td><td class="m">quote</td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>Field media</th><td>4 TB portable SSDs for nightly copies: Samsung T9 4 TB or SanDisk PRO-G40 4 TB (IP68)</td><td class="m">2</td><td class="m">T9 $420–800 · PRO-G40 $306–941 (volatile) <small style="color:#E5B567">verify before order</small></td><td><span class="chip proc">procure</span></td></tr>
+        <tr><th>Control targets</th><td>AdirPro 6× 145 mm magnetic-base scanning spheres (plus printed checkerboards)</td><td class="m">1 set</td><td class="m">$549.95 <small style="color:#E5B567">verify before order</small></td><td><span class="chip proc">procure</span></td></tr>
         <tr><th>Survey control</th><td>PLS-led total-station traverse + checkerboard targets</td><td class="m">per site</td><td class="m">≈$10k–30k per 1M sq ft (est.)</td><td><span class="chip proc">procure</span></td></tr>
         <tr class="sub"><td colspan="5">Gen-1 · production payload options</td></tr>
         <tr><th>Survey LiDAR</th><td>Hesai XT32M2X</td><td class="m">1</td><td class="m">$10,499 (single reseller; get US quote)</td><td><span class="chip def">Gen-1</span></td></tr>
         <tr><th>SLAM payload (alt.)</th><td>Emesent Hovermap ST-X · Leica BLK ARC · XGRIDS K2 · CHCNAV RS10</td><td class="m">1</td><td class="m">quote · $46–70k · ~£6.5k · ~€24k</td><td><span class="chip def">Gen-1</span></td></tr>
-        <tr><th>Global-shutter camera</th><td>Teledyne FLIR BFS-PGE-50S5C-C + lens</td><td class="m">1</td><td class="m">$878 + lens</td><td><span class="chip def">Gen-1</span></td></tr>
+        <tr><th>Global-shutter camera</th><td>Teledyne FLIR BFS-PGE-50S5C-C + Fujinon HF6XA-5M 6 mm 2/3" lens; PoE+ injector or 24 V GPIO power</td><td class="m">1</td><td class="m">$878 + lens $337–597 <small style="color:#E5B567">verify before order</small></td><td><span class="chip def">Gen-1</span></td></tr>
         <tr><th>Ruggedized compute</th><td>Seeed reComputer Robotics J4012 (100026552) / Neousys NRU-220S</td><td class="m">1</td><td class="m">~$1.4–2.6k / from $5,060</td><td><span class="chip def">Gen-1</span></td></tr>
-        <tr><th>Industrial switch</th><td>Moxa EDS-G205A-4PoE (no PTP) or PTP-managed industrial switch</td><td class="m">1</td><td class="m">~$1,144 / TBD quote</td><td><span class="chip def">Gen-1</span></td></tr>
+        <tr><th>Timing network</th><td>Baseline: no switch in the timing path. Jetson = PTP master, cabled directly to the Blackfly S. Only if a PTP switch is needed: Moxa EDS-405A-PTP (10/100 only) or ATOP EHG7504</td><td class="m">0–1</td><td class="m">— / $1,255.79 / quote <small style="color:#E5B567">verify before order</small></td><td><span class="chip def">Gen-1</span></td></tr>
         <tr><th>Payload battery</th><td>Bioenno BLF-2410A 24 V 10 Ah LFP (2.4 kg: exceeds FU-REQ-013 with full payload) / Core SWX Helix Max dual-voltage (1.08–1.6 kg, preferred for mass)</td><td class="m">1</td><td class="m">$189.99 / quote</td><td><span class="chip def">Gen-1</span></td></tr>
-        <tr><th>Connectors / enclosures</th><td>M12 locking Ethernet; IP-rated enclosures</td><td class="m">set</td><td class="m">quote</td><td><span class="chip def">Gen-1</span></td></tr>
-        <tr><th>Power distribution</th><td>Fused PDB with latching e-stop</td><td class="m">1</td><td class="m">quote</td><td><span class="chip def">Gen-1</span></td></tr>
+        <tr><th>Connectors / enclosures</th><td>M12 X-coded panel feedthrough (L-com M12XFP-RJ45F / Panduit ICAM12XRJS); IP-rated enclosure</td><td class="m">set</td><td class="m">$73–80 each · enclosure quote <small style="color:#E5B567">verify before order</small></td><td><span class="chip def">Gen-1</span></td></tr>
+        <tr><th>Power distribution</th><td>Fused PDB with latching e-stop driving a 24 V relay; Mean Well DDR-60G-12 12 V rail</td><td class="m">1</td><td class="m">PDB quote · DDR-60G-12 ≈$33 · e-stop $6–17 <small style="color:#E5B567">verify before order</small></td><td><span class="chip def">Gen-1</span></td></tr>
         <tr class="sub"><td colspan="5">Back end · PRJ-01 budget</td></tr>
         <tr><th>Archive</th><td>Synology DS1823xs+ (8-bay, 10 GbE) + drives for 40–60 TB usable</td><td class="m">1</td><td class="m">$1,799.99 diskless + drives</td><td><span class="chip proc">procure</span></td></tr>
         <tr><th>Software</th><td>Insta360 Media SDK (application); Cyclone REGISTER 360 / EdgeWise if sold</td><td class="m">—</td><td class="m">application / quote</td><td><span class="chip open">open</span></td></tr>
@@ -956,8 +936,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
       </tbody></table></div>
     <div class="ms-grid">
       <div class="ms-tw"><table class="ms-t n"><tbody>
-        <tr><th>Gen-0 procure, priced lines (midpoints, est.)</th><td class="m">≈$4,600 + quotes (X4, chargers, SSDs, survey)</td></tr>
-        <tr><th>Gen-1 payload, priced lines</th><td class="m">XT32M2X $10,499 + camera $878 + J4012 ~$1.4–2.6k + Moxa ~$1,144 + BLF-2410A $190 ≈ $14.1–15.3k + quotes</td></tr>
+        <tr><th>Gen-0 procure, priced lines (midpoints, est.)</th><td class="m">≈$5,400 (est., midpoints; incl. 3× BT2-06, 2× 9 A chargers, X4 kit, 2× 4 TB SSD) + $549.95 spheres + survey control quote · verify before order</td></tr>
+        <tr><th>Gen-1 payload, priced lines</th><td class="m">XT32M2X $10,499 + camera $878 + lens $337–597 + J4012 ~$1.4–2.6k + BLF-2410A $190 + 2× M12 ≈$150 ≈ $13.5–15.0k + quotes (no PTP switch in baseline)</td></tr>
       </tbody></table></div>
       <figure class="ph-grid" style="grid-template-columns:1fr;margin-top:14px"><figure><div class="ph"><img src="img/dog-nas.jpg" alt="Network attached storage unit" loading="lazy"></div><figcaption><b>Archive NAS (category example)</b>Synology two-bay unit shown to identify the category; the specified unit is the DS1823xs+. Photo: DYVER, CC BY-SA 4.0, Wikimedia Commons.</figcaption></figure></figure>
     </div>
@@ -1054,6 +1034,24 @@ footer li{break-inside:avoid;margin-bottom:6px}
  ['CityGaussian (large-scene 3DGS memory)','https://arxiv.org/pdf/2404.01133'],['NavVis / BIMstream case study','https://www.navvis.com/resources/case-studies/bimstream'],
  ['USIBD LOA C120 Guide v2.0 (2σ bands)','https://cdn.ymaws.com/www.nysapls.org/resource/resmgr/2019_conference/handouts/hale-g_bim_loa_guide_c120_v2.pdf'],['Hesai XT32M2X (OpenELAB)','https://openelab.com/products/hesai-xt32m2x-32-channel-lidar'],['Teledyne FLIR Blackfly S GigE','https://teledynevisionsolutions.com/products/blackfly-s-gige'],['Moxa EDS-G205A-4PoE','https://www.moxa.com/product/EDS-G205A-4PoE_Series.htm'],['Neousys NRU-220S (Coast IPC)','https://coastipc.com/nru-220s-nvidia-jetson-agx-orin-fanless-computer'],['Bioenno 24 V 10 Ah LFP','https://www.bioennopower.com/products/24v-10ah-lfp-battery-black-a-pvc-pack'],['Synology DS1823xs+','https://storagediskprices.com/synology-ds1823xs-plus/'],['Leica TS16 rentals','https://rentals.leica-geosystems.com/product-list.cfm?CategoryID=14'],['ANSI/A3 R15.08-2','https://blog.ansi.org/ansi/ansi-a3-r15-08-2-2023-industrial-mobile-robots/'],['Surveyor E&O exclusions (Higginbotham)','https://www.higginbotham.com/blog/surveyors-professional-indemnity-insurance/'],['Matterport Trust (SOC 2)','https://matterport.com/trust'],['Insta360 Developer SDK','https://www.insta360.com/sdk/home'],['Seeed reComputer Robotics J4012 (reseller listing)','https://pakronics.com.au/products/recomputer-robotics-j4012-with-gmsl-extension-intelligent-edge-ai-computer-with-nvidia-jetson-orin-nx-super-16gb-ss100026552'],['Connect Tech Boson carrier','https://connecttech.com/product/boson-for-framos-carrier-board-for-nvidia-jetson-orin-nx/'],['NVIDIA Jetson Orin Nano Super Developer Kit','https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/']];
 document.getElementById('srcs').innerHTML=SRC.map(s=>'<li><a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a></li>').join('');})();
+</script>
+
+<script>
+(function(){
+  var el=document.getElementById('fu3d'), ctl=document.getElementById('fu3dctl'); if(!el||!ctl) return;
+  var st={view:'iso',config:'gen1',explode:0,dims:false,labels:true};
+  function api(){ return el.fuViewer; }
+  function apply(a){ if(!a) return; try{ a.setView(st.view); a.setExplode(st.explode); a.setDims(st.dims); a.setLabels(st.labels); }catch(e){} }
+  function press(k,v){ ctl.querySelectorAll('.seg[data-k="'+k+'"] button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.v===v?'true':'false'); }); }
+  ctl.addEventListener('click',function(e){
+    var b=e.target.closest('.seg button'); if(!b) return; var k=b.parentNode.dataset.k, v=b.dataset.v; press(k,v);
+    if(k==='view'){ st.view=v; var a=api(); if(a) a.setView(v); }
+    if(k==='config' && v!==st.config){ st.config=v; var a2=api(); if(a2 && window.FUViewer){ a2.dispose(); el.fuViewer=window.FUViewer.mount(el,{config:v,view:st.view,callout:'balloon',ui:false,eager:true,poster:el.dataset.poster,fallback:el.dataset.fallback,dims:st.dims,labels:st.labels,explode:st.explode}); } }
+  });
+  document.getElementById('fu3dx').addEventListener('input',function(){ st.explode=this.value/100; var a=api(); if(a) a.setExplode(st.explode); });
+  document.getElementById('fu3dd').addEventListener('change',function(){ st.dims=this.checked; var a=api(); if(a) a.setDims(st.dims); });
+  document.getElementById('fu3dl').addEventListener('change',function(){ st.labels=this.checked; var a=api(); if(a) a.setLabels(st.labels); });
+})();
 </script>
 
 </body></html>

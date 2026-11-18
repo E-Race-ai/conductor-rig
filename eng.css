@@ -169,3 +169,21 @@ html[data-proj] .dg-sum{font:600 40px/1.1 var(--mono)!important;letter-spacing:-
 html[data-proj] .grand{font:600 40px/1.1 var(--mono)!important;letter-spacing:-.02em!important}
 html[data-proj] .dg-pcard .big,html[data-proj] .pcard .big{font:600 44px/1 var(--mono)!important}
 html[data-proj] .eng-toc{z-index:61}
+
+/* Field Unit 3D system figure (site/3d/fu-viewer.js) */
+.fu3d{height:clamp(420px,62vh,640px);border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#0e1115}
+.fu3d-ctl{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.fu3d-ctl .g{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fu3d-ctl .l{font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.fu3d-ctl .seg{display:inline-flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.fu3d-ctl .seg button{font:500 12px/1 "IBM Plex Mono",monospace;padding:7px 10px;background:transparent;color:var(--dim);border:0;border-right:1px solid var(--line);cursor:pointer}
+.fu3d-ctl .seg button:last-child{border-right:0}
+.fu3d-ctl .seg button[aria-pressed="true"]{background:var(--cy);color:#0B0D10}
+.fu3d-ctl input[type=range]{width:140px;accent-color:var(--cy)}
+.fu3d-ctl .ck2{font:500 12px/1 "IBM Plex Mono",monospace;color:var(--dim);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.fu3d-ctl .ck2 input{accent-color:var(--cy)}
+
+/* product photo card (site/3d/INTEGRATION.md) applied to existing .ph-grid cards */
+.ph-grid figure .ph:not(.dk){background:radial-gradient(120% 100% at 50% 35%,#ffffff 0%,#eef0f3 60%,#e2e5ea 100%);padding:clamp(10px,4%,22px)}
+.ph-grid figure .ph:not(.dk) img{filter:drop-shadow(0 10px 18px rgba(0,0,0,.18))}
+.ph-grid figure .ph.dk{background:radial-gradient(120% 100% at 50% 35%,#1b1f26 0%,#12151a 70%,#0e1115 100%);padding:clamp(10px,4%,22px)}

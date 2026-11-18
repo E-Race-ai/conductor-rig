@@ -70,7 +70,7 @@
     D.body.appendChild(lb);
     var li = lb.querySelector('img'), lc = lb.querySelector('.cap'), ln = lb.querySelector('.cnt'), list = [], cur = 0, last = null;
     var cap = function(im){ var f = im.closest('figure'), c = f && f.querySelector('figcaption'); return (c && c.textContent.trim()) || im.alt || ''; };
-    var show = function(i){ cur = (i + list.length) % list.length; var im = list[cur]; li.src = im.currentSrc || im.src; li.alt = im.alt || ''; lc.textContent = cap(im); ln.textContent = (cur + 1) + ' / ' + list.length; };
+    var show = function(i){ cur = (i + list.length) % list.length; var im = list[cur]; li.src = im.getAttribute('data-full') || im.currentSrc || im.src; li.alt = im.alt || ''; lc.textContent = cap(im); ln.textContent = (cur + 1) + ' / ' + list.length; };
     var open = function(im){ list = [].slice.call(D.querySelectorAll('img')).filter(ok); cur = Math.max(0, list.indexOf(im)); last = D.activeElement; lb.classList.add('open'); show(cur); D.body.style.overflow = 'hidden'; lb.querySelector('.x').focus(); };
     var close = function(){ lb.classList.remove('open'); D.body.style.overflow = ''; li.removeAttribute('src'); if (last) last.focus(); };
     lb.querySelector('.x').onclick = close; lb.querySelector('.pv').onclick = function(){ show(cur - 1); }; lb.querySelector('.nx').onclick = function(){ show(cur + 1); };
