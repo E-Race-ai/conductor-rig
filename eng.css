@@ -78,7 +78,9 @@ html[data-proj] figcaption{font:11.5px/1.45 var(--mono)!important;color:var(--fa
 html[data-proj] figcaption .fno{color:var(--dim)}
 
 /* nav: thin top bar; desktop gets a left section index */
-html[data-proj] nav.top{background:rgba(11,13,16,.94)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-proj] nav.top{background:#0B0D10!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;z-index:60!important;isolation:isolate}
+html[data-proj] section.band,html[data-proj] header{position:relative;z-index:0}
+html[data-proj] [id]{scroll-margin-top:64px}
 html[data-proj] nav.top .wrap{height:46px!important}
 html[data-proj] .mark{font:600 14px/1 var(--mono)!important;letter-spacing:.06em!important}
 html[data-proj] .mark span{background:var(--acc)!important;border-radius:0!important;width:7px!important;height:7px!important}
@@ -166,3 +168,4 @@ html[data-proj] canvas#orch{filter:saturate(.6)}
 html[data-proj] .dg-sum{font:600 40px/1.1 var(--mono)!important;letter-spacing:-.02em!important}
 html[data-proj] .grand{font:600 40px/1.1 var(--mono)!important;letter-spacing:-.02em!important}
 html[data-proj] .dg-pcard .big,html[data-proj] .pcard .big{font:600 44px/1 var(--mono)!important}
+html[data-proj] .eng-toc{z-index:61}

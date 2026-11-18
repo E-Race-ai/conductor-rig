@@ -32,8 +32,9 @@
       root.classList.add('has-toc');
       var toc = D.createElement('nav'); toc.className = 'eng-toc'; toc.setAttribute('aria-label', 'Section index');
       toc.innerHTML = '<div class="h">' + code + '</div><div class="r">' + (root.getAttribute('data-rev') || 'Rev C · 2026-11-18 · Build team') + '</div>';
-      secs.forEach(function(s, i){
-        var h = s.querySelector('h2'), n = (i + 1) + '.0';
+      var ni = 0;
+      secs.forEach(function(s){
+        var h = s.querySelector('h2'), n = s.getAttribute('data-appx') ? 'App. ' + s.getAttribute('data-appx') : (++ni) + '.0';
         var t = h.textContent.replace(/\s+/g, ' ').trim();
         var sp = D.createElement('span'); sp.className = 'eng-sec'; sp.textContent = n; h.insertBefore(sp, h.firstChild);
         var a = D.createElement('a'); a.href = '#' + s.id; a.innerHTML = '<i>' + n + '</i><span></span>'; a.lastChild.textContent = t.length > 46 ? t.slice(0, 44) + '…' : t;

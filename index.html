@@ -79,7 +79,7 @@
       <div class="pj-h"><span class="id">PRJ-01 · CONDUCTOR</span><span class="st"><i></i>Parts decided · ordering</span></div>
       <h2 id="pj1">AI orchestration workstation</h2>
       <p class="purpose">Single-socket AMD EPYC tower that runs about 14 coding agents concurrently plus local models on an RTX 5070 Ti.</p>
-      <figure><img src="img/case-inside.jpg" alt="Antec 900 case interior" loading="lazy"><figcaption>Fig. 1 — Antec 900 chassis, the selected enclosure. Source: Antec.</figcaption></figure>
+      <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
       <div class="specs">
         <div><b>16<small>C</small></b><span>EPYC 9175F</span></div>
@@ -97,25 +97,25 @@
     </section>
 
     <section class="pj fu" aria-labelledby="pj2">
-      <div class="pj-h"><span class="id">PRJ-02 · FIELD UNIT</span><span class="st"><i></i>Hardware owned · pilot day next</span></div>
-      <h2 id="pj2">Quadruped capture platform</h2>
-      <p class="purpose">High-precision LiDAR + 360° imaging of very large buildings. Unitree Go2 X carrying a Jetson Orin Nano Super logger, a survey LiDAR, an Insta360 X4 and a forward 4K camera. Test site #1: 1,000,000 sq ft (≈92,900 m²).</p>
-      <figure><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog" loading="lazy"><figcaption>Fig. 2 — Unitree Go2, the base platform. Source: Unitree Robotics.</figcaption></figure>
-      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="done"><b>Owned</b>X + Jetson</div><div class="now"><b>Access test + pilot</b>next</div><div><b>Building #1</b>then</div></div>
+      <div class="pj-h"><span class="id">PRJ-02 · FIELD UNIT</span><span class="st"><i></i>Gen-0 validation</span></div>
+      <h2 id="pj2">Mobile Reality Capture System (MRCS)</h2>
+      <p class="purpose">Survey-controlled LiDAR + 360° capture of 1M+ sq ft facilities. Gen-0 test platform: Unitree Go2 X carrier with a Jetson Orin Nano Super logger, survey LiDAR, global-shutter and 360° cameras. Test site #1: 1,000,000 sq ft (≈92,900 m²).</p>
+      <figure><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog" loading="lazy"><figcaption>Fig. 2 — Unitree Go2, Gen-0 carrier. Source: Unitree Robotics.</figcaption></figure>
+      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="now"><b>Gen-0</b>validation</div><div><b>Gen-1</b>payload</div><div><b>Gen-2</b>carrier</div></div>
       <div class="specs">
-        <div><b>67<small>TOPS</small></b><span>Orin Nano Super</span></div>
+        <div><b>LOA20<small></small></b><span>building-wide (est.)</span></div>
         <div><b>1.0<small>M sq ft</small></b><span>test site #1</span></div>
         <div><b>8<small>kg</small></b><span>rated payload</span></div>
         <div><b>5–6<small>days</small></b><span>field time (est.)</span></div>
       </div>
       <table class="kv">
-        <tr><th>Platform</th><td><span class="m">Go2 X · Jetson Orin Nano Super 8 GB · survey LiDAR (TBD) · Insta360 X4 · 4K camera</span></td></tr>
+        <tr><th>Configuration</th><td><span class="m">Gen-0: Go2 X · Jetson Orin Nano Super · Unitree L2 · Insta360 X4</span></td></tr>
         <tr><th>Accuracy</th><td>LOA20 (15–50 mm) building-wide with a survey control network <small>(est.)</small> · required LOA for the client deliverable: <b>TBD</b></td></tr>
-        <tr><th>Budget</th><td>Robot + Jetson owned · <span class="m">≈ $1,464</span> core add-ons · capture kit partly priced (Blackfly S $2,019, 15 Ah packs $1,200 each); X4, survey LiDAR and survey control pending quotes</td></tr>
-        <tr><th>Next</th><td>Pilot day: capture one 5,000–10,000 m² zone and measure capture rate (m²/h), Wh/km, X4 blur and drift between control targets. Rear-port access test first.</td></tr>
+        <tr><th>Budget</th><td>Gen-0 baseline in inventory · Gen-0 procure <span class="m">≈ $4,600</span> priced lines (est.) + quotes (X4, chargers, survey control) · Gen-1 payload by quote</td></tr>
+        <tr><th>Next gate</th><td>G1 Pilot day: capture rate (m²/h) + checkpoint RMSE on one 5,000–10,000 m² zone. G0 rear-port access test first.</td></tr>
         <tr><th>Team</th><td>Build team</td></tr>
       </table>
-      <div class="links"><a class="p" href="field-unit.html">Open PRJ-02 →</a><a href="field-unit.html#mission">Capture plan</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
+      <div class="links"><a class="p" href="field-unit.html">Open PRJ-02 →</a><a href="field-unit.html#req">Requirements</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
     </section>
   </div>
 
