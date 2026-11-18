@@ -31,7 +31,7 @@
     if (secs.length >= 4) {
       root.classList.add('has-toc');
       var toc = D.createElement('nav'); toc.className = 'eng-toc'; toc.setAttribute('aria-label', 'Section index');
-      toc.innerHTML = '<div class="h">' + code + '</div><div class="r">Rev C · 2026-11-18 · Build team</div>';
+      toc.innerHTML = '<div class="h">' + code + '</div><div class="r">' + (root.getAttribute('data-rev') || 'Rev C · 2026-11-18 · Build team') + '</div>';
       secs.forEach(function(s, i){
         var h = s.querySelector('h2'), n = (i + 1) + '.0';
         var t = h.textContent.replace(/\s+/g, ' ').trim();

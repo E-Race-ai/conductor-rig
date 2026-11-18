@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" data-proj="fu" class="doc"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Building #1 capture: large-building scanning · Field Unit</title>
+<meta name="description" content="Field Unit, Project 02: Unitree Go2 X quadruped capture platform for high-precision LiDAR + 360° imaging of very large buildings. Test site #1: 1,000,000 sq ft. Capture plan, rig, wiring, build steps and BOM.">
+<meta property="og:title" content="Building #1 capture: large-building scanning · Field Unit"><meta property="og:description" content="Field Unit, Project 02: Unitree Go2 X quadruped capture platform for high-precision LiDAR + 360° imaging of very large buildings. Test site #1: 1,000,000 sq ft. Capture plan, rig, wiring, build steps and BOM.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/og-field-unit.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/og-field-unit.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B0D10"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23A3E635'/%3E%3Cstop offset='.5' stop-color='%23FACC15'/%3E%3Cstop offset='1' stop-color='%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Cpath d='M7 22 L13 10 L19 22 L25 10' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><link rel="stylesheet" href="eng.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="eng-bar" style="position:relative;z-index:30;color:#9AA3AE;font:500 12.5px/1.4 IBM Plex Mono,ui-monospace,monospace;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#0E1014;border-bottom:1px solid #232830;border-top:2px solid #E8A33D"><a href="./" style="color:#9AA3AE;text-decoration:none">← Project index</a><b style="font-weight:600;color:#E8A33D;letter-spacing:.06em">PRJ-02 · FIELD UNIT</b><span style="display:flex;gap:14px"><a href="field-unit.html" style="color:#9AA3AE;text-decoration:none;padding:0 2px;border-bottom:1px solid transparent">Overview</a><a href="fu-build-plan.html" style="color:#9AA3AE;text-decoration:none;padding:0 2px;border-bottom:1px solid transparent">Build plan</a><a href="field-unit-research.html" style="color:#E4E7EB;text-decoration:none;padding:0 2px;border-bottom:1px solid #E8A33D">Research</a></span><span style="color:#6B7480">Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span></div>
+<style>
+:root{--bg:#0B0D10;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4FB3E8;--ac:#7FA7C9;--grad:linear-gradient(100deg,#4FB3E8,#7FA7C9 40%,#8B95A1 70%,#C9CED4);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><style>:root{--cy:#E8A33D;--ac:#C7A46A;--grad:linear-gradient(100deg,#E8A33D,#C7A46A 45%,#8B95A1 75%,#C9CED4)}</style><div class="wrap"><a class="back" href="field-unit-research.html">← Field Unit research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Anchor the Go2 to survey control
+
+**The Go2 X can capture building #1 (1,000,000 sq ft, about 92,900 m²), but its accuracy will come from the survey control network and the LiDAR you mount, not from the robot. The schedule is set by battery swaps and a slow camera-safe walking speed.** The kit as chosen is an Insta360 X4, an add-on LiDAR and a 4K camera, with the Jetson Orin Nano Super logging everything. That kit realistically delivers USIBD **LOA20 (15–50 mm)** across the whole building, provided a total-station control network ties it together. **LOA30 (5–15 mm)** needs a commercial SLAM scanner payload plus dense control, and **LOA40 (1–5 mm)** needs static terrestrial scanning. Without control the result fails outright. Open-loop LiDAR odometry drifts about 0.1–1% of distance travelled. Even the best automatic multi-session merges in the Hilti 2023 benchmark were off by about **0.3 m**, around 10× worse than single sessions. The plan that works breaks the building into roughly **7–10 battery missions**, each made up of **4–5 short SLAM segments** that start and end on surveyed targets. That comes to about **30–50 segments** in total. The work takes **about 5–6 field days** with a two-person crew if the building is open or racked warehouse, and up to about 10–11 days if it is cellular office or hospital space. Conductor can process all of it once the cloud is split into tiles. Its real limits are 16 GB of VRAM and the lack of a Linux Insta360 stitcher, not CPU or disk. Two caveats come first. For a one-off capture, a person with a wearable scanner is as fast as the dog, uses fewer people and is more accurate. And Unitree's regulatory and security record may get the robot refused at some client sites. So the team's first decision is the accuracy level written into the client deliverable, and the second is whether the client will accept a Unitree robot on site.
+
+## "High precision" means a USIBD LOA band, and most robot kits land in LOA20
+
+Clients and scan-to-BIM contracts specify accuracy using the USIBD Level of Accuracy (LOA) bands. Secondary academic sources give them as **LOA10 >50 mm, LOA20 15–50 mm, LOA30 5–15 mm, LOA40 1–5 mm and LOA50 0–1 mm** ([ISPRS Archives](https://isprs-archives.copernicus.org/articles/XLII-2-W8/45/2017/); [core.ac.uk](https://core.ac.uk/download/188622571.pdf)). NavVis says LOA20 and LOA30 are the bands most often specified for scan-to-BIM ([NavVis](https://www.navvis.com/blog/9-scan-to-bim-terms-you-need-to-know)). The current document is LOA Specification v3.1, released January 2025 ([LiDAR News](https://lidarnews.com/?p=17380)). It separates *measured* accuracy (the point cloud) from *represented* accuracy (the model) ([core.ac.uk](https://core.ac.uk/download/335287953.pdf)). Neither this research nor the source notes read the v3.1 text itself. The band edges, and the commonly repeated rule that bands are stated at 2σ (95%), therefore need checking against the spec before they go into a contract.
+
+The confidence level matters because scanner vendors quote **1σ local** figures. Leica's BLK ARC is ±10 mm indoors at 1σ in mobile mode ([Leica](https://data.leica-geosystems.com/leica-blk/blk-arc/tech-specs)). NavVis quotes 5 mm local (1σ) for the VLX 3 and says outright that absolute accuracy depends on the size of the environment and is improved with control points ([NavVis](https://knowledge.navvis.com/docs/navvis-vlx-3-specifications)). XGRIDS quotes 1 cm relative and 3 cm absolute for the L2 Pro after processing ([Heliguy](https://www.heliguy.com/blogs/posts/xgrids-k1-vs-l2-pro/)). **[EST]** A 10 mm 1σ scanner is about 20 mm at 2σ, which is strictly LOA20. Holding LOA30 at 2σ needs roughly 7 mm 1σ, a level only FARO Orbis and NavVis VLX 3 claim. Many service providers still sell ±10 mm 1σ devices as "LOA30-ish", and the team should agree that judgement with the client in writing rather than discover it at handover.
+
+The table summarises what each sensor route realistically achieves on a Go2 over the full building. The "building-wide" column assumes a control network and a robot carrier. On the Hilti 2023 benchmark, robot-mounted runs scored "a few centimeters" worse than handheld runs because of vibration and noisier LiDAR ([Hilti 2023, arXiv 2404.09765](https://arxiv.org/html/2404.09765v2)).
+
+| Route | Stated sensor/device accuracy | Weight | Price (dated where known) | Realistic building-wide LOA on a Go2 with control [EST] |
+|---|---|---|---|---|
+| Unitree L2 (the build plan's choice; also the head LiDAR) | ≤2.0 cm, 64k pts/s, 30 m ([Unitree](https://www.unitree.com/L2)) | 230 g | $419 | LOA10–20: navigation and coverage grade |
+| Livox Mid-360 | ≤2 cm 1σ at 10 m, 200k pts/s ([Livox](https://www.livoxtech.com/mid-360/specs)) | 265 g | not researched | LOA20 |
+| Hesai XT32 | 0.5 cm 1σ precision, ±1 cm accuracy ([Hesai](https://www.hesaitech.com/product/xt32/)) | ~0.8–1 kg (unverified) | not researched | LOA20, with LOA30 possible locally |
+| XGRIDS K1 / L2 Pro | ±1.2 cm relative; L2 Pro 1 cm relative / 3 cm absolute ([Heliguy](https://www.heliguy.com/blogs/posts/xgrids-k1-vs-l2-pro/)) | <1 kg / ~1.7 kg | K1 ~$13,700; L2 Pro ~$35,000 ([aifitlab](https://aifitlab.com/collections/xgrids-lidar/products/xgrids-lixel-l2-pro-lidar)) | LOA20 |
+| Leica BLK ARC | ±10 mm indoor 1σ, 25 m range ([Leica](https://data.leica-geosystems.com/leica-blk/blk-arc/tech-specs)) | 690 g | ~$50–70k (resellers, unverified) | LOA20 to borderline LOA30 |
+| Emesent Hovermap ST-X | ±10 mm indoor, 300 m range ([Emesent](https://knowledge.emesent.com/articles/hovermap-specifications)) | 1.57 kg + battery | Astro Max bundle $70,310 ([Freefly](https://store.freeflysystems.com/products/emesent-hovermap-st-x-astro-max-autonomy-bundle)) | LOA20 to borderline LOA30 |
+| FARO Orbis | ~5 mm mobile ([FARO](https://faro.com/de-DE/Resource-Library/Tech-Sheet/Accuracy-and-Versatility-with-Orbis-Premium-Mobile-Scanner)) | 3.6 kg | quote only | LOA30 with dense control |
+| Static TLS (RTC360, Focus, X7) in critical rooms | mm-level | tripod, not dog | quote only | LOA40 |
+
+The independent evidence lines up with this table. A preprint that checked NavVis VLX and BLK2GO against a total station and a Z+F TLS on a large multistorey building found about **5 mm indoor error** ([Preprints.org](https://www.preprints.org/manuscript/202404.1484)). A 2025 ISPRS review reports **RMSD ≤ 25 mm** for SLAM over large areas, and that was with GNSS help, which is not available indoors ([ISPRS](https://isprs-archives.copernicus.org/articles/XLVIII-G-2025/1603/2025/isprs-archives-XLVIII-G-2025-1603-2025.pdf)). No source documents any commercial scanner on a Unitree Go2 or B2, and nobody has measured a Go2-mounted rig against LOA. Any accuracy number the team gives the client therefore has to come from its own held-out checkpoints on building #1, not from a datasheet.
+
+## Survey control and short segments, not the SLAM algorithm, hold accuracy across 92,900 m²
+
+**Why the robot's map alone won't hold.** **[EST]** At 0.1–1% open-loop drift, one uncontrolled kilometre can be off by **1–10 m**, and the base-case route in this building is about 22 km. Feature-rich outdoor runs do much better: FAST-LIO2 drifted only 0.31 m over 1,524 m ([ECTLO, arXiv 2206.08517](https://arxiv.org/pdf/2206.08517)). Warehouses and corridors do much worse. On a flat-wall corridor dataset FAST-LIO2's average error reached **2.6 m** ([arXiv 2411.16931](https://pdf.arxiv.org/pdf/2411.16931v2)), and geometry-only KISS-ICP failed on every degenerate sequence ([COIN-LIO, arXiv 2310.01235](https://arxiv.org/pdf/2310.01235)). The Hilti 2023 challenge shows the realistic ceiling. On sites of 4,000–7,500 m², the best single-session LiDAR systems reached **1.2–3.3 cm RMSE** using loop closure or bundle adjustment. The best multi-session merges reached only **0.29 m**, and no team used the surveyed control points to tie sessions together ([arXiv 2404.09765](https://arxiv.org/html/2404.09765v2)). The lesson for a building twelve times larger is that every session boundary must be bridged by shared surveyed targets, not by automatic registration.
+
+**Drift versus breaks.** NavVis separates two kinds of SLAM error, and the distinction drives the field plan. *Drift* accumulates smoothly, and control points correct it. *Breaks* are wrong matches that show up as duplicated walls or a jumping trajectory, and control "won't help" with them ([NavVis](https://knowledge.navvis.com/docs/drifts-and-breaks.md)). Repetitive aisles cause breaks. The mitigations, in order of how well they are sourced, are:
+
+- Add LiDAR intensity or visual cues ([COIN-LIO](https://arxiv.org/pdf/2310.01235)).
+- Place two or three UWB ranging anchors in the worst aisles ([LIRO](https://arxiv.org/abs/2010.13072)).
+- Use planar-structure constraints, as KAIST did to win the Hilti robot sequence.
+- Fuse Go2 leg odometry as a velocity prior (no Go2-specific study found).
+- Put temporary clutter in featureless aisles to break the symmetry.
+- Have a person review each proposed loop closure before accepting it.
+
+**The control network.** Vendors require at least three surveyed control points "evenly distributed across zones and levels", measured by total station ([NavVis](https://knowledge.navvis.com/docs/cop-957-best-practices-for-capturing-surveyed-control-points-with-navvis-vlx-1)). Emesent Aura needs at least three GCPs and can auto-detect reflective targets ([Emesent](https://knowledge.emesent.com/gcp-workflow-in-aura)). The vendor proof of concept is a NavVis test on a 1,500 m² garage with 8 control points: 8 mm absolute accuracy from loop closure alone, and 6 mm with control ([NavVis](https://www.navvis.com/blog/how-to-get-6mm-accuracy-or-better-with-a-mobile-scanner)). No source gives a spacing rule for a site this size, so the following design is the team's own **[EST]**:
+
+- Run closed total-station traverses through the building.
+- Place LiDAR-reflective or checkerboard targets every **~30 m** along primary aisles and corridors.
+- Put targets at every segment start/end point, in every overlap zone, and on every stair landing.
+- Hold back about **20%** of targets as independent checkpoints.
+
+For a roughly 305 × 305 m floor plate with cross-aisles every ~50 m, that comes to about **150–200 targets** per floor-equivalent **[EST]**. That is more survey work than the "one setup day" in the field estimate assumes. Get a surveyor's quote, and run the traverse a day ahead of the robot.
+
+**Reconciling 7–10 battery missions with 25–50 SLAM sessions.** The two research threads describe two layers of one plan, not competing plans.
+
+- **Battery missions.** The operations thread sizes missions by battery. One 15 Ah pack lasts about **1.75–2.25 h under payload [EST]** and matches an X4 battery at 5.7K. One mission therefore covers a zone of about **10,000–15,000 m²**, which gives **7–10 missions** for the building.
+- **SLAM segments.** The SLAM thread sizes sessions by drift. FARO caps ZEB surveys at **3–25 minutes** in closed loops "to avoid very large files and to reduce drift" ([FARO](https://knowledge.faro.com/Hardware/GeoSlam/ZEB_Accessories/Recommended_Survey_Time_With_ZEB_Locate_With_the_Open_Loop_Method)). At about 2,000–4,000 m² per 20-minute segment, that gives **25–50 segments**.
+- **The combined plan [EST].** Divide each mission zone into **50 × 50 m tiles**. Record each tile as **one ~15–20 minute SLAM segment** that starts on a control target, closes a loop every 100–200 m, shares at least 10–20 m of corridor and **at least 2 targets** with neighbouring tiles, and ends on control. In the base case the dog drives about 1.5 h per pack, so each battery mission holds **4–5 segments**. Over **7–9 missions** that totals about **30–45 segments**, comfortably inside the 25–50 range.
+- **Battery swaps.** Always end a segment on a target before a swap. The accessory battery keeps the Jetson and LiDAR logging through the robot's power-down, but start a fresh segment on the same target afterwards rather than trusting IMU-only time while the dog reboots.
+- **Floors, stairs and lifts.** Treat each floor as its own set of missions. Scan stairwells as dedicated short segments, carried by hand if needed. Treat elevators as hard session boundaries, because the LiDAR sees a moving box.
+
+**Keeping the Jetson out of trouble.** The Orin Nano's 8 GB of shared memory is another reason for short segments. LIO stacks accumulate map memory, so onboard processing should stop at odometry plus a downsampled QA preview. The **raw MCAP bag is the system of record**, and global optimisation happens on Conductor. GLIM is tested on Jetson Orin, and its offline viewer merges sessions with global registration, ICP refinement and manual loop closure ([GLIM](https://github.com/koide3/glim); [GLIM merge docs](https://koide3.github.io/glim/merge.html)). That makes it the natural open-source core.
+
+## Field operations: about 5–6 days, driven by battery swaps and a 0.5 m/s speed
+
+**Route length and time.** **[EST]** Every racked aisle has to be driven, because both the X4 and the LiDAR are blocked by racking. In a racked warehouse or factory on a ~5.5 m aisle pitch, the route is about **22 km** including 30% overhead for turns, loops and re-passes.
+
+- **Speed.** Drive at **0.5 m/s**, deliberately slower than OpenSpace's 1.3 m/s human capture pace ([OpenSpace](https://support.openspace.ai/en/articles/3564935-walking-the-project-site-with-openspace)). The dog's trot adds bob that a monopod does not.
+- **Driving time.** That works out to about **12.2 h of net driving, or ~13.5 h with re-shoots**, a rate of about 7,600 m²/h. That sits inside NavVis's 7,000–12,000 m²/h band for open halls and warehouses ([NavVis](https://knowledge.navvis.com/docs/navvis-vlx-scanning-daily-coverage-guide)).
+- **Daily output.** A teleoperated robot gets about **3.5–4.5 h of net capture per 8–10 h day**. That is **2.5–3 battery missions per day**, so about **3.4 capture days**.
+- **Total field days.** Adding a site-walk and control day plus QC and re-shoot time gives **5–6 field days**.
+- **Range.** An open warehouse driven at 10 m lane spacing and 0.8 m/s takes about 2–3 days. A cellular hospital or office at 4 m spacing and 0.35 m/s takes about 26–30 h of driving and **10–11 days**.
+
+**Reconciling field days with wearable benchmarks.** The base case looks competitive until it is compared per person. **[EST]** It works out to about **290k sq ft per capture day**, or about 170–200k sq ft per field day across the whole job, with a two-person crew. That is **85–100k sq ft per person-day**. The wearable benchmarks:
+
+- A reseller quotes **200k–300k sq ft per operator-day** for a NavVis VLX 3 ([The Future 3D](https://www.thefuture3d.com/blog/navvis-vlx3-review-specifications-guide)).
+- BIMstream's production figure is about **100k sq ft per scanner shift**, and its multi-unit crews finish 1–2M sq ft buildings in about a week ([NavVis/BIMstream](https://www.navvis.com/resources/case-studies/bimstream)).
+- IBKS took 10 days per 225k sq ft healthcare tower ([NavVis/IBKS](https://navvis.com/resources/case-studies/ibks-pointfuse)).
+
+So the dog at best matches one wearable operator's calendar time while using twice the people. It only gets there in warehouse-class geometry, because the base case borrows the warehouse rate. In office or hospital space it falls to the 10–11 day conservative case, the same as about ten single-scanner shifts. Robot vendors sell repeatability, not first-capture speed: Spot's ST Engineering deployment covers a 1.5M sq ft site but publishes no scan rate ([Boston Dynamics](https://bostondynamics.com/case-studies/spot-at-st-engineering-mras/)). **Quote the client 5–10 days until a pilot day has measured real throughput.**
+
+**Batteries and endurance.** The Go2 X ships with an 8 Ah pack rated at 1–2 h and a 3.5 A charger. The EDU-class **15 Ah pack (~432 Wh)** with the **9 A charger** recharges in about 1.5 h, against about 4 h on the standard charger ([Unitree](https://www.unitree.com/go2); [Global Drone HQ](https://globaldronehq.com/products/unitree-go2-long-range-battery)). Nobody has measured a Go2 runtime carrying a 3–5 kg scanning payload. The planning figures are **[EST]**:
+
+- **Recommended set: three 15 Ah packs and two 9 A chargers.** That sustains a full day, needs a ~600 W outlet at base camp, and halves the number of swaps. The alternative is 5–6 × 8 Ah packs.
+- **Swaps are power-down swaps.** No hot-swap is documented, so budget **3–5 minutes per swap**.
+- **Accessory battery.** The Jetson, LiDAR and global-shutter camera run from their own 24 V-class battery, as the companion build plan specifies, so they keep logging through robot swaps.
+- **Camera endurance.** The X4 lasts about **135 min at 5.7K30** and **71–75 min at 8K30** ([SlashGear](https://www.slashgear.com/1563687/insta360-x4-review-8k-360-action-camera-slow-motion)). That is the main reason to shoot at 5.7K: **one robot pack, one camera battery, one mission**, all changed at the same swap. Carry 4–5 X4 batteries. Don't run the X4 on USB with the battery removed; one user reports a shutdown at 45 minutes that way.
+
+**Autonomy and connectivity.** Use **teleop as the production mode** for building #1. The Go2 X is rated only "partially" open for secondary development ([Unitree](https://www.unitree.com/go2)). Community ROS 2 drivers list AIR, PRO and EDU, not the X ([go2_ros2_sdk](https://github.com/abizovnuralem/go2_ros2_sdk)). Go2 Nav2 projects report map-frame drift at scale ([at1047](https://at1047.github.io/go2_search_and_rescue/results)). Nav2 waypoint runs are worth piloting on long aisles in zones already mapped, but doors, fire doors and lifts need a person regardless.
+
+Design the comms **offline-first**:
+
+- Drive with the handheld controller at **20–40 m** **[EST]**.
+- Put a 5 GHz travel router on a tripod in each mission zone for FPV and Jetson status.
+- Never stream the 360 video live.
+- Treat indoor 4G in steel buildings as unusable.
+
+**Keeping the operator out of the 360 shot.** The X4 sees everything except a small zone under the camera, so the pilot has to stay **15–25 m back** or leapfrog into cross-aisles, at the edge of controller range. Mask people in post where that fails.
+
+**Speed and lighting.** **[EST]** Lock the X4 shutter at **≤1/120 s**: at 0.5 m/s the camera moves about 4 mm during the exposure. Accept the extra ISO noise. Slow to about 0.3 m/s in dim zones, and ask the facility to turn on all high-bay lighting. Don't fit an on-robot LED, which flares in the 360 frame.
+
+**Safety.** Treat the dog like any AMR on a live site:
+
+- A site-specific risk assessment in the spirit of ISO 3691-4 ([Geekplus](https://www.geekplus.com/resources/knowledge-base/amr-safety-standards-and-compliance-the-enterprise-guide-to-risk-mitigation-and-operational-excellence?hsLang=en)).
+- **Forklift-free windows** (nights, weekends or barriered zones), because drivers can't see a 40 cm robot.
+- A two-person crew (pilot, plus a spotter who handles doors, swaps, cards and QC), plus a facility escort.
+- A certificate of insurance naming the client.
+
+Research on quadruped–human safety is described as "in its infancy", and factory staff rank collision and path deviation as their top concerns ([MDPI 2024](https://mdpi.com/2076-3417/14/22/10232)). The Go2 has **no IP rating and a 5–35 °C operating range** ([GDHQ](https://globaldronehq.com/blogs/guides/unitree-go2-series-guide)), so unconditioned bays in winter and wet plant rooms are off limits. Its ~16 cm maximum step is below common 17–18 cm commercial risers. Plan to **carry the dog between floors**.
+
+**Client security acceptance.** This could stop the job before any capture starts:
+
+- **Section 1260H.** Unitree is on the Pentagon's Section 1260H list.
+- **FCC Covered List.** The FCC added foreign-produced advanced robotic devices to the Covered List effective **28 July 2026**. Existing Go2 authorisations stand, and software updates are allowed through 1 January 2029 ([Global Drone HQ](https://globaldronehq.com/blogs/guides/unitree-fcc-covered-list-us-buyers-guide)). It is not a ban on using units already authorised ([The Hacker News](https://thehackernews.com/2026/07/fcc-blocks-new-foreign-produced-robots.html?m=1)).
+- **Backdoor history.** The Go1 had an undocumented CloudSail remote-access tunnel (**CVE-2025-2894**) ([Tenable](https://tenable.com/cve/CVE-2025-2894)). Later reports describe Go2 exploits, and note that patching with official firmware also removes the root access needed to inspect the tunnel ([Korben](https://korben.info/en/unitree-robot-dogs-backdoor-nobody-fixing.html)).
+
+The answer is an air-gapped posture, documented in a one-page security statement for the client's IT team:
+
+- Pull the 4G SIM and turn off Bluetooth.
+- Never join client Wi-Fi.
+- Log only to the team-owned Jetson.
+
+Even so, expect refusals at federal, defence, critical-infrastructure and many Fortune 500 sites. Ask before mobilising.
+
+## The camera kit: X4 at 5.7K for the visual layer, a timestamped 4K camera for anything measurable
+
+**X4 settings.** The X4 is a strong, cheap 360 tour camera. OpenSpace lists it as compatible ([OpenSpace](https://support.openspace.ai/hc/en-us/articles/42283714903443-Insta360-Camera-Comparison)). It is also a rolling-shutter consumer device with no hardware sync, so treat it as a **visual layer registered to the LiDAR trajectory, not a measurement source**. Shoot **5.7K30 at High bitrate**. It records about **700 MB/min (~42 GB/h)** against 1.5 GB/min (~90 GB/h) at 8K30 High ([Insta360 manual](https://onlinemanual.insta360.com/x4/en-us/specs/compatibility/storage)). Reviewers find **5.7K performs better indoors and in dim light** ([360rumors](https://360rumors.com/insta360-x4-review/?amp=1)). At 8K the camera has overheated after about 30 minutes indoors without airflow ([Reddit report](https://pol1.lr.ggtyler.dev/r/Insta360/comments/1ii503r/long_time_recording_in_8k)), and its battery would no longer line up with a 15 Ah robot pack. Further settings:
+
+- Turn FlowState stabilisation off, or keep the raw .insv files with their gyro data.
+- Use V30 cards of 512 GB to 1 TB. One 512 GB card holds more than a full day at 5.7K **[EST]**.
+- Give the camera airflow.
+- Start and stop recording from the Jetson using Insta360's Desktop Camera SDK. It supports the X4 over USB on Linux AArch64 but cannot set bitrate ([Insta360 SDK](https://gh.hhj520.top/Insta360Develop/Desktop-CameraSDK-Cpp)).
+
+**Choosing the 4K camera.** Pick it by deliverable.
+
+- **Action camera.** A **DJI Osmo Action 5 Pro** ($349, DJI claims up to 4 h) or GoPro HERO13 ($399.99) adds a sharp forward video for reports ([BGR](https://bgr.com/reviews/dji-osmo-action-5-pro-review-the-best-battery-life-an-action-cam-can-get/); [Tom's Guide](https://www.tomsguide.com/cameras-photography/gopro-action-cameras/gopro-hero13-black-can-the-champ-keep-his-title)). It adds nothing metric: it has its own clock, its own heat limits and rolling shutter. Pick it if the deliverable is visual.
+- **Machine-vision camera.** A **global-shutter camera** such as the Teledyne FLIR Blackfly S 12.3 MP ($2,019 board-level mono) can be hardware-triggered from a GPIO and timestamped in the Jetson's clock ([Teledyne](https://teledynevisionsolutions.com/products/blackfly-s-board-level)). It produces distortion-free frames, which is what point-cloud colourisation, photogrammetry and measurable defect imagery need. The colour variant's price was not researched. If the deliverable says "high precision", this is the right forward camera.
+
+**Time sync.** Make the Jetson the clock master.
+
+- **LiDAR.** Livox LiDARs accept PTPv2/gPTP with no GPS hardware ([Livox](https://livox-wiki-en.readthedocs.io/en/latest/tutorials/new_product/common/time_sync.html)). Confirm the equivalent for whichever sensor is chosen.
+- **Global-shutter camera.** Trigger it from the Jetson or a microcontroller.
+- **Clock domains.** Jetson camera stacks can stamp frames with a monotonic clock while the LiDAR uses system time, so the two must be reconciled ([NVIDIA forum](https://forums.developer.nvidia.com/t/lidar-camera-synchronization-argus-returns-monotonic-clock-time-lidars-system-clock-time/204126)).
+- **Reference standard.** ETH's Boxi legged-robot payload targets **<10 µs** sync for mm-level work at 1 m/s ([Boxi, arXiv 2504.18500](https://arxiv.org/pdf/2504.18500)).
+- **X4 and action camera [EST].** These can only be synced in post: an LED flash or foot stomp seen by every sensor at the start of each segment, then cross-correlation of the X4 gyro against the LiDAR IMU. At 0.5 m/s, 10 ms of residual error is 5 mm of travel. That is fine for tours and coarse colour, but not for per-point measurement.
+
+**Mounting layout [EST].** The front-top deck carries the LiDAR on a rigid, slightly tilted bracket, with the global-shutter camera bolted to the **same bracket** so their calibration stays fixed. Note that the measured Mid-360 offset on a Go2 is about (0.187, 0, 0.080) m with a 13° pitch ([velog](https://velog.io/@jeonchanwook/unitree-go2-sensor-Lidar)). The Jetson, accessory battery and DC-DC converters sit low between the hips. The X4 goes **rear-centre on a 25–40 cm mast**, with its lenses parallel to the mast so the stitch hides it. That puts the lens at about 0.65–0.8 m and keeps the dog's body mostly in the nadir. Too tall a mast sways and raises tip risk.
+
+Total added mass is about **2.2–3.5 kg**, well inside the 8 kg rating, but it costs runtime. The front LiDAR will appear in the bottom-forward part of the 360 frame, a trade accepted for a clean LiDAR view. The head L2 stays as the navigation sensor.
+
+## Conductor can process the job, but tile the cloud and work around 16 GB of VRAM
+
+**Data volumes [EST].** In the base case (13.5 h of capture), the raw data on the cards and NVMe is about **1.3–1.8 TB**, or **0.4–0.7 TB per field day**. Shooting 8K instead adds about 0.65 TB.
+
+| Stream (base case 13.5 h) | Rate | Job total |
+|---|---|---|
+| X4 5.7K30 High | ~42 GB/h | ~0.57 TB (8K30 High: ~1.2 TB) |
+| 4K action cam (100–150 Mbps) | 45–68 GB/h | 0.6–0.9 TB |
+| Global-shutter camera at ~2 fps JPEG (alternative) | ~20–30 GB/h | ~0.3–0.4 TB |
+| LiDAR + IMU as raw packets/MCAP (L2 ~4–7, XT32 ~5.5–11, Mid-360 ~13–19 GB/h) | 5–19 GB/h | 0.1–0.25 TB |
+
+Record LiDAR as raw packets, not decoded PointCloud2. Decoded XT32 clouds swell to about 70–75 GB/h. As a sanity check, NavVis's purpose-built system records only **15–34 GB/h** ([NavVis](https://knowledge.navvis.com/docs/hardware-requirements-1)), so 360 video dominates this kit's footprint.
+
+**Field data handling.** After every mission:
+
+- Copy the bag off the Jetson.
+- Check the cards.
+- Overlay a quick SLAM preview on the floor plan to confirm aisle coverage before leaving the zone.
+
+Every night, copy everything to two 4 TB SSDs and keep one off site.
+
+**The processing chain on Conductor.**
+
+1. **Ingest and checksum** everything.
+2. **SLAM per segment.** Run GLIM with CUDA on the 5070 Ti, or FAST-LIO2/Point-LIO plus hierarchical bundle adjustment, the HKU-MaRS Hilti recipe.
+3. **Merge and register to control.** Merge the segments in GLIM's offline viewer, with targets in the overlaps. Register to the control network in CloudCompare, or in Leica Cyclone REGISTER 360 PLUS if the team wants its native registration reports ([Leica](https://rcdocs.leica-geosystems.com/cyclone-register-360/latest/computer-specifications)).
+4. **Process headlessly in tiles** with PDAL: outlier removal, voxel downsampling, ground classification, then COPC/LAZ output.
+5. **Stitch the 360 video and extract frames** at 1–2 fps.
+6. **Colourise** the cloud by projecting frames along the SLAM trajectory using the estimated time offsets. This is custom Python/Open3D work, not a turnkey tool.
+7. **Export and publish** E57/LAS/LAZ/RCP files, and a Potree viewer, which is tested to 640 B points ([PotreeConverter](https://github.com/potree/PotreeConverter/)). Optionally use Cintoo or a 360 tour platform.
+8. **Scan-to-BIM** in Revit with EdgeWise if it is in scope ([Topcon](https://www.topconpositioning.com/solutions/technology/infrastructure-software-and-services/clearedge-edgewise)).
+
+One check before relying on GLIM's CUDA path: it is documented on CUDA 12.2/12.5. Confirm it builds for the Blackwell-generation 5070 Ti, which requires a newer CUDA toolkit. Otherwise fall back to its CPU mode.
+
+**Final cloud size [EST].** Scanned surfaces are about 2.5–4× the floor area, so the finished cloud is about **2.3–3.7 billion points at 10 mm spacing** and **9–15 billion at 5 mm**. At 5 mm that is about 0.3–0.55 TB as LAS and about 30–130 GB as LAZ ([LASzip](https://www.cs.unc.edu/~isenburg/lastools/download/laszip)). Point spacing describes density, not accuracy, and the QA report should state both.
+
+**Where Conductor is short.** Conductor's 16-core EPYC meets NavVis's ≥8-core and XGRIDS's 16-core guidance. Its 128 GB of RAM meets NavVis (128 GB), Leica (64–256 GB) and XGRIDS LCC (128 GB for ≤60-minute captures) ([NavVis](https://knowledge.navvis.com/docs/hardware-requirements-1); [XGRIDS](https://docs.xgrids.com/en-us/06-lixel-cybercolor/01-lcc-studio/v2.0.0/03-download-and-installation.html)). Four limits remain:
+
+- **CloudCompare memory.** CloudCompare holds about 32 M coloured points per GB and caps each cloud at about 2 B points ([CloudCompare](https://www.cloudcompare.org/doc/wiki/index.php/Introduction)). The whole 5 mm building will never sit in memory at once, so **work per zone tile (0.2–1.5 B points)** and do building-wide operations in PDAL/COPC. A move to 256 GB is a worthwhile, not essential, upgrade.
+- **VRAM.** 16 GB is above Leica's 8 GB recommendation but below XGRIDS LCC's **RTX 3090 (24 GB) minimum**. Naive 3D Gaussian splatting runs out of memory above about 11 M Gaussians even on 24 GB ([CityGaussian](https://arxiv.org/pdf/2404.01133)). Splats of this building must be trained as **~20–45 blocks of 2,000–5,000 m²**, about 10–70 GPU-hours **[EST]**, or offloaded to cloud GPUs.
+- **Video decode.** The 5070 Ti has **two NVENC encoders but only one NVDEC decoder**, rated at 8K75 ([NVIDIA](https://developer.nvidia.com/video-encode-decode-support-matrix?ncid=em-prod-816193)). The X4 footage decodes in hardware, but one stream at a time. Run the 4K camera's decodes on the CPU in parallel.
+- **360 stitching.** Insta360 Studio has no Linux build. Headless stitching needs the **Insta360 Media SDK** (Ubuntu 22.04 x86_64, discrete GPU), which requires an approved application ([Insta360 SDK docs](https://insta360develop.github.io/Insta360-Developer_Docs/en/x/desktop/guide/)). Apply now, or plan a Windows boot for Studio, REGISTER 360, EdgeWise and Revit.
+
+**Storage [EST].** A full project needs **4.5–9 TB of working space** (raw, stitched video, frames, SLAM maps, deliverables and splat scratch). That fits on the 15.36 TB of NVMe for one active project. Use one drive for raw and ingest, the other for scratch, and no unbacked RAID-0. It leaves no room for backups or a second job, so add a **4–6 bay NAS with 40–60 TB usable** on 10 GbE for archive and 3-2-1 backup. Keep active projects on local NVMe: Leica advises against NAS for project storage.
+
+## The robot earns its place on repeat captures, not a one-off LOA30 survey
+
+**Against the alternatives.** For a single first capture, the honest ranking puts a person with a wearable scanner first. NavVis VLX 3 offers 5 mm local accuracy, handles stairs and doors, needs one operator, and covers 100k–300k sq ft per day. Its 8.5 kg weight rules it out as a Go2 payload ([NavVis](https://knowledge.navvis.com/docs/navvis-vlx-3-specifications)). Spot with a BLK ARC or Hovermap is the proven robotic stack: certified payloads, Autowalk missions that repeat without a human, and a 14 kg payload. But configured Spots are reported at **$150k–$375k**, plus about $50k for a BLK ARC ([Standard Bots](https://standardbots.com/articles/spot-robot); [reach.dog](https://acceptance.reach.dog/shop/rmus-unmanned-solutions-drone-robotics-sales-training-and-support/products/leica-blk-arc)). Turner Construction still found BLK ARC on Spot less accurate than its static RTC360, though useful for broad geometry ([Leica](https://data.leica-geosystems.com/leica-blk/blk-arc/blog/leica-blk-arc-and-blk2go-help-autonomous-reality-capture-become-everyday)).
+
+**The case for the Go2.** The Go2 X costs **$4,500** ([Unitree](https://www.unitree.com/go2)). Robots pay back on **repeat runs of the same route**, such as weekly progress capture, BIM comparison, and areas people shouldn't walk. That is how Foster + Partners, Virginia Tech and W.R. Grace used them ([Foster + Partners](https://www.fosterandpartners.com/plus-journal/on-site-with-spot); [CSE Magazine](https://www.csemag.com/research-puts-robotic-technology-on-campus-construction-sites/)). A 2024 study still flags battery capacity and "prototype-level maturity" as the limits ([arXiv 2409.15253](https://arxiv.org/pdf/2409.15253)).
+
+**The verdict.** Use the Go2 for building #1 to deliver **LOA20 point clouds plus 360 tours**, to prove throughput, and to build the repeat-capture product. Do not promise building-wide LOA30 from the dog alone. Commercial scanning services charge **$0.20–$0.70 per sq ft** ([The Future 3D](https://www.thefuture3d.com/blog/navvis-vlx3-review-specifications-guide)). On that basis this one building is a six-figure job, which means renting a wearable scanner or subcontracting TLS for stairwells and LOA30 rooms is cheap insurance rather than a defeat. BIMstream's own production mix on 1–2M sq ft buildings was about 70% wearable, 15% TLS and 15% handheld ([NavVis/BIMstream](https://www.navvis.com/resources/case-studies/bimstream)).
+
+### Recommended kit for building #1
+
+| Item | Recommendation |
+|---|---|
+| Robot power | Go2 X with three 15 Ah packs and two 9 A chargers. The 8 Ah pack is a spare. |
+| Survey LiDAR | **If the client needs LOA20:** a Hesai XT32-class (or Livox Mid-360) on the front deck, raw packets logged on the Jetson, with the head L2 kept for navigation. **If the client needs LOA30:** a commercial payload (Hovermap ST-X or BLK ARC; XGRIDS K1/K2 as a budget LOA20 option) as a "dumb carrier" with its own battery and processing software. |
+| Forward 4K camera | Blackfly S-class global-shutter colour camera, hardware-triggered by the Jetson. A DJI Osmo Action 5 Pro only if the deliverable is purely visual. |
+| 360 camera | Insta360 X4 at 5.7K30 High, shutter ≤1/120 s, stabilisation off, on a 25–40 cm rear mast, 4–5 batteries, 512 GB–1 TB V30 cards |
+| Compute and power | Jetson Orin Nano Super with 1 TB NVMe as PTP master, on a 24 V accessory battery, Ethernet-only to the robot (per the companion build plan) |
+| Survey | Total station traverse; ~150–200 LiDAR-reflective/checkerboard targets; 20% held out as checkpoints |
+| Comms | Handheld controller; one 5 GHz tripod router per zone; 4G SIM removed, Bluetooth off |
+| Office | Conductor, plus a 40–60 TB NAS on 10 GbE, Insta360 Media SDK access, and optionally a 256 GB RAM upgrade |
+
+### Capture plan [EST]
+
+**Day 0, pilot.** Capture one ~5,000–10,000 m² zone and measure:
+
+- Wh/km under the full kit at 0.5 m/s.
+- X4 blur against speed and light.
+- Controller and router range.
+- Drift between control targets.
+- Real m²/h.
+
+Re-baseline the schedule from these numbers before quoting firm dates.
+
+**Day 1, control.** Survey the control network, or have it surveyed in parallel a day ahead. Install the targets and tile the floor plan into 50 × 50 m tiles grouped into 7–10 mission zones.
+
+**Days 2–4 or 5, capture.** Run 2.5–3 missions per day in forklift-free windows. Each mission is one 15 Ah pack, one X4 battery and 4–5 tile segments. Each segment runs 15–20 minutes, starting and ending on targets, with an LED/stomp sync event at the start and ≥2 shared targets with its neighbours. Run QA after every mission.
+
+**Final 0.5–1 day, cleanup.** Re-shoot gaps, record the stairwell segments by hand-carry or subcontract, and capture TLS in any LOA30/40 rooms.
+
+### Processing plan [EST]
+
+1. On the day, run checksums and coverage overlays.
+2. During the following week, run per-segment SLAM and bundle adjustment.
+3. Merge the segments by mission zone, then register zones to control.
+4. Compute residuals on the held-out checkpoints and report them by LOA at the confidence level the contract specifies. This is the gate: no zone ships until it passes.
+5. Process tiles in PDAL, colourise from the global-shutter camera (and the X4 for the tour layer), and publish COPC/Potree and E57.
+6. Add 3DGS blocks or BIM only if they were sold.
+
+### Decisions the team must make
+
+| Decision | Why it matters |
+|---|---|
+| **Required LOA, stated as measured vs represented, 1σ vs 2σ, and local vs absolute building-wide** | It sets the LiDAR choice, control density, whether a TLS or wearable subcontract is needed, and what can honestly be promised. |
+| Deliverables (360 tour, point cloud, BIM, splats) | They drive camera choice, processing hours and the VRAM workarounds. |
+| Building facts: floors, stairs, lifts, racking pitch, lighting, forklift schedule, temperature | They move the schedule between 2–3 and 10–11 days. |
+| Client acceptance of a Unitree robot and the air-gapped posture | It can veto the robot outright, so have a wearable fallback ready. |
+| Who surveys control, and the budget for ~150–200 targets | Building-wide accuracy depends on it. |
+| Action camera vs global-shutter forward camera | The choice is visual-only vs measurable imagery. |
+| NAS purchase, 256 GB RAM upgrade, Insta360 SDK application, software licences (REGISTER 360, EdgeWise) | These are Conductor's real bottlenecks. |
+
+## Conclusion
+
+The question "how precise can the dog be?" turns out to be the wrong one. The robot is a carrier. Precision comes from the control network, and productivity is capped by batteries and a 0.5 m/s camera-safe walk. Neither is improved by better legs. That moves the team's competitive edge from hardware to process: disciplined segmenting, sync events, held-out checkpoints and an accuracy report a client can audit. None of the published Go2 work has demonstrated that process yet, and the same discipline would make a wearable or Spot capture just as defensible.
+
+The strategic payoff of building #1 is therefore not one fast scan. It is a measured baseline (Wh/km, m²/h, checkpoint residuals) and a surveyed control network that turn every later visit into a cheap, repeatable robot run. That is the use case where a $4,500 dog does beat a person with a premium wearable scanner. Until the client's required LOA and security stance are known in writing, every number here except the physics of drift is a planning estimate.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

@@ -64,7 +64,7 @@
     <div>
       <div class="hx-code">Build team · Project index</div>
       <h1>Two projects, one team</h1>
-      <p>The same people work on both, in separate lanes: each project has its own budget, plan, bill of materials and research. They stay independent until integration (Phase 3), when Field Unit offloads heavy AI inference to Conductor.</p>
+      <p>The same people work on both, in separate lanes: each project has its own budget, plan, bill of materials and research. They meet at one interface: Field Unit captures building data, Conductor processes it (see Integration below).</p>
     </div>
     <table class="rev" aria-label="Document revision">
       <tr><td>Doc</td><td>BT-IDX</td></tr>
@@ -97,31 +97,32 @@
     </section>
 
     <section class="pj fu" aria-labelledby="pj2">
-      <div class="pj-h"><span class="id">PRJ-02 · FIELD UNIT</span><span class="st"><i></i>Hardware owned · access test</span></div>
-      <h2 id="pj2">Quadruped robot platform</h2>
-      <p class="purpose">Unitree Go2 X with an add-on Jetson Orin Nano Super, a Unitree L2 3D LiDAR and an SO-101 arm: perception, locomotion and light manipulation.</p>
+      <div class="pj-h"><span class="id">PRJ-02 · FIELD UNIT</span><span class="st"><i></i>Hardware owned · pilot day next</span></div>
+      <h2 id="pj2">Quadruped capture platform</h2>
+      <p class="purpose">High-precision LiDAR + 360° imaging of very large buildings. Unitree Go2 X carrying a Jetson Orin Nano Super logger, a survey LiDAR, an Insta360 X4 and a forward 4K camera. Test site #1: 1,000,000 sq ft (≈92,900 m²).</p>
       <figure><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog" loading="lazy"><figcaption>Fig. 2 — Unitree Go2, the base platform. Source: Unitree Robotics.</figcaption></figure>
-      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="done"><b>Owned</b>X + Jetson</div><div class="now"><b>Access test</b>next</div><div><b>Add-ons</b>then</div></div>
+      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="done"><b>Owned</b>X + Jetson</div><div class="now"><b>Access test + pilot</b>next</div><div><b>Building #1</b>then</div></div>
       <div class="specs">
         <div><b>67<small>TOPS</small></b><span>Orin Nano Super</span></div>
-        <div><b>12</b><span>leg actuators</span></div>
+        <div><b>1.0<small>M sq ft</small></b><span>test site #1</span></div>
         <div><b>8<small>kg</small></b><span>rated payload</span></div>
-        <div><b>≈3.5<small>kg</small></b><span>add-ons (est.)</span></div>
+        <div><b>5–6<small>days</small></b><span>field time (est.)</span></div>
       </div>
       <table class="kv">
-        <tr><th>Platform</th><td><span class="m">Go2 X · Jetson Orin Nano Super 8 GB · Unitree L2 · SO-101</span></td></tr>
-        <tr><th>Budget</th><td>Robot + Jetson owned · <span class="m">≈ $1,464</span> core add-ons <small>(≈ $2,939 with 15 Ah battery upgrade)</small></td></tr>
-        <tr><th>Next</th><td>20-minute rear-port network test: determine which DDS topics the X exposes to the Jetson.</td></tr>
+        <tr><th>Platform</th><td><span class="m">Go2 X · Jetson Orin Nano Super 8 GB · survey LiDAR (TBD) · Insta360 X4 · 4K camera</span></td></tr>
+        <tr><th>Accuracy</th><td>LOA20 (15–50 mm) building-wide with a survey control network <small>(est.)</small> · required LOA for the client deliverable: <b>TBD</b></td></tr>
+        <tr><th>Budget</th><td>Robot + Jetson owned · <span class="m">≈ $1,464</span> core add-ons · capture kit partly priced (Blackfly S $2,019, 15 Ah packs $1,200 each); X4, survey LiDAR and survey control pending quotes</td></tr>
+        <tr><th>Next</th><td>Pilot day: capture one 5,000–10,000 m² zone and measure capture rate (m²/h), Wh/km, X4 blur and drift between control targets. Rear-port access test first.</td></tr>
         <tr><th>Team</th><td>Build team</td></tr>
       </table>
-      <div class="links"><a class="p" href="field-unit.html">Open PRJ-02 →</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
+      <div class="links"><a class="p" href="field-unit.html">Open PRJ-02 →</a><a href="field-unit.html#mission">Capture plan</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
     </section>
   </div>
 
-  <aside class="intg" id="meet" aria-label="Integration, Phase 3">
-    <span class="hx-code">Integration · Phase 3 · not scheduled</span>
-    <div><b>Where the projects meet.</b> Once both work standalone, Field Unit sends heavy inference (arm VLA, LLM/VLM planner, open-vocabulary vision) over Wi-Fi to Conductor's RTX 5070 Ti. Locomotion, e-stop, arm safety and SLAM stay on the robot, so it degrades safely if the link drops. Until then, each project ships on its own budget and schedule.
-      <div class="if">Interface (planned): Zenoh over Wi-Fi 6 · ROS 2 Humble · command timeouts → robot stop</div></div>
+  <aside class="intg" id="meet" aria-label="Integration: processing pipeline">
+    <span class="hx-code">Integration · processing pipeline · moved earlier: required for building #1</span>
+    <div><b>Where the projects meet: Field Unit captures → Conductor processes.</b> The scanning mission makes integration part of the core workflow, not a later phase. The dog logs raw LiDAR (MCAP), 360 and 4K video on site with no network; Conductor ingests it, runs SLAM optimisation and segment merging (GLIM / bundle adjustment), registers to survey control, colourises and publishes the deliverables. The projects keep separate budgets, plans and BOMs; the hand-off is files, not a live link.
+      <div class="if">Interface: raw MCAP bags + .insv / video files + control coordinates → Conductor NVMe → NAS (40–60 TB, planned). Later: Zenoh over Wi-Fi 6 for live inference.</div></div>
   </aside>
 
   <footer class="hx-foot">Build team · PRJ-01 Conductor · PRJ-02 Field Unit · Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics; Hesai; TheRobotStudio; Wikimedia Commons contributors (see each project's credits). Shown for identification; trademarks belong to their owners.</footer>
