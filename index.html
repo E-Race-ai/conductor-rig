@@ -77,8 +77,8 @@
   <div class="prj">
     <section class="pj con" aria-labelledby="pj1">
       <div class="pj-h"><span class="id">PRJ-01 · CONDUCTOR</span><span class="st"><i></i>Parts decided · ordering</span></div>
-      <h2 id="pj1">AI orchestration workstation</h2>
-      <p class="purpose">Single-socket AMD EPYC tower that runs about 14 coding agents concurrently plus local models on an RTX 5070 Ti.</p>
+      <h2 id="pj1">AI Orchestration &amp; Capture Processing Workstation</h2>
+      <p class="purpose">Single-socket AMD EPYC workstation. Runs about 14 concurrent coding agents and local models on an RTX 5070 Ti, and is the processing back end for PRJ-02 capture data (SLAM merge, registration to control, 360° stitching, QA). Document CD-SYS-001 Rev A.</p>
       <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
       <div class="specs">
@@ -90,10 +90,10 @@
       <table class="kv">
         <tr><th>Platform</th><td><span class="m">EPYC 9175F · ASRock Rack TURIND8X-2T · SP5</span></td></tr>
         <tr><th>Budget</th><td><span class="m">≈ $14,037</span> all-in <small>(Micro Center $9,063 incl. tax + Amazon drives ≈ $4,974)</small></td></tr>
-        <tr><th>Next</th><td>Confirm board's 3× EPS inputs vs PSU's 2× EPS cables; order before price guarantee ends Thu Nov 19.</td></tr>
+        <tr><th>Next gate</th><td>G0: EPS check (board 3× EPS vs PSU 2× EPS cables) + order before the price guarantee ends Thu Nov 19. Then G2: NAS ≥ 40 TB before the first client job.</td></tr>
         <tr><th>Team</th><td>Build team</td></tr>
       </table>
-      <div class="links"><a class="p" href="conductor.html">Open PRJ-01 →</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
+      <div class="links"><a class="p" href="conductor.html">Open PRJ-01 →</a><a href="conductor.html#req">Requirements</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
     </section>
 
     <section class="pj fu" aria-labelledby="pj2">

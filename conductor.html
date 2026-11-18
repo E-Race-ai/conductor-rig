@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-proj="con"><head><meta charset="utf-8">
+<html lang="en" data-proj="con" data-rev="CD-SYS-001 · Rev A · 2026-11-18"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Conductor · Project 01</title>
-<meta name="description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
-<meta property="og:title" content="Conductor · Project 01"><meta property="og:description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<title>Conductor · CD-SYS-001</title>
+<meta name="description" content="Conductor CD-SYS-001: AI orchestration and capture processing workstation. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
+<meta property="og:title" content="Conductor · CD-SYS-001"><meta property="og:description" content="Conductor CD-SYS-001: AI orchestration and capture processing workstation. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/og-conductor.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/og-conductor.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B0D10"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -415,1115 +415,644 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .dp-cap{display:flex;gap:12px;align-items:baseline;margin-top:14px;min-height:48px;color:#C9D0DD}
 .dp-cap b{font:800 12px var(--mono);color:#0B0D10;background:var(--film);border-radius:3px;padding:4px 10px;white-space:nowrap}
 
+</style><style>
+/* PRJ-02 Field Unit · MRCS engineering document */
+.ms-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+@media (max-width:860px){.ms-grid{grid-template-columns:1fr}}
+.ms-h3{font:600 17px/1.3 var(--body);margin:40px 0 6px;color:var(--text);text-transform:none;letter-spacing:0}
+.ms-h3 i{font:500 12px/1 var(--mono);color:var(--cy);font-style:normal;margin-right:10px}
+.ms-p{color:var(--dim);font-size:15px;max-width:80ch;margin:6px 0 0}
+.ms-tw{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.ms-t{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.45;min-width:620px}
+.ms-t.n{min-width:0}
+.ms-t th,.ms-t td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+.ms-t thead th{font:600 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.015)}
+.ms-t tbody tr:last-child td,.ms-t tbody tr:last-child th{border-bottom:0}
+.ms-t .m,.ms-t td.m{font-family:var(--mono);font-size:12.5px;color:var(--text)}
+.ms-t tbody th{font-weight:600;color:var(--text);font-family:var(--body)}
+.ms-t tbody th.m{font-family:var(--mono)}
+.ms-t .hi td,.ms-t .hi th{background:rgba(79,179,232,.06)}
+.ms-t .sub td{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.02)}
+.chip{display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:4px 6px;border-radius:2px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.chip.base{color:#0B0D10;background:#9AA3AE;border-color:#9AA3AE}
+.chip.proc{color:#0B0D10;background:var(--cy);border-color:var(--cy)}
+.chip.def{color:var(--faint)}
+.chip.ver{color:var(--cy);border-color:var(--cy)}
+.chip.open{color:#E5B567;border-color:#6B5A36}
+.chip.ok{color:#7FB89A;border-color:#2F5A45}
+.ms-call{margin-top:16px;border:1px solid var(--cy);border-left-width:3px;border-radius:3px;padding:12px 14px;font-size:14px;background:rgba(79,179,232,.05)}
+.ms-call .lbl{color:var(--cy);font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
+.ms-fig{margin:18px 0 0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:14px}
+.ms-fig .sc{overflow-x:auto}
+.ms-fig svg{display:block;width:100%;height:auto;min-width:640px}
+.ms-fig figcaption{font-size:12.5px;color:var(--faint);margin-top:8px}
+.ph-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+@media (max-width:900px){.ph-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ph-grid figure{margin:0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:10px}
+.ph{aspect-ratio:4/3;background:#E9ECEF;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ph.dk{background:#101317}
+.ph img{width:100%;height:100%;object-fit:contain;display:block}
+.ph-grid figcaption{font-size:12px;color:var(--faint);margin-top:8px;line-height:1.4}
+.ph-grid figcaption b{color:var(--text);font-weight:600;display:block;font-size:12.5px}
+.ms-seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+@media (max-width:860px){.ms-seg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ms-seg{grid-template-columns:1fr}}
+.ms-seg>div{padding:14px;border-right:1px solid var(--line);min-width:0}
+.ms-seg>div:last-child{border-right:0}
+@media (max-width:860px){.ms-seg>div{border-bottom:1px solid var(--line)}}
+.ms-seg .lv{font:600 11px/1 var(--mono);letter-spacing:.08em;color:var(--cy);text-transform:uppercase}
+.ms-seg h4{margin:6px 0 2px;font:600 15px/1.25 var(--body);text-transform:none;letter-spacing:0}
+.ms-seg p{margin:4px 0 0;font-size:12.5px;color:var(--dim);line-height:1.45}
+.ms-seg svg{width:100%;max-width:200px;height:auto;margin-top:10px;display:block}
+.ms-flowline{stroke-dasharray:4 6;animation:msflow 2.4s linear infinite}
+@keyframes msflow{to{stroke-dashoffset:-20}}
+.ms-pipe{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:stretch}
+.ms-step{flex:1 1 118px;min-width:0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:10px 12px}
+.ms-step .n{font:600 11px/1 var(--mono);color:var(--cy)}
+.ms-step b{display:block;font-size:13.5px;margin-top:5px;line-height:1.3}
+.ms-step small{display:block;color:var(--dim);font-size:12px;margin-top:4px;line-height:1.4}
+.ms-step.gate{border-color:var(--cy)}
+.ms-bn{display:inline-block;margin-top:6px;font:600 10.5px/1.3 var(--mono);color:#E8A33D;border:1px solid rgba(79,179,232,.45);border-radius:2px;padding:2px 5px}
+.ck{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:16px}
+.ck>div{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:14px}
+.ck h4{margin:0 0 8px;font:600 13px/1.3 var(--mono);color:var(--cy);text-transform:none;letter-spacing:.02em}
+.ck ol{margin:0;padding-left:20px;font-size:13px;color:var(--dim);line-height:1.5}
+.ck li{margin:3px 0}
+.ck li::marker{color:var(--faint);font-family:var(--mono);font-size:11px}
+.fu-hd{padding-block:clamp(44px,6vw,80px) 36px}
+.fu-hd .hg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.fu-hd .hg{grid-template-columns:1fr}}
+.fu-hd h1{font:600 clamp(36px,5vw,56px)/1.05 var(--body);margin:12px 0 0;text-transform:none;letter-spacing:-.01em}
+.fu-hd h1 span{display:block;font-size:.5em;color:#9AA3AE;font-weight:500;margin-top:8px}
+.fu-hd .spec{font:500 13px/1.6 var(--mono);color:var(--dim);margin-top:14px}
+.fu-hd .ph{aspect-ratio:4/3;background:#0B0D10;border:1px solid var(--line)}
+.fu-hd .ph img{object-fit:cover}
+.fu-hd .src{margin-top:6px}
+</style><style>
+/* PRJ-01 Conductor · CD-SYS-001 engineering system specification (shares .ms-* classes with FU-SYS-001) */
+.cd-calc{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;margin-top:16px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+@media (max-width:860px){.cd-calc{grid-template-columns:1fr}}
+.cd-calc>div{padding:16px;min-width:0}
+.cd-calc>div:first-child{border-right:1px solid var(--line)}
+@media (max-width:860px){.cd-calc>div:first-child{border-right:0;border-bottom:1px solid var(--line)}}
+.cd-calc label{display:block;font:600 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 6px}
+.cd-calc input[type=range]{width:100%;accent-color:var(--cy)}
+.cd-calc .val{font:600 22px/1 var(--mono);color:var(--text)}
+.cd-calc .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.cd-calc .opts button{font:500 12.5px/1 var(--mono);padding:8px 10px;border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:2px;cursor:pointer}
+.cd-calc .opts button[aria-pressed="true"]{border-color:var(--cy);color:var(--text);background:rgba(79,179,232,.08)}
+.cd-calc .grp+.grp{margin-top:18px}
+.cd-bar{position:relative;height:14px;border:1px solid var(--line);border-radius:2px;background:#0B0D10;margin-top:10px;overflow:hidden}
+.cd-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--cy);transition:width .25s}
+.cd-bar i.r{background:#5B6470}
+.cd-bar i.over{background:#C46A5A}
+.cd-bar b{position:absolute;top:-1px;bottom:-1px;width:1px;background:#E4E7EB}
+.cd-leg{display:flex;gap:14px;flex-wrap:wrap;font:500 11.5px/1.4 var(--mono);color:var(--faint);margin-top:6px}
+.cd-leg span::before{content:"";display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:-1px;background:var(--c,#5B6470)}
+.vd-ok{color:#7FB89A}.vd-warn{color:#E5B567}.vd-bad{color:#D98877}
+.cd-bom td.ck{width:34px}
+.cd-bom input{accent-color:var(--cy)}
+.cd-bom tfoot td,.cd-bom tfoot th{font:600 13px/1.4 var(--mono);border-top:1px solid var(--line);padding:10px 12px}
+.ms-call{background:rgba(79,179,232,.05)}
+.ms-t .hi td,.ms-t .hi th{background:rgba(79,179,232,.06)}
+.cd-gb{display:grid;grid-template-columns:200px 1fr 82px;gap:8px 12px;align-items:center;font-size:13px;margin-top:14px}
+@media (max-width:560px){.cd-gb{grid-template-columns:120px 1fr 64px;font-size:12px}}
+.cd-gb .n{color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cd-gb .n.us{color:var(--text);font-weight:600}
+.cd-gb .t{height:10px;background:#15181C;border:1px solid var(--line);border-radius:2px;position:relative}
+.cd-gb .t i{position:absolute;left:0;top:0;bottom:0;background:#5B6470}
+.cd-gb .t i.us{background:var(--cy)}
+.cd-gb .v{font:500 12.5px/1 var(--mono);text-align:right;color:var(--dim)}
 </style>
 
 <nav class="top" aria-label="Sections">
   <div class="wrap">
     <a class="mark" href="#top">CONDUCTOR<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#tour">Start here</a><a href="#numbers">Numbers</a><a class="keep" href="#options">A vs B</a><a href="#fit">What it runs</a><a href="#silicon">Silicon</a><a href="#build">The build</a><a href="#day">Build day</a><a href="#orchestra">Orchestra</a><a href="#proof">Proof</a><a href="#airflow">Power</a><a href="#parts">Parts</a><a class="keep" href="#bom">Bill of materials</a>
+      <a class="keep" href="#role">Role</a><a class="keep" href="#req">Requirements</a><a href="#hw">Hardware</a><a href="#if">Interfaces</a><a href="#perf">Performance</a><a href="#pipe">Pipeline</a><a href="#store">Storage</a><a href="#sec">Security</a><a href="#build">Build</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a>
     </div>
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
+<header class="fu-hd" id="top">
+  <div class="wrap hg">
     <div>
-      <div class="kicker">Project 01 · AI orchestration workstation · 2026</div>
-      <h1 style="margin-top:14px">Conductor<span style="display:block;font-size:.46em;color:#9AA3AE;font-weight:500;margin-top:6px">AI orchestration workstation</span></h1>
-      <p class="sub">AMD EPYC 9175F · 128 GB DDR5-5600 ECC · RTX 5070 Ti 16 GB · 2× 7.68 TB U.3 · 1200 W</p>
-      <p class="lead">One machine that runs our whole fleet of AI agents, their tools and our own local models side by side. Built on <b>AMD EPYC 9175F</b> and <b>NVIDIA GeForce RTX 5070 Ti</b>, in an Antec 900.</p>
-      <div class="boot" id="boot" aria-live="off">
-        <div>POST · <b>16 cores / 32 threads</b> online</div>
-        <div>Memory · <b>4 channels</b> · <b>128 GB</b> ECC trained</div>
-        <div>GPU · <b>16 GB GDDR7</b> · <b>896 GB/s</b></div>
-        <div>Fabric · <b>128 lanes</b> PCIe 5.0 · link up <b>2× 10 GbE</b></div>
-        <div>Agents · <b>ready</b></div>
-      </div>
-      <div class="cta">
-        <a class="btn prime" href="#tour">Start here: 60-second tour ↓</a>
-        <a class="btn" href="#build">See it assemble</a>
-        <a class="btn" href="#bom">Bill of materials</a>
-        <a class="btn" href="build-book.html">Team build book ↗</a>
-      </div>
+      <div class="kicker">PRJ-01 · Document CD-SYS-001 · Rev A · 2026-11-18</div>
+      <h1>Conductor<span>AI Orchestration &amp; Capture Processing Workstation</span></h1>
+      <p class="spec">AMD EPYC 9175F · ASRock Rack TURIND8X-2T · 128 GB DDR5-5600 ECC RDIMM<br>RTX 5070 Ti 16 GB · 2× Kioxia CD6-R 7.68 TB U.3 · Leadex VII 1200 W · Antec 900</p>
+      <div class="ms-tw"><table class="ms-t n">
+        <tbody>
+          <tr><th style="width:36%">Configuration</th><td>Baseline (Option A, decided 2026-11-17) <span class="chip ver">ordering</span></td></tr>
+          <tr><th>Roles</th><td>(1) Agent orchestration and local inference · (2) Processing back end for PRJ-02 Field Unit capture data</td></tr>
+          <tr><th>Budget</th><td class="m">≈ $14,037 all-in (Micro Center $9,062.85 incl. 7% tax + Amazon ≈ $4,974)</td></tr>
+          <tr><th>Next gate</th><td>G0: confirm EPS input requirement (board 3× EPS vs PSU 2× EPS cables), then order before the price guarantee ends Thu 2026-11-19</td></tr>
+          <tr><th>Owner</th><td>Build team</td></tr>
+        </tbody></table></div>
     </div>
-    <div class="wafer-box" data-sp-tilt="9" aria-hidden="true">
-      <canvas id="wafer"></canvas>
-      <span class="wafer-tag" style="left:2%;top:4%">ZEN 5 · CCD WAFER</span>
-      <span class="wafer-tag" style="right:2%;bottom:4%">8 CORES / DIE · 1 ENABLED</span>
-    </div>
+    <figure style="margin:0">
+      <div class="ph"><img src="img/case-inside.jpg" alt="Antec 900 chassis, interior view"></div>
+      <figcaption class="src">Enclosure: Antec 900 (2026), interior. Source: Antec. Shown for identification.</figcaption>
+    </figure>
   </div>
 </header>
 
-<section class="band" id="tour">
+<section class="band" id="role">
   <div class="wrap">
-    <div class="kicker">Start here · the machine in 60 seconds</div>
-    <h2 style="margin-top:14px">System overview: eight subsystems</h2>
-    <p class="lead">A computer is a team. <b>Tap any part</b> of our final build below to see what it does in plain English, and what we can upgrade later.</p>
-    <div style="margin-top:22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
-      <span class="ab-toggle"><button type="button" aria-pressed="true" tabindex="-1" style="cursor:default">✓ Final build · EPYC 9175F in the Antec 900</button></span>
-      <span class="src">Dotted words like <span class="jg" tabindex="0" data-k="VRAM">VRAM</span> explain themselves when you hover or tap.</span>
-    </div>
-    <div class="tour">
-      <div class="rig" id="rig">
-        <svg viewBox="0 0 360 470" role="img" aria-label="Side view of the computer with each part highlighted">
-          <defs>
-            <linearGradient id="filmS" x1="0" x2="1"><stop offset="0" stop-color="#4FB3E8"/><stop offset=".4" stop-color="#7FA7C9"/><stop offset=".7" stop-color="#8B95A1"/><stop offset="1" stop-color="#C9CED4"/></linearGradient>
-            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".06"/><stop offset=".5" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".04"/></linearGradient>
-            <g id="fanG"><circle r="25" fill="#0B0F18" stroke="#2A3448" stroke-width="2"/><g class="fan"><path d="M0-4C6-20 18-14 4 0M4 0C20 6 14 18 0 4M0 4C-6 20-18 14-4 0M-4 0C-20-6-14-18 0-4" fill="#3A465E"/></g><circle r="4" fill="#586178"/></g>
-          </defs>
-          <!-- case -->
-          <g data-part="case">
-            <rect x="8" y="8" width="344" height="454" rx="16" fill="#0C111B" stroke="#2A3448" stroke-width="2"/>
-            <rect x="8" y="8" width="344" height="454" rx="16" fill="url(#glass)"/>
-            <use href="#fanG" x="325" y="78"/>
-            <use href="#fanG" x="40" y="110"/><use href="#fanG" x="40" y="200"/><use href="#fanG" x="40" y="290"/>
-            <rect x="14" y="356" width="332" height="2" fill="#2A3448"/>
-          </g>
-          <!-- motherboard -->
-          <g data-part="board">
-            <rect x="104" y="28" width="230" height="312" rx="6" fill="#131B2A" stroke="#33405A"/>
-            <g stroke="#26324A" stroke-width="1"><path d="M120 150h60M120 160h44M300 300v-60M290 300v-40M120 320h90"/></g>
-            <rect x="122" y="240" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="270" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="300" width="200" height="8" rx="2" fill="#2A3448"/>
-          </g>
-          <!-- RAM -->
-          <g data-part="ram">
-            <g fill="#2A3546" stroke="#7FA7C9" stroke-width="1"><rect x="164" y="48" width="7" height="92" rx="1.5"/><rect x="174" y="48" width="7" height="92" rx="1.5"/><rect x="184" y="48" width="7" height="92" rx="1.5"/><rect x="194" y="48" width="7" height="92" rx="1.5"/></g>
-            <g fill="#2A3546" stroke="#7FA7C9" stroke-width="1" id="ram2"><rect x="271" y="48" width="7" height="92" rx="1.5"/><rect x="281" y="48" width="7" height="92" rx="1.5"/><rect x="291" y="48" width="7" height="92" rx="1.5"/><rect x="301" y="48" width="7" height="92" rx="1.5"/></g>
-          </g>
-          <!-- CPU -->
-          <g data-part="cpu">
-            <rect x="208" y="64" width="56" height="62" rx="5" fill="#1D2638" stroke="#4FB3E8" stroke-width="1.5"/>
-            <circle cx="236" cy="95" r="17" fill="#0B0F18" stroke="#4FB3E8" stroke-width="1.5"/>
-            <text x="236" y="99" fill="#4FB3E8" font-family="IBM Plex Mono,monospace" font-size="10" text-anchor="middle">CPU</text>
-          </g>
-          <!-- cooler: radiator + tubes + front fans -->
-          <g data-part="cooler">
-            <rect x="96" y="12" width="206" height="26" rx="5" fill="#141C2B" stroke="#33405A"/>
-            <g fill="none" stroke="#3A465E" stroke-width="1.5"><circle cx="131" cy="25" r="10"/><circle cx="199" cy="25" r="10"/><circle cx="267" cy="25" r="10"/></g>
-            <g stroke="#4FB3E8" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"><path class="flow" d="M226 38C226 50 224 60 226 78"/><path class="flow" d="M246 78C248 60 246 50 246 38" style="animation-direction:reverse"/></g>
-          </g>
-          <!-- GPU -->
-          <g data-part="gpu">
-            <rect x="96" y="174" width="232" height="52" rx="6" fill="#1A2233" stroke="#8B95A1" stroke-width="1.5"/>
-            <rect x="96" y="222" width="232" height="6" rx="2" fill="#8B95A1" opacity=".55"/>
-            <text x="300" y="204" fill="#8B95A1" font-family="IBM Plex Mono,monospace" font-size="10" text-anchor="end">GPU</text>
-          </g>
-          <!-- drives -->
-          <g data-part="ssd">
-            <rect x="34" y="374" width="78" height="22" rx="3" fill="#1A2233" stroke="#C9CED4" stroke-width="1.2"/>
-            <rect x="34" y="402" width="78" height="22" rx="3" fill="#1A2233" stroke="#C9CED4" stroke-width="1.2"/>
-            <circle cx="104" cy="385" r="2.2" fill="#3E9E74"/><circle cx="104" cy="413" r="2.2" fill="#3E9E74"/>
-          </g>
-          <!-- PSU -->
-          <g data-part="psu">
-            <rect x="196" y="370" width="146" height="78" rx="6" fill="#141C2B" stroke="#C9CED4" stroke-width="1.5"/>
-            <circle cx="269" cy="409" r="26" fill="none" stroke="#3A465E" stroke-width="2"/>
-            <path d="M262 398l-6 13h10l-6 13" stroke="#C9CED4" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
-          </g>
-          <!-- hotspots -->
-          <g id="hotspots"></g>
-        </svg>
-        <span class="rig-hint">SIDE VIEW · FRONT ON THE LEFT · TAP A NUMBER</span>
-      </div>
-      <article class="pcard" aria-live="polite">
-        <div class="ph" id="tph"><span class="tag" id="ttag">01 · The brain</span><img id="timg" alt=""></div>
-        <div class="bd">
-          <div><h3 id="tname">Processor</h3><div class="model" id="tmodel"></div></div>
-          <p class="what" id="twhat"></p>
-          <p class="like"><span class="ico" id="tico">🎼</span><span id="tlike"></span></p>
-          <div class="big"><b class="film" id="tbig"></b><span id="tbigl"></span></div>
-          <div class="vs" id="tvs"></div>
-        </div>
-        <div class="tour-nav">
-          <div class="dots" id="tdots"></div>
-          <button type="button" class="step" id="tprev">← Back</button>
-          <button type="button" class="step prime" id="tnext">Next part →</button>
-        </div>
-      </article>
-    </div>
+    <div class="kicker">CD-SYS-001 · 1.0</div>
+    <h2>Role and workloads</h2>
+    <p class="lead">Conductor is a single-socket server-class tower with two workloads. It runs concurrent coding agents and local language models, and it is the processing back end for the Field Unit: raw LiDAR, 360° and 4K video come in on field media, and registered point clouds, tours and QA reports go out. The hand-off between the projects is files, not a live link.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Workload</th><th>Description</th><th style="width:22%">Primary resource</th><th style="width:20%">Sizing basis</th></tr></thead>
+      <tbody>
+        <tr><th>W-1 Agent orchestration</th><td>Concurrent coding agents, tool servers, containers; frontier models via cloud APIs</td><td class="m">RAM capacity, cores</td><td class="m">24 GB reserve + ~7 GB/agent (est.)</td></tr>
+        <tr><th>W-2 Local inference</th><td>Models that fit 16 GB VRAM (8B–20B class); larger MoE models in GPU + RAM hybrid mode</td><td class="m">VRAM, memory bandwidth</td><td class="m">gpt-oss-20b ≈ 14–15.5 GB</td></tr>
+        <tr><th>W-3 SLAM optimisation</th><td>Offline bundle adjustment and multi-session merge of Field Unit segments (GLIM / HBA)</td><td class="m">GPU (CUDA), RAM</td><td class="m">30–45 segments per 1M sq ft (est.)</td></tr>
+        <tr><th>W-4 Registration &amp; QA</th><td>Register merged clouds to survey control; checkpoint residuals; LOA report</td><td class="m">CPU, RAM</td><td class="m">2.3–3.7 B pts at 10 mm (est.)</td></tr>
+        <tr><th>W-5 360° stitching &amp; colourisation</th><td>Insta360 X4 batch stitch (Media SDK, Linux), frame extraction, point colourisation</td><td class="m">NVDEC, GPU, storage I/O</td><td class="m">≈ 60–90 GB/h of 8K video</td></tr>
+        <tr><th>W-6 Gaussian splats</th><td>Photoreal reconstruction trained in tiles</td><td class="m">VRAM (bottleneck)</td><td class="m">20–45 tiles per building (est.)</td></tr>
+      </tbody></table></div>
   </div>
 </section>
 
-<section class="band" id="numbers">
+<section class="band" id="req">
   <div class="wrap">
-    <div class="kicker">By the numbers</div>
-    <h2 style="margin-top:14px">Key specifications</h2>
-    <div class="nums">
-      <div class="num reveal"><b><span class="count-static" data-final="16">16</span></b><span>Zen 5 cores</span><p>32 threads, boosting to 5.0 GHz, each core with its own 32 MB of L3 cache.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="128">128</span><small>GB</small></b><span>ECC system memory</span><p>Four 32 GB DDR5-5600 RDIMMs, with four slots free to double it.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="179">179</span><small>GB/s</small></b><span>Memory bandwidth</span><p>Theoretical, 4 channels at 5600 MT/s. Doubles to 358 GB/s with four more sticks.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="16">16</span><small>GB</small></b><span>GPU memory</span><p>GDDR7 on a 256-bit bus, 896 GB/s.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="128">128</span></b><span>PCIe 5.0 lanes</span><p>Seven full-length slots; four run at full x16 with no lane sharing.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="1406" data-sep="1">1,406</span></b><span>AI TOPS</span><p>FP4 with sparsity, from 8,960 CUDA cores.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="15.36" data-dec="2">15.36</span><small>TB</small></b><span>Enterprise NVMe</span><p>Two Kioxia CD6-R U.3 drives with power-loss protection.</p></div>
-      <div class="num reveal"><b><span class="count-static" data-final="1200" data-sep="1">1,200</span><small>W</small></b><span>Platinum power</span><p>ATX 3.1 with a native 12V-2x6 cable for the GPU.</p></div>
-    </div>
+    <div class="kicker">CD-SYS-001 · 2.0</div>
+    <h2>Requirements</h2>
+    <p class="lead">Each requirement has a target, a verification method and a status. Targets marked est. are planning calculations from the research reports and are verified at burn-in or on Field Unit pilot data.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:11%">ID</th><th>Requirement</th><th style="width:24%">Target</th><th style="width:20%">Verification</th><th style="width:11%">Status</th></tr></thead>
+      <tbody>
+        <tr><th class="m">CD-REQ-001</th><td>Concurrent coding agents on baseline memory</td><td class="m">≥ 14 at 128 GB (est.)</td><td>Load test, 14 agents, 1 h</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">CD-REQ-002</th><td>Concurrent agents after memory upgrade</td><td class="m">≥ 33 at 256 GB (est.)</td><td>Load test after upgrade</td><td><span class="chip def">deferred</span></td></tr>
+        <tr><th class="m">CD-REQ-003</th><td>Local model fully resident in VRAM</td><td class="m">gpt-oss-20b, ≥ 150 tok/s generation</td><td>llama-bench (reported 189.5 tok/s on this GPU)</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">CD-REQ-004</th><td>Working storage for one Field Unit job</td><td class="m">≥ 9 TB free (raw 1.3–1.8 TB + working 4.5–9 TB, est.)</td><td>Capacity check at ingest</td><td><span class="chip ok">met: 15.36 TB</span></td></tr>
+        <tr><th class="m">CD-REQ-005</th><td>Data integrity on ingest from field media</td><td class="m">SHA-256 match on 100% of files before media reuse</td><td>Ingest log</td><td><span class="chip open">procedure</span></td></tr>
+        <tr><th class="m">CD-REQ-006</th><td>Backup of client data</td><td class="m">2 copies on site + 1 offsite; NAS ≥ 40 TB usable</td><td>Restore test</td><td><span class="chip open">procure</span></td></tr>
+        <tr><th class="m">CD-REQ-007</th><td>Point-cloud processing at building scale</td><td class="m">Tiled pipeline; ≤ 2 B pts per in-memory cloud</td><td>Pilot dataset end-to-end</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">CD-REQ-008</th><td>Gaussian-splat training within VRAM</td><td class="m">Tiles fit 16 GB; 24 GB needed for XGRIDS LCC Studio</td><td>Pilot tile training</td><td><span class="chip open">risk CD-R-02</span></td></tr>
+        <tr><th class="m">CD-REQ-009</th><td>Power and ride-through</td><td class="m">≈ 850 W peak at wall (est.); UPS ≥ 1,500 VA, 2,200 VA recommended</td><td>Wall meter at full load</td><td><span class="chip open">open</span></td></tr>
+        <tr><th class="m">CD-REQ-010</th><td>Sustained full-load thermal stability</td><td class="m">No throttling over a 4 h CPU+GPU burn-in</td><td>Burn-in log</td><td><span class="chip open">at build</span></td></tr>
+        <tr><th class="m">CD-REQ-011</th><td>Out-of-band management isolated</td><td class="m">BMC on management VLAN only; default credentials changed</td><td>Network audit</td><td><span class="chip open">at build</span></td></tr>
+        <tr><th class="m">CD-REQ-012</th><td>Client data encrypted at rest</td><td class="m">Full-disk encryption on data volumes and NAS (target)</td><td>Configuration audit</td><td><span class="chip open">target</span></td></tr>
+        <tr><th class="m">CD-REQ-013</th><td>Processing turnaround per 1M sq ft job</td><td class="m">TBD from pilot</td><td>Pilot timing</td><td><span class="chip open">TBD</span></td></tr>
+      </tbody></table></div>
   </div>
 </section>
 
-<section class="band" id="options">
+<section class="band" id="hw">
   <div class="wrap">
-    <div class="kicker">The decision · Nov 17</div>
-    <h2 style="margin-top:14px">Decision record: Option A vs Option B</h2>
-    <p class="lead">Both quotes come from Micro Center Miami (store 185) and are <b>price-guaranteed until Thursday, Nov 19, 2026</b>. <b>We're building Option A, the EPYC 9175F, in the Antec 900 case.</b> Option B, the Threadripper PRO upgrade, would have cost $13,503 more. Here is what we compared and why A wins for now.</p>
-    <div class="duo">
-      <article class="opt-card" style="border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),0 30px 60px -30px rgba(79,179,232,.45)"><span class="letter film">A</span><div class="who" style="color:var(--cy)">✓ Chosen · the final build</div><h3>EPYC 9175F</h3>
-        <div class="price film">$9,063<small>with tax + case</small></div>
-        <ul><li><b>16 cores</b> · ASRock Rack TURIND8X-2T server board</li><li><b>128 GB</b> on 4 of 8 memory channels</li><li><b>RTX 5070 Ti 16 GB</b></li><li>1,200 W Platinum · 360 mm AIO · <b>+ Antec 900</b> ($199.99, 6 fans included)</li></ul></article>
-      <article class="opt-card b" style="opacity:.62"><span class="letter">B</span><div class="who">Option B · considered, not chosen</div><h3>Threadripper PRO 9975WX</h3>
-        <div class="price">$22,459<small>quote total with tax</small></div>
-        <ul><li><b>32 cores</b> · ASUS WRX90E-SAGE SE workstation board</li><li><b>256 GB</b> on all 8 memory channels</li><li><b>RTX PRO 5000 48 GB</b></li><li>1,650 W Titanium · 420 mm AIO · Antec 900 with 6 fans</li></ul></article>
+    <div class="kicker">CD-SYS-001 · 3.0</div>
+    <h2>Hardware configuration</h2>
+    <p class="lead">Baseline configuration as ordered. Prices are the Micro Center Miami quote (held to 2026-11-19) and Amazon listings for the enterprise drives.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:15%">Subsystem</th><th>Part</th><th style="width:34%">Key specifications</th><th style="width:14%">Price</th></tr></thead>
+      <tbody>
+        <tr><th>CPU</th><td>AMD EPYC 9175F (Zen 5 "Turin"), SP5</td><td class="m">16C/32T · 4.2/5.0 GHz · 512 MB L3 (16 CCD × 1 core, 32 MB each) · 320 W · 12 ch DDR5 rated · 128 PCIe 5.0 lanes</td><td class="m" rowspan="3">$5,999.99<br><small>bundle, SKU 999999</small></td></tr>
+        <tr><th>Motherboard</th><td>ASRock Rack TURIND8X-2T</td><td class="m">SSI-EEB · 8 DIMM (1 DPC) · 7× PCIe 5.0 x16 + 1× x8 · 2× M.2 · 4× MCIO · 2× 10 GbE (BCM57416) + IPMI · AST2600 BMC · 24-pin + 3× EPS</td></tr>
+        <tr><th>Memory</th><td>Kingston FURY Renegade Pro, KF556R28RBE2K4-128</td><td class="m">128 GB (4 × 32 GB) DDR5-5600 CL28 ECC RDIMM · 4 of 8 slots · ≈ 179 GB/s theoretical</td></tr>
+        <tr><th>GPU</th><td>ASUS ProArt GeForce RTX 5070 Ti OC 16 GB</td><td class="m">16 GB GDDR7 · 896 GB/s · 8,960 CUDA · ≈ 1,406 AI TOPS (FP4 sparse) · 300 W · 1× 12V-2x6</td><td class="m">$1,699.99</td></tr>
+        <tr><th>Storage</th><td>2× Kioxia CD6-R 7.68 TB U.3 NVMe</td><td class="m">PCIe 4.0 x4 · 6,200 / 4,000 MB/s · 1 DWPD · PLP · via 2× MCIO 4i → U.2 cables</td><td class="m">2 × $2,449 + 2 × $38</td></tr>
+        <tr><th>CPU cooling</th><td>SilverStone XE360-SP5</td><td class="m">360 mm AIO for SP5 · top-mounted, exhaust</td><td class="m">$379.99</td></tr>
+        <tr><th>Power</th><td>Super Flower Leadex VII Platinum PRO 1200 W</td><td class="m">ATX 3.1 · 1× 12V-2x6 (600 W) · 2× EPS 4+4 · 4× PCIe 6+2 · see CD-R-01</td><td class="m">$189.99</td></tr>
+        <tr><th>Enclosure</th><td>Antec 900 (2026)</td><td class="m">SSI-EEB · 8 slots · 6 PWM fans included · GPU ≤ 465 mm · top radiator ≤ 360 mm</td><td class="m">$199.99</td></tr>
+      </tbody></table></div>
+    <div class="ph-grid">
+      <figure><div class="ph"><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 processor" loading="lazy"></div><figcaption><b>Fig. 1 — CPU</b>AMD EPYC 9005 series. Source: AMD.</figcaption></figure>
+      <figure><div class="ph"><img src="img/a-board.jpg" alt="ASRock Rack TURIND8X-2T motherboard" loading="lazy"></div><figcaption><b>Fig. 2 — Motherboard</b>ASRock Rack TURIND8X-2T. Source: ASRock Rack (via Scan Computers).</figcaption></figure>
+      <figure><div class="ph"><img src="img/a-gpu.jpg" alt="ASUS ProArt RTX 5070 Ti" loading="lazy"></div><figcaption><b>Fig. 3 — GPU</b>ASUS ProArt RTX 5070 Ti OC 16 GB. Source: ASUS.</figcaption></figure>
+      <figure><div class="ph"><img src="img/ssd.jpg" alt="Kioxia CD6-R data center SSD" loading="lazy"></div><figcaption><b>Fig. 4 — Storage</b>Kioxia CD6-R U.3 NVMe. Source: KIOXIA.</figcaption></figure>
+      <figure><div class="ph"><img src="img/cable.jpg" alt="MCIO to U.2 cable" loading="lazy"></div><figcaption><b>Fig. 5 — Drive cable</b>MCIO 4i → U.2, 0.5 m. Source: Micro SATA Cables.</figcaption></figure>
+      <figure><div class="ph"><img src="img/a-cooler.jpg" alt="SilverStone XE360-SP5" loading="lazy"></div><figcaption><b>Fig. 6 — CPU cooling</b>SilverStone XE360-SP5. Source: SilverStone.</figcaption></figure>
+      <figure><div class="ph"><img src="img/a-psu.jpg" alt="Super Flower Leadex VII Platinum PRO" loading="lazy"></div><figcaption><b>Fig. 7 — PSU</b>Super Flower Leadex VII Platinum PRO. Source: Super Flower.</figcaption></figure>
+      <figure><div class="ph"><img src="img/case.jpg" alt="Antec 900 chassis" loading="lazy"></div><figcaption><b>Fig. 8 — Enclosure</b>Antec 900 (2026). Source: Antec.</figcaption></figure>
     </div>
 
-    <h3 style="margin-top:64px">What you get</h3>
-    <div class="versus" id="versus"></div>
-    <p class="src" style="margin-top:12px">Agent estimate: ~7 GB RAM per coding agent after 24 GB for the OS. GPU speeds: gpt-oss-20b llama-bench on the 5070 Ti; Ollama 4-bit on the PRO 5000 (Database Mart). Bandwidth is theoretical at DDR5-5600.</p>
-
-    <h3 style="margin-top:64px">Line by line</h3>
-    <div class="tbl"><table class="qt" id="qt"></table></div>
-
-    <h3 style="margin-top:64px">What the extra $13,503 would have bought</h3>
-    <div class="stackbar" id="stackbar"></div>
-    <div class="legend2" id="stacklegend"></div>
-
-    <div class="verdicts">
-      <div class="verdict pick"><div class="flag" style="color:var(--cy)">Why A</div><h4>Most of the power for 40% of the price</h4>
-        <ul><li>Our agents mostly call cloud models, so we don't need a giant local GPU on day one</li><li>Same server-class platform: 7 full-size card slots, 128 PCIe lanes, 10 GbE and remote management</li><li>Same Kioxia drives as B, so storage is identical</li><li>Saves $13,503 now, to spend later only when we need it</li></ul></div>
-      <div class="verdict"><div class="flag" style="color:var(--dim)">What we give up, for now</div><h4>Half the cores, memory and VRAM</h4>
-        <ul><li>16 cores instead of 32</li><li>128 GB instead of 256 GB: about 14 agents at once instead of 33</li><li>16 GB of GPU memory instead of 48 GB, so 30B–70B models run slower, partly from system memory</li></ul></div>
-      <div class="verdict"><div class="flag" style="color:var(--vi)">How we close the gap</div><h4>Upgrade in this order</h4>
-        <ul><li><b>1. Memory:</b> fill the 4 empty slots for 256 GB and twice the bandwidth</li><li><b>2. GPU:</b> add or swap in a 48 GB card; the board has 4 full x16 slots</li><li><b>3. Power:</b> a bigger PSU only when a second big GPU goes in</li></ul><p class="src" style="margin-top:10px">Cross-reference: PRJ-02 Field Unit's building-scanning workload (≈1.3–1.8 TB raw per 1M sq ft capture; Gaussian splats tiled to fit 16 GB VRAM) makes the 256 GB RAM upgrade, a 24–48 GB GPU and a 40–60 TB NAS directly relevant. <a href="field-unit.html#arch">Field Unit MRCS architecture →</a></p></div>
-    </div>
+    <h3 class="ms-h3"><i>3.1</i>Motherboard population map</h3>
+    <p class="ms-p">Slot and connector usage on the TURIND8X-2T. The GPU goes in a full x16 slot that shares no lanes: slot 0, 2, 4 or 6. Slot 1 shares lanes with one MCIO port and one M.2; slot 7 (x8) shares with two MCIO ports. Memory population follows the board manual's 4-DIMM rule.</p>
+    <figure class="ms-fig">
+      <div class="sc"><svg viewBox="0 0 1080 470" role="img" aria-label="TURIND8X-2T population map: SP5 socket, eight DIMM slots, eight PCIe slots, four MCIO ports, two M.2, power connectors" style="min-width:760px" font-family="IBM Plex Mono, monospace" font-size="12">
+        <defs><pattern id="cgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1C2129" stroke-width="1"/></pattern></defs>
+        <rect width="1080" height="470" fill="url(#cgrid)"/>
+        <!-- board outline -->
+        <rect x="40" y="30" width="560" height="410" fill="#111418" stroke="#5B6470" stroke-width="1.5" rx="2"/>
+        <text x="48" y="24" fill="#6B7480">TURIND8X-2T · SSI-EEB 12.63 × 13 in · schematic, not to scale</text>
+        <!-- socket -->
+        <rect x="230" y="70" width="120" height="140" fill="none" stroke="#4FB3E8" stroke-width="1.5"/>
+        <text x="290" y="135" fill="#E4E7EB" text-anchor="middle">SP5</text><text x="290" y="152" fill="#9AA3AE" text-anchor="middle">EPYC 9175F</text>
+        <!-- DIMMs left 4, right 4 -->
+        <g stroke-width="1.5">
+          <rect x="150" y="60" width="12" height="160" fill="#4FB3E8" stroke="#4FB3E8"/><rect x="170" y="60" width="12" height="160" fill="none" stroke="#5B6470"/>
+          <rect x="190" y="60" width="12" height="160" fill="#4FB3E8" stroke="#4FB3E8"/><rect x="210" y="60" width="12" height="160" fill="none" stroke="#5B6470"/>
+          <rect x="358" y="60" width="12" height="160" fill="none" stroke="#5B6470"/><rect x="378" y="60" width="12" height="160" fill="#4FB3E8" stroke="#4FB3E8"/>
+          <rect x="398" y="60" width="12" height="160" fill="none" stroke="#5B6470"/><rect x="418" y="60" width="12" height="160" fill="#4FB3E8" stroke="#4FB3E8"/>
+        </g>
+        <!-- power connectors -->
+        <rect x="470" y="50" width="34" height="18" fill="none" stroke="#E5B567" stroke-width="1.5"/><rect x="510" y="50" width="34" height="18" fill="none" stroke="#E5B567" stroke-width="1.5"/><rect x="550" y="50" width="34" height="18" fill="none" stroke="#E5B567" stroke-width="1.5"/>
+        <rect x="560" y="110" width="22" height="90" fill="none" stroke="#9AA3AE" stroke-width="1.5"/>
+        <!-- M.2 -->
+        <rect x="470" y="230" width="100" height="14" fill="none" stroke="#9AA3AE" stroke-width="1.5"/><rect x="470" y="252" width="100" height="14" fill="#2A3546" stroke="#9AA3AE" stroke-width="1.5"/>
+        <!-- MCIO -->
+        <g stroke-width="1.5"><rect x="470" y="282" width="24" height="16" fill="#4FB3E8" stroke="#4FB3E8"/><rect x="500" y="282" width="24" height="16" fill="#4FB3E8" stroke="#4FB3E8"/><rect x="530" y="282" width="24" height="16" fill="none" stroke="#5B6470"/><rect x="560" y="282" width="24" height="16" fill="none" stroke="#5B6470"/></g>
+        <!-- PCIe slots -->
+        <g stroke-width="1.5">
+          <rect x="70" y="250" width="370" height="10" fill="#4FB3E8" stroke="#4FB3E8"/>
+          <rect x="70" y="272" width="370" height="10" fill="none" stroke="#5B6470"/>
+          <rect x="70" y="294" width="370" height="10" fill="none" stroke="#9AA3AE"/>
+          <rect x="70" y="316" width="370" height="10" fill="none" stroke="#5B6470"/>
+          <rect x="70" y="338" width="370" height="10" fill="none" stroke="#9AA3AE"/>
+          <rect x="70" y="360" width="370" height="10" fill="none" stroke="#5B6470"/>
+          <rect x="70" y="382" width="370" height="10" fill="none" stroke="#9AA3AE"/>
+          <rect x="70" y="404" width="190" height="10" fill="none" stroke="#5B6470"/>
+        </g>
+        <g fill="#6B7480" font-size="11"><text x="50" y="259">0</text><text x="50" y="281">1</text><text x="50" y="303">2</text><text x="50" y="325">3</text><text x="50" y="347">4</text><text x="50" y="369">5</text><text x="50" y="391">6</text><text x="50" y="413">7</text></g>
+        <!-- leaders: dot at feature, horizontal to column at x=640 -->
+        <g stroke="#6B7480" stroke-width="1" fill="none">
+          <polyline points="584,59 620,59 640,59"/>
+          <polyline points="430,90 640,90" />
+          <polyline points="582,155 640,155"/>
+          <polyline points="570,259 640,259"/>
+          <polyline points="584,290 600,290 600,300 640,300"/>
+          <polyline points="440,255 455,255 455,340 640,340"/>
+          <polyline points="440,277 448,277 448,380 640,380"/>
+          <polyline points="260,409 270,409 270,425 640,425"/>
+        </g>
+        <g fill="#E4E7EB"><circle cx="584" cy="59" r="2.5"/><circle cx="430" cy="90" r="2.5"/><circle cx="582" cy="155" r="2.5"/><circle cx="570" cy="259" r="2.5"/><circle cx="584" cy="290" r="2.5"/><circle cx="440" cy="255" r="2.5"/><circle cx="440" cy="277" r="2.5"/><circle cx="260" cy="409" r="2.5"/></g>
+        <g font-size="12">
+          <text x="650" y="55" fill="#E5B567">A · EPS 8-pin ×3 (CPU power)</text><text x="650" y="71" fill="#9AA3AE">PSU supplies 2 cables → open check CD-R-01</text>
+          <text x="650" y="94" fill="#E4E7EB">B · DIMM ×8 · 4 populated (4 × 32 GB)</text>
+          <text x="650" y="159" fill="#E4E7EB">C · 24-pin ATX main power</text>
+          <text x="650" y="263" fill="#E4E7EB">D · M.2 ×2 · boot SSD (optional, Samsung 9100 PRO)</text>
+          <text x="650" y="304" fill="#E4E7EB">E · MCIO ×4 · 2 used → Kioxia CD6-R ×2 (U.3)</text>
+          <text x="650" y="344" fill="#E4E7EB">F · Slot 0 · x16 · GPU (alt. slot 2/4/6)</text>
+          <text x="650" y="384" fill="#E4E7EB">G · Slot 1 · shares lanes with MCIO + M.2 · keep empty</text>
+          <text x="650" y="429" fill="#E4E7EB">H · Slot 7 · x8 · shares with 2 MCIO · keep empty</text>
+        </g>
+        <g font-size="11" fill="#6B7480"><rect x="650" y="190" width="10" height="10" fill="#4FB3E8"/><text x="666" y="199">populated / used</text><rect x="790" y="190" width="10" height="10" fill="none" stroke="#5B6470" stroke-width="1.5"/><text x="806" y="199">empty</text></g>
+      </svg></div>
+      <figcaption>Fig. 9 — TURIND8X-2T population map, top view. Slot sharing and connector counts from the board specification (Central Computer spec sheet); DIMM positions are schematic, populate per the manual's 4-DIMM table.</figcaption>
+    </figure>
   </div>
 </section>
 
-<section class="band" id="fit">
+<section class="band" id="if">
   <div class="wrap">
-    <div class="kicker">What can it actually run?</div>
-    <h2 style="margin-top:14px">Workload fit calculator</h2>
-    <p class="lead">The two questions that matter for an AI computer: <b>how big a model fits on the graphics card</b>, and <b>how many agents can work at the same time</b>. The bright bar is our build today; the faded bar shows the planned upgrade.</p>
-    <div class="fit-grid">
-      <div class="fitc">
-        <h3>Local AI models</h3>
-        <p class="q">A model has to fit in the graphics card's memory to run fast. Pick a model size:</p>
-        <div class="chips" id="mchips"></div>
-        <div id="mbars"></div>
-        <p class="fit-note">Sizes assume 4-bit compressed models (the normal way to run them locally) plus room for the conversation. Not fitting doesn't mean it won't run — it spills into system memory and runs roughly 5–10× slower.</p>
-      </div>
-      <div class="fitc">
-        <h3>Agents at once</h3>
-        <p class="q">Each AI coding agent with its tools, browser and containers uses about 7 GB of system memory. Slide to set how many run together:</p>
-        <div class="slider"><input type="range" id="agents" min="1" max="40" value="12" aria-label="Number of agents running at once"><output id="agentsOut" for="agents">12</output></div>
-        <div class="agents-viz" id="agentsViz" aria-hidden="true"></div>
-        <div class="ramgrid" id="ramgrid" aria-hidden="true"></div>
-        <div id="abars"></div>
-        <p class="fit-note">Estimate: 24 GB kept for the operating system, databases and model servers, then ~7 GB per agent.</p>
-      </div>
-    </div>
+    <div class="kicker">CD-SYS-001 · 4.0</div>
+    <h2>Interfaces</h2>
+    <p class="lead">External and internal interfaces. The Field Unit never connects to Conductor over a network on site; data arrives on field media and is verified before use.</p>
+    <figure class="ms-fig">
+      <div class="sc"><svg viewBox="0 0 1080 330" role="img" aria-label="Conductor architecture block diagram" style="min-width:760px" font-family="IBM Plex Mono, monospace" font-size="12">
+        <rect width="1080" height="330" fill="url(#cgrid)"/>
+        <g fill="#111418" stroke="#5B6470" stroke-width="1.5">
+          <rect x="400" y="120" width="200" height="80"/>
+          <rect x="130" y="40" width="190" height="56"/><rect x="130" y="224" width="190" height="56"/>
+          <rect x="680" y="40" width="200" height="56"/><rect x="680" y="132" width="200" height="56"/><rect x="680" y="224" width="200" height="56"/>
+          <rect x="400" y="250" width="200" height="56"/>
+        </g>
+        <rect x="400" y="120" width="200" height="80" fill="none" stroke="#4FB3E8" stroke-width="1.5"/>
+        <g fill="#E4E7EB" text-anchor="middle">
+          <text x="500" y="155">EPYC 9175F</text><text x="500" y="172" fill="#9AA3AE">16C · 512 MB L3</text>
+          <text x="225" y="64">DDR5 RDIMM 128 GB</text><text x="225" y="81" fill="#9AA3AE">4 ch · ≈179 GB/s</text>
+          <text x="225" y="248">BMC AST2600</text><text x="225" y="265" fill="#9AA3AE">IPMI · mgmt VLAN</text>
+          <text x="780" y="64">RTX 5070 Ti 16 GB</text><text x="780" y="81" fill="#9AA3AE">PCIe 5.0 x16 · 896 GB/s</text>
+          <text x="780" y="156">2× CD6-R 7.68 TB</text><text x="780" y="173" fill="#9AA3AE">MCIO · PCIe 4.0 x4 each</text>
+          <text x="780" y="248">2× 10 GbE</text><text x="780" y="265" fill="#9AA3AE">LAN · NAS (planned)</text>
+          <text x="500" y="274">Field media ingest</text><text x="500" y="291" fill="#9AA3AE">USB · SHA-256 verify</text>
+        </g>
+        <g stroke="#9AA3AE" stroke-width="1.5" fill="none">
+          <polyline points="320,68 360,68 360,140 400,140"/>
+          <polyline points="320,252 360,252 360,180 400,180"/>
+          <polyline points="600,140 640,140 640,68 680,68"/>
+          <line x1="600" y1="160" x2="680" y2="160"/>
+          <polyline points="600,180 640,180 640,252 680,252"/>
+          <line x1="500" y1="200" x2="500" y2="250"/>
+        </g>
+        <g fill="#6B7480" font-size="11"><text x="608" y="58">IF-C03</text><text x="608" y="154">IF-C04</text><text x="608" y="270">IF-C01/02</text><text x="508" y="232">IF-C06</text><text x="326" y="270">IF-C05</text></g>
+      </svg></div>
+      <figcaption>Fig. 10 — Conductor architecture. Interface IDs refer to the table below. Bandwidths are theoretical maxima from manufacturer data.</figcaption>
+    </figure>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:10%">ID</th><th style="width:20%">Interface</th><th>Endpoint</th><th style="width:28%">Protocol / rate</th><th style="width:16%">Notes</th></tr></thead>
+      <tbody>
+        <tr><th class="m">IF-C01</th><td>10 GbE port 1</td><td>Office LAN · agents' cloud API traffic, user access</td><td class="m">10GBASE-T (Broadcom BCM57416)</td><td>Firewalled host</td></tr>
+        <tr><th class="m">IF-C02</th><td>10 GbE port 2</td><td>NAS (planned, Synology DS1823xs+)</td><td class="m">10GBASE-T, direct or via 10 GbE switch</td><td>Backup path, CD-REQ-006</td></tr>
+        <tr><th class="m">IF-C03</th><td>PCIe slot 0</td><td>RTX 5070 Ti</td><td class="m">PCIe 5.0 x16</td><td>Alt. slot 2/4/6</td></tr>
+        <tr><th class="m">IF-C04</th><td>MCIO 0, 1</td><td>Kioxia CD6-R ×2</td><td class="m">PCIe 4.0 x4 per drive · ≤ 0.5 m cable · separate SATA power</td><td>Verify 16GT/s x4 in lspci</td></tr>
+        <tr><th class="m">IF-C05</th><td>IPMI RJ45</td><td>BMC (AST2600)</td><td class="m">Management VLAN only</td><td>CD-REQ-011</td></tr>
+        <tr><th class="m">IF-C06</th><td>USB (host)</td><td>Field Unit rugged SSD / card readers</td><td class="m">USB 3.x mass storage</td><td>Ingest → SHA-256 → working set</td></tr>
+        <tr><th class="m">IF-C07</th><td>Display</td><td>Monitor on the GPU (BMC video is VGA only)</td><td class="m">DisplayPort / HDMI on GPU</td><td>Build step</td></tr>
+        <tr><th class="m">IF-C08</th><td>AC input</td><td>UPS → PSU</td><td class="m">120 V, 15 A circuit · ≈ 7.1 A at full load (est.)</td><td>CD-REQ-009</td></tr>
+      </tbody></table></div>
   </div>
 </section>
 
-<section class="band" id="silicon">
+<section class="band" id="perf">
   <div class="wrap">
-    <div class="kicker">The silicon</div>
-    <h2 style="margin-top:14px">CPU: EPYC 9175F topology</h2>
-    <div class="split">
-      <div class="die reveal">
-        <svg viewBox="0 0 720 754" role="img" aria-label="Stylized EPYC 9175F package: sixteen compute dies, each with one active core, linked to a central I/O die">
-          <defs>
-            <linearGradient id="gfilm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4FB3E8"/><stop offset=".4" stop-color="#7FA7C9"/><stop offset=".7" stop-color="#8B95A1"/><stop offset="1" stop-color="#C9CED4"/></linearGradient>
-            <pattern id="pins" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2" fill="#1C2433"/></pattern>
-          </defs>
-          <rect x="2" y="2" width="716" height="750" rx="18" fill="#0B1019" stroke="#2A3448" stroke-width="2"/>
-          <rect x="2" y="2" width="716" height="750" rx="18" fill="url(#pins)" opacity=".7"/>
-          <rect x="24" y="40" width="672" height="660" rx="12" fill="none" stroke="#2A3448" stroke-dasharray="4 6"/>
-          <g id="fabric" stroke="url(#gfilm)" stroke-width="2" fill="none" opacity=".85"></g>
-          <!-- IOD -->
-          <rect x="290" y="170" width="140" height="414" rx="8" fill="#141B2A" stroke="url(#gfilm)" stroke-width="2"/>
-          <text x="360" y="356" text-anchor="middle" fill="#E9EDF5" font-family="IBM Plex Mono, monospace" font-size="16">I/O DIE</text>
-          <text x="360" y="382" text-anchor="middle" fill="#8E98AC" font-family="IBM Plex Mono, monospace" font-size="11">12 × DDR5</text>
-          <text x="360" y="400" text-anchor="middle" fill="#8E98AC" font-family="IBM Plex Mono, monospace" font-size="11">128 × PCIe 5.0</text>
-          <!-- CCDs -->
-          <g id="ccds"></g>
-          <text x="360" y="730" text-anchor="middle" fill="#586178" font-family="IBM Plex Mono, monospace" font-size="12">SP5 · LGA 6096 · 72 × 75.4 mm package</text>
-        </svg>
+    <div class="kicker">CD-SYS-001 · 5.0</div>
+    <h2>Performance and capacity</h2>
+    <p class="lead">Figures are theoretical maxima or published benchmarks on the same component, not measurements on this machine. They are confirmed at burn-in (CD-REQ-003, CD-REQ-010).</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:30%">Metric</th><th style="width:22%">Baseline</th><th style="width:22%">After upgrade</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><th>System memory bandwidth</th><td class="m">≈ 179 GB/s (4 ch)</td><td class="m">≈ 358 GB/s (8 ch)</td><td>channels × 8 B × 5,600 MT/s; CPU rated 614 GB/s at 12 ch</td></tr>
+        <tr><th>Memory capacity</th><td class="m">128 GB</td><td class="m">256 GB</td><td>4 more identical RDIMMs</td></tr>
+        <tr><th>Concurrent agents</th><td class="m">≈ 14 (est.)</td><td class="m">≈ 33 (est.)</td><td>24 GB reserve + ~7 GB per agent</td></tr>
+        <tr><th>GPU memory</th><td class="m">16 GB · 896 GB/s</td><td class="m">24–48 GB card (TBD)</td><td>NVIDIA / ASUS specifications</td></tr>
+        <tr><th>gpt-oss-20b generation</th><td class="m">189.5 tok/s (reported)</td><td class="m">—</td><td>llama.cpp discussion #15396, community llama-bench</td></tr>
+        <tr><th>gpt-oss-20b prompt processing</th><td class="m">6,340 tok/s (reported)</td><td class="m">—</td><td>same source</td></tr>
+        <tr><th>gpt-oss-120b, GPU + RAM hybrid</th><td class="m">8–30 tok/s (reported, other rigs)</td><td class="m">higher with 8 ch</td><td>carteakey.dev; Hardware Corner</td></tr>
+        <tr><th>Working storage</th><td class="m">15.36 TB · 6.2 / 4.0 GB/s per drive</td><td class="m">+ NAS ≥ 40 TB</td><td>Kioxia CD6-R datasheet</td></tr>
+        <tr><th>Power at the wall, full load</th><td class="m">≈ 850 W (est.)</td><td class="m">re-check with 2nd GPU</td><td>320 W CPU + 300 W GPU + ~150 W rest + PSU loss</td></tr>
+      </tbody></table></div>
+
+    <h3 class="ms-h3"><i>5.1</i>Local inference, GPU comparison</h3>
+    <p class="ms-p">gpt-oss-20b generation speed, tokens per second, community llama-bench results by GPU. The selected card is highlighted.</p>
+    <div class="ms-fig"><div class="cd-gb" id="cdgpu"></div>
+      <figcaption>Fig. 11 — gpt-oss-20b generation, tok/s. Source: llama.cpp discussion #15396. Not measured on this machine.</figcaption></div>
+
+    <h3 class="ms-h3"><i>5.2</i>Agent capacity calculator</h3>
+    <p class="ms-p">Planning model for workload W-1: a fixed reserve for the OS, services and one local model, plus a per-agent allowance. Values are planning estimates, not measurements.</p>
+    <div class="cd-calc" id="cdcalc">
+      <div>
+        <div class="grp"><label for="cdA">Concurrent agents</label><div class="val" id="cdAv">14</div><input id="cdA" type="range" min="1" max="40" value="14"></div>
+        <div class="grp"><label for="cdP">Allowance per agent (GB)</label><div class="val" id="cdPv">7</div><input id="cdP" type="range" min="3" max="12" value="7"></div>
+        <div class="grp"><label>Installed memory</label><div class="opts"><button type="button" data-m="128" aria-pressed="true">128 GB · baseline</button><button type="button" data-m="256" aria-pressed="false">256 GB · upgrade</button></div></div>
       </div>
       <div>
-        <p class="lead" style="margin-top:0">AMD builds the <b>EPYC 9175F</b> an unusual way: sixteen Zen 5 compute dies with <b>just one core switched on in each</b>, around a single I/O die. Every core gets its own 32 MB of L3 cache and its own link to memory. It is AMD's high-frequency part for databases and GPU host machines.</p>
-        <ul class="facts" style="margin-top:24px">
-          <li><b>5.0<small style="font-size:.5em"> GHz</small></b><span><strong>Boost clock</strong> on a 4.2 GHz base, at 320 W.</span></li>
-          <li><b>512<small style="font-size:.5em"> MB</small></b><span><strong>L3 cache</strong>: 32 MB for every single core.</span></li>
-          <li><b>16</b><span><strong>Memory links</strong>, one per compute die, so the CPU can saturate whatever memory we install.</span></li>
-          <li><b>512-bit</b><span><strong>Full-width AVX-512</strong>. Vector math runs in one pass, not two halves.</span></li>
-          <li><b>12 → 4</b><span><strong>Memory channels</strong>: the CPU is rated for 12 (614 GB/s). This board wires 8, and we fill 4 today.</span></li>
-        </ul>
-        <p class="src" style="margin-top:14px">Sources: AMD, Level1Techs, PassMark, ASRock Rack spec sheet (via Central Computer).</p>
+        <div class="ms-tw" style="margin-top:0"><table class="ms-t n"><tbody>
+          <tr><th style="width:55%">Reserve (OS, services, model)</th><td class="m">24 GB</td></tr>
+          <tr><th>Agents × allowance</th><td class="m" id="cdAg">98 GB</td></tr>
+          <tr><th>Required</th><td class="m" id="cdReq">122 GB</td></tr>
+          <tr><th>Installed</th><td class="m" id="cdIn">128 GB</td></tr>
+          <tr><th>Headroom</th><td class="m" id="cdHd">6 GB</td></tr>
+          <tr><th>Maximum agents at this allowance</th><td class="m" id="cdMax">14</td></tr>
+          <tr><th>Verdict</th><td class="m" id="cdVd">Within capacity</td></tr>
+        </tbody></table></div>
+        <div class="cd-bar" aria-hidden="true"><i class="r" id="cdBr"></i><i id="cdBa"></i><b id="cdBm"></b></div>
+        <div class="cd-leg"><span style="--c:#5B6470">reserve</span><span style="--c:var(--cy)">agents</span><span style="--c:#E4E7EB">installed limit</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="build" style="padding-bottom:0">
+<section class="band" id="pipe">
   <div class="wrap">
-    <div class="kicker">The build</div>
+    <div class="kicker">CD-SYS-001 · 6.0</div>
+    <h2>Processing pipeline for Field Unit data</h2>
+    <p class="lead">Stages for one capture job, from field media to deliverables. Volumes are estimates for a 1,000,000 sq ft building from the scanning report: about 1.3–1.8 TB raw, 4.5–9 TB working space. Bottlenecks are marked.</p>
+    <div class="ms-pipe">
+      <div class="ms-step"><span class="n">P1</span><b>Ingest &amp; verify</b><small>Copy field SSDs and cards; SHA-256 against field manifest; second copy to NAS. CPU / I/O.</small></div>
+      <div class="ms-step"><span class="n">P2</span><b>SLAM optimisation &amp; merge</b><small>GLIM or FAST-LIO2 + HBA offline; merge 30–45 segments. GPU (CUDA).</small><span class="ms-bn">GLIM on Blackwell unverified</span></div>
+      <div class="ms-step"><span class="n">P3</span><b>Register to control</b><small>Hold to survey targets; checkpoint residuals. CPU + RAM; CloudCompare / Open3D / PDAL.</small></div>
+      <div class="ms-step"><span class="n">P4</span><b>360° stitch</b><small>Insta360 Media SDK (Linux, by application); frame extraction. NVDEC.</small><span class="ms-bn">1 NVDEC · SDK access</span></div>
+      <div class="ms-step"><span class="n">P5</span><b>Colourise &amp; tile</b><small>Time-aligned colour from frames; PDAL → COPC tiles by zone. CPU + RAM.</small><span class="ms-bn">128 GB at 5 mm</span></div>
+      <div class="ms-step"><span class="n">P6</span><b>Gaussian splats</b><small>Train per tile (20–45 tiles, est.); LoD streaming as fallback. GPU.</small><span class="ms-bn">16 GB VRAM</span></div>
+      <div class="ms-step gate"><span class="n">P7</span><b>QA/QC gate</b><small>Checkpoint RMSE vs required LOA at 2σ; coverage and density maps.</small></div>
+      <div class="ms-step"><span class="n">P8</span><b>Deliverables</b><small>E57/LAZ point cloud, 360° tour, splats, LOA compliance report.</small></div>
+    </div>
+    <div class="ms-tw" style="margin-top:20px"><table class="ms-t">
+      <thead><tr><th style="width:24%">Constraint</th><th>Effect</th><th style="width:34%">Mitigation</th></tr></thead>
+      <tbody>
+        <tr><th>16 GB VRAM</th><td>Below XGRIDS LCC Studio's 24 GB minimum; a 24 GB RTX 3090 runs out of memory above ≈ 11 M Gaussians (CityGaussian)</td><td>Tile training; upgrade to a 24–48 GB card (gate G3)</td></tr>
+        <tr><th>128 GB RAM</th><td>A full 5 mm cloud (9–15 B points, est.) cannot be held in memory; CloudCompare caps a cloud near 2 B points</td><td>Process per floor or zone; PDAL command line; 256 GB upgrade</td></tr>
+        <tr><th>Single NVDEC</th><td>8K decode works (rated 8K 75 fps) but decode jobs queue one at a time</td><td>Schedule stitching overnight; 5.7K capture</td></tr>
+        <tr><th>No NAS</th><td>15.36 TB holds one active job with no backup copy</td><td>NAS ≥ 40 TB usable + offsite (CD-REQ-006)</td></tr>
+        <tr><th>Insta360 on Linux</th><td>Insta360 Studio has no Linux build; Media SDK access is by application</td><td>Apply for SDK; Windows VM fallback (TBD)</td></tr>
+      </tbody></table></div>
   </div>
-  <div class="xp" id="xp">
-    <div class="wrap xp-stage">
-      <div class="xp-copy">
-        <h2>Assembly stack</h2>
-        <p class="lead" style="font-size:16px">Scroll to assemble. Every part is drawn to scale from its spec sheet, inside the Antec 900's 85-litre chassis.</p>
-        <div class="xp-meter"><i id="xpbar"></i></div>
-        <div class="xp-state" id="xpstate">Exploded view · scroll to assemble</div>
-      </div>
-      <div class="xp-svg"><svg id="xpsvg" viewBox="-260 -300 1520 1560" role="img" aria-label="Exploded view of the workstation: case, motherboard, CPU and cooler, memory, GPU, power supply, drives and radiator"></svg></div>
+</section>
+
+<section class="band" id="store">
+  <div class="wrap">
+    <div class="kicker">CD-SYS-001 · 7.0</div>
+    <h2>Storage and data protection</h2>
+    <p class="lead">Active jobs live on local NVMe; the NAS holds the second copy and the archive; an offsite copy protects against site loss. Vendors advise against processing projects directly on a NAS.</p>
+    <figure class="ms-fig">
+      <div class="sc"><svg viewBox="0 0 1080 220" role="img" aria-label="Storage topology from field media to offsite copy" style="min-width:760px" font-family="IBM Plex Mono, monospace" font-size="12">
+        <rect width="1080" height="220" fill="url(#cgrid)"/>
+        <g fill="#111418" stroke="#5B6470" stroke-width="1.5"><rect x="40" y="70" width="190" height="80"/><rect x="300" y="70" width="190" height="80"/><rect x="560" y="70" width="210" height="80"/><rect x="840" y="70" width="200" height="80"/></g>
+        <rect x="300" y="70" width="190" height="80" fill="none" stroke="#4FB3E8" stroke-width="1.5"/>
+        <g text-anchor="middle" fill="#E4E7EB">
+          <text x="135" y="100">Field media</text><text x="135" y="118" fill="#9AA3AE">Jetson NVMe · X4 cards</text><text x="135" y="134" fill="#9AA3AE">2 copies on site</text>
+          <text x="395" y="100">Conductor NVMe</text><text x="395" y="118" fill="#9AA3AE">2× 7.68 TB · working set</text><text x="395" y="134" fill="#9AA3AE">active job</text>
+          <text x="665" y="100">NAS (planned)</text><text x="665" y="118" fill="#9AA3AE">DS1823xs+ · ≥ 40 TB usable</text><text x="665" y="134" fill="#9AA3AE">copy 2 + archive</text>
+          <text x="940" y="100">Offsite copy</text><text x="940" y="118" fill="#9AA3AE">encrypted</text><text x="940" y="134" fill="#9AA3AE">copy 3</text>
+        </g>
+        <g stroke="#9AA3AE" stroke-width="1.5"><line x1="230" y1="110" x2="300" y2="110"/><line x1="490" y1="110" x2="560" y2="110"/><line x1="770" y1="110" x2="840" y2="110"/></g>
+        <g fill="#9AA3AE"><path d="M300 110l-8-4v8z"/><path d="M560 110l-8-4v8z"/><path d="M840 110l-8-4v8z"/></g>
+        <g fill="#6B7480" font-size="11" text-anchor="middle"><text x="265" y="98">USB</text><text x="265" y="132">SHA-256</text><text x="525" y="98">10 GbE</text><text x="805" y="98">scheduled</text></g>
+        <text x="40" y="190" fill="#6B7480" font-size="11">Per job (est.): raw 1.3–1.8 TB · working 4.5–9 TB · final cloud 0.3–0.55 TB LAS at 5 mm (30–130 GB LAZ)</text>
+      </svg></div>
+      <figcaption>Fig. 12 — Storage topology and copy count. Field media is reused only after the SHA-256 check passes and the NAS copy exists.</figcaption>
+    </figure>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Tier</th><th>Device</th><th style="width:22%">Capacity</th><th style="width:22%">Retention</th></tr></thead>
+      <tbody>
+        <tr><th>Working set</th><td>2× Kioxia CD6-R, U.3, PLP</td><td class="m">15.36 TB raw</td><td>Active job only</td></tr>
+        <tr><th>Copy 2 / archive</th><td>Synology DS1823xs+ (8-bay, 10 GbE), diskless $1,799.99</td><td class="m">≥ 40 TB usable (104–156 TB configs ≈ $5.1–7.4k)</td><td>Per client contract (TBD)</td></tr>
+        <tr><th>Copy 3</th><td>Offsite (encrypted)</td><td class="m">Per archive</td><td>Per client contract (TBD)</td></tr>
+        <tr><th>Boot</th><td>Samsung 9100 PRO 2 TB M.2 (optional line)</td><td class="m">2 TB</td><td>OS, tools, containers</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section class="band" id="sec">
+  <div class="wrap">
+    <div class="kicker">CD-SYS-001 · 8.0</div>
+    <h2>Security</h2>
+    <p class="lead">Conductor holds client facility data. Controls below are targets for the first client job; none is claimed as certified.</p>
+    <div class="ck">
+      <div><h4>Management plane</h4><ol><li>BMC/IPMI on a dedicated management VLAN, never on the user LAN</li><li>Change BMC default credentials at first boot</li><li>Update BMC and BIOS firmware before the first client job</li></ol></div>
+      <div><h4>Data at rest</h4><ol><li>Full-disk encryption on data volumes (target)</li><li>Encrypted NAS shares and offsite copy</li><li>Deletion on contract end, logged</li></ol></div>
+      <div><h4>Access</h4><ol><li>Named user accounts, key-only SSH</li><li>Host firewall; only required services exposed</li><li>No client data in cloud API prompts without client approval</li></ol></div>
+      <div><h4>Chain of custody</h4><ol><li>Field manifest with SHA-256 per file</li><li>Verify on ingest; log operator and time</li><li>QA report lists the dataset hashes</li></ol></div>
     </div>
   </div>
 </section>
 
-<section class="band" id="day">
+<section class="band" id="build">
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
-      <div>
-        <div class="kicker">Build day</div>
-        <h2 style="margin-top:14px">Build procedure: nine steps</h2>
-      </div>
-      <div class="day-arrows"><button type="button" id="dprev" aria-label="Previous step">←</button><button type="button" id="dnext" aria-label="Next step">→</button></div>
+    <div class="kicker">CD-SYS-001 · 9.0</div>
+    <h2>Build procedure</h2>
+    <p class="lead">The full step-by-step procedure, checklists and team sign-off live in the <a href="build-book.html">build book</a>. Summary of the SP5-specific steps:</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:8%">Step</th><th>Action</th><th style="width:36%">Check</th></tr></thead>
+      <tbody>
+        <tr><th class="m">1</th><td>Install the 4 RDIMMs in the slots the manual names for 4-DIMM population</td><td>Runs at DDR5-4800 until EXPO is enabled</td></tr>
+        <tr><th class="m">2</th><td>Seat the EPYC 9175F in SP5 with the torque sequence; fit XE360-SP5 bracket</td><td>Radiator top-mounted as exhaust (top takes 360 mm max)</td></tr>
+        <tr><th class="m">3</th><td>Mount the board in the Antec 900 (SSI-EEB standoffs)</td><td>Standoff count matches the board</td></tr>
+        <tr><th class="m">4</th><td>Connect 24-pin and EPS</td><td><b>CD-R-01:</b> confirm EPS requirement before power-on</td></tr>
+        <tr><th class="m">5</th><td>Install the GPU in slot 0 (or 2/4/6); connect 12V-2x6</td><td>Not slot 1 or 7</td></tr>
+        <tr><th class="m">6</th><td>Mount both CD6-R drives; MCIO cables ≤ 0.5 m; separate SATA power per drive</td><td><span class="m">lspci</span> shows 16GT/s x4</td></tr>
+        <tr><th class="m">7</th><td>First boot with a monitor on the GPU (BMC video is VGA only); BMC on mgmt VLAN</td><td>CD-REQ-011</td></tr>
+        <tr><th class="m">8</th><td>Burn-in: 4 h CPU + GPU load; wall-power reading</td><td>CD-REQ-009, CD-REQ-010</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section class="band" id="roadmap">
+  <div class="wrap">
+    <div class="kicker">CD-SYS-001 · 10.0</div>
+    <h2>Upgrade roadmap and gates</h2>
+    <p class="lead">Upgrades are ordered by the constraint they remove. The Field Unit scanning workload moves the NAS ahead of the first client job and gives the GPU upgrade a concrete trigger.</p>
+    <div class="ms-seg">
+      <div><span class="lv">G0 · by 2026-11-19</span><h4>EPS check + order</h4><p>Confirm 3× vs 2× EPS (CD-R-01). Order Baseline within the price guarantee.</p></div>
+      <div><span class="lv">G1 · at build</span><h4>Build + burn-in</h4><p>Verify CD-REQ-003, 009, 010, 011. Record wall power and thermals.</p></div>
+      <div><span class="lv">G2 · before first job</span><h4>NAS + pilot processing</h4><p>Install NAS (CD-REQ-006). Process Field Unit pilot-day data end-to-end; set CD-REQ-013.</p></div>
+      <div><span class="lv">G3 · triggered</span><h4>Memory, GPU, power</h4><p>256 GB when agents or 5 mm clouds hit the limit; 24–48 GB GPU when splat tiling or LCC is required; PSU only with a second 300 W+ GPU.</p></div>
     </div>
-    <p class="lead">About <b>4 hours</b> for two people, start to finish. Swipe through the order we'll put it together. The full checklist, with boxes to tick off on the day, is in the <a href="build-book.html">build book</a>.</p>
-    <div class="day-track" id="dayTrack" tabindex="0" aria-label="Build steps, scroll sideways"></div>
-    <div class="day-bar"><i id="dayFill"></i></div>
-    <div class="day-meta"><span id="dayNow">Step 1 of 9</span><span>Total ≈ 4 h · 2 people · 1 anti-static strap</span></div>
+    <div class="ms-tw" style="margin-top:20px"><table class="ms-t">
+      <thead><tr><th style="width:22%">Upgrade</th><th>Trigger</th><th style="width:22%">Removes</th><th style="width:16%">Cost</th></tr></thead>
+      <tbody>
+        <tr><th>NAS ≥ 40 TB</th><td>Before the first client job</td><td>Single copy of client data</td><td class="m">$1,799.99 + drives</td></tr>
+        <tr><th>Memory to 256 GB</th><td>&gt; 14 agents, or full-floor 5 mm clouds</td><td>RAM capacity; doubles bandwidth to ≈ 358 GB/s</td><td class="m">$4,589.99</td></tr>
+        <tr><th>GPU 24–48 GB</th><td>XGRIDS LCC (24 GB minimum) or splat tile count too high</td><td>VRAM limit</td><td class="m">quote</td></tr>
+        <tr><th>PSU</th><td>Second 300 W+ GPU, or EPS check fails</td><td>Power headroom / EPS count</td><td class="m">quote</td></tr>
+      </tbody></table></div>
   </div>
 </section>
 
-<section class="band" id="orchestra">
+<section class="band" id="risk">
   <div class="wrap">
-    <div class="kicker">The orchestra</div>
-    <h2 style="margin-top:14px">Agent concurrency model</h2>
-    <div class="orch">
-      <canvas id="orch" aria-label="Animated illustration: 14 agents on a ring sending calls to cloud models, the local GPU, tools and a vector database" role="img"></canvas>
-      <div class="stack">
-        <div><div class="big film">~14</div><p><b>coding agents running at once</b>, our estimate. Six agents measured ~43.5 GB of RAM, about 7 GB each. 128 GB leaves room for ~14 after the OS and services, and <b>~33</b> once we add four more memory sticks.</p></div>
-        <p><b>Memory runs out first in agent work.</b> Every session starts its own tool servers, browsers and containers. That is why memory is the first upgrade on our list: four empty slots are waiting.</p>
-        <p><b>Local models take the routine calls.</b> A fast 20B-class model handles routing, tool calls and fallback on the 16 GB GPU, or an embedding and reranking pair for search. Frontier work goes to cloud models like Claude.</p>
-        <p class="src">Illustration, not a live feed. Memory figure from a Claude Code issue report (June 2026).</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="datapath">
-  <div class="wrap">
-    <div class="kicker">Inside one request</div>
-    <h2>Data path and link bandwidth</h2>
-    <p class="lead">Follow an agent's request through the machine. Each hop has a different speed limit, shown on the line; the dots move faster where the pipe is wider. This is why memory bandwidth and GPU memory matter more than raw core count for this build.</p>
-    <div class="dpath"><svg viewBox="0 0 1200 300" id="dpsvg" aria-hidden="true">
-      <defs><filter id="dpglow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/></filter></defs>
-      <g class="nd" data-i="0"><rect x="20" y="110" width="170" height="80" rx="14"/><text class="t1" x="105" y="146">AGENT</text><text class="t2" x="105" y="168">one of ~14</text></g>
-      <g class="nd" data-i="1"><rect x="260" y="110" width="170" height="80" rx="14"/><text class="t1" x="345" y="146">EPYC CORE</text><text class="t2" x="345" y="168">1 of 16 · 32 MB L3</text></g>
-      <g class="nd" data-i="2"><rect x="500" y="110" width="170" height="80" rx="14"/><text class="t1" x="585" y="146">DDR5 · 128 GB</text><text class="t2" x="585" y="168">4 of 8 channels</text></g>
-      <g class="nd" data-i="3"><rect x="740" y="110" width="170" height="80" rx="14"/><text class="t1" x="825" y="146">RTX 5070 TI</text><text class="t2" x="825" y="168">16 GB GDDR7</text></g>
-      <g class="nd" data-i="4"><rect x="980" y="110" width="200" height="80" rx="14"/><text class="t1" x="1080" y="146">KIOXIA NVME</text><text class="t2" x="1080" y="168">2 × 7.68 TB</text></g>
-      <g stroke="#1C2433" stroke-width="10" stroke-linecap="round"><line x1="190" y1="150" x2="260" y2="150"/><line x1="430" y1="150" x2="500" y2="150"/><line x1="670" y1="150" x2="740" y2="150"/><line x1="910" y1="150" x2="980" y2="150"/></g>
-      <text class="bw" x="225" y="96">cache</text><text class="bw" x="465" y="96">~179 GB/s</text><text class="bw" x="705" y="96">PCIe 5.0 x16</text><text class="bw" x="945" y="96">~6.2 GB/s each</text>
-      <text class="t2" x="825" y="222">896 GB/s inside the card</text>
-      <g id="dppk"></g>
-    </svg></div>
-    <div class="dp-cap" aria-live="polite"><b id="dpstep">Hop 1</b><span id="dptxt">An agent sends a request: a prompt, some code to read, a tool call.</span></div>
-    <p class="src" style="margin-top:8px">Speeds from the final-build facts sheet: DDR5-5600 in 4 channels ≈ 179 GB/s theoretical; RTX 5070 Ti 896 GB/s; Kioxia CD6-R ~6,200 MB/s sequential read. Dot speeds are relative, not to scale.</p>
-  </div>
-</section>
-
-<section class="band" id="proof">
-  <div class="wrap">
-    <div class="kicker">The proof</div>
-    <h2 style="margin-top:14px">Benchmarks</h2>
-    <div class="cols">
-      <div class="panel">
-        <h3>Local AI on the RTX 5070 Ti</h3>
-        <p class="src" style="margin-top:6px">gpt-oss-20b · llama.cpp llama-bench · generation tokens per second</p>
-        <div class="bars" id="gpubars"></div>
-        <div class="stat-strip">
-          <div><b class="film">6,340</b><span>tok/s · gpt-oss-20b prompt processing</span></div>
-          <div><b>125</b><span>tok/s · Llama 3.1 8B Q4 (Ollama)</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Sources: llama.cpp discussion #15396 (community llama-bench results); ComputingForGeeks. gpt-oss-20b needs ~15.5 GB at 32K context, so it fills the card.</p>
-      </div>
-      <div class="panel">
-        <h3>Memory sets the pace</h3>
-        <p class="src" style="margin-top:6px">Theoretical memory bandwidth · GB/s · higher is faster for CPU-side AI</p>
-        <div class="bars" id="cpubars"></div>
-        <div class="stat-strip">
-          <div><b class="film">25–30</b><span>tok/s · gpt-oss-120b, GPU + RAM hybrid (tuned rigs)</span></div>
-          <div><b>~3×</b><span>speed-up from faster RAM on that model</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Bandwidth = channels × 8 bytes × MT/s. AMD rates the 9175F at 614 GB/s across 12 channels. Hybrid results from carteakey.dev and hardware-corner (consumer rigs, not this machine): ~10–11 tok/s at DDR5-2000 vs ~30 tok/s at DDR5-6000.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="airflow">
-  <div class="wrap">
-    <div class="kicker">Power &amp; air</div>
-    <h2 style="margin-top:14px">Thermal and power budget</h2>
-    <div class="cols" style="align-items:center">
-      <div class="air panel" style="padding:12px"><svg id="airsvg" viewBox="0 0 900 640" role="img" aria-label="Airflow diagram: three 140 mm front fans pull cool air in; it crosses the board and GPU and leaves through the rear fan and the 360 mm radiator on top; two reverse-flow fans push air up from the shroud"></svg></div>
-      <div>
-        <p class="lead" style="margin-top:0"><b>Cool air enters through three 140 mm fans in front.</b> It crosses the board and the GPU, then leaves through the rear fan and the <b>360 mm radiator on top</b>, which cools the CPU. Two reverse-flow fans in the shroud push cool air up into the GPU. All six case fans come with the Antec 900.</p>
-        <div class="gauges">
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.71"></svg><b>~850 W</b><span>full-load estimate at the wall, of a 1,200 W PSU</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.47"></svg><b>~7.1 A</b><span>of a standard 15 A, 120 V circuit</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.29"></svg><b>~350 W</b><span>spare PSU capacity for upgrades (80 Plus Platinum)</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Wall power is an estimate from component ratings: 320 W CPU + 300 W GPU + ~150 W for memory, drives, fans and board ≈ 770 W, plus PSU losses. A UPS of 1,500 VA is tight; 2,200 VA is recommended. Sources: AMD, NVIDIA, Super Flower, Antec, Gamers Nexus.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="parts">
-  <div class="wrap">
-    <div class="kicker">Meet the parts</div>
-    <h2 style="margin-top:14px">Component reference</h2>
-    <p class="lead">This is what we're buying: <b>the EPYC build in the Antec 900.</b> Each part was chosen to keep our agents and local models fed without waiting on memory, cores or storage. Click through to the exact product pages.</p>
-    <div class="chapters" id="chapters"></div>
+    <div class="kicker">CD-SYS-001 · 11.0</div>
+    <h2>Risk register</h2>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:8%">ID</th><th>Risk</th><th style="width:7%">L</th><th style="width:7%">I</th><th style="width:34%">Mitigation</th><th style="width:10%">Owner</th></tr></thead>
+      <tbody>
+        <tr class="hi"><th class="m">CD-R-01</th><td>Board has 3× EPS inputs; PSU has 2× EPS cables</td><td class="m">M</td><td class="m">H</td><td>Confirm in the TURIND8X-2T manual before ordering; if 3 required, swap PSU within the price guarantee</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-02</th><td>16 GB VRAM limits splat training and some tools</td><td class="m">H</td><td class="m">M</td><td>Tile; G3 GPU upgrade</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-03</th><td>128 GB insufficient for full-floor 5 mm clouds</td><td class="m">M</td><td class="m">M</td><td>Zone processing; 256 GB upgrade</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-04</th><td>No NAS: client data has a single copy</td><td class="m">H</td><td class="m">H</td><td>NAS before first job (G2)</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-05</th><td>GLIM CUDA build on Blackwell (sm_120) unverified</td><td class="m">M</td><td class="m">M</td><td>Build with CUDA ≥ 12.8; fallback FAST-LIO2 + HBA on CPU</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-06</th><td>Insta360 Media SDK access not granted</td><td class="m">M</td><td class="m">M</td><td>Apply early; Windows Studio fallback</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-07</th><td>UPS undersized (1,500 VA tight for ≈ 850 W)</td><td class="m">M</td><td class="m">L</td><td>2,200 VA unit</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-08</th><td>Price guarantee expires 2026-11-19</td><td class="m">H</td><td class="m">M</td><td>Close G0 first</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-09</th><td>BMC exposed on user network</td><td class="m">L</td><td class="m">H</td><td>Management VLAN; credentials changed (CD-REQ-011)</td><td>Build team</td></tr>
+        <tr><th class="m">CD-R-10</th><td>4 of 8 memory channels halves CPU-side inference bandwidth</td><td class="m">C</td><td class="m">L</td><td>Accepted in Option A; memory upgrade restores 8 ch</td><td>Build team</td></tr>
+      </tbody></table></div>
+    <p class="ms-p" style="margin-top:8px;font-size:12.5px">L = likelihood, I = impact (L/M/H); C = certain (accepted).</p>
   </div>
 </section>
 
 <section class="band" id="bom">
   <div class="wrap">
-    <div class="kicker">Bill of materials</div>
-    <h2 style="margin-top:14px">Bill of materials</h2>
-    <p class="lead">Sourced <b>Micro Center first</b>, from the Miami store quote held until Thursday, Nov 19. Amazon and specialist suppliers only fill what Micro Center doesn't carry. The Kioxia drives and their cables come from Amazon because Micro Center doesn't carry enterprise drives. Tick extras on or off to see the total update.</p>
-    <div class="bom-grid">
-      <div class="lines" id="bomlines"></div>
-      <aside class="sum" id="bomsum" aria-live="polite"></aside>
-    </div>
+    <div class="kicker">CD-SYS-001 · 12.0</div>
+    <h2>Bill of materials by configuration</h2>
+    <p class="lead">Baseline lines are ordered as one set. Procure and Upgrade lines are selectable. Micro Center lines carry 7% sales tax (est.); Amazon tax excluded.</p>
+    <div class="ms-tw"><table class="ms-t cd-bom" id="cdbom">
+      <thead><tr><th class="ck"></th><th style="width:12%">Config</th><th>Item</th><th style="width:14%">Source</th><th style="width:7%">Qty</th><th style="width:13%;text-align:right">Line</th></tr></thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr><th colspan="5">Micro Center subtotal + 7% tax (est.)</th><td class="m" id="cdMc" style="text-align:right"></td></tr>
+        <tr><th colspan="5">Other sources (tax excluded)</th><td class="m" id="cdOt" style="text-align:right"></td></tr>
+        <tr><th colspan="5">Selected total</th><td class="m" id="cdTot" style="text-align:right;color:var(--cy)"></td></tr>
+      </tfoot>
+    </table></div>
+    <p class="ms-p" style="font-size:12.5px;margin-top:8px">Baseline total ≈ $14,037 (Micro Center $9,062.85 incl. tax + Amazon $4,974). The Arctic fan set is no longer required: the Antec 900 ships with 6 PWM fans.</p>
   </div>
 </section>
 
-<footer>
+<section class="band" id="appxdec" data-appx="A">
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline">
-      <div class="mark">CONDUCTOR<span></span></div>
-      <a href="build-book.html">Team build book: decisions, fit check and assembly →</a>
-    </div>
-    <p style="max-width:70ch">Specs come from manufacturer datasheets and the reviews below, checked in November 2026. Figures marked as estimates or reported have not been measured on this exact machine.</p>
-    <ol id="sources"></ol>
-    <p class="src" id="photocred">Product photos: AMD; ASRock; ASRock Rack (via Scan Computers); ASUS; Antec; CDW; Chaddy (Wikimedia Commons, CC BY-SA 4.0); Darkone (Wikimedia Commons, CC BY-SA 2.5); KIOXIA; Kms (Wikimedia Commons, CC BY 3.0); Micro SATA Cables; PNY (NVIDIA board partner); SilverStone; Super Flower; Thermaltake. Shown for identification; all trademarks belong to their owners.</p>
+    <div class="kicker">CD-SYS-001 · Appendix</div>
+    <h2>Decision record: Option A vs Option B</h2>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%"></th><th>Option A (selected 2026-11-17)</th><th>Option B (not selected)</th></tr></thead>
+      <tbody>
+        <tr><th>Platform</th><td>EPYC 9175F + TURIND8X-2T, 128 GB, RTX 5070 Ti 16 GB</td><td>Threadripper PRO 9975WX + WRX90E-SAGE SE, 256 GB, RTX PRO 5000 48 GB</td></tr>
+        <tr><th>Micro Center price</th><td class="m">$8,956</td><td class="m">$22,459 (+$13,503)</td></tr>
+        <tr><th>Rationale</th><td colspan="2">Same 7-slot / 128-lane platform class and the same drives. The memory, GPU and power upgrade path closes most of the gap when a workload requires it (section 10.0).</td></tr>
+      </tbody></table></div>
   </div>
-</footer>
+</section>
+
+<section class="band" id="appxsrc" data-appx="B">
+  <div class="wrap">
+    <div class="kicker">CD-SYS-001 · Appendix</div>
+    <h2>Sources</h2>
+    <ol class="ms-p" style="font-size:13px;line-height:1.7;max-width:none">
+      <li><a href="https://www.amd.com/en/products/processors/server/epyc/9005-series/amd-epyc-9175f.html">AMD: EPYC 9175F product page</a></li>
+      <li><a href="https://chipsandcheese.com/p/amds-turin-5th-gen-epyc-launched">Chips and Cheese: AMD Turin launch analysis</a></li>
+      <li><a href="https://forum.level1techs.com/t/epyc-turin-gaming-build-9175f/228698/3">Level1Techs: EPYC 9175F build (16 CCDs, one core each)</a></li>
+      <li><a href="https://www.centralcomputer.com/asrock-rack-turind8x-2t-500w-server-motherboard-single-socket-sp5-supports-amd-epyc-9005-9004-processors-8x-ddr5-rdimm-slots.html">Central Computer: ASRock Rack TURIND8X-2T specifications</a></li>
+      <li><a href="https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/">ASUS: ProArt RTX 5070 Ti OC</a></li>
+      <li><a href="https://github.com/ggml-org/llama.cpp/discussions/15396">llama.cpp discussion #15396: gpt-oss llama-bench results by GPU</a></li>
+      <li><a href="https://carteakey.dev/blog/local-inference/optimizing-gpt-oss-120b-local-inference/">carteakey.dev: gpt-oss-120b local inference</a> · <a href="https://www.hardware-corner.net/gpt-oss-offloading-moe-layers/">Hardware Corner: MoE offloading</a></li>
+      <li><a href="https://europe.kioxia.com/nl-nl/business/ssd/data-center-ssd/cd6-r.html">Kioxia: CD6-R data center SSD</a></li>
+      <li><a href="https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/">SilverStone: XE360-SP5</a> · <a href="https://www.super-flower.com.tw/products-detail/LVII-P-PRO/">Super Flower: Leadex VII Platinum PRO</a></li>
+      <li><a href="https://antec.com/product/case/900">Antec: 900</a> · <a href="https://gamersnexus.net/cases/goat-antec-900-case-revisit-new-900-2026-review-benchmarks-and-thermals">Gamers Nexus: Antec 900 (2026) review</a></li>
+      <li><a href="fu-building-scanning.html">Field Unit report: Go2 large building scanning (data volumes, processing bottlenecks)</a></li>
+      <li>Field Unit Gen-1 enterprise kit notes (NAS pricing: Synology DS1823xs+), research library</li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="appxrev" data-appx="C">
+  <div class="wrap">
+    <div class="kicker">CD-SYS-001 · Appendix</div>
+    <h2>Revision history</h2>
+    <div class="ms-tw"><table class="ms-t n">
+      <thead><tr><th style="width:12%">Rev</th><th style="width:18%">Date</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><th class="m">A</th><td class="m">2026-11-18</td><td>First issue as system specification. Replaces the showcase page. Adds the capture-processing role, requirements, interfaces, pipeline, storage, security, roadmap and risk register.</td></tr>
+        <tr><th class="m">—</th><td class="m">2026-11-17</td><td>Option A selected; Antec 900 enclosure added.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
 
 <script>
-const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const $ = s=>document.querySelector(s);
-const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);return;} new IntersectionObserver(es=>es.forEach(e=>fn(e.isIntersecting,e)),opts||{threshold:0}).observe(el); };
-
-/* ---------- Hero wafer ---------- */
 (function(){
-  const c=$('#wafer'), ctx=c.getContext('2d'); let W=0,running=false,t0=performance.now(),raf;
-  function size(){const r=c.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);W=r.width;c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);}
-  function draw(now){
-    const t=(now-t0)/1000, R=W*0.46, cx=W/2, cy=W/2, die=R/7.2, gap=die*0.08, rot=RM?0.18:t*0.05, light=t*0.6;
-    ctx.clearRect(0,0,W,W);
-    const glow=ctx.createRadialGradient(cx,cy,R*0.2,cx,cy,R*1.12);glow.addColorStop(0,'rgba(79,179,232,0.10)');glow.addColorStop(1,'rgba(6,8,14,0)');
-    ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,R*1.12,0,Math.PI*2);ctx.fill();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(rot);
-    ctx.beginPath();ctx.arc(0,0,R,0.06+Math.PI/2,Math.PI/2-0.06+Math.PI*2);ctx.closePath();
-    const base=ctx.createLinearGradient(-R,-R,R,R);base.addColorStop(0,'#1a2233');base.addColorStop(1,'#0c111b');ctx.fillStyle=base;ctx.fill();
-    ctx.save();ctx.clip();
-    const n=Math.ceil(R/die)+1;
-    for(let i=-n;i<=n;i++)for(let j=-n;j<=n;j++){
-      const x=i*die-die/2, y=j*die*0.82-die*0.41, w=die-gap, h=die*0.82-gap;
-      const far=Math.max(Math.hypot(x,y),Math.hypot(x+w,y),Math.hypot(x,y+h),Math.hypot(x+w,y+h));
-      if(far>R*0.97)continue;
-      const r=Math.hypot(x+w/2,y+h/2)/R, a=Math.atan2(y+h/2,x+w/2);
-      const hue=(195+150*Math.sin(r*3.1+a*0.9-light*0.5)+360)%360;
-      const spec=Math.max(0,Math.cos(a-rot*-1-light*0.35))*Math.max(0,1-Math.abs(r-0.55)*1.4);
-      ctx.fillStyle=`hsl(${hue},${62+spec*25}%,${16+r*8+spec*38}%)`;
-      ctx.fillRect(x,y,w,h);
-      // 8 core blocks per die
-      ctx.fillStyle=`hsla(${(hue+40)%360},70%,${30+spec*45}%,0.55)`;
-      const cw=(w-gap*3)/4, ch=(h*0.5-gap*2)/2;
-      for(let q=0;q<8;q++){const qx=x+gap+(q%4)*(cw+gap*0.6),qy=y+gap+Math.floor(q/4)*(ch+gap*0.6);ctx.fillRect(qx,qy,cw*0.9,ch);}
-    }
-    ctx.restore();
-    ctx.strokeStyle='rgba(233,237,245,0.18)';ctx.lineWidth=1;ctx.stroke();
-    ctx.restore();
-    // specular sweep
-    const sx=cx+Math.cos(light*0.35)*R*0.6, sy=cy+Math.sin(light*0.35)*R*0.6;
-    const sp=ctx.createRadialGradient(sx,sy,0,sx,sy,R*0.7);sp.addColorStop(0,'rgba(255,255,255,0.12)');sp.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=sp;ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fill();
-    if(running&&!RM)raf=requestAnimationFrame(draw);
+  const $=s=>document.querySelector(s);
+  const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  /* GPU comparison */
+  const gpu=[['RTX 5060 Ti 16 GB',111.5],['RTX 3090 24 GB',161.8],['RTX 5070 Ti 16 GB · selected',189.5,1],['RTX 5080 16 GB',204.9],['RTX 4090 24 GB',221.9],['RTX 5090 32 GB',282.5]];
+  const gmax=300;
+  $('#cdgpu').innerHTML=gpu.map(([n,v,us])=>`<span class="n${us?' us':''}">${n}</span><span class="t"><i class="${us?'us':''}" style="width:${(v/gmax*100).toFixed(1)}%"></i></span><span class="v">${v}</span>`).join('');
+  /* Agent capacity */
+  let mem=128;
+  const A=$('#cdA'),P=$('#cdP');
+  function calc(){
+    const a=+A.value,p=+P.value,res=24,ag=a*p,req=res+ag,hd=mem-req,max=Math.max(0,Math.floor((mem-res)/p));
+    $('#cdAv').textContent=a;$('#cdPv').textContent=p;
+    $('#cdAg').textContent=ag+' GB';$('#cdReq').textContent=req+' GB';$('#cdIn').textContent=mem+' GB';
+    $('#cdHd').textContent=(hd>=0?'':'−')+Math.abs(hd)+' GB';$('#cdMax').textContent=max;
+    const vd=$('#cdVd');
+    if(hd<0){vd.textContent='Over capacity by '+(-hd)+' GB';vd.className='m vd-bad';}
+    else if(hd<mem*0.05){vd.textContent='At limit (headroom < 5%)';vd.className='m vd-warn';}
+    else{vd.textContent='Within capacity';vd.className='m vd-ok';}
+    const scale=Math.max(mem,req)*1.05;
+    $('#cdBr').style.width=(res/scale*100)+'%';
+    const ba=$('#cdBa');ba.style.left=(res/scale*100)+'%';ba.style.width=(ag/scale*100)+'%';ba.className=hd<0?'over':'';
+    $('#cdBm').style.left=(mem/scale*100)+'%';
   }
-  size();draw(performance.now());
-  window.addEventListener('resize',()=>{size();draw(performance.now());});
-  vis(c,on=>{running=on;cancelAnimationFrame(raf);if(on&&!RM)raf=requestAnimationFrame(draw);});
-})();
-
-/* ---------- Boot sequence (types once on load) ---------- */
-(function(){
-  if(RM)return; return; const lines=[...document.querySelectorAll('#boot div')]; const html=lines.map(l=>l.innerHTML);
-  lines.forEach(l=>l.style.visibility='hidden');
-  let i=0; const next=()=>{ if(i>=lines.length)return; const l=lines[i]; l.style.visibility='visible';
-    const full=l.textContent; const original=html[i]; let k=0;
-    const tick=()=>{k+=2; if(k>=full.length){l.innerHTML=original;i++;setTimeout(next,140);return;} l.textContent=full.slice(0,k);requestAnimationFrame(tick);};
-    tick(); };
-  setTimeout(next,250);
-})();
-
-/* ---------- Count-ups ---------- */
-(function(){
-  document.querySelectorAll('.count').forEach(el=>{
-    const to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), sep=!!el.dataset.sep, cell=el.closest('.num');
-    const fmt=v=>sep?Math.round(v).toLocaleString('en-US'):v.toFixed(dec);
-    let done=false; const r0=el.getBoundingClientRect(); if(r0.top<innerHeight&&r0.bottom>0) done=true;
-    vis(el,on=>{ if(!on||done||RM)return; done=true; const t0=performance.now(), d=1400;
-      const step=now=>{const p=Math.min(1,(now-t0)/d), e=1-Math.pow(1-p,3); el.textContent=fmt(to*e); if(cell)cell.style.setProperty('--fill',e); if(p<1)requestAnimationFrame(step); else el.textContent=fmt(to);};
-      requestAnimationFrame(step);
-    },{threshold:0.4});
-  });
-})();
-
-/* ---------- Reveal ---------- */
-(function(){ if(RM)return; document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top>innerHeight){el.classList.add('pre'); vis(el,on=>{if(on)el.classList.remove('pre');},{threshold:0.15});}}); })();
-
-/* ---------- Die CCDs ---------- */
-(function(){
-  const g=$('#ccds'), f=$('#fabric'); const cols=[44,160,460,576], rows=[62,222,382,542]; let s='', l='', k=0;
-  cols.forEach((x,ci)=>rows.forEach((y,ri)=>{ const w=100,h=140, left=ci<2;
-    const ex=left?290:430, ey=190+ri*100+ (ci%2?20:50);
-    l+=`<path class="fabric" d="M${left?x+w:x} ${y+h/2} C ${left?x+w+60:x-60} ${y+h/2}, ${left?ex-50:ex+50} ${ey}, ${ex} ${ey}"/>`;
-    s+=`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="#121927" stroke="#2F3A52" stroke-width="1.5"/>`;
-    for(let q=0;q<8;q++){const cx=x+10+(q%4)*21, cy=y+12+Math.floor(q/4)*30, on=q===0;
-      s+=on?`<rect class="core" style="animation-delay:${k*0.19}s" x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="url(#gfilm)"/>`
-           :`<rect x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="#1B2436" opacity=".7"/>`;}
-    s+=`<rect x="${x+10}" y="${y+78}" width="${w-20}" height="44" rx="3" fill="#1B2436"/><text x="${x+w/2}" y="${y+97}" text-anchor="middle" fill="#8E98AC" font-family="IBM Plex Mono, monospace" font-size="11">32 MB L3</text><text x="${x+w/2}" y="${y+113}" text-anchor="middle" fill="#586178" font-family="IBM Plex Mono, monospace" font-size="10">CCD ${k}</text></g>`;
-    k++; }));
-  g.innerHTML=s; f.innerHTML=l;
-})();
-
-/* ---------- Exploded build ---------- */
-(function(){
-  const svg=$('#xpsvg'); const S=1.7; // px per mm
-  const part=(id,dx,dy,inner,label,sub,lx,ly)=>`<g data-dx="${dx}" data-dy="${dy}" id="p-${id}">${inner}<g class="lbl"><text x="${lx}" y="${ly}">${label}</text><text class="lbl-sub" x="${lx}" y="${ly+24}">${sub}</text></g></g>`;
-  const fan=(cx,cy,r)=>`<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#0B1019" stroke="#2F3A52" stroke-width="2"/><g class="fan">${[0,1,2,3,4,5,6].map(k=>`<path d="M${cx} ${cy} q ${r*0.5} ${-r*0.25} ${r*0.86} ${r*0.05}" stroke="url(#xfilm)" stroke-width="${r*0.18}" stroke-linecap="round" fill="none" transform="rotate(${k*51.4} ${cx} ${cy})" opacity=".8"/>`).join('')}</g><circle cx="${cx}" cy="${cy}" r="${r*0.2}" fill="#141B2A"/></g>`;
-  const bx=110,by=120,bw=330*S,bh=305*S; // board
-  const slotY=n=>by+ (138+(n-1)*20.32)*S*0.92;
-  let h=`<defs><linearGradient id="xfilm" x1="0" x2="1"><stop offset="0" stop-color="#4FB3E8"/><stop offset=".45" stop-color="#7FA7C9"/><stop offset=".75" stop-color="#8B95A1"/><stop offset="1" stop-color="#C9CED4"/></linearGradient></defs>`;
-  // case shell (anchor)
-  h+=`<g id="p-case"><rect x="40" y="40" width="${250*S*0+920}" height="1040" rx="22" fill="#0A0E17" stroke="#2A3448" stroke-width="3"/><rect x="40" y="860" width="920" height="220" fill="#0D1220" stroke="#2A3448" stroke-width="2"/>
-    ${fan(310,860,0)}<text x="60" y="1120" fill="#8E98AC">ANTEC 900 · 85 L · SSI-EEB</text><text x="940" y="1120" text-anchor="end" fill="#586178">FRONT →</text>
-    <g>${[260,420].map(x=>fan(x,980,52)).join('')}</g><g>${[300,520,740].map(y=>fan(915,y,40)).join('')}</g><rect x="58" y="120" width="40" height="238" rx="4" fill="#121927" stroke="#2F3A52"/></g>`;
-  // board
-  let slots=''; for(let n=1;n<=7;n++){slots+=`<rect x="${bx+40}" y="${slotY(n)}" width="${150}" height="9" rx="2" fill="#2F3A52"/>`;}
-  h+=part('board',0,0,`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="8" fill="#0F1A1A" stroke="#24493E" stroke-width="2"/>
-    <rect x="${bx}" y="${by+10}" width="34" height="200" fill="#1C2A2A"/>${slots}
-    <rect x="${bx+260}" y="${by+380}" width="250" height="90" rx="6" fill="#152222" stroke="#24493E"/><text x="${bx+385}" y="${by+432}" text-anchor="middle" class="lbl-sub" style="font-size:15px">2 × M.2 · 4 × MCIO</text>`,
-    'ASROCK RACK TURIND8X-2T','EEB 12.6×13 in · 7× PCIe 5.0 x16 · 2× 10 GbE',bx+250,by+bh+50);
-  // CPU + cooler block
-  const sx=bx+250, sy=by+120;
-  h+=part('cpu',0,-330,`<rect x="${sx-20}" y="${sy-30}" width="${72*S+40}" height="${75.4*S+60}" rx="14" fill="#141B2A" stroke="url(#xfilm)" stroke-width="3"/><circle cx="${sx+61}" cy="${sy+64}" r="40" fill="none" stroke="url(#xfilm)" stroke-width="3" opacity=".7"/><text x="${sx+61}" y="${sy+70}" text-anchor="middle" style="font-size:16px">SP5</text>`,
-    'EPYC 9175F + XE360-SP5 PUMP','16 cores · 320 W · 360 mm AIO',sx-40,sy-60);
-  // DIMMs
-  const dimm=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="url(#xfilm)" opacity=".85"/>`;
-  const slotE=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="none" stroke="#2F3A52" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-  h+=`<g>${[0,1,2,3].map(k=>slotE(sx+165+k*18)).join('')}</g>`;
-  h+=part('ramL',-230,-120,[0,1,2,3].map(k=>dimm(sx-90+k*18)).join(''),'128 GB DDR5','4 × 32 GB · 4 of 8 slots',sx-330,by+30);
-  // GPU slot 1
-  const gy=slotY(1)-6;
-  h+=part('gpu',-120,250,`<rect x="${bx-60}" y="${gy}" width="${304*S}" height="${2.5*20.32*S}" rx="8" fill="#10151F" stroke="url(#xfilm)" stroke-width="3"/><rect x="${bx-60}" y="${gy+70}" width="${304*S}" height="10" fill="url(#xfilm)" opacity=".5"/>${[0,1,2].map(k=>`<circle cx="${bx+40+k*150}" cy="${gy+40}" r="30" fill="#0B1019" stroke="#2F3A52"/>`).join('')}`,
-    'RTX 5070 TI · ASUS PROART','16 GB GDDR7 · 300 W · ~304 mm',bx,gy+150);
-  // 360 mm radiator, top exhaust
-  const rx=340, ry=48;
-  h+=part('rad',150,-300,`<rect x="${rx}" y="${ry}" width="600" height="58" rx="8" fill="#0D1220" stroke="#2F3A52" stroke-width="2"/>${[0,1,2].map(k=>fan(rx+100+k*200,ry+29,26)).join('')}`,
-    '360 MM RADIATOR · TOP','3 × 120 mm · exhausts up',rx,ry-52);
-  // PSU
-  h+=part('psu',-200,260,`<rect x="70" y="900" width="${150*S}" height="${86*S}" rx="8" fill="#141B2A" stroke="#2F3A52" stroke-width="2"/>${fan(70+75*S,900+43*S,48)}`,
-    'LEADEX VII PLATINUM PRO','1200 W · Platinum · ATX 3.1',70,1150);
-  // Drives
-  h+=part('ssd',260,240,`<rect x="620" y="920" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/><rect x="620" y="980" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/>`,
-    '2 × KIOXIA CD6-R','15.36 TB · U.3 via MCIO',600,1150);
-  svg.innerHTML=h;
-  const parts=[...svg.querySelectorAll('[data-dx]')], lbls=[...svg.querySelectorAll('.lbl')];
-  const bar=$('#xpbar'), state=$('#xpstate'), sec=$('#xp');
-  const apply=p=>{const e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-    parts.forEach(g=>{const dx=+g.dataset.dx*(1-e), dy=+g.dataset.dy*(1-e); g.setAttribute('transform',`translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);});
-    lbls.forEach(l=>l.setAttribute('opacity',(1-e*0.85).toFixed(2)));
-    bar.style.width=(e*100)+'%';
-    state.textContent=e>0.98?'Assembled · 8 parts · one machine':e<0.02?'Exploded view · scroll to assemble':`Assembling · ${Math.round(e*100)}%`; };
-  apply(0);
-  if(RM)return;
-  let ticking=false;
-  const onScroll=()=>{ if(ticking)return; ticking=true; requestAnimationFrame(()=>{ticking=false;const r=sec.getBoundingClientRect(),span=r.height-innerHeight;const p=Math.min(1,Math.max(0,(-r.top)/Math.max(1,span)));apply(p);}); };
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-})();
-
-/* ---------- Orchestra ---------- */
-(function(){
-  const c=$('#orch'), ctx=c.getContext('2d'); let W,H,run=false,raf; const pulses=[];
-  const SVC=[['Claude API','#7FA7C9'],['OpenAI API','#8B95A1'],['Local GPU · 16 GB','#4FB3E8'],['Vector DB','#C9CED4'],['MCP tools','#4FB3E8'],['Browsers','#8B95A1']];
-  function size(){const r=c.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0);}
-  const N=14;
-  function nodes(t){const cx=W/2,cy=H/2,r1=Math.min(W,H)*0.27,r2=Math.min(W,H)*0.44;
-    const ag=[...Array(N)].map((_,i)=>{const a=i/N*Math.PI*2+t*0.04;return [cx+Math.cos(a)*r1,cy+Math.sin(a)*r1];});
-    const sv=SVC.map((s,i)=>{const a=i/SVC.length*Math.PI*2-Math.PI/2;return [cx+Math.cos(a)*r2,cy+Math.sin(a)*r2*0.92];});
-    return {cx,cy,ag,sv};}
-  function draw(now){const t=now/1000; const {cx,cy,ag,sv}=nodes(t);
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='rgba(142,152,172,0.10)';ctx.lineWidth=1;
-    ag.forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();});
-    if(!RM&&run&&Math.random()<0.55){pulses.push({a:Math.floor(Math.random()*N),s:Math.floor(Math.random()*SVC.length),p:0,v:0.006+Math.random()*0.01});}
-    for(let i=pulses.length-1;i>=0;i--){const q=pulses[i];q.p+=q.v;if(q.p>=1){pulses.splice(i,1);continue;}
-      const [ax,ay]=ag[q.a],[sx,sy]=sv[q.s];const x=ax+(sx-ax)*q.p,y=ay+(sy-ay)*q.p;
-      ctx.strokeStyle=SVC[q.s][1]+'33';ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(x,y);ctx.stroke();
-      ctx.fillStyle=SVC[q.s][1];ctx.beginPath();ctx.arc(x,y,2.6,0,Math.PI*2);ctx.fill();}
-    ag.forEach(([x,y],i)=>{ctx.fillStyle=`hsl(${190+i*5},80%,${62+12*Math.sin(t*2+i)}%)`;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();});
-    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,46);g.addColorStop(0,'rgba(127,167,201,0.9)');g.addColorStop(1,'rgba(127,167,201,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,46,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#E9EDF5';ctx.font='600 13px "IBM Plex Mono", monospace';ctx.textAlign='center';ctx.fillText('CONDUCTOR',cx,cy+4);
-    sv.forEach(([x,y],i)=>{ctx.fillStyle='#0E131E';ctx.strokeStyle=SVC[i][1];ctx.lineWidth=1.5;const w=ctx.measureText(SVC[i][0]).width+22;
-      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x-w/2,y-14,w,28,14);else ctx.rect(x-w/2,y-14,w,28);ctx.fill();ctx.stroke();
-      ctx.fillStyle='#E9EDF5';ctx.font='500 12px "IBM Plex Mono", monospace';ctx.fillText(SVC[i][0],x,y+4);});
-    if(run&&!RM)raf=requestAnimationFrame(draw);}
-  size(); for(let k=0;k<40;k++)pulses.push({a:k%N,s:k%SVC.length,p:Math.random()*0.9,v:0.008});
-  draw(performance.now());
-  addEventListener('resize',()=>{size();draw(performance.now());});
-  vis(c,on=>{run=on;cancelAnimationFrame(raf);if(on&&!RM)raf=requestAnimationFrame(draw);});
-})();
-
-/* ---------- Bars ---------- */
-(function(){
-  const gpu=[['RTX 5060 Ti 16 GB',111.5],['RTX 3090 24 GB',161.8],['RTX 5070 Ti 16 GB · ours',189.5,1],['RTX 5080 16 GB',204.9],['RTX 4090 24 GB',221.9],['RTX 5090 32 GB',282.5]];
-  $('#gpubars').innerHTML=gpu.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} tok/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/282.5*100}%"></i></div></div>`).join('');
-  const mem=[['Today · 4 channels × DDR5-5600',179,1],['After upgrade · 8 channels × DDR5-5600',358],['Board maximum · 8 channels × DDR5-6400',410],['CPU rating · 12 channels × DDR5-6400',614]];
-  $('#cpubars').innerHTML=mem.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} GB/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/614*100}%"></i></div></div>`).join('');
-  if(RM)return;
-  document.querySelectorAll('.bars').forEach(box=>{const is=[...box.querySelectorAll('.track i')]; let done=false;
-    const r=box.getBoundingClientRect(); if(r.top<innerHeight)return;
-    is.forEach(i=>{i.style.transition='width 1.1s cubic-bezier(.2,.7,.2,1)';i.dataset.w=i.style.getPropertyValue('--w');i.style.width='0%';});
-    vis(box,on=>{if(on&&!done){done=true;is.forEach((i,k)=>setTimeout(()=>i.style.width=i.dataset.w,k*90));}},{threshold:.3});});
-})();
-
-/* ---------- Airflow ---------- */
-(function(){
-  const s=$('#airsvg');
-  const paths=[
-    ['M850 150 C 740 160, 600 180, 470 200 S 160 230, 40 200','#4FB3E8'],
-    ['M850 300 C 740 290, 600 260, 520 200 S 470 90, 440 10','#7FA7C9'],
-    ['M850 300 C 760 300, 560 230, 360 160 S 260 60, 240 10','#7FA7C9'],
-    ['M850 450 C 740 430, 600 380, 420 370 S 140 360, 40 330','#8B95A1'],
-    ['M420 560 C 420 500, 380 440, 300 400 S 120 380, 40 350','#C9CED4'],
-    ['M600 560 C 600 500, 560 450, 480 420 S 200 400, 40 360','#C9CED4'],
-  ];
-  let h=`<rect x="20" y="20" width="860" height="600" rx="18" fill="#0A0E17" stroke="#2A3448" stroke-width="2"/>
-    <rect x="70" y="80" width="560" height="420" rx="8" fill="#0F1A1A" stroke="#24493E"/>
-    <rect x="300" y="120" width="100" height="110" rx="10" fill="#141B2A" stroke="#2F3A52"/><text x="350" y="182" text-anchor="middle" fill="#E9EDF5">CPU</text>
-    <rect x="40" y="320" width="500" height="70" rx="8" fill="#10151F" stroke="#2F3A52"/><text x="290" y="361" text-anchor="middle" fill="#E9EDF5">GPU · RTX 5070 Ti</text>
-    <rect x="150" y="26" width="480" height="40" rx="8" fill="#0D1220" stroke="#2F3A52"/><text x="390" y="52" text-anchor="middle">360 RAD · TOP EXHAUST ↑</text>
-    <circle cx="840" cy="150" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="300" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="450" r="40" fill="none" stroke="#2F3A52"/>
-    <rect x="20" y="520" width="860" height="100" fill="#0D1220" stroke="#2A3448"/>
-    <circle cx="420" cy="570" r="34" fill="none" stroke="#2F3A52"/><circle cx="600" cy="570" r="34" fill="none" stroke="#2F3A52"/>
-    <rect x="22" y="110" width="22" height="160" fill="#141B2A" stroke="#2F3A52"/><text x="56" y="104">← REAR EXHAUST</text><text x="690" y="96">FRONT INTAKE 3×140</text>`;
-  paths.forEach(([d,c],i)=>{h+=`<path d="${d}" fill="none" stroke="${c}" stroke-opacity=".22" stroke-width="2" stroke-dasharray="3 7"/>`;
-    if(!RM)for(let k=0;k<4;k++)h+=`<circle r="4" fill="${c}"><animateMotion dur="${3.4+i*0.3}s" begin="${-k*0.85-i*0.4}s" repeatCount="indefinite" path="${d}"/></circle>`;});
-  s.innerHTML=h;
-  document.querySelectorAll('[data-gauge]').forEach(g=>{const v=+g.dataset.gauge,r=60,C=2*Math.PI*r;
-    g.innerHTML=`<defs><linearGradient id="gg${Math.round(v*1000)}" x1="0" x2="1"><stop offset="0" stop-color="#4FB3E8"/><stop offset=".5" stop-color="#7FA7C9"/><stop offset="1" stop-color="#8B95A1"/></linearGradient></defs>
-      <circle cx="75" cy="75" r="${r}" fill="none" stroke="#1C2433" stroke-width="12"/>
-      <circle cx="75" cy="75" r="${r}" fill="none" stroke="url(#gg${Math.round(v*1000)})" stroke-width="12" stroke-linecap="round" transform="rotate(-90 75 75)" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-v)}" class="garc"/>`;
-    if(RM)return; const arc=g.querySelector('.garc'); const r0=g.getBoundingClientRect(); if(r0.top<innerHeight)return;
-    arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1)'; arc.setAttribute('stroke-dashoffset',C);
-    let done=false; vis(g,on=>{if(on&&!done){done=true;requestAnimationFrame(()=>arc.setAttribute('stroke-dashoffset',C*(1-v)));}},{threshold:.4});});
-})();
-
-/* ---------- Spec sheet + sources ---------- */
-(function(){
-  const SPECS=[
-    ['Processor','AMD EPYC 9175F',['<b>16 cores / 32 threads</b>, Zen 5 "Turin"','4.2 GHz base · <b>5.0 GHz</b> boost · 320 W','<b>512 MB L3</b> · 16 CCDs, one core each','Rated for 12-channel DDR5-6400 · <b>128 PCIe 5.0 lanes</b>','Full 512-bit AVX-512 · SP5 socket']],
-    ['Motherboard','ASRock Rack TURIND8X-2T',['EEB 12.63 × 13 in · CPUs up to 500 W','<b>7× PCIe 5.0 x16</b> + 1× x8. GPU goes in slot 0, 2, 4 or 6','2× M.2 Gen5 · 4× MCIO Gen5 x4','Broadcom <b>dual 10 GbE</b> + dedicated IPMI port','AST2600 BMC (onboard video is VGA only) · 24-pin + 3× EPS']],
-    ['Memory','128 GB Kingston FURY Renegade Pro',['4 × 32 GB DDR5-5600 <b>CL28</b> ECC RDIMM','Kit KF556R28RBE2K4-128 · 4 of 8 slots','Runs DDR5-4800 until EXPO is enabled','<b>~179 GB/s</b> theoretical · ~358 GB/s with 4 more sticks']],
-    ['Graphics','ASUS ProArt GeForce RTX 5070 Ti OC',['<b>16 GB GDDR7</b> · 256-bit · 896 GB/s','<b>8,960 CUDA cores</b> · Blackwell','~1,406 AI TOPS (FP4, sparse)','300 W · one 12V-2x6 plug · ~2.5-slot, ~304 mm']],
-    ['Cooling','SilverStone XE360-SP5',['360 mm AIO built for SP5','Mounted as <b>top exhaust</b> in the Antec 900','28 mm radiator · 3× 120 mm fans','Front stays free for the case\'s 3× 140 mm intake fans']],
-    ['Power','Super Flower Leadex VII Platinum PRO',['<b>1,200 W</b> · 80 Plus Platinum · ATX 3.1','1× native 12V-2x6 (600 W) for the GPU','2× EPS 4+4 · 4× PCIe 6+2 · ~150 mm long','<b>Open check:</b> the board has 3 EPS inputs. Confirm in its manual that 2 are enough for a 320 W CPU']],
-    ['Chassis','Antec 900 (2026)',['547 × 250 × 622 mm · ~85 L · 15 kg','SSI-EEB server boards supported','<b>6 PWM fans included</b> (3× 140 front, 2× 120 reverse shroud, 1× 140 rear)','GPU up to 465 mm · 360 mm radiator on top · 9 drive bays']],
-    ['Storage','2× Kioxia CD6-R 7.68 TB',['<b>15.36 TB</b> U.3 NVMe · PCIe 4.0 x4','6,200 / 4,000 MB/s sequential','<b>1,000,000</b> random read IOPS','1 DWPD · power-loss protection','Cabled to the board\'s MCIO ports (≤50 cm cables)']],
-  ];
-  const _sp=$('#specs'); if(_sp) _sp.innerHTML=SPECS.map(([r,n,l])=>`<article class="spec"><div class="role">${r}</div><h3>${n}</h3><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
-  const SRC=[
-    ['AMD: EPYC 9175F product page','https://www.amd.com/en/products/processors/server/epyc/9005-series/amd-epyc-9175f.html'],
-    ['Level1Techs: EPYC Turin 9175F build (16 CCDs, one core each)','https://forum.level1techs.com/t/epyc-turin-gaming-build-9175f/228698/3'],
-    ['PassMark: AMD EPYC 9175F','https://www.cpubenchmark.net/cpu.php?cpu=AMD+EPYC+9175F'],
-    ['Central Computer: ASRock Rack TURIND8X-2T spec sheet','https://www.centralcomputer.com/asrock-rack-turind8x-2t-500w-server-motherboard-single-socket-sp5-supports-amd-epyc-9005-9004-processors-8x-ddr5-rdimm-slots.html'],
-    ['Chips and Cheese: AMD Turin launch analysis','https://chipsandcheese.com/p/amds-turin-5th-gen-epyc-launched'],
-    ['llama.cpp discussion #15396: gpt-oss llama-bench results by GPU','https://github.com/ggml-org/llama.cpp/discussions/15396'],
-    ['ComputingForGeeks: local LLM GPU benchmarks','https://computingforgeeks.com/black-friday-gpu-deals/'],
-    ['carteakey.dev: optimizing gpt-oss-120b local inference','https://carteakey.dev/blog/local-inference/optimizing-gpt-oss-120b-local-inference/'],
-    ['Hardware Corner: gpt-oss MoE layer offloading','https://www.hardware-corner.net/gpt-oss-offloading-moe-layers/'],
-    ['ASUS: ProArt GeForce RTX 5070 Ti OC','https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/'],
-    ['SilverStone: XE360-SP5','https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/'],
-    ['Super Flower: Leadex VII Platinum PRO','https://www.super-flower.com.tw/products-detail/LVII-P-PRO/'],
-    ['Antec: 900 case specifications','https://antec.com/product/case/900'],
-    ['Gamers Nexus: Antec 900 (2026) review and thermals','https://gamersnexus.net/cases/goat-antec-900-case-revisit-new-900-2026-review-benchmarks-and-thermals'],
-    ['Kioxia: CD6-R data center SSD','https://europe.kioxia.com/nl-nl/business/ssd/data-center-ssd/cd6-r.html'],
-  ];
-  $('#sources').innerHTML=SRC.map(([t,u])=>`<li><a href="${u}">${t}</a></li>`).join('');
-})();
-</script>
-<script>
-/* ---------- v2: chapters + BOM ---------- */
-const BOM = [{"id": "cpu-bundle", "role": "CPU + motherboard + 128 GB memory bundle", "name": "Micro Center Computer Build Bundle: AMD EPYC 9175F + ASRock Rack TURIND8X-2T + Kingston FURY Renegade Pro 128 GB DDR5-5600 ECC RDIMM quad kit", "mpn": "TURIND8X-2T + KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/site/products/amd_bundles.aspx", "price": 5999.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "999999", "notes": "Listed on Micro Center's AMD bundle deals page. Ask the store for the bundle by SKU.", "alt": [], "stock": ""}, {"id": "cpu", "role": "CPU (in the bundle)", "name": "AMD EPYC 9175F, 16 cores, SP5", "mpn": "", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "board", "role": "Motherboard (in the bundle)", "name": "ASRock Rack TURIND8X-2T, SP5, SSI-EEB", "mpn": "TURIND8X-2T", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "ram", "role": "Memory (in the bundle)", "name": "Kingston FURY Renegade Pro 128 GB (4 × 32 GB) DDR5-5600 CL28 ECC RDIMM, KF556R28RBE2K4-128", "mpn": "KF556R28RBE2K4-128", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "gpu", "role": "Graphics card", "name": "ASUS ProArt GeForce RTX 5070 Ti OC 16 GB GDDR7", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "price": 1699.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "936120", "notes": "Install in slot 0, 2, 4 or 6 (full x16 slots that do not share lanes with the drive ports).", "alt": [], "stock": ""}, {"id": "case", "role": "Case", "name": "Antec 900 Tempered Glass eATX Full Tower Computer Case - Black", "mpn": "ANTEC 900 (UPC 0-761345-10272-8)", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "price": 199.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center snippet: $199.99 sale (orig $219.99).", "stock": "In-store pickup only. Phoenix in stock; no longer carried at Austin. Miami not visible.", "sku": "028738", "alt": [{"source": "Best Buy", "url": "https://www.bestbuy.com/product/antec-900-full-tower-case-ai-workstation-gaming-chassis-supports-e-atx-threadripper-back-connect-mb-6-pwm-fans-included-black/JXVWSWSRY2", "price": 299.99}, {"source": "Amazon", "url": "https://www.amazon.com/Antec-900-Workstation-Threadripper-Back-Connect/dp/B0GMSPXMM2", "price": null}], "notes": "Supports E-ATX/SSI-EEB. Comes with 6 PWM fans. Takes up to a 420mm radiator."}, {"id": "psu", "role": "Power supply", "name": "Super Flower LEADEX VII Platinum PRO 1200 W, 80 Plus Platinum, ATX 3.1, fully modular", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "price": 189.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "848499", "notes": "Open check: the board has 3 EPS 8-pin inputs and this unit ships 2 EPS cables. Confirm in the TURIND8X-2T manual that 2 are enough for a 320 W CPU.", "alt": [], "stock": ""}, {"id": "cooler", "role": "CPU cooler (SP5 AIO)", "name": "SilverStone XE360-SP5 360 mm All-in-One Liquid CPU Cooler for EPYC SP5", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "price": 379.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "069492", "notes": "Mount the radiator at the top of the Antec 900 as exhaust. The front keeps the case's three 140 mm intake fans.", "alt": [], "stock": ""}, {"id": "ssd-u3", "role": "Storage (×2)", "name": "Kioxia CD6-R 7.68 TB U.3 NVMe (HP P21842-003)", "mpn": "KCD6XLUL7T68 / P21842-003", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0HPR72914", "price": 2449.0, "priceNote": "Amazon listing, Nov 15", "notes": "Recommended by our consultant, Expertly.Ai. Micro Center does not carry enterprise U.3 drives. Check SMART hours and the warranty on arrival.", "alt": [], "stock": ""}, {"id": "cable-mcio", "role": "Drive cables (×2)", "name": "MCIO 4i (SFF-TA-1016) to U.2 (SFF-8639) cable, 0.5 m, with SATA power", "mpn": "MCIO 4i → SFF-8639", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0CWP5X4M7", "price": 38.0, "priceNote": "approx.", "notes": "Connects each Kioxia drive to the TURIND8X-2T MCIO ports. Give each drive its own SATA power lead.", "alt": [], "stock": ""}, {"id": "fans-opt", "role": "Optional: extra fans (on the original quote)", "name": "6× ARCTIC P12 Pro 120 mm + SilverStone CPF04 PWM fan hub", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "price": 99.93, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "953612 · 133009", "notes": "The Antec 900 already ships with 6 PWM fans, so these are optional. Skip them to save about $100.", "alt": [], "stock": ""}, {"id": "ram-up", "role": "Later: memory upgrade to 256 GB", "name": "4 more Kingston FURY Renegade Pro 32 GB DDR5-5600 RDIMMs (same kit, KF556R28RBE2K4-128)", "mpn": "KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black?ob=1&storeid=145", "price": 4589.99, "priceNote": "Micro Center list price for the 4-stick kit (Nov 15). Bundle math implies about $475 a stick, so ask.", "sku": "873000", "notes": "Fills all 8 slots: 256 GB and twice the memory bandwidth. The first upgrade to make.", "alt": [], "stock": ""}, {"id": "paste", "role": "Thermal paste (spare, for re-mounts)", "name": "ARCTIC MX-6 Thermal Paste - 8 g", "mpn": "ACTCP00081A", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/683102/arctic-cooling-mx-6-thermal-paste-8-g", "price": null, "priceNote": "Micro Center price not visible in search results. About $8–$11 elsewhere (Walmart $10.99).", "stock": "Unknown.", "sku": null, "alt": [{"source": "Amazon (MX-6 8g)", "url": "https://www.amazon.com/ARCTIC-MX-6-Conductivity-Non-Conductive-Non-capacitive/dp/B09VDLH5M6", "price": null}, {"source": "Newegg (Noctua NT-H2 10g)", "url": "https://www.newegg.com/noctua-nt-h2-10g/p/2MB-0026-00006", "price": 28.84}], "notes": "The AW420 likely ships with paste pre-applied. Get a large tube anyway for re-mounts on the large sTR5 IHS. Micro Center only lists NT-H2 in 3.5g (quickview 698093), not 10g."}, {"id": "boot-ssd", "role": "Optional Gen5 M.2 boot SSD", "name": "Samsung 9100 PRO 2TB PCIe Gen 5 x4 NVMe M.2 Internal SSD", "mpn": "MZ-VAP2T0B/AM", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/691300/samsung-9100-pro-2tb-samsung-v-nand-tlc-nand-(v8)-pcie-gen-5-x4-and-pcie-gen-5-x4-nvme-m2-internal-ssd", "price": 399.99, "priceNote": "Cached Micro Center product page snippet: $399.99 (orig $899.99), in-store only. The cache may be stale.", "stock": "In-store only. Snapshot: 25+ at St. Louis Park.", "sku": "815258", "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1878199-REG/samsung_mz_vap2t0b_am_2tb_9100_pro_pcie.html", "price": null}, {"source": "Newegg (Crucial T705 2TB, CT2000T705SSD3)", "url": "https://www.newegg.com/crucial-2tb-t705-nvme/p/N82E16820156398", "price": 379.99}], "notes": "A price tracker shows Amazon at $399.95 (2026-11-14). The Crucial T705 2TB was seen at Micro Center Yonkers for $369.99, but only on a search-results page, so there is no product URL for it."}, {"id": "ups", "role": "UPS (pure sine, active-PFC compatible)", "name": "CyberPower PFC Sinewave Series UPS CP1500PFCLCD, 1500 VA / 1000 W, 120 V, 10 outlets", "mpn": "CP1500PFCLCD", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/353897/cyberpower-systems-pfc-sinewave-series-ups-(cp1500pfclcd)", "price": 239.99, "priceNote": "Micro Center product page snippet: $239.99 (orig $259.99).", "stock": "Snapshots: in stock at Westbury and Denver (7). Miami not visible.", "sku": null, "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1513053-REG/cyberpower_cp1500pfclcd_pfc_sinewave_ups.html", "price": 239.95}, {"source": "CDW", "url": "https://www.cdw.com/product/cyberpower-intelligent-pfc-lcd-cp1500pfclcd/2190609", "price": 239.95}], "notes": "Rated 1000W. Full load (CPU 350W + GPU 300W + platform) can reach about 800–900W, which gives only a short runtime. A 2000–2200VA unit would be better, but none was found at Micro Center in searches. Consider CyberPower OR2200PFCLCD or APC SMT2200C from CDW/B&H (not sourced here)."}, {"id": "esd", "role": "Anti-static wrist strap", "name": "Kingwin Anti-Static Wrist Strap", "mpn": "ATA-W24", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/336438/Anti-Static_Wrist_Strap", "price": 4.99, "priceNote": "Micro Center product page snippet: $4.99. An older snippet shows $3.99.", "stock": "Snapshots: 6 at Parkville, 9 at Fairfax. Miami not visible.", "sku": "740001", "alt": [{"source": "Micro Center (iFixit strap)", "url": "https://www.microcenter.com/quickview/442494/ifixit-anti-static-wrist-strap", "price": 5.99}], "notes": ""}];
-const CREDITS = {"cpu": {"file": "cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/9000-wx-series/amd-ryzen-threadripper-pro-9975wx.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/3513563-threadripper-pro-9000-series.jpg", "owner": "AMD"}, "board": {"file": "board.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/096fe01b-a516-48d6-833b-46901887982d/", "owner": "ASUS"}, "board-io": {"file": "board-io.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/d1de116c-6ba0-49ff-bab4-7abb594ab2ef/", "owner": "ASUS"}, "ram": {"file": "ram.jpg", "sourcePage": "https://www.cdw.com/product/kingston-fury-renegade-pro-ddr5-kit-128-gb-4-x-32-gb-dimm-288-pin/7922358", "imageUrl": "https://webobjects2.cdw.com/is/image/CDW/7922358?wid=1200&hei=900&qlt=95", "owner": "CDW"}, "gpu": {"file": "gpu.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/3-rtx-pro-5000-3qtr-front-left.jpg", "owner": "PNY (NVIDIA board partner)"}, "case": {"file": "case.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-01.jpg", "owner": "Antec"}, "psu": {"file": "psu.jpg", "sourcePage": "https://www.asrock.com/Power-Supply/Taichi/TC-1650T/", "imageUrl": "https://www.asrock.com/Power-Supply/photo/TC-1650T(L1).png", "owner": "ASRock"}, "cooler": {"file": "cooler.jpg", "sourcePage": "https://uk.thermaltake.com/aw420-aio-liquid-cooler.html", "imageUrl": "https://uk.thermaltake.com/media/catalog/product/c/l/cl-w445-pl14bl-a_01.jpg", "owner": "Thermaltake"}, "ssd": {"file": "ssd.jpg", "sourcePage": "https://americas.kioxia.com/en-us/business/ssd/data-center-ssd/cd6-r.html", "imageUrl": "https://americas.kioxia.com/content/dam/kioxia/shared/business/ssd/data-center-ssd/img/cd6-r_img_001.png", "owner": "KIOXIA"}, "cable": {"file": "cable.jpg", "sourcePage": "https://www.microsatacables.com/slimsas-8i-sff-8654-cable-to-two-u-2-connectors-50-cm", "imageUrl": "https://www.microsatacables.com/media/catalog/product/1/8/1857a.jpg", "owner": "Micro SATA Cables"}, "a-cpu": {"file": "a-cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/server/epyc/9005-series.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/epyc/2909511-epyc-9005-teaser.jpg", "owner": "AMD"}, "a-gpu": {"file": "a-gpu.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/4cf11703-9459-4f83-a5f4-8c5da154bfe6/", "owner": "ASUS"}, "a-cooler": {"file": "a-cooler.jpg", "sourcePage": "https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/", "imageUrl": "https://www.silverstonetek.com/upload/detail/xe360-sp5-1.jpg", "owner": "SilverStone"}, "a-psu": {"file": "a-psu.jpg", "sourcePage": "https://www.super-flower.com.tw/products-detail/LVII-P-PRO/", "imageUrl": "https://www.super-flower.com.tw/upload/catalog_color_b/2024%20web_IM_2505_VII%20P_01__26E26j3vti.png", "owner": "Super Flower"}, "case-inside": {"file": "case-inside.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/900-pdt07.png", "owner": "Antec"}, "gpu-back": {"file": "gpu-back.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/2-rtx-pro-5000-3qtr-back-right.jpg", "owner": "PNY (NVIDIA board partner)"}, "a-board": {"file": "a-board.jpg", "sourcePage": "https://www.scan.co.uk/products/asrock-rack-turind8x-2t-500w-amd-epyc-9004-9005-sp5-ddr5-7x-pcie-50-x16-2x-m2-2x-10gbe-ssi-eeb", "imageUrl": "https://www.scan.co.uk/images/products/super/3783823-l-b.jpg", "owner": "ASRock Rack (via Scan Computers)"}, "dog-go2": {"file": "dog-go2.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "https://oss-global-cdn.unitree.com/static/84f36612b1f64800928f27b4c140d85b_1200x675.png", "owner": "Unitree Robotics"}, "dog-jetson": {"file": "dog-jetson.jpg", "sourcePage": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/", "imageUrl": "jetson-orin-nano-super-developer-kit-hero.jpg (cropped)", "owner": "NVIDIA"}, "dog-l2": {"file": "dog-l2.jpg", "sourcePage": "https://www.unitree.com/L2", "imageUrl": "https://oss-global-cdn.unitree.com/static/c2f833925ff54f928f538a67b748d6db_990x557.png", "owner": "Unitree Robotics"}, "dog-hero": {"file": "dog-hero.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "https://www.unitree.com/images/1c36f0b03cfd445fbcad12b4b1eb3a29_3840x3266.jpg", "owner": "Unitree Robotics"}, "dog-pair": {"file": "dog-pair.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "https://oss-global-cdn.unitree.com/static/320b50c0880d4466bca8beb56aa73abd_1620x816.png", "owner": "Unitree Robotics"}, "dog-run": {"file": "dog-run.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "https://oss-global-cdn.unitree.com/static/f3afd2338d574621b84d4b5f23aa345b_1620x816.png", "owner": "Unitree Robotics"}, "dog-so101": {"file": "dog-so101.jpg", "sourcePage": "https://github.com/TheRobotStudio/SO-ARM100", "imageUrl": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/main/media/SO101_Follower.webp", "owner": "TheRobotStudio (SO-ARM100, open source)"}, "dog-umi": {"file": "dog-umi.jpg", "sourcePage": "https://umi-on-legs.github.io/", "imageUrl": "https://umi-on-legs.github.io/static/images/espresso-and-latte.jpeg", "owner": "UMI on Legs project (Stanford / Columbia)"}, "dog-piper": {"file": "dog-piper.jpg", "sourcePage": "https://global.agilex.ai/products/piper-6-dof-robotic-arm", "imageUrl": "https://global.agilex.ai/cdn/shop/files/piper_product.jpg", "owner": "AgileX Robotics"}, "dog-go2-piper": {"file": "dog-go2-piper.jpg", "sourcePage": "https://global.agilex.ai/products/piper-6-dof-robotic-arm", "imageUrl": "https://global.agilex.ai/cdn/shop/files/PiPER_-_mobile_manipulation.jpg", "owner": "AgileX Robotics"}, "dog-velo": {"file": "dog-velo.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Velodyne_Lidar_Alpha_Prime_Ultra_Puck_Puck_Sensor_Family.jpg", "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Velodyne_Lidar_Alpha_Prime_Ultra_Puck_Puck_Sensor_Family.jpg/1920px-Velodyne_Lidar_Alpha_Prime_Ultra_Puck_Puck_Sensor_Family.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "owner": "APJarvis (Wikimedia Commons, CC BY-SA 4.0)", "license": "CC BY-SA 4.0"}, "dog-go2-real": {"file": "dog-go2-real.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Unitree_Go2_of_Salvamont_side_view.jpg", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Unitree_Go2_of_Salvamont_side_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "owner": "HotNews Romania - Adi Iacob, Ovidiu Popica (Wikimedia Commons, CC BY 3.0)", "license": "CC BY 3.0"}, "dog-nvme": {"file": "dog-nvme.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg", "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg/1920px-Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "owner": "D-Kuru (Wikimedia Commons, CC BY-SA 4.0)", "license": "CC BY-SA 4.0"}, "dog-switch": {"file": "dog-switch.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Netgear_5-port_Gigabit_Desktop_Switch_GS105.jpg", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Netgear_5-port_Gigabit_Desktop_Switch_GS105.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "owner": "Photeka (Wikimedia Commons, CC BY-SA 3.0)", "license": "CC BY-SA 3.0"}, "dog-buck": {"file": "dog-buck.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:XL4015-based_CC-CV_buck_converter_modules_01.jpg", "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/XL4015-based_CC-CV_buck_converter_modules_01.jpg/1920px-XL4015-based_CC-CV_buck_converter_modules_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "owner": "Retired electrician (Wikimedia Commons, CC0)", "license": "CC0"}, "dog-xt": {"file": "dog-xt.jpg", "sourcePage": "https://www.hesaitech.com/product/xt16/", "imageUrl": "https://www.hesaitech.com/wp-content/uploads/2024/11/XT.png", "owner": "Hesai Technology"}, "dog-go2-3q": {"file": "dog-go2-3q.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "unitree.com/go2 product render", "owner": "Unitree Robotics"}, "dog-go2-side": {"file": "dog-go2-side.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "unitree.com/go2 product render", "owner": "Unitree Robotics"}, "dog-go2-callout": {"file": "dog-go2-callout.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "unitree.com/go2 component overview", "owner": "Unitree Robotics"}, "dog-go2-face": {"file": "dog-go2-face.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "unitree.com/go2 head close-up", "owner": "Unitree Robotics"}, "dog-l2-cloud": {"file": "dog-l2-cloud.jpg", "sourcePage": "https://www.unitree.com/L2", "imageUrl": "unitree.com/L2 point-cloud image", "owner": "Unitree Robotics"}, "dog-l2-frame": {"file": "dog-l2-frame.jpg", "sourcePage": "https://github.com/unitreerobotics/unilidar_sdk2", "imageUrl": "https://raw.githubusercontent.com/unitreerobotics/unilidar_sdk2/main/docs/lidar_frame_definition.jpg", "owner": "Unitree Robotics (unilidar_sdk2, BSD-3)"}, "dog-jetson-ports": {"file": "dog-jetson-ports.jpg", "sourcePage": "https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/hardware_spec.html", "imageUrl": "jetson-orin-nano-qtr_numbered.png (NVIDIA developer docs)", "owner": "NVIDIA"}, "dog-so101-leader": {"file": "dog-so101-leader.jpg", "sourcePage": "https://github.com/TheRobotStudio/SO-ARM100", "imageUrl": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/main/media/SO101_Leader.webp", "owner": "TheRobotStudio (SO-ARM100, open source)"}, "esd": {"file": "esd.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Antistatic_wrist_strap.jpg", "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Antistatic_wrist_strap.jpg/1920px-Antistatic_wrist_strap.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "owner": "Kms (Wikimedia Commons, CC BY 3.0)", "license": "CC BY 3.0", "note": "example of the part type"}, "paste": {"file": "paste.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:W%C3%A4rmeleitpaste_Thermal_Compound.jpg", "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/W%C3%A4rmeleitpaste_Thermal_Compound.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "owner": "Darkone (Wikimedia Commons, CC BY-SA 2.5)", "license": "CC BY-SA 2.5", "note": "example of the part type"}, "a-fans": {"file": "a-fans.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Arctic_P12_Pro_A-RGB.jpg", "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Arctic_P12_Pro_A-RGB.jpg/1920px-Arctic_P12_Pro_A-RGB.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "owner": "Chaddy (Wikimedia Commons, CC BY-SA 4.0)", "license": "CC BY-SA 4.0", "note": "ARCTIC P12 Pro A-RGB, same fan family"}, "dog-x4": {"file": "dog-x4.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Insta360_X4_senza_protezione_lenti_ma_cover_termica.jpg", "imageUrl": "Special:FilePath width 1920", "owner": "ItzANormalFioko / Wikimedia Commons", "license": "CC BY-SA 4.0"}, "dog-ts16": {"file": "dog-ts16.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Leica_Viva_TS16_total_station_front_view.jpg", "imageUrl": "Special:FilePath width 1920", "owner": "Alex P. Kok / Wikimedia Commons", "license": "CC BY-SA 4.0"}, "dog-nas": {"file": "dog-nas.jpg", "sourcePage": "https://commons.wikimedia.org/wiki/File:Synology_Disk_Station_DS223J_-_NAS-Server.jpg", "imageUrl": "Special:FilePath width 1920", "owner": "DYVER / Wikimedia Commons", "license": "CC BY-SA 4.0"}, "dog-xt32": {"file": "dog-xt32.jpg", "sourcePage": "https://www.hesaitech.com/product/xt32/", "imageUrl": "https://www.hesaitech.com/wp-content/uploads/2024/11/XT32-banner1.jpg", "owner": "Hesai"}};
-const IMGS = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-fans": "img/a-fans.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "dog-buck": "img/dog-buck.jpg", "dog-go2-3q": "img/dog-go2-3q.jpg", "dog-go2-callout": "img/dog-go2-callout.jpg", "dog-go2-face": "img/dog-go2-face.jpg", "dog-go2-piper": "img/dog-go2-piper.jpg", "dog-go2-real": "img/dog-go2-real.jpg", "dog-go2-side": "img/dog-go2-side.jpg", "dog-go2": "img/dog-go2.jpg", "dog-hero": "img/dog-hero.jpg", "dog-jetson-ports": "img/dog-jetson-ports.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2-cloud": "img/dog-l2-cloud.jpg", "dog-l2-frame": "img/dog-l2-frame.jpg", "dog-l2": "img/dog-l2.jpg", "dog-nas": "img/dog-nas.jpg", "dog-nvme": "img/dog-nvme.jpg", "dog-pair": "img/dog-pair.jpg", "dog-piper": "img/dog-piper.jpg", "dog-run": "img/dog-run.jpg", "dog-so101-leader": "img/dog-so101-leader.jpg", "dog-so101": "img/dog-so101.jpg", "dog-switch": "img/dog-switch.jpg", "dog-ts16": "img/dog-ts16.jpg", "dog-umi": "img/dog-umi.jpg", "dog-velo": "img/dog-velo.jpg", "dog-x4": "img/dog-x4.jpg", "dog-xt": "img/dog-xt.jpg", "dog-xt32": "img/dog-xt32.jpg", "esd": "img/esd.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "og-conductor": "img/og-conductor.jpg", "og-field-unit": "img/og-field-unit.jpg", "og-hub": "img/og-hub.jpg", "paste": "img/paste.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
-(function(){
-  const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const B=id=>BOM.find(b=>b.id===id)||null;
-  const money=n=>n==null||isNaN(n)?'—':'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const srcKind=s=>/micro\s*center/i.test(s||'')?'mc':/amazon/i.test(s||'')?'amz':'oth';
-  const chip=s=>s?`<span class="chip ${srcKind(s)}"><i></i>${esc(s)}</span>`:'';
-  const img=(id,alt,cls)=>IMGS[id]?`<img src="${IMGS[id]}" alt="${esc(alt)}" loading="lazy" decoding="async">`:`<span class="${cls||'ph'}">${esc(alt)}</span>`;
-  const DARK=new Set(['cpu']);
-  const credit=id=>CREDITS[id]&&CREDITS[id].owner?`Image: ${esc(CREDITS[id].owner)}`:'';
-
-  /* chapters */
-  const CH=[
-   {img:'a-cpu',bom:'cpu-bundle',role:'Processor',name:'AMD EPYC 9175F',
-    why:'<b>16 fast Zen 5 cores, each on its own chiplet with its own 32 MB of cache.</b> Clocks up to 5.0 GHz keep agent tools, builds and browsers snappy, and the server platform brings 128 PCIe 5.0 lanes for more GPUs later.',
-    kv:[['16 / 32','cores / threads'],['5.0 GHz','boost clock'],['512 MB','L3 cache'],['320 W','TDP']]},
-   {img:'a-board',bom:'cpu-bundle',role:'Motherboard',name:'ASRock Rack TURIND8X-2T',
-    why:'<b>A server board in a workstation case.</b> Seven full-length PCIe 5.0 slots, dual 10 GbE and a BMC, so we can power-cycle and watch the machine from a browser. Its MCIO ports connect the Kioxia drives.',
-    kv:[['7× x16','PCIe 5.0 slots'],['8','DDR5 RDIMM slots'],['2 + 4','M.2 Gen5 + MCIO'],['2× 10 GbE','Broadcom']]},
-   {img:'ram',bom:'cpu-bundle',role:'Memory',name:'Kingston FURY Renegade Pro DDR5 RDIMM',
-    why:'<b>128 GB of ECC memory in 4 of the 8 slots</b>, enough for about 14 agents at once. Turn on EXPO in the BIOS for the rated 5600 speed. The four empty slots are the first upgrade: 256 GB and double the bandwidth.',
-    kv:[['128 GB','4 × 32 GB ECC'],['5600','MT/s · CL28'],['~179 GB/s','theoretical'],['4 free','slots to grow']]},
-   {img:'a-gpu',bom:'gpu',role:'Graphics',name:'ASUS ProArt RTX 5070 Ti',
-    why:'<b>16 GB of GDDR7 for the local models that do the routine work</b>: routers, embedders and fast 8–20B models. Bigger work goes to cloud models. The board has room for a 48 GB card later.',
-    kv:[['16 GB','GDDR7'],['896 GB/s','bandwidth'],['8,960','CUDA cores'],['300 W','12V-2x6']]},
-   {img:'a-cooler',bom:'cooler',role:'Cooling',name:'SilverStone XE360-SP5',
-    why:'<b>A 360 mm liquid cooler made for EPYC\'s big SP5 socket.</b> In the Antec 900 it mounts at the top as exhaust, so the case\'s front fans keep pulling in cool air.',
-    kv:[['360 mm','radiator'],['SP5','native mount'],['Top','exhaust in the Antec 900'],['28 mm','radiator thickness']]},
-   {img:'a-psu',bom:'psu',role:'Power',name:'Super Flower Leadex VII Platinum PRO',
-    why:'<b>1,200 W of Platinum power for a build that peaks around 850 W.</b> A native 12V-2x6 cable feeds the GPU. One check before build day: confirm two CPU power cables are enough for this board.',
-    kv:[['1,200 W','Platinum'],['ATX 3.1','12V-2x6 native'],['2× EPS','CPU cables'],['~850 W','peak draw']]},
-   {img:'case',bom:'case',role:'Chassis',name:'Antec 900',
-    why:'<b>A full tower that takes our 12 × 13 in server board</b> and ships with six fans, so we don\'t need to buy more. It has nine drive bays and room for a 465 mm GPU.',
-    kv:[['85 L','547×250×622 mm'],['6','PWM fans included'],['SSI-EEB','board support'],['9','drive bays']]},
-   {img:'ssd',bom:'ssd-u3',role:'Storage',name:'Kioxia CD6-R 7.68 TB × 2',
-    why:'<b>Data-center NVMe with power-loss protection</b>, recommended by our consultant at Expertly.Ai. Two drives on the board\'s MCIO ports hold the model library, datasets and vector indexes.',
-    kv:[['15.36 TB','total'],['6.2 GB/s','sequential read'],['1M','random read IOPS'],['1 DWPD','endurance']]},
-  ];
-  document.getElementById('chapters').innerHTML=CH.map((c,i)=>{const b=B(c.bom);
-    const alts=(b&&b.alt||[]).filter(a=>a&&a.url).slice(0,1);
-    return `<article class="chap">
-      <div class="plate-wrap"><div class="plate${DARK.has(c.img)?' dark':''}" data-tilt><span class="plate-tag">${String(i+1).padStart(2,'0')} · ${esc(c.role)}</span>${img(c.img,c.name)}<span class="plate-credit">${credit(c.img)}</span></div></div>
-      <div><div class="idx">${esc(c.role)}</div><h3>${esc(c.name)}</h3><p class="why">${c.why}</p>
-        <div class="kv">${c.kv.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
-        <div class="buy">${b&&b.url?`<a class="btn prime sm" href="${esc(b.url)}">View at ${esc(b.source||'store')} ↗</a>`:''}
-          ${alts.map(a=>`<a class="btn sm" href="${esc(a.url)}">${esc(a.source)}${a.price?' · '+money(a.price):''} ↗</a>`).join('')}
-          ${b?chip((b.source||'')+(b.sku?' · SKU '+b.sku:'')):''}</div></div></article>`;}).join('');
-
-  /* tilt */
-  if(!RM&&matchMedia('(hover:hover)').matches){document.querySelectorAll('[data-tilt]').forEach(p=>{
-    p.addEventListener('pointermove',e=>{const r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      p.style.setProperty('--ry',(x*10).toFixed(2)+'deg');p.style.setProperty('--rx',(-y*8).toFixed(2)+'deg');p.style.setProperty('--sheen',(x*120)+'%');});
-    p.addEventListener('pointerleave',()=>{p.style.setProperty('--ry','0deg');p.style.setProperty('--rx','0deg');p.style.setProperty('--sheen','-60%');});});}
-
+  A.addEventListener('input',calc);P.addEventListener('input',calc);
+  document.querySelectorAll('#cdcalc .opts button').forEach(b=>b.addEventListener('click',()=>{
+    mem=+b.dataset.m;document.querySelectorAll('#cdcalc .opts button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));calc();}));
+  calc();
   /* BOM */
-  const st={gpu:'gpu',extras:{'fans-opt':false,'ram-up':false,paste:false,'boot-ssd':false,ups:true,esd:true}};
-  const CORE=[['cpu-bundle','a-cpu'],['GPU','a-gpu'],['case','case'],['psu','a-psu'],['cooler','a-cooler'],['ssd-u3','ssd'],['cable-mcio','cable']];
-  const EXTRAS=['ups','esd','fans-opt','ram-up','paste','boot-ssd'];
-  const REF=[['cpu','a-cpu'],['board','a-board'],['ram','ram']];
-  function lineHTML(b,thumb,opts){opts=opts||{};if(!b)return '';const q=b.qty||1, p=b.price;
-    const alts=(b.alt||[]).filter(a=>a&&a.url).slice(0,2);
-    return `<div class="line${opts.off?' off':''}${opts.ref?' ref':''}">
-      <div class="thumb${DARK.has(thumb)?' dark':''}">${img(thumb,b.role||'',' ')}</div>
-      <div style="min-width:0"><h4>${b.url?`<a href="${esc(b.url)}">${esc(b.name)}</a>`:esc(b.name)}</h4>
-        <div class="meta">${chip(b.source)}${b.sku?`<span>SKU ${esc(b.sku)}</span>`:''}${b.mpn?`<span>MPN ${esc(b.mpn)}</span>`:''}${b.stock?`<span>${esc(b.stock)}</span>`:''}</div>
-        ${alts.length?`<div class="alt">Also at ${alts.map(a=>`<a href="${esc(a.url)}">${esc(a.source)}${a.price?' '+money(a.price):''}</a>`).join(' · ')}</div>`:''}
-        ${b.notes&&!opts.ref?`<div class="alt">${esc(b.notes)}</div>`:''}
-        ${opts.toggle||''}</div>
-      <div class="px">${opts.ref?`<small>in bundle</small><b style="font-size:13px;color:var(--dim)">${p?money(p)+' alone':''}</b>`:`<b>${money(p*q)}</b><small>${q>1?q+' × '+money(p):''}${b.priceNote?' '+esc(b.priceNote):''}</small>`}</div></div>`;}
-  function render(){
-    const gpuLine=B(st.gpu==='gpu'?'gpu':'gpu-72-alt');
-    const rows=[]; let lines=[];
-    rows.push('<div class="group-h">Core build</div>');
-    CORE.forEach(([id,th])=>{const b=id==='GPU'?gpuLine:B(id); if(!b)return;
-      let tog=''; if(id==='GPU'&&B('gpu-72-alt')){tog=`<label class="opt-toggle"><input type="checkbox" id="opt72" ${st.gpu!=='gpu'?'checked':''}> Use the 72 GB version instead</label>`;}
-      rows.push(lineHTML(b,th,{toggle:tog})); lines.push(b);});
-    rows.push('<div class="group-h">Included in the CPU bundle</div>');
-    REF.forEach(([id,th])=>rows.push(lineHTML(B(id),th,{ref:true})));
-    rows.push('<div class="group-h">Extras, optional and later upgrades</div>');
-    EXTRAS.forEach(id=>{const b=B(id); if(!b)return; const on=!!st.extras[id];
-      rows.push(lineHTML(b,({'fans-opt':'a-fans','ram-up':'ram'})[id]||id,{off:!on,toggle:`<label class="opt-toggle"><input type="checkbox" data-extra="${id}" ${on?'checked':''}> Include</label>`})); if(on)lines.push(b);});
-    document.getElementById('bomlines').innerHTML=rows.join('');
-    const byStore={}; lines.forEach(b=>{if(b.price==null)return;const k=srcKind(b.source)==='mc'?'Micro Center':srcKind(b.source)==='amz'?'Amazon':(b.source||'Other');byStore[k]=(byStore[k]||0)+b.price*(b.qty||1);});
-    const sub=Object.values(byStore).reduce((a,v)=>a+v,0), tax=sub*0.07;
-    const unknown=lines.filter(b=>b.price==null).length;
-    document.getElementById('bomsum').innerHTML=`<h3>Total</h3><div class="grand film">${money(sub+tax).replace(/\.\d\d$/,'')}</div>
-      <table>${Object.entries(byStore).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${chip(k)}</td><td>${money(v)}</td></tr>`).join('')}
-      <tr><td>Sales tax (7% est.)</td><td>${money(tax)}</td></tr><tr class="tot"><td>Grand total</td><td>${money(sub+tax)}</td></tr></table>
-      ${unknown?`<p class="src">${unknown} line${unknown>1?'s':''} without a confirmed price are excluded.</p>`:''}
-      <p class="src">Micro Center prices are from the Nov 15 quote (guaranteed to Nov 19). Other prices are listings seen on Nov 15, 2026 and may change.</p>
-      <button class="btn prime" type="button" id="copylist">Copy shopping list</button>`;
-    document.getElementById('copylist').onclick=async e=>{
-      const g={}; lines.forEach(b=>{const k=srcKind(b.source)==='mc'?'Micro Center (Miami, store 185)':srcKind(b.source)==='amz'?'Amazon':(b.source||'Other');(g[k]=g[k]||[]).push(b);});
-      const txt=Object.entries(g).map(([k,bs])=>k+'\n'+bs.map(b=>`- ${b.qty>1?b.qty+'× ':''}${b.name}${b.sku?' (SKU '+b.sku+')':''} ${money(b.price*(b.qty||1))}${b.url?'\n  '+b.url:''}`).join('\n')).join('\n\n')+`\n\nEstimated total with tax: ${money(sub+tax)}`;
-      try{await navigator.clipboard.writeText(txt);e.target.textContent='Copied';}catch(_){const ta=document.createElement('textarea');ta.value=txt;e.target.after(ta);ta.select();e.target.textContent='Selected · press ⌘/Ctrl+C';}
-      setTimeout(()=>{e.target.textContent='Copy shopping list';},2200);};
-  }
-  document.getElementById('bomlines').addEventListener('change',e=>{
-    if(e.target.id==='opt72'){st.gpu=e.target.checked?'gpu-72-alt':'gpu';render();}
-    if(e.target.dataset.extra){st.extras[e.target.dataset.extra]=e.target.checked;render();}});
-  render();
-})();
-</script>
-<script>
-/* ---------- Option A vs B ---------- */
-const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundles.aspx", "a-psu": "https://www.microcenter.com/quickView/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "a-hub": "https://www.microcenter.com/quickview/625314/silverstone-cpf04-pwm-fan-hub", "a-ram": "https://www.microcenter.com/quickview/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k41-black", "b-bundle": "https://www.microcenter.com/site/content/bundle-and-save.aspx?bundle=amd", "b-cpu": "https://www.microcenter.com/quickview/698657/amd-ryzen-threadripper-pro-9975wx-shimada-peak-4ghz-32-core-str5-boxed-processor-heatsink-not-included", "b-board": "https://www.microcenter.com/product/677978/WRX90E-SAGE_Pro_WS_SE_AMD_sTR5_EEB_Motherboard", "b-ram": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "b-gpu": "https://www.microcenter.com/product/711668/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "b-cooler": "https://www.microcenter.com/product/699609/thermaltake-aw420-420mm-all-in-one-liquid-cpu-cooling-kit-black", "b-psu": "https://www.microcenter.com/product/697062/asrock-tc-1650t-1650-watt-80-plus-titanium-atx-fully-modular-power-supply-atx-31-compatible", "b-case": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "a-gpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "a-cooler": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "a-fan": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "a-cpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "a-board": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "ssd": "https://www.amazon.com/dp/B0HPR72914", "cable-a": "https://www.amazon.com/dp/B0CWP5X4M7", "cable-b": "https://www.amazon.com/dp/B099DYK9CW"};
-(function(){
-  const L=(id,txt)=>LINKS[id]?`<a href="${LINKS[id]}" style="color:var(--text)">${txt} ↗</a>`:txt;
-  const m=n=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const V=[
-    ['CPU cores','Zen 5',16,32,v=>v],
-    ['System memory','GB, ECC RDIMM',128,256,v=>v+' GB'],
-    ['Memory bandwidth','theoretical',179,358,v=>'~'+v+' GB/s'],
-    ['Parallel coding agents','estimate',14,33,v=>'~'+v],
-    ['GPU memory','',16,48,v=>v+' GB'],
-    ['32B model, 4-bit','tokens / second',0,50,v=>v?'~'+v+' tok/s':"doesn't fit"],
-    ['70B model, 4-bit','short context',0,26,v=>v?'~'+v+' tok/s':"doesn't fit"],
-    ['M.2 Gen5 slots','plus U.2 ports',2,4,v=>v],
-    ['PSU capacity','watts',1200,1650,v=>v.toLocaleString('en-US')+' W'],
+  const BOM=[
+    ['base','Baseline','EPYC 9175F + TURIND8X-2T + 128 GB RDIMM bundle (SKU 999999)','MC',1,5999.99,1],
+    ['base','Baseline','ASUS ProArt RTX 5070 Ti OC 16 GB (SKU 936120)','MC',1,1699.99,1],
+    ['base','Baseline','SilverStone XE360-SP5 (SKU 069492)','MC',1,379.99,1],
+    ['base','Baseline','Super Flower Leadex VII Platinum PRO 1200 W (SKU 848499)','MC',1,189.99,1],
+    ['base','Baseline','Antec 900 (SKU 028738)','MC',1,199.99,1],
+    ['base','Baseline','Kioxia CD6-R 7.68 TB U.3 (Amazon B0HPR72914)','AMZ',2,2449,1],
+    ['base','Baseline','MCIO 4i → U.2 cable, 0.5 m (Amazon B0CWP5X4M7)','AMZ',2,38,1],
+    ['proc','Procure','CyberPower CP1500PFCLCD UPS, 1500 VA (2,200 VA recommended)','MC',1,239.99,1],
+    ['proc','Procure','Kingwin anti-static wrist strap (SKU 740001)','MC',1,4.99,1],
+    ['proc','Procure','Samsung 9100 PRO 2 TB M.2 boot SSD (SKU 815258)','MC',1,399.99,0],
+    ['proc','Procure','Synology DS1823xs+ NAS, diskless (10 GbE)','Other',1,1799.99,0],
+    ['def','Deferred','6× ARCTIC P12 Pro + SilverStone CPF04 hub (not required)','MC',1,99.93,0],
+    ['up','Upgrade','4× Kingston 32 GB DDR5-5600 RDIMM → 256 GB (SKU 873000)','MC',1,4589.99,0]
   ];
-  document.getElementById('versus').innerHTML=V.map(([l,s,a,b,f])=>{const mx=Math.max(a,b)||1;
-    return `<div class="vs-row"><div class="l">${l}${s?`<small>${s}</small>`:''}</div><div class="vs-bars">
-      <div class="vs-bar a"><span class="k">A</span><span class="t"><i style="--w:${a/mx*100}%"></i></span><span class="v">${f(a)}</span></div>
-      <div class="vs-bar b"><span class="k film">B</span><span class="t"><i style="--w:${b/mx*100}%"></i></span><span class="v">${f(b)}</span></div></div></div>`;}).join('');
-  const Q=[
-    ['CPU + board + 128 GB bundle','AMD EPYC 9175F + ASRock Rack TURIND8X-2T + Kingston FURY Renegade Pro 128 GB','SKU 999999',5999.99,'AMD Threadripper PRO 9975WX + ASUS Pro WS WRX90E-SAGE SE + Kingston FURY Renegade Pro 128 GB','SKU 999999',7999.99,'a-bundle','b-bundle'],
-    ['Second memory kit','None (4 of 8 slots filled)','',0,'Kingston FURY Renegade Pro 128 GB (4×32) KF556R28RBE2K4-128','SKU 873000',4589.99,null,'b-ram'],
-    ['Graphics','ASUS ProArt RTX 5070 Ti OC 16 GB','SKU 936120',1699.99,'NVIDIA RTX PRO 5000 Blackwell 48 GB (OEM)','SKU 044628',7199.99,'a-gpu','b-gpu'],
-    ['CPU cooler','SilverStone XE360-SP5 360 mm AIO','SKU 069492',379.99,'Thermaltake AW420 420 mm AIO','SKU 921551',449.99,'a-cooler','b-cooler'],
-    ['Power supply','Super Flower Leadex VII Platinum PRO 1200 W','SKU 848499',189.99,'ASRock Taichi TC-1650T 1650 W Titanium','SKU 883967',549.99,'a-psu','b-psu'],
-    ['Case','Not on the quote · we added the Antec 900 ($199.99)','',0,'Antec 900 tempered-glass full tower','SKU 028738',199.99,null,'b-case'],
-    ['Fans','6× Arctic P12 Pro + SilverStone CPF04 hub','SKU 953612 · 133009',99.93,'Included with the Antec 900 (6 fans)','',0,'a-fan','a-hub'],
-  ];
-  const tA=Q.reduce((s,r)=>s+r[3],0), tB=Q.reduce((s,r)=>s+r[6],0);
-  const d=v=>v===0?'<span style="color:var(--faint)">—</span>':`<span class="${v>0?'up':'dn'}">${v>0?'+':'−'}${m(Math.abs(v))}</span>`;
-  document.getElementById('qt').innerHTML=`<thead><tr><th>Part</th><th>Option A</th><th style="text-align:right">A</th><th>Option B</th><th style="text-align:right">B</th><th style="text-align:right">B − A</th></tr></thead><tbody>`+
-    Q.map(r=>{const fanRow=r[7]==='a-fan';const aTxt=fanRow?`${L('a-fan','6× Arctic P12 Pro')} + ${L('a-hub','SilverStone CPF04 hub')}`:(r[7]?L(r[7],r[1]):r[1]);const bTxt=fanRow?r[4]:(r[8]?L(r[8],r[4]):r[4]);
-    return `<tr><td><b>${r[0]}</b></td><td>${aTxt}${r[2]?`<small>${r[2]}</small>`:''}${r[7]==='a-bundle'&&(LINKS['a-cpu']||LINKS['a-board'])?`<small>Parts: ${L('a-cpu','EPYC 9175F')} · ${L('a-board','TURIND8X-2T')}</small>`:''}</td><td class="n">${r[3]?m(r[3]):'—'}</td><td>${bTxt}${r[5]?`<small>${r[5]}</small>`:''}${r[8]==='b-bundle'&&(LINKS['b-cpu']||LINKS['b-board'])?`<small>Parts: ${L('b-cpu','Threadripper PRO 9975WX')} · ${L('b-board','WRX90E-SAGE SE')}</small>`:''}</td><td class="n">${r[6]?m(r[6]):'—'}</td><td class="n">${d(r[6]-r[3])}</td></tr>`;}).join('')+
-    `<tr class="tot"><td>Subtotal</td><td></td><td class="n">${m(tA)}</td><td></td><td class="n">${m(tB)}</td><td class="n">${d(tB-tA)}</td></tr>
-     <tr><td>Sales tax (quoted)</td><td></td><td class="n">${m(585.89)}</td><td></td><td class="n">${m(1469.30)}</td><td class="n">${d(1469.30-585.89)}</td></tr>
-     <tr class="tot"><td>Quote total</td><td></td><td class="n">${m(8955.78)}</td><td></td><td class="n">${m(22459.24)}</td><td class="n">${d(22459.24-8955.78)}</td></tr>
-     <tr><td><b>Both still need</b></td><td colspan="5" style="color:var(--dim)">${L('ssd','2× Kioxia CD6-R 7.68 TB')} (~$4,898 on Amazon), recommended by our consultant Expertly.Ai. Micro Center doesn't carry enterprise drives. Plus 2 cables: ${L('cable-a','MCIO→U.2')} for A (~$76) or ${L('cable-b','SlimSAS→U.2')} for B (~$50). Option A also needs a case: we chose the ${L('b-case','Antec 900')} ($199.99). With the Micro Center card's 5% off, pre-tax totals drop to $7,951.40 (A) and $19,940.44 (B).</td></tr></tbody>`;
-  const S=[['Platform: 32 vs 16 cores, workstation board',2000,'#4FB3E8'],['Memory: +128 GB, all 8 channels',4589.99,'#7FA7C9'],['GPU: 48 GB PRO 5000 vs 16 GB 5070 Ti',5500,'#8B95A1'],['PSU, cooler, case, fans',530.05,'#C9CED4'],['Extra sales tax',883.41,'#8E98AC']];
-  const T=S.reduce((s,x)=>s+x[1],0);
-  document.getElementById('stackbar').innerHTML=S.map(([l,v,c])=>`<div style="flex:${v};background:${c}" title="${l}: ${m(v)}">${v/T>.09?Math.round(v/T*100)+'%':''}</div>`).join('');
-  document.getElementById('stacklegend').innerHTML=S.map(([l,v,c])=>`<span><i style="background:${c}"></i>${l} · <b style="color:var(--text)">${m(v)}</b></span>`).join('');
-  if(typeof RM!=='undefined'&&!RM){const box=document.getElementById('versus'); const r=box.getBoundingClientRect(); if(r.top>innerHeight){const is=[...box.querySelectorAll('.t i')];
-    is.forEach(i=>{i.dataset.w=i.style.getPropertyValue('--w');i.style.width='0';i.style.transition='width 1s cubic-bezier(.2,.7,.2,1)';});
-    let done=false; new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!done){done=true;is.forEach((i,k)=>setTimeout(()=>i.style.width=i.dataset.w,k*40));}}),{threshold:.2}).observe(box);}}
-})();
-</script>
-<script>
-(()=>{
-const IM = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-fans": "img/a-fans.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "dog-buck": "img/dog-buck.jpg", "dog-go2-3q": "img/dog-go2-3q.jpg", "dog-go2-callout": "img/dog-go2-callout.jpg", "dog-go2-face": "img/dog-go2-face.jpg", "dog-go2-piper": "img/dog-go2-piper.jpg", "dog-go2-real": "img/dog-go2-real.jpg", "dog-go2-side": "img/dog-go2-side.jpg", "dog-go2": "img/dog-go2.jpg", "dog-hero": "img/dog-hero.jpg", "dog-jetson-ports": "img/dog-jetson-ports.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2-cloud": "img/dog-l2-cloud.jpg", "dog-l2-frame": "img/dog-l2-frame.jpg", "dog-l2": "img/dog-l2.jpg", "dog-nas": "img/dog-nas.jpg", "dog-nvme": "img/dog-nvme.jpg", "dog-pair": "img/dog-pair.jpg", "dog-piper": "img/dog-piper.jpg", "dog-run": "img/dog-run.jpg", "dog-so101-leader": "img/dog-so101-leader.jpg", "dog-so101": "img/dog-so101.jpg", "dog-switch": "img/dog-switch.jpg", "dog-ts16": "img/dog-ts16.jpg", "dog-umi": "img/dog-umi.jpg", "dog-velo": "img/dog-velo.jpg", "dog-x4": "img/dog-x4.jpg", "dog-xt": "img/dog-xt.jpg", "dog-xt32": "img/dog-xt32.jpg", "esd": "img/esd.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "og-conductor": "img/og-conductor.jpg", "og-field-unit": "img/og-field-unit.jpg", "og-hub": "img/og-hub.jpg", "paste": "img/paste.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let OPT='A';
-const pic=(...keys)=>{for(const k of keys) if(IM[k]) return IM[k]; return null;};
-
-/* ---------- 1. tour ---------- */
-const PARTS=[
- {id:'cpu',  role:'The brain', name:'Processor (CPU)', ico:'🎼', hs:[236,40],
-  what:'Runs everything that isn\'t the AI model itself: the agents, their tools, databases, browsers and containers. More cores means more jobs at the same time.',
-  like:'<b>The conductor.</b> It hands out the work and keeps every agent in time.',
-  A:{model:'AMD EPYC 9175F', big:'16', bigl:'cores · 5.0 GHz · 512 MB cache', img:['a-cpu','cpu']},
-  B:{model:'AMD Threadripper PRO 9975WX', big:'32', bigl:'cores · 5.4 GHz', img:['cpu']}},
- {id:'ram',  role:'The workbench', name:'Memory (RAM)', ico:'🧰', hs:[184,154],
-  what:'Holds everything the machine is working on right now. Every open agent, document and dataset sits here. Run out and everything slows to a crawl.',
-  like:'<b>The workbench.</b> A bigger bench lets more people work at once without clearing space.',
-  A:{model:'Kingston FURY Renegade Pro · 4 × 32 GB', big:'128 GB', bigl:'4 of 8 slots filled', img:['ram'], up:'Upgrade later: fill the 4 empty slots for 256 GB and twice the speed.'},
-  B:{model:'Kingston FURY Renegade Pro · 8 × 32 GB', big:'256 GB', bigl:'all 8 slots · twice the speed', img:['ram']}},
- {id:'gpu',  role:'The AI engine', name:'Graphics card (GPU)', ico:'⚡', hs:[78,201],
-  what:'Runs our own AI models on the machine, with no cloud bill and no data leaving the building. Its memory decides how big a model fits.',
-  like:'<b>The engine room.</b> Thousands of tiny workers doing the math of AI in parallel.',
-  A:{model:'ASUS ProArt RTX 5070 Ti · 16 GB', big:'16 GB', bigl:'GPU memory', img:['a-gpu'], up:'Upgrade later: add or swap in a 48 GB card. The board has 4 full-speed slots.'},
-  B:{model:'NVIDIA RTX PRO 5000 Blackwell · 48 GB', big:'48 GB', bigl:'GPU memory · 3× Option A', img:['gpu','gpu-back']}},
- {id:'board',role:'The city', name:'Motherboard', ico:'🏙️', hs:[150,316],
-  what:'The big circuit board everything plugs into. It decides how many graphics cards, drives and memory sticks the machine can ever hold.',
-  like:'<b>The city streets.</b> Every part is a building; the board is the roads between them.',
-  A:{model:'ASRock Rack TURIND8X-2T', big:'7', bigl:'full-size card slots · room to grow', img:['a-board','board']},
-  B:{model:'ASUS Pro WS WRX90E-SAGE SE', big:'7', bigl:'full-size card slots · room to grow', img:['board']}},
- {id:'ssd',  role:'The library', name:'Storage drives', ico:'📚', hs:[73,446],
-  what:'Long-term storage for AI models, code and data. These are enterprise drives built to run 24/7 and survive a power cut mid-write. Recommended by our consultant at Expertly.Ai.',
-  like:'<b>The library.</b> Everything we own lives here, ready to be pulled onto the workbench.',
-  A:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']},
-  B:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']}},
- {id:'cooler',role:'The radiator', name:'Liquid cooler', ico:'❄️', hs:[84,25],
-  what:'Pulls heat off the processor with liquid and blows it out of the top of the case, the same way a car radiator works. It keeps the machine fast and quiet under load.',
-  like:'<b>The car radiator.</b> Hot liquid in, cool liquid out, all day long.',
-  A:{model:'SilverStone XE360-SP5 · 360 mm', big:'360 mm', bigl:'radiator · mounted at the top as exhaust', img:['a-cooler']},
-  B:{model:'Thermaltake AW420 · 420 mm', big:'420 mm', bigl:'radiator · fits the Antec 900 exactly', img:['cooler']}},
- {id:'psu',  role:'The power plant', name:'Power supply (PSU)', ico:'🔌', hs:[320,354],
-  what:'Turns wall power into clean, steady power for every part. It has to be big enough for today and for a second graphics card later.',
-  like:'<b>The power plant.</b> Feeds the whole city, with headroom for new buildings.',
-  A:{model:'Super Flower Leadex VII Platinum PRO', big:'1,200 W', bigl:'Platinum · the build peaks around 850 W', img:['a-psu'], up:'Check before build day: the board has 3 CPU power sockets and this PSU has 2 cables.'},
-  B:{model:'ASRock Taichi TC-1650T', big:'1,650 W', bigl:'Titanium · most efficient grade', img:['psu']}},
- {id:'case', role:'The body', name:'Case & fans', ico:'🌬️', hs:[325,34],
-  what:'Holds it all together and moves air through it: cool air in at the front, hot air out the back and top. It needs to fit an extra-large server board.',
-  like:'<b>The body and lungs.</b> Breathes cool air in, hot air out.',
-  A:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included · 9 drive bays', img:['case','case-inside']},
-  B:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included', img:['case','case-inside']}},
-];
-let ti=0;
-const rig=$('#rig'), hsG=$('#hotspots');
-if(rig){
-  const NS='http://www.w3.org/2000/svg';
-  PARTS.forEach((p,i)=>{
-    const g=document.createElementNS(NS,'g'); g.setAttribute('class','hs'); g.dataset.i=i;
-    g.setAttribute('transform',`translate(${p.hs[0]} ${p.hs[1]})`);
-    g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',p.name);
-    g.innerHTML=`<circle class="pulse" r="12" style="animation-delay:${i*.3}s"/><circle class="ring" r="12"/><text>${i+1}</text>`;
-    hsG.appendChild(g);
-  });
-  $('#tdots').innerHTML=PARTS.map((p,i)=>`<button type="button" aria-label="${p.name}" data-i="${i}"></button>`).join('');
-  const show=(i,anim=true)=>{
-    ti=(i+PARTS.length)%PARTS.length; const p=PARTS[ti], o=p[OPT], other=p[OPT==='A'?'B':'A'];
-    rig.classList.add('focus');
-    $$('#rig [data-part]').forEach(el=>el.classList.toggle('on',el.dataset.part===p.id));
-    $$('#hotspots .hs').forEach(el=>el.classList.toggle('on',+el.dataset.i===ti));
-    $$('#tdots button').forEach(el=>el.setAttribute('aria-current',+el.dataset.i===ti));
-    $('#ttag').textContent=String(ti+1).padStart(2,'0')+' · '+p.role;
-    $('#tname').textContent=p.name; $('#tmodel').textContent=o.model;
-    $('#twhat').innerHTML=p.what; $('#tlike').innerHTML=p.like; $('#tico').textContent=p.ico;
-    $('#tbig').textContent=o.big; $('#tbigl').textContent=o.bigl;
-    $('#tvs').textContent=o.up||'';
-    const src=pic(...o.img), ph=$('#tph'), im=$('#timg');
-    const set=()=>{ ph.querySelector('.noimg')?.remove();
-      if(src){im.hidden=false; im.src=src; im.alt=o.model;} else {im.hidden=true; ph.insertAdjacentHTML('beforeend',`<span class="noimg">${p.ico}</span>`);}
-      ph.classList.toggle('dark',/(^|\/)cpu\./.test(src||'')); ph.classList.remove('swap'); };
-    if(anim&&!RM){ph.classList.add('swap'); setTimeout(set,180);} else set();
-    // ram: dim half the sticks for option A
-    const r2=$('#ram2'); if(r2) r2.style.opacity=OPT==='A'?'.18':'1';
-    window.decodeJargon&&window.decodeJargon($('#tour .pcard'));
-  };
-  hsG.addEventListener('click',e=>{const g=e.target.closest('.hs'); if(g) show(+g.dataset.i);});
-  hsG.addEventListener('keydown',e=>{const g=e.target.closest('.hs'); if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(+g.dataset.i);}});
-  rig.querySelector('svg').addEventListener('click',e=>{const el=e.target.closest('[data-part]'); if(el){const i=PARTS.findIndex(p=>p.id===el.dataset.part); if(i>=0) show(i);}});
-  $('#tdots').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) show(+b.dataset.i);});
-  $('#tnext').onclick=()=>show(ti+1); $('#tprev').onclick=()=>show(ti-1);
-  window.__tourShow=show;
-  show(0,false);
-}
-
-/* ---------- shared A/B toggle ---------- */
-const setOpt=o=>{OPT=o; $$('.ab-toggle button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.opt===o));
-  window.__tourShow&&window.__tourShow(ti,true); drawModels(); drawAgents();};
-$$('.ab-toggle').forEach(t=>t.addEventListener('click',e=>{const b=e.target.closest('button[data-opt]'); if(b) setOpt(b.dataset.opt);}));
-
-/* ---------- 2. what can it run ---------- */
-const MODELS=[
- {n:'Small helper',s:'8B · e.g. Llama 3.1 8B',gb:6},
- {n:'Fast coder',s:'gpt-oss-20b',gb:14},
- {n:'Strong coder',s:'32B · e.g. Qwen 32B',gb:20},
- {n:'Big brain',s:'70B · e.g. Llama 3.3 70B',gb:40},
- {n:'Frontier-class open',s:'gpt-oss-120b',gb:61},
-];
-const GPUS=[{k:'A',n:'Our build · RTX 5070 Ti',gb:16},{k:'U',n:'After a GPU upgrade · 48 GB card',gb:48}];
-let mi=1;
-function drawModels(){
-  const mc=$('#mchips'), mb=$('#mbars'); if(!mc) return;
-  mc.innerHTML=MODELS.map((m,i)=>`<button type="button" aria-pressed="${i===mi}" data-i="${i}"><b>${m.n}</b><small>${m.s} · ~${m.gb} GB</small></button>`).join('');
-  const m=MODELS[mi];
-  mb.innerHTML=GPUS.map(g=>{const fit=m.gb<=g.gb, pct=Math.min(100,m.gb/g.gb*100), copies=Math.floor(g.gb/m.gb);
-    return `<div class="meter"${g.k[0]===OPT?'':' style="opacity:.6"'}><div class="row"><b>${g.n}</b><span>${m.gb} of ${g.gb} GB</span></div>
-      <div class="bar"><i class="${fit?'ok':'no'}" style="width:0" data-w="${pct}"></i></div>
-      <div class="vd ${fit?'ok':'no'}">${fit?(copies>1?`✓ Fits, fast. Room for ${copies} copies at once.`:'✓ Fits, fast.'):`✗ Too big for this card. Runs partly from system memory, much slower.`}</div></div>`;}).join('');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#mbars .bar i').forEach(i=>i.style.width=i.dataset.w+'%')));
-}
-$('#mchips')?.addEventListener('click',e=>{const b=e.target.closest('button'); if(b){mi=+b.dataset.i; drawModels();}});
-const RAMS=[{k:'A',n:'Our build · 128 GB',gb:128},{k:'U',n:'After the memory upgrade · 256 GB',gb:256}];
-function drawAgents(){
-  const a=$('#agents'); if(!a) return; const n=+a.value; $('#agentsOut').textContent=n;
-  const viz=$('#agentsViz'); const cur=viz.children.length;
-  if(n>cur) for(let k=cur;k<n;k++) viz.appendChild(document.createElement('i')); else while(viz.children.length>n) viz.lastChild.remove();
-  const need=24+n*7;
-  $('#abars').innerHTML=RAMS.map(r=>{const fit=need<=r.gb, pct=Math.min(100,need/r.gb*100), max=Math.floor((r.gb-24)/7);
-    return `<div class="meter"${r.k===OPT?'':' style="opacity:.6"'}><div class="row"><b>${r.n}</b><span>${need} of ${r.gb} GB</span></div>
-      <div class="bar"><i class="${fit?'ok':'no'}" style="width:${pct}%"></i></div>
-      <div class="vd ${fit?'ok':'no'}">${fit?`✓ Comfortable. Tops out around ${max} agents.`:`✗ Too many. Tops out around ${max} agents.`}</div></div>`;}).join('');
-}
-$('#agents')?.addEventListener('input',drawAgents);
-$('#agents')?.addEventListener('input',()=>drawRam(+$('#agents').value));
-drawModels(); drawAgents();
-
-/* ---------- 3. build day ---------- */
-const STEPS=[
- {t:'Prep the bench',m:'15 min',img:['case-inside','case'],e:'🧤',d:'Clear a big table, open every box, and lay parts out in build order. Clip on the anti-static strap.',w:'Keep the CPU and memory in their packaging until their step.'},
- {t:'Processor into the board',m:'20 min',img:['a-cpu','cpu'],e:'🧠',d:'With the board flat on its box, open the SP5 socket frame, slide the EPYC in its orange carrier into the rail, then close it and tighten the screws in the printed order.',w:'Never touch the socket pins. Use the torque screwdriver that comes with the CPU.'},
- {t:'Memory sticks',m:'10 min',img:['ram'],e:'🧰',d:'Press each of the 4 sticks in until the latches click, using the 4 slots the board manual marks for a 4-stick setup.',w:'Leave the other 4 slots empty for the upgrade. Memory runs slower until EXPO is turned on (step 9).'},
- {t:'Cooler mount',m:'25 min',img:['a-cooler','cooler'],e:'❄️',d:'Fit the 360 mm radiator to the top of the case with its fans blowing out, then lower the pump block onto the CPU and screw it down evenly.',w:'Peel the plastic film off the cold plate! The front stays as the case\'s 3 intake fans.'},
- {t:'Board into the case',m:'30 min',img:['a-board','board'],e:'🏙️',d:'Install extra standoffs for the extra-large board, then lower it in and screw it down. Plug in the cooler pump and fan cables.',w:'Count the standoffs against the board\'s holes. A stray one can short it.'},
- {t:'Storage drives',m:'20 min',img:['ssd','cable'],e:'📚',d:'Mount the two Kioxia drives in 2.5" bays and connect each one to a board MCIO port with its own cable and a SATA power lead.',w:'Use the short (0.5 m) cables, and put the drives where a fan blows on them.'},
- {t:'Graphics card',m:'15 min',img:['a-gpu','gpu'],e:'⚡',d:'Seat the card in slot 0, 2, 4 or 6, not slot 1 or 7, which share lanes with the drive ports. Screw it in and plug in its power cable firmly.',w:'Push the GPU power plug until it clicks flush. A half-seated plug can overheat.'},
- {t:'Power it all',m:'40 min',img:['a-psu','psu'],e:'🔌',d:'Install the power supply, then run every cable: board, CPU, GPU, drives, fans. Tie cables back for airflow.',w:'The board has 3 CPU power sockets and the PSU has 2 cables. Check the manual before build day. Use only this PSU\'s own cables.'},
- {t:'First boot',m:'60 min',img:['a-board'],e:'🚀',d:'Power on. Log in to the remote-management port, update the BIOS, turn on memory speed (EXPO), then run an overnight memory test.',w:'The first boot can take several minutes while memory trains. Plug the monitor into the GPU; the board\'s own video is VGA only.'},
-];
-const tr=$('#dayTrack');
-if(tr){
-  tr.innerHTML=STEPS.map((s,i)=>{const src=pic(...s.img);
-    return `<article class="day"><div class="ph"><span class="n">${i+1}</span><span class="t">${s.m}</span>${src?`<img src="${src}" alt="" loading="lazy" decoding="async">`:`<span class="emoji">${s.e}</span>`}</div>
-      <div class="bd"><h4>${s.t}</h4><p>${s.d}</p><div class="warn">⚠ ${s.w}</div></div></article>`;}).join('');
-  const W=()=>tr.querySelector('.day').getBoundingClientRect().width+16;
-  const upd=()=>{const max=tr.scrollWidth-tr.clientWidth; const f=max>0?tr.scrollLeft/max:1;
-    $('#dayFill').style.width=(Math.max(f,1/STEPS.length)*100)+'%';
-    const i=Math.min(STEPS.length-1,Math.round(tr.scrollLeft/W())); $('#dayNow').textContent=`Step ${i+1} of ${STEPS.length}`+(f>.98?' · done 🎉':'');};
-  tr.addEventListener('scroll',upd,{passive:true}); upd();
-  $('#dnext').onclick=()=>tr.scrollBy({left:W(),behavior:RM?'auto':'smooth'});
-  $('#dprev').onclick=()=>tr.scrollBy({left:-W(),behavior:RM?'auto':'smooth'});
-}
-
-/* ---------- 4. jargon decoder ---------- */
-const G={
- 'CPU':'The processor: the general-purpose brain of the computer.',
- 'GPU':'Graphics card. Its thousands of small cores make it the engine for running AI models.',
- 'VRAM':'Memory on the graphics card. A model must fit here to run fast.',
- 'GDDR7':'The newest, fastest type of graphics-card memory.',
- 'RAM':'System memory: the workbench for everything currently running.',
- 'ECC':'Error-correcting memory. Catches and fixes tiny memory errors, so a machine running 24/7 doesn\'t crash or corrupt data.',
- 'RDIMM':'Server-grade memory stick (registered). Required by EPYC and Threadripper PRO boards.',
- 'DDR5':'The current generation of system memory.',
- 'PCIe':'The high-speed roads that connect graphics cards and drives to the processor.',
- 'lanes':'Individual PCIe roads. More lanes means more cards and drives at full speed.',
- 'NVMe':'The fast, modern way SSDs talk to the computer.',
- 'U.3':'A connector used by enterprise data-center drives. Needs a special cable on desktop boards.',
- 'U.2':'Older version of the U.3 enterprise drive connector. They share the same plug.',
- 'MCIO':'A compact high-speed connector on server boards, used here to cable in the enterprise drives.',
- 'SlimSAS':'A slim cable connector on the ASUS board that links to enterprise drives.',
- 'EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
- 'SSI-EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
- 'AIO':'"All-in-one" liquid cooler: pump, tubes and radiator come pre-filled and sealed.',
- 'TDP':'How much heat a chip is designed to put out, in watts. Your cooler has to handle it.',
- 'BMC':'A tiny separate computer on the board that lets us power-cycle and fix the machine remotely, even when it\'s off.',
- 'EXPO':'A BIOS setting that runs the memory at its full rated speed. Off by default.',
- 'BIOS':'The firmware that starts the machine before the operating system loads.',
- 'PSU':'Power supply unit.',
- 'TOPS':'Trillions of operations per second: a rough measure of AI math speed.',
- 'FP4':'A very compact 4-bit number format that makes AI models smaller and faster.',
- 'AVX-512':'Wide math instructions in AMD Zen 5 cores that speed up data and AI work on the CPU.',
- 'chiplets':'The processor is built from several small chips in one package, instead of one big chip.',
- 'CCD':'Core chiplet: a small die holding 8 CPU cores.',
- 'GbE':'Gigabit Ethernet: wired network speed. 10 GbE is 10× a normal office port.',
- 'Titanium':'The highest power-supply efficiency rating: less power is wasted as heat.',
- 'Platinum':'A high power-supply efficiency rating, one step below Titanium.',
- 'threads':'Jobs a core can juggle at once. Each core here runs 2 threads.',
- 'channels':'Separate paths between the processor and memory. Filling more channels makes memory faster.',
- 'quantized':'Compressed so a model fits in less memory, with a small quality trade-off.',
- '4-bit':'Each model weight stored in 4 bits. It shrinks models about 4× versus full size.',
- 'vLLM':'Popular open-source software for serving AI models to many users or agents at once.',
- 'MCP':'Model Context Protocol: the standard way AI agents connect to tools and data.',
- 'LLM':'Large language model: the kind of AI behind ChatGPT and Claude.',
- 'inference':'Running a trained AI model to get answers, as opposed to training it.',
- 'tokens':'Chunks of words that AI models read and write. Speed is measured in tokens per second.',
- 'EPYC':'AMD\'s server processor family (Option A).',
- 'Threadripper PRO':'AMD\'s workstation processor family (Option B).',
- 'Blackwell':'NVIDIA\'s current generation of GPU chips.',
- 'Zen 5':'AMD\'s current CPU core design.',
- '12V-2x6':'The 16-pin power plug on modern NVIDIA graphics cards. Must be fully seated.',
- 'SKU':'The store\'s product number.',
- 'SP5':'The socket (the CPU\'s seat on the board) used by AMD EPYC server processors.',
- 'EPS':'The 8-pin power plug that feeds the processor.',
- 'IPMI':'The remote-management system run by the BMC: power on/off, console and sensors from a browser.',
-};
-const keys=Object.keys(G).sort((a,b)=>b.length-a.length);
-const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-const RX=new RegExp('(?<![\\w-])('+keys.map(esc).join('|')+')(?![\\w-])');
-const SKIP='a,button,h1,h2,h3,h4,code,svg,canvas,script,style,.jg,.kicker,.src,.boot,small,nav,label,input,output,.tag,.plate-tag,.chips,#jgpop,.jg-pill,select,option,.model';
-function decode(root){
-  if(!root) return;
-  const seen=new Set();
-  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{
-    const p=n.parentElement; if(!p||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-    if(p.closest(SKIP)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT;}});
-  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
-  for(const node of nodes){
-    let n=node, m;
-    while(n && (m=RX.exec(n.nodeValue))){
-      const k=m[1];
-      if(seen.has(k)){ // only decorate first use per block; continue after it
-        const rest=n.splitText(m.index+k.length); n=rest; continue; }
-      seen.add(k);
-      const after=n.splitText(m.index); const rest=after.splitText(k.length);
-      const sp=document.createElement('span'); sp.className='jg'; sp.tabIndex=0; sp.dataset.k=k; sp.textContent=k;
-      after.replaceWith(sp); n=rest;
-    }
+  const tb=$('#cdbom tbody');
+  tb.innerHTML=BOM.map((r,i)=>`<tr><td class="ck"><input type="checkbox" data-i="${i}" ${r[6]?'checked':''} ${r[0]==='base'?'disabled':''} aria-label="Include ${r[2]}"></td><td><span class="chip ${r[0]==='base'?'base':(r[0]==='proc'?'proc':'def')}">${r[1]}</span></td><td>${r[2]}</td><td class="m">${r[3]==='MC'?'Micro Center':(r[3]==='AMZ'?'Amazon':'Reseller')}</td><td class="m">${r[4]}</td><td class="m" style="text-align:right">${fmt(r[4]*r[5])}</td></tr>`).join('');
+  function tot(){
+    let mc=0,ot=0;
+    tb.querySelectorAll('input').forEach(c=>{if(!c.checked)return;const r=BOM[+c.dataset.i],v=r[4]*r[5];if(r[3]==='MC')mc+=v;else ot+=v;});
+    mc=Math.round(mc*1.07*100)/100;
+    $('#cdMc').textContent=fmt(mc);$('#cdOt').textContent=fmt(ot);$('#cdTot').textContent=fmt(mc+ot);
   }
-}
-window.decodeJargon=decode;
-const pop=document.createElement('div'); pop.id='jgpop'; pop.setAttribute('role','tooltip'); document.body.appendChild(pop);
-let cur=null;
-const showPop=el=>{const k=el.dataset.k, t=G[k]; if(!t) return; cur=el;
-  pop.innerHTML=`<b>${k}</b>${t}`; pop.classList.add('show');
-  const r=el.getBoundingClientRect(), pw=Math.min(300,innerWidth-32); pop.style.maxWidth=pw+'px';
-  const ph=pop.offsetHeight; let x=Math.max(16,Math.min(innerWidth-pw-16,r.left+r.width/2-pw/2));
-  let y=r.top-ph-10; if(y<12) y=r.bottom+10; pop.style.left=x+'px'; pop.style.top=y+'px';};
-const hidePop=()=>{cur=null; pop.classList.remove('show');};
-document.addEventListener('mouseover',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el); else if(cur&&!e.target.closest?.('.jg')) hidePop();});
-document.addEventListener('focusin',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el);});
-document.addEventListener('focusout',e=>{if(e.target.closest?.('.jg')) hidePop();});
-document.addEventListener('click',e=>{const el=e.target.closest?.('.jg'); if(el){e.preventDefault(); cur===el&&pop.classList.contains('show')?hidePop():showPop(el);} else hidePop();});
-addEventListener('scroll',()=>cur&&hidePop(),{passive:true});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') hidePop();});
-// decorate every content block once (per paragraph/cell so each term is explained where it appears)
-const blocks=$$('main p, main li, main td, section p, section li, section td, section .lead, header .lead, header .sub, .num p, .vd');
-blocks.forEach(b=>{ if(!b.closest('#jgpop')) decode(b); });
-// late-rendered content (BOM, parts, options tables) — decorate after they render
-const mo=new MutationObserver(muts=>{for(const mu of muts) for(const nd of mu.addedNodes){ if(nd.nodeType===1){
-  if(nd.closest('#jgpop')||nd.closest('.jg')) continue;
-  nd.querySelectorAll?.('p,li,td').forEach(decode); if(nd.matches?.('p,li,td')) decode(nd);}}});
-$$('section').forEach(s=>mo.observe(s,{childList:true,subtree:true}));
-setTimeout(()=>mo.disconnect(),8000);
-// helper pill
-let pillGone=false; try{pillGone=localStorage.getItem('jgpill')==='1';}catch(e){}
-if(!pillGone){const pill=document.createElement('div'); pill.className='jg-pill';
-  pill.innerHTML='<span>New to this? Tap any <i>dotted word</i> for a plain-English meaning.</span><button type="button" aria-label="Dismiss">✕</button>';
-  document.body.appendChild(pill);
-  pill.querySelector('button').onclick=()=>{pill.classList.add('gone'); try{localStorage.setItem('jgpill','1');}catch(e){}};
-  setTimeout(()=>pill.classList.add('gone'),14000);}
-})();
-
-/* ---------- sparkle pass: RAM grid + data path ---------- */
-function drawRam(n){const g=document.getElementById('ramgrid');if(!g)return;const RMm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const HUES=['#4FB3E8','#7FA7C9','#8B95A1','#C9CED4'];
-  if(!g.dataset.b){let h='';for(let d=0;d<4;d++){h+='<div class="dimm"><span>DIMM '+(d+1)+'</span><div class="cells">';for(let c=0;c<32;c++)h+='<i></i>';h+='</div></div>';}
-    g.innerHTML=h+'<div class="lg"><span><b style="background:#56627A"></b>24 GB system</span><span><b style="background:#4FB3E8"></b>~7 GB per agent</span><span id="ramover"></span></div>';g.dataset.b=1;}
-  const cells=[...g.querySelectorAll('i')];const need=24+n*7;
-  cells.forEach((c,i)=>{c.style.setProperty('--d',RMm?'0s':(Math.abs(i-need)*0.004)+'s');
-    if(i<24){c.className='os';c.style.background='';}
-    else if(i<need){const a=Math.floor((i-24)/7);c.className='';c.style.background=HUES[a%4];}
-    else{c.className='';c.style.background='';}});
-  const o=document.getElementById('ramover');o.className=need>128?'over':'';o.textContent=need>128?'✗ '+(need-128)+' GB over: these agents won\'t fit':(128-need)+' GB free';}
-drawRam(+(document.getElementById('agents')||{value:8}).value);
-(()=>{const svg=document.getElementById('dpsvg');if(!svg)return;const RMm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const g=document.getElementById('dppk'),nodes=[...svg.querySelectorAll('.nd')];
-  const X=[105,345,585,825,1080],SPD=[2.2,1.6,1.1,1.4];
-  const CAP=['An agent sends a request: a prompt, some code to read, a tool call.','One EPYC core picks it up. Each core has its own 32 MB slice of cache, so busy agents don\'t trip over each other.',
-    'Working data streams from memory at about 179 GB/s with 4 of 8 channels filled. Filling all 8 later doubles this.',
-    'Local AI runs on the RTX 5070 Ti, whose own memory moves 896 GB/s. Models must fit in its 16 GB to run fast.',
-    'Code, datasets and model files load from the Kioxia drives, about 6.2 GB/s each. Then the answer goes back to the agent.'];
-  const COLS=['#4FB3E8','#7FA7C9','#8B95A1','#C9CED4'];const P=[];
-  for(let k=0;k<7;k++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('r',6);c.setAttribute('cy',150);c.setAttribute('fill',COLS[k%4]);c.setAttribute('filter','url(#dpglow)');
-    const d=document.createElementNS('http://www.w3.org/2000/svg','circle');d.setAttribute('r',3);d.setAttribute('cy',150);d.setAttribute('fill','#fff');g.appendChild(c);g.appendChild(d);P.push({c,d,x:105-k*140});}
-  const st=document.getElementById('dpstep'),tx=document.getElementById('dptxt');let on=false,lt=0,hop=-1,lastHop=-1,tHop=0;
-  const frame=now=>{if(!on)return;const dt=Math.min(50,now-(lt||now));lt=now;
-    P.forEach(p=>{let seg=0;for(let i=0;i<4;i++)if(p.x>=X[i])seg=i;p.x+=(p.x<X[0]?2:SPD[seg])*dt*.12;if(p.x>X[4])p.x=X[0]-Math.random()*260;
-      const vis=p.x>=X[0]-10;p.c.setAttribute('cx',p.x);p.d.setAttribute('cx',p.x);p.c.style.opacity=p.d.style.opacity=vis?1:0;});
-    if(now-tHop>2600){tHop=now;hop=(hop+1)%5;nodes.forEach((n,i)=>n.classList.toggle('on',i===hop));st.textContent='Hop '+(hop+1)+' of 5';tx.textContent=CAP[hop];}
-    requestAnimationFrame(frame);};
-  if(RMm){nodes[0].classList.add('on');P.forEach((p,k)=>{p.c.setAttribute('cx',X[k%5]);p.d.setAttribute('cx',X[k%5]);});return;}
-  new IntersectionObserver(es=>{const was=on;on=es[0].isIntersecting;if(on&&!was){lt=0;requestAnimationFrame(frame);}},{threshold:.2}).observe(svg);
+  tb.addEventListener('change',tot);tot();
 })();
 </script>
 
