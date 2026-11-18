@@ -1,0 +1,44 @@
+/* Accelerate Robotics layer: brand tokens (blue #0055ff / cyan #00c8ff, navy), Space Grotesk headings, Inter body.
+   Loaded after eng.css on every page. Workstreams: data-proj="con" = The Brain (blue), "fu" = Site Capture (cyan). */
+html[data-proj]:not(.book){--bg:#070B16;--bg2:#0A1020;--panel:#0C1324;--line:#1C2640;--text:#EEF2FA;--dim:#A3AEC6;--faint:#6F7B97}
+html[data-proj]{
+  --head:"Space Grotesk","Inter",system-ui,sans-serif;
+  --display:"Space Grotesk","Inter",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --brand:#0055FF;--brand2:#00C8FF;
+  --acc:#4D8BFF;--acc2:#7FA6FF;--cy:var(--acc);
+}
+html[data-proj="fu"]{--acc:#00C8FF;--acc2:#5FD8FF;--cy:#00C8FF}
+html[data-proj="hub"]{--acc:#4D8BFF}
+html[data-proj]:not(.book) body{background:var(--bg);color:var(--text)}
+html[data-proj] body{font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
+html[data-proj] h1,html[data-proj] h2,html[data-proj] h3{font-family:var(--head)!important;letter-spacing:-.02em!important;font-weight:600!important}
+html[data-proj] h1{letter-spacing:-.03em!important}
+html[data-proj] .fu-hd h1{font-family:var(--head)!important;font-size:clamp(40px,5.4vw,64px)!important;line-height:1!important}
+html[data-proj] .fu-hd h1 span{font-family:var(--body)!important;font-size:clamp(16px,1.6vw,20px)!important;line-height:1.4!important;color:var(--dim)!important;letter-spacing:0!important;margin-top:12px!important;font-weight:500!important}
+html[data-proj] .fu-hd{background:radial-gradient(90% 120% at 85% 0%,color-mix(in srgb,var(--acc) 12%,transparent),transparent 60%),linear-gradient(180deg,var(--bg2),var(--bg))}
+html[data-proj] .fu-hd .ph{border-color:var(--line)!important;background:#0A1020!important}
+html[data-proj] .kicker{color:var(--dim)!important}
+html[data-proj] .kicker::before{background:linear-gradient(90deg,var(--brand),var(--brand2))!important;width:18px!important}
+html[data-proj] nav.top{background:rgba(7,11,22,.92)!important;backdrop-filter:saturate(1.4) blur(10px)!important;-webkit-backdrop-filter:saturate(1.4) blur(10px)!important}
+html[data-proj] .mark{font:600 14px/1 var(--head)!important;letter-spacing:.04em!important}
+html[data-proj] .mark span{border-radius:50%!important;background:linear-gradient(135deg,var(--brand2),var(--brand))!important}
+html[data-proj] .btn.prime,html[data-proj] .links a.p{color:#04101F!important}
+html[data-proj] .eng-toc a.on{background:#111A30!important}
+html.doc[data-proj] tr:hover td{background:#111A30}
+html[data-proj] .ms-t thead th{background:rgba(77,139,255,.04)!important}
+html[data-proj] .chip.base{color:#04101F!important;background:#A3AEC6!important;border-color:#A3AEC6!important}
+html[data-proj] .chip.proc{color:#04101F!important}
+html[data-proj] .chip.open{color:#F5B544!important;border-color:#6B5428!important}
+html[data-proj] .ms-call{background:color-mix(in srgb,var(--acc) 6%,transparent)!important}
+html[data-proj] figure{background:var(--panel)}
+html[data-proj] .fu3d{background:#0A1020}
+html[data-proj] .fu3d-ctl .seg button[aria-pressed="true"]{color:#04101F}
+html.book[data-proj]{--accent:#4D8BFF}
+html.book[data-proj] body{font-family:var(--body)}
+/* brand wordmark in the program bar */
+.ar-wm{display:inline-flex;align-items:center;gap:8px;font:600 13.5px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.01em;color:#EEF2FA;text-decoration:none;white-space:nowrap}
+.ar-wm i{display:inline-block;width:14px;height:14px;border-radius:4px;background:radial-gradient(circle at 50% 50%,#00d4ff 0 28%,transparent 30%),linear-gradient(135deg,#0A1020,#0A1020);box-shadow:inset 0 0 0 1.5px #0055FF}
+.ar-wm b{font-weight:600;color:#EEF2FA}.ar-wm span{color:#A3AEC6;font-weight:500}
+@media (max-width:560px){.eng-bar .ar-exp{flex-basis:100%;text-align:center}}

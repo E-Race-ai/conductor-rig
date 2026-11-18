@@ -19,7 +19,7 @@
 
   function ready(){
     var proj = root.getAttribute('data-proj') || 'hub';
-    var code = proj === 'fu' ? 'PRJ-02 · Field Unit' : proj === 'con' ? 'PRJ-01 · Conductor' : 'Build team';
+    var code = proj === 'fu' ? 'PRJ-02 · Site Capture' : proj === 'con' ? 'PRJ-01 · The Brain' : 'Accelerate Robotics';
 
     /* thin progress bar */
     var bar = D.createElement('div'); bar.id = 'eng-bar'; D.body.appendChild(bar);
@@ -31,10 +31,10 @@
     if (secs.length >= 4) {
       root.classList.add('has-toc');
       var toc = D.createElement('nav'); toc.className = 'eng-toc'; toc.setAttribute('aria-label', 'Section index');
-      toc.innerHTML = '<div class="h">' + code + '</div><div class="r">' + (root.getAttribute('data-rev') || 'Rev C · 2026-11-18 · Build team') + '</div>';
+      toc.innerHTML = '<div class="h">' + code + '</div><div class="r">' + (root.getAttribute('data-rev') || 'Rev D · 2026-11-18 · Program team') + '</div>';
       var ni = 0;
       secs.forEach(function(s){
-        var h = s.querySelector('h2'), n = s.getAttribute('data-appx') ? 'App. ' + s.getAttribute('data-appx') : (++ni) + '.0';
+        var h = s.querySelector('h2'), n = s.getAttribute('data-num') ? s.getAttribute('data-num') : s.getAttribute('data-appx') ? 'App. ' + s.getAttribute('data-appx') : (++ni) + '.0';
         var t = h.textContent.replace(/\s+/g, ' ').trim();
         var sp = D.createElement('span'); sp.className = 'eng-sec'; sp.textContent = n; h.insertBefore(sp, h.firstChild);
         var a = D.createElement('a'); a.href = '#' + s.id; a.innerHTML = '<i>' + n + '</i><span></span>'; a.lastChild.textContent = t.length > 46 ? t.slice(0, 44) + '…' : t;

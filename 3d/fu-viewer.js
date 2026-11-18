@@ -11,7 +11,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 
-const ACC = '#E8A33D';
+const ACC = '#00C8FF';
 const HERE = new URL('.', import.meta.url).href;
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -168,40 +168,40 @@ function gridTexture() {
 
 const CSS = `
 .fuv{position:relative;width:100%;min-height:320px;overflow:hidden;border-radius:4px;
- background:radial-gradient(120% 90% at 50% 38%,#1a1e25 0%,#111419 55%,#0b0d10 100%);font-family:"IBM Plex Sans",system-ui,sans-serif;color:#E4E7EB;
+ background:radial-gradient(120% 90% at 50% 38%,#141D33 0%,#0C1324 55%,#070B16 100%);font-family:"IBM Plex Sans",system-ui,sans-serif;color:#EEF2FA;
  -webkit-user-select:none;user-select:none;touch-action:pan-y}
-.fuv.drawing{background:#101318}
+.fuv.drawing{background:#0A1020}
 .fuv canvas{display:block;width:100%!important;height:100%!important;outline:none;cursor:grab}
 .fuv canvas:active{cursor:grabbing}
 .fuv img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s;pointer-events:none}
 .fuv svg.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .fuv .lbl{position:absolute;pointer-events:none;transition:opacity .2s;font-size:12.5px;line-height:1.25}
-.fuv .lbl b{font:600 11px/1 "IBM Plex Mono",monospace;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid ${ACC};color:${ACC};border-radius:2px;margin-right:9px;vertical-align:-5px;background:rgba(11,13,16,.75)}
+.fuv .lbl b{font:600 11px/1 "IBM Plex Mono",monospace;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid ${ACC};color:${ACC};border-radius:2px;margin-right:9px;vertical-align:-5px;background:rgba(7,11,22,.75)}
 .fuv .lbl span{font-weight:500;letter-spacing:.005em}
-.fuv .lbl i{display:block;white-space:normal;font:400 11px/1.35 "IBM Plex Mono",monospace;color:#9AA3AE;font-style:normal;margin:3px 0 0 29px}
+.fuv .lbl i{display:block;white-space:normal;font:400 11px/1.35 "IBM Plex Mono",monospace;color:#A3AEC6;font-style:normal;margin:3px 0 0 29px}
 .fuv .lbl.r{text-align:left}.fuv .lbl.l{text-align:right}.fuv .lbl.l i{margin:3px 29px 0 0}
 .fuv .lbl.l b{margin:0 0 0 9px;float:right}
 .fuv .lbl.off{opacity:.18}
-.fuv .bal{position:absolute;width:24px;height:24px;display:grid;place-items:center;font:600 11.5px/1 "IBM Plex Mono",monospace;color:${ACC};border:1px solid ${ACC};border-radius:2px;background:rgba(11,13,16,.85);pointer-events:none;transition:opacity .2s}
+.fuv .bal{position:absolute;width:24px;height:24px;display:grid;place-items:center;font:600 11.5px/1 "IBM Plex Mono",monospace;color:${ACC};border:1px solid ${ACC};border-radius:2px;background:rgba(7,11,22,.85);pointer-events:none;transition:opacity .2s}
 .fuv .bal.off{opacity:.3}
 .fuv .leg{position:absolute;right:22px;top:50%;transform:translateY(-50%);display:grid;gap:14px;width:250px;pointer-events:none}
 .fuv .leg div{font-size:12.5px;line-height:1.3}
 .fuv .leg b{font:600 11px/1 "IBM Plex Mono",monospace;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid ${ACC};color:${ACC};border-radius:2px;margin-right:9px;vertical-align:-5px}
-.fuv .leg span{font-weight:500}.fuv .leg i{display:block;font:400 11px/1.35 "IBM Plex Mono",monospace;color:#9AA3AE;font-style:normal;margin:3px 0 0 29px}
+.fuv .leg span{font-weight:500}.fuv .leg i{display:block;font:400 11px/1.35 "IBM Plex Mono",monospace;color:#A3AEC6;font-style:normal;margin:3px 0 0 29px}
 .fuv .leg.m{right:10px;left:10px;top:36px;transform:none;width:auto;grid-template-columns:1fr 1fr;gap:6px 10px}
 .fuv .leg.m div{font-size:11px}.fuv .leg.m i{display:none}.fuv .leg.m b{width:17px;height:17px;margin-right:6px;font-size:10px;vertical-align:-4px}
-.fuv .tb{position:absolute;right:22px;bottom:18px;display:grid;grid-template-columns:auto auto;gap:0;border:1px solid #2b313b;font:400 10.5px/1 "IBM Plex Mono",monospace;color:#9AA3AE;pointer-events:none;background:rgba(11,13,16,.6)}
-.fuv .tb span{padding:6px 9px;border-bottom:1px solid #2b313b}.fuv .tb span:nth-child(odd){color:#6B7480;border-right:1px solid #2b313b}
-.fuv .tb span:nth-last-child(-n+2){border-bottom:0}.fuv .tb b{color:#E4E7EB;font-weight:500}
-.fuv .dimt{font:500 11px/1 "IBM Plex Mono",monospace;fill:#C9CED4;letter-spacing:.02em}
+.fuv .tb{position:absolute;right:22px;bottom:18px;display:grid;grid-template-columns:auto auto;gap:0;border:1px solid #1C2640;font:400 10.5px/1 "IBM Plex Mono",monospace;color:#A3AEC6;pointer-events:none;background:rgba(7,11,22,.6)}
+.fuv .tb span{padding:6px 9px;border-bottom:1px solid #1C2640}.fuv .tb span:nth-child(odd){color:#6B7480;border-right:1px solid #1C2640}
+.fuv .tb span:nth-last-child(-n+2){border-bottom:0}.fuv .tb b{color:#EEF2FA;font-weight:500}
+.fuv .dimt{font:500 11px/1 "IBM Plex Mono",monospace;fill:#C8D1E3;letter-spacing:.02em}
 .fuv .ui{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;pointer-events:none}
 .fuv .ui>*{pointer-events:auto}
-.fuv .seg{display:inline-flex;border:1px solid #2b313b;border-radius:3px;overflow:hidden;background:rgba(11,13,16,.82);backdrop-filter:blur(6px)}
-.fuv .seg button{all:unset;cursor:pointer;font:500 11.5px/1 "IBM Plex Mono",monospace;padding:8px 11px;color:#9AA3AE;letter-spacing:.03em}
-.fuv .seg button+button{border-left:1px solid #2b313b}
-.fuv .seg button[aria-pressed=true]{color:#0B0D10;background:#C9CED4}
+.fuv .seg{display:inline-flex;border:1px solid #1C2640;border-radius:3px;overflow:hidden;background:rgba(7,11,22,.82);backdrop-filter:blur(6px)}
+.fuv .seg button{all:unset;cursor:pointer;font:500 11.5px/1 "IBM Plex Mono",monospace;padding:8px 11px;color:#A3AEC6;letter-spacing:.03em}
+.fuv .seg button+button{border-left:1px solid #1C2640}
+.fuv .seg button[aria-pressed=true]{color:#070B16;background:#C8D1E3}
 .fuv .seg button:focus-visible{outline:2px solid ${ACC};outline-offset:-2px}
-.fuv .ex{display:inline-flex;align-items:center;gap:10px;font:500 11.5px/1 "IBM Plex Mono",monospace;color:#9AA3AE;border:1px solid #2b313b;border-radius:3px;padding:6px 11px;background:rgba(11,13,16,.82);backdrop-filter:blur(6px)}
+.fuv .ex{display:inline-flex;align-items:center;gap:10px;font:500 11.5px/1 "IBM Plex Mono",monospace;color:#A3AEC6;border:1px solid #1C2640;border-radius:3px;padding:6px 11px;background:rgba(7,11,22,.82);backdrop-filter:blur(6px)}
 .fuv .ex input{width:120px;accent-color:${ACC}}
 .fuv .tag{position:absolute;left:14px;top:12px;font:500 10.5px/1.5 "IBM Plex Mono",monospace;color:#6B7480;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
 .fuv .tag b{color:${ACC};font-weight:600}
@@ -256,7 +256,7 @@ export function mount(el, opt = {}) {
   controls.enablePan = false; controls.zoomSpeed = 0.6; controls.rotateSpeed = 0.7;
 
   // lights
-  scene.add(new THREE.HemisphereLight(0xdfe6f0, 0x0b0d10, 0.22));
+  scene.add(new THREE.HemisphereLight(0xdfe6f0, 0x070b16, 0.22));
   const key = new THREE.DirectionalLight(0xffffff, 1.9); key.position.set(0.9, 3.6, 1.1); key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048); key.shadow.camera.left = -0.8; key.shadow.camera.right = 0.8; key.shadow.camera.top = 0.8; key.shadow.camera.bottom = -0.8;
   key.shadow.camera.near = 0.5; key.shadow.camera.far = 8; key.shadow.radius = 6; key.shadow.blurSamples = 16; key.shadow.bias = -0.0004; key.shadow.normalBias = 0.01;
@@ -534,7 +534,7 @@ export function mount(el, opt = {}) {
   });
 
   function makeDrawing() {
-    const face = new THREE.MeshBasicMaterial({ color: 0x0e1115, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 });
+    const face = new THREE.MeshBasicMaterial({ color: 0x0a1020, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 });
     const lineMat = new THREE.LineBasicMaterial({ color: 0xc9ced4, transparent: true, opacity: 0.85 });
     const accMat = new THREE.LineBasicMaterial({ color: new THREE.Color(ACC), transparent: true, opacity: 0.95 });
     const mkHull = (c) => { const m = new THREE.MeshBasicMaterial({ color: c, side: THREE.BackSide });
