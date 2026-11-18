@@ -536,6 +536,44 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .dg-src li{break-inside:avoid;margin:5px 0;color:var(--dim)}
 .dg-src a{color:var(--dim)}
 footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+/* ---- pass 2: photos + motion ---- */
+.dg-rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.dg-rv.in{opacity:1;transform:none}
+.dg-fill{transition:width .7s cubic-bezier(.2,.8,.2,1),background .4s}
+.dg-photo-band{padding-top:clamp(40px,6vw,80px)}
+.dg-gal{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;margin-top:28px}
+@media (max-width:860px){.dg-gal{grid-template-columns:1fr}}
+.dg-gal figure{margin:0;position:relative;border-radius:18px;overflow:hidden;background:#0B0F08;border:1px solid var(--line);min-height:220px}
+.dg-gal figure img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease}
+.dg-gal figure:hover img{transform:scale(1.04)}
+.dg-gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 12px;background:linear-gradient(transparent,rgba(5,7,4,.85));font-size:13px;color:#C9D0DD}
+.dg-gal figcaption b{color:var(--text)}
+.dg-gal .big{grid-row:span 2;min-height:420px}
+.dg-gal .stack{display:grid;gap:14px}
+.dg-kb img{animation:dgkb 18s ease-in-out infinite alternate}
+@keyframes dgkb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.12) translate(-2%,-2%)}}
+.dg-walk{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#080B07,#0B0F08);overflow:hidden}
+.dg-walk svg{display:block;width:100%;height:auto}
+@media (max-width:640px){.dg-walk text{display:none}}
+.dg-built{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+@media (max-width:900px){.dg-built{grid-template-columns:1fr}}
+.dg-built figure{margin:0;border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column}
+.dg-built figure img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#fff}
+.dg-built figure img.contain{object-fit:contain;background:#F4F5F2}
+.dg-built figcaption{padding:12px 14px 14px;font-size:14px;color:#C9D0DD}
+.dg-built figcaption b{display:block;color:var(--text);font-size:15px;margin-bottom:2px}
+.dg-armdemo{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--panel)}
+@media (max-width:860px){.dg-armdemo{grid-template-columns:1fr}}
+.dg-armdemo svg{width:100%;height:auto;display:block}
+.dg-diag .pw{stroke-dasharray:10 8;animation:dgflow 1.1s linear infinite}
+@keyframes dgflow{to{stroke-dashoffset:-18}}
+.dg-sweep{transform-box:view-box;transform-origin:635px 130px;animation:dgspin 3.2s linear infinite;pointer-events:none}
+@keyframes dgspin{to{transform:rotate(360deg)}}
+.dg-ping{transform-box:view-box;transform-origin:635px 130px;animation:dgping 2.4s ease-out infinite;pointer-events:none}
+.dg-ping.b{animation-delay:1.2s}
+@keyframes dgping{from{transform:scale(.15);opacity:.7}to{transform:scale(1.6);opacity:0}}
+.dg-paused .dg-sweep,.dg-paused .dg-ping,.dg-paused .pw,.dg-paused.dg-kb img{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.dg-rv{opacity:1;transform:none;transition:none}.dg-sweep,.dg-ping,.dg-diag .pw,.dg-kb img{animation:none}.dg-ping{display:none}}
 </style>
 
 <nav class="top" aria-label="Sections">
@@ -572,6 +610,36 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </header>
 
+<section class="band dg-photo-band" id="field">
+  <div class="wrap">
+    <div class="kicker">Meet the dog</div>
+    <h2>Real robot. <span class="film">Real ground.</span></h2>
+    <p class="lead">The <b>Unitree Go2</b> is a 15 kg, 12-motor robot dog that trots, climbs stairs and gets back up after a fall. Ours is the <b>X</b> model; everything we add rides on its back.</p>
+    <div class="dg-gal">
+      <figure class="big dg-kb dg-rv"><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog standing on a rock against a dark background" loading="lazy"><figcaption><b>Unitree Go2.</b> Same body as our X: 12 joint motors, about 45 N·m each.</figcaption></figure>
+      <figure class="dg-rv"><img src="img/dog-run.jpg" alt="Go2 robot dog running on a sports track" loading="lazy"><figcaption><b>Up to 3.7 m/s</b> on the X, about a jog.</figcaption></figure>
+      <figure class="dg-rv"><img src="img/dog-pair.jpg" alt="Two Go2 robot dogs walking on grass" loading="lazy"><figcaption><b>Outdoors on grass</b>, dry ground only (no rain rating).</figcaption></figure>
+    </div>
+    <div class="dg-walk dg-rv" aria-hidden="true"><svg id="walksvg" viewBox="0 0 1200 170">
+  <line x1="0" y1="150" x2="1200" y2="150" stroke="#2A3448" stroke-width="2" stroke-dasharray="14 10"><animate attributeName="stroke-dashoffset" from="0" to="-24" dur=".7s" repeatCount="indefinite"/></line>
+  <g><animateTransform attributeName="transform" type="translate" from="-260 0" to="1260 0" dur="16s" begin="-5s" repeatCount="indefinite"/>
+    <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur=".35s" repeatCount="indefinite"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="24 42 70;-22 42 70;24 42 70" dur=".7s" begin="-0.35s" repeatCount="indefinite"/><line x1="42" y1="70" x2="42" y2="104" stroke="#56627A" stroke-width="9" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="rotate" values="-6 42 104;-38 42 104;-6 42 104" keyTimes="0;.5;1" dur=".7s" begin="-0.35s" repeatCount="indefinite"/><line x1="42" y1="104" x2="42" y2="136" stroke="#56627A" stroke-width="7" stroke-linecap="round"/><circle cx="42" cy="137" r="5" fill="#11151F"/></g><circle cx="42" cy="70" r="8" fill="#56627A"/></g><g><animateTransform attributeName="transform" type="rotate" values="24 142 70;-22 142 70;24 142 70" dur=".7s" begin="-0s" repeatCount="indefinite"/><line x1="142" y1="70" x2="142" y2="104" stroke="#56627A" stroke-width="9" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="rotate" values="-6 142 104;-38 142 104;-6 142 104" keyTimes="0;.5;1" dur=".7s" begin="-0s" repeatCount="indefinite"/><line x1="142" y1="104" x2="142" y2="136" stroke="#56627A" stroke-width="7" stroke-linecap="round"/><circle cx="142" cy="137" r="5" fill="#11151F"/></g><circle cx="142" cy="70" r="8" fill="#56627A"/></g>
+    <rect x="20" y="48" width="150" height="34" rx="16" fill="#8E98AC"/>
+    <rect x="44" y="38" width="98" height="12" rx="3" fill="#3A465C"/>
+    <rect x="58" y="22" width="34" height="16" rx="3" fill="#76B900"/>
+    <rect x="110" y="16" width="20" height="22" rx="6" fill="#1A2233" stroke="#A3E635" stroke-width="2"/>
+    <path d="M170 50 Q196 50 198 66 L196 80 Q186 88 170 84 Z" fill="#A5AEC2"/>
+    <circle cx="188" cy="62" r="3.5" fill="#A3E635"/>
+    <g><animateTransform attributeName="transform" type="rotate" values="24 48 70;-22 48 70;24 48 70" dur=".7s" begin="-0s" repeatCount="indefinite"/><line x1="48" y1="70" x2="48" y2="104" stroke="#A5AEC2" stroke-width="9" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="rotate" values="-6 48 104;-38 48 104;-6 48 104" keyTimes="0;.5;1" dur=".7s" begin="-0s" repeatCount="indefinite"/><line x1="48" y1="104" x2="48" y2="136" stroke="#A5AEC2" stroke-width="7" stroke-linecap="round"/><circle cx="48" cy="137" r="5" fill="#11151F"/></g><circle cx="48" cy="70" r="8" fill="#A5AEC2"/></g><g><animateTransform attributeName="transform" type="rotate" values="24 148 70;-22 148 70;24 148 70" dur=".7s" begin="-0.35s" repeatCount="indefinite"/><line x1="148" y1="70" x2="148" y2="104" stroke="#A5AEC2" stroke-width="9" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="rotate" values="-6 148 104;-38 148 104;-6 148 104" keyTimes="0;.5;1" dur=".7s" begin="-0.35s" repeatCount="indefinite"/><line x1="148" y1="104" x2="148" y2="136" stroke="#A5AEC2" stroke-width="7" stroke-linecap="round"/><circle cx="148" cy="137" r="5" fill="#11151F"/></g><circle cx="148" cy="70" r="8" fill="#A5AEC2"/></g>
+    </g>
+  </g>
+  <text x="16" y="24" fill="#586178" font-family="JetBrains Mono,monospace" font-size="12" letter-spacing="2">TROT GAIT · DIAGONAL LEGS MOVE TOGETHER</text>
+</svg></div>
+    <p class="src" style="margin-top:10px">Photos: Unitree Robotics (unitree.com/go2), shown for identification.</p>
+  </div>
+</section>
+
 <section class="band" id="tour">
   <div class="wrap">
     <div class="kicker">Start here</div>
@@ -584,6 +652,13 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
             <linearGradient id="dgf" x1="0" x2="1"><stop offset="0" stop-color="#A3E635"/><stop offset=".4" stop-color="#FACC15"/><stop offset=".7" stop-color="#FB923C"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
           </defs>
           <line x1="40" y1="520" x2="860" y2="520" stroke="#1C2433" stroke-width="2"/>
+          <defs><radialGradient id="dgsw" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(635 130) scale(330)"><stop offset="0" stop-color="#A3E635" stop-opacity=".45"/><stop offset="1" stop-color="#A3E635" stop-opacity="0"/></radialGradient></defs>
+          <g aria-hidden="true">
+            <circle class="dg-ping" cx="635" cy="130" r="120" fill="none" stroke="#A3E635" stroke-width="2"/>
+            <circle class="dg-ping b" cx="635" cy="130" r="120" fill="none" stroke="#A3E635" stroke-width="2"/>
+            <path class="dg-sweep" d="M635 130 L965 130 A330 330 0 0 0 921 -35 Z" fill="url(#dgsw)"/>
+          </g>
+          
           <!-- legs (behind) -->
           <g class="dg-part" data-part="legs">
             <path d="M265 330 L235 420 L270 515" fill="none" stroke="#2A3448" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
@@ -718,6 +793,51 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
+
+<section class="band" id="built">
+  <div class="wrap">
+    <div class="kicker">Proof it can be done</div>
+    <h2>Dogs with <span class="film">hands.</span></h2>
+    <p class="lead">Nobody has published a Go2 <b>X</b> build like ours yet, but research labs and AgileX have put arms on the Go2. These are the setups our plan copies from.</p>
+    <div class="dg-built">
+      <figure class="dg-rv"><img src="img/dog-go2-piper.jpg" alt="Go2 robot dog with an AgileX PiPER arm on its back handing over a bottle" loading="lazy"><figcaption><b>Go2 + AgileX PiPER</b>AgileX's mobile-manipulation demo: the arm we plan to move up to later (4.2 kg, lifts 1.5 kg).</figcaption></figure>
+      <figure class="dg-rv"><img src="img/dog-umi.jpg" alt="UMI on Legs: Go2 robot dog with an arm doing manipulation tasks" loading="lazy" style="object-position:30% 50%"><figcaption><b>UMI on Legs (Stanford / Columbia)</b>A Go2 with a 3.4 kg arm doing real tasks. Its leg motors overheated in 5–10 minutes, which is why we start light.</figcaption></figure>
+      <figure class="dg-rv"><img class="contain" src="img/dog-so101.jpg" alt="SO-101 open-source robot arm" loading="lazy"><figcaption><b>SO-101 (our first arm)</b>Open-source, under 1 kg, $440–530, plugs into the Jetson over USB and works with LeRobot.</figcaption></figure>
+    </div>
+    <div class="dg-armdemo dg-rv">
+      <svg id="armsvg" viewBox="0 0 360 230" role="img" aria-label="Animated robot arm picking up a block and dropping it in a bin">
+  <rect x="20" y="192" width="330" height="10" rx="3" fill="#1C2433"/>
+  <path d="M285 160 V192 H335 V160" fill="none" stroke="#FB923C" stroke-width="4"/>
+  <text x="310" y="218" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono,monospace" font-size="11">BIN</text>
+  <rect x="80" y="178" width="40" height="16" rx="3" fill="#3A465C"/>
+  <rect x="205" y="172" width="20" height="20" rx="3" fill="#FACC15"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.35;.351;1" dur="5s" repeatCount="indefinite"/></rect>
+  <rect x="298" y="172" width="20" height="20" rx="3" fill="#FACC15" opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;.85;.851;1" dur="5s" repeatCount="indefinite"/></rect>
+  <g transform="translate(100 190)">
+    <g><animateTransform attributeName="transform" type="rotate" values="-112.3;-51.3;-51.3;-97.4;-17.5;-17.5;-112.3" keyTimes="0;.25;.35;.55;.75;.85;1" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;0 0 1 1;.4 0 .2 1;.4 0 .2 1;0 0 1 1;.4 0 .2 1"/>
+      <line x1="0" y1="0" x2="85" y2="0" stroke="#A5AEC2" stroke-width="14" stroke-linecap="round"/>
+      <g transform="translate(85 0)">
+        <g><animateTransform attributeName="transform" type="rotate" values="97.8;94.6;94.6;79.8;12.4;12.4;97.8" keyTimes="0;.25;.35;.55;.75;.85;1" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;0 0 1 1;.4 0 .2 1;.4 0 .2 1;0 0 1 1;.4 0 .2 1"/>
+          <line x1="0" y1="0" x2="85" y2="0" stroke="#8E98AC" stroke-width="11" stroke-linecap="round"/>
+          <rect x="82" y="-10" width="20" height="20" rx="3" fill="#FACC15" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.35;.351;.85;.851;1" dur="5s" repeatCount="indefinite"/></rect>
+          <g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 2;0 2;0 0;0 0" keyTimes="0;.28;.35;.8;.85;1" dur="5s" repeatCount="indefinite"/><path d="M85 -16 H104" stroke="#A3E635" stroke-width="5" stroke-linecap="round"/></g>
+          <g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -2;0 -2;0 0;0 0" keyTimes="0;.28;.35;.8;.85;1" dur="5s" repeatCount="indefinite"/><path d="M85 16 H104" stroke="#A3E635" stroke-width="5" stroke-linecap="round"/></g>
+          <circle cx="0" cy="0" r="9" fill="#FACC15"/>
+        </g>
+      </g>
+      <circle cx="0" cy="0" r="11" fill="#FACC15"/>
+    </g>
+  </g>
+</svg>
+      <div>
+        <h3>Pick, lift, <span class="film">drop.</span></h3>
+        <p style="color:#C9D0DD;margin:10px 0 0">The first job we'll teach it. We drive the arm by hand with the matching <b>leader arm</b> to record about 50 examples, train a small model on the workstation's GPU, then let the Jetson run it on the dog.</p>
+        <p class="src" style="margin-top:10px">Animation is illustrative. Expected success on narrow tasks: about 40–70% after 1–3 months (research report).</p>
+      </div>
+    </div>
+    <p class="src" style="margin-top:12px">Photos: AgileX Robotics; UMI on Legs project (umi-on-legs.github.io); TheRobotStudio SO-ARM100 (open source). Shown for identification.</p>
+  </div>
+</section>
+
 <section class="band" id="fit">
   <div class="wrap">
     <div class="kicker">Interactive</div>
@@ -818,9 +938,16 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
         <rect class="bx" x="700" y="300" width="200" height="70" rx="10"/><text class="t1" x="714" y="330">Jetson</text><text class="t2" x="714" y="352">static .99 (avoid .161 .18 .100)</text>
         <rect class="bx" x="700" y="400" width="200" height="70" rx="10"/><text class="t1" x="714" y="430">Spare port</text><text class="t2" x="714" y="452">laptop / later arm</text>
         <path class="nt" d="M250 335 H380 M250 435 H320 V375 H380 M600 335 H700 M600 375 H650 V435 H700"/>
-        <rect class="bx" x="380" y="440" width="220" height="64" rx="10" stroke="#FACC15"/><text class="t1" x="394" y="468">Conductor · RTX 5070 Ti</text><text class="t2" x="394" y="490">separate Wi-Fi subnet, Zenoh</text>
+        <rect class="bx" x="380" y="440" width="220" height="64" rx="10" stroke="#FACC15"/><text class="t1" x="394" y="468">Team workstation (Phase 3)</text><text class="t2" x="394" y="490">separate Wi-Fi subnet, Zenoh</text>
         <path class="wf" d="M900 335 H950 V490 H600"/>
         <text x="890" y="482" fill="#FACC15" font-size="12">Wi-Fi</text>
+        <g aria-hidden="true">
+          <circle r="6" fill="#A3E635"><animateMotion dur="2.4s" repeatCount="indefinite" path="M250 335 H380 H600 H700"/></circle>
+          <circle r="6" fill="#FACC15"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite" path="M700 335 H600 H380 H250"/></circle>
+          <circle r="5" fill="#A3E635"><animateMotion dur="2.8s" begin="-.6s" repeatCount="indefinite" path="M250 435 H320 V375 H380 H600 V335 H700"/></circle>
+          <circle r="5" fill="#FB923C"><animateMotion dur="3.2s" repeatCount="indefinite" path="M900 335 H950 V490 H600"/></circle>
+          <circle r="5" fill="#FB923C"><animateMotion dur="3.2s" begin="-1.6s" repeatCount="indefinite" path="M600 490 H950 V335 H900"/></circle>
+        </g>
       </svg>
     </div>
     <p class="src" style="margin-top:12px">Never bridge 192.168.123.x onto the home or office network: the robot's DDS bus has no authentication (CVE-2026-27509).</p>
@@ -919,11 +1046,11 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
-<footer class="dg-foot"><div class="wrap">Field Unit · Project 02 · <a href="./">All projects</a> · Figures marked est. are calculations, not measurements. Product photos: NVIDIA; Unitree Robotics, shown for identification.</div></footer>
+<footer class="dg-foot"><div class="wrap">Field Unit · Project 02 · <a href="./">All projects</a> · Figures marked est. are calculations, not measurements. Product photos: AgileX Robotics; NVIDIA; TheRobotStudio (SO-ARM100, open source); UMI on Legs project (Stanford / Columbia); Unitree Robotics, shown for identification.</div></footer>
 
 <script>
 (function(){
-const IMG = {"dog-go2": "img/dog-go2.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2": "img/dog-l2.jpg"};
+const IMG = {"dog-go2-piper": "img/dog-go2-piper.jpg", "dog-go2": "img/dog-go2.jpg", "dog-hero": "img/dog-hero.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2": "img/dog-l2.jpg", "dog-pair": "img/dog-pair.jpg", "dog-piper": "img/dog-piper.jpg", "dog-run": "img/dog-run.jpg", "dog-so101": "img/dog-so101.jpg", "dog-umi": "img/dog-umi.jpg"};
 /* ---------- hero LiDAR sweep ---------- */
 (function(){
   const c=document.getElementById('scan'); if(!c) return; const x=c.getContext('2d'); const W=800,C=400;
@@ -1044,11 +1171,11 @@ const ICON={
  net:'<svg viewBox="0 0 100 100"><rect x="16" y="38" width="68" height="26" rx="5" fill="#FACC15"/><rect x="24" y="46" width="9" height="9" fill="#0A0D14"/><rect x="38" y="46" width="9" height="9" fill="#0A0D14"/><rect x="52" y="46" width="9" height="9" fill="#0A0D14"/><rect x="66" y="46" width="9" height="9" fill="#0A0D14"/></svg>'
 };
 const CH=[
- {i:'dog',img:'dog-go2',s:'own',n:'Unitree Go2 X',f:['~15 kg','12 motors','3.7 m/s','8 kg payload','Wi-Fi 6 · 4G'],p:'The robot itself. The X shares the EDU\'s body, motors and payload, but has no compute dock, no foot sensors, the smaller 8 Ah battery and only "partial" developer access. Both teardowns (Simplexity, iFixit) found a modular, fairly repairable design: hand-removable battery, separately connected motors, a hip collar built to break first. Weak spots: a neck crack after stair tests, and no direct spare-parts supply from Unitree.'},
+ {i:'dog',img:'dog-hero',s:'own',n:'Unitree Go2 X',f:['~15 kg','12 motors','3.7 m/s','8 kg payload','Wi-Fi 6 · 4G'],p:'The robot itself. The X shares the EDU\'s body, motors and payload, but has no compute dock, no foot sensors, the smaller 8 Ah battery and only "partial" developer access. Both teardowns (Simplexity, iFixit) found a modular, fairly repairable design: hand-removable battery, separately connected motors, a hip collar built to break first. Weak spots: a neck crack after stair tests, and no direct spare-parts supply from Unitree.'},
  {i:'chip',img:'dog-jetson',s:'own',n:'NVIDIA Jetson Orin Nano Super Developer Kit',f:['67 TOPS','8 GB shared','7–25 W','19 V input','$399 list'],p:'Our onboard brain (B&H 1994308, NVIDIA 945-13766-0000-000). Enough for LiDAR mapping, navigation, the arm driver and one fast detector. Not enough for arm AI models or anything above a ~3B language model, so those run on the Conductor. It has one network port, four USB 3 ports, two M.2 slots for an SSD and built-in Wi-Fi.'},
  {i:'lidar',img:'dog-l2',s:'buy',n:'Unitree L2 4D LiDAR',f:['$419','230 g','360° × 96°','0.05–30 m','IMU built in'],p:'The best-value add-on LiDAR for a Go2: light, sees almost touching distance, and its built-in motion sensor suits mapping on a shaking, walking robot. Unitree ships an open-source Point-LIO mapping package for it. Mount it high at the rear.'},
  {i:'arm',img:'dog-so101',s:'buy',n:'SO-101 robot arm',f:['$440–530','<1 kg','USB','LeRobot'],p:'A low-cost open-source arm for proving the whole pipeline: record demonstrations with a leader arm or a Quest 3 headset, train SmolVLA or ACT on the 5070 Ti, run it from the Jetson. Not tough enough for field work, which is why the PiPER is the planned upgrade.'},
- {i:'arm',s:'later',n:'AgileX PiPER (later)',f:['~$2k–3.5k arm-only','4.2 kg','1.5 kg payload','24 V · CAN'],p:'The step up: lifts three times what the D1 does, takes fast commands over CAN through a USB adapter, and a 2026 paper already ran an AI arm model on a Go2 with a PiPER. Its weight is the risk: with everything else it pushes the dog toward the 8 kg rating.'},
+ {i:'arm',img:'dog-piper',s:'later',n:'AgileX PiPER (later)',f:['~$2k–3.5k arm-only','4.2 kg','1.5 kg payload','24 V · CAN'],p:'The step up: lifts three times what the D1 does, takes fast commands over CAN through a USB adapter, and a 2026 paper already ran an AI arm model on a Go2 with a PiPER. Its weight is the risk: with everything else it pushes the dog toward the 8 kg rating.'},
  {i:'bat',s:'buy',n:'Power: accessory pack + 15 Ah upgrade',f:['24 V · ~200 Wh','fuse + e-stop','19 V + 12 V bucks','15 Ah: ~$1,200'],p:'Add-ons run from their own 24 V pack, so the robot\'s battery only moves the legs. The 15 Ah long-range main battery nearly doubles stored energy at the same size and weight; add the 9 A fast charger, since the stock 3.5 A charger takes about 4.5 h to fill it (est.).'},
  {i:'net',s:'buy',n:'Network switch, deck plate, SSD',f:['5-port gigabit','M4 deck','1 TB NVMe'],p:'The glue: a small 12 V switch joins robot, Jetson and LiDAR; a deck plate from open CAD bolts to the back; an NVMe SSD makes the Jetson fast and reliable.'}
 ];
@@ -1106,6 +1233,30 @@ const SRC=[
  ['Unitree service terms (warranty)','https://dev-z1.unitree.com/appendix/service.html']
 ];
 document.getElementById('srcs').innerHTML=SRC.map(s=>'<li><a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a></li>').join('');
+})();
+</script>
+
+<script>
+(()=>{
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // reveal: cards, tiles and figures fade up as they scroll in
+  document.querySelectorAll('.num,.dg-card,.dg-chap,#day .dg-day,.dg-diag,#proof .dg-card').forEach(el=>el.classList.add('dg-rv'));
+  const cu = el => {
+    const b = el.querySelector && el.querySelector(':scope > b'); if(!b) return;
+    const t = b.firstChild; if(!t || t.nodeType!==3 || !/^\d+$/.test(t.textContent.trim()) || RM) return;
+    const end = +t.textContent.trim(), t0 = performance.now();
+    const f = now => { const k=Math.min(1,(now-t0)/1100); t.textContent = Math.round(end*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(f); };
+    t.textContent='0'; requestAnimationFrame(f);
+  };
+  const rv = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); if(e.target.classList.contains('num')) cu(e.target); rv.unobserve(e.target);} }),{threshold:.12}) : null;
+  document.querySelectorAll('.dg-rv').forEach((el,i)=>{ if(rv){ el.style.transitionDelay = (el.classList.contains('num')? (i%4)*80 : 0)+'ms'; rv.observe(el);} else el.classList.add('in'); });
+  // pause SVG (SMIL) and CSS animations when off screen or when reduced motion is on
+  const anim = [document.getElementById('walksvg'), document.getElementById('armsvg'), document.querySelector('.dg-diag svg'), document.getElementById('dogsvg')].filter(Boolean);
+  if(RM){ anim.forEach(sv=>{ if(sv.pauseAnimations){ sv.setCurrentTime && sv.setCurrentTime(1.2); sv.pauseAnimations(); } sv.classList.add('dg-paused'); }); document.querySelectorAll('.dg-kb').forEach(e=>e.classList.add('dg-paused')); return; }
+  if('IntersectionObserver' in window){
+    const po = new IntersectionObserver(es=>es.forEach(e=>{ const sv=e.target; if(e.isIntersecting){ sv.unpauseAnimations&&sv.unpauseAnimations(); sv.classList.remove('dg-paused'); } else { sv.pauseAnimations&&sv.pauseAnimations(); sv.classList.add('dg-paused'); } }),{threshold:0});
+    anim.forEach(sv=>po.observe(sv));
+  }
 })();
 </script>
 
