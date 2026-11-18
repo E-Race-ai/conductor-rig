@@ -1,0 +1,168 @@
+/* Engineering documentation theme: quiet graphite, hairlines, one accent per project, Plex type. Loaded on every page; html[data-proj] beats :root. */
+html[data-proj]:not(.book){--bg:#0B0D10;--bg2:#0E1014;--panel:#111418;--line:#232830;--text:#E4E7EB;--dim:#9AA3AE;--faint:#6B7480}
+html[data-proj]{
+  --display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --acc:#4FB3E8;--acc2:#7FA7C9;
+  --cy:var(--acc);--vi:var(--acc2);--pk:#8B95A1;--au:#C9CED4;
+  --film:var(--acc);--grad:var(--acc);
+}
+html[data-proj="fu"]{--acc:#E8A33D;--acc2:#C7A46A}
+html[data-proj]:not(.book) body{background:var(--bg);color:var(--text);}
+html[data-proj] body{font-family:var(--body);font-size:15.5px;line-height:1.6;letter-spacing:0}
+html[data-proj] ::selection{background:color-mix(in srgb,var(--acc) 35%,transparent)}
+html[data-proj] a{color:var(--acc)}
+html[data-proj] :focus-visible{outline:1px solid var(--acc);outline-offset:2px}
+
+/* type: sentence case, medium weight, no display caps, no gradient text */
+html[data-proj] h1,html[data-proj] h2,html[data-proj] h3{font-family:var(--body)!important;text-transform:none!important;letter-spacing:-.012em!important;font-weight:600!important;line-height:1.18!important}
+html[data-proj] h1{font-size:clamp(30px,3.6vw,44px)!important}
+html[data-proj] h2{font-size:clamp(24px,2.6vw,32px)!important}
+html[data-proj] h3{font-size:18px!important}
+html[data-proj] h2 br,html[data-proj] h1 br{display:none}
+html[data-proj] .film,html[data-proj] h1 .film,html[data-proj] h2 .film{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}
+html[data-proj] h2 .film::before{content:" "}
+html[data-proj] .kicker{font:500 11.5px/1.4 var(--mono)!important;letter-spacing:.08em!important;color:var(--faint)!important}
+html[data-proj] .kicker::before{width:14px!important;height:2px!important;background:var(--acc)!important}
+html[data-proj] .lead{font-size:16px!important;color:var(--dim)!important;max-width:72ch}
+html[data-proj] .src,html[data-proj] small{font-family:var(--mono)}
+html[data-proj] .band{padding-block:clamp(48px,6vw,80px)!important}
+html[data-proj] .band + .band{border-top:1px solid var(--line)}
+
+/* hero: factual header, not a poster */
+html[data-proj] header.hero{padding-block:36px 32px!important;border-bottom:1px solid var(--line)}
+html[data-proj] header.hero h1{font-size:clamp(32px,4vw,46px)!important}
+html[data-proj] header.hero .sub{font:500 15px/1.5 var(--mono)!important;text-transform:none!important;color:var(--dim)!important;margin-top:10px!important}
+html[data-proj] .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;align-items:start!important}
+@media (max-width:860px){html[data-proj] .hero-grid{grid-template-columns:1fr!important}}
+html[data-proj] .boot{min-height:0!important;margin-top:18px!important;border:1px solid var(--line);font:12.5px/1.5 var(--mono)!important;gap:0!important;max-width:560px}
+html[data-proj] .boot div{padding:6px 10px;border-top:1px solid var(--line);opacity:1!important;transform:none!important;animation:none!important}
+html[data-proj] .boot div:first-child{border-top:0}
+html[data-proj] .boot div::before{content:""!important}
+html[data-proj] .boot b{color:var(--text);font-weight:500}
+html[data-proj] .wafer-box{display:none!important}
+html[data-proj] .dg-holo canvas,html[data-proj] .dg-holo .grid,html[data-proj] .dg-holo .dg-rec,html[data-proj] .dg-holo .dg-hud{display:none!important}
+html[data-proj] .dg-holo{border:1px solid var(--line)!important;border-radius:0!important;box-shadow:none!important;background:#0B0D10!important}
+html[data-proj] .dg-holo img{filter:none!important;animation:none!important;transform:none!important;opacity:1!important}
+html[data-proj] .dg-holo::after{content:"Unitree Go2, base platform. Source: Unitree Robotics.";display:block;font:11.5px/1.45 var(--mono);color:var(--faint);padding:7px 10px;border-top:1px solid var(--line)}
+html[data-proj] .dg-walk,html[data-proj] .eng-hide{display:none!important}
+
+/* buttons, panels, radii */
+html[data-proj] .btn{border-radius:2px!important;padding:9px 13px!important;font:500 13px/1 var(--body)!important;background:transparent!important;border:1px solid var(--line)!important;color:var(--text)!important;box-shadow:none!important;transform:none!important}
+html[data-proj] .btn.prime{background:var(--acc)!important;border-color:var(--acc)!important;color:#0B0D10!important;font-weight:600!important}
+html[data-proj] .btn:hover{border-color:var(--acc)!important}
+html[data-proj] [class*="card"],html[data-proj] .panel,html[data-proj] .num,html[data-proj] figure,html[data-proj] .chip,html[data-proj] .tour,html[data-proj] .rig,html[data-proj] .pcard,html[data-proj] table,html[data-proj] .tw,html[data-proj] .verdict,html[data-proj] .opt,html[data-proj] .line{border-radius:2px!important;box-shadow:none!important}
+html[data-proj] [class*="card"]:hover{transform:none!important}
+html[data-proj] img{border-radius:0!important}
+
+/* numbers band → spec readout */
+html[data-proj] .nums{margin-top:28px!important;background:var(--line)!important}
+html[data-proj] .num{padding:16px 16px 14px!important;background:var(--bg)!important}
+html[data-proj] .num b{font:600 clamp(28px,3vw,38px)/1 var(--mono)!important;letter-spacing:-.02em!important;color:var(--text)!important}
+html[data-proj] .num b small{font-size:.42em!important;color:var(--dim)!important}
+html[data-proj] .num span{font-size:13px!important;font-weight:600!important}
+html[data-proj] .num::after,html[data-proj] .num::before{display:none!important}
+
+/* no decorative motion / reveals */
+html[data-proj] .reveal,html[data-proj] .rv,html[data-proj] .dg-rv,html[data-proj] .sp-rv,html[data-proj] [data-rv] > *{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;filter:none!important}
+html[data-proj] .ab-toggle button{border-radius:2px!important}
+@media (prefers-reduced-motion:reduce){html[data-proj] *{animation:none!important;transition:none!important}}
+
+/* tables & figures */
+html[data-proj] table{font-variant-numeric:tabular-nums}
+html[data-proj] th{font-family:var(--mono);font-weight:500}
+html[data-proj] td{font-variant-numeric:tabular-nums}
+html[data-proj] figure{border:1px solid var(--line);background:#0B0D10}
+html[data-proj] figcaption{font:11.5px/1.45 var(--mono)!important;color:var(--faint)!important;text-transform:none!important;letter-spacing:0!important}
+html[data-proj] figcaption .fno{color:var(--dim)}
+
+/* nav: thin top bar; desktop gets a left section index */
+html[data-proj] nav.top{background:rgba(11,13,16,.94)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-proj] nav.top .wrap{height:46px!important}
+html[data-proj] .mark{font:600 14px/1 var(--mono)!important;letter-spacing:.06em!important}
+html[data-proj] .mark span{background:var(--acc)!important;border-radius:0!important;width:7px!important;height:7px!important}
+html[data-proj] .navlinks a{font:500 12.5px/1 var(--body)!important}
+.eng-sec{font:500 .62em/1 var(--mono);color:var(--acc);margin-right:.55em;vertical-align:.12em;letter-spacing:0}
+.eng-toc{display:none}
+@media (min-width:1360px){
+  html[data-proj].has-toc body{padding-left:216px}
+  html[data-proj].has-toc nav.top .navlinks{display:none}
+  .eng-toc{display:block;position:fixed;left:0;top:0;bottom:0;width:216px;z-index:12;border-right:1px solid var(--line);background:var(--bg);padding:18px 14px 64px 18px;overflow-y:auto;font:12.5px/1.35 var(--body)}
+  .eng-toc .h{font:600 11px/1.3 var(--mono);letter-spacing:.08em;color:var(--acc);text-transform:uppercase;margin-bottom:4px}
+  .eng-toc .r{font:11px/1.4 var(--mono);color:var(--faint);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  html[data-proj] .eng-toc a{display:flex;gap:8px;padding:5px 6px;margin:0 -6px;color:var(--dim);text-decoration:none;border-left:2px solid transparent}
+  .eng-toc a i{font:normal 11px/1.6 var(--mono);color:var(--faint);min-width:26px}
+  html[data-proj] .eng-toc a:hover{color:var(--text)}
+  html[data-proj] .eng-toc a.on{color:var(--text);border-left-color:var(--acc);background:#13171C}
+  .eng-toc a.on i{color:var(--acc)}
+}
+
+/* motion control for explanatory diagrams */
+.eng-motion{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:12px;z-index:40;font:500 11.5px/1 var(--mono);color:var(--dim);background:var(--panel);border:1px solid var(--line);padding:8px 10px;cursor:pointer;border-radius:2px}
+.eng-motion:hover{color:var(--text);border-color:var(--acc)}
+html.eng-paused *{animation-play-state:paused!important}
+
+/* progress bar: thin, neutral */
+#eng-bar{position:fixed;left:0;right:0;top:0;height:2px;background:var(--acc);transform-origin:0 50%;transform:scaleX(0);z-index:60;opacity:.85}
+
+/* lightbox: plain */
+#eng-lb{position:fixed;inset:0;z-index:80;background:rgba(8,9,11,.96);display:none;align-items:center;justify-content:center;flex-direction:column;padding:48px 16px 16px}
+#eng-lb.open{display:flex}
+#eng-lb img{max-width:min(1400px,100%);max-height:calc(100vh - 120px);object-fit:contain;border:1px solid var(--line)}
+#eng-lb .cap{font:12px/1.5 var(--mono);color:var(--dim);margin-top:10px;max-width:900px;text-align:center}
+#eng-lb button{position:absolute;background:var(--panel);border:1px solid var(--line);color:var(--text);font:500 14px/1 var(--mono);padding:9px 12px;cursor:pointer;border-radius:2px}
+#eng-lb .x{top:12px;right:12px}#eng-lb .pv{left:12px;top:50%}#eng-lb .nx{right:12px;top:50%}
+#eng-lb .cnt{position:absolute;top:18px;left:16px;font:12px/1 var(--mono);color:var(--faint)}
+html[data-proj] img.eng-zoom{cursor:zoom-in}
+
+/* callouts on photos: thin leaders */
+html[data-proj] .sp-co,html[data-proj] .co{box-shadow:none!important;animation:none!important}
+
+/* doc / research pages */
+html.doc[data-proj] h1{background:none!important;color:var(--text)!important;-webkit-text-fill-color:currentColor!important}
+html.doc[data-proj] .wrap{max-width:860px}
+html.doc[data-proj] h2{border-top:1px solid var(--line);padding-top:.9em;margin-top:2.2em}
+html.doc[data-proj] p,html.doc[data-proj] li{color:#C3C9D1}
+html.doc[data-proj] .card{background:var(--panel);border:1px solid var(--line);border-radius:2px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:start;padding:12px}
+html.doc[data-proj] .card .th{display:block;width:96px;height:64px;background-size:cover;background-position:center;border:1px solid var(--line)}
+html.doc[data-proj] .card:hover{border-color:var(--acc)}
+html.doc[data-proj] .card i{color:var(--acc);font-family:var(--mono)}
+html.doc[data-proj] .card b{font-size:16px;font-weight:600}
+html.doc[data-proj] .proj{color:var(--acc)}
+html.doc[data-proj] blockquote{border-left:2px solid var(--acc)}
+html.doc[data-proj] code,html.doc[data-proj] pre{border-radius:2px}
+html.doc[data-proj] tr:hover td{background:#13171C}
+
+/* build book: keep its PCB layout, align type + accent */
+html.book[data-proj]{--accent:#4FB3E8}
+html.book[data-proj] body{font-family:var(--body)}
+
+/* lettered photo callouts (ported from the old layer, quiet) */
+.sp-co-wrap{position:relative}
+.sp-co{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:0;border:1px solid var(--acc);background:#0B0D10;color:var(--acc);font:600 11px/18px var(--mono);text-align:center;cursor:pointer;z-index:4;padding:0}
+.sp-co span{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);white-space:nowrap;background:#0B0D10;color:var(--text);border:1px solid var(--line);padding:5px 8px;border-radius:2px;font:500 11.5px/1.3 var(--mono);opacity:0;pointer-events:none;text-align:left}
+.sp-co:hover span,.sp-co:focus span,.sp-co.on span{opacity:1}
+.sp-co.l span{left:auto;right:-4px;transform:none}.sp-co.r span{left:-4px;transform:none}
+html[data-proj] .dg-armdemo{display:none!important}
+html[data-proj] .navlinks a{color:var(--dim)!important}
+html[data-proj] .navlinks a:hover{color:var(--text)!important}
+html[data-proj] .bar i.ok{background:#3E9E74!important}
+html[data-proj] .bar i.no{background:#9E4A42!important}
+html[data-proj] .meter .vd.ok{color:#5FBF93!important}
+html[data-proj] .b,html[data-proj] .pick{background:var(--panel)!important}
+html[data-proj] #asmname{font:600 20px/1.25 var(--body)!important;text-transform:none!important;letter-spacing:0!important}
+html[data-proj] #asmglow{display:none!important}
+html[data-proj] #asm{background:#0B0D10!important}
+html.doc[data-proj] h1{font-size:clamp(28px,3vw,36px)!important}
+html.doc[data-proj] h2{font-size:clamp(21px,2vw,25px)!important}
+html.doc[data-proj] h3{font-size:17px!important}
+html[data-proj] .num b span{font:inherit!important;color:inherit!important}
+html[data-proj] .dg-ping{display:none!important}
+html[data-proj] .dg-tty{box-shadow:none!important;border-color:var(--line)!important}
+html[data-proj] .dg-tty .ttybar i{background:#2A3036!important}
+html[data-proj] .big{font:600 clamp(44px,5vw,64px)/1 var(--mono)!important;letter-spacing:-.03em!important}
+html[data-proj] canvas#orch{filter:saturate(.6)}
+html[data-proj] .dg-sum{font:600 40px/1.1 var(--mono)!important;letter-spacing:-.02em!important}
+html[data-proj] .grand{font:600 40px/1.1 var(--mono)!important;letter-spacing:-.02em!important}
+html[data-proj] .dg-pcard .big,html[data-proj] .pcard .big{font:600 44px/1 var(--mono)!important}

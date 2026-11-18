@@ -1,0 +1,88 @@
+/* Engineering doc layer: motion pause (CSS + rAF), section numbers + index, figure numbers, thin progress bar, plain lightbox. Loaded in <head>, not deferred. */
+(function(){
+  var D = document, root = D.documentElement, W = window;
+  var RM = W.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KEY = 'eng.motion';
+  var paused = RM; try { var v = localStorage.getItem(KEY); if (v === 'off') paused = true; if (v === 'on' && !RM) paused = false; } catch (e) {}
+  if (paused) root.classList.add('eng-paused');
+
+  /* rAF gate: while paused, animation callbacks wait; resumes cleanly */
+  var raf = W.requestAnimationFrame.bind(W), held = [];
+  W.requestAnimationFrame = function(cb){ if (!paused) return raf(cb); held.push(cb); return -held.length; };
+  function setPaused(p){
+    paused = p; root.classList.toggle('eng-paused', p);
+    try { localStorage.setItem(KEY, p ? 'off' : 'on'); } catch (e) {}
+    D.querySelectorAll('svg').forEach(function(s){ try { p ? s.pauseAnimations() : s.unpauseAnimations(); } catch (e) {} });
+    if (!p) { var q = held; held = []; q.forEach(function(cb){ raf(cb); }); }
+    var b = D.getElementById('eng-motion'); if (b) b.textContent = p ? '▶ Diagram motion: off' : '❚❚ Diagram motion: on';
+  }
+
+  function ready(){
+    var proj = root.getAttribute('data-proj') || 'hub';
+    var code = proj === 'fu' ? 'PRJ-02 · Field Unit' : proj === 'con' ? 'PRJ-01 · Conductor' : 'Build team';
+
+    /* thin progress bar */
+    var bar = D.createElement('div'); bar.id = 'eng-bar'; D.body.appendChild(bar);
+    var tk = false; function prog(){ tk = false; var h = root.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')'; }
+    addEventListener('scroll', function(){ if (!tk) { tk = true; raf(prog); } }, { passive: true }); prog();
+
+    /* section numbers + left index (showcase pages) */
+    var secs = [].slice.call(D.querySelectorAll('section.band[id]')).filter(function(s){ return s.querySelector('h2') && s.offsetParent !== null; });
+    if (secs.length >= 4) {
+      root.classList.add('has-toc');
+      var toc = D.createElement('nav'); toc.className = 'eng-toc'; toc.setAttribute('aria-label', 'Section index');
+      toc.innerHTML = '<div class="h">' + code + '</div><div class="r">Rev C · 2026-11-18 · Build team</div>';
+      secs.forEach(function(s, i){
+        var h = s.querySelector('h2'), n = (i + 1) + '.0';
+        var t = h.textContent.replace(/\s+/g, ' ').trim();
+        var sp = D.createElement('span'); sp.className = 'eng-sec'; sp.textContent = n; h.insertBefore(sp, h.firstChild);
+        var a = D.createElement('a'); a.href = '#' + s.id; a.innerHTML = '<i>' + n + '</i><span></span>'; a.lastChild.textContent = t.length > 46 ? t.slice(0, 44) + '…' : t;
+        toc.appendChild(a);
+      });
+      D.body.appendChild(toc);
+      var links = [].slice.call(toc.querySelectorAll('a'));
+      if ('IntersectionObserver' in W) {
+        var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { var id = e.target.id; links.forEach(function(l){ l.classList.toggle('on', l.getAttribute('href') === '#' + id); }); } }); }, { rootMargin: '-35% 0px -60% 0px' });
+        secs.forEach(function(s){ io.observe(s); });
+      }
+    }
+
+    /* figure numbers */
+    var fn = 0;
+    D.querySelectorAll('figure > figcaption').forEach(function(fc){
+      if (fc.closest('.pj')) return; // hub figures are pre-numbered
+      if (/^\s*Fig\./.test(fc.textContent)) return;
+      fn++; var s = D.createElement('span'); s.className = 'fno'; s.textContent = 'Fig. ' + fn + ' — '; fc.insertBefore(s, fc.firstChild);
+    });
+
+    /* motion control: only where something moves */
+    var moving = D.querySelector('canvas, svg animate, svg animateMotion, svg animateTransform, [class*="flow"], .fan, #flowsvg, #asm, #tty, #orch');
+    if (moving && proj !== 'hub') {
+      var b = D.createElement('button'); b.id = 'eng-motion'; b.className = 'eng-motion'; b.type = 'button';
+      b.onclick = function(){ setPaused(!paused); }; D.body.appendChild(b); setPaused(paused);
+    }
+
+    /* plain lightbox */
+    var ok = function(img){ return !img.closest('a,nav,button,#eng-lb,[data-nolb],.mark') && img.naturalWidth >= 300 && img.getBoundingClientRect().width >= 60; };
+    var lb = D.createElement('div'); lb.id = 'eng-lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Image viewer');
+    lb.innerHTML = '<span class="cnt"></span><button class="x" aria-label="Close">Close ✕</button><button class="pv" aria-label="Previous">‹</button><button class="nx" aria-label="Next">›</button><img alt=""><div class="cap"></div>';
+    D.body.appendChild(lb);
+    var li = lb.querySelector('img'), lc = lb.querySelector('.cap'), ln = lb.querySelector('.cnt'), list = [], cur = 0, last = null;
+    var cap = function(im){ var f = im.closest('figure'), c = f && f.querySelector('figcaption'); return (c && c.textContent.trim()) || im.alt || ''; };
+    var show = function(i){ cur = (i + list.length) % list.length; var im = list[cur]; li.src = im.currentSrc || im.src; li.alt = im.alt || ''; lc.textContent = cap(im); ln.textContent = (cur + 1) + ' / ' + list.length; };
+    var open = function(im){ list = [].slice.call(D.querySelectorAll('img')).filter(ok); cur = Math.max(0, list.indexOf(im)); last = D.activeElement; lb.classList.add('open'); show(cur); D.body.style.overflow = 'hidden'; lb.querySelector('.x').focus(); };
+    var close = function(){ lb.classList.remove('open'); D.body.style.overflow = ''; li.removeAttribute('src'); if (last) last.focus(); };
+    lb.querySelector('.x').onclick = close; lb.querySelector('.pv').onclick = function(){ show(cur - 1); }; lb.querySelector('.nx').onclick = function(){ show(cur + 1); };
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    D.addEventListener('keydown', function(e){ if (!lb.classList.contains('open')) return; if (e.key === 'Escape') close(); else if (e.key === 'ArrowRight') show(cur + 1); else if (e.key === 'ArrowLeft') show(cur - 1); });
+    var sx = null; lb.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function(e){ if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 45) show(cur + (dx < 0 ? 1 : -1)); sx = null; });
+    D.addEventListener('click', function(e){ var im = e.target.closest && e.target.closest('img'); if (im && ok(im)) { e.preventDefault(); open(im); } });
+    var deco = function(){ D.querySelectorAll('img').forEach(function(im){ if (!im.dataset.eng && ok(im)) { im.dataset.eng = 1; im.classList.add('eng-zoom'); im.tabIndex = 0; im.addEventListener('keydown', function(e){ if (e.key === 'Enter') open(im); }); } }); };
+    addEventListener('load', deco); deco();
+
+    /* photo callouts: tap toggles on touch */
+    D.addEventListener('click', function(e){ var c = e.target.closest && e.target.closest('.sp-co'); D.querySelectorAll('.sp-co.on').forEach(function(o){ if (o !== c) o.classList.remove('on'); }); if (c) c.classList.toggle('on'); });
+  }
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', ready); else ready();
+})();

@@ -5,317 +5,126 @@
 <meta name="description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
 <meta property="og:title" content="Build team · Projects"><meta property="og:description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/og-hub.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/og-hub.jpg"><meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B0D10"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="sparkle.css"><script src="sparkle.js" defer></script>
-</head><body style="margin:0">
-<div style="position:relative;z-index:30;color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#E9EDF5"><span>Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span><span style="display:flex;gap:8px;flex-wrap:wrap"><a href="conductor.html" style="background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">01 Conductor</a><a href="field-unit.html" style="background:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">02 Field Unit</a></span></div>
-<style>
-/* Hub: the team's project board. Two swim lanes, each in its own colour world; a muted "where they meet" strip below. */
-:root{--bg:#06080E;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--faint:#586178;
-  --con:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);--fu:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B);
-  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--body:"Manrope",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.92;margin:0;text-transform:uppercase;text-wrap:balance}
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
-.hb-hero{padding:clamp(48px,7vw,96px) 0 clamp(28px,4vw,48px)}
-.hb-hero h1{font-size:clamp(60px,9vw,128px);font-weight:900;line-height:.84;margin-top:16px}
-.hb-hero h1 .c{background:var(--con);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hb-hero h1 .f{background:var(--fu);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hb-hero p{color:var(--dim);font-size:clamp(17px,1.6vw,20px);max-width:62ch;margin:18px 0 0}
-.hb-hero p b{color:var(--text)}
-.lanes{margin-top:36px;border:1px solid var(--line);border-radius:18px;background:#080B12;overflow:hidden}
-.lanes svg{display:block;width:100%;height:auto}
-.lanes .tk{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-@media (max-width:640px){.lanes svg g text{font-size:24px}.lanes .tk{font-size:26px}.lanes svg>text:not(.tk){font-size:22px}}
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
-@media (max-width:860px){.projects{grid-template-columns:1fr}}
-.pj{position:relative;border-radius:20px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.pj::before{content:"";position:absolute;inset:0;border-radius:20px;padding:2px;background:var(--g);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.pj.con{--g:var(--con);--a:#6EE7F9;--a2:#A78BFA}
-.pj.fu{--g:var(--fu);--a:#A3E635;--a2:#FACC15;background:#0D120A}
-.pj .ph{aspect-ratio:16/8;background:#000 center/cover no-repeat;position:relative}
-.pj .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel))}
-.pj.fu .ph::after{background:linear-gradient(180deg,transparent 40%,#0D120A)}
-.pj .ph .no{position:absolute;left:20px;top:16px;z-index:1;font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:#0A0D14;background:var(--g);padding:2px 14px 0;border-radius:10px}
-.pj .in{padding:6px 24px 24px;display:flex;flex-direction:column;gap:14px;flex:1}
-.pj h2{font-size:clamp(44px,5vw,68px);background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pj .what{color:#C9D0DD;margin:0}
-.pj .st{display:flex;flex-wrap:wrap;gap:8px}
-.pj .chip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
-.pj .chip.on{color:#0A0D14;background:var(--a);border-color:transparent;font-weight:700}
-.pj .nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-@media (max-width:520px){.pj .nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.pj .n{background:var(--bg);padding:12px 12px 10px;min-width:0}
-.pj .n b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(28px,3vw,40px);line-height:.9;color:var(--a)}
-.pj .n span{font-size:12px;color:var(--dim);line-height:1.3;display:block;margin-top:4px}
-.pj dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
-.pj dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
-.pj dd{margin:0;color:#C9D0DD}
-.pj .go{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
-.pj .go a{text-decoration:none;font-weight:700;font-size:14px;padding:11px 16px;border-radius:999px;border:1px solid var(--line);color:var(--text);background:var(--bg)}
-.pj .go a.p{background:var(--g);color:#0A0D14;border:0}
-.pj .go a:hover{transform:translateY(-1px)}
-.meet{margin:40px 0 0;border:1px dashed #2A3448;border-radius:16px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;align-items:center;color:var(--dim)}
-@media (max-width:860px){.meet{grid-template-columns:1fr}}
-.meet h3{font-size:28px;color:#A5AEC2}
-.meet .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #2A3448;border-radius:999px;padding:3px 10px;margin-bottom:10px}
-.meet p{margin:8px 0 0;font-size:14px}
-.meet svg{width:100%;height:auto;display:block}
-footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
-.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
-.rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-/* ---- sparkle pass: cinematic hero, ticker, trailer, parallax ---- */
-.hb-hero{position:relative;overflow:hidden}
-#hbstars{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.9}
-.hb-front{position:relative;z-index:1}
-.hb-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
-.hb-title .ln>span{display:inline-block;animation:hb-up 1.1s cubic-bezier(.2,.8,.2,1) both}
-.hb-title .ln:nth-child(2)>span{animation-delay:.18s}
-@keyframes hb-up{from{transform:translateY(105%);opacity:0;filter:blur(8px)}}
-.hb-title .c,.hb-title .f{background-size:200% 100%;animation:hb-pan 6s ease-in-out infinite alternate}
-@keyframes hb-pan{to{background-position:100% 0}}
-.hb-tick{border-block:1px solid var(--line);background:#080B12;overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
- -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.hb-tick-in{display:inline-flex;gap:34px;padding:12px 0;animation:hb-tick 48s linear infinite;padding-left:100%}
-.hb-tick .t{font-weight:700}.hb-tick .t.con{color:#6EE7F9}.hb-tick .t.fu{color:#A3E635}
-@keyframes hb-tick{to{transform:translateX(-100%)}}
-.hb-tick:hover .hb-tick-in{animation-play-state:paused}
-.pj .ph{transition:transform .7s cubic-bezier(.2,.7,.2,1);transform:scale(1.06);transform-origin:50% 100%}
-.pj{isolation:isolate}
-.pj:hover::before{background-size:220% 100%;animation:hb-pan 2.4s linear infinite alternate}
-.pj{transition:box-shadow .5s}
-.pj.con:hover{box-shadow:0 30px 80px -40px #6EE7F9}.pj.fu:hover{box-shadow:0 30px 80px -40px #A3E635}
-.hb-trailer{margin-top:44px}
-.tr-stage{position:relative;margin-top:14px;aspect-ratio:16/7;border-radius:20px;overflow:hidden;background:#000;border:1px solid var(--line)}
-@media (max-width:640px){.tr-stage{aspect-ratio:4/3}}
-.tr-s{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.1s ease}
-.tr-s.on{opacity:1;z-index:1}
-.tr-s img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);cursor:zoom-in}
-.tr-s.fit{background:radial-gradient(ellipse at 50% 45%,#F4F6FA 0,#C9D0DD 55%,#3A465C 100%)}
-.tr-s.fit img{object-fit:contain;padding:4% 0 12%}
-.tr-s.on img{animation:tr-kb 6.5s ease-out both}
-.tr-s:nth-child(2n).on img{animation-name:tr-kb2}
-@keyframes tr-kb{from{transform:scale(1.18) translate(2%,1%)}to{transform:scale(1.02) translate(-1%,-1%)}}
-@keyframes tr-kb2{from{transform:scale(1.02) translate(-2%,0)}to{transform:scale(1.16) translate(2%,-2%)}}
-.tr-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(3,5,9,.85));pointer-events:none}
-.tr-s figcaption{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;color:#E9EDF5;font-size:clamp(15px,1.6vw,19px);max-width:62ch;transform:translateY(12px);opacity:0;transition:.8s .3s}
-.tr-s.on figcaption{transform:none;opacity:1}
-.tr-s figcaption b{display:inline-block;margin-right:10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#0A0D14;padding:4px 9px;border-radius:999px;vertical-align:2px}
-.tr-s[data-p=con] figcaption b{background:var(--con)}.tr-s[data-p=fu] figcaption b{background:var(--fu)}
-.tr-dots{position:absolute;right:18px;top:16px;z-index:3;display:flex;gap:6px}
-.tr-dots button{width:26px;height:4px;border-radius:2px;border:0;background:rgba(255,255,255,.25);padding:0;cursor:pointer;overflow:hidden;position:relative}
-.tr-dots button.on::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:0 50%;animation:tr-bar 5.2s linear both}
-@keyframes tr-bar{from{transform:scaleX(0)}}
-@media (prefers-reduced-motion:reduce){.hb-title .ln>span,.hb-title .c,.hb-title .f,.hb-tick-in,.tr-s.on img,.pj:hover::before{animation:none}.hb-tick-in{padding-left:16px}}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><link rel="stylesheet" href="eng.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="eng-bar" style="position:relative;z-index:30;color:#9AA3AE;font:500 12.5px/1.4 IBM Plex Mono,ui-monospace,monospace;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#0E1014;border-bottom:1px solid #232830;border-top:2px solid #6B7480"><b style="font-weight:600;color:#E4E7EB;letter-spacing:.06em">BUILD TEAM · PROJECT INDEX</b><span style="display:flex;gap:16px;flex-wrap:wrap"><a href="conductor.html" style="color:#E4E7EB;text-decoration:none;border-left:2px solid #4FB3E8;padding:0 0 0 7px">PRJ-01 Conductor</a><a href="field-unit.html" style="color:#E4E7EB;text-decoration:none;border-left:2px solid #E8A33D;padding:0 0 0 7px">PRJ-02 Field Unit</a></span><span style="color:#6B7480">Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span></div>
+<style>
+.hx{max-width:1180px;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
+.hx-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px}
+@media (max-width:760px){.hx-head{grid-template-columns:1fr}}
+.hx-head h1{font:600 clamp(28px,3.4vw,40px)/1.15 var(--body);letter-spacing:-.015em;margin:6px 0 0;text-transform:none}
+.hx-head p{color:var(--dim);margin:10px 0 0;max-width:68ch}
+.hx-code{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.rev{border-collapse:collapse;font:12.5px/1.5 var(--mono);color:var(--dim)}
+.rev td{padding:3px 0 3px 14px;border:0}.rev td:first-child{color:var(--faint);padding-left:0}
+.prj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+@media (max-width:980px){.prj{grid-template-columns:1fr}}
+.pj{border:1px solid var(--line);background:var(--panel);border-top:3px solid var(--pa);min-width:0;display:flex;flex-direction:column}
+.pj.con{--pa:#4FB3E8}.pj.fu{--pa:#E8A33D}
+.pj-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:16px 18px 0}
+.pj-h .id{font:600 12px/1 var(--mono);letter-spacing:.1em;color:var(--pa)}
+.pj-h .st{font:500 11.5px/1 var(--mono);color:var(--dim);border:1px solid var(--line);padding:5px 8px;white-space:nowrap}
+.pj-h .st i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pa);margin-right:7px;vertical-align:0}
+.pj h2{font:600 26px/1.2 var(--body);letter-spacing:-.01em;text-transform:none;margin:8px 18px 0}
+.pj .purpose{margin:6px 18px 0;color:var(--dim);font-size:14.5px}
+.pj figure{margin:16px 18px 0;border:1px solid var(--line);background:#0B0D10}
+.pj figure img{display:block;width:100%;aspect-ratio:16/8;object-fit:cover}
+.pj figcaption{font:11.5px/1.45 var(--mono);color:var(--faint);padding:7px 10px;border-top:1px solid var(--line)}
+.phase{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 18px 0;border:1px solid var(--line)}
+.phase div{padding:8px 10px;font:11.5px/1.3 var(--mono);color:var(--faint);border-left:1px solid var(--line);min-width:0}
+.phase div:first-child{border-left:0}
+.phase div b{display:block;font-weight:500;color:var(--dim);margin-bottom:2px}
+.phase .done{color:var(--dim)}.phase .done b::before{content:"✓ ";color:var(--pa)}
+.phase .now{background:color-mix(in srgb,var(--pa) 10%,transparent);color:var(--text)}.phase .now b{color:var(--pa)}
+.kv{width:auto;margin:16px 18px 0;border-collapse:collapse;font-size:13.5px}
+.kv th,.kv td{text-align:left;vertical-align:top;padding:7px 0;border-bottom:1px solid var(--line)}
+.kv th{width:30%;font:500 11.5px/1.5 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.06em;padding-right:12px}
+.kv td{color:var(--text)}.kv td .m{font-family:var(--mono);font-size:12.5px}.kv td small{color:var(--dim)}
+.specs{margin:16px 18px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line)}
+@media (max-width:520px){.specs{grid-template-columns:repeat(2,minmax(0,1fr))}.specs div:nth-child(3){border-left:0}.specs div:nth-child(n+3){border-top:1px solid var(--line)}}
+.specs div{padding:10px;border-left:1px solid var(--line);min-width:0}.specs div:first-child{border-left:0}
+.specs b{display:block;font:600 20px/1.1 var(--mono);color:var(--text)}.specs b small{font-size:12px;color:var(--dim);font-weight:500;margin-left:2px}
+.specs span{font-size:12px;color:var(--dim)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin:18px;margin-top:auto;padding-top:18px}
+.links a{font:500 13px/1 var(--body);padding:9px 12px;border:1px solid var(--line);color:var(--text);text-decoration:none}
+.links a.p{background:var(--pa);border-color:var(--pa);color:#0B0D10;font-weight:600}
+.links a:hover{border-color:var(--pa)}
+.intg{margin-top:28px;border:1px dashed #3A414B;padding:16px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;color:var(--dim);font-size:14px}
+@media (max-width:640px){.intg{grid-template-columns:1fr}}
+.intg .hx-code{padding-top:3px}.intg b{color:var(--text);font-weight:600}
+.intg .if{font:12px/1.6 var(--mono);color:var(--faint);margin-top:6px}
+.hx-foot{margin-top:28px;border-top:1px solid var(--line);padding-top:14px;font:11.5px/1.6 var(--mono);color:var(--faint)}
 </style>
 
-<header class="hb-hero">
-  <canvas id="hbstars" aria-hidden="true"></canvas>
-  <div class="wrap hb-front">
-    <div class="kicker">The build team · project board · Nov 2026</div>
-    <h1 class="hb-title"><span class="ln"><span>Two projects.</span></span><span class="ln"><span><span class="c">One</span> <span class="f">team.</span></span></span></h1>
-    <p>Same people, <b>separate swim lanes</b>. Each project has its own budget, plan, shopping list and research. They stay apart until <b>Phase 3</b>, when the robot dog starts sending its heavy AI work to the workstation.</p>
-    <div class="lanes rv" aria-hidden="true">
-      <svg id="lanesvg" viewBox="0 0 1200 250">
-        <defs>
-          <linearGradient id="gc" gradientUnits="userSpaceOnUse" x1="24" x2="900" y1="0" y2="0"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".45" stop-color="#A78BFA"/><stop offset=".75" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
-          <linearGradient id="gf" gradientUnits="userSpaceOnUse" x1="24" x2="900" y1="0" y2="0"><stop offset="0" stop-color="#A3E635"/><stop offset=".5" stop-color="#FACC15"/><stop offset=".8" stop-color="#FB923C"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
-        </defs>
-        <text class="tk" x="24" y="44" fill="#6EE7F9">01 Conductor</text>
-        <text class="tk" x="24" y="152" fill="#A3E635">02 Field Unit</text>
-        <path id="tc" d="M24 66 H900" stroke="url(#gc)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <path id="tf" d="M24 174 H900" stroke="url(#gf)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <g font-family="JetBrains Mono,monospace" font-size="11" fill="#8E98AC">
-          <circle cx="120" cy="66" r="7" fill="#6EE7F9"/><text x="96" y="94">Research</text>
-          <circle cx="330" cy="66" r="7" fill="#A78BFA"/><text x="300" y="94">Decided</text>
-          <circle cx="540" cy="66" r="9" fill="#06080E" stroke="#F0ABFC" stroke-width="3"/><text x="508" y="94">Ordering</text>
-          <circle cx="750" cy="66" r="7" fill="#06080E" stroke="#3A465C" stroke-width="3"/><text x="728" y="94">Build</text>
-          <circle cx="120" cy="174" r="7" fill="#A3E635"/><text x="96" y="202">Research</text>
-          <circle cx="330" cy="174" r="7" fill="#FACC15"/><text x="292" y="202">X owned</text>
-          <circle cx="540" cy="174" r="9" fill="#070A05" stroke="#FB923C" stroke-width="3"/><text x="496" y="202">Access test</text>
-          <circle cx="750" cy="174" r="7" fill="#070A05" stroke="#3A465C" stroke-width="3"/><text x="716" y="202">Add-ons</text>
-        </g>
-        <path id="merge" d="M900 66 C1000 66 1010 120 1110 120 M900 174 C1000 174 1010 120 1110 120" stroke="#3A465C" stroke-width="2" stroke-dasharray="6 7" fill="none"/>
-        <circle cx="1124" cy="120" r="14" fill="none" stroke="#56627A" stroke-width="2" stroke-dasharray="4 5"/>
-        <text x="1046" y="160" font-family="JetBrains Mono,monospace" font-size="11" fill="#586178">Phase 3</text>
-        <circle id="pc" r="6" fill="#fff" filter="url(#glow)"/><circle id="pc2" r="3.5" fill="#fff"/>
-        <circle id="pf" r="6" fill="#fff" filter="url(#glow)"/><circle id="pf2" r="3.5" fill="#fff"/>
-      </svg>
-    </div>
-  </div>
-</header>
-<div class="hb-tick" aria-label="Live status"><div class="hb-tick-in">
-  <span class="t con">● 01 Conductor</span><span>Parts decided Nov 17</span><span>EPYC 9175F · 16 cores · 512 MB L3</span><span>RTX 5070 Ti · 16 GB</span><span>Next: confirm 3 EPS inputs vs 2 cables</span><span>Order before Thu Nov 19</span>
-  <span class="t fu">● 02 Field Unit</span><span>Go2 X + Jetson owned</span><span>Orin Nano Super · 67 TOPS</span><span>Unitree L2 · 360° × 96°</span><span>Next: 20-minute rear-port network test</span><span>≈ $1,464 core add-ons</span>
-</div></div>
-
-<main class="wrap">
-  <div class="projects">
-    <article class="pj con rv" aria-labelledby="p1">
-      <div class="ph" style="background-image:url(img/case-inside.jpg)"><span class="no">01</span></div>
-      <div class="in">
-        <div class="kicker">Project 01 · AI orchestration workstation</div>
-        <h2 id="p1">Conductor</h2>
-        <p class="what">The team's AI workstation: an AMD EPYC 9175F tower that runs about 14 coding agents at once plus local AI models on an RTX 5070 Ti.</p>
-        <div class="st"><span class="chip">Research</span><span class="chip">Decided Nov 17</span><span class="chip on">Ordering</span><span class="chip">Build</span></div>
-        <div class="nums">
-          <div class="n"><b data-n="16">16</b><span>CPU cores</span></div>
-          <div class="n"><b data-n="128">128</b><span>GB memory</span></div>
-          <div class="n"><b data-n="16">16</b><span>GB GPU memory</span></div>
-          <div class="n"><b data-n="14">14</b><span>agents at once</span></div>
-        </div>
-        <dl>
-          <dt>Team</dt><dd>Same team</dd>
-          <dt>Budget</dt><dd>≈ $14,037 all-in (Micro Center $9,063 + Amazon drives ≈ $4,974)</dd>
-          <dt>Next</dt><dd>Confirm the board's 3 CPU power inputs vs the PSU's 2 cables, then order before the price guarantee ends Thu Nov 19.</dd>
-        </dl>
-        <div class="go"><a class="p" href="conductor.html">Open Conductor →</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
-      </div>
-    </article>
-
-    <article class="pj fu rv" aria-labelledby="p2">
-      <div class="ph" style="background-image:url(img/dog-hero.jpg);background-size:cover;background-position:50% 62%;background-color:#050505"><span class="no">02</span></div>
-      <div class="in">
-        <div class="kicker">Project 02 · Robot dog</div>
-        <h2 id="p2">Field Unit</h2>
-        <p class="what">Our Unitree Go2 X robot dog with its own NVIDIA Jetson computer, a 3D LiDAR and a small robot arm: a robot that can see, walk and pick things up.</p>
-        <div class="st"><span class="chip">Research</span><span class="chip">Hardware owned</span><span class="chip on">Access test</span><span class="chip">Add-ons</span></div>
-        <div class="nums">
-          <div class="n"><b data-n="67">67</b><span>TOPS onboard</span></div>
-          <div class="n"><b data-n="12">12</b><span>leg motors</span></div>
-          <div class="n"><b data-n="8">8</b><span>kg payload rating</span></div>
-          <div class="n"><b data-n="3.5" data-d="1">3.5</b><span>kg add-ons (est.)</span></div>
-        </div>
-        <dl>
-          <dt>Team</dt><dd>Same team</dd>
-          <dt>Budget</dt><dd>Go2 X and Jetson owned · ≈ $1,464 core add-ons · ≈ $2,939 with the 15 Ah battery upgrade</dd>
-          <dt>Next</dt><dd>Run the 20-minute network test on the X's rear port to find out what the Jetson is allowed to control.</dd>
-        </dl>
-        <div class="go"><a class="p" href="field-unit.html">Open Field Unit →</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
-      </div>
-    </article>
-  </div>
-
-  <section class="hb-trailer rv" aria-label="Trailer: both projects in pictures">
-    <div class="kicker">Trailer · 30 seconds of both projects</div>
-    <div class="tr-stage" id="trailer">
-      <figure class="tr-s on" data-p="con"><img src="img/a-cpu.jpg" alt="AMD EPYC 9175F processor" loading="lazy"><figcaption><b>01 Conductor</b> EPYC 9175F: 16 cores, each on its own chiplet with 32 MB of cache.</figcaption></figure>
-      <figure class="tr-s" data-p="fu"><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog standing on a rock" loading="lazy"><figcaption><b>02 Field Unit</b> The Go2 X: 15 kg, 12 motors, up to 3.7 m/s.</figcaption></figure>
-      <figure class="tr-s fit" data-p="con"><img src="img/a-gpu.jpg" alt="ASUS ProArt RTX 5070 Ti graphics card" loading="lazy"><figcaption><b>01 Conductor</b> RTX 5070 Ti: 16 GB that will one day do the dog's heavy thinking.</figcaption></figure>
-      <figure class="tr-s" data-p="fu"><img src="img/dog-run.jpg" alt="Go2 robot dog running on a track" loading="lazy"><figcaption><b>02 Field Unit</b> Field Unit trots, climbs stairs and gets back up after a fall.</figcaption></figure>
-      <figure class="tr-s fit" data-p="con"><img src="img/a-board.jpg" alt="ASRock Rack TURIND8X-2T motherboard" loading="lazy"><figcaption><b>01 Conductor</b> TURIND8X-2T: one SP5 socket, 8 memory slots, 8 PCIe 5.0 slots.</figcaption></figure>
-      <figure class="tr-s" data-p="fu"><img src="img/dog-l2-cloud.jpg" alt="Point cloud captured by a Unitree L2 LiDAR" loading="lazy"><figcaption><b>02 Field Unit</b> What the L2 LiDAR sees: every dot is a laser distance.</figcaption></figure>
-      <figure class="tr-s fit" data-p="con"><img src="img/ram.jpg" alt="Kingston DDR5 ECC registered memory" loading="lazy"><figcaption><b>01 Conductor</b> 128 GB of DDR5 ECC memory: 4 sticks now, 8 after the upgrade.</figcaption></figure>
-      <figure class="tr-s" data-p="fu"><img src="img/dog-go2-piper.jpg" alt="Go2 robot dog carrying a PiPER robot arm" loading="lazy"><figcaption><b>02 Field Unit</b> Where it's heading: a Go2 with a robot arm (AgileX PiPER).</figcaption></figure>
-      <div class="tr-dots" id="trdots"></div>
-    </div>
-  </section>
-
-  <section class="meet rv" id="meet" aria-labelledby="mt">
+<main class="hx" id="top">
+  <div class="hx-head">
     <div>
-      <span class="tag">Phase 3 · not now</span>
-      <h3 id="mt">Where they meet (later)</h3>
-      <p>Once both projects work on their own, Field Unit will send its heavy AI jobs (the arm's AI models, language models, big vision models) over Wi-Fi to Conductor's RTX 5070 Ti. The dog keeps walking, safety stops and mapping on board, so it still works if Wi-Fi drops.</p>
-      <p>Until then, each project ships on its own budget and schedule.</p>
+      <div class="hx-code">Build team · Project index</div>
+      <h1>Two projects, one team</h1>
+      <p>The same people work on both, in separate lanes: each project has its own budget, plan, bill of materials and research. They stay independent until integration (Phase 3), when Field Unit offloads heavy AI inference to Conductor.</p>
     </div>
-    <svg viewBox="0 0 560 150" aria-hidden="true">
-      <g fill="none" stroke="#3A465C" stroke-width="2">
-        <rect x="10" y="40" width="150" height="70" rx="12"/><rect x="400" y="40" width="150" height="70" rx="12"/>
-      </g>
-      <text x="85" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8E98AC">Field Unit</text>
-      <text x="85" y="92" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">Jetson · sensors</text>
-      <text x="475" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8E98AC">Conductor</text>
-      <text x="475" y="92" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">RTX 5070 Ti</text>
-      <path id="mw1" d="M160 66 H400" stroke="#56627A" stroke-width="2" stroke-dasharray="5 7" fill="none"/>
-      <path id="mw2" d="M400 86 H160" stroke="#56627A" stroke-width="2" stroke-dasharray="5 7" fill="none"/>
-      <text x="280" y="54" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">camera + task → (Wi-Fi, Zenoh)</text>
-      <text x="280" y="108" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">← arm actions + plans</text>
-    </svg>
-  </section>
+    <table class="rev" aria-label="Document revision">
+      <tr><td>Doc</td><td>BT-IDX</td></tr>
+      <tr><td>Rev</td><td>C · 2026-11-18</td></tr>
+      <tr><td>Owner</td><td>Build team</td></tr>
+      <tr><td>Projects</td><td>2 active</td></tr>
+    </table>
+  </div>
+
+  <div class="prj">
+    <section class="pj con" aria-labelledby="pj1">
+      <div class="pj-h"><span class="id">PRJ-01 · CONDUCTOR</span><span class="st"><i></i>Parts decided · ordering</span></div>
+      <h2 id="pj1">AI orchestration workstation</h2>
+      <p class="purpose">Single-socket AMD EPYC tower that runs about 14 coding agents concurrently plus local models on an RTX 5070 Ti.</p>
+      <figure><img src="img/case-inside.jpg" alt="Antec 900 case interior" loading="lazy"><figcaption>Fig. 1 — Antec 900 chassis, the selected enclosure. Source: Antec.</figcaption></figure>
+      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
+      <div class="specs">
+        <div><b>16<small>C</small></b><span>EPYC 9175F</span></div>
+        <div><b>128<small>GB</small></b><span>DDR5 ECC</span></div>
+        <div><b>16<small>GB</small></b><span>VRAM, 5070 Ti</span></div>
+        <div><b>15.36<small>TB</small></b><span>U.3 NVMe</span></div>
+      </div>
+      <table class="kv">
+        <tr><th>Platform</th><td><span class="m">EPYC 9175F · ASRock Rack TURIND8X-2T · SP5</span></td></tr>
+        <tr><th>Budget</th><td><span class="m">≈ $14,037</span> all-in <small>(Micro Center $9,063 incl. tax + Amazon drives ≈ $4,974)</small></td></tr>
+        <tr><th>Next</th><td>Confirm board's 3× EPS inputs vs PSU's 2× EPS cables; order before price guarantee ends Thu Nov 19.</td></tr>
+        <tr><th>Team</th><td>Build team</td></tr>
+      </table>
+      <div class="links"><a class="p" href="conductor.html">Open PRJ-01 →</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
+    </section>
+
+    <section class="pj fu" aria-labelledby="pj2">
+      <div class="pj-h"><span class="id">PRJ-02 · FIELD UNIT</span><span class="st"><i></i>Hardware owned · access test</span></div>
+      <h2 id="pj2">Quadruped robot platform</h2>
+      <p class="purpose">Unitree Go2 X with an add-on Jetson Orin Nano Super, a Unitree L2 3D LiDAR and an SO-101 arm: perception, locomotion and light manipulation.</p>
+      <figure><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog" loading="lazy"><figcaption>Fig. 2 — Unitree Go2, the base platform. Source: Unitree Robotics.</figcaption></figure>
+      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="done"><b>Owned</b>X + Jetson</div><div class="now"><b>Access test</b>next</div><div><b>Add-ons</b>then</div></div>
+      <div class="specs">
+        <div><b>67<small>TOPS</small></b><span>Orin Nano Super</span></div>
+        <div><b>12</b><span>leg actuators</span></div>
+        <div><b>8<small>kg</small></b><span>rated payload</span></div>
+        <div><b>≈3.5<small>kg</small></b><span>add-ons (est.)</span></div>
+      </div>
+      <table class="kv">
+        <tr><th>Platform</th><td><span class="m">Go2 X · Jetson Orin Nano Super 8 GB · Unitree L2 · SO-101</span></td></tr>
+        <tr><th>Budget</th><td>Robot + Jetson owned · <span class="m">≈ $1,464</span> core add-ons <small>(≈ $2,939 with 15 Ah battery upgrade)</small></td></tr>
+        <tr><th>Next</th><td>20-minute rear-port network test: determine which DDS topics the X exposes to the Jetson.</td></tr>
+        <tr><th>Team</th><td>Build team</td></tr>
+      </table>
+      <div class="links"><a class="p" href="field-unit.html">Open PRJ-02 →</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
+    </section>
+  </div>
+
+  <aside class="intg" id="meet" aria-label="Integration, Phase 3">
+    <span class="hx-code">Integration · Phase 3 · not scheduled</span>
+    <div><b>Where the projects meet.</b> Once both work standalone, Field Unit sends heavy inference (arm VLA, LLM/VLM planner, open-vocabulary vision) over Wi-Fi to Conductor's RTX 5070 Ti. Locomotion, e-stop, arm safety and SLAM stay on the robot, so it degrades safely if the link drops. Until then, each project ships on its own budget and schedule.
+      <div class="if">Interface (planned): Zenoh over Wi-Fi 6 · ROS 2 Humble · command timeouts → robot stop</div></div>
+  </aside>
+
+  <footer class="hx-foot">Build team · PRJ-01 Conductor · PRJ-02 Field Unit · Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics; Hesai; TheRobotStudio; Wikimedia Commons contributors (see each project's credits). Shown for identification; trademarks belong to their owners.</footer>
 </main>
-<footer><div class="wrap">The build team · Project 01 Conductor · Project 02 Field Unit · Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics. Shown for identification; trademarks belong to their owners.</div></footer>
-
-<script>
-(()=>{
-  // old shared links pointed at the Conductor showcase (e.g. /#bom); send section hashes there
-  const h=location.hash.slice(1); if(h&&h!=='meet'&&!document.getElementById(h)){location.replace('conductor.html#'+h);return;}
-  const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  // scroll reveal
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');countUp(e.target);io.unobserve(e.target);}}),{threshold:.15}) : null;
-  document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
-  function countUp(root){
-    root.querySelectorAll('[data-n]').forEach(b=>{
-      const end=parseFloat(b.dataset.n), d=+(b.dataset.d||0);
-      if(RM){b.textContent=end.toFixed(d);return;}
-      const t0=performance.now(), dur=1100;
-      const step=t=>{const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);b.textContent=(end*e).toFixed(d);if(k<1)requestAnimationFrame(step);};
-      requestAnimationFrame(step);
-    });
-  }
-  // lane pulses: each project's pulse runs along its own track, then fades into the dashed Phase 3 merge
-  const svg=document.getElementById('lanesvg'); if(!svg) return;
-  const tc=document.getElementById('tc'), tf=document.getElementById('tf');
-  const P=[[document.getElementById('pc'),document.getElementById('pc2'),tc,0],[document.getElementById('pf'),document.getElementById('pf2'),tf,.45]];
-  const merge=document.getElementById('merge'); const mw=[document.getElementById('mw1'),document.getElementById('mw2')];
-  function place(t){
-    P.forEach(([g,c,path,off])=>{
-      const L=path.getTotalLength(), k=((t/5200)+off)%1, p=path.getPointAtLength(k*L);
-      [g,c].forEach(el=>{el.setAttribute('cx',p.x);el.setAttribute('cy',p.y);el.style.opacity=k>.9?(1-k)*10:1;});
-    });
-    merge.style.strokeDashoffset=-(t/60)%26;
-    mw[0].style.strokeDashoffset=-(t/50)%24; mw[1].style.strokeDashoffset=-(t/50)%24;
-  }
-  if(RM){place(1800);return;}
-  let on=true, raf; const seen=new Set();
-  const vis=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?seen.add(e.target):seen.delete(e.target)); const was=on; on=seen.size>0; if(on&&!was) loop();},{threshold:0});
-  vis.observe(svg); vis.observe(document.getElementById('meet'));
-  function loop(){cancelAnimationFrame(raf); const f=t=>{place(t); if(on) raf=requestAnimationFrame(f);}; raf=requestAnimationFrame(f);}
-  loop();
-})();
-</script>
-
-<script>
-/* sparkle pass: starfield in both palettes, card parallax, trailer */
-(()=>{
-  const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  // starfield: left half drifts in Conductor colours, right half in Field Unit colours; pointer parallax
-  const c=document.getElementById('hbstars');
-  if(c){const x=c.getContext('2d');let W,H,DPR=Math.min(2,devicePixelRatio||1),pts=[],mx=0,my=0,tmx=0,tmy=0,on=true;
-    const CON=['#6EE7F9','#A78BFA','#F0ABFC','#FCD34D'],FU=['#A3E635','#FACC15','#FB923C','#F59E0B'];
-    const size=()=>{const r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);
-      const n=Math.round(Math.min(160,W*H/7000));pts=Array.from({length:n},()=>{const L=Math.random()<.5;return{x:L?Math.random()*W*.55:W*.45+Math.random()*W*.55,y:Math.random()*H,z:.2+Math.random()*.8,
-        c:(L?CON:FU)[Math.random()*4|0],v:.05+Math.random()*.25,ph:Math.random()*6.28};});};
-    size();addEventListener('resize',size);
-    addEventListener('pointermove',e=>{tmx=(e.clientX/innerWidth-.5);tmy=(e.clientY/innerHeight-.5);},{passive:true});
-    const draw=t=>{x.clearRect(0,0,W,H);mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
-      for(const p of pts){if(!RM){p.y-=p.v*p.z;if(p.y<-4)p.y=H+4;}
-        const px=p.x+mx*40*p.z,py=p.y+my*30*p.z,a=.25+.55*p.z*(.6+.4*Math.sin(t/900+p.ph));
-        x.globalAlpha=a;x.fillStyle=p.c;x.beginPath();x.arc(px,py,.6+p.z*1.6,0,6.283);x.fill();
-        if(p.z>.85){x.globalAlpha=a*.25;x.beginPath();x.arc(px,py,5*p.z,0,6.283);x.fill();}}
-      x.globalAlpha=1;if(on&&!RM)requestAnimationFrame(draw);};
-    new IntersectionObserver(es=>{on=es[0].isIntersecting;if(on&&!RM)requestAnimationFrame(draw);}).observe(c);
-    requestAnimationFrame(draw);}
-  // photo parallax inside each project card
-  if(!RM&&matchMedia('(hover:hover)').matches)document.querySelectorAll('.pj').forEach(pj=>{const ph=pj.querySelector('.ph');if(!ph)return;
-    pj.addEventListener('pointermove',e=>{const r=pj.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
-      ph.style.transform='scale(1.1) translate('+(-px*14)+'px,'+(-py*10)+'px)';});
-    pj.addEventListener('pointerleave',()=>ph.style.transform='');});
-  // trailer: Ken Burns slides, alternating projects
-  const st=document.getElementById('trailer');if(!st)return;const S=[...st.querySelectorAll('.tr-s')],dots=document.getElementById('trdots');let i=0,tm=null,vis=false;
-  S.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>go(k,true);dots.appendChild(b);});
-  const go=(k,user)=>{S[i].classList.remove('on');dots.children[i].classList.remove('on');i=(k+S.length)%S.length;S[i].classList.add('on');
-    const d=dots.children[i];d.classList.remove('on');void d.offsetWidth;d.classList.add('on');if(user)sched();};
-  const sched=()=>{clearTimeout(tm);if(vis&&!RM)tm=setTimeout(()=>{go(i+1);sched();},5200);};
-  new IntersectionObserver(es=>{vis=es[0].isIntersecting;sched();},{threshold:.3}).observe(st);
-  dots.children[0].classList.add('on');
-})();
-</script>
 
 </body></html>
