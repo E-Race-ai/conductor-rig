@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en" data-proj="hub"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Build team · Projects</title>
 <meta name="description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
 <meta property="og:title" content="Build team · Projects"><meta property="og:description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
-<meta property="og:image" content="img/a-cpu.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/og-hub.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/og-hub.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="sparkle.css"><script src="sparkle.js" defer></script>
 </head><body style="margin:0">
 <div style="position:relative;z-index:30;color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#E9EDF5"><span>Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span><span style="display:flex;gap:8px;flex-wrap:wrap"><a href="conductor.html" style="background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">01 Conductor</a><a href="field-unit.html" style="background:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">02 Field Unit</a></span></div>
 <style>
@@ -68,12 +69,57 @@ footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ---- sparkle pass: cinematic hero, ticker, trailer, parallax ---- */
+.hb-hero{position:relative;overflow:hidden}
+#hbstars{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.9}
+.hb-front{position:relative;z-index:1}
+.hb-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.hb-title .ln>span{display:inline-block;animation:hb-up 1.1s cubic-bezier(.2,.8,.2,1) both}
+.hb-title .ln:nth-child(2)>span{animation-delay:.18s}
+@keyframes hb-up{from{transform:translateY(105%);opacity:0;filter:blur(8px)}}
+.hb-title .c,.hb-title .f{background-size:200% 100%;animation:hb-pan 6s ease-in-out infinite alternate}
+@keyframes hb-pan{to{background-position:100% 0}}
+.hb-tick{border-block:1px solid var(--line);background:#080B12;overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+ -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.hb-tick-in{display:inline-flex;gap:34px;padding:12px 0;animation:hb-tick 48s linear infinite;padding-left:100%}
+.hb-tick .t{font-weight:700}.hb-tick .t.con{color:#6EE7F9}.hb-tick .t.fu{color:#A3E635}
+@keyframes hb-tick{to{transform:translateX(-100%)}}
+.hb-tick:hover .hb-tick-in{animation-play-state:paused}
+.pj .ph{transition:transform .7s cubic-bezier(.2,.7,.2,1);transform:scale(1.06);transform-origin:50% 100%}
+.pj{isolation:isolate}
+.pj:hover::before{background-size:220% 100%;animation:hb-pan 2.4s linear infinite alternate}
+.pj{transition:box-shadow .5s}
+.pj.con:hover{box-shadow:0 30px 80px -40px #6EE7F9}.pj.fu:hover{box-shadow:0 30px 80px -40px #A3E635}
+.hb-trailer{margin-top:44px}
+.tr-stage{position:relative;margin-top:14px;aspect-ratio:16/7;border-radius:20px;overflow:hidden;background:#000;border:1px solid var(--line)}
+@media (max-width:640px){.tr-stage{aspect-ratio:4/3}}
+.tr-s{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.1s ease}
+.tr-s.on{opacity:1;z-index:1}
+.tr-s img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);cursor:zoom-in}
+.tr-s.fit{background:radial-gradient(ellipse at 50% 45%,#F4F6FA 0,#C9D0DD 55%,#3A465C 100%)}
+.tr-s.fit img{object-fit:contain;padding:4% 0 12%}
+.tr-s.on img{animation:tr-kb 6.5s ease-out both}
+.tr-s:nth-child(2n).on img{animation-name:tr-kb2}
+@keyframes tr-kb{from{transform:scale(1.18) translate(2%,1%)}to{transform:scale(1.02) translate(-1%,-1%)}}
+@keyframes tr-kb2{from{transform:scale(1.02) translate(-2%,0)}to{transform:scale(1.16) translate(2%,-2%)}}
+.tr-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(3,5,9,.85));pointer-events:none}
+.tr-s figcaption{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;color:#E9EDF5;font-size:clamp(15px,1.6vw,19px);max-width:62ch;transform:translateY(12px);opacity:0;transition:.8s .3s}
+.tr-s.on figcaption{transform:none;opacity:1}
+.tr-s figcaption b{display:inline-block;margin-right:10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#0A0D14;padding:4px 9px;border-radius:999px;vertical-align:2px}
+.tr-s[data-p=con] figcaption b{background:var(--con)}.tr-s[data-p=fu] figcaption b{background:var(--fu)}
+.tr-dots{position:absolute;right:18px;top:16px;z-index:3;display:flex;gap:6px}
+.tr-dots button{width:26px;height:4px;border-radius:2px;border:0;background:rgba(255,255,255,.25);padding:0;cursor:pointer;overflow:hidden;position:relative}
+.tr-dots button.on::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:0 50%;animation:tr-bar 5.2s linear both}
+@keyframes tr-bar{from{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.hb-title .ln>span,.hb-title .c,.hb-title .f,.hb-tick-in,.tr-s.on img,.pj:hover::before{animation:none}.hb-tick-in{padding-left:16px}}
 </style>
 
 <header class="hb-hero">
-  <div class="wrap">
+  <canvas id="hbstars" aria-hidden="true"></canvas>
+  <div class="wrap hb-front">
     <div class="kicker">The build team · project board · Nov 2026</div>
-    <h1>Two projects.<br><span class="c">One</span> <span class="f">team.</span></h1>
+    <h1 class="hb-title"><span class="ln"><span>Two projects.</span></span><span class="ln"><span><span class="c">One</span> <span class="f">team.</span></span></span></h1>
     <p>Same people, <b>separate swim lanes</b>. Each project has its own budget, plan, shopping list and research. They stay apart until <b>Phase 3</b>, when the robot dog starts sending its heavy AI work to the workstation.</p>
     <div class="lanes rv" aria-hidden="true">
       <svg id="lanesvg" viewBox="0 0 1200 250">
@@ -105,6 +151,10 @@ footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
     </div>
   </div>
 </header>
+<div class="hb-tick" aria-label="Live status"><div class="hb-tick-in">
+  <span class="t con">● 01 Conductor</span><span>Parts decided Nov 17</span><span>EPYC 9175F · 16 cores · 512 MB L3</span><span>RTX 5070 Ti · 16 GB</span><span>Next: confirm 3 EPS inputs vs 2 cables</span><span>Order before Thu Nov 19</span>
+  <span class="t fu">● 02 Field Unit</span><span>Go2 X + Jetson owned</span><span>Orin Nano Super · 67 TOPS</span><span>Unitree L2 · 360° × 96°</span><span>Next: 20-minute rear-port network test</span><span>≈ $1,464 core add-ons</span>
+</div></div>
 
 <main class="wrap">
   <div class="projects">
@@ -153,6 +203,21 @@ footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
     </article>
   </div>
 
+  <section class="hb-trailer rv" aria-label="Trailer: both projects in pictures">
+    <div class="kicker">Trailer · 30 seconds of both projects</div>
+    <div class="tr-stage" id="trailer">
+      <figure class="tr-s on" data-p="con"><img src="img/a-cpu.jpg" alt="AMD EPYC 9175F processor" loading="lazy"><figcaption><b>01 Conductor</b> EPYC 9175F: 16 cores, each on its own chiplet with 32 MB of cache.</figcaption></figure>
+      <figure class="tr-s" data-p="fu"><img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog standing on a rock" loading="lazy"><figcaption><b>02 Field Unit</b> The Go2 X: 15 kg, 12 motors, up to 3.7 m/s.</figcaption></figure>
+      <figure class="tr-s fit" data-p="con"><img src="img/a-gpu.jpg" alt="ASUS ProArt RTX 5070 Ti graphics card" loading="lazy"><figcaption><b>01 Conductor</b> RTX 5070 Ti: 16 GB that will one day do the dog's heavy thinking.</figcaption></figure>
+      <figure class="tr-s" data-p="fu"><img src="img/dog-run.jpg" alt="Go2 robot dog running on a track" loading="lazy"><figcaption><b>02 Field Unit</b> Field Unit trots, climbs stairs and gets back up after a fall.</figcaption></figure>
+      <figure class="tr-s fit" data-p="con"><img src="img/a-board.jpg" alt="ASRock Rack TURIND8X-2T motherboard" loading="lazy"><figcaption><b>01 Conductor</b> TURIND8X-2T: one SP5 socket, 8 memory slots, 8 PCIe 5.0 slots.</figcaption></figure>
+      <figure class="tr-s" data-p="fu"><img src="img/dog-l2-cloud.jpg" alt="Point cloud captured by a Unitree L2 LiDAR" loading="lazy"><figcaption><b>02 Field Unit</b> What the L2 LiDAR sees: every dot is a laser distance.</figcaption></figure>
+      <figure class="tr-s fit" data-p="con"><img src="img/ram.jpg" alt="Kingston DDR5 ECC registered memory" loading="lazy"><figcaption><b>01 Conductor</b> 128 GB of DDR5 ECC memory: 4 sticks now, 8 after the upgrade.</figcaption></figure>
+      <figure class="tr-s" data-p="fu"><img src="img/dog-go2-piper.jpg" alt="Go2 robot dog carrying a PiPER robot arm" loading="lazy"><figcaption><b>02 Field Unit</b> Where it's heading: a Go2 with a robot arm (AgileX PiPER).</figcaption></figure>
+      <div class="tr-dots" id="trdots"></div>
+    </div>
+  </section>
+
   <section class="meet rv" id="meet" aria-labelledby="mt">
     <div>
       <span class="tag">Phase 3 · not now</span>
@@ -175,7 +240,7 @@ footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
     </svg>
   </section>
 </main>
-<footer><div class="wrap">The build team · Project 01 Conductor · Project 02 Field Unit · Product photos: Antec; Unitree Robotics, shown for identification.</div></footer>
+<footer><div class="wrap">The build team · Project 01 Conductor · Project 02 Field Unit · Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics. Shown for identification; trademarks belong to their owners.</div></footer>
 
 <script>
 (()=>{
@@ -213,6 +278,43 @@ footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
   vis.observe(svg); vis.observe(document.getElementById('meet'));
   function loop(){cancelAnimationFrame(raf); const f=t=>{place(t); if(on) raf=requestAnimationFrame(f);}; raf=requestAnimationFrame(f);}
   loop();
+})();
+</script>
+
+<script>
+/* sparkle pass: starfield in both palettes, card parallax, trailer */
+(()=>{
+  const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // starfield: left half drifts in Conductor colours, right half in Field Unit colours; pointer parallax
+  const c=document.getElementById('hbstars');
+  if(c){const x=c.getContext('2d');let W,H,DPR=Math.min(2,devicePixelRatio||1),pts=[],mx=0,my=0,tmx=0,tmy=0,on=true;
+    const CON=['#6EE7F9','#A78BFA','#F0ABFC','#FCD34D'],FU=['#A3E635','#FACC15','#FB923C','#F59E0B'];
+    const size=()=>{const r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);
+      const n=Math.round(Math.min(160,W*H/7000));pts=Array.from({length:n},()=>{const L=Math.random()<.5;return{x:L?Math.random()*W*.55:W*.45+Math.random()*W*.55,y:Math.random()*H,z:.2+Math.random()*.8,
+        c:(L?CON:FU)[Math.random()*4|0],v:.05+Math.random()*.25,ph:Math.random()*6.28};});};
+    size();addEventListener('resize',size);
+    addEventListener('pointermove',e=>{tmx=(e.clientX/innerWidth-.5);tmy=(e.clientY/innerHeight-.5);},{passive:true});
+    const draw=t=>{x.clearRect(0,0,W,H);mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
+      for(const p of pts){if(!RM){p.y-=p.v*p.z;if(p.y<-4)p.y=H+4;}
+        const px=p.x+mx*40*p.z,py=p.y+my*30*p.z,a=.25+.55*p.z*(.6+.4*Math.sin(t/900+p.ph));
+        x.globalAlpha=a;x.fillStyle=p.c;x.beginPath();x.arc(px,py,.6+p.z*1.6,0,6.283);x.fill();
+        if(p.z>.85){x.globalAlpha=a*.25;x.beginPath();x.arc(px,py,5*p.z,0,6.283);x.fill();}}
+      x.globalAlpha=1;if(on&&!RM)requestAnimationFrame(draw);};
+    new IntersectionObserver(es=>{on=es[0].isIntersecting;if(on&&!RM)requestAnimationFrame(draw);}).observe(c);
+    requestAnimationFrame(draw);}
+  // photo parallax inside each project card
+  if(!RM&&matchMedia('(hover:hover)').matches)document.querySelectorAll('.pj').forEach(pj=>{const ph=pj.querySelector('.ph');if(!ph)return;
+    pj.addEventListener('pointermove',e=>{const r=pj.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      ph.style.transform='scale(1.1) translate('+(-px*14)+'px,'+(-py*10)+'px)';});
+    pj.addEventListener('pointerleave',()=>ph.style.transform='');});
+  // trailer: Ken Burns slides, alternating projects
+  const st=document.getElementById('trailer');if(!st)return;const S=[...st.querySelectorAll('.tr-s')],dots=document.getElementById('trdots');let i=0,tm=null,vis=false;
+  S.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(k+1));b.onclick=()=>go(k,true);dots.appendChild(b);});
+  const go=(k,user)=>{S[i].classList.remove('on');dots.children[i].classList.remove('on');i=(k+S.length)%S.length;S[i].classList.add('on');
+    const d=dots.children[i];d.classList.remove('on');void d.offsetWidth;d.classList.add('on');if(user)sched();};
+  const sched=()=>{clearTimeout(tm);if(vis&&!RM)tm=setTimeout(()=>{go(i+1);sched();},5200);};
+  new IntersectionObserver(es=>{vis=es[0].isIntersecting;sched();},{threshold:.3}).observe(st);
+  dots.children[0].classList.add('on');
 })();
 </script>
 

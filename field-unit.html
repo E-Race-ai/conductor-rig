@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Field Unit · Project 02</title>
 <meta name="description" content="Field Unit, Project 02: our Unitree Go2 X robot dog with a Jetson Orin Nano Super, Unitree L2 LiDAR and SO-101 arm. Tour, fit check, wiring, build steps and shopping list.">
 <meta property="og:title" content="Field Unit · Project 02"><meta property="og:description" content="Field Unit, Project 02: our Unitree Go2 X robot dog with a Jetson Orin Nano Super, Unitree L2 LiDAR and SO-101 arm. Tour, fit check, wiring, build steps and shopping list.">
-<meta property="og:image" content="img/dog-go2.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/og-field-unit.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/og-field-unit.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#070A05"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23A3E635'/%3E%3Cstop offset='.5' stop-color='%23FACC15'/%3E%3Cstop offset='1' stop-color='%23F59E0B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Cpath d='M7 22 L13 10 L19 22 L25 10' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="sparkle.css"><script src="sparkle.js" defer></script>
 </head><body style="margin:0">
 <div style="position:relative;z-index:30;color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B)"><a href="./" style="color:#0A0D14;text-decoration:none;font-weight:700;opacity:.75">← All projects</a><b style="font-weight:900;letter-spacing:.04em;text-transform:uppercase">Project 02 · Field Unit</b><span style="display:flex;gap:14px"><a href="field-unit.html" style="color:#0A0D14;text-decoration:underline;font-weight:800">Showcase</a><a href="fu-build-plan.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Build plan</a><a href="field-unit-research.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Research</a></span><span style="opacity:.75">link stops working Wed, Nov 18, 7:00 PM ET</span></div>
 <style>
@@ -394,6 +395,26 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .jg-pill button{all:unset;cursor:pointer;color:var(--faint);padding:0 2px}
 .jg-pill.gone{opacity:0;pointer-events:none}
 
+/* sparkle pass: RAM grid + data path */
+.ramgrid{display:grid;gap:6px;margin:14px 0 6px}
+.ramgrid .dimm{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center}
+.ramgrid .dimm>span{font:600 10px var(--mono);color:var(--faint);letter-spacing:.08em;width:52px}
+.ramgrid .cells{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:2px;padding:4px;border-radius:5px;background:#0B1019;border:1px solid var(--line);position:relative}
+.ramgrid .cells::after{content:"";position:absolute;left:46%;top:-1px;bottom:-1px;width:4px;background:var(--bg)}
+.ramgrid i{display:block;height:11px;border-radius:2px;background:#1A2233;transition:background-color .35s,box-shadow .35s;transition-delay:var(--d,0s)}
+.ramgrid i.os{background:#56627A}
+.ramgrid .lg{display:flex;flex-wrap:wrap;gap:12px;font:600 11px var(--mono);color:var(--dim);margin-top:4px}
+.ramgrid .lg b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.ramgrid .over{color:#F87171;font-weight:700}
+.dpath{margin-top:36px;border:1px solid var(--line);border-radius:20px;background:#080B12;padding:10px;overflow:hidden}
+.dpath svg{display:block;width:100%;height:auto}
+.dpath .nd rect{fill:#0E131E;stroke:#2A3448;stroke-width:2;transition:stroke .3s}
+.dpath .nd.on rect{stroke:#A3E635}
+.dpath text{font-family:var(--mono);text-anchor:middle}
+.dpath .t1{font-size:15px;font-weight:700;fill:#E9EDF5}.dpath .t2{font-size:11px;fill:#8E98AC}.dpath .bw{font-size:12px;font-weight:700;fill:#A3E635}
+.dp-cap{display:flex;gap:12px;align-items:baseline;margin-top:14px;min-height:48px;color:#C9D0DD}
+.dp-cap b{font:800 12px var(--mono);color:#0A0D14;background:var(--film);border-radius:999px;padding:4px 10px;white-space:nowrap}
+
 </style><style>:root{--cy:#A3E635;--vi:#FACC15;--pk:#FB923C;--au:#F59E0B;--film:linear-gradient(100deg,#A3E635 0%,#FACC15 40%,#FB923C 70%,#F59E0B 100%)}.mark span{border-radius:50%}</style><style>
 /* Robot dog page: extra styles layered on the shared Conductor CSS. All prefixed dg- */
 .dg-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
@@ -574,13 +595,119 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
 @keyframes dgping{from{transform:scale(.15);opacity:.7}to{transform:scale(1.6);opacity:0}}
 .dg-paused .dg-sweep,.dg-paused .dg-ping,.dg-paused .pw,.dg-paused.dg-kb img{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.dg-rv{opacity:1;transform:none;transition:none}.dg-sweep,.dg-ping,.dg-diag .pw,.dg-kb img{animation:none}.dg-ping{display:none}}
+/* ===== sparkle pass ===== */
+.dg-holo{position:relative;aspect-ratio:1/1;max-width:600px;width:100%;justify-self:center;border-radius:24px;overflow:hidden;background:#050605;border:1px solid #1E2A12;box-shadow:0 40px 120px -50px #A3E635}
+.dg-holo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;filter:brightness(.62) saturate(.9);transform:scale(1.04);animation:dg-breath 9s ease-in-out infinite alternate}
+@keyframes dg-breath{to{transform:scale(1.1) translateY(-1.5%)}}
+.dg-holo canvas{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen}
+.dg-holo .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(163,230,53,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.07) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;-webkit-mask:radial-gradient(circle at 50% 55%,#000 30%,transparent 75%);mask:radial-gradient(circle at 50% 55%,#000 30%,transparent 75%)}
+.dg-hud{position:absolute;font:600 11px/1.35 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#D9F99D;background:rgba(5,8,4,.62);border:1px solid rgba(163,230,53,.35);border-radius:8px;padding:8px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);min-width:120px}
+.dg-hud b{display:block;font:800 22px/1 var(--display);letter-spacing:.02em;color:#fff;margin-top:3px}
+.dg-hud small{color:#8E98AC;font-size:10px}
+.dg-hud.tl{left:12px;top:12px}.dg-hud.tr{right:12px;top:12px;text-align:right}.dg-hud.bl{left:12px;bottom:12px}.dg-hud.br{right:12px;bottom:12px;text-align:right}
+.dg-hud .lv{height:4px;border-radius:2px;background:#1E2A12;margin-top:6px;overflow:hidden}.dg-hud .lv i{display:block;height:100%;background:linear-gradient(90deg,#A3E635,#FACC15);width:0;transition:width 1.6s cubic-bezier(.2,.7,.2,1)}
+.dg-rec{position:absolute;left:50%;top:14px;transform:translateX(-50%);font:700 10px/1 var(--mono);letter-spacing:.16em;color:#A3E635;display:flex;gap:6px;align-items:center}
+.dg-rec::before{content:"";width:7px;height:7px;border-radius:50%;background:#A3E635;animation:dg-blink 1.2s infinite}
+@keyframes dg-blink{50%{opacity:.2}}
+@media (max-width:520px){.dg-hud{min-width:0;padding:6px 8px;font-size:9px}.dg-hud b{font-size:17px}.dg-rec{display:none}}
+/* hardware close-ups */
+.dg-hw{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;margin-top:36px}
+.dg-hw .hw{grid-column:span 4;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.dg-hw .hw.wide{grid-column:span 8}.dg-hw .hw.half{grid-column:span 6}
+@media (max-width:980px){.dg-hw .hw,.dg-hw .hw.half{grid-column:span 6}.dg-hw .hw.wide{grid-column:span 12}}
+@media (max-width:620px){.dg-hw .hw,.dg-hw .hw.half,.dg-hw .hw.wide{grid-column:span 12}}
+.dg-hw .pic{position:relative;background:#F4F5F7;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dg-hw .pic.dark{background:#06080E}
+.dg-hw .wide .pic{aspect-ratio:16/9}
+.dg-hw .pic img{width:100%;height:100%;object-fit:contain;display:block}
+.dg-hw .pic img.cover{object-fit:cover}
+.dg-hw .pic svg{width:78%;height:auto}
+.dg-hw .pic .illo{position:absolute;left:10px;bottom:10px;font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#56627A;background:#fff;border:1px solid #D0D5DD;border-radius:999px;padding:5px 8px}
+.dg-hw .txt{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.dg-hw .txt h3{font-size:24px}
+.dg-hw .txt p{margin:0;color:#C9D0DD;font-size:14px}
+.dg-hw .where{font:600 12px/1.4 var(--mono);color:var(--cy)}
+.dg-hw .where::before{content:"→ ";}
+.dg-hw .pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;height:100%}
+.dg-hw .pair img{background:#F4F5F7}
+/* assembly (scroll-scrubbed) */
+#assemble{padding-bottom:0}
+.dg-asm{height:300vh;position:relative;margin-top:24px}
+.dg-asm .pin{position:sticky;top:64px;height:calc(100vh - 80px);min-height:460px;display:grid;grid-template-rows:auto 1fr auto;gap:10px}
+.dg-asm .stage{position:relative;border:1px solid var(--line);border-radius:20px;background:radial-gradient(ellipse at 50% 80%,#141C0C 0,#06080E 70%);overflow:hidden;min-height:0}
+.dg-asm svg{position:absolute;inset:0;width:100%;height:100%}
+.dg-asm .now{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.dg-asm .now b{font:900 clamp(28px,4vw,48px)/1 var(--display);text-transform:uppercase}
+.dg-asm .now span{color:var(--dim);max-width:70ch}
+.dg-asm .steps{display:flex;gap:6px;flex-wrap:wrap}
+.dg-asm .steps span{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:var(--faint);transition:.3s}
+.dg-asm .steps span.done{color:#0A0D14;background:var(--cy);border-color:var(--cy)}
+.dg-asm .steps span.cur{color:var(--text);border-color:var(--cy);box-shadow:0 0 18px -4px var(--cy)}
+.dg-asm .pct{font:700 12px var(--mono);color:var(--dim);margin-left:auto}
+@media (prefers-reduced-motion:reduce){.dg-asm{height:auto}.dg-asm .pin{position:relative;top:0;height:560px}}
+/* power waterfall + gauges */
+.dg-pw{margin-top:16px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){.dg-pw{grid-template-columns:1fr}}
+.dg-fall{display:grid;gap:8px;margin-top:14px}
+.dg-fall .row{display:grid;grid-template-columns:150px minmax(0,1fr) 54px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.dg-fall .row{grid-template-columns:100px minmax(0,1fr) 46px;font-size:12px}}
+.dg-fall .row .tr{height:16px;position:relative;background:#0A0D14;border-radius:4px;overflow:hidden}
+.dg-fall .row .tr i{position:absolute;top:0;bottom:0;border-radius:4px;transition:left .7s cubic-bezier(.2,.7,.2,1),width .7s cubic-bezier(.2,.7,.2,1),opacity .4s}
+.dg-fall .row.off{opacity:.35}
+.dg-fall .row b{text-align:right;font:700 12px var(--mono)}
+.dg-fall .row.tot{border-top:1px solid var(--line);padding-top:8px;font-weight:700}
+.dg-gauges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px;text-align:center}
+.dg-gauges svg{width:100%;max-width:150px;height:auto;display:block;margin:0 auto}
+.dg-gauges .g-arc{transition:stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1),stroke .4s}
+.dg-gauges span{display:block;font-size:12px;color:var(--dim);line-height:1.3;margin-top:4px}
+/* data flow */
+.dg-flow{margin-top:30px;border:1px solid var(--line);border-radius:20px;background:#080B12;padding:10px;overflow:hidden}
+.dg-flow svg{width:100%;height:auto;display:block}
+.dg-flow .nd rect{fill:#0E131E;stroke:#2A3448;stroke-width:2;transition:stroke .3s,fill .3s}
+.dg-flow .nd.on rect{stroke:#A3E635;fill:#141C0C}
+.dg-flow .nd text{font-family:var(--mono);fill:#C9D0DD;text-anchor:middle}
+.dg-flow .nd .t1{font-size:15px;font-weight:700;fill:#E9EDF5}.dg-flow .nd .t2{font-size:12px;fill:#8E98AC}
+.dg-flow .zone{font:700 12px var(--mono);letter-spacing:.14em;fill:#586178}
+.dg-flowcap{display:flex;gap:12px;align-items:baseline;margin-top:14px;min-height:52px}
+.dg-flowcap b{font:800 13px var(--mono);color:#0A0D14;background:#A3E635;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.dg-flowcap span{color:#C9D0DD}
+/* terminal */
+.dg-term{margin-top:30px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){.dg-term{grid-template-columns:1fr}}
+.dg-tty{background:#03050A;border:1px solid #1E2A12;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -40px #A3E635}
+.dg-tty .ttybar{display:flex;gap:6px;align-items:center;padding:10px 12px;border-bottom:1px solid #121A0A;font:600 11px var(--mono);color:#586178}
+.dg-tty .ttybar i{width:10px;height:10px;border-radius:50%;background:#2A3448}.dg-tty .ttybar i:first-child{background:#FB923C}.dg-tty .ttybar i:nth-child(2){background:#FACC15}.dg-tty .ttybar i:nth-child(3){background:#A3E635}
+.dg-tty pre{margin:0;padding:16px;min-height:330px;font:13px/1.6 var(--mono);color:#C9D0DD;white-space:pre-wrap;word-break:break-word}
+.dg-tty .p{color:#A3E635}.dg-tty .o{color:#8E98AC}.dg-tty .k{color:#FACC15}.dg-tty .g{color:#A3E635;font-weight:700}.dg-tty .w{color:#FB923C;font-weight:700}
+.dg-tty .cur{display:inline-block;width:8px;height:15px;background:#A3E635;vertical-align:-2px;animation:dg-blink 1s steps(1) infinite}
+.dg-res{display:grid;gap:12px;align-content:start}
+.dg-res .r{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--panel);transition:.4s;opacity:.55}
+.dg-res .r.on{opacity:1;border-color:#A3E635;box-shadow:0 0 30px -12px #A3E635}
+.dg-res .r.b.on{border-color:#FB923C;box-shadow:0 0 30px -12px #FB923C}
+.dg-res .r h3{font-size:22px;margin-bottom:6px}.dg-res .r p{margin:0;color:#C9D0DD;font-size:14px}
+.dg-res .seg{display:flex;gap:8px}
+.dg-res .seg button{flex:1;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:10px;font:700 13px var(--body);cursor:pointer}
+.dg-res .seg button.on{background:var(--film);color:#0A0D14;border:0}
+/* lidar line-up */
+.dg-lineup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 6px}
+@media (max-width:700px){.dg-lineup{grid-template-columns:1fr}}
+.dg-lineup figure{margin:0;border-radius:12px;overflow:hidden;background:#F4F5F7;position:relative}
+.dg-lineup img{width:100%;aspect-ratio:16/10;object-fit:contain;display:block}
+.dg-lineup figcaption{position:absolute;left:8px;bottom:8px;font:700 11px/1.2 var(--mono);color:#0A0D14;background:rgba(255,255,255,.9);padding:5px 8px;border-radius:6px}
+/* bom thumbs */
+.dg-line{grid-template-columns:28px 48px minmax(0,1fr) auto!important}
+.dg-line .bt{width:48px;height:40px;border-radius:8px;background:#F4F5F7 center/contain no-repeat;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dg-line .bt svg{width:34px;height:34px}
+.dg-line .bt.dk{background-color:#0E131E}
+@media (prefers-reduced-motion:reduce){.dg-holo img{animation:none}.dg-rec::before,.dg-tty .cur{animation:none}}
+
 </style>
 
 <nav class="top" aria-label="Sections">
   <div class="wrap">
     <a class="mark" href="#top">FIELD UNIT<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#tour">Start here</a><a href="#numbers">Numbers</a><a class="keep" href="#options">Decisions</a><a href="#fit">Will it carry it?</a><a href="#brain">The brain</a><a href="#wiring">Wiring</a><a class="keep" href="#day">Build day</a><a href="#proof">Proof</a><a href="#parts">Parts</a><a class="keep" href="#bom">Shopping list</a><a href="#risks">Risks</a>
+      <a class="keep" href="#tour">Start here</a><a href="#hardware">Up close</a><a href="#assemble">Assembly</a><a href="#numbers">Numbers</a><a class="keep" href="#options">Decisions</a><a href="#fit">Will it carry it?</a><a href="#brain">The brain</a><a href="#wiring">Wiring</a><a href="#test">The test</a><a class="keep" href="#day">Build day</a><a href="#proof">Proof</a><a href="#parts">Parts</a><a class="keep" href="#bom">Shopping list</a><a href="#risks">Risks</a>
     </div>
   </div>
 </nav>
@@ -604,8 +731,15 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
         <a class="btn" href="#bom">What we still need to buy</a>
       </div>
     </div>
-    <div class="dg-scan" aria-label="Animated LiDAR scan: the dog sweeps a room with laser points">
-      <canvas id="scan" width="800" height="800"></canvas>
+    <div class="dg-holo" id="holo" aria-label="Photo of a Unitree Go2 with an animated LiDAR scan sweeping over it and live-style readouts">
+      <img src="img/dog-hero.jpg" alt="Unitree Go2 robot dog standing on a rock" data-nolb>
+      <div class="grid"></div>
+      <canvas id="holocv"></canvas>
+      <div class="dg-rec">LIDAR SWEEP · ILLUSTRATIVE</div>
+      <div class="dg-hud tl">Compute<b><span data-count="67">67</span> TOPS</b><small>Orin Nano Super</small></div>
+      <div class="dg-hud tr">LiDAR<b><span data-count="64000">64,000</span></b><small>points / s · L2</small></div>
+      <div class="dg-hud bl">Payload <small>est.</small><b><span data-count="3.4" data-dec="1">3.4</span> / 8 kg</b><div class="lv"><i data-w="42"></i></div></div>
+      <div class="dg-hud br">Battery<b><span data-count="432">432</span> Wh</b><small>15 Ah upgrade</small><div class="lv"><i data-w="100"></i></div></div>
     </div>
   </div>
 </header>
@@ -743,6 +877,78 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
+<section class="band" id="hardware">
+  <div class="wrap">
+    <div class="kicker">Every part, up close</div>
+    <h2>What it looks like. <span class="film">Where it goes.</span></h2>
+    <p class="lead">Real product photos of every part, with the job each one does on the dog. Tap the lettered dots on the Jetson to see which port connects to what. Tap any photo to enlarge it.</p>
+    <div class="dg-hw" data-rv>
+      <article class="hw wide">
+        <div class="pic sp-co-wrap" style="aspect-ratio:1300/999">
+          <img src="img/dog-jetson-ports.jpg" alt="Jetson Orin Nano Super developer kit, port side, NVIDIA numbered diagram" loading="lazy">
+          <button class="sp-co" style="left:36%;top:19%" aria-label="Fan and heatsink">A<span>Fan + heatsink over the Orin module.<br>Needs airflow: use a vented case.</span></button>
+          <button class="sp-co" style="left:65%;top:16%" aria-label="40-pin header">B<span>40-pin header: spare GPIO.<br>Not used in phase 1.</span></button>
+          <button class="sp-co l" style="left:77%;top:45%" aria-label="Gigabit Ethernet">C<span>Gigabit Ethernet → our 12 V switch<br>→ Go2 rear port (192.168.123.x)</span></button>
+          <button class="sp-co" style="left:62%;top:53%" aria-label="USB 3 ports">D<span>4× USB 3 → SO-101 arm (USB serial)<br>and later a USB-CAN adapter for the PiPER</span></button>
+          <button class="sp-co r" style="left:45%;top:79%" aria-label="DC barrel jack">E<span>DC barrel jack ← 19 V buck converter<br>(fused, from the 24 V accessory battery)</span></button>
+          <button class="sp-co" style="left:51%;top:69%" aria-label="DisplayPort">F<span>DisplayPort: monitor for first setup only</span></button>
+          <button class="sp-co r" style="left:18%;top:60%" aria-label="Camera connectors">G<span>2× camera connectors (MIPI CSI)<br>Free for a later camera</span></button>
+        </div>
+        <div class="txt"><span class="dg-pill own">Owned</span><h3>Jetson Orin Nano Super Developer Kit</h3><p>67 TOPS, 8 GB shared memory, 7–25 W. The numbers on the photo are NVIDIA's; our lettered dots show what each port does in this build. The M.2 slots for the 1 TB SSD are underneath the board.</p><div class="where">Bolts to the deck plate, on standoffs above the power board</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-go2-3q.jpg" alt="Unitree Go2 product render, three-quarter view of the back" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill own">Owned</span><h3>Go2 X: the back</h3><p>The flat back is where everything mounts, on the existing M4 holes. The rear Ethernet port sits under most deck plates, so use a flat-edge cable.</p><div class="where">The roof rack for every add-on</div></div>
+      </article>
+      <article class="hw half">
+        <div class="pic dark"><img class="cover" src="img/dog-go2-callout.jpg" alt="Unitree diagram labelling the Go2's built-in components" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill own">Owned</span><h3>What's already inside</h3><p>Unitree's own component map: head LiDAR, front camera, motors, battery and more. Enlarge it to read the labels.</p><div class="where">Built in; we don't open the shell (it voids the warranty)</div></div>
+      </article>
+      <article class="hw half">
+        <div class="pic dark"><img class="cover" src="img/dog-go2-real.jpg" alt="A real Go2 robot dog in the field on snow, mountain rescue livery" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill own">Owned</span><h3>A Go2 at work</h3><p>A real Go2 with the Romanian mountain rescue service (Salvamont): same body as ours, outdoors in the cold.</p><div class="where">What "field" means for the Field Unit</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-l2-frame.jpg" alt="Unitree L2 LiDAR outline drawing with its X, Y, Z axes" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>Unitree L2 LiDAR</h3><p>230 g, 360° × 96°, 0.05–30 m, built-in IMU. Unitree's official drawing shows its shape and the axes the mapping software uses.</p><div class="where">High at the rear of the deck, ← 12 V buck, → switch</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic dark"><img class="cover" src="img/dog-l2-cloud.jpg" alt="Coloured 3D point cloud captured by the Unitree L2" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>What the L2 sees</h3><p>A real L2 scan: every dot is a laser distance, coloured by height. Point-LIO turns these into a map on the Jetson.</p><div class="where">Feeds mapping and obstacle avoidance</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><div class="pair"><img src="img/dog-so101.jpg" alt="SO-101 follower arm with gripper" loading="lazy"><img src="img/dog-so101-leader.jpg" alt="SO-101 leader arm with handle" loading="lazy"></div></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>SO-101: follower + leader</h3><p>Left, the follower arm that rides on the dog. Right, the leader arm you move by hand to teach it; it records the demonstrations we train on.</p><div class="where">Follower → Jetson USB · Leader stays on the desk</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-switch.jpg" alt="Netgear GS105 five-port gigabit switch with its power adapter" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>5-port gigabit switch</h3><p>Example: a Netgear GS105, which runs on 12 V DC. It joins the Go2's rear port, the Jetson and the L2 on one network.</p><div class="where">On the deck, ← 12 V buck</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-buck.jpg" alt="Two XL4015 DC-DC buck converter modules" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>Buck converters</h3><p>Example modules: they step the 24 V pack down to 19 V for the Jetson and 12 V for the switch, LiDAR and arm. Size each for its load, and fuse each branch.</p><div class="where">Power board, between the battery and every load</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-nvme.jpg" alt="M.2 NVMe SSD stick" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>1 TB NVMe SSD</h3><p>Example M.2 NVMe drive. The Jetson boots from it instead of a microSD card: faster and far more reliable.</p><div class="where">M.2 slot under the Jetson board</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><svg viewBox="0 0 220 150" role="img" aria-label="Illustration of a 24 volt battery pack with fuse and red emergency stop"><rect x="20" y="40" width="130" height="80" rx="10" fill="#1A2233" stroke="#FACC15" stroke-width="3"/><rect x="150" y="62" width="10" height="36" rx="3" fill="#FACC15"/><text x="85" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="16" font-weight="700" fill="#FACC15">24 V</text><text x="85" y="100" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8E98AC">~200 Wh</text><circle cx="192" cy="55" r="16" fill="#DC2626" stroke="#7F1D1D" stroke-width="3"/><rect x="176" y="95" width="32" height="14" rx="3" fill="#E5E7EB" stroke="#9CA3AF"/><text x="192" y="128" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#56627A">fuse · e-stop</text></svg><span class="illo">Illustration</span></div>
+        <div class="txt"><span class="dg-pill buy">To buy</span><h3>24 V accessory battery</h3><p>A 6S Li-ion or 8S LiFePO4 pack of about 200 Wh, with a main fuse and a latching red e-stop right after it. It powers every add-on, so the dog's own battery only moves the legs.</p><div class="where">Low and centred on the deck, between the hips</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><svg viewBox="0 0 220 150" role="img" aria-label="Illustration of a USB to CAN adapter"><rect x="30" y="55" width="120" height="44" rx="10" fill="#1A2233" stroke="#A3E635" stroke-width="3"/><rect x="6" y="66" width="26" height="22" rx="3" fill="#C9D0DD"/><rect x="150" y="62" width="40" height="30" rx="4" fill="#0A0D14" stroke="#A3E635" stroke-width="2"/><text x="90" y="82" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#A3E635">USB → CAN</text><text x="170" y="113" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#56627A">CAN H/L</text></svg><span class="illo">Illustration</span></div>
+        <div class="txt"><span class="dg-pill later">Later</span><h3>USB-CAN adapter</h3><p>Only needed for the PiPER upgrade: the PiPER takes its commands over CAN, and this turns one Jetson USB port into a CAN bus.</p><div class="where">Jetson USB → PiPER control cable</div></div>
+      </article>
+      <article class="hw">
+        <div class="pic"><img src="img/dog-piper.jpg" alt="AgileX PiPER six-axis robot arm" loading="lazy"></div>
+        <div class="txt"><span class="dg-pill later">Later</span><h3>AgileX PiPER</h3><p>The upgrade arm: 4.2 kg, lifts 1.5 kg, 24 V, CAN. Only if the weighed payload leaves room.</p><div class="where">Front of the deck, ← 24 V direct, fused</div></div>
+      </article>
+    </div>
+    <p class="src" style="margin-top:14px">Photos: NVIDIA (docs.nvidia.com); Unitree Robotics (unitree.com, unilidar_sdk2); TheRobotStudio (SO-ARM100); AgileX Robotics; Wikimedia Commons: HotNews Romania (CC BY 3.0), Photeka (CC BY-SA 3.0), Retired electrician (CC0), D-Kuru (CC BY-SA 4.0). Switch, buck and SSD photos are examples of the part type, not specific purchases. Illustrations are labelled.</p>
+  </div>
+</section>
+
 <section class="band" id="numbers">
   <div class="wrap">
     <div class="kicker">By the numbers</div>
@@ -838,6 +1044,58 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
+<section class="band" id="assemble">
+  <div class="wrap">
+    <div class="kicker">Assembly · scroll to build</div>
+    <h2>Seven parts. <span class="film">One deck.</span></h2>
+    <p class="lead">Scroll and the add-ons land on the dog's back in build order. Heavy parts sit low and between the hips; the LiDAR goes high at the rear, the arm at the front.</p>
+    <div class="dg-asm" id="asm">
+      <div class="pin">
+        <div class="now"><b id="asmname">Bare Go2 X</b><span id="asmtxt">Owned. 15 kg, 12 motors, 8 kg payload rating. Nothing on its back yet.</span><span class="pct" id="asmpct">0%</span></div>
+        <div class="stage">
+          <svg viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs><linearGradient id="asmg" x1="0" x2="1"><stop offset="0" stop-color="#A3E635"/><stop offset=".5" stop-color="#FACC15"/><stop offset="1" stop-color="#FB923C"/></linearGradient>
+              <filter id="asmglow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter></defs>
+            <g stroke="#1E2A12" stroke-width="1">
+              <line x1="0" y1="470" x2="1000" y2="470" stroke="#2A3448" stroke-width="2"/>
+              <line x1="0" y1="490" x2="1000" y2="490" stroke-dasharray="4 10"/>
+            </g>
+            <!-- dog body (static) -->
+            <g id="asmdog">
+              <path d="M290 330 L270 400 L282 468" stroke="#56627A" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M650 330 L632 400 L646 468" stroke="#56627A" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="250" y="292" width="470" height="72" rx="32" fill="#A5AEC2"/>
+              <rect x="300" y="300" width="370" height="10" rx="5" fill="#C9D0DD" opacity=".6"/>
+              <path d="M720 300 Q790 296 800 330 L796 356 Q776 372 720 364 Z" fill="#C9D0DD"/>
+              <circle cx="784" cy="326" r="7" fill="#A3E635"/><rect x="752" y="344" width="34" height="9" rx="4" fill="#1A2233"/>
+              <path d="M310 330 L292 400 L306 468" stroke="#8E98AC" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M672 330 L654 400 L668 468" stroke="#8E98AC" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="310" cy="330" r="22" fill="#8E98AC"/><circle cx="672" cy="330" r="22" fill="#8E98AC"/>
+              <text x="485" y="340" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="16" font-weight="700" fill="#3A465C" letter-spacing="3">GO2 X</text>
+            </g>
+            <!-- parts in build order -->
+            <g class="ap" data-i="0"><rect x="300" y="274" width="410" height="18" rx="4" fill="#3A465C" stroke="#56627A"/><g fill="#0A0D14"><circle cx="320" cy="283" r="4"/><circle cx="420" cy="283" r="4"/><circle cx="590" cy="283" r="4"/><circle cx="690" cy="283" r="4"/></g><text x="505" y="288" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#C9D0DD">DECK PLATE · M4</text></g>
+            <g class="ap" data-i="1"><rect x="380" y="226" width="130" height="48" rx="8" fill="#1A2233" stroke="#FACC15" stroke-width="3"/><text x="445" y="256" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" font-weight="700" fill="#FACC15">24 V · 200 Wh</text></g>
+            <g class="ap" data-i="2"><rect x="520" y="246" width="80" height="28" rx="4" fill="#14532D" stroke="#A3E635" stroke-width="2"/><rect x="528" y="252" width="22" height="16" rx="2" fill="#FACC15" opacity=".8"/><rect x="560" y="252" width="22" height="16" rx="2" fill="#FACC15" opacity=".8"/><circle cx="616" cy="258" r="13" fill="#DC2626" stroke="#7F1D1D" stroke-width="3"/></g>
+            <g class="ap" data-i="3"><rect x="636" y="252" width="66" height="22" rx="4" fill="#1E3A8A" stroke="#93C5FD" stroke-width="2"/><g fill="#0A0D14"><rect x="642" y="260" width="9" height="8"/><rect x="654" y="260" width="9" height="8"/><rect x="666" y="260" width="9" height="8"/><rect x="678" y="260" width="9" height="8"/><rect x="690" y="260" width="9" height="8"/></g></g>
+            <g class="ap" data-i="4"><rect x="516" y="196" width="140" height="40" rx="6" fill="#0A0D14" stroke="#76B900" stroke-width="3"/><circle cx="560" cy="216" r="13" fill="#1A2233" stroke="#76B900" stroke-width="2"/><path d="M560 205 L560 227 M549 216 L571 216" stroke="#76B900" stroke-width="2"/><text x="612" y="221" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#76B900">JETSON</text><line x1="530" y1="236" x2="530" y2="246" stroke="#56627A" stroke-width="3"/><line x1="642" y1="236" x2="642" y2="252" stroke="#56627A" stroke-width="3"/></g>
+            <g class="ap" data-i="5"><rect x="330" y="160" width="12" height="114" fill="#56627A"/><rect x="306" y="110" width="60" height="56" rx="16" fill="#1A2233" stroke="#A3E635" stroke-width="3"/><rect x="314" y="128" width="44" height="14" rx="5" fill="#A3E635"/><path class="beam" d="M366 135 L540 70 M366 135 L560 140 M306 135 L150 80" stroke="#A3E635" stroke-width="2" opacity="0" stroke-dasharray="6 6"/></g>
+            <g class="ap" data-i="6"><rect x="676" y="252" width="0" height="0"/><rect x="664" y="232" width="40" height="20" rx="4" fill="#FB923C"/><path d="M684 232 L716 150 L800 128" stroke="#FB923C" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="716" cy="150" r="10" fill="#FDBA74"/><path d="M800 128 L826 114 M800 128 L824 146" stroke="#FB923C" stroke-width="8" stroke-linecap="round"/></g>
+            <!-- wires appear at the end -->
+            <g id="asmwires" opacity="0" fill="none" stroke-width="2.5" stroke-linecap="round">
+              <path d="M510 250 Q515 250 520 258" stroke="#FACC15"/><path d="M560 246 Q560 240 560 236" stroke="#FACC15"/>
+              <path d="M600 266 Q620 270 636 264" stroke="#FACC15"/><path d="M342 200 Q430 180 516 210" stroke="#93C5FD" stroke-dasharray="5 5"/>
+              <path d="M656 226 Q690 240 690 252" stroke="#93C5FD" stroke-dasharray="5 5"/><path d="M700 274 Q712 290 720 300" stroke="#93C5FD" stroke-dasharray="5 5"/>
+            </g>
+            <text x="20" y="34" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="2" fill="#586178">SIDE VIEW · REAR ← → FRONT · NOT TO SCALE</text>
+          </svg>
+        </div>
+        <div class="steps" id="asmsteps"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="band" id="fit">
   <div class="wrap">
     <div class="kicker">Interactive</div>
@@ -863,6 +1121,18 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
         </div>
         <div class="dg-verdict" id="fitv"></div>
         <p class="src" style="margin-top:12px">Assumes ~190 W for walking (arXiv 2509.01765, read as amps), 90% usable energy, add-ons on their own battery. Carried weight will cut walking time further; nobody has published a measured figure.</p>
+      </div>
+    </div>
+    <div class="dg-pw">
+      <div class="dg-card">
+        <h3>Power budget, load by load <span class="dg-est">est.</span></h3>
+        <p class="src" style="margin-top:6px">Each bar starts where the last one ends, so you can see what eats the accessory battery. It updates as you tick parts above.</p>
+        <div class="dg-fall" id="fall"></div>
+      </div>
+      <div class="dg-card">
+        <h3>Gauges <span class="dg-est">est.</span></h3>
+        <div class="dg-gauges" id="gauges"></div>
+        <p class="src" style="margin-top:10px">Walking time doesn't yet account for the weight carried; heavier loads will shorten it.</p>
       </div>
     </div>
   </div>
@@ -904,6 +1174,32 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="band" id="flow">
+  <div class="wrap">
+    <div class="kicker">One loop, start to finish</div>
+    <h2>From laser to <span class="film">footstep.</span></h2>
+    <p class="lead">Follow one trip around the system: the LiDAR measures the room, the Jetson builds the map, Wi-Fi carries a summary home, the workstation decides, and the dog moves. Anything safety-related never leaves the dog.</p>
+    <div class="dg-flow">
+      <svg viewBox="0 0 1200 340" id="flowsvg" aria-hidden="true">
+        <rect x="10" y="20" width="700" height="300" rx="18" fill="none" stroke="#1E2A12" stroke-width="2" stroke-dasharray="6 8"/>
+        <rect x="900" y="20" width="290" height="300" rx="18" fill="none" stroke="#2A3448" stroke-width="2" stroke-dasharray="6 8"/>
+        <text class="zone" x="30" y="46">ON THE DOG</text><text class="zone" x="920" y="46">AT HOME · CONDUCTOR</text>
+        <path d="M110 120 L330 120 L560 120 L795 190 L1045 190 M795 190 L560 260 L110 260" fill="none" stroke="#1C2433" stroke-width="3"/><path id="fdash" d="M110 120 L330 120 L560 120 L795 190 L1045 190 M795 190 L560 260 L110 260" fill="none" stroke="#2A3448" stroke-width="2" stroke-dasharray="4 10"/>
+        <g class="nd" data-i="0"><rect x="40" y="88" width="140" height="64" rx="12"/><text class="t1" x="110" y="116">L2 LIDAR</text><text class="t2" x="110" y="136">64k pts/s</text></g>
+        <g class="nd" data-i="1"><rect x="260" y="88" width="140" height="64" rx="12"/><text class="t1" x="330" y="116">POINT-LIO</text><text class="t2" x="330" y="136">Jetson · SLAM</text></g>
+        <g class="nd" data-i="2"><rect x="490" y="88" width="140" height="64" rx="12"/><text class="t1" x="560" y="116">MAP TILE</text><text class="t2" x="560" y="136">+ camera frame</text></g>
+        <g class="nd" data-i="3"><rect x="720" y="158" width="150" height="64" rx="12"/><text class="t1" x="795" y="186">WI-FI · ZENOH</text><text class="t2" x="795" y="206">both directions</text></g>
+        <g class="nd" data-i="4"><rect x="960" y="158" width="170" height="64" rx="12"/><text class="t1" x="1045" y="186">RTX 5070 TI</text><text class="t2" x="1045" y="206">planner · arm AI</text></g>
+        <g class="nd" data-i="5"><rect x="490" y="228" width="140" height="64" rx="12"/><text class="t1" x="560" y="256">COMMAND</text><text class="t2" x="560" y="276">+ watchdog</text></g>
+        <g class="nd" data-i="6"><rect x="40" y="228" width="140" height="64" rx="12"/><text class="t1" x="110" y="256">GO2 WALKS</text><text class="t2" x="110" y="276">sport mode</text></g>
+        <circle id="fpk" r="9" fill="#A3E635" filter="url(#fglow)"/><circle id="fpk2" r="4.5" fill="#fff"/>
+        <defs><filter id="fglow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/></filter></defs>
+      </svg>
+    </div>
+    <div class="dg-flowcap" aria-live="polite"><b id="fstep">1 / 8</b><span id="ftxt">The L2 spins and measures distances all around the dog.</span></div>
   </div>
 </section>
 
@@ -954,6 +1250,23 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
+<section class="band" id="test">
+  <div class="wrap">
+    <div class="kicker">Step 1 · the 20-minute test</div>
+    <h2>One cable. <span class="film">Two possible answers.</span></h2>
+    <p class="lead">Before buying anything else, plug the Jetson into the X's rear port and ask the robot what it will share. The answer picks the software for everything after. The output below is <b>illustrative</b>: what each result would look like, not a recording.</p>
+    <div class="dg-term">
+      <div class="dg-tty"><div class="ttybar"><i></i><i></i><i></i><span style="margin-left:8px">jetson@field-unit: ~</span></div><pre id="tty" aria-live="off"></pre></div>
+      <div class="dg-res">
+        <div class="seg" role="group" aria-label="Choose a result"><button type="button" data-r="a" class="on">Result A</button><button type="button" data-r="b">Result B</button></div>
+        <div class="r a on" id="resa"><h3>A · Full robot topics</h3><p><b>rt/lowstate</b> and <b>rt/sportmodestate</b> show up. Use Unitree's official SDK over the cable. The Jetson can read joints and IMU, and joint control may be possible: test it only with the dog hung up.</p></div>
+        <div class="r b" id="resb"><h3>B · Only a few topics</h3><p>Use the community Wi-Fi drivers (go2_ros2_sdk / unitree_webrtc_connect). You get walk, turn and stand commands, video and the head LiDAR, but no joint control. Still enough for mapping and a stop-then-grab arm.</p></div>
+        <p class="src">Save the robot's encryption key from your Unitree account first, then keep the dog offline so an automatic update can't break the drivers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="band" id="day">
   <div class="wrap">
     <div class="kicker">Build day</div>
@@ -983,6 +1296,11 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
     </div>
     <div class="dg-card" style="margin-top:16px">
       <h3>LiDAR head to head</h3>
+      <div class="dg-lineup">
+        <figure><img src="img/dog-l2.jpg" alt="Unitree L2 LiDAR cutaway render" loading="lazy"><figcaption>Unitree L2 · our pick</figcaption></figure>
+        <figure><img src="img/dog-xt.jpg" alt="Hesai PandarXT LiDAR" loading="lazy"><figcaption>Hesai XT16 / XT32</figcaption></figure>
+        <figure><img src="img/dog-velo.jpg" alt="Velodyne LiDAR family including the Puck" loading="lazy"><figcaption>Velodyne: Alpha Prime, Ultra Puck, Puck</figcaption></figure>
+      </div>
       <div class="dg-tbl"><table>
         <thead><tr><th>Sensor</th><th>Weight</th><th>Blind zone</th><th>Range</th><th>Built-in IMU</th><th>Price</th><th>Status</th></tr></thead>
         <tbody>
@@ -1046,11 +1364,11 @@ footer.dg-foot{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--
   </div>
 </section>
 
-<footer class="dg-foot"><div class="wrap">Field Unit · Project 02 · <a href="./">All projects</a> · Figures marked est. are calculations, not measurements. Product photos: AgileX Robotics; NVIDIA; TheRobotStudio (SO-ARM100, open source); UMI on Legs project (Stanford / Columbia); Unitree Robotics, shown for identification.</div></footer>
+<footer class="dg-foot"><div class="wrap">Field Unit · Project 02 · <a href="./">All projects</a> · Figures marked est. are calculations, not measurements. Product photos: APJarvis (Wikimedia Commons, CC BY-SA 4.0); AgileX Robotics; D-Kuru (Wikimedia Commons, CC BY-SA 4.0); Hesai Technology; HotNews Romania - Adi Iacob, Ovidiu Popica (Wikimedia Commons, CC BY 3.0); NVIDIA; Photeka (Wikimedia Commons, CC BY-SA 3.0); Retired electrician (Wikimedia Commons, CC0); TheRobotStudio (SO-ARM100, open source); UMI on Legs project (Stanford / Columbia); Unitree Robotics; Unitree Robotics (unilidar_sdk2, BSD-3), shown for identification.</div></footer>
 
 <script>
 (function(){
-const IMG = {"dog-go2-piper": "img/dog-go2-piper.jpg", "dog-go2": "img/dog-go2.jpg", "dog-hero": "img/dog-hero.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2": "img/dog-l2.jpg", "dog-pair": "img/dog-pair.jpg", "dog-piper": "img/dog-piper.jpg", "dog-run": "img/dog-run.jpg", "dog-so101": "img/dog-so101.jpg", "dog-umi": "img/dog-umi.jpg"};
+const IMG = {"dog-buck": "img/dog-buck.jpg", "dog-go2-3q": "img/dog-go2-3q.jpg", "dog-go2-callout": "img/dog-go2-callout.jpg", "dog-go2-face": "img/dog-go2-face.jpg", "dog-go2-piper": "img/dog-go2-piper.jpg", "dog-go2-real": "img/dog-go2-real.jpg", "dog-go2-side": "img/dog-go2-side.jpg", "dog-go2": "img/dog-go2.jpg", "dog-hero": "img/dog-hero.jpg", "dog-jetson-ports": "img/dog-jetson-ports.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2-cloud": "img/dog-l2-cloud.jpg", "dog-l2-frame": "img/dog-l2-frame.jpg", "dog-l2": "img/dog-l2.jpg", "dog-nvme": "img/dog-nvme.jpg", "dog-pair": "img/dog-pair.jpg", "dog-piper": "img/dog-piper.jpg", "dog-run": "img/dog-run.jpg", "dog-so101-leader": "img/dog-so101-leader.jpg", "dog-so101": "img/dog-so101.jpg", "dog-switch": "img/dog-switch.jpg", "dog-umi": "img/dog-umi.jpg", "dog-velo": "img/dog-velo.jpg", "dog-xt": "img/dog-xt.jpg"};
 /* ---------- hero LiDAR sweep ---------- */
 (function(){
   const c=document.getElementById('scan'); if(!c) return; const x=c.getContext('2d'); const W=800,C=400;
@@ -1137,6 +1455,7 @@ function fit(){let kg=0,w=0;FIT.forEach(f=>{if(f.on){kg+=f.kg;w+=f.w;}});
   if(kg>8){v.className='dg-verdict bad';v.innerHTML='<b>Over the 8 kg rating.</b> The dog can lift up to 12 kg, but expect hot leg motors and short runs. Drop the heavy arm or LiDAR.';}
   else if(kg>6){v.className='dg-verdict warn';v.innerHTML='<b>Close to the limit.</b> It should walk, but log leg-motor temperatures from the first test. A 3.4 kg arm overheated a Go2\'s legs in Stanford\'s tests.';}
   else{v.className='dg-verdict';v.innerHTML='<b>Comfortable.</b> '+kg.toFixed(1)+' kg of the 8 kg rating, leaving room for the PiPER later if the bench tests go well.';}
+  document.dispatchEvent(new CustomEvent('fu:fit',{detail:{items:FIT,kg:kg,w:w,bat:BAT}}));
 }
 fit();
 
@@ -1177,29 +1496,29 @@ const CH=[
  {i:'arm',img:'dog-so101',s:'buy',n:'SO-101 robot arm',f:['$440–530','<1 kg','USB','LeRobot'],p:'A low-cost open-source arm for proving the whole pipeline: record demonstrations with a leader arm or a Quest 3 headset, train SmolVLA or ACT on the 5070 Ti, run it from the Jetson. Not tough enough for field work, which is why the PiPER is the planned upgrade.'},
  {i:'arm',img:'dog-piper',s:'later',n:'AgileX PiPER (later)',f:['~$2k–3.5k arm-only','4.2 kg','1.5 kg payload','24 V · CAN'],p:'The step up: lifts three times what the D1 does, takes fast commands over CAN through a USB adapter, and a 2026 paper already ran an AI arm model on a Go2 with a PiPER. Its weight is the risk: with everything else it pushes the dog toward the 8 kg rating.'},
  {i:'bat',s:'buy',n:'Power: accessory pack + 15 Ah upgrade',f:['24 V · ~200 Wh','fuse + e-stop','19 V + 12 V bucks','15 Ah: ~$1,200'],p:'Add-ons run from their own 24 V pack, so the robot\'s battery only moves the legs. The 15 Ah long-range main battery nearly doubles stored energy at the same size and weight; add the 9 A fast charger, since the stock 3.5 A charger takes about 4.5 h to fill it (est.).'},
- {i:'net',s:'buy',n:'Network switch, deck plate, SSD',f:['5-port gigabit','M4 deck','1 TB NVMe'],p:'The glue: a small 12 V switch joins robot, Jetson and LiDAR; a deck plate from open CAD bolts to the back; an NVMe SSD makes the Jetson fast and reliable.'}
+ {i:'net',img:'dog-switch',s:'buy',n:'Network switch, deck plate, SSD',f:['5-port gigabit','M4 deck','1 TB NVMe'],p:'The glue: a small 12 V switch joins robot, Jetson and LiDAR; a deck plate from open CAD bolts to the back; an NVMe SSD makes the Jetson fast and reliable.'}
 ];
 document.getElementById('chapters').innerHTML=CH.map(c=>'<div class="dg-chap"><div class="ico">'+(IMG[c.img]?'<img src="'+IMG[c.img]+'" alt="'+c.n+'" loading="lazy">':ICON[c.i])+'</div><div><span class="dg-pill '+ST[c.s][0]+'">'+ST[c.s][1]+'</span><h3>'+c.n+'</h3><div class="facts">'+c.f.map(x=>'<span>'+x+'</span>').join('')+'</div><p>'+c.p+'</p></div></div>').join('');
 
 /* ---------- BOM ---------- */
 const BOM=[
- {g:'Owned',n:'Unitree Go2 X',d:'$4,500 Unitree list',lo:0,hi:0,own:1},
- {g:'Owned',n:'Jetson Orin Nano Super Developer Kit',d:'$399 NVIDIA list',lo:0,hi:0,own:1},
- {g:'To buy · core',n:'1 TB NVMe SSD for the Jetson',d:'boot drive',lo:80,hi:120,core:1},
+ {g:'Owned',n:'Unitree Go2 X',im:'dog-go2-side',d:'$4,500 Unitree list',lo:0,hi:0,own:1},
+ {g:'Owned',n:'Jetson Orin Nano Super Developer Kit',im:'dog-jetson-ports',d:'$399 NVIDIA list',lo:0,hi:0,own:1},
+ {g:'To buy · core',n:'1 TB NVMe SSD for the Jetson',im:'dog-nvme',d:'boot drive',lo:80,hi:120,core:1},
  {g:'To buy · core',n:'24 V accessory battery (~200 Wh) + charger',d:'6S Li-ion or 8S LiFePO4',lo:150,hi:350,core:1},
- {g:'To buy · core',n:'19 V & 12 V buck converters, fuses, e-stop, wiring',d:'bench-test first',lo:80,hi:150,core:1},
- {g:'To buy · core',n:'12 V gigabit 5-port switch',d:'',lo:30,hi:60,core:1},
- {g:'To buy · core',n:'Unitree L2 LiDAR',d:'unitree.com',lo:419,hi:419,core:1},
- {g:'To buy · core',n:'SO-101 arm, assembled',d:'leader + follower kit if teleoperating',lo:440,hi:530,core:1},
+ {g:'To buy · core',n:'19 V & 12 V buck converters, fuses, e-stop, wiring',im:'dog-buck',d:'bench-test first',lo:80,hi:150,core:1},
+ {g:'To buy · core',n:'12 V gigabit 5-port switch',im:'dog-switch',d:'',lo:30,hi:60,core:1},
+ {g:'To buy · core',n:'Unitree L2 LiDAR',im:'dog-l2',d:'unitree.com',lo:419,hi:419,core:1},
+ {g:'To buy · core',n:'SO-101 arm, assembled',im:'dog-so101',d:'leader + follower kit if teleoperating',lo:440,hi:530,core:1},
  {g:'To buy · core',n:'Deck plate (3D printed or rail kit)',d:'Futurology kit $99.99',lo:0,hi:100,core:1},
  {g:'Upgrades',n:'15 Ah long-range battery + 9 A charger',d:'recommended',lo:1350,hi:1600,on:1},
- {g:'Upgrades',n:'AgileX PiPER arm + USB-CAN adapter',d:'later, if weight allows',lo:2200,hi:4000,on:0}
+ {g:'Upgrades',n:'AgileX PiPER arm + USB-CAN adapter',im:'dog-piper',d:'later, if weight allows',lo:2200,hi:4000,on:0}
 ];
 const bl=document.getElementById('bomlist');let lastG='';
 const money=v=>'$'+Math.round(v).toLocaleString('en-US');
 bl.innerHTML=BOM.map((b,i)=>{let h='';if(b.g!==lastG){h+='<div class="dg-group">'+b.g+'</div>';lastG=b.g;}
   const rng=b.own?'owned':(b.lo===b.hi?money(b.lo):money(b.lo)+'–'+money(b.hi).slice(1));
-  h+='<label class="dg-line"><input type="checkbox" data-i="'+i+'"'+(b.own||b.core?' checked disabled':(b.on?' checked':''))+'><span class="nm"><b>'+b.n+'</b>'+(b.d?'<small>'+b.d+'</small>':'')+'</span><span class="px">'+(b.own?'$0':money((b.lo+b.hi)/2))+'<small>'+rng+'</small></span></label>';return h;}).join('');
+  h+='<label class="dg-line"><input type="checkbox" data-i="'+i+'"'+(b.own||b.core?' checked disabled':(b.on?' checked':''))+'>'+(b.im&&IMG[b.im]?'<span class="bt" style="background-image:url('+IMG[b.im]+')"></span>':'<span class="bt dk">'+(/battery/i.test(b.n)?ICON.bat:/plate/i.test(b.n)?ICON.net:ICON.chip)+'</span>')+'<span class="nm"><b>'+b.n+'</b>'+(b.d?'<small>'+b.d+'</small>':'')+'</span><span class="px">'+(b.own?'$0':money((b.lo+b.hi)/2))+'<small>'+rng+'</small></span></label>';return h;}).join('');
 bl.addEventListener('change',e=>{const i=e.target.dataset.i;if(i==null)return;BOM[i].on=e.target.checked?1:0;bom();});
 function bom(){let core=0,up=0;BOM.forEach(b=>{const m=(b.lo+b.hi)/2;if(b.core)core+=m;else if(!b.own&&b.on)up+=m;});
   document.getElementById('bomcore').textContent=money(core);document.getElementById('bomup').textContent=money(up);document.getElementById('bomsum').textContent=money(core+up);}
@@ -1257,6 +1576,121 @@ document.getElementById('srcs').innerHTML=SRC.map(s=>'<li><a href="'+s[1]+'" tar
     const po = new IntersectionObserver(es=>es.forEach(e=>{ const sv=e.target; if(e.isIntersecting){ sv.unpauseAnimations&&sv.unpauseAnimations(); sv.classList.remove('dg-paused'); } else { sv.pauseAnimations&&sv.pauseAnimations(); sv.classList.add('dg-paused'); } }),{threshold:0});
     anim.forEach(sv=>po.observe(sv));
   }
+})();
+</script>
+<script>
+/* ===== sparkle pass: hero point cloud, HUD, assembly scrub, power waterfall + gauges, data flow, terminal ===== */
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const $=s=>document.querySelector(s);
+const onVis=(el,fn,th)=>{if(!el)return;const io=new IntersectionObserver(es=>es.forEach(e=>fn(e.isIntersecting)),{threshold:th||0});io.observe(el);};
+
+/* --- hero: LiDAR sweep that turns the photo into points --- */
+(()=>{const box=$('#holo'),cv=$('#holocv');if(!box||!cv)return;const img=box.querySelector('img');const x=cv.getContext('2d');
+  let W,H,DPR=Math.min(2,devicePixelRatio||1),pts=[],on=false,t0=performance.now();
+  const build=()=>{const r=box.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0);
+    if(!img.naturalWidth)return;const S=150,oc=document.createElement('canvas');oc.width=S;oc.height=S;const o=oc.getContext('2d',{willReadFrequently:true});
+    // mirror object-fit:cover + object-position 50% 60% + scale(1.04)
+    const ir=img.naturalWidth/img.naturalHeight;let sw,sh;if(ir>1){sh=img.naturalHeight;sw=sh;}else{sw=img.naturalWidth;sh=sw;}
+    const sx=(img.naturalWidth-sw)*.5,sy=(img.naturalHeight-sh)*.6;o.drawImage(img,sx,sy,sw,sh,0,0,S,S);
+    let d;try{d=o.getImageData(0,0,S,S).data;}catch(e){return;}
+    pts=[];for(let yy=0;yy<S;yy+=1)for(let xx=0;xx<S;xx+=1){const i=(yy*S+xx)*4,l=(d[i]*.3+d[i+1]*.59+d[i+2]*.11);
+      if(l>70&&Math.random()<.55)pts.push({x:(xx+Math.random()*.6)/S*W,y:(yy+Math.random()*.6)/S*H,l:l/255,lit:0});}};
+  const draw=now=>{if(!on)return;const T=(now-t0)/1000,period=3.6,k=(T%period)/period,sx=k*(W+160)-80;
+    x.clearRect(0,0,W,H);
+    const g=x.createLinearGradient(sx-60,0,sx+6,0);g.addColorStop(0,'rgba(163,230,53,0)');g.addColorStop(1,'rgba(163,230,53,.28)');x.fillStyle=g;x.fillRect(sx-60,0,66,H);
+    x.fillStyle='rgba(217,249,157,.95)';x.shadowColor='#A3E635';x.shadowBlur=14;x.fillRect(sx,0,2.5,H);x.shadowBlur=0;
+    for(const p of pts){if(Math.abs(p.x-sx)<7)p.lit=1;else p.lit*=.992;
+      if(p.lit>.04){x.globalAlpha=Math.min(1,p.lit*(.55+.6*p.l));x.fillStyle=p.lit>.85?'#F7FEE7':(p.y/H<.55?'#A3E635':'#FACC15');x.fillRect(p.x-1,p.y-1,2.2,2.2);}}
+    x.globalAlpha=1;requestAnimationFrame(draw);};
+  const go=()=>{build();if(RM){pts.forEach(p=>p.lit=.6);on=true;draw(performance.now());on=false;return;}};
+  if(img.complete)go();else img.addEventListener('load',go,{once:true});addEventListener('resize',()=>{build();});
+  onVis(box,v=>{if(RM)return;const was=on;on=v;if(v&&!was)requestAnimationFrame(draw);});
+  // HUD level bars
+  setTimeout(()=>box.querySelectorAll('.lv i').forEach(i=>i.style.width=i.dataset.w+'%'),400);
+})();
+
+/* --- assembly: parts fly onto the deck as you scroll --- */
+(()=>{const sec=$('#asm');if(!sec)return;const asv=sec.querySelector('svg');const fitVB=()=>asv.setAttribute('viewBox',innerWidth<700?'220 70 640 420':'0 0 1000 520');fitVB();addEventListener('resize',fitVB);const parts=[...sec.querySelectorAll('.ap')];const wires=$('#asmwires');const beam=sec.querySelector('.beam');
+  const N=[['Deck plate','Bolts to the existing M4 holes on the back. Printed or a rail kit; check it against our X first.'],
+    ['24 V accessory battery','About 200 Wh, low and centred between the hips. It powers every add-on so the dog\'s battery only moves the legs.'],
+    ['Power board + e-stop','Main fuse, red latching e-stop, then 19 V and 12 V buck converters, each branch fused.'],
+    ['Network switch','12 V, 5 gigabit ports: Go2 rear port, Jetson, L2, and a spare.'],
+    ['Jetson Orin Nano Super','On standoffs above the power board, in a vented case. Ethernet to the switch, 19 V barrel from the buck.'],
+    ['Unitree L2 LiDAR','High at the rear on a short mast, so the arm never blocks its view.'],
+    ['SO-101 arm','At the front of the deck, USB to the Jetson. Total about 3.4 kg, well inside the 8 kg rating (est.).']];
+  const FROM=[[0,-260,-4],[-380,-200,-18],[0,-320,12],[340,-220,20],[0,-360,-10],[-420,-120,-24],[400,-260,28]];
+  const steps=$('#asmsteps');N.forEach((n,i)=>{const s=document.createElement('span');s.textContent=(i+1)+' '+n[0];steps.appendChild(s);});
+  const name=$('#asmname'),txt=$('#asmtxt'),pct=$('#asmpct');let last=-2;
+  const ease=t=>1-Math.pow(1-t,3);
+  const set=p=>{const n=parts.length;let cur=-1;
+    parts.forEach((g,i)=>{const a=Math.min(1,Math.max(0,(p*(n+1)-i)*1.25));const e=ease(a);const f=FROM[i];
+      g.setAttribute('transform','translate('+(f[0]*(1-e))+' '+(f[1]*(1-e))+') rotate('+(f[2]*(1-e))+' 500 260)');g.style.opacity=a<=0?0:Math.min(1,a*2);
+      if(a>.35)cur=i;});
+    wires.setAttribute('opacity',Math.max(0,Math.min(1,(p-.88)*8)));if(beam)beam.setAttribute('opacity',p>.8?.7:0);
+    if(cur!==last){last=cur;[...steps.children].forEach((s,i)=>{s.className=i<cur?'done':i===cur?'cur':'';});
+      if(cur<0){name.textContent='Bare Go2 X';txt.textContent='Owned. 15 kg, 12 motors, 8 kg payload rating. Nothing on its back yet.';}
+      else{name.textContent=N[cur][0];txt.textContent=N[cur][1];}}
+    pct.textContent=Math.round(p*100)+'%';};
+  if(RM){set(1);return;}
+  let tick=false;const upd=()=>{tick=false;const r=sec.getBoundingClientRect();const total=sec.offsetHeight-innerHeight*.9;const p=Math.min(1,Math.max(0,(-r.top+innerHeight*.08)/Math.max(1,total)));set(p);};
+  addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});addEventListener('resize',upd);upd();
+})();
+
+/* --- power waterfall + gauges (driven by the fit check) --- */
+(()=>{const fall=$('#fall'),gg=$('#gauges');if(!fall||!gg)return;
+  const COL={jet:'#76B900',pwr:'#93C5FD',l2:'#A3E635',so:'#FB923C',pip:'#F97316',xt:'#FACC15',rt:'#FDBA74'};
+  const ring=(id,label)=>'<div><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#1C2433" stroke-width="12"/><circle class="g-arc" id="'+id+'" cx="60" cy="60" r="48" fill="none" stroke="#A3E635" stroke-width="12" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)"/><text id="'+id+'t" x="60" y="58" text-anchor="middle" font-family="Big Shoulders Display,Arial Narrow,sans-serif" font-weight="900" font-size="30" fill="#E9EDF5">–</text><text id="'+id+'s" x="60" y="80" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8E98AC"></text></svg><span>'+label+'</span></div>';
+  gg.innerHTML=ring('gkg','Payload used of the 8 kg rating')+ring('gacc','Accessory battery (200 Wh) runtime')+ring('gmain','Walking on the main battery');
+  const setRing=(id,frac,big,small,col)=>{const a=document.getElementById(id);a.style.strokeDashoffset=301.6*(1-Math.max(0,Math.min(1,frac)));a.style.stroke=col;
+    document.getElementById(id+'t').textContent=big;document.getElementById(id+'s').textContent=small;};
+  const hm=h=>{const m=Math.round(h*60);return Math.floor(m/60)+'h'+String(m%60).padStart(2,'0');};
+  document.addEventListener('fu:fit',e=>{const {items,kg,w,bat}=e.detail;const loads=items.filter(f=>f.w>0);let acc=0;const max=Math.max(150,w);
+    fall.innerHTML=items.filter(f=>f.w>0||true).filter(f=>f.w>0).map(f=>{const h='<div class="row'+(f.on?'':' off')+'"><span>'+f.n.replace(' + case','').replace(' (later)','')+'</span><div class="tr"><i style="left:'+(f.on?acc/max*100:0)+'%;width:'+(f.on?f.w/max*100:0)+'%;background:'+(COL[f.k]||'#A3E635')+'"></i></div><b>'+(f.on?f.w+' W':'off')+'</b></div>';if(f.on)acc+=f.w;return h;}).join('')
+      +'<div class="row tot"><span>Total add-ons</span><div class="tr"><i style="left:0;width:'+(w/max*100)+'%;background:linear-gradient(90deg,#A3E635,#FACC15,#FB923C)"></i></div><b>'+w+' W</b></div>';
+    const kc=kg>8?'#F87171':kg>6?'#FACC15':'#A3E635';setRing('gkg',kg/8,kg.toFixed(1),'kg of 8',kc);
+    const accH=w>0?200*.9/w:0;setRing('gacc',accH/4,w>0?hm(accH):'–',w>0?'at '+w+' W':'no load',accH<1.5?'#FACC15':'#A3E635');
+    const mainH=(bat===8?236.8:432)*.9/190;setRing('gmain',mainH/4,hm(mainH),bat+' Ah pack','#93C5FD');});
+  // first paint: ask the fit check to re-announce
+  const any=document.querySelector('#fitopts input');if(any)any.dispatchEvent(new Event('change',{bubbles:true}));
+})();
+
+/* --- data flow: one packet's trip --- */
+(()=>{const svg=$('#flowsvg');if(!svg)return;const pk=$('#fpk'),pk2=$('#fpk2'),nodes=[...svg.querySelectorAll('.nd')];
+  const WP=[[110,120,0],[330,120,1],[560,120,2],[795,190,3],[1045,190,4],[795,190,3],[560,260,5],[110,260,6]];
+  const CAP=['The L2 spins and measures distances all around the dog.','Point-LIO on the Jetson turns points into the dog\'s position and a map, many times a second.',
+    'A small map tile and a compressed camera frame are packed up. Raw point clouds stay on the dog: they are too big for Wi-Fi.',
+    'Zenoh carries the package home over Wi-Fi.','The RTX 5070 Ti runs the planner or the arm AI and decides what to do next.',
+    'The decision travels back as a short command with a timeout.','The Jetson checks it. If Wi-Fi drops, the watchdog stops the dog.',
+    'Unitree\'s own controller moves the legs. Then the loop starts again.'];
+  const fs=$('#fstep'),ft=$('#ftxt'),dash=$('#fdash');let on=false,t0=0,lastSeg=-1;const SEG=1500;
+  const place=(x,y)=>{pk.setAttribute('cx',x);pk.setAttribute('cy',y);pk2.setAttribute('cx',x);pk2.setAttribute('cy',y);};
+  const frame=now=>{if(!on)return;const T=(now-t0)%(SEG*WP.length);const s=Math.floor(T/SEG),k=Math.min(1,(T%SEG)/(SEG*.55));const a=WP[s],b=WP[(s+1)%WP.length];
+    const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;const last=s===WP.length-1;place(last?a[0]:a[0]+(b[0]-a[0])*e,last?a[1]:a[1]+(b[1]-a[1])*e);
+    if(s!==lastSeg){lastSeg=s;nodes.forEach(n=>n.classList.toggle('on',+n.dataset.i===a[2]));fs.textContent=(s+1)+' / '+WP.length;ft.textContent=CAP[s];}
+    dash.style.strokeDashoffset=-(now/40)%14;requestAnimationFrame(frame);};
+  if(RM){place(110,120);nodes[0].classList.add('on');return;}
+  onVis(svg,v=>{const was=on;on=v;if(v&&!was){t0=performance.now()-(lastSeg>0?lastSeg*SEG:0);requestAnimationFrame(frame);}},.25);
+})();
+
+/* --- terminal: the network test, typed --- */
+(()=>{const tty=$('#tty');if(!tty)return;const segBtns=document.querySelectorAll('.dg-res .seg button');
+  const COMMON=[['p','$ '],['k','sudo ip addr add 192.168.123.99/24 dev eth0\n'],['p','$ '],['k','ping -c 2 192.168.123.161\n'],
+    ['o','64 bytes from 192.168.123.161: icmp_seq=1 ttl=64\n64 bytes from 192.168.123.161: icmp_seq=2 ttl=64\n'],['p','$ '],['k','ros2 topic list\n']];
+  const A=[['o','/rt/lowstate\n/rt/sportmodestate\n/rt/api/sport/request\n/rt/utlidar/cloud\n/rt/wirelesscontroller\n…\n'],['g','✓ RESULT A: official SDK over the cable\n']];
+  const B=[['o','/parameter_events\n/rosout\n'],['w','△ RESULT B: use the Wi-Fi (WebRTC) drivers\n']];
+  let run=0,mode='a',vis=false,auto=true;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const typeAll=async(lines,id)=>{tty.innerHTML='';let html='';for(const [c,t] of lines){const fast=c==='o'||c==='p';
+      for(let i=0;i<t.length;i+=fast?6:1){if(run!==id)return false;html2(html+'<span class="'+c+'">'+esc(t.slice(0,i+1))+'</span>');await new Promise(r=>setTimeout(r,fast?18:34));}
+      html+='<span class="'+c+'">'+esc(t)+'</span>';html2(html);await new Promise(r=>setTimeout(r,c==='k'?380:120));}return true;};
+  const html2=h=>tty.innerHTML=h+'<span class="cur"></span>';
+  const show=m=>{mode=m;segBtns.forEach(b=>b.classList.toggle('on',b.dataset.r===m));$('#resa').classList.toggle('on',m==='a');$('#resb').classList.toggle('on',m==='b');};
+  const play=async m=>{const id=++run;show(m);if(RM){tty.innerHTML=[...COMMON,...(m==='a'?A:B)].map(([c,t])=>'<span class="'+c+'">'+esc(t)+'</span>').join('');return;}
+    const ok=await typeAll([...COMMON,...(m==='a'?A:B)],id);if(ok&&auto&&vis){setTimeout(()=>{if(run===id&&auto&&vis)play(m==='a'?'b':'a');},3200);}};
+  segBtns.forEach(b=>b.onclick=()=>{auto=false;play(b.dataset.r);});
+  onVis(tty,v=>{const was=vis;vis=v;if(v&&!was)play(mode);},.3);
+})();
 })();
 </script>
 
