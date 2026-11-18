@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Velodyne VLP-16 Puck LiDAR</title>
+<meta name="description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<meta property="og:title" content="Project Conductor"><meta property="og:description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<meta property="og:image" content="img/a-cpu.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+</head><body style="margin:0">
+<div style="position:relative;z-index:30;background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))"><span>Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span><span style="display:flex;gap:14px"><a href="./" style="color:#0A0D14;text-decoration:none;opacity:.8">Showcase</a><a href="dog.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Robot dog</a><a href="build-book.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Build book</a><a href="research.html" style="color:#0A0D14;text-decoration:underline;font-weight:800">Research</a></span></div>
+<style>
+:root{--bg:#06080E;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#6EE7F9;color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 Manrope,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"Big Shoulders Display","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:10px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid #A78BFA;margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.card:hover{border-color:#A78BFA}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#A78BFA}
+</style><div class="wrap"><a class="back" href="research.html">← Research library</a><article id="doc"></article></div><script type="text/markdown" id="md"># Skip the Puck: put an XT16 or L2 on your Go2
+
+The Velodyne VLP-16 "Puck" was the reference 16-channel spinning LiDAR of the 2010s. In November 2026 it is a discontinued legacy sensor, and it is a poor fit for a Unitree Go2 EDU. Ouster bought Velodyne in 2023, and its FY2025 10-K says it **stopped manufacturing the VLP-16, Puck LITE and Puck Hi-Res in 2025**. A distributor reports that factory repairs ended on 30 June 2026 and that technical support ends with 2026. Used units are very cheap at about **$260–$500**, against roughly **$4,000** for any remaining new stock. On a quadruped, though, the VLP-16 has real drawbacks:
+
+- **0.9 m blind zone** around the robot
+- **830 g** plus a bulky interface box
+- **no internal IMU**
+- a **9–18 V** input that the Go2 battery bus overshoots
+
+The Hesai XT16 in your reference image has the same channel count and weight. It improves on the VLP-16 almost everywhere that matters, and it is the high-end LiDAR Unitree supports for the Go2. The **Unitree L2 ($419, 230 g, 96° vertical FOV, built-in IMU)** gets most Go2 owners most of the benefit for a tenth of the XT16's price. **Recommendation:** buy an L2 first. Buy an XT16, or a Go2 EDU Plus with the XT16 bundled, if you need range beyond 30 m or outdoor survey-grade maps. Buy a VLP-16 only as a cheap bench or desk sensor for learning LOAM-family pipelines, never as the main sensor on a Go2. Neither of your two eBay listings could be fetched, so their price, condition and contents are unverified.
+
+## A 2014 design: 16 rings, 2° apart, 100 m range
+
+The VLP-16 is a **16-channel, 903 nm, Class 1** spinning LiDAR. Its specs from the datasheet ([Puck Datasheets, Rev K](https://data.ouster.io/downloads/datasheets/velodyne/Puck%20Datasheets.zip)):
+
+- **360° × 30° (±15°) field of view, with 2.0° between rings**
+- **100 m range** and **±3 cm** typical accuracy
+- **~300k points/s** in single-return mode, ~600k in dual-return
+- **8 W at 9–18 V**, **~830 g**, IP67
+- Ø103 × 72 mm, with a 1/4-20 mount
+- 100 Mbps Ethernet over UDP
+
+Azimuth resolution depends only on spin rate: 0.1° at 5 Hz, 0.2° at 10 Hz and 0.4° at 20 Hz. The firing timing is fixed, so the point rate stays the same at any spin rate ([User Manual Rev F](https://data.ouster.io/downloads/velodyne/user-manual/vlp-16-user-manual-revf.pdf)). Two specs are missing from the datasheet. It does not say what target reflectivity the 100 m range assumes, and it gives no minimum range. Clearpath's integration docs put the minimum range at **0.9 m** ([Clearpath](https://docs.clearpathrobotics.com/docs/robots/accessories/sensors/lidar_3d/velodyne_puck)).
+
+The power interface takes the most care. A ~3 m cable is permanently attached to the sensor and ends in an **interface box**. The box provides the barrel power jack, the RJ45 port, the GPS PPS/NMEA input, a fuse and reverse-polarity protection. The supply must deliver **up to 3 A at spin-up**. Cutting the cable needs a Velodyne waiver and has warranty consequences ([User Manual Rev F](https://data.ouster.io/downloads/velodyne/user-manual/vlp-16-user-manual-revf.pdf)). Clearpath warns that the sensor itself has **no polarity or over-voltage protection** ([Clearpath](https://docs.clearpathrobotics.com/docs/robots/accessories/sensors/lidar_3d/velodyne_puck)). Firmware stopped at **3.0.41.1 (July 2019)**, and Ouster's download page offers manuals but no firmware files ([Ouster Velodyne downloads](https://ouster.com/downloads/velodyne-downloads)).
+
+The family has three 16-channel variants. They share the same electronics, interface and point rate:
+
+| Model | V-FOV / ring spacing | Weight | Op. temp | Notes |
+|---|---|---|---|---|
+| Puck (VLP-16, 80-VLP-16-A) | 30° (±15°) / 2.0° | ~830 g | −10 to +60 °C | Baseline |
+| Puck LITE (VLP-16-LW) | 30° / 2.0° | **~590 g** | −10 to +60 °C | "Aside from the weight… identical performance" |
+| Puck Hi-Res (VLP-16-HI-RES) | **20° (±10°) / 1.33°** | ~750 g (Clearpath lists 830 g) | 0 to +60 °C | Denser rings, narrower view |
+
+Sources: [Puck Datasheets.zip](https://data.ouster.io/downloads/datasheets/velodyne/Puck%20Datasheets.zip)
+
+The **Puck Hi-Res** you found on Clearpath's store ([store.clearpathrobotics.com/products/puck-hi-res](https://store.clearpathrobotics.com/products/puck-hi-res)) lists no price. The store's product data shows a $0 price, which is how its Shopify store marks a quote-only item. The listing is flagged "available", says nothing about lead time or warranty, and dates from 2018. The Hi-Res is the **wrong Puck for a dog**. Its denser rings help detect objects at long range. On a body about 0.45 m tall, though, the ±10° window first hits flat ground at roughly **2.6 m**, versus about 1.7 m for the standard ±15° model. It also sees less above sensor height. Both figures are my own geometry from the datasheet angles. On a Go2 that trade-off goes the wrong way. The 32-channel siblings, the Ultra Puck VLP-32C and the Puck 32MR, are 10 W, 925 g sensors. The VLP-32C was discontinued in July 2023 ([Digiflec](https://digiflec.com/product-discontinuation-notice-final-chance-to-buy-velodyne-ultra-puck-vlp-32c/)).
+
+## Ouster ended production in 2025, and the 10-K is the source to trust
+
+The research notes conflict. One reseller still lists the VLP-16 as new at **$4,000 with a 4–6 week backorder** ([Robotics Center](https://www.roboticscenter.ai/store/product/velodyne-vlp-16)), and no Ouster end-of-life page was found. Ouster's annual reports, on the other hand, are explicit. The FY2024 10-K, filed March 2025, said the VLP-16, VLP-16 Lite, VLP-16 Hi-Res, VLP-32 and VLS-128 were "in the final stages of their product lifecycle. We plan to stop manufacturing these products in 2025" ([Ouster 10-K FY2024](https://www.sec.gov/Archives/edgar/data/1816581/000162828025014318/oust-20241231.htm)). The FY2025 10-K, filed 2 March 2026, changes that to **"We stopped manufacturing these products in 2025"** ([Ouster 10-K FY2025](https://www.sec.gov/Archives/edgar/data/1816581/000162828026013313/oust-20251231.htm)).
+
+**The 10-K should win.** Ouster filed it with the SEC under legal liability for accuracy, and it is the manufacturer's own statement. A reseller listing is a storefront that may never have been updated. The two sources fit together: a "backorder" for a product that is no longer made means the reseller is hunting for leftover stock, not waiting on a factory run. Expect that order to stall or be cancelled.
+
+Support follows the same path. In September 2024, distributor Digiflec reported that Ouster had committed to **VLP-16 repairs until 30 June 2026** and **technical support until the end of 2026**. It also reported about 65,000 units sold and recommended the Ouster OS1 as the replacement ([Digiflec](https://digiflec.com/important-update-for-ouster-velodyne-vlp-16-users/)). These dates come from a distributor, not from Ouster itself. They match the 10-K's timeline, though, so treat them as likely correct but worth confirming with Ouster support. Velodyne's warranty ran **one year from shipment and could not be transferred** ([User Manual Rev F](https://data.ouster.io/downloads/velodyne/user-manual/vlp-16-user-manual-revf.pdf)). In practice, a VLP-16 bought in late 2026 has **no warranty, no factory repair, and support that ends within weeks**. A motor or laser-board failure is likely the end of the sensor.
+
+## Used Pucks sell for roughly 10% of list, and your two listings are unverified
+
+The VLP-16 launched in 2014 at **$7,999** ([Geo Week News](https://www.geoweeknews.com/articles/vol12no37-velodyne-announces-puck-lidar-sensor/)). In January 2018 Velodyne cut it to about **$4,000** ([GIM International](https://www.gim-international.com/content/news/velodyne-cuts-vlp-16-lidar-price)), and that remains the list price for new stock today ([Robotics Center](https://www.roboticscenter.ai/store/product/velodyne-vlp-16)). Fleets are now being liquidated, and the used market has collapsed:
+
+- **China-based eBay sellers:** **$262–$318** for a used Puck with the interface box, before shipping and import fees ([eBay 147537662935](https://www.ebay.com/itm/147537662935); [eBay 407220625816](https://www.ebay.com/itm/407220625816))
+- **A US seller of refurbished units:** **$500 each, or $425 each for four or more, with 52 sold**. This is the safest used option ([eBay search](https://www.ebay.com/shop/velodyne-vlp-16?_nkw=velodyne+vlp+16))
+- **Outliers:** $1,450 for a unit with full cabling, and $3,995 for an untested lot ([eBay listings](https://www.ebay.com/sch/i.html?_nkw=vlp-16&_sop=12))
+
+**Neither of your listings could be checked.** eBay returned HTTP 403 and bot-block pages for [item 307255040372](https://www.ebay.com/itm/307255040372) and [item 168494565249](https://www.ebay.com/itm/168494565249), and no indexed copy of either was found. Their model, price, condition, contents and seller history are all unknown. Use the market prices above as your benchmark. Anything over about $500 for a used standard Puck needs a reason, such as included cabling, verified US stock, or a return window. Check these points with the seller before buying:
+
+1. **The interface box and cable are included and intact.** A missing box, or a homemade adapter wired with the wrong polarity, can kill the sensor ([Clearpath](https://docs.clearpathrobotics.com/docs/robots/accessories/sensors/lidar_3d/velodyne_puck)).
+2. **The part number matches what you want.** 80-VLP-16-A is the standard Puck; LITE and Hi-Res units have different numbers.
+3. **The firmware version is visible in the web UI.** Units older than 3.0.38 lack the thermal-shutdown feature and fixes for an azimuth-counting bug ([User Manual Rev F](https://data.ouster.io/downloads/velodyne/user-manual/vlp-16-user-manual-revf.pdf)).
+
+Beyond those, general good practice applies:
+
+- Get a video of all 16 rings running live in VeloView or ROS.
+- Ask about bearing noise.
+- Check the optical window for scratches.
+- Get a return window.
+
+Treat any listing marked "untested" as parts only.
+
+## Integrating a VLP-16 on a Go2 EDU is feasible but unsupported
+
+**Software is the easy part.** The official `ros-drivers/velodyne` stack is at v2.5.1, last updated in August 2025. It ships binaries for ROS 2 Humble and Jazzy and lists the VLP-16 as supported ([docs.ros.org](https://docs.ros.org/en/jazzy/p/velodyne_driver/); [ROS Index](https://index.ros.org/p/velodyne_driver/)). TIER IV's Nebula driver also supports it on Humble and Jazzy ([tier4/nebula](https://github.com/tier4/nebula)). The VLP-16 is the reference sensor for LOAM, LeGO-LOAM and LIO-SAM. Its point clouds carry the per-point `ring` and `time` fields that LIO-SAM and FAST-LIO expect. A 2026 RA-L paper even uses a dataset recorded with a **VLP-16 on a Unitree Go1** ([Malladi et al. 2026](https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/malladi2026ral.pdf)). Two cautions apply on a walking robot:
+
+- **LeGO-LOAM assumes a ground plane is always visible** ([LeGO-LOAM](https://awesome.ecosyste.ms/projects/github.com%2Frobustfieldautonomylab%2Flego-loam)). A pitching quadruped breaks that assumption.
+- **You need an IMU.** Tightly coupled LiDAR-inertial methods (FAST-LIO2, Point-LIO, LIO-SAM) correct for the sensor's motion within each scan using IMU data ([arXiv 2509.06593](https://arxiv.org/html/2509.06593v1)). The VLP-16 has no IMU, so you must add one and time-sync it, or calibrate against the Go2's own IMU. Fusing leg kinematics as well cut trajectory error by up to **40% versus LIO-SAM and FAST-LIO2** on another quadruped ([arXiv 2504.20615](https://ar5iv.labs.arxiv.org/html/2504.20615)).
+
+**Hardware is where it gets hard.** No public build log, repository or paper pairs a Go2 with a VLP-16. Published Go2 work uses the Livox Mid-360 or the built-in LiDAR instead ([QuadVerse](https://arxiv.org/pdf/2606.07118); [ForEnt](https://arxiv.org/pdf/2606.19675)). Power, network, payload and mounting each need planning.
+
+**Power.** The Go2 battery runs at **28–33.6 V** ([Unitree Go2](https://www.unitree.com/go2/)), which is well above the VLP-16's 18 V limit. Never connect the sensor to the battery directly. Third-party documentation describes a **12 V / 3 A user output** on the EDU expansion dock ([InDro](https://indrorobotics.notion.site/Payload-1d61bb7999b280df802bc81a8a2cbc0c)). That covers the ~8 W running load and the 3 A spin-up surge with little margin. The same source gives conflicting figures for the dock's power connectors, so **measure before wiring**. Keep the interface box in the circuit for its fuse and polarity protection. If you remove it, add your own fuse and protection. If the 12 V output is already in use, an isolated 24–36 V to 12 V DC-DC converter is the alternative.
+
+**Network.** The Go2's internal subnet is **192.168.123.0/24**, and the Jetson Orin on the dock sits at **192.168.123.18** ([Go2 develop manual](https://miye-kim.github.io/YMO-support/go2/develop_manual)). From general domain knowledge rather than a fetched source, the VLP-16 ships at 192.168.1.201 and sends data on UDP 2368. Change its address to 192.168.123.x through its web UI, and plug it into the dock's Gigabit port.
+
+**Payload and mounting.** The Go2 EDU payload is **8 kg standard** ([Weston Robot](https://westonrobot.github.io/docs-legacy/robot_user_guide/unitree/go2.html)). The sensor plus mount, cable and converter comes to about 1 kg, high on the back. Unitree's factory LiDARs connect through a dedicated aviation connector on the dock, with a supplied base frame ([MYBOTSHOP forum](https://forum.mybotshop.de/t/unitree-go2-installation-of-livox-mid-360/1080)). A VLP-16 gets neither, so you design the plate, roll-bar adapter and cable routing yourself. Universities that add LiDARs to the Go2 make their own mounts ([PSU VAR Lab](https://var.psu.edu/?p=7121); [Southampton](https://robots.ecs.soton.ac.uk/go2/external_lidar)). The VLP-16's Ø103 mm body should fit an XT16-style roll bar with an adapter plate. No source confirms that, and its side cable exit needs clearance.
+
+**Your reference build is a stock product.** A Go2 with a PandarXT on a guarded top plate and a front depth camera matches the retail **"Go2 EDU Plus with Hesai XT16"** package. In that package the Jetson Orin, a RealSense D435i, a Mid-360 or XT16 LiDAR, and the D1 arm all mount to the same top deck ([Global Drone HQ](https://globaldronehq.com/collections/unitree-robot-dogs/products/unitree-go2-edu-quadruped-robot)). US prices:
+
+- **$19,000–$21,900** for the XT16 version, at RoboStore ([RoboStore](https://robostore.com/products/go2-edu-plus-with-xt16-lidar-quadruped-robot-dog)) and Global Drone HQ, which lists it at $19,430
+- **about $17,055** for the Mid-360 version, also at Global Drone HQ
+
+Unitree's developer material names the **Mid-360 and the XT16 as the two supported external LiDARs** for Go2 SLAM ([RoboStore blog](https://robostore.com/blogs/news/hesai-xt16-vs-mid-360-lidar-for-unitree-go2-edu-enhancing-robotics-with-advanced-sensing-technology)). Unitree does not support a VLP-16 on the Go2.
+
+## The XT16 is a better VLP-16, and the L2 is the value pick
+
+| | Velodyne VLP-16 | Hesai XT16 | Hesai XT32 | Livox Mid-360 | Unitree L2 |
+|---|---|---|---|---|---|
+| Scan | 16 rings | 16 rings | 32 rings | Non-repetitive | Non-repetitive "4D" |
+| Vertical FOV | 30° (2° res) | 30° (2° res) | 31° (1° res) | −7° to +52° | **90–96°** |
+| Range | 100 m | 120 m | 120 m | 40 m @10% / 70 m @80% | 30 m @90% |
+| Blind zone | **0.9 m** | 0.05 m | 0.05 m | 0.1 m | 0.05 m |
+| Accuracy | ±3 cm | ±1 cm | ±1 cm | ≤2 cm @10 m | ≤2 cm |
+| Points/s | ~300k | 320k | 640k | 200k | 64k effective |
+| Built-in IMU | No | Unverified | Unverified | Yes | Yes |
+| Weight | 830 g + box | 800 g | 800 g | 265 g | **230 g** |
+| Power / input | 8 W, 9–18 V | ~9 W, 9–36 V (retailer figure) | n/a | 6.5 W, 9–27 V | 10 W |
+| New price (US) | ~$4,000 (old stock) | ~$2,000–$3,300 | Quote only | $979 | **$419** |
+| Status | Out of production | Current, Unitree-supported | Current | Current, Unitree-supported | Current (Dec 2024) |
+
+Sources: [VLP-16 datasheet](https://data.ouster.io/downloads/datasheets/velodyne/Puck%20Datasheets.zip); [Clearpath](https://docs.clearpathrobotics.com/docs/robots/accessories/sensors/lidar_3d/velodyne_puck); [Hesai XT16/XT32](https://www.hesaitech.com/product/xt32/); [XT16 retailer power](https://aifitlab.com/collections/hesai-lidar/products/hesai-xt32m-32-16-lidar); [XT16 marketplace price](https://www.accio.ai/find-product/hesai-lidar-price); [Livox Mid-360 specs](https://www.livoxtech.com/mid-360/specs); [Mid-360 price](https://openelab.io/de/blogs/learn/livox-vs-hesai-vs-robosense-choosing-the-best-lidar-for-robotics); [Unitree L2](https://www.unitree.com/L2); [Robotics Center](https://www.roboticscenter.ai/learn/best-robot-lidar-slam-2026)
+
+**XT16 vs VLP-16.** The XT16 matches the VLP-16 on channel count, vertical field of view and weight. Its **0.05 m blind zone** lets it see obstacles right next to the dog, where the VLP-16 sees nothing within 0.9 m. It is three times as accurate. Its **9–36 V input** is far easier to power from a 28.8 V robot ([Hesai](https://www.hesaitech.com/product/xt32/)). It is in production and has maintained ROS 2 drivers through Hesai's SDK and Nebula ([tier4/nebula](https://github.com/tier4/nebula)).
+
+**XT32.** The XT32 doubles the vertical density to 1° at the same 800 g. That gives LiDAR odometry more structure to lock onto while the body pitches. Its price is quote-only, and no Go2 bundle with it was found.
+
+**Mid-360.** The Mid-360 is the practitioner default. Robotics Center's 2026 guide calls it "the default for quadrupeds and AMRs" ([Robotics Center](https://www.roboticscenter.ai/learn/best-robot-lidar-slam-2026)). Its built-in IMU suits FAST-LIO and Point-LIO. Its main weakness on a dog is that it looks only 7° below horizontal, so it misses nearby ground unless you tilt it.
+
+**L2.** The L2 has the best close-in coverage of the group: a **96° vertical field of view, a 0.05 m blind zone and a built-in IMU**. It weighs **230 g**, costs **$419**, and ships with Unitree's open-source Point-LIO package ([Unitree L2](https://www.unitree.com/L2)). It has two limits. Its range is **30 m at 90% reflectivity**, and its 64k points/s is a sparse, non-repetitive pattern that needs time to fill in. Users have also reported skewed maps and failed relocalization using the Go2's built-in L1 ([MYBOTSHOP forum](https://forum.mybotshop.de/t/unitree-go2-l1-saved-map-localization-only-no-slam/1789)). That report is about the L1, not the L2, but expect to tune the pipeline.
+
+The VLP-16 keeps two real advantages. Its **100 m range** suits large outdoor sites. It also has the deepest ecosystem of algorithm configs, datasets and tutorials. At $300–$500 used, it is the cheapest way to own a classic spinning 16-beam sensor.
+
+## Conclusion
+
+Price is no longer what decides LiDAR choice for a small quadruped. A VLP-16 costs less used than an L2 does new. What decides it on a Go2 is **close-in coverage, weight, a time-synced IMU, and a supply chain that still exists**, and the VLP-16 trails on all four. Its 0.9 m blind zone and ±15° view were designed for car roofs and survey tripods, not a robot whose hazards are within a metre of its feet. The 10-K settles the sourcing question: any new stock is leftover inventory, and after 2026 every unit is effectively orphaned. The listings you are considering would buy a sensor that cannot be repaired.
+
+**For your Go2 EDU, buy in this order:**
+
+1. **A Unitree L2 ($419)** for indoor and campus navigation and mapping.
+2. **A Hesai XT16**, or the Go2 EDU Plus XT16 bundle if you are still buying the robot, to reproduce your reference build. Choose it when you need 30–120 m range, centimetre accuracy and Unitree's supported mount and power path. Pair it with the front D435i for terrain right at the feet.
+3. **A VLP-16** only in narrow cases:
+   - as a sub-$500 desk or bench sensor for learning LIO-SAM and LOAM-style pipelines and replaying public datasets
+   - as a spare for an existing VLP-16 fleet
+   - on a larger, wheeled or survey platform where 100 m range matters and the blind zone does not
+
+   If you buy one, choose a tested standard Puck or Puck LITE with the interface box from a US seller with returns. Do not choose the Hi-Res.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>
