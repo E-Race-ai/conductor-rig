@@ -1,1452 +1,218 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Project Conductor</title>
-<meta name="description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
-<meta property="og:title" content="Project Conductor"><meta property="og:description" content="Project Conductor, our AI orchestration workstation. Final build: AMD EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia, in an Antec 900. Parts, sourced bill of materials and the build plan.">
+<title>Build team · Projects</title>
+<meta name="description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
+<meta property="og:title" content="Build team · Projects"><meta property="og:description" content="The build team project board: Project 01 Conductor (AI workstation) and Project 02 Field Unit (Go2 X robot dog). Same team, separate swim lanes.">
 <meta property="og:image" content="img/a-cpu.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#06080E"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%236EE7F9'/%3E%3Cstop offset='.5' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%23FCD34D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2306080E'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 </head><body style="margin:0">
-<div style="position:relative;z-index:30;background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))"><span>Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span><span style="display:flex;gap:14px"><a href="./" style="color:#0A0D14;text-decoration:underline;font-weight:800">Showcase</a><a href="dog.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Robot dog</a><a href="build-book.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Build book</a><a href="research.html" style="color:#0A0D14;text-decoration:none;opacity:.8">Research</a></span></div>
+<div style="position:relative;z-index:30;color:#0A0D14;font:600 13px/1.4 Manrope,system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:#E9EDF5"><span>Shared with the build team · link stops working Wed, Nov 18, 7:00 PM ET</span><span style="display:flex;gap:8px;flex-wrap:wrap"><a href="conductor.html" style="background:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">01 Conductor</a><a href="field-unit.html" style="background:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B);color:#0A0D14;text-decoration:none;font-weight:800;padding:3px 10px;border-radius:999px">02 Field Unit</a></span></div>
 <style>
-/* Layout: one dark "clean room" world. Full-bleed bands, each with a centered 1200px stage; hero = live silicon wafer; then numbers, die, exploded build, agent orchestra, proof, airflow, spec sheet. */
-:root{
-  --bg:#06080E; --bg2:#0A0E17; --panel:#0E131E; --line:#1C2433; --text:#E9EDF5; --dim:#8E98AC; --faint:#586178;
-  --cy:#6EE7F9; --vi:#A78BFA; --pk:#F0ABFC; --au:#FCD34D;
-  --film:linear-gradient(100deg,var(--cy) 0%,var(--vi) 38%,var(--pk) 66%,var(--au) 100%);
-  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
-  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  color-scheme:dark;
-}
+/* Hub: the team's project board. Two swim lanes, each in its own colour world; a muted "where they meet" strip below. */
+:root{--bg:#06080E;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--faint:#586178;
+  --con:linear-gradient(100deg,#6EE7F9,#A78BFA 40%,#F0ABFC 70%,#FCD34D);--fu:linear-gradient(100deg,#A3E635,#FACC15 45%,#FB923C 75%,#F59E0B);
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--body:"Manrope",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--bg)}
-a{color:var(--cy)}
-:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
 .wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.band{padding-block:clamp(72px,10vw,140px);position:relative}
-.band + .band{border-top:1px solid var(--line)}
-h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.92;letter-spacing:.005em;margin:0;text-wrap:balance;text-transform:uppercase}
-h2{font-size:clamp(44px,7vw,96px)}
-h3{font-size:clamp(24px,2.4vw,32px);font-weight:700}
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);display:flex;gap:10px;align-items:center}
-.kicker::before{content:"";width:28px;height:1px;background:var(--film)}
-.film{background:var(--film);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:clamp(17px,1.6vw,20px);color:var(--dim);max-width:60ch;margin:18px 0 0}
-.lead b{color:var(--text);font-weight:600}
-.src{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.02em}
-.src a{color:var(--dim)}
-
-/* nav */
-nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-nav.top .wrap{display:flex;align-items:center;gap:20px;height:56px}
-.mark{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.08em;text-decoration:none;color:var(--text)}
-.mark span{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--film);margin-left:6px;vertical-align:2px}
-.navlinks{display:flex;gap:18px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
-.navlinks a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
-.navlinks a:hover{color:var(--text)}
-@media (max-width:720px){.navlinks a:not(.keep){display:none}}
-
-/* hero */
-.hero{position:relative;overflow:hidden;padding-block:clamp(48px,7vw,96px) clamp(40px,6vw,80px)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:center}
-@media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
-.hero h1{position:relative;z-index:2;font-size:clamp(72px,10.5vw,150px);font-weight:900;line-height:.82;letter-spacing:-.005em}
-.hero .sub{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.2vw,40px);line-height:1;text-transform:uppercase;margin-top:18px;color:var(--text)}
-.wafer-box{position:relative;z-index:1;aspect-ratio:1;max-width:620px;width:100%;justify-self:center}
-.wafer-box canvas{width:100%;height:100%;display:block}
-.wafer-tag{position:absolute;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.06em}
-.boot{margin-top:28px;font-family:var(--mono);font-size:13px;color:var(--dim);display:grid;gap:4px;min-height:132px}
-.boot div::before{content:"› ";color:var(--cy)}
-.boot b{color:var(--text);font-weight:500}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line);color:var(--text);background:var(--panel)}
-.btn.prime{background:var(--film);color:#0A0D14;border:0}
-.btn:hover{transform:translateY(-1px)}
-
-/* numbers */
-.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px}
-@media (max-width:900px){.nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.num{background:var(--bg);padding:28px 22px 24px;display:grid;gap:6px;min-width:0;position:relative;overflow:hidden}
-.num b{font-family:var(--display);font-weight:900;font-size:clamp(56px,7vw,104px);line-height:.85;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.num b small{font-size:.38em;font-weight:700;margin-left:4px;color:var(--dim)}
-.num span{font-weight:700;font-size:14px}
-.num p{margin:0;color:var(--dim);font-size:13px;line-height:1.45}
-.num::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--film);transform-origin:left;transform:scaleX(var(--fill,1))}
-
-/* silicon */
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center;margin-top:40px}
-@media (max-width:860px){.split{grid-template-columns:1fr}}
-.die svg{width:100%;height:auto;display:block;max-width:520px;margin:0 auto}
-.facts{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.facts li{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
-.facts li b{font-family:var(--display);font-size:30px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
-.facts li span{color:var(--dim);font-size:14px}
-.facts li span strong{color:var(--text);font-weight:600}
-.fabric{stroke-dasharray:6 10;animation:flow 1.2s linear infinite}
-@keyframes flow{to{stroke-dashoffset:-32}}
-.core{animation:blink 3.2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:.55}50%{opacity:1}}
-
-/* exploded build */
-.xp{height:260vh;position:relative}
-.xp-stage{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));height:calc(100vh - 56px);height:calc(100svh - 56px);display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:center}
-@media (max-width:860px){.xp{height:220vh}.xp-stage{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);align-items:start;padding-top:16px}}
-.xp-copy h2{font-size:clamp(40px,5vw,72px)}
-.xp-svg{width:100%;height:100%;min-height:0}
-.xp-svg svg{width:100%;height:100%;display:block}
-.xp-svg text{font-family:var(--mono);font-size:22px;fill:var(--text)}
-.xp-svg .lbl-sub{fill:var(--dim);font-size:17px}
-.fan{transform-box:fill-box;transform-origin:center;animation:spin 1.6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.xp-meter{margin-top:20px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
-.xp-meter i{display:block;height:100%;background:var(--film);width:0%}
-.xp-state{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:8px}
-
-/* orchestra */
-.orch{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:40px}
-@media (max-width:860px){.orch{grid-template-columns:1fr}}
-.orch canvas{width:100%;aspect-ratio:1.15;display:block;border:1px solid var(--line);border-radius:16px;background:radial-gradient(circle at 50% 50%,#101828 0%,var(--bg) 70%)}
-.big{font-family:var(--display);font-weight:900;font-size:clamp(88px,12vw,160px);line-height:.8}
-.stack{display:grid;gap:22px}
-.stack p{margin:0;color:var(--dim)}
-.stack p b{color:var(--text)}
-
-/* bars */
-.bars{display:grid;gap:18px;margin-top:28px}
-.bar-row{display:grid;gap:6px}
-.bar-top{display:flex;justify-content:space-between;gap:12px;font-size:14px}
-.bar-top span:last-child{font-family:var(--mono);color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
-.track{height:14px;border-radius:7px;background:var(--panel);overflow:hidden;position:relative}
-.track i{position:absolute;inset:0 auto 0 0;border-radius:7px;background:var(--film);width:var(--w)}
-.track i.old{background:var(--faint)}
-.pair{display:grid;gap:5px}
-.pair .who{font-family:var(--mono);font-size:11px;color:var(--dim)}
-.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px);margin-top:40px}
-@media (max-width:860px){.cols{grid-template-columns:1fr}}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3vw,32px);min-width:0}
-.stat-strip{display:flex;flex-wrap:wrap;gap:24px 40px;margin-top:24px}
-.stat-strip div{display:grid}
-.stat-strip b{font-family:var(--display);font-size:44px;font-weight:800;line-height:1}
-.stat-strip span{font-size:12px;color:var(--dim);font-family:var(--mono)}
-
-/* airflow */
-.air svg{width:100%;height:auto;display:block}
-.air text{font-family:var(--mono);font-size:15px;fill:var(--dim)}
-.gauges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
-@media (max-width:640px){.gauges{grid-template-columns:1fr}}
-.gauge{display:grid;justify-items:center;gap:6px;text-align:center}
-.gauge svg{width:150px;height:150px}
-.gauge b{font-family:var(--display);font-size:30px;font-weight:800}
-.gauge span{font-size:12px;color:var(--dim);max-width:24ch}
-
-/* spec sheet */
-.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
-.spec{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:10px;align-content:start;position:relative;overflow:hidden}
-.spec::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--film);opacity:.7}
-.spec .role{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.spec h3{font-size:26px}
-.spec ul{margin:0;padding-left:18px;color:var(--dim);font-size:14px;display:grid;gap:3px}
-.spec ul b{color:var(--text);font-weight:600}
-
-footer{padding-block:64px 48px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
-footer ol{columns:2 320px;column-gap:40px;padding-left:18px;font-size:12.5px}
-footer li{break-inside:avoid;margin-bottom:6px}
-.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-.reveal.pre{opacity:.001;transform:translateY(24px)}
-@media (prefers-reduced-motion:reduce){.fabric,.core,.fan{animation:none}.reveal,.reveal.pre{opacity:1;transform:none;transition:none}}
-
-
-/* ---- v2: part chapters on lab plates + sourced bill of materials ---- */
-.chapters{display:grid;gap:clamp(56px,8vw,120px);margin-top:56px}
-.chap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
-.chap:nth-child(even) .plate-wrap{order:2}
-@media (max-width:860px){.chap{grid-template-columns:1fr}.chap:nth-child(even) .plate-wrap{order:0}}
-.plate-wrap{perspective:1200px}
-.plate{position:relative;aspect-ratio:4/3;border-radius:24px;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 40%,#FFFFFF 0%,#EEF1F6 60%,#D9DFE8 100%);
-  box-shadow:0 40px 80px -30px rgba(110,231,249,.25),0 20px 40px -20px rgba(0,0,0,.6);
-  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease;will-change:transform}
-.plate img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;mix-blend-mode:multiply;filter:saturate(1.05) contrast(1.03)}
-.plate::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 60%);transform:translateX(var(--sheen,-60%));transition:transform .4s ease;pointer-events:none}
-.plate.dark{background:radial-gradient(120% 90% at 50% 40%,#1A2233 0%,#0B0F18 70%)}
-.plate.dark img{mix-blend-mode:normal;border-radius:14px;inset:10%;width:80%;height:80%}
-.plate.dark .plate-tag,.plate.dark .plate-credit{color:#8E98AC}
-.thumb.dark{background:#0B0F18}.thumb.dark img{mix-blend-mode:normal}
-.plate .ph{position:absolute;inset:0;display:grid;place-items:center;color:#5B6478;font-family:var(--mono);font-size:13px;text-align:center;padding:20px}
-.plate-tag{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#3B4458;text-transform:uppercase;z-index:1}
-.plate-credit{position:absolute;right:14px;bottom:10px;font-family:var(--mono);font-size:10px;color:#6B7487;z-index:1}
-.chap .idx{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
-.chap h3{font-size:clamp(34px,4.2vw,58px);margin-top:10px;line-height:.92}
-.chap .why{color:var(--dim);margin:14px 0 0;max-width:52ch}
-.chap .why b{color:var(--text);font-weight:600}
-.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:20px}
-.kv div{background:var(--bg2);padding:12px 14px;display:grid;gap:2px;min-width:0}
-.kv b{font-family:var(--display);font-size:26px;font-weight:800;line-height:1}
-.kv span{font-size:12px;color:var(--dim)}
-.buy{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
-.chip.mc{border-color:#E4002B66;color:#FF8A9B}
-.chip.amz{border-color:#FF990066;color:#FFC266}
-.chip.oth{border-color:#6EE7F966;color:var(--cy)}
-.chip i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
-.btn.sm{padding:9px 14px;font-size:13px}
-/* BOM */
-.bom-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:24px;margin-top:40px;align-items:start}
-@media (max-width:960px){.bom-grid{grid-template-columns:1fr}}
-.lines{display:grid;gap:10px}
-.line{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px 12px 12px}
-.line.off{opacity:.45}
-.line.ref{background:transparent;border-style:dashed}
-.thumb{width:76px;height:76px;border-radius:12px;background:radial-gradient(#fff,#E6EAF0);display:grid;place-items:center;overflow:hidden}
-.thumb img{width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply}
-.thumb span{font-family:var(--mono);font-size:10px;color:#5B6478}
-.line h4{margin:0;font-size:15px;font-weight:700;line-height:1.3}
-.line h4 a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
-.line h4 a:hover{border-bottom-color:var(--cy)}
-.line .meta{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:6px;align-items:center;font-size:12px;color:var(--dim)}
-.line .alt{font-size:12px;color:var(--faint);margin-top:4px}
-.line .alt a{color:var(--dim)}
-.line .px{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
-.line .px b{display:block;font-size:17px;color:var(--text);font-weight:500}
-.line .px small{color:var(--faint);font-size:11px;display:block;white-space:normal;max-width:22ch;margin-left:auto}
-@media (max-width:560px){.line{grid-template-columns:56px minmax(0,1fr)}.thumb{width:56px;height:56px}.line .px{grid-column:2;text-align:left}.line .px small{margin-left:0;max-width:none}}
-.opt-toggle{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim);margin-top:8px;cursor:pointer}
-.opt-toggle input{accent-color:#A78BFA;width:16px;height:16px}
-.sum{position:sticky;top:calc(72px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:12px}
-.sum h3{font-size:28px}
-.sum table{width:100%;border-collapse:collapse;font-size:14px}
-.sum td{padding:7px 0;border-bottom:1px dashed var(--line)}
-.sum td:last-child{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
-.sum tr.tot td{border-bottom:0;border-top:1px solid var(--text);font-weight:700;font-size:16px;padding-top:10px}
-.sum .grand{font-family:var(--display);font-size:56px;font-weight:900;line-height:.9}
-.group-h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:18px 0 4px;display:flex;align-items:center;gap:10px}
-.group-h::after{content:"";flex:1;height:1px;background:var(--line)}
-
-
-
-
-/* ---- Option A vs B ---- */
-.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:44px}
-@media (max-width:760px){.duo{grid-template-columns:1fr}}
-.opt-card{border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,32px);background:var(--panel);display:grid;gap:10px;position:relative;overflow:hidden;min-width:0}
-.opt-card.b{border-color:#A78BFA66;background:linear-gradient(160deg,#151A2B 0%,var(--panel) 60%)}
-.opt-card .letter{font-family:var(--display);font-weight:900;font-size:120px;line-height:.75;position:absolute;right:18px;top:14px;opacity:.12}
-.opt-card .who{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.opt-card h3{font-size:clamp(30px,3.4vw,44px)}
-.opt-card .price{font-family:var(--display);font-size:clamp(48px,6vw,76px);font-weight:900;line-height:.9}
-.opt-card .price small{font-size:.32em;font-weight:600;color:var(--dim);margin-left:6px}
-.opt-card ul{margin:4px 0 0;padding-left:18px;color:var(--dim);font-size:14px;display:grid;gap:3px}
-.opt-card ul b{color:var(--text);font-weight:600}
-.versus{margin-top:48px;display:grid;gap:14px}
-.vs-row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:16px;align-items:center}
-@media (max-width:640px){.vs-row{grid-template-columns:1fr;gap:6px}}
-.vs-row .l{font-weight:700;font-size:14px}
-.vs-row .l small{display:block;font-weight:400;color:var(--faint);font-size:12px}
-.vs-bars{display:grid;gap:5px}
-.vs-bar{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(70px,auto);gap:10px;align-items:center;font-family:var(--mono);font-size:12.5px}
-.vs-bar .k{color:var(--dim);font-weight:500}
-.vs-bar .t{height:12px;border-radius:6px;background:var(--bg2);overflow:hidden;position:relative}
-.vs-bar .t i{position:absolute;inset:0 auto 0 0;border-radius:6px;width:var(--w)}
-.vs-bar.a .t i{background:#5B6478}
-.vs-bar.b .t i{background:var(--film)}
-.vs-bar .v{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.qt{width:100%;border-collapse:collapse;min-width:760px;font-size:14px}
-.qt th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px;border-bottom:1px solid var(--line);font-weight:500}
-.qt td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-.qt td.n{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.qt td small{display:block;color:var(--faint);font-size:12px;margin-top:2px}
-.qt tr.tot td{border-top:1px solid var(--text);font-weight:700;border-bottom:0}
-.qt .up{color:#F0ABFC}.qt .dn{color:#6EE7F9}
-.tbl{overflow-x:auto;margin-top:40px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
-.stackbar{display:flex;height:44px;border-radius:12px;overflow:hidden;margin-top:18px;border:1px solid var(--line)}
-.stackbar div{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#0A0D14;font-weight:600;min-width:0;overflow:hidden;white-space:nowrap}
-.legend2{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--dim)}
-.legend2 i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.verdicts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
-@media (max-width:900px){.verdicts{grid-template-columns:1fr}}
-.verdict{border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:8px;align-content:start;background:var(--bg2)}
-.verdict.pick{border-color:#FCD34D88;background:linear-gradient(160deg,#1E1A10 0%,var(--bg2) 70%)}
-.verdict h4{margin:0;font-family:var(--display);font-size:26px;text-transform:uppercase;font-weight:800}
-.verdict p,.verdict li{color:var(--dim);font-size:14px;margin:0}
-.verdict ul{margin:0;padding-left:18px;display:grid;gap:4px}
-.flag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
-
-
-
-/* ===== v3 plain-English layer ===== */
-.ab-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel);gap:2px}
-.ab-toggle button{all:unset;cursor:pointer;padding:7px 14px;border-radius:999px;font:700 13px/1 var(--body);color:var(--dim);white-space:nowrap}
-.ab-toggle button[aria-pressed="true"]{background:var(--film);color:#0A0D14}
-.ab-toggle button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
-
-/* tour */
-.tour{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);align-items:start;margin-top:34px}
-@media (max-width:860px){.tour{grid-template-columns:1fr}}
-.rig{position:relative;background:radial-gradient(120% 90% at 60% 30%,#121a2a,var(--bg2));border:1px solid var(--line);border-radius:20px;padding:14px}
-.rig svg{width:100%;height:auto;display:block;max-height:560px}
-.rig [data-part]{cursor:pointer;transition:opacity .25s,filter .25s}
-.rig.focus [data-part]:not(.on){opacity:.28}
-.rig [data-part].on{filter:drop-shadow(0 0 8px rgba(110,231,249,.75))}
-.rig .hs{cursor:pointer}
-.rig .hs circle.ring{fill:#0A0D14;stroke:url(#filmS);stroke-width:2}
-.rig .hs text{font:700 13px var(--mono);fill:var(--text);text-anchor:middle;dominant-baseline:central;pointer-events:none}
-.rig .hs.on circle.ring{fill:url(#filmS);stroke:#fff}
-.rig .hs.on text{fill:#0A0D14}
-.rig .pulse{fill:none;stroke:var(--cy);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:hsPulse 2.4s ease-out infinite}
-@keyframes hsPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
-@keyframes fanSpin{to{transform:rotate(360deg)}}
-.rig .fan{transform-box:fill-box;transform-origin:center;animation:fanSpin 2.2s linear infinite}
-.rig .flow{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
-@keyframes flow{to{stroke-dashoffset:-28}}
-@media (prefers-reduced-motion:reduce){.rig .pulse,.rig .fan,.rig .flow{animation:none}}
-.rig-hint{position:absolute;left:18px;bottom:14px;font:500 11px var(--mono);color:var(--faint);letter-spacing:.06em}
-
-.pcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
-.pcard .ph{background:#F3F4F7;aspect-ratio:16/10;display:grid;place-items:center;position:relative;overflow:hidden}
-.pcard .ph img{width:88%;height:88%;object-fit:contain;transition:opacity .3s,transform .5s}
-.pcard .ph.swap img{opacity:0;transform:scale(.96)}
-.pcard .ph .tag{position:absolute;left:12px;top:12px;font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:#0A0D14;color:#fff;padding:5px 9px;border-radius:999px}
-.pcard .ph.dark{background:#050505}
-.pcard .ph .noimg{font:800 64px var(--display);color:#c9ced8}
-.pcard .bd{padding:22px 22px 18px;display:grid;gap:14px}
-.pcard h3{font-size:clamp(28px,3vw,40px)}
-.pcard .model{font:500 13px var(--mono);color:var(--dim);margin-top:4px}
-.pcard .what{font-size:17px;line-height:1.55;margin:0}
-.pcard .like{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0;color:var(--dim);font-size:15px}
-.pcard .like b{color:var(--text)}
-.pcard .like .ico{font-size:22px;line-height:1}
-.pcard .big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.pcard .big b{font:900 clamp(44px,5vw,64px)/1 var(--display)}
-.pcard .big span{color:var(--dim);font-size:14px}
-.pcard .vs{font-size:13px;color:var(--faint);font-family:var(--mono)}
-.tour-nav{display:flex;align-items:center;gap:10px;padding:0 22px 20px;flex-wrap:wrap}
-.tour-nav .dots{display:flex;gap:6px;margin-right:auto}
-.tour-nav .dots button{all:unset;cursor:pointer;width:9px;height:9px;border-radius:50%;background:var(--line)}
-.tour-nav .dots button[aria-current="true"]{background:var(--cy);width:22px;border-radius:9px}
-.tour-nav .step{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font:700 13px var(--body);color:var(--text);background:var(--bg2)}
-.tour-nav .step.prime{background:var(--film);color:#0A0D14;border-color:transparent}
-.tour-nav .step:focus-visible,.tour-nav .dots button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
-
-/* fit: what can it run */
-.fit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:34px}
-@media (max-width:860px){.fit-grid{grid-template-columns:1fr}}
-.fitc{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px}
-.fitc h3{font-size:clamp(24px,2.4vw,30px)}
-.fitc .q{color:var(--dim);margin:8px 0 16px;font-size:15px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chips button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--bg2);display:grid;gap:2px}
-.chips button b{font:700 14px var(--body);color:var(--text)}
-.chips button small{font:500 11px var(--mono);color:var(--faint)}
-.chips button[aria-pressed="true"]{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy) inset;background:color-mix(in srgb,var(--cy) 10%,var(--bg2))}
-.chips button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
-.meter{display:grid;gap:4px;margin-top:14px}
-.meter .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
-.meter .row b{font-weight:700}
-.meter .row span{color:var(--dim);font-family:var(--mono);font-size:12px;white-space:nowrap}
-.bar{position:relative;height:16px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
-.bar i{position:absolute;inset:0 auto 0 0;border-radius:999px;transition:width .6s cubic-bezier(.2,.8,.2,1),background .3s}
-.bar i.ok{background:linear-gradient(90deg,#34D399,#6EE7F9)}
-.bar i.no{background:repeating-linear-gradient(135deg,#F87171 0 8px,#FB923C 8px 16px)}
-.meter .vd{font-size:13px;font-weight:600}
-.meter .vd.ok{color:#6EE7B7}.meter .vd.no{color:#FCA5A5}
-.slider{display:flex;align-items:center;gap:14px;margin:4px 0 18px}
-.slider input{flex:1;accent-color:#A78BFA;height:28px}
-.slider output{font:900 44px/1 var(--display);min-width:2.2ch;text-align:right}
-.agents-viz{display:flex;flex-wrap:wrap;gap:4px;min-height:24px;margin-bottom:6px}
-.agents-viz i{width:14px;height:14px;border-radius:4px;background:var(--film);animation:pop .3s ease-out}
-@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-@media (prefers-reduced-motion:reduce){.agents-viz i{animation:none}.bar i{transition:none}}
-.fit-note{margin-top:14px;font-size:13px;color:var(--faint)}
-
-/* build day */
-.day-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-top:30px;scrollbar-width:thin}
-.day{scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-.day .ph{background:#F3F4F7;aspect-ratio:4/3;display:grid;place-items:center;position:relative}
-.day .ph img{width:84%;height:84%;object-fit:contain}
-.day .ph .n{position:absolute;left:10px;top:10px;width:34px;height:34px;border-radius:50%;background:#0A0D14;color:#fff;display:grid;place-items:center;font:800 16px var(--mono)}
-.day .ph .t{position:absolute;right:10px;top:12px;font:700 11px var(--mono);background:#fff;color:#0A0D14;border-radius:999px;padding:4px 8px;border:1px solid #d8dbe2}
-.day .ph .emoji{font-size:64px}
-.day .bd{padding:16px 16px 18px;display:grid;gap:8px}
-.day h4{margin:0;font:800 22px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
-.day p{margin:0;font-size:14.5px;color:var(--dim)}
-.day .warn{font-size:13px;color:#FDE68A;background:rgba(252,211,77,.08);border:1px solid rgba(252,211,77,.25);border-radius:10px;padding:8px 10px}
-.day-bar{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
-.day-bar i{display:block;height:100%;width:0;background:var(--film)}
-.day-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px;font:500 12px var(--mono);color:var(--faint)}
-.day-arrows{display:flex;gap:8px}
-.day-arrows button{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;color:var(--text);font-size:18px}
-.day-arrows button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
-
-/* jargon decoder */
-.jg{border-bottom:1.5px dotted color-mix(in srgb,var(--cy) 70%,transparent);cursor:help;text-decoration:none}
-.jg:focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:2px}
-#jgpop{position:fixed;z-index:60;max-width:300px;background:#F5F7FB;color:#0A0D14;border-radius:14px;padding:12px 14px;box-shadow:0 18px 50px rgba(0,0,0,.5);font:500 14px/1.45 var(--body);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
-#jgpop.show{opacity:1;transform:none}
-#jgpop b{display:block;font:800 13px var(--mono);letter-spacing:.04em;margin-bottom:3px;color:#5B21B6}
-.jg-pill{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:600 12px var(--body);color:var(--dim);box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center;transition:opacity .4s}
-.jg-pill i{font-style:normal;border-bottom:1.5px dotted var(--cy);color:var(--text)}
-.jg-pill button{all:unset;cursor:pointer;color:var(--faint);padding:0 2px}
-.jg-pill.gone{opacity:0;pointer-events:none}
-
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.92;margin:0;text-transform:uppercase;text-wrap:balance}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.hb-hero{padding:clamp(48px,7vw,96px) 0 clamp(28px,4vw,48px)}
+.hb-hero h1{font-size:clamp(60px,9vw,128px);font-weight:900;line-height:.84;margin-top:16px}
+.hb-hero h1 .c{background:var(--con);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hb-hero h1 .f{background:var(--fu);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hb-hero p{color:var(--dim);font-size:clamp(17px,1.6vw,20px);max-width:62ch;margin:18px 0 0}
+.hb-hero p b{color:var(--text)}
+.lanes{margin-top:36px;border:1px solid var(--line);border-radius:18px;background:#080B12;overflow:hidden}
+.lanes svg{display:block;width:100%;height:auto}
+.lanes .tk{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:640px){.lanes svg g text{font-size:24px}.lanes .tk{font-size:26px}.lanes svg>text:not(.tk){font-size:22px}}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+@media (max-width:860px){.projects{grid-template-columns:1fr}}
+.pj{position:relative;border-radius:20px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.pj::before{content:"";position:absolute;inset:0;border-radius:20px;padding:2px;background:var(--g);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.pj.con{--g:var(--con);--a:#6EE7F9;--a2:#A78BFA}
+.pj.fu{--g:var(--fu);--a:#A3E635;--a2:#FACC15;background:#0D120A}
+.pj .ph{aspect-ratio:16/8;background:#000 center/cover no-repeat;position:relative}
+.pj .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel))}
+.pj.fu .ph::after{background:linear-gradient(180deg,transparent 40%,#0D120A)}
+.pj .ph .no{position:absolute;left:20px;top:16px;z-index:1;font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:#0A0D14;background:var(--g);padding:2px 14px 0;border-radius:10px}
+.pj .in{padding:6px 24px 24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.pj h2{font-size:clamp(44px,5vw,68px);background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pj .what{color:#C9D0DD;margin:0}
+.pj .st{display:flex;flex-wrap:wrap;gap:8px}
+.pj .chip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+.pj .chip.on{color:#0A0D14;background:var(--a);border-color:transparent;font-weight:700}
+.pj .nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media (max-width:520px){.pj .nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pj .n{background:var(--bg);padding:12px 12px 10px;min-width:0}
+.pj .n b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(28px,3vw,40px);line-height:.9;color:var(--a)}
+.pj .n span{font-size:12px;color:var(--dim);line-height:1.3;display:block;margin-top:4px}
+.pj dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.pj dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.pj dd{margin:0;color:#C9D0DD}
+.pj .go{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.pj .go a{text-decoration:none;font-weight:700;font-size:14px;padding:11px 16px;border-radius:999px;border:1px solid var(--line);color:var(--text);background:var(--bg)}
+.pj .go a.p{background:var(--g);color:#0A0D14;border:0}
+.pj .go a:hover{transform:translateY(-1px)}
+.meet{margin:40px 0 0;border:1px dashed #2A3448;border-radius:16px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;align-items:center;color:var(--dim)}
+@media (max-width:860px){.meet{grid-template-columns:1fr}}
+.meet h3{font-size:28px;color:#A5AEC2}
+.meet .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #2A3448;border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.meet p{margin:8px 0 0;font-size:14px}
+.meet svg{width:100%;height:auto;display:block}
+footer{padding:48px 0 64px;color:var(--faint);font-size:13px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 </style>
 
-<nav class="top" aria-label="Sections">
+<header class="hb-hero">
   <div class="wrap">
-    <a class="mark" href="#top">CONDUCTOR<span></span></a>
-    <div class="navlinks">
-      <a class="keep" href="#tour">Start here</a><a href="#numbers">Numbers</a><a class="keep" href="#options">A vs B</a><a href="#fit">What it runs</a><a href="#silicon">Silicon</a><a href="#build">The build</a><a href="#day">Build day</a><a href="#orchestra">Orchestra</a><a href="#proof">Proof</a><a href="#airflow">Power</a><a href="#parts">Parts</a><a class="keep" href="#bom">Bill of materials</a><a class="keep" href="dog.html">Robot dog →</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="kicker">AI orchestration workstation · 2026</div>
-      <h1 style="margin-top:18px"><span class="film">Conductor</span></h1>
-      <p class="sub">16 cores. 128 GB. 16 GB of Blackwell.<br>Every agent, in concert.</p>
-      <p class="lead">One machine that runs our whole fleet of AI agents, their tools and our own local models side by side. Built on <b>AMD EPYC 9175F</b> and <b>NVIDIA GeForce RTX 5070 Ti</b>, in an Antec 900.</p>
-      <div class="boot" id="boot" aria-live="off">
-        <div>POST · <b>16 cores / 32 threads</b> online</div>
-        <div>Memory · <b>4 channels</b> · <b>128 GB</b> ECC trained</div>
-        <div>GPU · <b>16 GB GDDR7</b> · <b>896 GB/s</b></div>
-        <div>Fabric · <b>128 lanes</b> PCIe 5.0 · link up <b>2× 10 GbE</b></div>
-        <div>Agents · <b>ready</b></div>
-      </div>
-      <div class="cta">
-        <a class="btn prime" href="#tour">Start here: 60-second tour ↓</a>
-        <a class="btn" href="#build">See it assemble</a>
-        <a class="btn" href="#bom">Bill of materials</a>
-        <a class="btn" href="build-book.html">Team build book ↗</a>
-      </div>
-    </div>
-    <div class="wafer-box" aria-hidden="true">
-      <canvas id="wafer"></canvas>
-      <span class="wafer-tag" style="left:2%;top:4%">ZEN 5 · CCD WAFER</span>
-      <span class="wafer-tag" style="right:2%;bottom:4%">8 CORES / DIE · 1 ENABLED</span>
+    <div class="kicker">The build team · project board · Nov 2026</div>
+    <h1>Two projects.<br><span class="c">One</span> <span class="f">team.</span></h1>
+    <p>Same people, <b>separate swim lanes</b>. Each project has its own budget, plan, shopping list and research. They stay apart until <b>Phase 3</b>, when the robot dog starts sending its heavy AI work to the workstation.</p>
+    <div class="lanes rv" aria-hidden="true">
+      <svg id="lanesvg" viewBox="0 0 1200 250">
+        <defs>
+          <linearGradient id="gc" gradientUnits="userSpaceOnUse" x1="24" x2="900" y1="0" y2="0"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".45" stop-color="#A78BFA"/><stop offset=".75" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
+          <linearGradient id="gf" gradientUnits="userSpaceOnUse" x1="24" x2="900" y1="0" y2="0"><stop offset="0" stop-color="#A3E635"/><stop offset=".5" stop-color="#FACC15"/><stop offset=".8" stop-color="#FB923C"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+        <text class="tk" x="24" y="44" fill="#6EE7F9">01 Conductor</text>
+        <text class="tk" x="24" y="152" fill="#A3E635">02 Field Unit</text>
+        <path id="tc" d="M24 66 H900" stroke="url(#gc)" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path id="tf" d="M24 174 H900" stroke="url(#gf)" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <g font-family="JetBrains Mono,monospace" font-size="11" fill="#8E98AC">
+          <circle cx="120" cy="66" r="7" fill="#6EE7F9"/><text x="96" y="94">Research</text>
+          <circle cx="330" cy="66" r="7" fill="#A78BFA"/><text x="300" y="94">Decided</text>
+          <circle cx="540" cy="66" r="9" fill="#06080E" stroke="#F0ABFC" stroke-width="3"/><text x="508" y="94">Ordering</text>
+          <circle cx="750" cy="66" r="7" fill="#06080E" stroke="#3A465C" stroke-width="3"/><text x="728" y="94">Build</text>
+          <circle cx="120" cy="174" r="7" fill="#A3E635"/><text x="96" y="202">Research</text>
+          <circle cx="330" cy="174" r="7" fill="#FACC15"/><text x="292" y="202">X owned</text>
+          <circle cx="540" cy="174" r="9" fill="#070A05" stroke="#FB923C" stroke-width="3"/><text x="496" y="202">Access test</text>
+          <circle cx="750" cy="174" r="7" fill="#070A05" stroke="#3A465C" stroke-width="3"/><text x="716" y="202">Add-ons</text>
+        </g>
+        <path id="merge" d="M900 66 C1000 66 1010 120 1110 120 M900 174 C1000 174 1010 120 1110 120" stroke="#3A465C" stroke-width="2" stroke-dasharray="6 7" fill="none"/>
+        <circle cx="1124" cy="120" r="14" fill="none" stroke="#56627A" stroke-width="2" stroke-dasharray="4 5"/>
+        <text x="1046" y="160" font-family="JetBrains Mono,monospace" font-size="11" fill="#586178">Phase 3</text>
+        <circle id="pc" r="6" fill="#fff" filter="url(#glow)"/><circle id="pc2" r="3.5" fill="#fff"/>
+        <circle id="pf" r="6" fill="#fff" filter="url(#glow)"/><circle id="pf2" r="3.5" fill="#fff"/>
+      </svg>
     </div>
   </div>
 </header>
 
-<section class="band" id="tour">
-  <div class="wrap">
-    <div class="kicker">Start here · the machine in 60 seconds</div>
-    <h2 style="margin-top:14px">Eight parts.<br><span class="film">One simple idea.</span></h2>
-    <p class="lead">A computer is a team. <b>Tap any part</b> of our final build below to see what it does in plain English, and what we can upgrade later.</p>
-    <div style="margin-top:22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
-      <span class="ab-toggle"><button type="button" aria-pressed="true" tabindex="-1" style="cursor:default">✓ Final build · EPYC 9175F in the Antec 900</button></span>
-      <span class="src">Dotted words like <span class="jg" tabindex="0" data-k="VRAM">VRAM</span> explain themselves when you hover or tap.</span>
-    </div>
-    <div class="tour">
-      <div class="rig" id="rig">
-        <svg viewBox="0 0 360 470" role="img" aria-label="Side view of the computer with each part highlighted">
-          <defs>
-            <linearGradient id="filmS" x1="0" x2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".4" stop-color="#A78BFA"/><stop offset=".7" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
-            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".06"/><stop offset=".5" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".04"/></linearGradient>
-            <g id="fanG"><circle r="25" fill="#0B0F18" stroke="#2A3448" stroke-width="2"/><g class="fan"><path d="M0-4C6-20 18-14 4 0M4 0C20 6 14 18 0 4M0 4C-6 20-18 14-4 0M-4 0C-20-6-14-18 0-4" fill="#3A465E"/></g><circle r="4" fill="#586178"/></g>
-          </defs>
-          <!-- case -->
-          <g data-part="case">
-            <rect x="8" y="8" width="344" height="454" rx="16" fill="#0C111B" stroke="#2A3448" stroke-width="2"/>
-            <rect x="8" y="8" width="344" height="454" rx="16" fill="url(#glass)"/>
-            <use href="#fanG" x="325" y="78"/>
-            <use href="#fanG" x="40" y="110"/><use href="#fanG" x="40" y="200"/><use href="#fanG" x="40" y="290"/>
-            <rect x="14" y="356" width="332" height="2" fill="#2A3448"/>
-          </g>
-          <!-- motherboard -->
-          <g data-part="board">
-            <rect x="104" y="28" width="230" height="312" rx="6" fill="#131B2A" stroke="#33405A"/>
-            <g stroke="#26324A" stroke-width="1"><path d="M120 150h60M120 160h44M300 300v-60M290 300v-40M120 320h90"/></g>
-            <rect x="122" y="240" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="270" width="200" height="8" rx="2" fill="#2A3448"/><rect x="122" y="300" width="200" height="8" rx="2" fill="#2A3448"/>
-          </g>
-          <!-- RAM -->
-          <g data-part="ram">
-            <g fill="#3B2F6B" stroke="#A78BFA" stroke-width="1"><rect x="164" y="48" width="7" height="92" rx="1.5"/><rect x="174" y="48" width="7" height="92" rx="1.5"/><rect x="184" y="48" width="7" height="92" rx="1.5"/><rect x="194" y="48" width="7" height="92" rx="1.5"/></g>
-            <g fill="#3B2F6B" stroke="#A78BFA" stroke-width="1" id="ram2"><rect x="271" y="48" width="7" height="92" rx="1.5"/><rect x="281" y="48" width="7" height="92" rx="1.5"/><rect x="291" y="48" width="7" height="92" rx="1.5"/><rect x="301" y="48" width="7" height="92" rx="1.5"/></g>
-          </g>
-          <!-- CPU -->
-          <g data-part="cpu">
-            <rect x="208" y="64" width="56" height="62" rx="5" fill="#1D2638" stroke="#6EE7F9" stroke-width="1.5"/>
-            <circle cx="236" cy="95" r="17" fill="#0B0F18" stroke="#6EE7F9" stroke-width="1.5"/>
-            <text x="236" y="99" fill="#6EE7F9" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">CPU</text>
-          </g>
-          <!-- cooler: radiator + tubes + front fans -->
-          <g data-part="cooler">
-            <rect x="96" y="12" width="206" height="26" rx="5" fill="#141C2B" stroke="#33405A"/>
-            <g fill="none" stroke="#3A465E" stroke-width="1.5"><circle cx="131" cy="25" r="10"/><circle cx="199" cy="25" r="10"/><circle cx="267" cy="25" r="10"/></g>
-            <g stroke="#6EE7F9" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"><path class="flow" d="M226 38C226 50 224 60 226 78"/><path class="flow" d="M246 78C248 60 246 50 246 38" style="animation-direction:reverse"/></g>
-          </g>
-          <!-- GPU -->
-          <g data-part="gpu">
-            <rect x="96" y="174" width="232" height="52" rx="6" fill="#1A2233" stroke="#F0ABFC" stroke-width="1.5"/>
-            <rect x="96" y="222" width="232" height="6" rx="2" fill="#F0ABFC" opacity=".55"/>
-            <text x="300" y="204" fill="#F0ABFC" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="end">GPU</text>
-          </g>
-          <!-- drives -->
-          <g data-part="ssd">
-            <rect x="34" y="374" width="78" height="22" rx="3" fill="#1A2233" stroke="#FCD34D" stroke-width="1.2"/>
-            <rect x="34" y="402" width="78" height="22" rx="3" fill="#1A2233" stroke="#FCD34D" stroke-width="1.2"/>
-            <circle cx="104" cy="385" r="2.2" fill="#34D399"/><circle cx="104" cy="413" r="2.2" fill="#34D399"/>
-          </g>
-          <!-- PSU -->
-          <g data-part="psu">
-            <rect x="196" y="370" width="146" height="78" rx="6" fill="#141C2B" stroke="#FCD34D" stroke-width="1.5"/>
-            <circle cx="269" cy="409" r="26" fill="none" stroke="#3A465E" stroke-width="2"/>
-            <path d="M262 398l-6 13h10l-6 13" stroke="#FCD34D" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
-          </g>
-          <!-- hotspots -->
-          <g id="hotspots"></g>
-        </svg>
-        <span class="rig-hint">SIDE VIEW · FRONT ON THE LEFT · TAP A NUMBER</span>
-      </div>
-      <article class="pcard" aria-live="polite">
-        <div class="ph" id="tph"><span class="tag" id="ttag">01 · The brain</span><img id="timg" alt=""></div>
-        <div class="bd">
-          <div><h3 id="tname">Processor</h3><div class="model" id="tmodel"></div></div>
-          <p class="what" id="twhat"></p>
-          <p class="like"><span class="ico" id="tico">🎼</span><span id="tlike"></span></p>
-          <div class="big"><b class="film" id="tbig"></b><span id="tbigl"></span></div>
-          <div class="vs" id="tvs"></div>
+<main class="wrap">
+  <div class="projects">
+    <article class="pj con rv" aria-labelledby="p1">
+      <div class="ph" style="background-image:url(img/case-inside.jpg)"><span class="no">01</span></div>
+      <div class="in">
+        <div class="kicker">Project 01 · AI orchestration workstation</div>
+        <h2 id="p1">Conductor</h2>
+        <p class="what">The team's AI workstation: an AMD EPYC 9175F tower that runs about 14 coding agents at once plus local AI models on an RTX 5070 Ti.</p>
+        <div class="st"><span class="chip">Research</span><span class="chip">Decided Nov 17</span><span class="chip on">Ordering</span><span class="chip">Build</span></div>
+        <div class="nums">
+          <div class="n"><b data-n="16">16</b><span>CPU cores</span></div>
+          <div class="n"><b data-n="128">128</b><span>GB memory</span></div>
+          <div class="n"><b data-n="16">16</b><span>GB GPU memory</span></div>
+          <div class="n"><b data-n="14">14</b><span>agents at once</span></div>
         </div>
-        <div class="tour-nav">
-          <div class="dots" id="tdots"></div>
-          <button type="button" class="step" id="tprev">← Back</button>
-          <button type="button" class="step prime" id="tnext">Next part →</button>
+        <dl>
+          <dt>Team</dt><dd>Same team</dd>
+          <dt>Budget</dt><dd>≈ $14,037 all-in (Micro Center $9,063 + Amazon drives ≈ $4,974)</dd>
+          <dt>Next</dt><dd>Confirm the board's 3 CPU power inputs vs the PSU's 2 cables, then order before the price guarantee ends Thu Nov 19.</dd>
+        </dl>
+        <div class="go"><a class="p" href="conductor.html">Open Conductor →</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
+      </div>
+    </article>
+
+    <article class="pj fu rv" aria-labelledby="p2">
+      <div class="ph" style="background-image:url(img/dog-go2.jpg);background-size:170%;background-position:42% 96%"><span class="no">02</span></div>
+      <div class="in">
+        <div class="kicker">Project 02 · Robot dog</div>
+        <h2 id="p2">Field Unit</h2>
+        <p class="what">Our Unitree Go2 X robot dog with its own NVIDIA Jetson computer, a 3D LiDAR and a small robot arm: a robot that can see, walk and pick things up.</p>
+        <div class="st"><span class="chip">Research</span><span class="chip">Hardware owned</span><span class="chip on">Access test</span><span class="chip">Add-ons</span></div>
+        <div class="nums">
+          <div class="n"><b data-n="67">67</b><span>TOPS onboard</span></div>
+          <div class="n"><b data-n="12">12</b><span>leg motors</span></div>
+          <div class="n"><b data-n="8">8</b><span>kg payload rating</span></div>
+          <div class="n"><b data-n="3.5" data-d="1">3.5</b><span>kg add-ons (est.)</span></div>
         </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="numbers">
-  <div class="wrap">
-    <div class="kicker">By the numbers</div>
-    <h2 style="margin-top:14px">Built to never<br><span class="film">wait on hardware</span></h2>
-    <div class="nums">
-      <div class="num"><b><span class="count" data-to="16">16</span></b><span>Zen 5 cores</span><p>32 threads, boosting to 5.0 GHz, each core with its own 32 MB of L3 cache.</p></div>
-      <div class="num"><b><span class="count" data-to="128">128</span><small>GB</small></b><span>ECC system memory</span><p>Four 32 GB DDR5-5600 RDIMMs, with four slots free to double it.</p></div>
-      <div class="num"><b><span class="count" data-to="179">179</span><small>GB/s</small></b><span>Memory bandwidth</span><p>Theoretical, 4 channels at 5600 MT/s. Doubles to 358 GB/s with four more sticks.</p></div>
-      <div class="num"><b><span class="count" data-to="16">16</span><small>GB</small></b><span>GPU memory</span><p>GDDR7 on a 256-bit bus, 896 GB/s.</p></div>
-      <div class="num"><b><span class="count" data-to="128">128</span></b><span>PCIe 5.0 lanes</span><p>Seven full-length slots; four run at full x16 with no lane sharing.</p></div>
-      <div class="num"><b><span class="count" data-to="1406" data-sep="1">1,406</span></b><span>AI TOPS</span><p>FP4 with sparsity, from 8,960 CUDA cores.</p></div>
-      <div class="num"><b><span class="count" data-to="15.36" data-dec="2">15.36</span><small>TB</small></b><span>Enterprise NVMe</span><p>Two Kioxia CD6-R U.3 drives with power-loss protection.</p></div>
-      <div class="num"><b><span class="count" data-to="1200" data-sep="1">1,200</span><small>W</small></b><span>Platinum power</span><p>ATX 3.1 with a native 12V-2x6 cable for the GPU.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="options">
-  <div class="wrap">
-    <div class="kicker">The decision · Nov 17</div>
-    <h2 style="margin-top:14px">Two quotes.<br><span class="film">We chose A.</span></h2>
-    <p class="lead">Both quotes come from Micro Center Miami (store 185) and are <b>price-guaranteed until Thursday, Nov 19, 2026</b>. <b>We're building Option A, the EPYC 9175F, in the Antec 900 case.</b> Option B, the Threadripper PRO upgrade, would have cost $13,503 more. Here is what we compared and why A wins for now.</p>
-    <div class="duo">
-      <article class="opt-card" style="border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),0 30px 60px -30px rgba(110,231,249,.45)"><span class="letter film">A</span><div class="who" style="color:var(--cy)">✓ Chosen · the final build</div><h3>EPYC 9175F</h3>
-        <div class="price film">$9,063<small>with tax + case</small></div>
-        <ul><li><b>16 cores</b> · ASRock Rack TURIND8X-2T server board</li><li><b>128 GB</b> on 4 of 8 memory channels</li><li><b>RTX 5070 Ti 16 GB</b></li><li>1,200 W Platinum · 360 mm AIO · <b>+ Antec 900</b> ($199.99, 6 fans included)</li></ul></article>
-      <article class="opt-card b" style="opacity:.62"><span class="letter">B</span><div class="who">Option B · considered, not chosen</div><h3>Threadripper PRO 9975WX</h3>
-        <div class="price">$22,459<small>quote total with tax</small></div>
-        <ul><li><b>32 cores</b> · ASUS WRX90E-SAGE SE workstation board</li><li><b>256 GB</b> on all 8 memory channels</li><li><b>RTX PRO 5000 48 GB</b></li><li>1,650 W Titanium · 420 mm AIO · Antec 900 with 6 fans</li></ul></article>
-    </div>
-
-    <h3 style="margin-top:64px">What you get</h3>
-    <div class="versus" id="versus"></div>
-    <p class="src" style="margin-top:12px">Agent estimate: ~7 GB RAM per coding agent after 24 GB for the OS. GPU speeds: gpt-oss-20b llama-bench on the 5070 Ti; Ollama 4-bit on the PRO 5000 (Database Mart). Bandwidth is theoretical at DDR5-5600.</p>
-
-    <h3 style="margin-top:64px">Line by line</h3>
-    <div class="tbl"><table class="qt" id="qt"></table></div>
-
-    <h3 style="margin-top:64px">What the extra $13,503 would have bought</h3>
-    <div class="stackbar" id="stackbar"></div>
-    <div class="legend2" id="stacklegend"></div>
-
-    <div class="verdicts">
-      <div class="verdict pick"><div class="flag" style="color:var(--cy)">Why A</div><h4>Most of the power for 40% of the price</h4>
-        <ul><li>Our agents mostly call cloud models, so we don't need a giant local GPU on day one</li><li>Same server-class platform: 7 full-size card slots, 128 PCIe lanes, 10 GbE and remote management</li><li>Same Kioxia drives as B, so storage is identical</li><li>Saves $13,503 now, to spend later only when we need it</li></ul></div>
-      <div class="verdict"><div class="flag" style="color:var(--dim)">What we give up, for now</div><h4>Half the cores, memory and VRAM</h4>
-        <ul><li>16 cores instead of 32</li><li>128 GB instead of 256 GB: about 14 agents at once instead of 33</li><li>16 GB of GPU memory instead of 48 GB, so 30B–70B models run slower, partly from system memory</li></ul></div>
-      <div class="verdict"><div class="flag" style="color:var(--vi)">How we close the gap</div><h4>Upgrade in this order</h4>
-        <ul><li><b>1. Memory:</b> fill the 4 empty slots for 256 GB and twice the bandwidth</li><li><b>2. GPU:</b> add or swap in a 48 GB card; the board has 4 full x16 slots</li><li><b>3. Power:</b> a bigger PSU only when a second big GPU goes in</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="fit">
-  <div class="wrap">
-    <div class="kicker">What can it actually run?</div>
-    <h2 style="margin-top:14px">Pick a job.<br><span class="film">See if it fits.</span></h2>
-    <p class="lead">The two questions that matter for an AI computer: <b>how big a model fits on the graphics card</b>, and <b>how many agents can work at the same time</b>. The bright bar is our build today; the faded bar shows the planned upgrade.</p>
-    <div class="fit-grid">
-      <div class="fitc">
-        <h3>Local AI models</h3>
-        <p class="q">A model has to fit in the graphics card's memory to run fast. Pick a model size:</p>
-        <div class="chips" id="mchips"></div>
-        <div id="mbars"></div>
-        <p class="fit-note">Sizes assume 4-bit compressed models (the normal way to run them locally) plus room for the conversation. Not fitting doesn't mean it won't run — it spills into system memory and runs roughly 5–10× slower.</p>
+        <dl>
+          <dt>Team</dt><dd>Same team</dd>
+          <dt>Budget</dt><dd>Go2 X and Jetson owned · ≈ $1,464 core add-ons · ≈ $2,939 with the 15 Ah battery upgrade</dd>
+          <dt>Next</dt><dd>Run the 20-minute network test on the X's rear port to find out what the Jetson is allowed to control.</dd>
+        </dl>
+        <div class="go"><a class="p" href="field-unit.html">Open Field Unit →</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
       </div>
-      <div class="fitc">
-        <h3>Agents at once</h3>
-        <p class="q">Each AI coding agent with its tools, browser and containers uses about 7 GB of system memory. Slide to set how many run together:</p>
-        <div class="slider"><input type="range" id="agents" min="1" max="40" value="12" aria-label="Number of agents running at once"><output id="agentsOut" for="agents">12</output></div>
-        <div class="agents-viz" id="agentsViz" aria-hidden="true"></div>
-        <div id="abars"></div>
-        <p class="fit-note">Estimate: 24 GB kept for the operating system, databases and model servers, then ~7 GB per agent.</p>
-      </div>
+    </article>
+  </div>
+
+  <section class="meet rv" id="meet" aria-labelledby="mt">
+    <div>
+      <span class="tag">Phase 3 · not now</span>
+      <h3 id="mt">Where they meet (later)</h3>
+      <p>Once both projects work on their own, Field Unit will send its heavy AI jobs (the arm's AI models, language models, big vision models) over Wi-Fi to Conductor's RTX 5070 Ti. The dog keeps walking, safety stops and mapping on board, so it still works if Wi-Fi drops.</p>
+      <p>Until then, each project ships on its own budget and schedule.</p>
     </div>
-  </div>
-</section>
+    <svg viewBox="0 0 560 150" aria-hidden="true">
+      <g fill="none" stroke="#3A465C" stroke-width="2">
+        <rect x="10" y="40" width="150" height="70" rx="12"/><rect x="400" y="40" width="150" height="70" rx="12"/>
+      </g>
+      <text x="85" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8E98AC">Field Unit</text>
+      <text x="85" y="92" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">Jetson · sensors</text>
+      <text x="475" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#8E98AC">Conductor</text>
+      <text x="475" y="92" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">RTX 5070 Ti</text>
+      <path id="mw1" d="M160 66 H400" stroke="#56627A" stroke-width="2" stroke-dasharray="5 7" fill="none"/>
+      <path id="mw2" d="M400 86 H160" stroke="#56627A" stroke-width="2" stroke-dasharray="5 7" fill="none"/>
+      <text x="280" y="54" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">camera + task → (Wi-Fi, Zenoh)</text>
+      <text x="280" y="108" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#586178">← arm actions + plans</text>
+    </svg>
+  </section>
+</main>
+<footer><div class="wrap">The build team · Project 01 Conductor · Project 02 Field Unit · Product photos: Antec; Unitree Robotics, shown for identification.</div></footer>
 
-<section class="band" id="silicon">
-  <div class="wrap">
-    <div class="kicker">The silicon</div>
-    <h2 style="margin-top:14px">Sixteen chiplets.<br><span class="film">One core each.</span></h2>
-    <div class="split">
-      <div class="die reveal">
-        <svg viewBox="0 0 720 754" role="img" aria-label="Stylized EPYC 9175F package: sixteen compute dies, each with one active core, linked to a central I/O die">
-          <defs>
-            <linearGradient id="gfilm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".4" stop-color="#A78BFA"/><stop offset=".7" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient>
-            <pattern id="pins" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2" fill="#1C2433"/></pattern>
-          </defs>
-          <rect x="2" y="2" width="716" height="750" rx="18" fill="#0B1019" stroke="#2A3448" stroke-width="2"/>
-          <rect x="2" y="2" width="716" height="750" rx="18" fill="url(#pins)" opacity=".7"/>
-          <rect x="24" y="40" width="672" height="660" rx="12" fill="none" stroke="#2A3448" stroke-dasharray="4 6"/>
-          <g id="fabric" stroke="url(#gfilm)" stroke-width="2" fill="none" opacity=".85"></g>
-          <!-- IOD -->
-          <rect x="290" y="170" width="140" height="414" rx="8" fill="#141B2A" stroke="url(#gfilm)" stroke-width="2"/>
-          <text x="360" y="356" text-anchor="middle" fill="#E9EDF5" font-family="JetBrains Mono, monospace" font-size="16">I/O DIE</text>
-          <text x="360" y="382" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">12 × DDR5</text>
-          <text x="360" y="400" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">128 × PCIe 5.0</text>
-          <!-- CCDs -->
-          <g id="ccds"></g>
-          <text x="360" y="730" text-anchor="middle" fill="#586178" font-family="JetBrains Mono, monospace" font-size="12">SP5 · LGA 6096 · 72 × 75.4 mm package</text>
-        </svg>
-      </div>
-      <div>
-        <p class="lead" style="margin-top:0">AMD builds the <b>EPYC 9175F</b> an unusual way: sixteen Zen 5 compute dies with <b>just one core switched on in each</b>, around a single I/O die. Every core gets its own 32 MB of L3 cache and its own link to memory. It is AMD's high-frequency part for databases and GPU host machines.</p>
-        <ul class="facts" style="margin-top:24px">
-          <li><b>5.0<small style="font-size:.5em"> GHz</small></b><span><strong>Boost clock</strong> on a 4.2 GHz base, at 320 W.</span></li>
-          <li><b>512<small style="font-size:.5em"> MB</small></b><span><strong>L3 cache</strong>: 32 MB for every single core.</span></li>
-          <li><b>16</b><span><strong>Memory links</strong>, one per compute die, so the CPU can saturate whatever memory we install.</span></li>
-          <li><b>512-bit</b><span><strong>Full-width AVX-512</strong>. Vector math runs in one pass, not two halves.</span></li>
-          <li><b>12 → 4</b><span><strong>Memory channels</strong>: the CPU is rated for 12 (614 GB/s). This board wires 8, and we fill 4 today.</span></li>
-        </ul>
-        <p class="src" style="margin-top:14px">Sources: AMD, Level1Techs, PassMark, ASRock Rack spec sheet (via Central Computer).</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="build" style="padding-bottom:0">
-  <div class="wrap">
-    <div class="kicker">The build</div>
-  </div>
-  <div class="xp" id="xp">
-    <div class="wrap xp-stage">
-      <div class="xp-copy">
-        <h2>Eight parts.<br><span class="film">One machine.</span></h2>
-        <p class="lead" style="font-size:16px">Scroll to assemble. Every part is drawn to scale from its spec sheet, inside the Antec 900's 85-litre chassis.</p>
-        <div class="xp-meter"><i id="xpbar"></i></div>
-        <div class="xp-state" id="xpstate">Exploded view · scroll to assemble</div>
-      </div>
-      <div class="xp-svg"><svg id="xpsvg" viewBox="-260 -300 1520 1560" role="img" aria-label="Exploded view of the workstation: case, motherboard, CPU and cooler, memory, GPU, power supply, drives and radiator"></svg></div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="day">
-  <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
-      <div>
-        <div class="kicker">Build day</div>
-        <h2 style="margin-top:14px">From boxes to boot<br><span class="film">in nine steps</span></h2>
-      </div>
-      <div class="day-arrows"><button type="button" id="dprev" aria-label="Previous step">←</button><button type="button" id="dnext" aria-label="Next step">→</button></div>
-    </div>
-    <p class="lead">About <b>4 hours</b> for two people, start to finish. Swipe through the order we'll put it together. The full checklist, with boxes to tick off on the day, is in the <a href="build-book.html">build book</a>.</p>
-    <div class="day-track" id="dayTrack" tabindex="0" aria-label="Build steps, scroll sideways"></div>
-    <div class="day-bar"><i id="dayFill"></i></div>
-    <div class="day-meta"><span id="dayNow">Step 1 of 9</span><span>Total ≈ 4 h · 2 people · 1 anti-static strap</span></div>
-  </div>
-</section>
-
-<section class="band" id="orchestra">
-  <div class="wrap">
-    <div class="kicker">The orchestra</div>
-    <h2 style="margin-top:14px">A crew of agents.<br><span class="film">One conductor.</span></h2>
-    <div class="orch">
-      <canvas id="orch" aria-label="Animated illustration: 14 agents on a ring sending calls to cloud models, the local GPU, tools and a vector database" role="img"></canvas>
-      <div class="stack">
-        <div><div class="big film">~14</div><p><b>coding agents running at once</b>, our estimate. Six agents measured ~43.5 GB of RAM, about 7 GB each. 128 GB leaves room for ~14 after the OS and services, and <b>~33</b> once we add four more memory sticks.</p></div>
-        <p><b>Memory runs out first in agent work.</b> Every session starts its own tool servers, browsers and containers. That is why memory is the first upgrade on our list: four empty slots are waiting.</p>
-        <p><b>Local models take the routine calls.</b> A fast 20B-class model handles routing, tool calls and fallback on the 16 GB GPU, or an embedding and reranking pair for search. Frontier work goes to cloud models like Claude.</p>
-        <p class="src">Illustration, not a live feed. Memory figure from a Claude Code issue report (June 2026).</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="proof">
-  <div class="wrap">
-    <div class="kicker">The proof</div>
-    <h2 style="margin-top:14px">Measured,<br><span class="film">not promised</span></h2>
-    <div class="cols">
-      <div class="panel">
-        <h3>Local AI on the RTX 5070 Ti</h3>
-        <p class="src" style="margin-top:6px">gpt-oss-20b · llama.cpp llama-bench · generation tokens per second</p>
-        <div class="bars" id="gpubars"></div>
-        <div class="stat-strip">
-          <div><b class="film">6,340</b><span>tok/s · gpt-oss-20b prompt processing</span></div>
-          <div><b>125</b><span>tok/s · Llama 3.1 8B Q4 (Ollama)</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Sources: llama.cpp discussion #15396 (community llama-bench results); ComputingForGeeks. gpt-oss-20b needs ~15.5 GB at 32K context, so it fills the card.</p>
-      </div>
-      <div class="panel">
-        <h3>Memory sets the pace</h3>
-        <p class="src" style="margin-top:6px">Theoretical memory bandwidth · GB/s · higher is faster for CPU-side AI</p>
-        <div class="bars" id="cpubars"></div>
-        <div class="stat-strip">
-          <div><b class="film">25–30</b><span>tok/s · gpt-oss-120b, GPU + RAM hybrid (tuned rigs)</span></div>
-          <div><b>~3×</b><span>speed-up from faster RAM on that model</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Bandwidth = channels × 8 bytes × MT/s. AMD rates the 9175F at 614 GB/s across 12 channels. Hybrid results from carteakey.dev and hardware-corner (consumer rigs, not this machine): ~10–11 tok/s at DDR5-2000 vs ~30 tok/s at DDR5-6000.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="airflow">
-  <div class="wrap">
-    <div class="kicker">Power &amp; air</div>
-    <h2 style="margin-top:14px">Cool, quiet,<br><span class="film">on one outlet</span></h2>
-    <div class="cols" style="align-items:center">
-      <div class="air panel" style="padding:12px"><svg id="airsvg" viewBox="0 0 900 640" role="img" aria-label="Airflow diagram: three 140 mm front fans pull cool air in; it crosses the board and GPU and leaves through the rear fan and the 360 mm radiator on top; two reverse-flow fans push air up from the shroud"></svg></div>
-      <div>
-        <p class="lead" style="margin-top:0"><b>Cool air enters through three 140 mm fans in front.</b> It crosses the board and the GPU, then leaves through the rear fan and the <b>360 mm radiator on top</b>, which cools the CPU. Two reverse-flow fans in the shroud push cool air up into the GPU. All six case fans come with the Antec 900.</p>
-        <div class="gauges">
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.71"></svg><b>~850 W</b><span>full-load estimate at the wall, of a 1,200 W PSU</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.47"></svg><b>~7.1 A</b><span>of a standard 15 A, 120 V circuit</span></div>
-          <div class="gauge"><svg viewBox="0 0 150 150" data-gauge="0.29"></svg><b>~350 W</b><span>spare PSU capacity for upgrades (80 Plus Platinum)</span></div>
-        </div>
-        <p class="src" style="margin-top:16px">Wall power is an estimate from component ratings: 320 W CPU + 300 W GPU + ~150 W for memory, drives, fans and board ≈ 770 W, plus PSU losses. A UPS of 1,500 VA is tight; 2,200 VA is recommended. Sources: AMD, NVIDIA, Super Flower, Antec, Gamers Nexus.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="parts">
-  <div class="wrap">
-    <div class="kicker">Meet the parts</div>
-    <h2 style="margin-top:14px">The final build,<br><span class="film">part by part</span></h2>
-    <p class="lead">This is what we're buying: <b>the EPYC build in the Antec 900.</b> Each part was chosen to keep our agents and local models fed without waiting on memory, cores or storage. Click through to the exact product pages.</p>
-    <div class="chapters" id="chapters"></div>
-  </div>
-</section>
-
-<section class="band" id="bom">
-  <div class="wrap">
-    <div class="kicker">Bill of materials</div>
-    <h2 style="margin-top:14px">Where every part<br><span class="film">comes from</span></h2>
-    <p class="lead">Sourced <b>Micro Center first</b>, from the Miami store quote held until Thursday, Nov 19. Amazon and specialist suppliers only fill what Micro Center doesn't carry. The Kioxia drives and their cables come from Amazon because Micro Center doesn't carry enterprise drives. Tick extras on or off to see the total update.</p>
-    <div class="bom-grid">
-      <div class="lines" id="bomlines"></div>
-      <aside class="sum" id="bomsum" aria-live="polite"></aside>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline">
-      <div class="mark">CONDUCTOR<span></span></div>
-      <a href="build-book.html">Team build book: decisions, fit check and assembly →</a>
-    </div>
-    <p style="max-width:70ch">Specs come from manufacturer datasheets and the reviews below, checked in November 2026. Figures marked as estimates or reported have not been measured on this exact machine.</p>
-    <ol id="sources"></ol>
-    <p class="src" id="photocred">Product photos: AMD; ASRock; ASRock Rack (via Scan Computers); ASUS; Antec; CDW; KIOXIA; Micro SATA Cables; PNY (NVIDIA board partner); SilverStone; Super Flower; Thermaltake. Shown for identification; all trademarks belong to their owners.</p>
-  </div>
-</footer>
-
-<script>
-const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const $ = s=>document.querySelector(s);
-const vis = (el,fn,opts)=>{ if(!('IntersectionObserver' in window)){fn(true);return;} new IntersectionObserver(es=>es.forEach(e=>fn(e.isIntersecting,e)),opts||{threshold:0}).observe(el); };
-
-/* ---------- Hero wafer ---------- */
-(function(){
-  const c=$('#wafer'), ctx=c.getContext('2d'); let W=0,running=false,t0=performance.now(),raf;
-  function size(){const r=c.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);W=r.width;c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);}
-  function draw(now){
-    const t=(now-t0)/1000, R=W*0.46, cx=W/2, cy=W/2, die=R/7.2, gap=die*0.08, rot=RM?0.18:t*0.05, light=t*0.6;
-    ctx.clearRect(0,0,W,W);
-    const glow=ctx.createRadialGradient(cx,cy,R*0.2,cx,cy,R*1.12);glow.addColorStop(0,'rgba(110,231,249,0.10)');glow.addColorStop(1,'rgba(6,8,14,0)');
-    ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,R*1.12,0,Math.PI*2);ctx.fill();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(rot);
-    ctx.beginPath();ctx.arc(0,0,R,0.06+Math.PI/2,Math.PI/2-0.06+Math.PI*2);ctx.closePath();
-    const base=ctx.createLinearGradient(-R,-R,R,R);base.addColorStop(0,'#1a2233');base.addColorStop(1,'#0c111b');ctx.fillStyle=base;ctx.fill();
-    ctx.save();ctx.clip();
-    const n=Math.ceil(R/die)+1;
-    for(let i=-n;i<=n;i++)for(let j=-n;j<=n;j++){
-      const x=i*die-die/2, y=j*die*0.82-die*0.41, w=die-gap, h=die*0.82-gap;
-      const far=Math.max(Math.hypot(x,y),Math.hypot(x+w,y),Math.hypot(x,y+h),Math.hypot(x+w,y+h));
-      if(far>R*0.97)continue;
-      const r=Math.hypot(x+w/2,y+h/2)/R, a=Math.atan2(y+h/2,x+w/2);
-      const hue=(195+150*Math.sin(r*3.1+a*0.9-light*0.5)+360)%360;
-      const spec=Math.max(0,Math.cos(a-rot*-1-light*0.35))*Math.max(0,1-Math.abs(r-0.55)*1.4);
-      ctx.fillStyle=`hsl(${hue},${62+spec*25}%,${16+r*8+spec*38}%)`;
-      ctx.fillRect(x,y,w,h);
-      // 8 core blocks per die
-      ctx.fillStyle=`hsla(${(hue+40)%360},70%,${30+spec*45}%,0.55)`;
-      const cw=(w-gap*3)/4, ch=(h*0.5-gap*2)/2;
-      for(let q=0;q<8;q++){const qx=x+gap+(q%4)*(cw+gap*0.6),qy=y+gap+Math.floor(q/4)*(ch+gap*0.6);ctx.fillRect(qx,qy,cw*0.9,ch);}
-    }
-    ctx.restore();
-    ctx.strokeStyle='rgba(233,237,245,0.18)';ctx.lineWidth=1;ctx.stroke();
-    ctx.restore();
-    // specular sweep
-    const sx=cx+Math.cos(light*0.35)*R*0.6, sy=cy+Math.sin(light*0.35)*R*0.6;
-    const sp=ctx.createRadialGradient(sx,sy,0,sx,sy,R*0.7);sp.addColorStop(0,'rgba(255,255,255,0.12)');sp.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=sp;ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fill();
-    if(running&&!RM)raf=requestAnimationFrame(draw);
-  }
-  size();draw(performance.now());
-  window.addEventListener('resize',()=>{size();draw(performance.now());});
-  vis(c,on=>{running=on;cancelAnimationFrame(raf);if(on&&!RM)raf=requestAnimationFrame(draw);});
-})();
-
-/* ---------- Boot sequence (types once on load) ---------- */
-(function(){
-  if(RM)return; const lines=[...document.querySelectorAll('#boot div')]; const html=lines.map(l=>l.innerHTML);
-  lines.forEach(l=>l.style.visibility='hidden');
-  let i=0; const next=()=>{ if(i>=lines.length)return; const l=lines[i]; l.style.visibility='visible';
-    const full=l.textContent; const original=html[i]; let k=0;
-    const tick=()=>{k+=2; if(k>=full.length){l.innerHTML=original;i++;setTimeout(next,140);return;} l.textContent=full.slice(0,k);requestAnimationFrame(tick);};
-    tick(); };
-  setTimeout(next,250);
-})();
-
-/* ---------- Count-ups ---------- */
-(function(){
-  document.querySelectorAll('.count').forEach(el=>{
-    const to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), sep=!!el.dataset.sep, cell=el.closest('.num');
-    const fmt=v=>sep?Math.round(v).toLocaleString('en-US'):v.toFixed(dec);
-    let done=false; const r0=el.getBoundingClientRect(); if(r0.top<innerHeight&&r0.bottom>0) done=true;
-    vis(el,on=>{ if(!on||done||RM)return; done=true; const t0=performance.now(), d=1400;
-      const step=now=>{const p=Math.min(1,(now-t0)/d), e=1-Math.pow(1-p,3); el.textContent=fmt(to*e); if(cell)cell.style.setProperty('--fill',e); if(p<1)requestAnimationFrame(step); else el.textContent=fmt(to);};
-      requestAnimationFrame(step);
-    },{threshold:0.4});
-  });
-})();
-
-/* ---------- Reveal ---------- */
-(function(){ if(RM)return; document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top>innerHeight){el.classList.add('pre'); vis(el,on=>{if(on)el.classList.remove('pre');},{threshold:0.15});}}); })();
-
-/* ---------- Die CCDs ---------- */
-(function(){
-  const g=$('#ccds'), f=$('#fabric'); const cols=[44,160,460,576], rows=[62,222,382,542]; let s='', l='', k=0;
-  cols.forEach((x,ci)=>rows.forEach((y,ri)=>{ const w=100,h=140, left=ci<2;
-    const ex=left?290:430, ey=190+ri*100+ (ci%2?20:50);
-    l+=`<path class="fabric" d="M${left?x+w:x} ${y+h/2} C ${left?x+w+60:x-60} ${y+h/2}, ${left?ex-50:ex+50} ${ey}, ${ex} ${ey}"/>`;
-    s+=`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="#121927" stroke="#2F3A52" stroke-width="1.5"/>`;
-    for(let q=0;q<8;q++){const cx=x+10+(q%4)*21, cy=y+12+Math.floor(q/4)*30, on=q===0;
-      s+=on?`<rect class="core" style="animation-delay:${k*0.19}s" x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="url(#gfilm)"/>`
-           :`<rect x="${cx}" y="${cy}" width="17" height="24" rx="2" fill="#1B2436" opacity=".7"/>`;}
-    s+=`<rect x="${x+10}" y="${y+78}" width="${w-20}" height="44" rx="3" fill="#1B2436"/><text x="${x+w/2}" y="${y+97}" text-anchor="middle" fill="#8E98AC" font-family="JetBrains Mono, monospace" font-size="11">32 MB L3</text><text x="${x+w/2}" y="${y+113}" text-anchor="middle" fill="#586178" font-family="JetBrains Mono, monospace" font-size="10">CCD ${k}</text></g>`;
-    k++; }));
-  g.innerHTML=s; f.innerHTML=l;
-})();
-
-/* ---------- Exploded build ---------- */
-(function(){
-  const svg=$('#xpsvg'); const S=1.7; // px per mm
-  const part=(id,dx,dy,inner,label,sub,lx,ly)=>`<g data-dx="${dx}" data-dy="${dy}" id="p-${id}">${inner}<g class="lbl"><text x="${lx}" y="${ly}">${label}</text><text class="lbl-sub" x="${lx}" y="${ly+24}">${sub}</text></g></g>`;
-  const fan=(cx,cy,r)=>`<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#0B1019" stroke="#2F3A52" stroke-width="2"/><g class="fan">${[0,1,2,3,4,5,6].map(k=>`<path d="M${cx} ${cy} q ${r*0.5} ${-r*0.25} ${r*0.86} ${r*0.05}" stroke="url(#xfilm)" stroke-width="${r*0.18}" stroke-linecap="round" fill="none" transform="rotate(${k*51.4} ${cx} ${cy})" opacity=".8"/>`).join('')}</g><circle cx="${cx}" cy="${cy}" r="${r*0.2}" fill="#141B2A"/></g>`;
-  const bx=110,by=120,bw=330*S,bh=305*S; // board
-  const slotY=n=>by+ (138+(n-1)*20.32)*S*0.92;
-  let h=`<defs><linearGradient id="xfilm" x1="0" x2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".45" stop-color="#A78BFA"/><stop offset=".75" stop-color="#F0ABFC"/><stop offset="1" stop-color="#FCD34D"/></linearGradient></defs>`;
-  // case shell (anchor)
-  h+=`<g id="p-case"><rect x="40" y="40" width="${250*S*0+920}" height="1040" rx="22" fill="#0A0E17" stroke="#2A3448" stroke-width="3"/><rect x="40" y="860" width="920" height="220" fill="#0D1220" stroke="#2A3448" stroke-width="2"/>
-    ${fan(310,860,0)}<text x="60" y="1120" fill="#8E98AC">ANTEC 900 · 85 L · SSI-EEB</text><text x="940" y="1120" text-anchor="end" fill="#586178">FRONT →</text>
-    <g>${[260,420].map(x=>fan(x,980,52)).join('')}</g><g>${[300,520,740].map(y=>fan(915,y,40)).join('')}</g><rect x="58" y="120" width="40" height="238" rx="4" fill="#121927" stroke="#2F3A52"/></g>`;
-  // board
-  let slots=''; for(let n=1;n<=7;n++){slots+=`<rect x="${bx+40}" y="${slotY(n)}" width="${150}" height="9" rx="2" fill="#2F3A52"/>`;}
-  h+=part('board',0,0,`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="8" fill="#0F1A1A" stroke="#2C5B50" stroke-width="2"/>
-    <rect x="${bx}" y="${by+10}" width="34" height="200" fill="#1C2A2A"/>${slots}
-    <rect x="${bx+260}" y="${by+380}" width="250" height="90" rx="6" fill="#152222" stroke="#2C5B50"/><text x="${bx+385}" y="${by+432}" text-anchor="middle" class="lbl-sub" style="font-size:15px">2 × M.2 · 4 × MCIO</text>`,
-    'ASROCK RACK TURIND8X-2T','EEB 12.6×13 in · 7× PCIe 5.0 x16 · 2× 10 GbE',bx+250,by+bh+50);
-  // CPU + cooler block
-  const sx=bx+250, sy=by+120;
-  h+=part('cpu',0,-330,`<rect x="${sx-20}" y="${sy-30}" width="${72*S+40}" height="${75.4*S+60}" rx="14" fill="#141B2A" stroke="url(#xfilm)" stroke-width="3"/><circle cx="${sx+61}" cy="${sy+64}" r="40" fill="none" stroke="url(#xfilm)" stroke-width="3" opacity=".7"/><text x="${sx+61}" y="${sy+70}" text-anchor="middle" style="font-size:16px">SP5</text>`,
-    'EPYC 9175F + XE360-SP5 PUMP','16 cores · 320 W · 360 mm AIO',sx-40,sy-60);
-  // DIMMs
-  const dimm=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="url(#xfilm)" opacity=".85"/>`;
-  const slotE=(x)=>`<rect x="${x}" y="${by+40}" width="12" height="226" rx="2" fill="none" stroke="#2F3A52" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-  h+=`<g>${[0,1,2,3].map(k=>slotE(sx+165+k*18)).join('')}</g>`;
-  h+=part('ramL',-230,-120,[0,1,2,3].map(k=>dimm(sx-90+k*18)).join(''),'128 GB DDR5','4 × 32 GB · 4 of 8 slots',sx-330,by+30);
-  // GPU slot 1
-  const gy=slotY(1)-6;
-  h+=part('gpu',-120,250,`<rect x="${bx-60}" y="${gy}" width="${304*S}" height="${2.5*20.32*S}" rx="8" fill="#10151F" stroke="url(#xfilm)" stroke-width="3"/><rect x="${bx-60}" y="${gy+70}" width="${304*S}" height="10" fill="url(#xfilm)" opacity=".5"/>${[0,1,2].map(k=>`<circle cx="${bx+40+k*150}" cy="${gy+40}" r="30" fill="#0B1019" stroke="#2F3A52"/>`).join('')}`,
-    'RTX 5070 TI · ASUS PROART','16 GB GDDR7 · 300 W · ~304 mm',bx,gy+150);
-  // 360 mm radiator, top exhaust
-  const rx=340, ry=48;
-  h+=part('rad',150,-300,`<rect x="${rx}" y="${ry}" width="600" height="58" rx="8" fill="#0D1220" stroke="#2F3A52" stroke-width="2"/>${[0,1,2].map(k=>fan(rx+100+k*200,ry+29,26)).join('')}`,
-    '360 MM RADIATOR · TOP','3 × 120 mm · exhausts up',rx,ry-52);
-  // PSU
-  h+=part('psu',-200,260,`<rect x="70" y="900" width="${150*S}" height="${86*S}" rx="8" fill="#141B2A" stroke="#2F3A52" stroke-width="2"/>${fan(70+75*S,900+43*S,48)}`,
-    'LEADEX VII PLATINUM PRO','1200 W · Platinum · ATX 3.1',70,1150);
-  // Drives
-  h+=part('ssd',260,240,`<rect x="620" y="920" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/><rect x="620" y="980" width="${100*S*1.2}" height="44" rx="5" fill="#141B2A" stroke="url(#xfilm)" stroke-width="2"/>`,
-    '2 × KIOXIA CD6-R','15.36 TB · U.3 via MCIO',600,1150);
-  svg.innerHTML=h;
-  const parts=[...svg.querySelectorAll('[data-dx]')], lbls=[...svg.querySelectorAll('.lbl')];
-  const bar=$('#xpbar'), state=$('#xpstate'), sec=$('#xp');
-  const apply=p=>{const e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-    parts.forEach(g=>{const dx=+g.dataset.dx*(1-e), dy=+g.dataset.dy*(1-e); g.setAttribute('transform',`translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);});
-    lbls.forEach(l=>l.setAttribute('opacity',(1-e*0.85).toFixed(2)));
-    bar.style.width=(e*100)+'%';
-    state.textContent=e>0.98?'Assembled · 8 parts · one machine':e<0.02?'Exploded view · scroll to assemble':`Assembling · ${Math.round(e*100)}%`; };
-  apply(0);
-  if(RM)return;
-  let ticking=false;
-  const onScroll=()=>{ if(ticking)return; ticking=true; requestAnimationFrame(()=>{ticking=false;const r=sec.getBoundingClientRect(),span=r.height-innerHeight;const p=Math.min(1,Math.max(0,(-r.top)/Math.max(1,span)));apply(p);}); };
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-})();
-
-/* ---------- Orchestra ---------- */
-(function(){
-  const c=$('#orch'), ctx=c.getContext('2d'); let W,H,run=false,raf; const pulses=[];
-  const SVC=[['Claude API','#A78BFA'],['OpenAI API','#F0ABFC'],['Local GPU · 16 GB','#6EE7F9'],['Vector DB','#FCD34D'],['MCP tools','#6EE7F9'],['Browsers','#F0ABFC']];
-  function size(){const r=c.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0);}
-  const N=14;
-  function nodes(t){const cx=W/2,cy=H/2,r1=Math.min(W,H)*0.27,r2=Math.min(W,H)*0.44;
-    const ag=[...Array(N)].map((_,i)=>{const a=i/N*Math.PI*2+t*0.04;return [cx+Math.cos(a)*r1,cy+Math.sin(a)*r1];});
-    const sv=SVC.map((s,i)=>{const a=i/SVC.length*Math.PI*2-Math.PI/2;return [cx+Math.cos(a)*r2,cy+Math.sin(a)*r2*0.92];});
-    return {cx,cy,ag,sv};}
-  function draw(now){const t=now/1000; const {cx,cy,ag,sv}=nodes(t);
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='rgba(142,152,172,0.10)';ctx.lineWidth=1;
-    ag.forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();});
-    if(!RM&&run&&Math.random()<0.55){pulses.push({a:Math.floor(Math.random()*N),s:Math.floor(Math.random()*SVC.length),p:0,v:0.006+Math.random()*0.01});}
-    for(let i=pulses.length-1;i>=0;i--){const q=pulses[i];q.p+=q.v;if(q.p>=1){pulses.splice(i,1);continue;}
-      const [ax,ay]=ag[q.a],[sx,sy]=sv[q.s];const x=ax+(sx-ax)*q.p,y=ay+(sy-ay)*q.p;
-      ctx.strokeStyle=SVC[q.s][1]+'33';ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(x,y);ctx.stroke();
-      ctx.fillStyle=SVC[q.s][1];ctx.beginPath();ctx.arc(x,y,2.6,0,Math.PI*2);ctx.fill();}
-    ag.forEach(([x,y],i)=>{ctx.fillStyle=`hsl(${190+i*5},80%,${62+12*Math.sin(t*2+i)}%)`;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();});
-    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,46);g.addColorStop(0,'rgba(167,139,250,0.9)');g.addColorStop(1,'rgba(167,139,250,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,46,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#E9EDF5';ctx.font='600 13px "JetBrains Mono", monospace';ctx.textAlign='center';ctx.fillText('CONDUCTOR',cx,cy+4);
-    sv.forEach(([x,y],i)=>{ctx.fillStyle='#0E131E';ctx.strokeStyle=SVC[i][1];ctx.lineWidth=1.5;const w=ctx.measureText(SVC[i][0]).width+22;
-      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x-w/2,y-14,w,28,14);else ctx.rect(x-w/2,y-14,w,28);ctx.fill();ctx.stroke();
-      ctx.fillStyle='#E9EDF5';ctx.font='500 12px "JetBrains Mono", monospace';ctx.fillText(SVC[i][0],x,y+4);});
-    if(run&&!RM)raf=requestAnimationFrame(draw);}
-  size(); for(let k=0;k<40;k++)pulses.push({a:k%N,s:k%SVC.length,p:Math.random()*0.9,v:0.008});
-  draw(performance.now());
-  addEventListener('resize',()=>{size();draw(performance.now());});
-  vis(c,on=>{run=on;cancelAnimationFrame(raf);if(on&&!RM)raf=requestAnimationFrame(draw);});
-})();
-
-/* ---------- Bars ---------- */
-(function(){
-  const gpu=[['RTX 5060 Ti 16 GB',111.5],['RTX 3090 24 GB',161.8],['RTX 5070 Ti 16 GB · ours',189.5,1],['RTX 5080 16 GB',204.9],['RTX 4090 24 GB',221.9],['RTX 5090 32 GB',282.5]];
-  $('#gpubars').innerHTML=gpu.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} tok/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/282.5*100}%"></i></div></div>`).join('');
-  const mem=[['Today · 4 channels × DDR5-5600',179,1],['After upgrade · 8 channels × DDR5-5600',358],['Board maximum · 8 channels × DDR5-6400',410],['CPU rating · 12 channels × DDR5-6400',614]];
-  $('#cpubars').innerHTML=mem.map(([n,v,us])=>`<div class="bar-row"><div class="bar-top"><span${us?' style="color:var(--text);font-weight:700"':''}>${n}</span><span>${v} GB/s</span></div><div class="track"><i${us?'':' class="old"'} style="--w:${v/614*100}%"></i></div></div>`).join('');
-  if(RM)return;
-  document.querySelectorAll('.bars').forEach(box=>{const is=[...box.querySelectorAll('.track i')]; let done=false;
-    const r=box.getBoundingClientRect(); if(r.top<innerHeight)return;
-    is.forEach(i=>{i.style.transition='width 1.1s cubic-bezier(.2,.7,.2,1)';i.dataset.w=i.style.getPropertyValue('--w');i.style.width='0%';});
-    vis(box,on=>{if(on&&!done){done=true;is.forEach((i,k)=>setTimeout(()=>i.style.width=i.dataset.w,k*90));}},{threshold:.3});});
-})();
-
-/* ---------- Airflow ---------- */
-(function(){
-  const s=$('#airsvg');
-  const paths=[
-    ['M850 150 C 740 160, 600 180, 470 200 S 160 230, 40 200','#6EE7F9'],
-    ['M850 300 C 740 290, 600 260, 520 200 S 470 90, 440 10','#A78BFA'],
-    ['M850 300 C 760 300, 560 230, 360 160 S 260 60, 240 10','#A78BFA'],
-    ['M850 450 C 740 430, 600 380, 420 370 S 140 360, 40 330','#F0ABFC'],
-    ['M420 560 C 420 500, 380 440, 300 400 S 120 380, 40 350','#FCD34D'],
-    ['M600 560 C 600 500, 560 450, 480 420 S 200 400, 40 360','#FCD34D'],
-  ];
-  let h=`<rect x="20" y="20" width="860" height="600" rx="18" fill="#0A0E17" stroke="#2A3448" stroke-width="2"/>
-    <rect x="70" y="80" width="560" height="420" rx="8" fill="#0F1A1A" stroke="#2C5B50"/>
-    <rect x="300" y="120" width="100" height="110" rx="10" fill="#141B2A" stroke="#2F3A52"/><text x="350" y="182" text-anchor="middle" fill="#E9EDF5">CPU</text>
-    <rect x="40" y="320" width="500" height="70" rx="8" fill="#10151F" stroke="#2F3A52"/><text x="290" y="361" text-anchor="middle" fill="#E9EDF5">GPU · RTX 5070 Ti</text>
-    <rect x="150" y="26" width="480" height="40" rx="8" fill="#0D1220" stroke="#2F3A52"/><text x="390" y="52" text-anchor="middle">360 RAD · TOP EXHAUST ↑</text>
-    <circle cx="840" cy="150" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="300" r="40" fill="none" stroke="#2F3A52"/><circle cx="840" cy="450" r="40" fill="none" stroke="#2F3A52"/>
-    <rect x="20" y="520" width="860" height="100" fill="#0D1220" stroke="#2A3448"/>
-    <circle cx="420" cy="570" r="34" fill="none" stroke="#2F3A52"/><circle cx="600" cy="570" r="34" fill="none" stroke="#2F3A52"/>
-    <rect x="22" y="110" width="22" height="160" fill="#141B2A" stroke="#2F3A52"/><text x="56" y="104">← REAR EXHAUST</text><text x="690" y="96">FRONT INTAKE 3×140</text>`;
-  paths.forEach(([d,c],i)=>{h+=`<path d="${d}" fill="none" stroke="${c}" stroke-opacity=".22" stroke-width="2" stroke-dasharray="3 7"/>`;
-    if(!RM)for(let k=0;k<4;k++)h+=`<circle r="4" fill="${c}"><animateMotion dur="${3.4+i*0.3}s" begin="${-k*0.85-i*0.4}s" repeatCount="indefinite" path="${d}"/></circle>`;});
-  s.innerHTML=h;
-  document.querySelectorAll('[data-gauge]').forEach(g=>{const v=+g.dataset.gauge,r=60,C=2*Math.PI*r;
-    g.innerHTML=`<defs><linearGradient id="gg${Math.round(v*1000)}" x1="0" x2="1"><stop offset="0" stop-color="#6EE7F9"/><stop offset=".5" stop-color="#A78BFA"/><stop offset="1" stop-color="#F0ABFC"/></linearGradient></defs>
-      <circle cx="75" cy="75" r="${r}" fill="none" stroke="#1C2433" stroke-width="12"/>
-      <circle cx="75" cy="75" r="${r}" fill="none" stroke="url(#gg${Math.round(v*1000)})" stroke-width="12" stroke-linecap="round" transform="rotate(-90 75 75)" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-v)}" class="garc"/>`;
-    if(RM)return; const arc=g.querySelector('.garc'); const r0=g.getBoundingClientRect(); if(r0.top<innerHeight)return;
-    arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1)'; arc.setAttribute('stroke-dashoffset',C);
-    let done=false; vis(g,on=>{if(on&&!done){done=true;requestAnimationFrame(()=>arc.setAttribute('stroke-dashoffset',C*(1-v)));}},{threshold:.4});});
-})();
-
-/* ---------- Spec sheet + sources ---------- */
-(function(){
-  const SPECS=[
-    ['Processor','AMD EPYC 9175F',['<b>16 cores / 32 threads</b>, Zen 5 "Turin"','4.2 GHz base · <b>5.0 GHz</b> boost · 320 W','<b>512 MB L3</b> · 16 CCDs, one core each','Rated for 12-channel DDR5-6400 · <b>128 PCIe 5.0 lanes</b>','Full 512-bit AVX-512 · SP5 socket']],
-    ['Motherboard','ASRock Rack TURIND8X-2T',['EEB 12.63 × 13 in · CPUs up to 500 W','<b>7× PCIe 5.0 x16</b> + 1× x8. GPU goes in slot 0, 2, 4 or 6','2× M.2 Gen5 · 4× MCIO Gen5 x4','Broadcom <b>dual 10 GbE</b> + dedicated IPMI port','AST2600 BMC (onboard video is VGA only) · 24-pin + 3× EPS']],
-    ['Memory','128 GB Kingston FURY Renegade Pro',['4 × 32 GB DDR5-5600 <b>CL28</b> ECC RDIMM','Kit KF556R28RBE2K4-128 · 4 of 8 slots','Runs DDR5-4800 until EXPO is enabled','<b>~179 GB/s</b> theoretical · ~358 GB/s with 4 more sticks']],
-    ['Graphics','ASUS ProArt GeForce RTX 5070 Ti OC',['<b>16 GB GDDR7</b> · 256-bit · 896 GB/s','<b>8,960 CUDA cores</b> · Blackwell','~1,406 AI TOPS (FP4, sparse)','300 W · one 12V-2x6 plug · ~2.5-slot, ~304 mm']],
-    ['Cooling','SilverStone XE360-SP5',['360 mm AIO built for SP5','Mounted as <b>top exhaust</b> in the Antec 900','28 mm radiator · 3× 120 mm fans','Front stays free for the case\'s 3× 140 mm intake fans']],
-    ['Power','Super Flower Leadex VII Platinum PRO',['<b>1,200 W</b> · 80 Plus Platinum · ATX 3.1','1× native 12V-2x6 (600 W) for the GPU','2× EPS 4+4 · 4× PCIe 6+2 · ~150 mm long','<b>Open check:</b> the board has 3 EPS inputs. Confirm in its manual that 2 are enough for a 320 W CPU']],
-    ['Chassis','Antec 900 (2026)',['547 × 250 × 622 mm · ~85 L · 15 kg','SSI-EEB server boards supported','<b>6 PWM fans included</b> (3× 140 front, 2× 120 reverse shroud, 1× 140 rear)','GPU up to 465 mm · 360 mm radiator on top · 9 drive bays']],
-    ['Storage','2× Kioxia CD6-R 7.68 TB',['<b>15.36 TB</b> U.3 NVMe · PCIe 4.0 x4','6,200 / 4,000 MB/s sequential','<b>1,000,000</b> random read IOPS','1 DWPD · power-loss protection','Cabled to the board\'s MCIO ports (≤50 cm cables)']],
-  ];
-  const _sp=$('#specs'); if(_sp) _sp.innerHTML=SPECS.map(([r,n,l])=>`<article class="spec"><div class="role">${r}</div><h3>${n}</h3><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
-  const SRC=[
-    ['AMD: EPYC 9175F product page','https://www.amd.com/en/products/processors/server/epyc/9005-series/amd-epyc-9175f.html'],
-    ['Level1Techs: EPYC Turin 9175F build (16 CCDs, one core each)','https://forum.level1techs.com/t/epyc-turin-gaming-build-9175f/228698/3'],
-    ['PassMark: AMD EPYC 9175F','https://www.cpubenchmark.net/cpu.php?cpu=AMD+EPYC+9175F'],
-    ['Central Computer: ASRock Rack TURIND8X-2T spec sheet','https://www.centralcomputer.com/asrock-rack-turind8x-2t-500w-server-motherboard-single-socket-sp5-supports-amd-epyc-9005-9004-processors-8x-ddr5-rdimm-slots.html'],
-    ['Chips and Cheese: AMD Turin launch analysis','https://chipsandcheese.com/p/amds-turin-5th-gen-epyc-launched'],
-    ['llama.cpp discussion #15396: gpt-oss llama-bench results by GPU','https://github.com/ggml-org/llama.cpp/discussions/15396'],
-    ['ComputingForGeeks: local LLM GPU benchmarks','https://computingforgeeks.com/black-friday-gpu-deals/'],
-    ['carteakey.dev: optimizing gpt-oss-120b local inference','https://carteakey.dev/blog/local-inference/optimizing-gpt-oss-120b-local-inference/'],
-    ['Hardware Corner: gpt-oss MoE layer offloading','https://www.hardware-corner.net/gpt-oss-offloading-moe-layers/'],
-    ['ASUS: ProArt GeForce RTX 5070 Ti OC','https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/'],
-    ['SilverStone: XE360-SP5','https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/'],
-    ['Super Flower: Leadex VII Platinum PRO','https://www.super-flower.com.tw/products-detail/LVII-P-PRO/'],
-    ['Antec: 900 case specifications','https://antec.com/product/case/900'],
-    ['Gamers Nexus: Antec 900 (2026) review and thermals','https://gamersnexus.net/cases/goat-antec-900-case-revisit-new-900-2026-review-benchmarks-and-thermals'],
-    ['Kioxia: CD6-R data center SSD','https://europe.kioxia.com/nl-nl/business/ssd/data-center-ssd/cd6-r.html'],
-  ];
-  $('#sources').innerHTML=SRC.map(([t,u])=>`<li><a href="${u}">${t}</a></li>`).join('');
-})();
-</script>
-<script>
-/* ---------- v2: chapters + BOM ---------- */
-const BOM = [{"id": "cpu-bundle", "role": "CPU + motherboard + 128 GB memory bundle", "name": "Micro Center Computer Build Bundle: AMD EPYC 9175F + ASRock Rack TURIND8X-2T + Kingston FURY Renegade Pro 128 GB DDR5-5600 ECC RDIMM quad kit", "mpn": "TURIND8X-2T + KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/site/products/amd_bundles.aspx", "price": 5999.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "999999", "notes": "Listed on Micro Center's AMD bundle deals page. Ask the store for the bundle by SKU.", "alt": [], "stock": ""}, {"id": "cpu", "role": "CPU (in the bundle)", "name": "AMD EPYC 9175F, 16 cores, SP5", "mpn": "", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "board", "role": "Motherboard (in the bundle)", "name": "ASRock Rack TURIND8X-2T, SP5, SSI-EEB", "mpn": "TURIND8X-2T", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "ram", "role": "Memory (in the bundle)", "name": "Kingston FURY Renegade Pro 128 GB (4 × 32 GB) DDR5-5600 CL28 ECC RDIMM, KF556R28RBE2K4-128", "mpn": "KF556R28RBE2K4-128", "qty": 0, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "price": null, "priceNote": "", "alt": [], "notes": "", "stock": ""}, {"id": "gpu", "role": "Graphics card", "name": "ASUS ProArt GeForce RTX 5070 Ti OC 16 GB GDDR7", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "price": 1699.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "936120", "notes": "Install in slot 0, 2, 4 or 6 (full x16 slots that do not share lanes with the drive ports).", "alt": [], "stock": ""}, {"id": "case", "role": "Case", "name": "Antec 900 Tempered Glass eATX Full Tower Computer Case - Black", "mpn": "ANTEC 900 (UPC 0-761345-10272-8)", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "price": 199.99, "priceNote": "Micro Center Miami quote, price guaranteed to 2026-11-19. Micro Center snippet: $199.99 sale (orig $219.99).", "stock": "In-store pickup only. Phoenix in stock; no longer carried at Austin. Miami not visible.", "sku": "028738", "alt": [{"source": "Best Buy", "url": "https://www.bestbuy.com/product/antec-900-full-tower-case-ai-workstation-gaming-chassis-supports-e-atx-threadripper-back-connect-mb-6-pwm-fans-included-black/JXVWSWSRY2", "price": 299.99}, {"source": "Amazon", "url": "https://www.amazon.com/Antec-900-Workstation-Threadripper-Back-Connect/dp/B0GMSPXMM2", "price": null}], "notes": "Supports E-ATX/SSI-EEB. Comes with 6 PWM fans. Takes up to a 420mm radiator."}, {"id": "psu", "role": "Power supply", "name": "Super Flower LEADEX VII Platinum PRO 1200 W, 80 Plus Platinum, ATX 3.1, fully modular", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "price": 189.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "848499", "notes": "Open check: the board has 3 EPS 8-pin inputs and this unit ships 2 EPS cables. Confirm in the TURIND8X-2T manual that 2 are enough for a 320 W CPU.", "alt": [], "stock": ""}, {"id": "cooler", "role": "CPU cooler (SP5 AIO)", "name": "SilverStone XE360-SP5 360 mm All-in-One Liquid CPU Cooler for EPYC SP5", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "price": 379.99, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "069492", "notes": "Mount the radiator at the top of the Antec 900 as exhaust. The front keeps the case's three 140 mm intake fans.", "alt": [], "stock": ""}, {"id": "ssd-u3", "role": "Storage (×2)", "name": "Kioxia CD6-R 7.68 TB U.3 NVMe (HP P21842-003)", "mpn": "KCD6XLUL7T68 / P21842-003", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0HPR72914", "price": 2449.0, "priceNote": "Amazon listing, Nov 15", "notes": "Recommended by our consultant, Expertly.Ai. Micro Center does not carry enterprise U.3 drives. Check SMART hours and the warranty on arrival.", "alt": [], "stock": ""}, {"id": "cable-mcio", "role": "Drive cables (×2)", "name": "MCIO 4i (SFF-TA-1016) to U.2 (SFF-8639) cable, 0.5 m, with SATA power", "mpn": "MCIO 4i → SFF-8639", "qty": 2, "source": "Amazon", "url": "https://www.amazon.com/dp/B0CWP5X4M7", "price": 38.0, "priceNote": "approx.", "notes": "Connects each Kioxia drive to the TURIND8X-2T MCIO ports. Give each drive its own SATA power lead.", "alt": [], "stock": ""}, {"id": "fans-opt", "role": "Optional: extra fans (on the original quote)", "name": "6× ARCTIC P12 Pro 120 mm + SilverStone CPF04 PWM fan hub", "mpn": "", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "price": 99.93, "priceNote": "Micro Center Miami quote, price guaranteed to Nov 19.", "sku": "953612 · 133009", "notes": "The Antec 900 already ships with 6 PWM fans, so these are optional. Skip them to save about $100.", "alt": [], "stock": ""}, {"id": "ram-up", "role": "Later: memory upgrade to 256 GB", "name": "4 more Kingston FURY Renegade Pro 32 GB DDR5-5600 RDIMMs (same kit, KF556R28RBE2K4-128)", "mpn": "KF556R28RBE2K4-128", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black?ob=1&storeid=145", "price": 4589.99, "priceNote": "Micro Center list price for the 4-stick kit (Nov 15). Bundle math implies about $475 a stick, so ask.", "sku": "873000", "notes": "Fills all 8 slots: 256 GB and twice the memory bandwidth. The first upgrade to make.", "alt": [], "stock": ""}, {"id": "paste", "role": "Thermal paste (spare, for re-mounts)", "name": "ARCTIC MX-6 Thermal Paste - 8 g", "mpn": "ACTCP00081A", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/683102/arctic-cooling-mx-6-thermal-paste-8-g", "price": null, "priceNote": "Micro Center price not visible in search results. About $8–$11 elsewhere (Walmart $10.99).", "stock": "Unknown.", "sku": null, "alt": [{"source": "Amazon (MX-6 8g)", "url": "https://www.amazon.com/ARCTIC-MX-6-Conductivity-Non-Conductive-Non-capacitive/dp/B09VDLH5M6", "price": null}, {"source": "Newegg (Noctua NT-H2 10g)", "url": "https://www.newegg.com/noctua-nt-h2-10g/p/2MB-0026-00006", "price": 28.84}], "notes": "The AW420 likely ships with paste pre-applied. Get a large tube anyway for re-mounts on the large sTR5 IHS. Micro Center only lists NT-H2 in 3.5g (quickview 698093), not 10g."}, {"id": "boot-ssd", "role": "Optional Gen5 M.2 boot SSD", "name": "Samsung 9100 PRO 2TB PCIe Gen 5 x4 NVMe M.2 Internal SSD", "mpn": "MZ-VAP2T0B/AM", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/691300/samsung-9100-pro-2tb-samsung-v-nand-tlc-nand-(v8)-pcie-gen-5-x4-and-pcie-gen-5-x4-nvme-m2-internal-ssd", "price": 399.99, "priceNote": "Cached Micro Center product page snippet: $399.99 (orig $899.99), in-store only. The cache may be stale.", "stock": "In-store only. Snapshot: 25+ at St. Louis Park.", "sku": "815258", "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1878199-REG/samsung_mz_vap2t0b_am_2tb_9100_pro_pcie.html", "price": null}, {"source": "Newegg (Crucial T705 2TB, CT2000T705SSD3)", "url": "https://www.newegg.com/crucial-2tb-t705-nvme/p/N82E16820156398", "price": 379.99}], "notes": "A price tracker shows Amazon at $399.95 (2026-11-14). The Crucial T705 2TB was seen at Micro Center Yonkers for $369.99, but only on a search-results page, so there is no product URL for it."}, {"id": "ups", "role": "UPS (pure sine, active-PFC compatible)", "name": "CyberPower PFC Sinewave Series UPS CP1500PFCLCD, 1500 VA / 1000 W, 120 V, 10 outlets", "mpn": "CP1500PFCLCD", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/353897/cyberpower-systems-pfc-sinewave-series-ups-(cp1500pfclcd)", "price": 239.99, "priceNote": "Micro Center product page snippet: $239.99 (orig $259.99).", "stock": "Snapshots: in stock at Westbury and Denver (7). Miami not visible.", "sku": null, "alt": [{"source": "B&H", "url": "https://www.bhphotovideo.com/c/product/1513053-REG/cyberpower_cp1500pfclcd_pfc_sinewave_ups.html", "price": 239.95}, {"source": "CDW", "url": "https://www.cdw.com/product/cyberpower-intelligent-pfc-lcd-cp1500pfclcd/2190609", "price": 239.95}], "notes": "Rated 1000W. Full load (CPU 350W + GPU 300W + platform) can reach about 800–900W, which gives only a short runtime. A 2000–2200VA unit would be better, but none was found at Micro Center in searches. Consider CyberPower OR2200PFCLCD or APC SMT2200C from CDW/B&H (not sourced here)."}, {"id": "esd", "role": "Anti-static wrist strap", "name": "Kingwin Anti-Static Wrist Strap", "mpn": "ATA-W24", "qty": 1, "source": "Micro Center", "url": "https://www.microcenter.com/product/336438/Anti-Static_Wrist_Strap", "price": 4.99, "priceNote": "Micro Center product page snippet: $4.99. An older snippet shows $3.99.", "stock": "Snapshots: 6 at Parkville, 9 at Fairfax. Miami not visible.", "sku": "740001", "alt": [{"source": "Micro Center (iFixit strap)", "url": "https://www.microcenter.com/quickview/442494/ifixit-anti-static-wrist-strap", "price": 5.99}], "notes": ""}];
-const CREDITS = {"cpu": {"file": "cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/workstations/ryzen-threadripper/9000-wx-series/amd-ryzen-threadripper-pro-9975wx.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/3513563-threadripper-pro-9000-series.jpg", "owner": "AMD"}, "board": {"file": "board.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/096fe01b-a516-48d6-833b-46901887982d/", "owner": "ASUS"}, "board-io": {"file": "board-io.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/motherboards/workstation/pro-ws-wrx90e-sage-se/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/d1de116c-6ba0-49ff-bab4-7abb594ab2ef/", "owner": "ASUS"}, "ram": {"file": "ram.jpg", "sourcePage": "https://www.cdw.com/product/kingston-fury-renegade-pro-ddr5-kit-128-gb-4-x-32-gb-dimm-288-pin/7922358", "imageUrl": "https://webobjects2.cdw.com/is/image/CDW/7922358?wid=1200&hei=900&qlt=95", "owner": "CDW"}, "gpu": {"file": "gpu.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/3-rtx-pro-5000-3qtr-front-left.jpg", "owner": "PNY (NVIDIA board partner)"}, "case": {"file": "case.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-01.jpg", "owner": "Antec"}, "psu": {"file": "psu.jpg", "sourcePage": "https://www.asrock.com/Power-Supply/Taichi/TC-1650T/", "imageUrl": "https://www.asrock.com/Power-Supply/photo/TC-1650T(L1).png", "owner": "ASRock"}, "cooler": {"file": "cooler.jpg", "sourcePage": "https://uk.thermaltake.com/aw420-aio-liquid-cooler.html", "imageUrl": "https://uk.thermaltake.com/media/catalog/product/c/l/cl-w445-pl14bl-a_01.jpg", "owner": "Thermaltake"}, "ssd": {"file": "ssd.jpg", "sourcePage": "https://americas.kioxia.com/en-us/business/ssd/data-center-ssd/cd6-r.html", "imageUrl": "https://americas.kioxia.com/content/dam/kioxia/shared/business/ssd/data-center-ssd/img/cd6-r_img_001.png", "owner": "KIOXIA"}, "cable": {"file": "cable.jpg", "sourcePage": "https://www.microsatacables.com/slimsas-8i-sff-8654-cable-to-two-u-2-connectors-50-cm", "imageUrl": "https://www.microsatacables.com/media/catalog/product/1/8/1857a.jpg", "owner": "Micro SATA Cables"}, "a-cpu": {"file": "a-cpu.jpg", "sourcePage": "https://www.amd.com/en/products/processors/server/epyc/9005-series.html", "imageUrl": "https://www.amd.com/content/dam/amd/en/images/products/processors/epyc/2909511-epyc-9005-teaser.jpg", "owner": "AMD"}, "a-gpu": {"file": "a-gpu.jpg", "sourcePage": "https://www.asus.com/us/motherboards-components/graphics-cards/proart/proart-rtx5070ti-o16g/", "imageUrl": "https://dlcdnwebimgs.asus.com/gain/4cf11703-9459-4f83-a5f4-8c5da154bfe6/", "owner": "ASUS"}, "a-cooler": {"file": "a-cooler.jpg", "sourcePage": "https://www.silverstonetek.com/en/product/info/coolers/xe360_sp5/", "imageUrl": "https://www.silverstonetek.com/upload/detail/xe360-sp5-0.jpg", "owner": "SilverStone"}, "a-psu": {"file": "a-psu.jpg", "sourcePage": "https://www.super-flower.com.tw/products-detail/LVII-P-PRO/", "imageUrl": "https://www.super-flower.com.tw/upload/catalog_color_b/2024%20web_IM_2505_VII%20P_01__26E26j3vti.png", "owner": "Super Flower"}, "case-inside": {"file": "case-inside.jpg", "sourcePage": "https://antec.com/product/case/900", "imageUrl": "https://antec.com/product/case/images/gallery-900-02.jpg", "owner": "Antec"}, "gpu-back": {"file": "gpu-back.jpg", "sourcePage": "https://www.pny.com/nvidia-rtx-pro-5000-blackwell", "imageUrl": "https://d2vfia6k6wrouk.cloudfront.net/productimages/e73bd9df-a2d4-4dbc-8d4c-b2a40108c705/images/2-rtx-pro-5000-3qtr-back-right.jpg", "owner": "PNY (NVIDIA board partner)"}, "a-board": {"file": "a-board.jpg", "sourcePage": "https://www.scan.co.uk/products/asrock-rack-turind8x-2t-500w-amd-epyc-9004-9005-sp5-ddr5-7x-pcie-50-x16-2x-m2-2x-10gbe-ssi-eeb", "imageUrl": "https://www.scan.co.uk/images/products/super/3783823-l-b.jpg", "owner": "ASRock Rack (via Scan Computers)"}, "dog-go2": {"file": "dog-go2.jpg", "sourcePage": "https://www.unitree.com/go2", "imageUrl": "https://oss-global-cdn.unitree.com/static/84f36612b1f64800928f27b4c140d85b_1200x675.png", "owner": "Unitree Robotics"}, "dog-jetson": {"file": "dog-jetson.jpg", "sourcePage": "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/", "imageUrl": "https://www.nvidia.com/content/dam/en-zz/Solutions/autonomous-machines/embedded-systems/nano-super-developer-kit/jetson-orin-nano-super-developer-kit-og.jpg", "owner": "NVIDIA"}, "dog-l2": {"file": "dog-l2.jpg", "sourcePage": "https://www.unitree.com/L2", "imageUrl": "https://oss-global-cdn.unitree.com/static/c2f833925ff54f928f538a67b748d6db_990x557.png", "owner": "Unitree Robotics"}};
-const IMGS = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "dog-go2": "img/dog-go2.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2": "img/dog-l2.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
-(function(){
-  const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const B=id=>BOM.find(b=>b.id===id)||null;
-  const money=n=>n==null||isNaN(n)?'—':'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const srcKind=s=>/micro\s*center/i.test(s||'')?'mc':/amazon/i.test(s||'')?'amz':'oth';
-  const chip=s=>s?`<span class="chip ${srcKind(s)}"><i></i>${esc(s)}</span>`:'';
-  const img=(id,alt,cls)=>IMGS[id]?`<img src="${IMGS[id]}" alt="${esc(alt)}" loading="lazy" decoding="async">`:`<span class="${cls||'ph'}">${esc(alt)}</span>`;
-  const DARK=new Set(['cpu']);
-  const credit=id=>CREDITS[id]&&CREDITS[id].owner?`Image: ${esc(CREDITS[id].owner)}`:'';
-
-  /* chapters */
-  const CH=[
-   {img:'a-cpu',bom:'cpu-bundle',role:'Processor',name:'AMD EPYC 9175F',
-    why:'<b>16 fast Zen 5 cores, each on its own chiplet with its own 32 MB of cache.</b> Clocks up to 5.0 GHz keep agent tools, builds and browsers snappy, and the server platform brings 128 PCIe 5.0 lanes for more GPUs later.',
-    kv:[['16 / 32','cores / threads'],['5.0 GHz','boost clock'],['512 MB','L3 cache'],['320 W','TDP']]},
-   {img:'a-board',bom:'cpu-bundle',role:'Motherboard',name:'ASRock Rack TURIND8X-2T',
-    why:'<b>A server board in a workstation case.</b> Seven full-length PCIe 5.0 slots, dual 10 GbE and a BMC, so we can power-cycle and watch the machine from a browser. Its MCIO ports connect the Kioxia drives.',
-    kv:[['7× x16','PCIe 5.0 slots'],['8','DDR5 RDIMM slots'],['2 + 4','M.2 Gen5 + MCIO'],['2× 10 GbE','Broadcom']]},
-   {img:'ram',bom:'cpu-bundle',role:'Memory',name:'Kingston FURY Renegade Pro DDR5 RDIMM',
-    why:'<b>128 GB of ECC memory in 4 of the 8 slots</b>, enough for about 14 agents at once. Turn on EXPO in the BIOS for the rated 5600 speed. The four empty slots are the first upgrade: 256 GB and double the bandwidth.',
-    kv:[['128 GB','4 × 32 GB ECC'],['5600','MT/s · CL28'],['~179 GB/s','theoretical'],['4 free','slots to grow']]},
-   {img:'a-gpu',bom:'gpu',role:'Graphics',name:'ASUS ProArt RTX 5070 Ti',
-    why:'<b>16 GB of GDDR7 for the local models that do the routine work</b>: routers, embedders and fast 8–20B models. Bigger work goes to cloud models. The board has room for a 48 GB card later.',
-    kv:[['16 GB','GDDR7'],['896 GB/s','bandwidth'],['8,960','CUDA cores'],['300 W','12V-2x6']]},
-   {img:'a-cooler',bom:'cooler',role:'Cooling',name:'SilverStone XE360-SP5',
-    why:'<b>A 360 mm liquid cooler made for EPYC\'s big SP5 socket.</b> In the Antec 900 it mounts at the top as exhaust, so the case\'s front fans keep pulling in cool air.',
-    kv:[['360 mm','radiator'],['SP5','native mount'],['Top','exhaust in the Antec 900'],['28 mm','radiator thickness']]},
-   {img:'a-psu',bom:'psu',role:'Power',name:'Super Flower Leadex VII Platinum PRO',
-    why:'<b>1,200 W of Platinum power for a build that peaks around 850 W.</b> A native 12V-2x6 cable feeds the GPU. One check before build day: confirm two CPU power cables are enough for this board.',
-    kv:[['1,200 W','Platinum'],['ATX 3.1','12V-2x6 native'],['2× EPS','CPU cables'],['~850 W','peak draw']]},
-   {img:'case',bom:'case',role:'Chassis',name:'Antec 900',
-    why:'<b>A full tower that takes our 12 × 13 in server board</b> and ships with six fans, so we don\'t need to buy more. It has nine drive bays and room for a 465 mm GPU.',
-    kv:[['85 L','547×250×622 mm'],['6','PWM fans included'],['SSI-EEB','board support'],['9','drive bays']]},
-   {img:'ssd',bom:'ssd-u3',role:'Storage',name:'Kioxia CD6-R 7.68 TB × 2',
-    why:'<b>Data-center NVMe with power-loss protection</b>, recommended by our consultant at Expertly.Ai. Two drives on the board\'s MCIO ports hold the model library, datasets and vector indexes.',
-    kv:[['15.36 TB','total'],['6.2 GB/s','sequential read'],['1M','random read IOPS'],['1 DWPD','endurance']]},
-  ];
-  document.getElementById('chapters').innerHTML=CH.map((c,i)=>{const b=B(c.bom);
-    const alts=(b&&b.alt||[]).filter(a=>a&&a.url).slice(0,1);
-    return `<article class="chap">
-      <div class="plate-wrap"><div class="plate${DARK.has(c.img)?' dark':''}" data-tilt><span class="plate-tag">${String(i+1).padStart(2,'0')} · ${esc(c.role)}</span>${img(c.img,c.name)}<span class="plate-credit">${credit(c.img)}</span></div></div>
-      <div><div class="idx">${esc(c.role)}</div><h3>${esc(c.name)}</h3><p class="why">${c.why}</p>
-        <div class="kv">${c.kv.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
-        <div class="buy">${b&&b.url?`<a class="btn prime sm" href="${esc(b.url)}">View at ${esc(b.source||'store')} ↗</a>`:''}
-          ${alts.map(a=>`<a class="btn sm" href="${esc(a.url)}">${esc(a.source)}${a.price?' · '+money(a.price):''} ↗</a>`).join('')}
-          ${b?chip((b.source||'')+(b.sku?' · SKU '+b.sku:'')):''}</div></div></article>`;}).join('');
-
-  /* tilt */
-  if(!RM&&matchMedia('(hover:hover)').matches){document.querySelectorAll('[data-tilt]').forEach(p=>{
-    p.addEventListener('pointermove',e=>{const r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      p.style.setProperty('--ry',(x*10).toFixed(2)+'deg');p.style.setProperty('--rx',(-y*8).toFixed(2)+'deg');p.style.setProperty('--sheen',(x*120)+'%');});
-    p.addEventListener('pointerleave',()=>{p.style.setProperty('--ry','0deg');p.style.setProperty('--rx','0deg');p.style.setProperty('--sheen','-60%');});});}
-
-  /* BOM */
-  const st={gpu:'gpu',extras:{'fans-opt':false,'ram-up':false,paste:false,'boot-ssd':false,ups:true,esd:true}};
-  const CORE=[['cpu-bundle','a-cpu'],['GPU','a-gpu'],['case','case'],['psu','a-psu'],['cooler','a-cooler'],['ssd-u3','ssd'],['cable-mcio','cable']];
-  const EXTRAS=['ups','esd','fans-opt','ram-up','paste','boot-ssd'];
-  const REF=[['cpu','a-cpu'],['board','a-board'],['ram','ram']];
-  function lineHTML(b,thumb,opts){opts=opts||{};if(!b)return '';const q=b.qty||1, p=b.price;
-    const alts=(b.alt||[]).filter(a=>a&&a.url).slice(0,2);
-    return `<div class="line${opts.off?' off':''}${opts.ref?' ref':''}">
-      <div class="thumb${DARK.has(thumb)?' dark':''}">${img(thumb,b.role||'',' ')}</div>
-      <div style="min-width:0"><h4>${b.url?`<a href="${esc(b.url)}">${esc(b.name)}</a>`:esc(b.name)}</h4>
-        <div class="meta">${chip(b.source)}${b.sku?`<span>SKU ${esc(b.sku)}</span>`:''}${b.mpn?`<span>MPN ${esc(b.mpn)}</span>`:''}${b.stock?`<span>${esc(b.stock)}</span>`:''}</div>
-        ${alts.length?`<div class="alt">Also at ${alts.map(a=>`<a href="${esc(a.url)}">${esc(a.source)}${a.price?' '+money(a.price):''}</a>`).join(' · ')}</div>`:''}
-        ${b.notes&&!opts.ref?`<div class="alt">${esc(b.notes)}</div>`:''}
-        ${opts.toggle||''}</div>
-      <div class="px">${opts.ref?`<small>in bundle</small><b style="font-size:13px;color:var(--dim)">${p?money(p)+' alone':''}</b>`:`<b>${money(p*q)}</b><small>${q>1?q+' × '+money(p):''}${b.priceNote?' '+esc(b.priceNote):''}</small>`}</div></div>`;}
-  function render(){
-    const gpuLine=B(st.gpu==='gpu'?'gpu':'gpu-72-alt');
-    const rows=[]; let lines=[];
-    rows.push('<div class="group-h">Core build</div>');
-    CORE.forEach(([id,th])=>{const b=id==='GPU'?gpuLine:B(id); if(!b)return;
-      let tog=''; if(id==='GPU'&&B('gpu-72-alt')){tog=`<label class="opt-toggle"><input type="checkbox" id="opt72" ${st.gpu!=='gpu'?'checked':''}> Use the 72 GB version instead</label>`;}
-      rows.push(lineHTML(b,th,{toggle:tog})); lines.push(b);});
-    rows.push('<div class="group-h">Included in the CPU bundle</div>');
-    REF.forEach(([id,th])=>rows.push(lineHTML(B(id),th,{ref:true})));
-    rows.push('<div class="group-h">Extras, optional and later upgrades</div>');
-    EXTRAS.forEach(id=>{const b=B(id); if(!b)return; const on=!!st.extras[id];
-      rows.push(lineHTML(b,({'fans-opt':'a-fans','ram-up':'ram'})[id]||id,{off:!on,toggle:`<label class="opt-toggle"><input type="checkbox" data-extra="${id}" ${on?'checked':''}> Include</label>`})); if(on)lines.push(b);});
-    document.getElementById('bomlines').innerHTML=rows.join('');
-    const byStore={}; lines.forEach(b=>{if(b.price==null)return;const k=srcKind(b.source)==='mc'?'Micro Center':srcKind(b.source)==='amz'?'Amazon':(b.source||'Other');byStore[k]=(byStore[k]||0)+b.price*(b.qty||1);});
-    const sub=Object.values(byStore).reduce((a,v)=>a+v,0), tax=sub*0.07;
-    const unknown=lines.filter(b=>b.price==null).length;
-    document.getElementById('bomsum').innerHTML=`<h3>Total</h3><div class="grand film">${money(sub+tax).replace(/\.\d\d$/,'')}</div>
-      <table>${Object.entries(byStore).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${chip(k)}</td><td>${money(v)}</td></tr>`).join('')}
-      <tr><td>Sales tax (7% est.)</td><td>${money(tax)}</td></tr><tr class="tot"><td>Grand total</td><td>${money(sub+tax)}</td></tr></table>
-      ${unknown?`<p class="src">${unknown} line${unknown>1?'s':''} without a confirmed price are excluded.</p>`:''}
-      <p class="src">Micro Center prices are from the Nov 15 quote (guaranteed to Nov 19). Other prices are listings seen on Nov 15, 2026 and may change.</p>
-      <button class="btn prime" type="button" id="copylist">Copy shopping list</button>`;
-    document.getElementById('copylist').onclick=async e=>{
-      const g={}; lines.forEach(b=>{const k=srcKind(b.source)==='mc'?'Micro Center (Miami, store 185)':srcKind(b.source)==='amz'?'Amazon':(b.source||'Other');(g[k]=g[k]||[]).push(b);});
-      const txt=Object.entries(g).map(([k,bs])=>k+'\n'+bs.map(b=>`- ${b.qty>1?b.qty+'× ':''}${b.name}${b.sku?' (SKU '+b.sku+')':''} ${money(b.price*(b.qty||1))}${b.url?'\n  '+b.url:''}`).join('\n')).join('\n\n')+`\n\nEstimated total with tax: ${money(sub+tax)}`;
-      try{await navigator.clipboard.writeText(txt);e.target.textContent='Copied';}catch(_){const ta=document.createElement('textarea');ta.value=txt;e.target.after(ta);ta.select();e.target.textContent='Selected · press ⌘/Ctrl+C';}
-      setTimeout(()=>{e.target.textContent='Copy shopping list';},2200);};
-  }
-  document.getElementById('bomlines').addEventListener('change',e=>{
-    if(e.target.id==='opt72'){st.gpu=e.target.checked?'gpu-72-alt':'gpu';render();}
-    if(e.target.dataset.extra){st.extras[e.target.dataset.extra]=e.target.checked;render();}});
-  render();
-})();
-</script>
-<script>
-/* ---------- Option A vs B ---------- */
-const LINKS = {"a-bundle": "https://www.microcenter.com/site/products/amd_bundles.aspx", "a-psu": "https://www.microcenter.com/quickView/680165/super-flower-leadex-vii-platinum-pro-1200-watt-80-plus-platinum-atx-fully-modular-power-supply-atx-31-compatible", "a-hub": "https://www.microcenter.com/quickview/625314/silverstone-cpf04-pwm-fan-hub", "a-ram": "https://www.microcenter.com/quickview/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k41-black", "b-bundle": "https://www.microcenter.com/site/content/bundle-and-save.aspx?bundle=amd", "b-cpu": "https://www.microcenter.com/quickview/698657/amd-ryzen-threadripper-pro-9975wx-shimada-peak-4ghz-32-core-str5-boxed-processor-heatsink-not-included", "b-board": "https://www.microcenter.com/product/677978/WRX90E-SAGE_Pro_WS_SE_AMD_sTR5_EEB_Motherboard", "b-ram": "https://www.microcenter.com/product/696279/kingston-fury-renegade-pro-128gb-(4-x-32gb)-ddr5-5600-pc5-44800-cl28-quad-channel-ecc-registered-memory-modules-kf556r28rbe2k4-128-black", "b-gpu": "https://www.microcenter.com/product/711668/nvidia-rtx-pro-5000-blackwell-single-fan-ai-workstation-graphics-card-(oem)", "b-cooler": "https://www.microcenter.com/product/699609/thermaltake-aw420-420mm-all-in-one-liquid-cpu-cooling-kit-black", "b-psu": "https://www.microcenter.com/product/697062/asrock-tc-1650t-1650-watt-80-plus-titanium-atx-fully-modular-power-supply-atx-31-compatible", "b-case": "https://www.microcenter.com/product/710364/antec-900-tempered-glass-eatx-full-tower-computer-case-black", "a-gpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=936120", "a-cooler": "https://www.microcenter.com/search/search_results.aspx?Ntt=069492", "a-fan": "https://www.microcenter.com/search/search_results.aspx?Ntt=953612", "a-cpu": "https://www.microcenter.com/search/search_results.aspx?Ntt=EPYC+9175F", "a-board": "https://www.microcenter.com/search/search_results.aspx?Ntt=TURIND8X-2T", "ssd": "https://www.amazon.com/dp/B0HPR72914", "cable-a": "https://www.amazon.com/dp/B0CWP5X4M7", "cable-b": "https://www.amazon.com/dp/B099DYK9CW"};
-(function(){
-  const L=(id,txt)=>LINKS[id]?`<a href="${LINKS[id]}" style="color:var(--text)">${txt} ↗</a>`:txt;
-  const m=n=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const V=[
-    ['CPU cores','Zen 5',16,32,v=>v],
-    ['System memory','GB, ECC RDIMM',128,256,v=>v+' GB'],
-    ['Memory bandwidth','theoretical',179,358,v=>'~'+v+' GB/s'],
-    ['Parallel coding agents','estimate',14,33,v=>'~'+v],
-    ['GPU memory','',16,48,v=>v+' GB'],
-    ['32B model, 4-bit','tokens / second',0,50,v=>v?'~'+v+' tok/s':"doesn't fit"],
-    ['70B model, 4-bit','short context',0,26,v=>v?'~'+v+' tok/s':"doesn't fit"],
-    ['M.2 Gen5 slots','plus U.2 ports',2,4,v=>v],
-    ['PSU capacity','watts',1200,1650,v=>v.toLocaleString('en-US')+' W'],
-  ];
-  document.getElementById('versus').innerHTML=V.map(([l,s,a,b,f])=>{const mx=Math.max(a,b)||1;
-    return `<div class="vs-row"><div class="l">${l}${s?`<small>${s}</small>`:''}</div><div class="vs-bars">
-      <div class="vs-bar a"><span class="k">A</span><span class="t"><i style="--w:${a/mx*100}%"></i></span><span class="v">${f(a)}</span></div>
-      <div class="vs-bar b"><span class="k film">B</span><span class="t"><i style="--w:${b/mx*100}%"></i></span><span class="v">${f(b)}</span></div></div></div>`;}).join('');
-  const Q=[
-    ['CPU + board + 128 GB bundle','AMD EPYC 9175F + ASRock Rack TURIND8X-2T + Kingston FURY Renegade Pro 128 GB','SKU 999999',5999.99,'AMD Threadripper PRO 9975WX + ASUS Pro WS WRX90E-SAGE SE + Kingston FURY Renegade Pro 128 GB','SKU 999999',7999.99,'a-bundle','b-bundle'],
-    ['Second memory kit','None (4 of 8 slots filled)','',0,'Kingston FURY Renegade Pro 128 GB (4×32) KF556R28RBE2K4-128','SKU 873000',4589.99,null,'b-ram'],
-    ['Graphics','ASUS ProArt RTX 5070 Ti OC 16 GB','SKU 936120',1699.99,'NVIDIA RTX PRO 5000 Blackwell 48 GB (OEM)','SKU 044628',7199.99,'a-gpu','b-gpu'],
-    ['CPU cooler','SilverStone XE360-SP5 360 mm AIO','SKU 069492',379.99,'Thermaltake AW420 420 mm AIO','SKU 921551',449.99,'a-cooler','b-cooler'],
-    ['Power supply','Super Flower Leadex VII Platinum PRO 1200 W','SKU 848499',189.99,'ASRock Taichi TC-1650T 1650 W Titanium','SKU 883967',549.99,'a-psu','b-psu'],
-    ['Case','Not on the quote · we added the Antec 900 ($199.99)','',0,'Antec 900 tempered-glass full tower','SKU 028738',199.99,null,'b-case'],
-    ['Fans','6× Arctic P12 Pro + SilverStone CPF04 hub','SKU 953612 · 133009',99.93,'Included with the Antec 900 (6 fans)','',0,'a-fan','a-hub'],
-  ];
-  const tA=Q.reduce((s,r)=>s+r[3],0), tB=Q.reduce((s,r)=>s+r[6],0);
-  const d=v=>v===0?'<span style="color:var(--faint)">—</span>':`<span class="${v>0?'up':'dn'}">${v>0?'+':'−'}${m(Math.abs(v))}</span>`;
-  document.getElementById('qt').innerHTML=`<thead><tr><th>Part</th><th>Option A</th><th style="text-align:right">A</th><th>Option B</th><th style="text-align:right">B</th><th style="text-align:right">B − A</th></tr></thead><tbody>`+
-    Q.map(r=>{const fanRow=r[7]==='a-fan';const aTxt=fanRow?`${L('a-fan','6× Arctic P12 Pro')} + ${L('a-hub','SilverStone CPF04 hub')}`:(r[7]?L(r[7],r[1]):r[1]);const bTxt=fanRow?r[4]:(r[8]?L(r[8],r[4]):r[4]);
-    return `<tr><td><b>${r[0]}</b></td><td>${aTxt}${r[2]?`<small>${r[2]}</small>`:''}${r[7]==='a-bundle'&&(LINKS['a-cpu']||LINKS['a-board'])?`<small>Parts: ${L('a-cpu','EPYC 9175F')} · ${L('a-board','TURIND8X-2T')}</small>`:''}</td><td class="n">${r[3]?m(r[3]):'—'}</td><td>${bTxt}${r[5]?`<small>${r[5]}</small>`:''}${r[8]==='b-bundle'&&(LINKS['b-cpu']||LINKS['b-board'])?`<small>Parts: ${L('b-cpu','Threadripper PRO 9975WX')} · ${L('b-board','WRX90E-SAGE SE')}</small>`:''}</td><td class="n">${r[6]?m(r[6]):'—'}</td><td class="n">${d(r[6]-r[3])}</td></tr>`;}).join('')+
-    `<tr class="tot"><td>Subtotal</td><td></td><td class="n">${m(tA)}</td><td></td><td class="n">${m(tB)}</td><td class="n">${d(tB-tA)}</td></tr>
-     <tr><td>Sales tax (quoted)</td><td></td><td class="n">${m(585.89)}</td><td></td><td class="n">${m(1469.30)}</td><td class="n">${d(1469.30-585.89)}</td></tr>
-     <tr class="tot"><td>Quote total</td><td></td><td class="n">${m(8955.78)}</td><td></td><td class="n">${m(22459.24)}</td><td class="n">${d(22459.24-8955.78)}</td></tr>
-     <tr><td><b>Both still need</b></td><td colspan="5" style="color:var(--dim)">${L('ssd','2× Kioxia CD6-R 7.68 TB')} (~$4,898 on Amazon), recommended by our consultant Expertly.Ai. Micro Center doesn't carry enterprise drives. Plus 2 cables: ${L('cable-a','MCIO→U.2')} for A (~$76) or ${L('cable-b','SlimSAS→U.2')} for B (~$50). Option A also needs a case: we chose the ${L('b-case','Antec 900')} ($199.99). With the Micro Center card's 5% off, pre-tax totals drop to $7,951.40 (A) and $19,940.44 (B).</td></tr></tbody>`;
-  const S=[['Platform: 32 vs 16 cores, workstation board',2000,'#6EE7F9'],['Memory: +128 GB, all 8 channels',4589.99,'#A78BFA'],['GPU: 48 GB PRO 5000 vs 16 GB 5070 Ti',5500,'#F0ABFC'],['PSU, cooler, case, fans',530.05,'#FCD34D'],['Extra sales tax',883.41,'#8E98AC']];
-  const T=S.reduce((s,x)=>s+x[1],0);
-  document.getElementById('stackbar').innerHTML=S.map(([l,v,c])=>`<div style="flex:${v};background:${c}" title="${l}: ${m(v)}">${v/T>.09?Math.round(v/T*100)+'%':''}</div>`).join('');
-  document.getElementById('stacklegend').innerHTML=S.map(([l,v,c])=>`<span><i style="background:${c}"></i>${l} · <b style="color:var(--text)">${m(v)}</b></span>`).join('');
-  if(typeof RM!=='undefined'&&!RM){const box=document.getElementById('versus'); const r=box.getBoundingClientRect(); if(r.top>innerHeight){const is=[...box.querySelectorAll('.t i')];
-    is.forEach(i=>{i.dataset.w=i.style.getPropertyValue('--w');i.style.width='0';i.style.transition='width 1s cubic-bezier(.2,.7,.2,1)';});
-    let done=false; new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!done){done=true;is.forEach((i,k)=>setTimeout(()=>i.style.width=i.dataset.w,k*40));}}),{threshold:.2}).observe(box);}}
-})();
-</script>
 <script>
 (()=>{
-const IM = {"a-board": "img/a-board.jpg", "a-cooler": "img/a-cooler.jpg", "a-cpu": "img/a-cpu.jpg", "a-gpu": "img/a-gpu.jpg", "a-psu": "img/a-psu.jpg", "board-io": "img/board-io.jpg", "board": "img/board.jpg", "cable": "img/cable.jpg", "case-inside": "img/case-inside.jpg", "case": "img/case.jpg", "cooler": "img/cooler.jpg", "cpu": "img/cpu.jpg", "dog-go2": "img/dog-go2.jpg", "dog-jetson": "img/dog-jetson.jpg", "dog-l2": "img/dog-l2.jpg", "gpu-back": "img/gpu-back.jpg", "gpu": "img/gpu.jpg", "psu": "img/psu.jpg", "ram": "img/ram.jpg", "ssd": "img/ssd.jpg"};
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let OPT='A';
-const pic=(...keys)=>{for(const k of keys) if(IM[k]) return IM[k]; return null;};
-
-/* ---------- 1. tour ---------- */
-const PARTS=[
- {id:'cpu',  role:'The brain', name:'Processor (CPU)', ico:'🎼', hs:[236,40],
-  what:'Runs everything that isn\'t the AI model itself: the agents, their tools, databases, browsers and containers. More cores means more jobs at the same time.',
-  like:'<b>The conductor.</b> It hands out the work and keeps every agent in time.',
-  A:{model:'AMD EPYC 9175F', big:'16', bigl:'cores · 5.0 GHz · 512 MB cache', img:['a-cpu','cpu']},
-  B:{model:'AMD Threadripper PRO 9975WX', big:'32', bigl:'cores · 5.4 GHz', img:['cpu']}},
- {id:'ram',  role:'The workbench', name:'Memory (RAM)', ico:'🧰', hs:[184,154],
-  what:'Holds everything the machine is working on right now. Every open agent, document and dataset sits here. Run out and everything slows to a crawl.',
-  like:'<b>The workbench.</b> A bigger bench lets more people work at once without clearing space.',
-  A:{model:'Kingston FURY Renegade Pro · 4 × 32 GB', big:'128 GB', bigl:'4 of 8 slots filled', img:['ram'], up:'Upgrade later: fill the 4 empty slots for 256 GB and twice the speed.'},
-  B:{model:'Kingston FURY Renegade Pro · 8 × 32 GB', big:'256 GB', bigl:'all 8 slots · twice the speed', img:['ram']}},
- {id:'gpu',  role:'The AI engine', name:'Graphics card (GPU)', ico:'⚡', hs:[78,201],
-  what:'Runs our own AI models on the machine, with no cloud bill and no data leaving the building. Its memory decides how big a model fits.',
-  like:'<b>The engine room.</b> Thousands of tiny workers doing the math of AI in parallel.',
-  A:{model:'ASUS ProArt RTX 5070 Ti · 16 GB', big:'16 GB', bigl:'GPU memory', img:['a-gpu'], up:'Upgrade later: add or swap in a 48 GB card. The board has 4 full-speed slots.'},
-  B:{model:'NVIDIA RTX PRO 5000 Blackwell · 48 GB', big:'48 GB', bigl:'GPU memory · 3× Option A', img:['gpu','gpu-back']}},
- {id:'board',role:'The city', name:'Motherboard', ico:'🏙️', hs:[150,316],
-  what:'The big circuit board everything plugs into. It decides how many graphics cards, drives and memory sticks the machine can ever hold.',
-  like:'<b>The city streets.</b> Every part is a building; the board is the roads between them.',
-  A:{model:'ASRock Rack TURIND8X-2T', big:'7', bigl:'full-size card slots · room to grow', img:['a-board','board']},
-  B:{model:'ASUS Pro WS WRX90E-SAGE SE', big:'7', bigl:'full-size card slots · room to grow', img:['board']}},
- {id:'ssd',  role:'The library', name:'Storage drives', ico:'📚', hs:[73,446],
-  what:'Long-term storage for AI models, code and data. These are enterprise drives built to run 24/7 and survive a power cut mid-write. Recommended by our consultant at Expertly.Ai.',
-  like:'<b>The library.</b> Everything we own lives here, ready to be pulled onto the workbench.',
-  A:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']},
-  B:{model:'2 × Kioxia CD6-R 7.68 TB (from Amazon)', big:'15.4 TB', bigl:'enterprise storage', img:['ssd']}},
- {id:'cooler',role:'The radiator', name:'Liquid cooler', ico:'❄️', hs:[84,25],
-  what:'Pulls heat off the processor with liquid and blows it out of the top of the case, the same way a car radiator works. It keeps the machine fast and quiet under load.',
-  like:'<b>The car radiator.</b> Hot liquid in, cool liquid out, all day long.',
-  A:{model:'SilverStone XE360-SP5 · 360 mm', big:'360 mm', bigl:'radiator · mounted at the top as exhaust', img:['a-cooler']},
-  B:{model:'Thermaltake AW420 · 420 mm', big:'420 mm', bigl:'radiator · fits the Antec 900 exactly', img:['cooler']}},
- {id:'psu',  role:'The power plant', name:'Power supply (PSU)', ico:'🔌', hs:[320,354],
-  what:'Turns wall power into clean, steady power for every part. It has to be big enough for today and for a second graphics card later.',
-  like:'<b>The power plant.</b> Feeds the whole city, with headroom for new buildings.',
-  A:{model:'Super Flower Leadex VII Platinum PRO', big:'1,200 W', bigl:'Platinum · the build peaks around 850 W', img:['a-psu'], up:'Check before build day: the board has 3 CPU power sockets and this PSU has 2 cables.'},
-  B:{model:'ASRock Taichi TC-1650T', big:'1,650 W', bigl:'Titanium · most efficient grade', img:['psu']}},
- {id:'case', role:'The body', name:'Case & fans', ico:'🌬️', hs:[325,34],
-  what:'Holds it all together and moves air through it: cool air in at the front, hot air out the back and top. It needs to fit an extra-large server board.',
-  like:'<b>The body and lungs.</b> Breathes cool air in, hot air out.',
-  A:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included · 9 drive bays', img:['case','case-inside']},
-  B:{model:'Antec 900 full tower · 6 fans included', big:'6', bigl:'fans included', img:['case','case-inside']}},
-];
-let ti=0;
-const rig=$('#rig'), hsG=$('#hotspots');
-if(rig){
-  const NS='http://www.w3.org/2000/svg';
-  PARTS.forEach((p,i)=>{
-    const g=document.createElementNS(NS,'g'); g.setAttribute('class','hs'); g.dataset.i=i;
-    g.setAttribute('transform',`translate(${p.hs[0]} ${p.hs[1]})`);
-    g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',p.name);
-    g.innerHTML=`<circle class="pulse" r="12" style="animation-delay:${i*.3}s"/><circle class="ring" r="12"/><text>${i+1}</text>`;
-    hsG.appendChild(g);
-  });
-  $('#tdots').innerHTML=PARTS.map((p,i)=>`<button type="button" aria-label="${p.name}" data-i="${i}"></button>`).join('');
-  const show=(i,anim=true)=>{
-    ti=(i+PARTS.length)%PARTS.length; const p=PARTS[ti], o=p[OPT], other=p[OPT==='A'?'B':'A'];
-    rig.classList.add('focus');
-    $$('#rig [data-part]').forEach(el=>el.classList.toggle('on',el.dataset.part===p.id));
-    $$('#hotspots .hs').forEach(el=>el.classList.toggle('on',+el.dataset.i===ti));
-    $$('#tdots button').forEach(el=>el.setAttribute('aria-current',+el.dataset.i===ti));
-    $('#ttag').textContent=String(ti+1).padStart(2,'0')+' · '+p.role;
-    $('#tname').textContent=p.name; $('#tmodel').textContent=o.model;
-    $('#twhat').innerHTML=p.what; $('#tlike').innerHTML=p.like; $('#tico').textContent=p.ico;
-    $('#tbig').textContent=o.big; $('#tbigl').textContent=o.bigl;
-    $('#tvs').textContent=o.up||'';
-    const src=pic(...o.img), ph=$('#tph'), im=$('#timg');
-    const set=()=>{ ph.querySelector('.noimg')?.remove();
-      if(src){im.hidden=false; im.src=src; im.alt=o.model;} else {im.hidden=true; ph.insertAdjacentHTML('beforeend',`<span class="noimg">${p.ico}</span>`);}
-      ph.classList.toggle('dark',/(^|\/)cpu\./.test(src||'')); ph.classList.remove('swap'); };
-    if(anim&&!RM){ph.classList.add('swap'); setTimeout(set,180);} else set();
-    // ram: dim half the sticks for option A
-    const r2=$('#ram2'); if(r2) r2.style.opacity=OPT==='A'?'.18':'1';
-    window.decodeJargon&&window.decodeJargon($('#tour .pcard'));
-  };
-  hsG.addEventListener('click',e=>{const g=e.target.closest('.hs'); if(g) show(+g.dataset.i);});
-  hsG.addEventListener('keydown',e=>{const g=e.target.closest('.hs'); if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(+g.dataset.i);}});
-  rig.querySelector('svg').addEventListener('click',e=>{const el=e.target.closest('[data-part]'); if(el){const i=PARTS.findIndex(p=>p.id===el.dataset.part); if(i>=0) show(i);}});
-  $('#tdots').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) show(+b.dataset.i);});
-  $('#tnext').onclick=()=>show(ti+1); $('#tprev').onclick=()=>show(ti-1);
-  window.__tourShow=show;
-  show(0,false);
-}
-
-/* ---------- shared A/B toggle ---------- */
-const setOpt=o=>{OPT=o; $$('.ab-toggle button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.opt===o));
-  window.__tourShow&&window.__tourShow(ti,true); drawModels(); drawAgents();};
-$$('.ab-toggle').forEach(t=>t.addEventListener('click',e=>{const b=e.target.closest('button[data-opt]'); if(b) setOpt(b.dataset.opt);}));
-
-/* ---------- 2. what can it run ---------- */
-const MODELS=[
- {n:'Small helper',s:'8B · e.g. Llama 3.1 8B',gb:6},
- {n:'Fast coder',s:'gpt-oss-20b',gb:14},
- {n:'Strong coder',s:'32B · e.g. Qwen 32B',gb:20},
- {n:'Big brain',s:'70B · e.g. Llama 3.3 70B',gb:40},
- {n:'Frontier-class open',s:'gpt-oss-120b',gb:61},
-];
-const GPUS=[{k:'A',n:'Our build · RTX 5070 Ti',gb:16},{k:'U',n:'After a GPU upgrade · 48 GB card',gb:48}];
-let mi=1;
-function drawModels(){
-  const mc=$('#mchips'), mb=$('#mbars'); if(!mc) return;
-  mc.innerHTML=MODELS.map((m,i)=>`<button type="button" aria-pressed="${i===mi}" data-i="${i}"><b>${m.n}</b><small>${m.s} · ~${m.gb} GB</small></button>`).join('');
-  const m=MODELS[mi];
-  mb.innerHTML=GPUS.map(g=>{const fit=m.gb<=g.gb, pct=Math.min(100,m.gb/g.gb*100), copies=Math.floor(g.gb/m.gb);
-    return `<div class="meter"${g.k[0]===OPT?'':' style="opacity:.6"'}><div class="row"><b>${g.n}</b><span>${m.gb} of ${g.gb} GB</span></div>
-      <div class="bar"><i class="${fit?'ok':'no'}" style="width:0" data-w="${pct}"></i></div>
-      <div class="vd ${fit?'ok':'no'}">${fit?(copies>1?`✓ Fits, fast. Room for ${copies} copies at once.`:'✓ Fits, fast.'):`✗ Too big for this card. Runs partly from system memory, much slower.`}</div></div>`;}).join('');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#mbars .bar i').forEach(i=>i.style.width=i.dataset.w+'%')));
-}
-$('#mchips')?.addEventListener('click',e=>{const b=e.target.closest('button'); if(b){mi=+b.dataset.i; drawModels();}});
-const RAMS=[{k:'A',n:'Our build · 128 GB',gb:128},{k:'U',n:'After the memory upgrade · 256 GB',gb:256}];
-function drawAgents(){
-  const a=$('#agents'); if(!a) return; const n=+a.value; $('#agentsOut').textContent=n;
-  const viz=$('#agentsViz'); const cur=viz.children.length;
-  if(n>cur) for(let k=cur;k<n;k++) viz.appendChild(document.createElement('i')); else while(viz.children.length>n) viz.lastChild.remove();
-  const need=24+n*7;
-  $('#abars').innerHTML=RAMS.map(r=>{const fit=need<=r.gb, pct=Math.min(100,need/r.gb*100), max=Math.floor((r.gb-24)/7);
-    return `<div class="meter"${r.k===OPT?'':' style="opacity:.6"'}><div class="row"><b>${r.n}</b><span>${need} of ${r.gb} GB</span></div>
-      <div class="bar"><i class="${fit?'ok':'no'}" style="width:${pct}%"></i></div>
-      <div class="vd ${fit?'ok':'no'}">${fit?`✓ Comfortable. Tops out around ${max} agents.`:`✗ Too many. Tops out around ${max} agents.`}</div></div>`;}).join('');
-}
-$('#agents')?.addEventListener('input',drawAgents);
-drawModels(); drawAgents();
-
-/* ---------- 3. build day ---------- */
-const STEPS=[
- {t:'Prep the bench',m:'15 min',img:['case-inside','case'],e:'🧤',d:'Clear a big table, open every box, and lay parts out in build order. Clip on the anti-static strap.',w:'Keep the CPU and memory in their packaging until their step.'},
- {t:'Processor into the board',m:'20 min',img:['a-cpu','cpu'],e:'🧠',d:'With the board flat on its box, open the SP5 socket frame, slide the EPYC in its orange carrier into the rail, then close it and tighten the screws in the printed order.',w:'Never touch the socket pins. Use the torque screwdriver that comes with the CPU.'},
- {t:'Memory sticks',m:'10 min',img:['ram'],e:'🧰',d:'Press each of the 4 sticks in until the latches click, using the 4 slots the board manual marks for a 4-stick setup.',w:'Leave the other 4 slots empty for the upgrade. Memory runs slower until EXPO is turned on (step 9).'},
- {t:'Cooler mount',m:'25 min',img:['a-cooler','cooler'],e:'❄️',d:'Fit the 360 mm radiator to the top of the case with its fans blowing out, then lower the pump block onto the CPU and screw it down evenly.',w:'Peel the plastic film off the cold plate! The front stays as the case\'s 3 intake fans.'},
- {t:'Board into the case',m:'30 min',img:['a-board','board'],e:'🏙️',d:'Install extra standoffs for the extra-large board, then lower it in and screw it down. Plug in the cooler pump and fan cables.',w:'Count the standoffs against the board\'s holes. A stray one can short it.'},
- {t:'Storage drives',m:'20 min',img:['ssd','cable'],e:'📚',d:'Mount the two Kioxia drives in 2.5" bays and connect each one to a board MCIO port with its own cable and a SATA power lead.',w:'Use the short (0.5 m) cables, and put the drives where a fan blows on them.'},
- {t:'Graphics card',m:'15 min',img:['a-gpu','gpu'],e:'⚡',d:'Seat the card in slot 0, 2, 4 or 6, not slot 1 or 7, which share lanes with the drive ports. Screw it in and plug in its power cable firmly.',w:'Push the GPU power plug until it clicks flush. A half-seated plug can overheat.'},
- {t:'Power it all',m:'40 min',img:['a-psu','psu'],e:'🔌',d:'Install the power supply, then run every cable: board, CPU, GPU, drives, fans. Tie cables back for airflow.',w:'The board has 3 CPU power sockets and the PSU has 2 cables. Check the manual before build day. Use only this PSU\'s own cables.'},
- {t:'First boot',m:'60 min',img:['board-io'],e:'🚀',d:'Power on. Log in to the remote-management port, update the BIOS, turn on memory speed (EXPO), then run an overnight memory test.',w:'The first boot can take several minutes while memory trains. Plug the monitor into the GPU; the board\'s own video is VGA only.'},
-];
-const tr=$('#dayTrack');
-if(tr){
-  tr.innerHTML=STEPS.map((s,i)=>{const src=pic(...s.img);
-    return `<article class="day"><div class="ph"><span class="n">${i+1}</span><span class="t">${s.m}</span>${src?`<img src="${src}" alt="" loading="lazy" decoding="async">`:`<span class="emoji">${s.e}</span>`}</div>
-      <div class="bd"><h4>${s.t}</h4><p>${s.d}</p><div class="warn">⚠ ${s.w}</div></div></article>`;}).join('');
-  const W=()=>tr.querySelector('.day').getBoundingClientRect().width+16;
-  const upd=()=>{const max=tr.scrollWidth-tr.clientWidth; const f=max>0?tr.scrollLeft/max:1;
-    $('#dayFill').style.width=(Math.max(f,1/STEPS.length)*100)+'%';
-    const i=Math.min(STEPS.length-1,Math.round(tr.scrollLeft/W())); $('#dayNow').textContent=`Step ${i+1} of ${STEPS.length}`+(f>.98?' · done 🎉':'');};
-  tr.addEventListener('scroll',upd,{passive:true}); upd();
-  $('#dnext').onclick=()=>tr.scrollBy({left:W(),behavior:RM?'auto':'smooth'});
-  $('#dprev').onclick=()=>tr.scrollBy({left:-W(),behavior:RM?'auto':'smooth'});
-}
-
-/* ---------- 4. jargon decoder ---------- */
-const G={
- 'CPU':'The processor: the general-purpose brain of the computer.',
- 'GPU':'Graphics card. Its thousands of small cores make it the engine for running AI models.',
- 'VRAM':'Memory on the graphics card. A model must fit here to run fast.',
- 'GDDR7':'The newest, fastest type of graphics-card memory.',
- 'RAM':'System memory: the workbench for everything currently running.',
- 'ECC':'Error-correcting memory. Catches and fixes tiny memory errors, so a machine running 24/7 doesn\'t crash or corrupt data.',
- 'RDIMM':'Server-grade memory stick (registered). Required by EPYC and Threadripper PRO boards.',
- 'DDR5':'The current generation of system memory.',
- 'PCIe':'The high-speed roads that connect graphics cards and drives to the processor.',
- 'lanes':'Individual PCIe roads. More lanes means more cards and drives at full speed.',
- 'NVMe':'The fast, modern way SSDs talk to the computer.',
- 'U.3':'A connector used by enterprise data-center drives. Needs a special cable on desktop boards.',
- 'U.2':'Older version of the U.3 enterprise drive connector. They share the same plug.',
- 'MCIO':'A compact high-speed connector on server boards, used here to cable in the enterprise drives.',
- 'SlimSAS':'A slim cable connector on the ASUS board that links to enterprise drives.',
- 'EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
- 'SSI-EEB':'An extra-large motherboard size used by server boards. Needs a big case.',
- 'AIO':'"All-in-one" liquid cooler: pump, tubes and radiator come pre-filled and sealed.',
- 'TDP':'How much heat a chip is designed to put out, in watts. Your cooler has to handle it.',
- 'BMC':'A tiny separate computer on the board that lets us power-cycle and fix the machine remotely, even when it\'s off.',
- 'EXPO':'A BIOS setting that runs the memory at its full rated speed. Off by default.',
- 'BIOS':'The firmware that starts the machine before the operating system loads.',
- 'PSU':'Power supply unit.',
- 'TOPS':'Trillions of operations per second: a rough measure of AI math speed.',
- 'FP4':'A very compact 4-bit number format that makes AI models smaller and faster.',
- 'AVX-512':'Wide math instructions in AMD Zen 5 cores that speed up data and AI work on the CPU.',
- 'chiplets':'The processor is built from several small chips in one package, instead of one big chip.',
- 'CCD':'Core chiplet: a small die holding 8 CPU cores.',
- 'GbE':'Gigabit Ethernet: wired network speed. 10 GbE is 10× a normal office port.',
- 'Titanium':'The highest power-supply efficiency rating: less power is wasted as heat.',
- 'Platinum':'A high power-supply efficiency rating, one step below Titanium.',
- 'threads':'Jobs a core can juggle at once. Each core here runs 2 threads.',
- 'channels':'Separate paths between the processor and memory. Filling more channels makes memory faster.',
- 'quantized':'Compressed so a model fits in less memory, with a small quality trade-off.',
- '4-bit':'Each model weight stored in 4 bits. It shrinks models about 4× versus full size.',
- 'vLLM':'Popular open-source software for serving AI models to many users or agents at once.',
- 'MCP':'Model Context Protocol: the standard way AI agents connect to tools and data.',
- 'LLM':'Large language model: the kind of AI behind ChatGPT and Claude.',
- 'inference':'Running a trained AI model to get answers, as opposed to training it.',
- 'tokens':'Chunks of words that AI models read and write. Speed is measured in tokens per second.',
- 'EPYC':'AMD\'s server processor family (Option A).',
- 'Threadripper PRO':'AMD\'s workstation processor family (Option B).',
- 'Blackwell':'NVIDIA\'s current generation of GPU chips.',
- 'Zen 5':'AMD\'s current CPU core design.',
- '12V-2x6':'The 16-pin power plug on modern NVIDIA graphics cards. Must be fully seated.',
- 'SKU':'The store\'s product number.',
- 'SP5':'The socket (the CPU\'s seat on the board) used by AMD EPYC server processors.',
- 'EPS':'The 8-pin power plug that feeds the processor.',
- 'IPMI':'The remote-management system run by the BMC: power on/off, console and sensors from a browser.',
-};
-const keys=Object.keys(G).sort((a,b)=>b.length-a.length);
-const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-const RX=new RegExp('(?<![\\w-])('+keys.map(esc).join('|')+')(?![\\w-])');
-const SKIP='a,button,h1,h2,h3,h4,code,svg,canvas,script,style,.jg,.kicker,.src,.boot,small,nav,label,input,output,.tag,.plate-tag,.chips,#jgpop,.jg-pill,select,option,.model';
-function decode(root){
-  if(!root) return;
-  const seen=new Set();
-  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{
-    const p=n.parentElement; if(!p||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-    if(p.closest(SKIP)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT;}});
-  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
-  for(const node of nodes){
-    let n=node, m;
-    while(n && (m=RX.exec(n.nodeValue))){
-      const k=m[1];
-      if(seen.has(k)){ // only decorate first use per block; continue after it
-        const rest=n.splitText(m.index+k.length); n=rest; continue; }
-      seen.add(k);
-      const after=n.splitText(m.index); const rest=after.splitText(k.length);
-      const sp=document.createElement('span'); sp.className='jg'; sp.tabIndex=0; sp.dataset.k=k; sp.textContent=k;
-      after.replaceWith(sp); n=rest;
-    }
+  // old shared links pointed at the Conductor showcase (e.g. /#bom); send section hashes there
+  const h=location.hash.slice(1); if(h&&h!=='meet'&&!document.getElementById(h)){location.replace('conductor.html#'+h);return;}
+  const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // scroll reveal
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');countUp(e.target);io.unobserve(e.target);}}),{threshold:.15}) : null;
+  document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
+  function countUp(root){
+    root.querySelectorAll('[data-n]').forEach(b=>{
+      const end=parseFloat(b.dataset.n), d=+(b.dataset.d||0);
+      if(RM){b.textContent=end.toFixed(d);return;}
+      const t0=performance.now(), dur=1100;
+      const step=t=>{const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);b.textContent=(end*e).toFixed(d);if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    });
   }
-}
-window.decodeJargon=decode;
-const pop=document.createElement('div'); pop.id='jgpop'; pop.setAttribute('role','tooltip'); document.body.appendChild(pop);
-let cur=null;
-const showPop=el=>{const k=el.dataset.k, t=G[k]; if(!t) return; cur=el;
-  pop.innerHTML=`<b>${k}</b>${t}`; pop.classList.add('show');
-  const r=el.getBoundingClientRect(), pw=Math.min(300,innerWidth-32); pop.style.maxWidth=pw+'px';
-  const ph=pop.offsetHeight; let x=Math.max(16,Math.min(innerWidth-pw-16,r.left+r.width/2-pw/2));
-  let y=r.top-ph-10; if(y<12) y=r.bottom+10; pop.style.left=x+'px'; pop.style.top=y+'px';};
-const hidePop=()=>{cur=null; pop.classList.remove('show');};
-document.addEventListener('mouseover',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el); else if(cur&&!e.target.closest?.('.jg')) hidePop();});
-document.addEventListener('focusin',e=>{const el=e.target.closest?.('.jg'); if(el) showPop(el);});
-document.addEventListener('focusout',e=>{if(e.target.closest?.('.jg')) hidePop();});
-document.addEventListener('click',e=>{const el=e.target.closest?.('.jg'); if(el){e.preventDefault(); cur===el&&pop.classList.contains('show')?hidePop():showPop(el);} else hidePop();});
-addEventListener('scroll',()=>cur&&hidePop(),{passive:true});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') hidePop();});
-// decorate every content block once (per paragraph/cell so each term is explained where it appears)
-const blocks=$$('main p, main li, main td, section p, section li, section td, section .lead, header .lead, header .sub, .num p, .vd');
-blocks.forEach(b=>{ if(!b.closest('#jgpop')) decode(b); });
-// late-rendered content (BOM, parts, options tables) — decorate after they render
-const mo=new MutationObserver(muts=>{for(const mu of muts) for(const nd of mu.addedNodes){ if(nd.nodeType===1){
-  if(nd.closest('#jgpop')||nd.closest('.jg')) continue;
-  nd.querySelectorAll?.('p,li,td').forEach(decode); if(nd.matches?.('p,li,td')) decode(nd);}}});
-$$('section').forEach(s=>mo.observe(s,{childList:true,subtree:true}));
-setTimeout(()=>mo.disconnect(),8000);
-// helper pill
-let pillGone=false; try{pillGone=localStorage.getItem('jgpill')==='1';}catch(e){}
-if(!pillGone){const pill=document.createElement('div'); pill.className='jg-pill';
-  pill.innerHTML='<span>New to this? Tap any <i>dotted word</i> for a plain-English meaning.</span><button type="button" aria-label="Dismiss">✕</button>';
-  document.body.appendChild(pill);
-  pill.querySelector('button').onclick=()=>{pill.classList.add('gone'); try{localStorage.setItem('jgpill','1');}catch(e){}};
-  setTimeout(()=>pill.classList.add('gone'),14000);}
+  // lane pulses: each project's pulse runs along its own track, then fades into the dashed Phase 3 merge
+  const svg=document.getElementById('lanesvg'); if(!svg) return;
+  const tc=document.getElementById('tc'), tf=document.getElementById('tf');
+  const P=[[document.getElementById('pc'),document.getElementById('pc2'),tc,0],[document.getElementById('pf'),document.getElementById('pf2'),tf,.45]];
+  const merge=document.getElementById('merge'); const mw=[document.getElementById('mw1'),document.getElementById('mw2')];
+  function place(t){
+    P.forEach(([g,c,path,off])=>{
+      const L=path.getTotalLength(), k=((t/5200)+off)%1, p=path.getPointAtLength(k*L);
+      [g,c].forEach(el=>{el.setAttribute('cx',p.x);el.setAttribute('cy',p.y);el.style.opacity=k>.9?(1-k)*10:1;});
+    });
+    merge.style.strokeDashoffset=-(t/60)%26;
+    mw[0].style.strokeDashoffset=-(t/50)%24; mw[1].style.strokeDashoffset=-(t/50)%24;
+  }
+  if(RM){place(1800);return;}
+  let on=true, raf; const seen=new Set();
+  const vis=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?seen.add(e.target):seen.delete(e.target)); const was=on; on=seen.size>0; if(on&&!was) loop();},{threshold:0});
+  vis.observe(svg); vis.observe(document.getElementById('meet'));
+  function loop(){cancelAnimationFrame(raf); const f=t=>{place(t); if(on) raf=requestAnimationFrame(f);}; raf=requestAnimationFrame(f);}
+  loop();
 })();
 </script>
 
