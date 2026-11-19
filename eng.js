@@ -19,7 +19,7 @@
 
   function ready(){
     var proj = root.getAttribute('data-proj') || 'hub';
-    var code = proj === 'fu' ? 'PRJ-02 · Site Capture' : proj === 'con' ? 'PRJ-01 · The Brain' : proj === 'os' ? 'PRJ-03 · build.os' : 'Accelerate Robotics';
+    var code = proj === 'fu' ? 'PRJ-02 · Site Capture' : proj === 'con' ? 'PRJ-01 · The Brain' : proj === 'os' ? 'PRJ-03 · Hotel.OS' : 'Accelerate Robotics';
 
     /* thin progress bar */
     var bar = D.createElement('div'); bar.id = 'eng-bar'; D.body.appendChild(bar);
@@ -34,7 +34,7 @@
 
     /* end of page: big "where next" buttons built from the header nav */
     var cur = D.querySelector('.ar-tabs a[aria-current]'), tabs = [].slice.call(D.querySelectorAll('.ar-tabs a')), sw = [].slice.call(D.querySelectorAll('.ar-switch a'));
-    var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'build.os' }[proj];
+    var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'Hotel.OS' }[proj];
     tabs.forEach(function(a){ if (a !== cur) nx.push([wsName, a.textContent, a.getAttribute('href'), getComputedStyle(D.querySelector('.ar-bar')).getPropertyValue('--c')]); });
     sw.forEach(function(a){ if (!a.classList.contains('on')) nx.push([a.textContent === 'Program' ? 'Accelerate Robotics' : 'Other workstream', a.textContent === 'Program' ? 'Program home' : a.textContent, a.getAttribute('href'), a.style.getPropertyValue('--c')]); });
     if (nx.length && proj !== 'hub' && D.querySelector('.ar-bar')) {

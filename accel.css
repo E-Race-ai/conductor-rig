@@ -119,3 +119,66 @@ html[data-proj] .links a.p:hover{filter:brightness(1.1)}
 html[data-proj] a.back{display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border:1px solid #2A3658;border-radius:8px;background:#0C1324;color:#D5DCEB!important;
   font:500 13.5px/1 Inter,sans-serif!important;letter-spacing:0!important;text-transform:none!important;margin:20px 0 4px}
 html[data-proj] a.back:hover{border-color:var(--acc);color:#fff!important}
+
+/* ===== Hotel.OS digital-twin viewer ===== */
+.ht-band{padding:28px 0 8px}
+.ht{position:relative;height:min(80vh,740px);min-height:560px;background:#070B16;border:1px solid #1C2640;overflow:hidden;color:#EEF2FA;font-family:Inter,system-ui,sans-serif;isolation:isolate}
+.ht::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(4,7,14,.75));z-index:1}
+.ht-stage{position:absolute;inset:0;z-index:0}
+.ht-stage canvas{display:block;width:100%!important;height:100%!important;cursor:grab}
+.ht-stage canvas:active{cursor:grabbing}
+.ht-hud{position:absolute;z-index:2}
+.ht-k{font:600 10.5px/1.3 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#6F7B97}
+.ht-tl{left:24px;top:22px;max-width:440px}
+html[data-proj] .ht-tl h3{font:600 30px/1.1 "Space Grotesk",Inter,sans-serif!important;letter-spacing:-.02em!important;margin:10px 0 8px!important;color:#fff}
+.ht-tl h3 i{font:500 13px/1 "IBM Plex Mono",monospace;font-style:normal;color:#04101F;background:#D4A65A;padding:5px 7px;border-radius:4px;margin-right:12px;vertical-align:6px}
+.ht[data-mode="t1"] .ht-tl h3 i{background:#00C8FF}.ht[data-mode="walk"] .ht-tl h3 i{background:#EEF2FA}
+.ht[data-mode="walk"] .ht-leg.o{opacity:1}.ht[data-mode="t2"] .ht-tl h3 i{background:#7FA6FF}
+.ht-tl p{margin:0;color:#C3CCDD;font-size:14.5px;line-height:1.5;max-width:40ch}
+.ht-prog{margin-top:14px;height:2px;width:220px;background:#1C2640;overflow:hidden}
+.ht-prog i{display:block;height:100%;background:#D4A65A;transform-origin:0 50%;transform:scaleX(0)}
+.ht-modes{right:24px;top:22px;display:flex;gap:4px;padding:4px;background:rgba(9,14,28,.82);border:1px solid #24304F;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ht-modes button,.ht-br button{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border-radius:7px;background:transparent;color:#D5DCEB;font:600 13.5px/1 Inter,sans-serif;white-space:nowrap}
+.ht-modes button i{font:500 11px/1 "IBM Plex Mono",monospace;font-style:normal;color:#8E9AB5}
+.ht-modes button:hover,.ht-br button:hover{background:#17223F;color:#fff}
+.ht-modes button[aria-pressed="true"]{background:#D4A65A;color:#04101F}
+.ht-modes button[aria-pressed="true"] i{color:#04101F}
+.ht-tasks{right:24px;top:84px;width:290px;padding:14px 14px 6px;background:rgba(9,14,28,.82);border:1px solid #24304F;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s;pointer-events:none}
+.ht[data-mode="t5"] .ht-tasks{opacity:1;transform:none}
+.ht-tasks ul{list-style:none;margin:10px 0 0;padding:0}
+.ht-tasks li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:8px 0 8px 10px;border-left:2px solid var(--c);margin-bottom:6px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 10%,transparent),transparent)}
+.ht-tasks b{font:600 12px/1.3 "IBM Plex Mono",monospace;color:#fff}
+.ht-tasks span{font:500 11px/1.3 "IBM Plex Mono",monospace;color:var(--c);text-align:right;padding-right:8px}
+.ht-tasks em{grid-column:1/-1;font-style:normal;font-size:12.5px;color:#C3CCDD}
+.ht-bl{left:24px;bottom:20px;right:360px}
+.ht-leg{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:12px;font:500 11.5px/1.2 "IBM Plex Mono",monospace;color:#A3AEC6;opacity:0;transition:opacity .5s}
+.ht[data-mode="t3"] .ht-leg.o,.ht[data-mode="t5"] .ht-leg.d,.ht[data-mode="t1"] .ht-leg.c{opacity:1}
+.ht-leg{position:absolute;bottom:58px;left:0}
+.ht-leg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px;vertical-align:-1px;box-shadow:0 0 10px var(--c)}
+.ht-stats{display:flex;flex-wrap:wrap;gap:4px 22px}
+.ht-stats span{font:500 11px/1.2 "IBM Plex Mono",monospace;color:#6F7B97;text-transform:uppercase;letter-spacing:.06em}
+.ht-stats b{display:block;font:500 20px/1.15 "IBM Plex Mono",monospace;color:#EEF2FA;letter-spacing:-.02em;text-transform:none;margin-bottom:2px}
+.ht-br{right:24px;bottom:20px;display:flex;align-items:center;gap:4px;padding:4px;background:rgba(9,14,28,.82);border:1px solid #24304F;border-radius:10px}
+.ht-br .ht-k{padding:0 8px 0 6px}
+.ht-br button{min-height:34px;padding:0 10px;font-size:12.5px}
+.ht-br button[aria-pressed="true"]{background:#24304F;color:#fff}
+.ht-br button[data-ht-play]{margin-left:6px;border:1px solid #2A3658}
+.ht-cap{font:12px/1.5 "IBM Plex Mono",monospace;color:#6F7B97;margin-top:10px}
+.ht.ht-fail .ht-stage::after{content:"3D view needs WebGL. The layers are described in the tables below.";position:absolute;inset:0;display:grid;place-items:center;color:#A3AEC6;font:14px Inter,sans-serif}
+@media (max-width:900px){
+  .ht{height:auto;min-height:0;display:flex;flex-direction:column}
+  .ht::after{display:none}
+  .ht-hud{position:static}
+  .ht-tl{order:1;padding:16px 16px 10px;max-width:none}
+  html[data-proj] .ht-tl h3{font-size:22px!important}
+  .ht-modes{order:2;margin:0 12px;display:grid;grid-template-columns:repeat(5,1fr)}
+  .ht-modes button{justify-content:center;padding:0 4px;font-size:12.5px;flex-direction:column;gap:3px;min-height:46px}
+  .ht-stage{order:3;position:relative;height:400px;margin-top:10px}
+  .ht-tasks{order:4;width:auto;margin:10px 12px 0;display:none;transform:none}
+  .ht[data-mode="t5"] .ht-tasks{display:block}
+  .ht-bl{order:5;padding:12px 16px 0}
+  .ht-leg{position:static;opacity:1;display:none}
+  .ht[data-mode="t3"] .ht-leg.o,.ht[data-mode="t5"] .ht-leg.d,.ht[data-mode="t1"] .ht-leg.c{display:flex}
+  .ht-stats b{font-size:16px}
+  .ht-br{order:6;margin:12px;flex-wrap:wrap}
+}

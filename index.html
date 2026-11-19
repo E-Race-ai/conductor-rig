@@ -9,8 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="3d/hotel-twin.js"></script>
 </head><body style="margin:0">
-<div class="ar-bar" role="banner" style="--c:#0055FF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Workstream"><a href="./" style="--c:#A3AEC6" class="on" aria-current="true"><i></i>Program</a><a href="conductor.html" style="--c:#4D8BFF"><i></i>The Brain</a><a href="field-unit.html" style="--c:#00C8FF"><i></i>Site Capture</a><a href="build-os.html" style="--c:#D4A65A"><i></i>build.os</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<div class="ar-bar" role="banner" style="--c:#0055FF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Workstream"><a href="./" style="--c:#A3AEC6" class="on" aria-current="true"><i></i>Program</a><a href="conductor.html" style="--c:#4D8BFF"><i></i>The Brain</a><a href="field-unit.html" style="--c:#00C8FF"><i></i>Site Capture</a><a href="hotel-os.html" style="--c:#D4A65A"><i></i>Hotel.OS</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
 <style>
 .hx{max-width:1180px;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
 .hx-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px}
@@ -125,7 +127,7 @@
       <div class="hx-code">Accelerate Robotics · Engineering program</div>
       <h1>Agentic engineering, reality capture <em>and a building operating system</em></h1>
       <p class="hx-lede">Accelerate Robotics deploys and operates service-robot fleets in large hospitality and healthcare buildings. This program builds the three capabilities that operation runs on: a controlled platform for building software with AI agents, a system for capturing survey-grade 3D models of every building, and the operating system that runs the building day to day.</p>
-      <p><b>PRJ-01 The Brain</b> is the agentic engineering platform: business-unit leads direct sandboxed AI agents against a central context store, with frontier models for aggressive development and local compute for sensitive material. <b>PRJ-02 Site Capture</b> is a quadruped-mounted mobile reality capture system; its data is processed on the Brain. <b>PRJ-03 build.os</b> (hotel.os) connects staff, shift devices, robots and hotel systems through one task model, located on the Site Capture model. This workspace is the engineering record for all three.</p>
+      <p><b>PRJ-01 The Brain</b> is the agentic engineering platform: business-unit leads direct sandboxed AI agents against a central context store, with frontier models for aggressive development and local compute for sensitive material. <b>PRJ-02 Site Capture</b> is a quadruped-mounted mobile reality capture system; its data is processed on the Brain. <b>PRJ-03 Hotel.OS</b> connects staff, shift devices, robots and hotel systems through one task model, located on the Site Capture model. This workspace is the engineering record for all three.</p>
     </div>
     <table class="rev" aria-label="Document revision">
       <tr><td>Doc</td><td>AR-PGM-001</td></tr>
@@ -135,9 +137,26 @@
     </table>
   </div>
 
+  <div style="margin-top:26px">
+<div class="ht" data-hotel-twin aria-label="Interactive 3D digital twin of an illustrative six-floor hotel tower: LiDAR point cloud, building model, object layer and live operations">
+  <div class="ht-hud ht-tl"><div class="ht-k">PRJ-02 capture → PRJ-03 Hotel.OS · illustrative tower</div><h3 data-ht-title></h3><p data-ht-desc></p><div class="ht-prog" aria-hidden="true"><i></i></div></div>
+  <div class="ht-hud ht-modes" role="group" aria-label="Twin tier"><button type="button" data-ht-mode="t1"><i>T1</i>Point cloud</button><button type="button" data-ht-mode="t2"><i>T2</i>Model</button><button type="button" data-ht-mode="t3"><i>T3</i>Objects</button><button type="button" data-ht-mode="t5"><i>T5</i>Operations</button><button type="button" data-ht-mode="walk"><i>360</i>Walk</button></div>
+  <div class="ht-stage"></div>
+  <div class="ht-hud ht-tasks" aria-live="polite"><div class="ht-k">Open work · all floors</div><ul data-ht-tasks></ul></div>
+  <div class="ht-hud ht-bl">
+    <div class="ht-leg c"><span style="--c:#00C8FF">LiDAR returns (height-coloured)</span><span style="--c:#fff">Capture robot</span></div>
+    <div class="ht-leg o"><span style="--c:#D4A65A">Outlet</span><span style="--c:#EEF2FA">Light switch</span><span style="--c:#FFE2A8">Fixture</span><span style="--c:#FF6B5E">Life safety</span></div>
+    <div class="ht-leg d"><span style="--c:#D4A65A">Facilities</span><span style="--c:#2FD39A">Housekeeping</span><span style="--c:#FF6B5E">Security</span><span style="--c:#00C8FF">Robotics</span><span style="--c:#EEF2FA">Staff</span></div>
+    <div class="ht-stats" data-ht-stats></div>
+  </div>
+  <div class="ht-hud ht-br" role="group" aria-label="Floor focus"><span class="ht-k">Floor</span><button type="button" data-ht-floor="-1" aria-pressed="true">All</button><button type="button" data-ht-floor="0">1</button><button type="button" data-ht-floor="1">2</button><button type="button" data-ht-floor="2">3</button><button type="button" data-ht-floor="3">4</button><button type="button" data-ht-floor="4">5</button><button type="button" data-ht-floor="5">6</button><button type="button" data-ht-play aria-pressed="true">❚❚ Pause sequence</button></div>
+</div>
+  <p class="ht-cap">From LiDAR capture to live operations: the program in one model. Drag to orbit. Procedurally generated building for illustration.</p>
+  </div>
+
   <div class="kpi" aria-label="Program parameters">
     <div><b>C0–C3</b><span>Data classes routed to frontier or local models</span></div>
-    <div><b>92,900<small>m²</small></b><span>Site #1 floor area (1.0 M sq ft)</span></div>
+    <div><b>92,900<small>m²</small></b><span>Site #1: The Grand, Miami (1.0 M sq ft)</span></div>
     <div><b>15–50<small>mm</small></b><span>Target LOA20 at 2σ, building-wide (est.)</span></div>
     <div><b>1.3–1.8<small>TB</small></b><span>Raw capture per site (est.)</span></div>
     <div><b>7–10</b><span>Battery missions per site, 15–20 min SLAM segments</span></div>
@@ -168,7 +187,7 @@
   </div>
   <p class="pipe-cap">Estimates (est.) are planning figures from the program research; they are replaced by measured values at the G1 pilot.</p>
 
-<div class="sec-h"><h2>Workstreams</h2><p>One team, three specifications. Capture builds the model, build.os runs the building, the Brain builds the software.</p></div>
+<div class="sec-h"><h2>Workstreams</h2><p>One team, three specifications. Capture builds the model, Hotel.OS runs the building, the Brain builds the software.</p></div>
   <div class="prj">
     <section class="pj con" aria-labelledby="pj1">
       <div class="pj-h"><span class="id">PRJ-01 · THE BRAIN</span><span class="st"><i></i>Parts decided · ordering</span></div>
@@ -201,7 +220,7 @@
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="now"><b>Gen-0</b>validation</div><div><b>Gen-1</b>payload</div><div><b>Gen-2</b>carrier</div></div>
       <div class="specs">
         <div><b>LOA20<small></small></b><span>building-wide (est.)</span></div>
-        <div><b>1.0<small>M sq ft</small></b><span>site #1</span></div>
+        <div><b>1.0<small>M sq ft</small></b><span>The Grand, Miami</span></div>
         <div><b>360<small>°</small></b><span>walkthrough layer</span></div>
         <div><b>5–10<small>days</small></b><span>on site (est.)</span></div>
       </div>
@@ -216,12 +235,12 @@
     </section>
 
     <section class="pj os" aria-labelledby="pj3">
-      <div class="pj-h"><span class="id">PRJ-03 · BUILD.OS</span><span class="st"><i></i>Concept · Rev A.1</span></div>
+      <div class="pj-h"><span class="id">PRJ-03 · HOTEL.OS</span><span class="st"><i></i>Concept · Rev B</span></div>
       <div class="osg">
         <div>
-          <h2 id="pj3">build.os <span style="color:var(--dim);font-weight:500">/ hotel.os</span></h2>
-          <div class="sub">Building operating system · BO-SYS-001</div>
-          <p class="purpose">The runtime layer for an Accelerate property. It turns the Site Capture survey into an object-level digital twin of the whole building, down to every light switch and outlet, so facilities, housekeeping, security and robotics work from one map. One task model, one integration bus and one AI engine connect seven hotel departments, rugged shift devices, multi-vendor robot fleets and the systems a hotel already runs (PMS, POS, CRM, access control, BI). Spaces and routes come from Site Capture; the platform is built on the Brain, and confidential guest data stays on local models.</p>
+          <h2 id="pj3">Hotel.OS</h2>
+          <div class="sub">Hotel operating system · HO-SYS-001</div>
+          <p class="purpose">The runtime layer for an Accelerate property. Every square inch is mapped into a walkable digital twin (LiDAR geometry, 4K and 360° imagery, facilities floor plans) down to every switch and outlet. Tasks issued to a floor, room or object resolve to an exact location, and the general manager sees the whole building and everything happening in it. One task model, one integration bus and one AI engine connect seven hotel departments, rugged shift devices, multi-vendor robot fleets and the systems a hotel already runs (PMS, POS, CRM, access control, BI). Spaces and routes come from Site Capture; the platform is built on the Brain, and confidential guest data stays on local models.</p>
           <div class="osmod" aria-label="Core modules">
             <div><b>Tasks &amp; workflows</b><span>one queue, SLAs</span></div><div><b>Comms &amp; PTT</b><span>radio replacement</span></div><div><b>Robot fleet</b><span>Open-RMF dispatch</span></div><div><b>Integration bus</b><span>10 categories</span></div>
             <div><b>Guest experience</b><span>request loop</span></div><div><b>Security</b><span>RBAC · audit</span></div><div><b>Analytics</b><span>KPIs · BI export</span></div><div><b>Staff assistant</b><span>SOPs · drafts</span></div>
@@ -229,7 +248,7 @@
           </div>
         </div>
         <div>
-          <div class="phase" aria-label="Phase"><div class="now"><b>B0</b>define</div><div><b>P0</b>spine</div><div><b>P1</b>fleet</div><div><b>P2</b>AI</div></div>
+          <div class="phase" aria-label="Phase"><div class="now"><b>H0</b>define</div><div><b>P0</b>spine</div><div><b>P1</b>fleet</div><div><b>P2</b>AI</div></div>
           <div class="specs">
             <div><b>7</b><span>departments</span></div>
             <div><b>6</b><span>robot task types</span></div>
@@ -238,15 +257,16 @@
           </div>
           <table class="kv">
             <tr><th>Digital twin</th><td>Capture → building model → object layer (switches, outlets, fixtures) → asset registry → operations map</td></tr>
-            <tr><th>Map actions</th><td>Add, close out, tag team members, summon robots, deploy resources, see the whole footprint</td></tr>
+            <tr><th>Map actions</th><td>Walk the property, add, close out, tag team members, summon robots, deploy resources, GM view of the whole building</td></tr>
             <tr><th>Devices</th><td>Sonim XP Pro Thermal · XP5plus 5G · MegaConnect · Rhino C65 · T105</td></tr>
             <tr><th>Fleet layer</th><td>Open-RMF fleet, door and lift adapters; vendor-neutral dispatch</td></tr>
             <tr><th>Deployment</th><td>Cloud control plane + on-prem edge per property; ≥ 4 h offline continuity (target)</td></tr>
-            <tr><th>Next gate</th><td>B0: pilot property, PMS API access, Phase 0 scope signed</td></tr>
+            <tr><th>Sites</th><td>1 · The Grand, Miami (condominium + Marriott and DoubleTree hotel operations + lobby retail) · 2 · Hilton Thesis Hotel, Miami</td></tr>
+            <tr><th>Next gate</th><td>H0: The Grand pilot scope, PMS access per hotel operation</td></tr>
           </table>
         </div>
       </div>
-      <div class="links"><a class="p" href="build-os.html">Open build.os →</a><a href="build-os.html#twin">Digital twin</a><a href="build-os.html#integ">Integrations</a><a href="build-os.html#devices">Shift devices</a></div>
+      <div class="links"><a class="p" href="hotel-os.html">Open Hotel.OS →</a><a href="hotel-os.html#twin">Digital twin</a><a href="hotel-os.html#integ">Integrations</a><a href="hotel-os.html#devices">Shift devices</a></div>
     </section>
   </div>
 
