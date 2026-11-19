@@ -19,7 +19,7 @@
 
   function ready(){
     var proj = root.getAttribute('data-proj') || 'hub';
-    var code = proj === 'fu' ? 'PRJ-02 · Site Capture' : proj === 'con' ? 'PRJ-01 · The Brain' : proj === 'os' ? 'PRJ-03 · Hotel.OS' : proj === 'aug' ? 'PRJ-04 · Staff Augmentation' : 'Accelerate Robotics';
+    var code = proj === 'fu' ? 'PRJ-02 · Site Capture' : proj === 'con' ? 'PRJ-01 · The Brain' : proj === 'os' ? 'PRJ-03 · Hotel.OS' : proj === 'aug' ? 'PRJ-04 · Robotics' : 'Accelerate Robotics';
 
     /* thin progress bar */
     var bar = D.createElement('div'); bar.id = 'eng-bar'; D.body.appendChild(bar);
@@ -34,7 +34,7 @@
 
     /* end of page: big "where next" buttons built from the header nav */
     var cur = D.querySelector('.ar-tabs a[aria-current]'), tabs = [].slice.call(D.querySelectorAll('.ar-tabs a')), sw = [].slice.call(D.querySelectorAll('.ar-switch a'));
-    var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'Hotel.OS', aug: 'Staff Augmentation' }[proj];
+    var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'Hotel.OS', aug: 'Robotics' }[proj];
     var flows = [].slice.call(D.querySelectorAll('.ar-flow a.fl-chip'));
     if (flows.length) {
       var fb = D.createElement('nav'); fb.className = 'ar-next'; fb.setAttribute('aria-label', 'Connected projects');
