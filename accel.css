@@ -11,6 +11,7 @@ html[data-proj]{
 }
 html[data-proj="fu"]{--acc:#00C8FF;--acc2:#5FD8FF;--cy:#00C8FF}
 html[data-proj="hub"]{--acc:#4D8BFF}
+html[data-proj="os"]{--acc:#D4A65A;--acc2:#E6C48A;--cy:#D4A65A}
 html[data-proj]:not(.book) body{background:var(--bg);color:var(--text)}
 html[data-proj] body{font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
 html[data-proj] h1,html[data-proj] h2,html[data-proj] h3{font-family:var(--head)!important;letter-spacing:-.02em!important;font-weight:600!important}
@@ -66,7 +67,8 @@ html.book[data-proj] body{font-family:var(--body)}
   .ar-switch a,.ar-tabs a{flex:1;padding:0 8px;min-height:42px}
   .ar-exp{flex-basis:100%;margin:0;text-align:center}
 }
-@media (max-width:420px){.ar-switch a,.ar-tabs a{font-size:13px;gap:6px}.ar-switch a i{display:none}}
+@media (max-width:520px){.ar-switch{display:grid;grid-template-columns:1fr 1fr}.ar-switch a{min-height:40px}}
+@media (max-width:420px){.ar-switch a,.ar-tabs a{font-size:13px;gap:6px}}
 
 /* sticky section bar: pill buttons, scrollable, active one highlighted */
 html[data-proj] nav.top .wrap{height:auto!important;min-height:56px;gap:14px!important;max-width:none}
