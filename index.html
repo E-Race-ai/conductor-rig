@@ -26,7 +26,7 @@
 @media (max-width:980px){.prj{grid-template-columns:1fr}}
 .pj{border:1px solid var(--line);background:var(--panel);border-top:3px solid var(--pa);min-width:0;display:flex;flex-direction:column}
 .pj.con{--pa:#4D8BFF}.pj.fu{--pa:#00C8FF}.pj.aug{--pa:#9B7BFF;grid-column:1/-1}
-.sa-mini{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 18px 0}.sa-mini figure{margin:0;background:#F4F5F7;border:1px solid var(--line);border-radius:3px;overflow:hidden}.pj .sa-mini img{display:block;width:100%;height:210px!important;aspect-ratio:auto!important;object-fit:contain!important;padding:8px;box-sizing:border-box;background:#F4F5F7}.sa-mini figcaption{background:#0B1222;color:var(--dim);font:11.5px/1.4 var(--mono);padding:7px 10px;border-top:1px solid var(--line)}.pj.os{--pa:#D4A65A;grid-column:1/-1}
+.sa-mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 18px 0}.pj .sa-mini figure{margin:0;border:1px solid #24304F;background:none}.pj .sa-mini img{aspect-ratio:auto!important;object-fit:contain!important}.pj.os{--pa:#D4A65A;grid-column:1/-1}
 .pj.aug .osg,.pj.os .osg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 8px}
 @media (max-width:980px){.pj.os .osg,.pj.aug .osg{grid-template-columns:1fr}}
 .osmod{margin:16px 18px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:#0A1020}
@@ -305,7 +305,7 @@
           <h2 id="pj4">Robotics</h2>
           <div class="sub">Robot fleet for staff augmentation · RB-SYS-001</div>
           <p class="purpose">Its own project and its own lane: Robotics selects, buys, deploys and maintains the robot fleet that augments every department: linen, luggage, supplies, waste, small-item delivery and overnight floor care. One wheel platform carries swappable payload modules; each robot navigates on its own LiDAR SLAM, and Hotel.OS assigns its work. The Keenon W3 is selected for small-item delivery and doubles as branded or sponsor-wrapped space.</p>
-          <div class="sa-mini"><figure><img src="img/aug-base-bin.jpg" alt="Linen bin module on a low wheel base" loading="lazy"><figcaption>Linen bin module</figcaption></figure><figure><img src="img/aug-s100-luggage.jpg" alt="Keenon S100 with luggage cart" loading="lazy"><figcaption>Luggage cart · Keenon S100</figcaption></figure></div>
+          <div class="sa-mini"><figure class="rb-stage" style="--c:#9B7BFF;--h:250px"><span class="rb-tag">Module</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-base-bin-cut.webp" alt="Linen bin low AMR base" loading="lazy"></div><figcaption><b>Linen bin</b><span>low AMR base</span></figcaption></figure><figure class="rb-stage" style="--c:#9B7BFF;--h:250px"><span class="rb-tag">Module</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-s100-luggage-cut.webp" alt="Luggage cart Keenon S100" loading="lazy"></div><figcaption><b>Luggage cart</b><span>Keenon S100</span></figcaption></figure></div>
         </div>
         <div>
           <div class="phase" aria-label="Phase"><div class="now"><b>A0</b>qualify</div><div><b>A1</b>BOH pilot</div><div><b>A2</b>floor care</div><div><b>A3</b>scale</div></div>

@@ -514,7 +514,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 .ms-t .hi td,.ms-t .hi th{background:rgba(155,123,255,.07)}
 .sa-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}
 @media (max-width:760px){.sa-pair{grid-template-columns:1fr}}
-.sa-ph{background:#F4F5F7;border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.sa-ph-old{background:#F4F5F7;border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
 .sa-ph img{display:block;width:100%;height:300px;object-fit:contain;background:#F4F5F7;padding:10px;box-sizing:border-box}
 .sa-ph figcaption{background:#0B1222;color:#A3AEC6;font:12px/1.5 "IBM Plex Mono",monospace;padding:10px 12px;border-top:1px solid var(--line)}
 .sa-ph figcaption b{color:#EEF2FA;font-weight:600}
@@ -551,10 +551,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
         </tbody></table></div>
     </div>
     <figure style="margin:0">
-      <div class="sa-hero">
-        <figure class="sa-ph" style="margin:0"><img src="img/aug-base-bin.jpg" alt="Low autonomous wheel platform carrying a blue linen bin"><figcaption><b>Linen bin module</b> on a low AMR base (vendor TBC)</figcaption></figure>
-        <figure class="sa-ph" style="margin:0"><img src="img/aug-s100-luggage.jpg" alt="Keenon S100 heavy-load robot with a luggage-cart top module"><figcaption><b>Luggage cart module</b> on a Keenon S100</figcaption></figure>
-      </div>
+      <div class="sa-hero"><figure class="rb-stage" style="--c:#9B7BFF;--h:340px"><span class="rb-tag">Payload module</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-base-bin-cut.webp" alt="Linen bin low AMR base · vendor TBC" loading="lazy"></div><figcaption><b>Linen bin</b><span>low AMR base · vendor TBC</span></figcaption></figure><figure class="rb-stage" style="--c:#9B7BFF;--h:340px"><span class="rb-tag">Payload module</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-s100-luggage-cut.webp" alt="Luggage cart Keenon S100" loading="lazy"></div><figcaption><b>Luggage cart</b><span>Keenon S100</span></figcaption></figure></div>
       <figcaption class="src">Same idea, different payloads: a wheel platform with a module on top. Product images supplied by the program team; bases shown for identification. Right: Keenon S100. Left: a base marked “SEENON”, a name not matched to any AMR vendor in our research; vendor to be confirmed from the unit’s nameplate.</figcaption>
     </figure>
   </div>
@@ -583,10 +580,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="kicker">RB-SYS-001 · 2.0</div>
     <h2>Platform: wheel base plus payload modules</h2>
     <p class="lead">Heavy-load robots are treated as a common wheel platform. What changes from task to task is the module on top: a bin, a shelf, a cart or a locked cabinet. Lifting bases drive under a module and raise it (60 mm on the Pudu T-series, rack-lift on the Keenon S300); fixed-deck bases carry a mounted module (Keenon S100). Hotel.OS always knows which module is on which robot.</p>
-    <figure class="sa-pair">
-      <figure class="sa-ph" style="margin:0"><img src="img/aug-base-bin.jpg" alt="Linen bin module on a low autonomous base" loading="lazy"><figcaption><b>Module: linen bin.</b> Low lifting base, enclosed bin. Clean and soiled linen use separate, colour-coded bins.</figcaption></figure>
-      <figure class="sa-ph" style="margin:0"><img src="img/aug-s100-luggage.jpg" alt="Keenon S100 with luggage cart" loading="lazy"><figcaption><b>Module: luggage cart.</b> Keenon S100 fixed deck (865 × 600 mm shelf, 100 kg+), brass-style bell-cart frame, touchscreen and e-stops.</figcaption></figure>
-    </figure>
+    <div class="sa-pair"><figure class="rb-stage" style="--c:#9B7BFF;--h:380px"><span class="rb-tag">Module · linen</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-base-bin-cut.webp" alt="Linen bin: clean / soiled, colour-coded lifting base · covered bin" loading="lazy"></div><figcaption><b>Linen bin: clean / soiled, colour-coded</b><span>lifting base · covered bin</span></figcaption></figure><figure class="rb-stage" style="--c:#9B7BFF;--h:380px"><span class="rb-tag">Module · luggage</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/aug-s100-luggage-cut.webp" alt="Luggage cart on fixed deck Keenon S100 · 865 × 600 mm · 100 kg+" loading="lazy"></div><figcaption><b>Luggage cart on fixed deck</b><span>Keenon S100 · 865 × 600 mm · 100 kg+</span></figcaption></figure></div>
     <h3 class="ms-h3"><i>2.1</i>Module catalogue</h3>
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:18%">Module</th><th>Use</th><th style="width:18%">Base class</th><th style="width:16%">Security</th><th style="width:10%">Phase</th></tr></thead>
