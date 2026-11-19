@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pudu and Keenon hotel robots: report · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Pudu and Keenon hotel robots: report · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Anchor The Grand's robot fleet on Pudu
+
+Accelerate Robotics should build The Grand's staff-augmentation layer mostly on **Pudu**, and treat the Keenon W3 as a conditional choice. Pudu supplies the heavy-transport base (**T300 Lifting**, used with a pool of standard racks) and the cleaning fleet (**CC1 Pro** for hard floors, **MT1 Vac** for carpet, **MT1/MT1 Max** for back-of-house and garage). The **W3** stays the delivery robot only if Keenon signs a written dispatch-API commitment before purchase. The reason is software. Pudu runs a public developer program with a cloud API, webhooks, a US cluster and a private-cloud option. Keenon publishes no API, SDK or developer portal at all, and Hotel.OS cannot dispatch a robot it cannot talk to. Keenon's heavy-load S100 and S300 lose to the T300 on hardware too. They need 90 cm passages against the T300's 60 cm, and the S300's published spec table looks copied from the S100. On cleaning, the decision turns on documentation more than price. Pudu's CC1 Pro manual carries FCC Part 15 statements and an IEC 63327 claim. No Keenon cleaner has any US certification documented. Three program-level risks matter more than any model choice. First, the FCC's **28 July 2026 Covered List action** freezes the line-up: any model without a pre-July-2026 FCC grant can no longer be authorized, so every purchase becomes a lifetime buy. Second, Pudu had a **cross-tenant cloud API flaw in August 2025**. Third, elevator integration under Florida code could cost more per car than a robot. Almost every performance figure in this report is a vendor or reseller claim. No independent test of any model was found, and no named US hotel deployment with published metrics exists for either brand.
+
+## Why software, not hardware, decides this fleet
+
+The two vendors build broadly similar machines at similar prices, roughly $12k–$30k a unit. They diverge sharply on how a third-party platform can control them. Pudu's Open Platform went generally available in August 2023. It offers a Cloud API for task calls, status and callbacks, a Private Cloud API, a robot-side PUDU OS SDK and built-in webhooks, all authenticated with an App Key and Secret ([PUDU Open Platform](https://open.pudutech.com/en); [Pudu news](https://pudurobotics.com/about/news/64eeb7cb13fc2f004432c9cd)). Pudu's public skill repository describes endpoints for multi-point delivery, call tasks, lifting, scheduling, map service and analytics, served from cn, sea, de and **us** clusters ([GitHub pudu-robotics/skills](https://github.com/pudu-robotics/skills)). A directory profile from October 2026 finds that Keenon has **"no public developer API, developer portal, or OpenAPI"** and scores it 0/100 for agent readiness ([API Evangelist](https://providers.apievangelist.com/providers/keenon-robotics/)). Keenon's DINERBOT units can take instructions from restaurant order systems, so some private interface exists, but none is documented ([RobotsUSA Keenon](https://www.robotsusa.com/Keenon.htm?cs_region=robotsusa)).
+
+Neither vendor has a published Open-RMF fleet adapter, and neither supports MassRobotics interoperability. One exception is the Pudu T600, which claims VDA 5050 compatibility and on-premises deployment ([Pudu T600](https://www.pudurobotics.com/en/products/pudut600)). Pudu's API also has a limit. A team building an Open-RMF integration found that it reports robot position but **cannot accept an arbitrary [x, y, θ] goal**. The workaround is to dispatch to named waypoints stored on the robot ([Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594)). So Hotel.OS should plan for task-level control: it creates tasks, reads state and arbitrates shared resources, while each vendor's stack keeps local navigation. That works for staff augmentation, but it shapes everything downstream, especially elevators.
+
+## The W3 fits the job but sits behind a closed API
+
+### W3 specifications and fit
+
+The BUTLERBOT W3 is still Keenon's current enclosed room-delivery robot, and no successor has been announced ([Manila Times / PR Newswire](https://www.manilatimes.net/2026/07/18/tmt-newswire/pr-newswire/global-commercial-service-robot-shipments-leader-keenon-puts-humanoids-to-work-at-waic-2026/2386862)). The hardware suits the program's use case well. It measures **459 × 549 × 1081 mm** and weighs **48 kg**. It carries **2–4 configurable compartments** of 390 × 385 × 300 mm each, about 90 L in total, with a **20 kg payload at 10 kg per compartment**. It cruises at up to 0.8 m/s, needs a **70 cm** minimum passage and climbs 7° ([RobotLAB W3](https://www.robotlab.com/store/keenon-w3/); [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)). Guests open their compartment with a unique PIN or a phone notification. An 11.6-inch touchscreen handles code entry ([Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)). Toothbrushes, towels and snacks fit easily, but bulk linen does not.
+
+Two specifications matter for operations. First, battery claims conflict: "up to 12 h" from RobotLAB, 9–12 h from Robots International and 8 h from GrabaRobot. Charging takes about **6.5 h** from 15% to 100% ([RobotLAB W3](https://www.robotlab.com/store/keenon-w3/); [GrabaRobot](https://www.grabarobot.com/blog/keenon-robot-review-2026/)). A single W3 therefore cannot cover a 24-hour room-service day, so the fleet should be sized N+1. Second, the W3 is indoor-only, and no threshold height is published, so elevator sills and lobby transitions need a survey ([RobotLAB W3](https://www.robotlab.com/store/keenon-w3/)).
+
+### Elevators, guest notification and references
+
+The W3 rides elevators through an IoT and controller interface, not a mechanical arm. Keenon built an API platform with **KONE** ([Automated Warehouse](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)). For elevators without an API, RobotLAB installs a relay-based cab caller, which adds about a week ([RobotLAB Keenon](https://www.robotlab.com/manufacturers/keenon/)). Keenon materials say the robot can ring the guest-room phone ([Robots Asia](https://www.robotsasia.com/Keenon.htm?cs_region=robotsasia)). No PMS integration was found: nothing for Oracle OPERA, Mews or guest-messaging platforms.
+
+Named deployments are all outside the US: **M Social Auckland**, the first hotel robot in New Zealand to ride lifts autonomously ([Elevator World](https://elevatorworld.com/news/daily-news/keenon-robotics-brings-autonomous-robot-to-new-zealand)), **Shangri-La Traders Hongqiao** ([PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-world-s-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html)), and Wyndham's Asia-Pacific supplier deal from 2023. RobotLAB's widely quoted Four Seasons Maui result, with deliveries in **under 8 minutes across 12 floors**, does not name the robot model, so it should not be credited to the W3 ([RobotLAB Hotels](https://www.robotlab.com/industries/hotels/)). The Grand would likely be an early or reference US site for the W3 at this scale.
+
+### Sponsor wraps and warranty
+
+The program plans brand and sponsor wraps on the W3. Two constraints apply. Wraps must leave the stereo cameras, the collision bar and the compartment seams uncovered. And RobotLAB's warranty terms are voided by **opening the shell** ([RobotLAB service plans](https://www.robotlab.com/service-and-support-plans)). Wraps should therefore be applied as non-invasive vinyl, approved by the distributor in writing. That last point is our recommendation, not a published policy.
+
+### FlashBot Max as the fallback
+
+The Pudu FlashBot Max is the obvious alternative, and the W3's main competitor. It measures 538 × 534 × 1052 mm and weighs 60 kg. It has 2–4 compartments at 10 kg per layer, runs **9 h on a 4 h charge**, cruises at 0.5–1.2 m/s, and unlocks by password, phone number or NFC. It supports cloud elevator control with **KONE and Otis**, or Pudu's own hardware elevator box ([Pudu FlashBot Max](https://www.pudurobotics.com/en/products/flashbot-new)). Pudu integrated FlashBot with **Otis Integrated Dispatch** in Japan ([Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-successfully-integrates-flashbot-with-elevators/)).
+
+Pudu claims a 60 cm path clearance for the Max, but the original FlashBot manual specified **70 cm, with 1 m recommended for long aisles** ([FlashBot quick start guide](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)). The Max also carries less than the original FlashBot: 10 kg per layer against 15 kg. It costs **$20,000**, or about **$559/month** RaaS, against the W3's $29,600 or $829/month at the same reseller ([RobotLAB room service](https://www.robotlab.com/capabilities/room-service/)).
+
+The decision rule is simple. Keep the W3 if Keenon puts a dispatch API in writing, covering create task, status, compartment events, errors and elevator state. If it does not, switch the remaining delivery units to FlashBot Max. Wrap artwork does not transfer between the two, because the body dimensions differ. Avoid the FlashBot Arm. Its specifications come only from third parties, and as a semi-humanoid launched after July 2026 it would face the FCC barrier described below ([New Atlas](https://newatlas.com/robotics/pudu-robotics-flashbot-arm-semi-humanoid-delivery-robot)).
+
+## A T300 Lifting robot under a pool of racks beats every S-series option
+
+### The T-series family
+
+Pudu's T-series comes in three payload classes, each with Standard and Lifting variants:
+
+- **T300**, launched April 2024: 300 kg.
+- **T600**, launched July 2025: 600 kg, in Upright and Underride versions.
+- **T150**, launched January 2026: 150 kg.
+
+The T150 and T300 share an **835 × 500 × 1350 mm** body. Both run at up to 1.2 m/s, run about 12 h unloaded, charge from 0 to 90% in 2 h, and have a **60 mm lift stroke** on the Lifting version ([Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [Pudu T150](https://www.pudurobotics.com/en/products/pudut150); [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)). The T150 and T300 need only a **60 cm** passage and cross 20 mm thresholds and 35 mm gaps. The T600 tolerates only 10 mm thresholds, which is too tight for many elevator sills. The T300's loaded runtime is disputed: 8 h from Pudu, about 6 h from resellers ([RobotLAB T300](https://www.robotlab.com/store/pudu-t300/)). It does have user-swappable batteries.
+
+**No source publishes a slope rating for any T model**, and resellers describe the operating surface as "indoor flat ground." Until Pudu commits a slope figure in writing, keep the T-series off the loading-dock ramp.
+
+### How swappable payload modules work on the T300
+
+The program's "base plus swappable module" concept matches Pudu's own hospitality positioning. Pudu lists the T300 with **300 kg payload and 400 kg towing** for "direct loading, lifting, and towing for hotel carts and equipment," and names luggage racks as modular attachments ([Pudu hospitality](https://www.pudurobotics.com/solutions/hospitality)). A Pudu product intro summarized by search describes four configurations: Standard (65 kg robot), Shelf (103 kg), Lifting (81 kg) and Towing (90 kg robot, 400 kg towed with a 200 kg counterweight). Those figures are unverified ([Czapnik T300 Product Intro](https://www.czapnik.co.il/wp-content/uploads/2026/08/PUDU-T300-Product-Intro.-20250303-1.pdf)).
+
+The important detail is that Standard and Lifting have **different model codes**, WTID01 and WTIDL1, and different weights. That makes lifting a factory hardware difference, not something you can swap in the field. So the swappable layer should be the **cart, not the robot's top**. A **T300 Lifting** robot drives under a freestanding rack, recognizes it, jacks it and carries it. A reseller listing gives the T300 Lifting Rack envelope as **500–800 mm wide, 700–1,000 mm long and up to 1,300 mm tall** (unverified) ([RobotShop T300 Lifting Rack](https://ca.robotshop.com/products/pudu-t300-lifting-rack)). If every module (linen bin, soiled-linen hamper, luggage cart, amenity cage, trash tote) is built to that footprint and clearance, one robot can serve many carts. Standard hotel linen carts will not work without modification.
+
+### The case against Keenon's S100 and S300
+
+The **S100** is a fixed-shelf courier. It measures **925 × 640 × 1282 mm**, weighs 87.5 kg and carries **100 kg+** on an 865 × 600 × 800 mm platform. It runs 8 h, charges in 2.5 h and swaps batteries in 15 s. It needs a **90 cm** passage, though Keenon's own page pairs that figure with an inch value that converts to 75 cm ([Keenon S100](https://www.keenon.com/en/product/S100)). Its elevator and door modules are sold separately and require professional installation ([Knoxlabs S100](https://www.knoxlabs.com/products/keenon-courierbot-s100-delivery-robot)). It has hotel use at Furama Chiang Mai, moving linen, luggage and supplies ([IoT M2M Council](https://iotm2mcouncil.org/iot-library/news/smart-building-construction-news/keenon-robots-service-thailand-hotel/)). But a fixed shelf is the opposite of a swappable-module platform.
+
+The **S300** is the real Keenon comparator. It is a jacking robot that lifts **300 kg** racks of up to 1,200 × 1,200 mm on a 230 mm chassis. It runs 6 h at full load and charges in 3.5 h, and a distributor lists a slope limit of ≤5°. That is the slope figure Pudu has not published ([Keenon S300](https://www.keenon.com/en/product/S300); [Robots International S300](https://www.robotsinternational.com/KEENON-S300.htm)). It loses for four reasons:
+
+- It launched only around October 2025.
+- It needs a 90 cm passage and a **110–120 cm U-turn** ([Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300)).
+- Keenon's spec table repeats the S100's 1282 mm height, which is implausible for a go-under chassis and suggests a copy-paste error.
+- It shares Keenon's API gap.
+
+The T300 Lifting also comes with stronger paperwork for an industrial base. It holds **CE-MD and CE-RED certificates from TÜV SÜD** against EN ISO 3691-4 ([Robotics Tomorrow](https://roboticstomorrow.com/news/2025/03/10/pudu-robotics-pudu-t300-achieves-ce-md-and-ce-red-certifications-empowering-global-smart-manufacturing-with-international-safety-standards/24399)), and Pudu's OpenAPI exposes lifting tasks directly. One caveat runs the other way. ISO 3691-4 assumes controlled industrial zones, and no UL 3100 or ANSI/A3 R15.08 listing was found for any T model. Keep T-series robots in back-of-house corridors and service elevators. Use the W3 or FlashBot for guest-facing work.
+
+The T150 is a cheaper de-rated twin of the T300 at **$13,500** ([RobotsUSA](https://www.robotsusa.com/Pudu-Industrial-Delivery-Robots.htm?cs_region=robotsusa)). It is enough for luggage, which rarely exceeds 150 kg per run. The T600 is oversized for a hotel, and its 10 mm threshold limit rules it out.
+
+A side note: no AMR vendor called "SEENON" exists. A low chassis carrying a bin is most likely a mis-read KEENON unit or a third-party rebadge. It is not a T150 or T300, which are 1,350 mm tall ([Pudu T300](https://www.pudurobotics.com/en/products/pudut300)).
+
+## Pudu's cleaners win on paperwork as much as price
+
+The Grand has three distinct floor regimes:
+
+- stone lobby and retail frontage that needs wet scrubbing;
+- carpeted corridors, ballrooms and meeting levels that need vacuuming;
+- back-of-house and garage hard floors that need sweeping.
+
+Each brand has a machine for each regime, as the comparison below shows. All figures are vendor or reseller claims.
+
+| Model | Type | Width / rate (vendor) | Runtime / charge | Passage / threshold | US price (reseller) | Fit at The Grand |
+|---|---|---|---|---|---|---|
+| Keenon C30 | Dry 3-in-1 (sweep, vac, dust-mop) | 61 cm; 600 m²/h | 6 h vac, 10 h mop / 5–6 h | 65 cm / 2 cm | ~$11,900 | Cheap carpet option; no documented elevator use |
+| Keenon C40 | 4-in-1 incl. scrub | 400 mm scrub; 1,100 m²/h | 5 h scrub / 2 h, 5-s battery swap | 65 cm / 15 mm | $14,950–$20,580 | Credible CC1 Pro rival |
+| Keenon C55 | Large scrubber | 550 mm; 2,376 m²/h theoretical | 5 h, hot-swap / 4 h | — / 5 cm obstacle | ~$27,250 | Big lobby / BOH slabs |
+| Pudu CC1 Pro | 4-in-1 incl. scrub | 500 mm; 700–1,000 m²/h | 5 h scrub / <3 h | 70 cm (75 pref.) / 8 mm cleaning | $21,995–$24,000 + ~$2.9k dock | Lobby stone, retail frontage |
+| Pudu MT1 Vac | Sweep + vacuum + dust-mop | 55 cm vac; 1,400 m²/h | 3–6.5 h / <3.5 h | 75 cm / 20 mm | ~$20,000 | Carpeted corridors, ballrooms |
+| Pudu MT1 | Dry sweeper | 70 cm; 1,800 m²/h | 4–8 h / <3 h | 75 cm / — | $17–19k | BOH, loading dock |
+| Pudu MT1 Max | 3D-LiDAR sweeper, IP54 | 70 cm; 2,200 m²/h | 5–10 h / <3.5 h | 75 cm / 20 mm | ~$25k (to $32.6k) | Garage, porte-cochère |
+
+Sources: [Keenon C30](https://www.keenon.com/en/product/C30); [RobotsUSA Keenon cleaning](https://www.robotsusa.com/Keenon-Cleaning-Robots.htm?cs_region=robotsusa); [Keenon C40](https://www.keenon.com/en/product/C40); [Anton Robots C40](https://antonrobots.com/keenon-kleenbot-c40-review/); [Keenon C55](https://www.keenon.com/en/product/C55); [CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf); [RobotsUSA CC1 Pro](https://www.robotsusa.com/PUDU-CC1-Pro-AI-Powered-Autonomous-Cleaning-Robot.htm); [Pudu MT1 Vac](https://www.pudurobotics.com/en/products/mt1-vac); [MT1 Vac Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide); [Pudu MT1](https://www.pudurobotics.com/en/products/mt1); [Pudu MT1 Max](https://www.pudurobotics.com/en/products/mt1-max); [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/).
+
+### Why the CC1 Pro, not the C40
+
+On hardware alone, the Keenon C40 is the better buy. It costs $4–5k less than the CC1 Pro, has a slightly narrower 65 cm passage, and a reviewer calls it "a similar 4-in-1 approach for less money" ([Best Robots Compared](https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/)). The CC1 Pro wins anyway, for three reasons.
+
+First, certification. The CC1 Pro manual carries **FCC Part 15 Class B** and ISED statements and an IPX4 rating. Pudu claims **IEC 63327**, and a Florida dealer reports **TÜV SÜD cTUVus** certification ([CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf); [Sparkobot certification](https://sparkobot.pages.dev/the-clean-sheet/commercial-cleaning-robot-certification)). For the C40, no FCC, UL, CE or IEC documentation was found at all ([Anton Robots C40](https://antonrobots.com/keenon-kleenbot-c40-review/)).
+
+Second, evidence of cleaning. The CC1 Pro's rear verification camera produces post-task heat maps and stain maps ([PR Newswire CC1 Pro](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html)). A storefront tenant or HOA board can be shown that evidence.
+
+Third, maturity. Pudu claims over **20,000 CC1 units** sold on the same chassis since 2023 ([EuroShop / Pudu Europe](https://www.euroshop-tradefair.com/en/Home/Company_News/The_Secret_to_Global_Scale_Why_PUDU_CC1_Dominates_the_Commercial_Cleaning_Robot_Market)).
+
+The CC1 Pro has real limits. It has **15 L tanks**, it cleans over thresholds of 8 mm at most, it does not clean slopes over 3°, and it handles short-pile carpet only. The optional workstation is effectively mandatory for unattended overnight work. Coverage is modest: one unit covers about 3,500–5,000 m² per charge, about 4–5% of the tower's gross area, so it can only serve the hard-floor common areas.
+
+### The MT1 family
+
+The **MT1 Vac** is the only MT1 variant built for carpet. It has AI floor-type detection, H11 filtration (H13 optional) and a claimed 10 days between empties in 1,000 m² of hotel carpet ([Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries)). But its operation guide calls for **weekly dust-bag and filter changes**. It is also **not compatible with the Auto-Empty Station** that serves the MT1 and MT1 Max ([MT1 Vac Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide); [Pudu MT1 Max](https://www.pudurobotics.com/en/products/mt1-max)).
+
+The Keenon C30 costs about **$11,900** and is the cheaper carpet machine. It has no published elevator capability, only CE marking from a French reseller, and three conflicting suction figures ([Pentagone C30](https://www.pentagone-robotics.com/en/robots/keenon-c30)). It is a good candidate for a single-floor ballroom, not for fleet use.
+
+### Large lobbies and glass
+
+If the main lobby is a large open stone slab, none of these compact units is the right tool. The Keenon C55 or a full-size Avidbots or Brain Corp-class scrubber fits better, though this research did not price or verify the latter two. Every vendor also warns that glass and mirrored surfaces confuse their sensors ([Anton Robots C40](https://antonrobots.com/keenon-kleenbot-c40-review/); [Anton Robots MT1 Max](https://antonrobots.com/pudu-mt1-max-review/)). The storefront frontage needs mapping work in any case.
+
+## Elevator integration is the critical path
+
+Every robot that changes floors needs the building's elevators, and in a mixed-use tower those are several banks: hotel, residential and service, possibly from different manufacturers. The OEM elevator APIs are now real products:
+
+- **KONE**'s Service Robot API, used in a hotel by the Sudima Hotels group ([KONE Sudima reference](https://www.kone.com.au/stories-and-references/references/kone-partners-sudima-hotels.aspx)).
+- **Otis Integrated Dispatch**, a cloud API ([Otis Integrated Dispatch](https://www.otis.com/en/bh/products-services/products/otis-integrated-dispatch)).
+- **TK Elevator**'s MAX APIs ([Elevator World TKE](https://elevatorworld.com/?p=56287)).
+
+No Schindler robot-dispatch API was confirmed.
+
+Otis Integrated Dispatch matters most for The Grand. It **dispatches at the group or bank level, so robots from multiple vendors can share cars** ([Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-successfully-integrates-flashbot-with-elevators/)). That is how a Keenon W3 and a Pudu T300 can coexist without each vendor's cloud fighting the other for the same car. The rule for Hotel.OS: wherever the bank's manufacturer offers an API, **Hotel.OS (or the OEM) arbitrates the lift and the robot vendors are clients**. Each bank gets its own Open-RMF lift adapter. One caution: FlashBot's elevator legs currently run inside Pudu's IoT cloud, so Hotel.OS would not command the lift directly ([FlashBot notes via Pudu](https://www.pudurobotics.com/en/products/flashbot-new)). Whether Pudu or Keenon will hand elevator arbitration to a third party is unconfirmed, and it needs to be a contract question.
+
+Cost and permitting are the hidden budget. Trade press warns that elevator integration requires the OEM's involvement and permits, and **can exceed the cost of one robot** ([Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-launches-flashbot/)). The only per-car figure found, $20k–$40k per KONE elevator, comes from an unsourced vendor blog ([ulearnrobotics](https://ulearnrobotics.pages.dev/resources/elevator-integration-delivery-robots)). Florida enforces **ASME A17.1-2019 through Rule 61C-5.001 F.A.C.** ([Cornell LII](https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-61C-5-001)), and Miami-Dade runs its own elevator inspection regime ([Miami-Dade](https://www.miamidade.gov/facilities/elevator-violation-codes.asp)). An OEM cloud API that leaves the safety circuit untouched should be easier to approve than relay boxes wired into car operating panels, which will need a licensed Florida elevator contractor and a permit.
+
+Hotel.OS also needs a "fire recall / lift unavailable" state. Under Phase I recall, robots inside cars are carried to the lobby, and they must not block egress.
+
+Elevators are also where robots irritate people. Keenon's CEO acknowledges the trouble with door detection and crowded cars ([KR-Asia](https://kr-asia.com/dont-operate-in-a-vacuum-keenon-robotics-ceo-on-surviving-industry-shakeouts)). One Chinese hotel robot was observed planting itself in the middle of crowded cars ([36Kr](https://eu.36kr.com/en/p/3462277011576193)). Two mitigations follow:
+
+- Restrict robots to service cars wherever possible.
+- Never let a robot take the last available car from a guest using a mobility device. That protects the ADA's 36-inch accessible route.
+
+## FCC's July 2026 action makes every unit a lifetime buy
+
+### What the FCC action does
+
+On **28 July 2026** the FCC added "foreign-produced advanced robotic devices" to the Covered List, in Public Notice DA 26-786 ([FCC DA 26-786](https://docs.fcc.gov/public/attachments/DA-26-786A1.pdf)). The test is the place of production, not the brand. The definition covers ground-moving devices that navigate and avoid obstacles, weigh more than 4.4 lb, and have sensors, connectivity of at least 200 kbps and navigation software. Morgan Lewis reads this as potentially reaching wheeled commercial-service robots ([Morgan Lewis](https://www.morganlewis.com/pubs/2026/08/fcc-adds-foreign-produced-advanced-robotic-devices-and-power-inverters-to-covered-list-opens-conditional-approval-process)).
+
+**Previously authorized models may still be imported, sold and used.** A waiver allows security and compatibility firmware updates through at least **1 January 2029**. New models need Conditional Approval, reviewed by the Department of War, which requires a US manufacturing plan ([Morgan Lewis](https://www.morganlewis.com/pubs/2026/08/fcc-adds-foreign-produced-advanced-robotic-devices-and-power-inverters-to-covered-list-opens-conditional-approval-process)). Tech Times reports that Pudu's existing cleaning and delivery robots "continue to be sold and operated," while its new D9 humanoid and D5 quadruped cannot enter the US ([Tech Times](https://www.techtimes.com/articles/330290/20261109/pudu-robotics-puts-one-ai-model-three-robots-fcc-has-banned-its-humanoid-quadruped-us-markets.htm)).
+
+### What it means for The Grand
+
+The practical consequences follow directly:
+
+- **Verify each model's FCC ID and grant date before signing.** Pudu's grantee code is 2AXDW. The original FlashBot's ID, **2AXDW-FBBDR1**, dates from 2021 ([fccid.io](https://fccid.io/2AXDW-FBBDR1)). No FCC ID was found for the W3, the S100, the S300 or any Keenon cleaner. Grants for the FlashBot Max and the January 2026 T150 were not confirmed either.
+- **Buy spares and batteries up front.** A hardware revision that needs a new grant may not be authorizable.
+- **Don't plan for a successor.** A W3 replacement or new Keenon humanoids such as the XMAN-R1 are unlikely to reach the US.
+- **Check tenant and HOA contracts.** These may bar Covered List devices.
+
+Pudu and Keenon are not on the Section 1260H list ([WilmerHale](https://www.wilmerhale.com/en/insights/client-alerts/20260611-pentagon-adds-65-new-entities-to-the-1260h-list-of-chinese-military-companies)). Section 301 duties of roughly **25%, and possibly 37.5%**, apply to Chinese-origin robots per conflicting secondary sources ([Sourcebotics](https://sourcebotics.com/guides/us-tariffs-on-chinese-robots-2026/)). A Section 232 robotics determination from 28 October 2026 set no rate yet ([The Next Web](https://thenextweb.com/news/trump-robot-imports-national-security-section-232)).
+
+### Cloud security and data
+
+Security is concrete, not hypothetical. In **August 2025** a researcher showed that Pudu's cloud API checked tokens but **not ownership**. Any authenticated user could read call histories and dispatch or reconfigure other customers' BellaBot, CC1 and FlashBot units. Pudu fixed the flaw within days of escalation, but no CVE was issued ([pentester.ca](https://pentester.ca/blog/hacked-biggest-chinese-robot-company); [The Register](https://www.theregister.com/2025/08/29/pudu_robots_hackable/)). Pudu holds ISO 27001/27701 and offers private deployment. Tech Times notes that neither removes obligations under Chinese intelligence and data laws ([Tech Times](https://www.techtimes.com/articles/330290/20261109/pudu-robotics-puts-one-ai-model-three-robots-fcc-has-banned-its-humanoid-quadruped-us-markets.htm)). No Keenon vulnerability research exists. That reflects an absence of scrutiny, not evidence of safety.
+
+A robot that rides elevators across the hotel, retail and residential zones is effectively a badge holder. The controls should match:
+
+- **Network isolation:** isolated VLANs with egress allow-listing.
+- **Single dispatcher:** Hotel.OS as the only dispatcher.
+- **Scoped credentials:** floor- and time-scoped elevator credentials.
+- **Private cloud:** Pudu private cloud where offered.
+- **Vulnerability response:** contractual disclosure and patch SLAs.
+
+### Safety certification, insurance and labor
+
+No **UL 3300** listing was found for any model in either brand. OSHA added UL 3300 to the NRTL program at the end of 2025 ([UL](https://www.ul.com/news/ul-solutions-grants-first-global-certification-public-facing-robot-simbes-tally-autonomous)), so insurers and the AHJ are likely to ask for it.
+
+If the hotel workforce is represented by UNITE HERE, deployment likely triggers notice and bargaining obligations. Union contract precedent rewards the "augmentation, not replacement" framing paired with retraining ([Facilities Dive](https://www.facilitiesdive.com/news/hospitality-union-tech-battles/734712/)).
+
+## Recommended fleet and what it costs
+
+The fleet below is a planning estimate, not a quote. Room count and delivery demand were not in scope.
+
+Relay Robotics' published case studies are the best utilization benchmarks available, though they are vendor-sourced: about **7 deliveries a day** at The Concordia and about **57 a day** at EMC2 Chicago ([Relay Concordia](https://relayrobotics.com/case-studies/the-concordia-washington-dc); [Relay](https://relayrobotics.com)). Size delivery robots at roughly one unit per 40–60 peak daily deliveries, plus one spare to cover the W3's 6.5 h charge.
+
+| Role | Model | Steady-state units | Purchase (reseller) | RaaS / mo |
+|---|---|---|---|---|
+| Small-item delivery, sponsor-wrapped | Keenon W3 (fallback: Pudu FlashBot Max) | 6 (5 + 1 spare) | $17,900–$29,600 each ([Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm); [RobotLAB W3](https://www.robotlab.com/store/keenon-w3/)) | $829 each (RobotLAB) |
+| Linen, luggage, amenities, trash totes | Pudu T300 Lifting + rack pool (≈20–30 racks) | 4 | $18,800–$21,000 each ([RobotsUSA](https://www.robotsusa.com/Pudu-Industrial-Delivery-Robots.htm?cs_region=robotsusa); [RobotLAB T300](https://www.robotlab.com/store/pudu-t300/)) | $589 each, incl. $199 service plan bundle |
+| Towing / bell-cart moves | Pudu T300 (towing or shelf config) | 1 | ~$21,000 | $589 |
+| Lobby stone, retail frontage, BOH hard floor | Pudu CC1 Pro + workstation | 4 | $21,995–$24,000 + ~$2,899 dock ([ImageNet](https://shop.imagenetconsulting.com/products/pudu-self-cleaning-docking-station)) | $669 each (dock extra) |
+| Carpeted corridors, ballrooms, meeting levels | Pudu MT1 Vac | 4 | ~$20,000–$21,000 ([RobotLAB MT1 Vac](https://www.robotlab.com/store/pudu-mt1-vac/)) | $440 each |
+| Garage, dock, porte-cochère | Pudu MT1 (or MT1 Max if semi-outdoor) | 1 | $17–19k (MT1 Max ~$25k) | $529 (MT1) |
+
+**Totals.** The fleet comes to about **$420k–$495k** in hardware before racks, elevator work, tariffs and integration. On RaaS it is about **$12,900 a month**, roughly $155k a year.
+
+**Elevators are the largest unknown.** If the unverified $20k–$40k per car holds, integrating four service and hotel cars adds $80k–$160k. That would make elevators the biggest single line after the robots themselves.
+
+**Purchase versus RaaS.** RobotLAB's RaaS works out to about 120% of the cash price over 36 months ([Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)). For a fleet that FCC rules lock to its current models, RaaS shifts the parts and firmware continuity risk onto the integrator. That is worth the premium.
+
+**Single versus mixed vendor.** RobotLAB recommends one vendor per property ([RobotLAB Keenon](https://www.robotlab.com/manufacturers/keenon/)). The plan above is deliberately two-vendor, because the W3 was chosen for delivery. Two vendors work only if Hotel.OS owns elevator arbitration. If it can't, consolidate onto Pudu.
+
+## A 120-day pilot gated on five contract terms
+
+### Weeks 0–4: contract and site gates
+
+Nothing ships until five conditions are met in writing:
+
+1. **API access.** A Keenon dispatch-API commitment covering task, status, compartment and elevator events. For Pudu, an endpoint-level review confirming that multi-floor delivery and lifting tasks are exposed through the Open Platform.
+2. **FCC status.** FCC IDs with pre-28-July-2026 grant dates for every SKU, plus firmware and parts support terms through 2029.
+3. **Certification.** Status for UL 3300, UL 3100 or the TÜV certificate number, as the insurer requires.
+4. **Data handling.** Data residency in the US cluster or private cloud, a camera-image retention policy, and a vulnerability-disclosure SLA.
+5. **Elevator plan.** A survey of every bank: OEM, controller generation, API availability, and a licensed Florida elevator contractor. The same survey should measure sill gaps, thresholds, corridor and vestibule widths, and glass frontage against each robot's limits: 8–20 mm thresholds, 60–75 cm passages, 3° cleaning slope.
+
+### Weeks 4–16: pilot on one hotel bank and one service bank
+
+The pilot fleet is:
+
+- 2 W3 units;
+- 1 FlashBot Max as an API and elevator control unit;
+- 2 T300 Lifting units with 8–10 purpose-built racks (linen, soiled linen, luggage);
+- 1 CC1 Pro with workstation on lobby and retail stone;
+- 1 MT1 Vac on ballroom and corridor carpet.
+
+That costs roughly **$4,500 a month** on RaaS. Track these KPIs:
+
+- elevator-trip success rate;
+- mean time between human interventions;
+- deliveries per robot-day and door-to-door time;
+- measured m²/h against vendor rates;
+- threshold or sill failures;
+- guest complaints;
+- the share of tasks created and closed through Hotel.OS rather than vendor apps.
+
+At week 16, keep the W3 only if Keenon's API carried production traffic. Otherwise switch the remaining delivery units to FlashBot Max.
+
+### Phase 2: residential floors and scale-up
+
+Residential floors open only after three steps:
+
+- access-control credentialing for the robots;
+- a privacy review with the condo board covering cameras and data flows;
+- union notice where applicable.
+
+Scale to the steady-state fleet after that.
+
+## Conclusion
+
+Hotel.OS is what this fleet is for, and owning dispatch matters more than any spec-sheet difference between Pudu and Keenon. Keenon's hardware is competitive and often cheaper: the C30 and C40 undercut Pudu, and the W3 is a good hotel robot. But a robot that only its vendor's app can dispatch puts Keenon's cloud, not Accelerate's platform, in charge of The Grand. The same logic changes what "swappable payload modules" means here. Standardize the **cart footprint**, not the robot. A T300 Lifting robot plus a pool of racks built to one specification turns the base into a commodity, and the modules into Accelerate's own IP.
+
+The FCC action raises the stakes. The models certified before July 2026 are, in practice, the only models The Grand will ever run. Buying them now means buying parts depth and firmware runway through 2029, and building the Hotel.OS integration layer so the next fleet can come from a different manufacturer. Two things are still unknown: elevator cost per car, and whether either vendor will let a third party arbitrate lifts. The pilot should answer both before Accelerate commits to the full fleet.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>
