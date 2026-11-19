@@ -523,7 +523,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <a class="mark" href="#top">HOTEL.OS<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#interfaces">Interfaces</a><a class="keep" href="#scope">Scope</a><a href="#context">Context</a><a class="keep" href="#twin">Digital twin</a><a class="keep" href="#walk">Walkthrough</a><a class="keep" href="#modules">Modules</a><a href="#domain">Domain model</a><a class="keep" href="#integ">Integrations</a><a href="#fleet">Fleet</a><a class="keep" href="#devices">Devices</a><a href="#data">Data &amp; security</a><a href="#req">Requirements</a><a href="#kpi">KPIs</a><a class="keep" href="#sites">Sites</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a>
+      <a class="keep" href="#interfaces">Interfaces</a><a class="keep" href="#scope">Scope</a><a href="#context">Context</a><a class="keep" href="#layers">Architecture</a><a class="keep" href="#twin">Digital twin</a><a class="keep" href="#walk">Walkthrough</a><a class="keep" href="#modules">Modules</a><a href="#domain">Domain model</a><a class="keep" href="#integ">Integrations</a><a href="#fleet">Fleet</a><a class="keep" href="#devices">Devices</a><a href="#data">Data &amp; security</a><a href="#req">Requirements</a><a href="#kpi">KPIs</a><a class="keep" href="#sites">Sites</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a>
     </div>
   </div>
 </nav>
@@ -533,7 +533,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div>
       <div class="kicker">PRJ-03 · Hotel.OS · HO-SYS-001 · Rev B · 2026-11-19</div>
       <h1>Hotel.OS<span>Hotel operating system: one digital twin, one task model, every department</span></h1>
-      <p class="lede-c">Hotel.OS maps every square inch of a property into a digital twin: LiDAR geometry, 4K and 360° imagery and the facilities team’s own floor plans in one survey frame. The building can be walked digitally; a task issued to a floor, room or object resolves to an exact location; and the general manager sees the entire building, and everything happening in it, at once.</p>
+      <p class="lede-c">Hotel.OS is the orchestration layer for everything that happens in a building, by people and by robots. Each robot navigates locally on its own LiDAR SLAM; the digital twin gives robots and people one shared model of the building, mapped down to every switch and outlet; Hotel.OS assigns and tracks every task on it. Everyone sees the whole building, whatever their department and wherever they are, while their own role stays in focus.</p>
       <p class="spec">7 departments · 5 device models · 6 robot task types · 10 integration categories<br>Spatial model: PRJ-02 Site Capture · Built on: PRJ-01 The Brain</p>
       <div class="ms-tw"><table class="ms-t n">
         <tbody>
@@ -582,6 +582,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <div class="ht" data-hotel-twin aria-label="Interactive 3D digital twin of an illustrative mixed-use hotel tower: LiDAR point cloud, building model, object layer and live operations">
   <div class="ht-hud ht-tl"><div class="ht-k">Hotel.OS · digital twin · illustrative mixed-use tower</div><h3 data-ht-title></h3><p data-ht-desc></p><div class="ht-prog" aria-hidden="true"><i></i></div></div>
   <div class="ht-hud ht-modes" role="group" aria-label="Twin tier"><button type="button" data-ht-mode="t1"><i>T1</i>Point cloud</button><button type="button" data-ht-mode="t2"><i>T2</i>Model</button><button type="button" data-ht-mode="t3"><i>T3</i>Objects</button><button type="button" data-ht-mode="t5"><i>T5</i>Operations</button><button type="button" data-ht-mode="walk"><i>360</i>Walk</button></div>
+  <div class="ht-hud ht-lens" role="group" aria-label="Role lens: highlight one department, keep the rest as context"><span class="ht-k">Lens</span><button type="button" data-ht-lens="all" aria-pressed="true">GM · all</button><button type="button" data-ht-lens="hk">Housekeeping</button><button type="button" data-ht-lens="fac">Facilities</button><button type="button" data-ht-lens="sec">Security</button><button type="button" data-ht-lens="rob">Robotics</button></div>
   <div class="ht-stage"></div>
   <div class="ht-hud ht-tasks" aria-live="polite"><div class="ht-k">Open work · all floors</div><ul data-ht-tasks></ul></div>
   <div class="ht-hud ht-bl">
@@ -728,6 +729,52 @@ footer li{break-inside:avoid;margin-bottom:6px}
       </svg></div>
       <figcaption>System context. Inbound: requests from staff, guests (via messaging integrations) and systems; outbound: tasks to people, devices and robots. All flows pass through the core; no device or robot talks to a hotel system directly.</figcaption>
     </figure>
+    <h3 class="ms-h3" id="layers"><i>2.1</i>Orchestration architecture: three layers</h3>
+    <p class="ms-p">Every robot already navigates on its own: onboard LiDAR SLAM handles localisation, path planning and obstacle avoidance in the corridor it is in. What a building with several robot fleets and seven departments lacks is a shared picture and one place that decides the work. Hotel.OS separates those concerns into three layers.</p>
+    <figure class="ms-fig"><div class="sc"><svg viewBox="0 0 1080 470" role="img" aria-label="Three-layer orchestration architecture: Hotel.OS orchestration over the shared digital-twin world model over local autonomy on each robot and person" style="min-width:760px" font-family="IBM Plex Mono, monospace" font-size="12">
+<rect width="1080" height="470" fill="url(#bgrid)"/>
+<g font-size="10.5" fill="#6F7B97" letter-spacing="1"><text x="24" y="30">L3 · ORCHESTRATION</text><text x="24" y="190">L2 · SHARED WORLD MODEL</text><text x="24" y="350">L1 · LOCAL AUTONOMY</text></g>
+<rect x="24" y="40" width="1032" height="104" rx="12" fill="#0C1324" stroke="#D4A65A" stroke-width="2"/>
+<text x="44" y="70" fill="#D4A65A" font-size="15" font-family="Space Grotesk,Inter,sans-serif" font-weight="600">Hotel.OS: every task in the building, human and robotic</text>
+<g fill="#C8D1E3" font-size="11.5"><text x="44" y="96">task graph · assignment (person or robot) · scheduling · SLAs · elevator and door arbitration · exceptions · audit</text>
+<text x="44" y="120" fill="#A3AEC6">decides WHAT happens, WHO does it and WHEN · never drives a motor</text></g>
+<rect x="24" y="200" width="1032" height="104" rx="12" fill="#0C1324" stroke="#7FA6FF" stroke-width="2"/>
+<text x="44" y="230" fill="#7FA6FF" font-size="15" font-family="Space Grotesk,Inter,sans-serif" font-weight="600">Digital twin: one survey frame shared by robots and people</text>
+<g fill="#C8D1E3" font-size="11.5"><text x="44" y="256">geometry · rooms and numbering · objects and assets · route graph · keep-outs · doors, lifts, docks · live state of every task, robot, person</text>
+<text x="44" y="280" fill="#A3AEC6">the common map: WHERE everything is, for every screen and every robot</text></g>
+<g>
+<rect x="24" y="360" width="192" height="92" rx="10" fill="#0C1324" stroke="#00C8FF" stroke-width="1.5"/><text x="38" y="386" fill="#EEF2FA" font-size="13" font-family="Inter,sans-serif" font-weight="600">Delivery robots</text><text x="38" y="406" fill="#A3AEC6" font-size="11">W3 · FlashBot</text><text x="38" y="428" fill="#00C8FF" font-size="11">onboard LiDAR SLAM</text><rect x="234" y="360" width="192" height="92" rx="10" fill="#0C1324" stroke="#00C8FF" stroke-width="1.5"/><text x="248" y="386" fill="#EEF2FA" font-size="13" font-family="Inter,sans-serif" font-weight="600">Heavy-load bases</text><text x="248" y="406" fill="#A3AEC6" font-size="11">T300 · S100</text><text x="248" y="428" fill="#00C8FF" font-size="11">onboard LiDAR SLAM</text><rect x="444" y="360" width="192" height="92" rx="10" fill="#0C1324" stroke="#00C8FF" stroke-width="1.5"/><text x="458" y="386" fill="#EEF2FA" font-size="13" font-family="Inter,sans-serif" font-weight="600">Floor care</text><text x="458" y="406" fill="#A3AEC6" font-size="11">CC1 Pro · MT1 Vac</text><text x="458" y="428" fill="#00C8FF" font-size="11">onboard LiDAR SLAM</text><rect x="654" y="360" width="192" height="92" rx="10" fill="#0C1324" stroke="#EEF2FA" stroke-width="1.5"/><text x="668" y="386" fill="#EEF2FA" font-size="13" font-family="Inter,sans-serif" font-weight="600">Staff on shift</text><text x="668" y="406" fill="#A3AEC6" font-size="11">C65 · XP5plus · T105</text><text x="668" y="428" fill="#EEF2FA" font-size="11">eyes, hands, judgement</text><rect x="864" y="360" width="192" height="92" rx="10" fill="#0C1324" stroke="#00C8FF" stroke-width="1.5"/><text x="878" y="386" fill="#EEF2FA" font-size="13" font-family="Inter,sans-serif" font-weight="600">Building systems</text><text x="878" y="406" fill="#A3AEC6" font-size="11">PMS · access · lifts</text><text x="878" y="428" fill="#00C8FF" font-size="11">vendor controllers</text></g>
+<g stroke="#A3AEC6" stroke-width="1.5" fill="none">
+<line x1="300" y1="144" x2="300" y2="200"/><line x1="780" y1="200" x2="780" y2="144"/>
+</g>
+<text x="312" y="176" fill="#D4A65A" font-size="11">tasks resolve to twin geometry</text><text x="792" y="176" fill="#7FA6FF" font-size="11">live state on one map</text>
+<g stroke="#00C8FF" stroke-width="1.5" fill="none" stroke-dasharray="5 4">
+<line x1="120" y1="304" x2="120" y2="360"/><line x1="330" y1="304" x2="330" y2="360"/><line x1="540" y1="304" x2="540" y2="360"/></g>
+<line x1="750" y1="304" x2="750" y2="360" stroke="#EEF2FA" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="960" y1="304" x2="960" y2="360" stroke="#A3AEC6" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+
+</svg></div>
+      <figcaption>Dashed links: destinations and keep-outs go down in each robot's own frame; poses come back up and are shown in the twin frame. L1 moves things safely. L2 says where everything is, in one frame for people and robots. L3 decides what happens, who does it and when. Each layer only talks to its neighbour; Hotel.OS never drives a motor and a robot never decides task priority.</figcaption></figure>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%">Layer</th><th>Owns</th><th style="width:30%">Does not own</th><th style="width:16%">Interface</th></tr></thead>
+      <tbody>
+        <tr class="hi"><th>L3 · Orchestration (Hotel.OS)</th><td>All tasks, human and robotic; assignment, scheduling, SLAs; elevator and door arbitration across vendors; exceptions; audit</td><td>Motion control, local obstacle avoidance</td><td>Fleet adapters (Open-RMF), shift devices, integrations</td></tr>
+        <tr><th>L2 · Shared world model (twin)</th><td>One survey frame: geometry, room numbering, objects and assets, route graph, keep-outs, doors, lifts, docks; live state of every task, robot and person</td><td>Decisions; per-vendor navigation maps</td><td>Map alignment transforms; twin APIs</td></tr>
+        <tr><th>L1 · Local autonomy</th><td>Each robot: SLAM localisation, path planning, obstacle avoidance, safety stops. Each person: judgement, hands, guest interaction</td><td>Task priority, cross-fleet coordination</td><td>Vendor cloud / private APIs; devices</td></tr>
+      </tbody></table></div>
+    <div class="ms-call"><span class="lbl">Map alignment</span>Every vendor keeps its own SLAM map; Hotel.OS registers each one to the twin frame with a per-map transform fitted on surveyed anchor points (doors, columns, lift sills), and re-fits it whenever the vendor re-maps. Destinations are sent in the robot's own frame; poses come back and are shown in the twin frame. Target alignment residual ≤ 10 cm (est.).</div>
+    <h3 class="ms-h3" id="lens"><i>2.2</i>Shared view, role focus</h3>
+    <p class="ms-p">Everyone sees the same building, wherever they are and whichever department they work for: every open task, robot, alarm and person on shift, on one map. Each role opens it through its own lens: its own work in focus, everything else visible as context. Try the lens in the live model above.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%">Role</th><th>In focus</th><th style="width:38%">Visible as context</th></tr></thead>
+      <tbody>
+        <tr><th>General manager</th><td>Everything: whole-building load, SLAs, incidents, staffing</td><td>—</td></tr>
+        <tr><th>Housekeeping</th><td>Room status, turnovers, linen and amenity runs, linen robots</td><td>Maintenance in the same room, security holds, VIP arrivals</td></tr>
+        <tr><th>Facilities</th><td>Work orders pinned to objects, asset history, technician routes</td><td>Occupancy and housekeeping in the room before entering</td></tr>
+        <tr><th>Security</th><td>Doors, alarms, incidents, patrols</td><td>Who and which robot is on the floor right now</td></tr>
+        <tr><th>Robotics operations</th><td>Fleet health, exceptions, charging, elevator queues</td><td>Human tasks the robots are supporting</td></tr>
+        <tr><th>Front desk</th><td>Guest requests, delivery ETAs, room readiness</td><td>Everything blocking a room from being ready</td></tr>
+      </tbody></table></div>
   </div>
 </section>
 
@@ -977,6 +1024,9 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><th class="m">HO-REQ-015</th><td>Pixel-to-point accuracy in the walkthrough</td><td class="m">≤ 50 mm at 95% against surveyed checkpoints</td><td>Checkpoint picks in imagery</td><td><span class="chip open">design</span></td></tr>
         <tr><th class="m">HO-REQ-016</th><td>Facilities floor plans registered and reconciled</td><td class="m">All floors; discrepancies &gt; 100 mm reported</td><td>Plan-vs-scan report</td><td><span class="chip open">design</span></td></tr>
         <tr><th class="m">HO-REQ-017</th><td>Task addressing resolves to geometry</td><td class="m">100% of floor, room and asset references resolve in the twin</td><td>Address-resolution test on PMS and facilities numbering</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">HO-REQ-018</th><td>Every robot shown live in the twin frame</td><td class="m">Pose latency ≤ 2 s; map alignment residual ≤ 10 cm (est.)</td><td>Survey-point check per vendor map</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">HO-REQ-019</th><td>One orchestrator for human and robotic work</td><td class="m">100% of tasks created and closed in Hotel.OS</td><td>Event-log audit</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">HO-REQ-020</th><td>Shared view with role lenses</td><td class="m">Every role sees all floors; own work in focus</td><td>Role acceptance test</td><td><span class="chip open">design</span></td></tr>
       </tbody></table></div>
     <h3 class="ms-h3" id="kpi"><i>10.1</i>Operating KPIs</h3>
     <p class="lead">Baselines are measured at the pilot property before go-live; targets are set from the baseline, not assumed.</p>
@@ -1052,7 +1102,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:8%">Rev</th><th style="width:16%">Date</th><th>Change</th></tr></thead>
       <tbody>
-        <tr class="hi"><th class="m">B</th><td class="m">2026-11-19</td><td>Renamed from build.os to Hotel.OS; identifiers BO-* → HO-*; page moved to hotel-os.html. Interactive digital-twin model added, including first-person walk. Sections 3.6–3.8: walkthrough fidelity, facilities floor-plan registration, addressing precision, GM view; HO-REQ-014 to 017. Deployment sites (11.1): The Grand, Miami; Hilton Thesis Hotel, Miami. HO-REQ-013 multi-operator tenancy.</td></tr>
+        <tr class="hi"><th class="m">B</th><td class="m">2026-11-19</td><td>Renamed from build.os to Hotel.OS; identifiers BO-* → HO-*; page moved to hotel-os.html. Interactive digital-twin model added, including first-person walk and role lenses. 2.1 three-layer orchestration architecture (local autonomy, shared world model, orchestration); 2.2 shared view, role focus; HO-REQ-018 to 020. Sections 3.6–3.8: walkthrough fidelity, facilities floor-plan registration, addressing precision, GM view; HO-REQ-014 to 017. Deployment sites (11.1): The Grand, Miami; Hilton Thesis Hotel, Miami. HO-REQ-013 multi-operator tenancy.</td></tr>
         <tr><th class="m">A.1</th><td class="m">2026-11-19</td><td>Section 3.0 added: building digital twin tiers T1–T5 down to switches and outlets, object classes, operations map, map actions (add, close out, tag, summon robot, deploy resources, full footprint), twin maintenance; HO-REQ-009 to 012; HO-R-08, 09.</td></tr>
         <tr><th class="m">A</th><td class="m">2026-11-19</td><td>First issue: scope, system context, core modules, AI engine, domain model, integration map, fleet orchestration, selected shift devices (Sonim XP Pro Thermal, XP5plus 5G, MegaConnect; Rhino C65, T105), data and deployment, requirements, KPIs, roadmap, risks.</td></tr>
       </tbody></table></div>

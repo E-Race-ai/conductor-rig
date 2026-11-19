@@ -136,14 +136,17 @@ function build(scene, P) {
     { id: 'SEC-077', d: 'Security', t: 'Door 1F-D01 held open', f: 0, p: [-26, 0, -1.5] },
     { id: 'WO-1051', d: 'Facilities', t: 'Fixture 6F corridor · flicker', f: 5, p: [10, WH, 0] },
     { id: 'HK-2234', d: 'Housekeeping', t: 'Spill · 3F corridor', f: 2, p: [-6, 0, 0] },
+    { id: 'RB-0392', d: 'Robotics', t: 'W3 · amenity kit → 7F-1712', f: 6, p: [-8, 0, 5.5] },
+    { id: 'WO-1060', d: 'Facilities', t: 'FCU 3F-1310 · room warm', f: 2, p: [18, WH, 5.5] },
+    { id: 'SEC-081', d: 'Security', t: 'Patrol · 8F stair door', f: 7, p: [-30, 0, -1.5] },
   ];
   tasks.forEach(tk => {
     const y0 = tk.f * FH, [x, y, z] = tk.p, colr = deptCol[tk.d];
     const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, y0 + y, z), new THREE.Vector3(x, y0 + 3.6, z)]);
-    L.ops[tk.f].add(new THREE.Line(lg, new THREE.LineBasicMaterial({ color: colr, transparent: true, opacity: 1 })));
+    const tl = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: colr, transparent: true, opacity: 1 })); tl.userData.dept = tk.d; L.ops[tk.f].add(tl);
     const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.Float32BufferAttribute([x, y0 + 3.6, z], 3));
     const pin = new THREE.Points(pg, new THREE.PointsMaterial({ color: colr, size: 30, sizeAttenuation: false, map: ring, transparent: true, depthWrite: false, depthTest: false, opacity: 1 }));
-    pin.userData.pulse = R() * 6; L.ops[tk.f].add(pin); tk.pin = pin;
+    pin.userData.pulse = R() * 6; pin.userData.dept = tk.d; L.ops[tk.f].add(pin); tk.pin = pin;
   });
   for (let f = 0; f < NF; f++) {
     const y = f * FH + .05, rp = [-LX + 1, y, 0, LX - 1, y, 0, -28, y, 0, -28, y, -1.5, 28, y, 0, 28, y, -4];
@@ -157,14 +160,14 @@ function build(scene, P) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.2, .9), new THREE.MeshBasicMaterial({ color: C.robot, transparent: true, opacity: 1 }));
     const halo = new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3)),
       new THREE.PointsMaterial({ color: C.robot, size: 46, sizeAttenuation: false, map: dot, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: .7 }));
-    m.add(halo); L.ops[f].add(m); robots.push({ m, f, x0, x1, z, speed, ph: R() * 10, lift });
+    m.userData.dept = 'Robotics'; halo.userData.dept = 'Robotics'; m.add(halo); L.ops[f].add(m); robots.push({ m, f, x0, x1, z, speed, ph: R() * 10, lift });
   };
   mkRobot(4, -20, 26, -.9, .9); mkRobot(1, -28, 20, .9, .7); mkRobot(2, -10, 28, .95, 1.1); mkRobot(0, -24, 24, -.9, .8, true);
   const staff = [];
-  [[0, -18, 0], [1, 6, -4], [2, -4, 0], [3, -21, 4], [5, 12, 0], [4, 20, -5]].forEach(([f, x, z]) => {
+  [[0, -18, 0, 'Security'], [1, 6, -4, 'Housekeeping'], [2, -4, 0, 'Housekeeping'], [3, -21, 4, 'Facilities'], [5, 12, 0, 'Facilities'], [4, 20, -5, 'Housekeeping'], [6, -10, 4, 'Housekeeping'], [7, -26, 0, 'Security']].forEach(([f, x, z, dp]) => {
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([x, f * FH + 1.7, z], 3));
     const p = new THREE.Points(g, new THREE.PointsMaterial({ color: C.staff, size: 9, sizeAttenuation: false, map: dot, transparent: true, depthWrite: false, opacity: 1 }));
-    L.ops[f].add(p); staff.push(p);
+    p.userData.dept = dp; L.ops[f].add(p); staff.push(p);
   });
   /* podium (index NF): double-height lobby, storefronts on the street side, two hotel receptions */
   {
@@ -236,9 +239,11 @@ function mount(el) {
   if (st) st.innerHTML = [['points', B.stats.points], ['walls', B.stats.walls], ['outlets', B.stats.outlets], ['switches', B.stats.switches], ['fixtures', B.stats.fixtures], ['life safety', B.stats.safety]]
     .map(([k, v]) => `<span><b>${v.toLocaleString('en-US')}</b>${k}</span>`).join('');
   const tl = $('[data-ht-tasks]');
-  if (tl) tl.innerHTML = B.tasks.map(t => `<li style="--c:#${new THREE.Color({ Facilities: C.fac, Housekeeping: C.hk, Security: C.sec, Robotics: C.rob }[t.d]).getHexString()}"><b>${t.id}</b><span>${t.d} · F${t.f + 1}</span><em>${t.t}</em></li>`).join('');
+  if (tl) tl.innerHTML = B.tasks.map(t => `<li data-dept="${t.d}" style="--c:#${new THREE.Color({ Facilities: C.fac, Housekeeping: C.hk, Security: C.sec, Robotics: C.rob }[t.d]).getHexString()}"><b>${t.id}</b><span>${t.d} · F${t.f + 1}</span><em>${t.t}</em></li>`).join('');
 
   const cur = {}; Object.keys(MODES.t1.o).forEach(k => (cur[k] = 0));
+  const LENS = { all: null, hk: ['Housekeeping'], fac: ['Facilities'], sec: ['Security'], rob: ['Robotics'] }; let lens = 'all';
+  const lensF = (d) => (!d || !LENS[lens] || LENS[lens].includes(d)) ? 1 : .14;
   const grow = new Array(NF + 1).fill(1); let scan = 1, walkT = 0, flyHome = false, prevMode = 't1'; const WALKF = 3;
   let mode = 't1', focus = -1, auto = !REDUCED, tAuto = 0, dogT = 0;
   const btns = [...el.querySelectorAll('[data-ht-mode]')], fbtns = [...el.querySelectorAll('[data-ht-floor]')], playBtn = $('[data-ht-play]'), bar = $('.ht-prog i');
@@ -254,6 +259,12 @@ function mount(el) {
   };
   const stopAuto = () => { auto = false; if (playBtn) { playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = '▶ Play sequence'; } };
   btns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.htMode, true)));
+  const lbtns = [...el.querySelectorAll('[data-ht-lens]')];
+  const setLens = (k) => { lens = k; lbtns.forEach(x => x.setAttribute('aria-pressed', String(x.dataset.htLens === k)));
+    const ul = el.querySelector('[data-ht-tasks]'); if (ul) { const lis = [...ul.children]; lis.forEach(li => li.classList.toggle('dim', !!LENS[k] && !LENS[k].includes(li.dataset.dept)));
+      lis.sort((x, y) => (x.classList.contains('dim') ? 1 : 0) - (y.classList.contains('dim') ? 1 : 0)).forEach(li => ul.appendChild(li)); }
+    el.dataset.lens = k; };
+  lbtns.forEach(b => b.addEventListener('click', () => { setLens(b.dataset.htLens); if (mode !== 't5' && mode !== 'walk') setMode('t5', true); else stopAuto(); }));
   fbtns.forEach(b => b.addEventListener('click', () => { focus = +b.dataset.htFloor; fbtns.forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
   if (playBtn) playBtn.addEventListener('click', () => { auto = !auto; playBtn.setAttribute('aria-pressed', String(auto)); playBtn.textContent = auto ? '❚❚ Pause sequence' : '▶ Play sequence'; if (auto) setMode(mode === 't5' ? 't1' : mode); });
   ctl.addEventListener('start', () => { ctl.autoRotate = false; });
@@ -289,7 +300,7 @@ function mount(el) {
       B.L[n].forEach((g, f) => {
         const ff2 = isWalk ? WALKF : focus, fo = ff2 < 0 || ff2 === f ? 1 : .05, a = cur[n] * fo;
         g.visible = a > .01;
-        g.traverse(o => { if (o.material) { const base = o.userData.base ?? (o.userData.base = o.material.opacity); o.material.opacity = base * a; } });
+        g.traverse(o => { if (o.material) { const base = o.userData.base ?? (o.userData.base = o.material.opacity); o.material.opacity = base * a * lensF(o.userData.dept); } });
       });
     });
     // scanning dog on the trajectory of the focused (or top) floor
