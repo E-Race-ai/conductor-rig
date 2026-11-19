@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+<script src="3d/brain-flow.js" defer></script>
 </head><body style="margin:0">
 <div class="ar-bar" role="banner" style="--c:#4D8BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="conductor.html" aria-current="page">Overview</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
 <div class="ar-flow" style="--c:#4D8BFF"><div class="fl-row"><div class="fl-side fl-in"><b>Upstream</b><a class="fl-chip in" href="field-unit.html#data" style="--c:#00C8FF"><small>Feeds in from · Site Capture</small><span>Raw LiDAR, 360° + 4K, control coordinates on verified media</span></a><a class="fl-chip in" href="hotel-os.html#data" style="--c:#D4A65A"><small>Feeds in from · Hotel.OS</small><span>Operational events and field corrections back into the context brain</span></a></div><div class="fl-me"><small>PRJ-01 · Process · build</small><b>The Brain</b></div><div class="fl-side fl-out"><b>Downstream</b><a class="fl-chip out" href="hotel-os.html#twin" style="--c:#D4A65A"><small>Feeds into · Hotel.OS</small><span>Twin tiers T2–T4: building model, object layer, asset registry</span></a><a class="fl-chip out" href="hotel-os.html#modules" style="--c:#D4A65A"><small>Feeds into · Hotel.OS</small><span>Platform software built by agents; C2 inference for the AI engine</span></a></div></div></div>
@@ -548,7 +549,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <a class="mark" href="#top">THE BRAIN<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#role">Operating model</a><a class="keep" href="#req">Requirements</a><a href="#hw">Hardware</a><a href="#if">Interfaces</a><a href="#perf">Performance</a><a href="#pipe">Pipeline</a><a href="#store">Storage</a><a href="#sec">Security</a><a href="#build">Build</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a>
+      <a class="keep" href="#live">Live view</a><a class="keep" href="#role">Operating model</a><a class="keep" href="#req">Requirements</a><a href="#hw">Hardware</a><a href="#if">Interfaces</a><a href="#perf">Performance</a><a href="#pipe">Pipeline</a><a href="#store">Storage</a><a href="#sec">Security</a><a href="#build">Build</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a>
     </div>
   </div>
 </nav>
@@ -574,6 +575,18 @@ footer li{break-inside:avoid;margin-bottom:6px}
     </figure>
   </div>
 </header>
+
+<div class="bf-band" id="live"><div class="wrap">
+  <div class="bf" data-brain-flow aria-label="Live simulation of the agentic engineering platform: work from business-unit leads flows through the control plane, sandboxes and model router; confidential work stays on local inference; merges pass the review gate; every hop is logged">
+    <div class="bf-top">
+      <div><div class="ht-k">The Brain · live orchestration · illustrative simulation</div><h3>Every task, routed by policy</h3><p>Work from department leads runs in sandboxes against the shared context. Internal work (C1, cyan) may use frontier models; confidential work (C2, gold) never leaves the building.</p></div>
+      <div class="bf-ctl"><div class="bf-kpis"><span><b data-bf="tasks">0</b>tasks</span><span><b data-bf="local">0%</b>on local models</span><span><b data-bf="merges">0</b>reviewed merges</span></div>
+        <div class="bf-mix" role="group" aria-label="Data mix"><span class="ht-k">Data mix</span><button type="button" data-bf-mix="0.1">Mostly internal</button><button type="button" data-bf-mix="0.35" aria-pressed="true">Mixed</button><button type="button" data-bf-mix="0.8">Confidential-heavy</button></div></div>
+    </div>
+    <div class="bf-sc"><div class="bf-stage"></div></div>
+  </div>
+  <p class="ht-cap">Simulated traffic for illustration; the architecture and policy are specified in 1.2–1.3 and CD-REQ-014 to 018.</p>
+</div></div>
 
 <section class="band" id="role">
   <div class="wrap">

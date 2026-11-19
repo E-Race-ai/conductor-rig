@@ -323,3 +323,20 @@ html[data-proj] a.fl-chip:hover{border-color:var(--c);background:#101A33}
 /* end-of-page flow footer */
 .ar-next .g.flow{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .ar-next a p{margin:2px 0 0;font-size:13px;color:#A3AEC6;line-height:1.4}
+
+/* ===== The Brain live orchestration view ===== */
+.bf-band{padding:28px 0 8px}
+.bf{border:1px solid #1C2640;border-radius:14px;background:#070B16;overflow:hidden}
+.bf-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 28px;padding:20px 22px 12px}
+html[data-proj] .bf-top h3{font:600 28px/1.1 "Space Grotesk",Inter,sans-serif!important;margin:8px 0 6px!important;color:#fff}
+.bf-top p{margin:0;max-width:56ch;color:#A3AEC6;font-size:14.5px;line-height:1.5}
+.bf-ctl{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.bf-kpis{display:flex;gap:22px}.bf-kpis span{font:500 11px/1.2 "IBM Plex Mono",monospace;color:#6F7B97;text-transform:uppercase;letter-spacing:.06em}
+.bf-kpis b{display:block;font:500 24px/1.1 "IBM Plex Mono",monospace;color:#EEF2FA;text-transform:none;letter-spacing:-.02em;margin-bottom:2px}
+.bf-mix{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid #24304F;border-radius:10px;background:#0B1222}
+.bf-mix .ht-k{padding:0 8px}
+.bf-mix button{appearance:none;border:0;cursor:pointer;min-height:34px;padding:0 12px;border-radius:7px;background:transparent;color:#D5DCEB;font:600 12.5px/1 Inter,sans-serif}
+.bf-mix button:hover{background:#17223F}.bf-mix button[aria-pressed="true"]{background:#4D8BFF;color:#04101F}
+.bf-sc{overflow-x:auto}.bf-stage{min-width:760px}
+.bf-stage canvas{display:block}
+@media (max-width:760px){.bf-ctl{align-items:flex-start}.bf-mix{flex-wrap:wrap}}
