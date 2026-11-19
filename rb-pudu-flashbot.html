@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pudu FlashBot / FlashBot Max · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Pudu FlashBot / FlashBot Max · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Pudu Robotics FlashBot (FlashBot / FlashBot Max / FlashBot Arm): Hotel Delivery Deep Dive, as of Nov 2026
+
+Scope note: Pudu sells three FlashBot variants under one name. (1) The original FlashBot, launched globally in Sept 2021. (2) The upgraded FlashBot, announced Oct 23 2024 and sold on pudurobotics.com as "FlashBot Max". (3) FlashBot Arm, a semi-humanoid variant with two arms, unveiled around April 2025. The pudurobotics.com URL `/products/flashbot-new` serves the Max page in English and the "FlashBot Arm" title in the DE and ES locales. "FlashBot Pro" appears only in one low-quality GEO-style article and is probably a regional or informal name. Almost every figure below is a VENDOR or RESELLER claim. Independent data is very thin, and I flag it wherever it exists.
+
+## 1. Full specifications
+
+### Takeaway
+FlashBot Max (the current model) is about 538×534×1052 mm and 60 kg. It has 2–4 adjustable gull-wing compartments at 10 kg per layer, runs 9 h on a 4 h charge, and uses VSLAM+ with LiDAR. Pudu's own page claims a 60 cm path clearance, but the original FlashBot manual specifies a 70 cm minimum aisle. The original FlashBot carried more: 15 kg per layer, 30 kg max. Neither FlashBot nor FlashBot Max has arms or any way to press buttons. Elevators run entirely through IoT or API integration. Only the separate FlashBot Arm variant can physically press buttons.
+
+### Cited Findings
+**FlashBot Max (current, Oct 2024 upgrade). Source: Pudu product page (vendor)**
+- Dimensions 538 × 534 × 1052 mm (21.18 × 21.02 × 41.42 in). Weight 60 kg (132.28 lb) — [Pudu FlashBot Max page](https://www.pudurobotics.com/en/products/flashbot-new)
+- Payload 10 kg per layer. 2–4 adjustable compartments. Single compartment 187 × 410 × 280 mm, double 380 × 410 × 280 mm — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new)
+  - Computed volumes (my arithmetic, not a vendor figure): single ≈ 21.5 L, double ≈ 43.6 L.
+- Run time 9 h. Charge time 4 h. Cruise speed 0.5–1.2 m/s, adjustable — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new)
+- Navigation: "VSLAM+ & Lidar SLAM". The page claims semi-outdoor operation (garden corridors, fitness zones, poolsides), 3D obstacle avoidance through sensor fusion for low and overhanging obstacles, and "60cm Path Clearance" — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new)
+- Compartment access by password, phone number, or NFC. Each compartment has an independently controlled door. Continuous fan ventilation reduces odors — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new); [PR Newswire launch, Oct 23 2024](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html)
+- The launch release cites a "70 cm" chassis width and a dual-side suspension system, along with auto-recharge. It lists building integrations with access control, E-Gates, elevators, telephones, and Bluetooth speakers — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html). This contradicts the 534 mm width on the product page. The 70 cm probably means minimum passage, not body width.
+- Reseller spec (RobotLAB): payload "up to 20 kg total, 10 kg per compartment", "VSLAM+ with 3D LiDAR SLAM", minimum passage width 60 cm — [RobotLAB FlashBot Max](https://www.robotlab.com/store/pudu-flashbot-max/)
+- The page has a "large screen". No size is given for the Max. The FlashBot Arm built on the Max chassis has a 10.1-inch touchscreen — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new); [New Atlas](https://newatlas.com/robotics/pudu-robotics-flashbot-arm-semi-humanoid-delivery-robot)
+
+**Original FlashBot (2021–2024). Sources: Pudu sales decks hosted by RobotShop (July 2024) and Optima Robotics (vendor)**
+- 539 × 515 × 1050 mm. Weight 55 kg in the RobotShop deck, 50 kg in the Optima deck. Payload 15 kg per layer, 30 kg max. ABS and aviation-grade aluminium body. Compartments 2–4, single 219 × 410 × 286 mm, double 438 × 410 × 286 mm. Charge time 4.5 h. Battery life 12 h (RobotShop deck) or 10 h (Optima deck). Auto-charging. Cruise speed 0.5–1.5 m/s — [Pudu deck via RobotShop, 2024-07-15](https://cdn.robotshop.com/media/P/Pud/RB-Pud-17/pdf/flashbot-20240715-en-presentation.pdf); [Pudu deck via Optima](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf)
+- Sensors: three RGB-D depth cameras, a customised LiDAR, and IMU-based "laser SLAM", which needs no ceiling or location-code stickers. Detects obstacles as low as 3 cm and suspended obstacles at 70 cm above the floor. Six-wheel independent auto-level suspension. Climbs 2 cm obstacles and crosses 3.5 cm gaps. "70 CM Superior Passability… 99.9% of building scenarios" — [RobotShop deck](https://cdn.robotshop.com/media/P/Pud/RB-Pud-17/pdf/flashbot-20240715-en-presentation.pdf)
+- Gull-wing doors, indicator light strip, charging contacts. The "Ultimate version" adds an "Ultra-Sensitive E-Skin" for riding elevators safely with passengers (89 patents claimed). Optional UV germicidal lamp in the compartments, with a claimed 99.9% sterilisation rate — [Optima deck](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf)
+- Voice: "AI Voice Interaction" with voice commands. Greeting/escort mode with voice announcements for check-in guidance — [Optima deck](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf)
+
+**Operating limits (Pudu quick-start manual, original FlashBot)**
+- Indoor flat floors only: wood, tile, thin carpet. No open balconies. Operating range 0–40 °C. Recommended maximum speed 0.8 m/s for safety. The robot has a blind spot. No unpackaged drinks or hot liquids — [FlashBot quick start guide (Pudu Academy), via Homery](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- Aisles must be at least 70 cm wide, 1 m is recommended for long aisles, and 2 m is needed for two-way robot traffic. Maximum slope is 8°, with under 5° suggested and a 7.5° limit to avoid spills. Black, polished, or transparent surfaces at 20–26 cm height can confuse the LiDAR and may need stickers — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- Packing list: "Phone system: Optional" and "Elevator IoT system: Optional". Both are add-ons, not standard — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- "The robot cannot enter a paused state when it is waiting for or riding an elevator", meaning the e-stop pause is disabled inside the lift — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- Room delivery is started from the robot screen. The initial password is 0000. At the destination, the robot opens only the compartment assigned to that destination — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+
+**FlashBot Arm (semi-humanoid variant, announced around April 2025)**
+- Built on the FlashBot Max base. Two 7-DOF arms with Pudu DH11 11-DOF hands, 2 m reach, 10.1-inch touchscreen, LLM-based voice conversation. Claimed 8 h runtime on a 4 h charge, lower under heavy loads. Can press elevator buttons, swipe keycards, and summon elevators (all claims). Price and availability were not given — [New Atlas, Apr 1 2025](https://newatlas.com/robotics/pudu-robotics-flashbot-arm-semi-humanoid-delivery-robot)
+- humanoid.guide lists a $34,000 price. This is unverified — [humanoid.guide](https://humanoid.guide/?p=6698)
+
+**Arms and button pressing:** standard FlashBot and FlashBot Max have none. Floor changes depend entirely on elevator IoT or API integration — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new); [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+
+### Inferences
+- The Max trades payload (30→20 kg total) and runtime for semi-outdoor capability and a narrower claimed path. In a Miami tower, 10 kg per layer covers room-service trays, amenities, and parcels, but not bulk linen.
+- The 60 cm vs. 70 cm passage discrepancy matters for back-of-house corridors and service-elevator vestibules. Plan for 70–100 cm.
+- The manual's indoor-only limit applies to the 2021 model. Treat the Max's "semi-outdoor" claim as limited to covered pool decks, not open exposure to Miami rain and heat.
+
+### Gaps
+- No official Max spec for battery chemistry or capacity, IP rating, threshold height, or screen size. I found no Max user manual. The Pudu product page does not list QR or face access, and no source mentions face access.
+- Compartment volumes are my calculation from the dimensions. Pudu does not publish volumes.
+
+## 2. Elevator and door integration
+
+### Takeaway
+FlashBot never presses buttons. It rides elevators through Pudu's cloud IoT path, either through OEM cloud APIs (KONE, Otis Integrated Dispatch) or through Pudu's own hardware elevator-control box (the "Elevator IoT system", sold as an option). The same IoT layer drives turnstiles, E-gates, access control, and phones. Multi-floor maps are built and replicated with the PUDU Mapping Tool.
+
+### Cited Findings
+- "Cloud-based elevator systems compatible with major brands like KONE and OTIS without the need for modifications, while also supporting a hardware solution" — [PR Newswire, Oct 2024](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html); [Pudu product page](https://www.pudurobotics.com/en/products/flashbot-new)
+- RobotLAB lists KONE/OTIS elevator integration, calling it "certified" in its FAQ but "compatible" in its spec table — [RobotLAB Max](https://www.robotlab.com/store/pudu-flashbot-max/). RobotLAB handles integration during deployment and says to call to confirm a building's elevator compatibility — [RobotLAB FlashBot](https://www.robotlab.com/store/pudu-flashbot/)
+- Japan's first robot–elevator integration with Nippon Otis used Otis Integrated Dispatch, an API that connects by cloud or locally and dispatches at the group or bank level so robots from multiple vendors can share cars (Sept 2023) — [Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-successfully-integrates-flashbot-with-elevators/); [PR Newswire (DE)](https://www.prnewswire.com/de/pressemitteilungen/in-zusammenarbeit-mit-nippon-otis-wurde-der-lieferroboter-flashbot-von-pudu-zum-ersten-mal-in-japan-erfolgreich-mit-einem-aufzug-verbunden-301936753.html)
+- Independent trade-press caveat: elevator integration requires a custom integration with, and override of, the elevator control system. The elevator OEM must be involved, permits and local lift laws apply, and the cost of elevator integration can exceed the cost of one robot — [Automated Warehouse (launch coverage)](https://www.automatedwarehouseonline.com/pudu-robotics-launches-flashbot/)
+- IoT also controls "turnstiles and access control systems (KRE)" — [Optima deck](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf). The Max can "make calls, pass turnstiles, and use elevators" — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new). RobotLAB says FlashBot opens automatic doors through IoT — [RobotLAB](https://www.robotlab.com/store/pudu-flashbot/)
+- Multi-floor map replication through the PUDU Mapping Tool — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html)
+- Elevator etiquette: the "E-Skin" (Ultimate version only) is for sharing cars with passengers — [Optima deck](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf)
+- RobotLAB notes that FlashBot "may require network connectivity and elevator integrations, so infrastructure planning is key" — [RobotLAB blog](https://www.robotlab.com/blog/im-looking-for-a-robot-that-can-deliver-items-to-hotel-rooms/)
+
+### Inferences
+- A Miami mixed-use tower likely has several elevator banks: hotel, residential, and service. Each bank needs its own integration. The OEM matters: KONE and Otis have cloud APIs Pudu already supports. Schindler, TK Elevator, and Mitsubishi likely need Pudu's hardware box plus the OEM's sign-off and a Florida elevator permit.
+- Residential floors usually sit behind access-controlled elevators. The robot needs IoT credentials in the building's access-control system, which is a security-policy decision for Hotel.OS.
+
+### Gaps
+- No public list of supported elevator OEMs beyond KONE and Otis. No US elevator-integration price. No disclosed Schindler or TKE integrations.
+
+## 3. Guest-delivery flow (phone call, notifications, PMS)
+
+### Takeaway
+The native flow works like this. Staff load the robot and pick a room on the touchscreen. The robot rides the elevator and, on arrival, rings the guest-room phone or sends a pickup-code message. The guest enters the code (password, phone number, or NFC on the Max), takes the item, and the robot returns. Phone calling is an optional "Phone system" module. I found no documented PMS or guest-messaging integration (Opera, Mews, Alice, Duve, etc.). Any such link would have to be built through Pudu's cloud OpenAPI.
+
+### Cited Findings
+- Flow: staff take the order, call the robot, and place items. The robot sends an arrival notification, rides the elevator, and delivers. The customer receives a code, picks up, and the robot returns — [RobotShop deck](https://cdn.robotshop.com/media/P/Pud/RB-Pud-17/pdf/flashbot-20240715-en-presentation.pdf)
+- "Arrival notifications by phone calls and sends a pickup code". "Remind customers of the pickup by sending a message with the pickup code or by calling the customer" — [Optima deck](https://optima-robotics.com/wp-content/uploads/2024/08/FlashBot_Intro_EN.pdf)
+- The phone system is listed as optional in the packing list — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- The Oct 2024 release lists "telephones" and "Bluetooth speakers" among integrable building devices — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html)
+- RobotLAB: the robot "notifies the guest on arrival and releases items only after verification by password, phone number match, or NFC tap" — [RobotLAB](https://www.robotlab.com/store/pudu-flashbot/)
+- At the Shenzhen CTID signing, FlashBot delivered beverages "after receiving mobile orders" (China) — [RoboticFirms](https://www.roboticfirms.com/article/pudu-robotics-shenzhen-ctid-robot-serviced-hotel)
+
+### Inferences
+- In US hotels the "phone call" feature normally needs a SIP or PBX hookup to the hotel phone system. The protocol is undocumented, so ask the vendor. If Hotel.OS dispatches through the OpenAPI, Hotel.OS can own guest notifications (SMS, app, TV) and skip Pudu's phone module.
+
+### Gaps
+- No public documentation of PBX/SIP protocols, PMS connectors, or SMS in the US. No guest-messaging partners were found.
+
+## 4. Software: Pudu cloud/app, multi-robot, APIs/SDK, Open-RMF
+
+### Takeaway
+Pudu Link / PUDU Cloud provides fleet monitoring, reporting, and OTA updates. Pudu claims an ad-hoc network that coordinates 20+ robots. Since August 2023 the PUDU Open Platform has offered a cloud OpenAPI (task dispatch, status, delivery, calling, statistics) and an Android SDK. This is the realistic path for Hotel.OS to dispatch FlashBot. I found no evidence of Open-RMF support or an official fleet adapter.
+
+### Cited Findings
+- Pudu Link shows real-time location and status, handles multi-robot scheduling and task allocation, and avoids collisions in crowded areas — [Pudu](https://www.pudurobotics.com/en/products/flashbot-new)
+- "Schedule more than 20 robots to work together" over an ad-hoc network. PUDU CLOUD uploads status and data 24/7, generates reports automatically, and pushes remote software upgrades — [RobotShop deck](https://cdn.robotshop.com/media/P/Pud/RB-Pud-17/pdf/flashbot-20240715-en-presentation.pdf)
+- The PUDU Open Platform launched in August 2023 for distributors and developers, offering remote access, programming, customisation, navigation control, and analytics — [Pudu news](https://www.pudurobotics.com/about/news/64eeb7cb13fc2f004432c9cd); [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2023/08/29/pudu-robotics-launches-open-platform-for-deeper-integration-and-remote-management-of-delivery-and-cleaning-robots/21027/)
+- Pudu's GitHub "skills" repo describes a cloud OpenAPI covering task dispatching, status queries, delivery, cruising, calling, and statistics. It requires an ApiAppKey and ApiAppSecret from the Open Platform — [GitHub pudu-robotics/skills](https://github.com/pudu-robotics/skills); [PUDU Open Platform docs](https://open.pudutech.com/en/os-sdk/fv4apte6td963bjvzu1umbz6); [Pudu Open Platform page](https://www.pudurobotics.com/en/open-platform)
+- Open-RMF dispatches by bidding through rmf_dispatcher_node. No Pudu fleet adapter exists in the open-rmf repositories I found — [open-rmf/rmf_demos](https://github.com/open-rmf/rmf_demos)
+
+### Inferences
+- Hotel.OS can probably create delivery tasks and poll status through the OpenAPI. Confirm with Pudu that FlashBot multi-floor delivery tasks (with elevator legs) are exposed, not only single-floor tasks. Elevator control still runs through Pudu's IoT cloud, so Hotel.OS would not command the elevators directly.
+
+### Gaps
+- No public FlashBot-specific OpenAPI endpoint list. No webhook/event documentation was confirmed. No Open-RMF adapter.
+
+## 5. Safety, certifications, data and privacy
+
+### Takeaway
+FlashBot has an FCC equipment authorisation (FCC ID 2AXDW-FBBDR1, 2021). I found no evidence of a UL 3300 (service-robot safety) or similar NRTL listing for any FlashBot. CE was not confirmed in my sources. I found no public data or privacy documentation specific to FlashBot.
+
+### Cited Findings
+- FCC ID 2AXDW-FBBDR1 "FlashBot", granted to Shenzhen Pudu Technology Co., Ltd., latest application 2021-09-30. The manual carries a Part 15 statement — [fccid.io](https://fccid.io/2AXDW-FBBDR1)
+- UL 3300 is the US/Canada safety standard for service robots and is separate from FCC/ISED radio authorisation — [KeepRobots](https://keeprobots.com/notes/ul-3300-service-robot-certification/). I found no listing of a FlashBot under it.
+- Safety features (vendor claims): e-stop, 3D obstacle avoidance, a recommended 0.8 m/s maximum, a stated blind spot, and the e-stop pause disabled during elevator rides — [manual](https://files.homery.com/static/product_documents/10091000005-123989_31277.pdf)
+- The robot carries several RGB-D cameras (three on the original FlashBot), panoramic cameras on the Arm, and cloud connectivity — [RobotShop deck](https://cdn.robotshop.com/media/P/Pud/RB-Pud-17/pdf/flashbot-20240715-en-presentation.pdf); [New Atlas](https://newatlas.com/robotics/pudu-robotics-flashbot-arm-semi-humanoid-delivery-robot)
+
+### Inferences
+- Many US AHJs, insurers, and enterprise security teams want UL 3300 and a privacy review. With a Chinese cloud provider (Pudu Cloud) and cameras in residential corridors, expect a data-residency and security review. Ask where US data is hosted.
+
+### Gaps
+- No confirmed UL 3300, CE, or IP rating. No data-retention or privacy policy specific to the robot.
+
+## 6. US price, purchase/lease/RaaS, distributors, warranty, service
+
+### Takeaway
+The US list price is about $20,000 for FlashBot Max. Standard FlashBot is listed at $19.5k–$28k. RobotLAB is the main US integrator and offers buy, lease, or RaaS on quote. Elevator integration and installation are extra. The warranty is 1 year.
+
+### Cited Findings
+- RobotLAB: FlashBot Max from $20,000 purchase. Lease and RaaS on request, no published rates — [RobotLAB Max](https://www.robotlab.com/store/pudu-flashbot-max/)
+- RobotLAB's standard FlashBot page lists $20,000 in the header but $28,000 in its comparison table and FAQ, which contradict each other — [RobotLAB FlashBot](https://www.robotlab.com/store/pudu-flashbot/)
+- Merchant Service lists $19,499.99 for FlashBot — [Merchant Service](https://www.merchantservice.com/product/flashbot-hotel-commercial-delivery-robot/). ShopAppliances lists SKU 10091000005 (price not captured) — [ShopAppliances](https://www.shopappliances.com/products/pudu-10091000005)
+- RobotShop's listing excludes expert installation and training, which are sold separately — [RobotShop](https://robotshop.com/products/robotlab-pudu-flashbot)
+- RobotLAB claims nationwide sales, leasing, and turnkey deployment (mapping, elevator/door integration, training, service) — [RobotLAB Pudu](https://www.robotlab.com/manufacturers/pudu/); [RobotLAB hotels](https://www.robotlab.com/industries/hotels/)
+- Pudu's support page lists a free 1-year warranty, with different periods for different components, counted from receipt. It requires proof of purchase and no unauthorised modification — [Pudu support](http://t.pudurobotics.com/support)
+
+### Inferences
+- A Miami deployment budget: roughly $20k per robot, plus elevator integration per bank (possibly more than the robot price, per trade press), plus installation and mapping, plus a post-year-1 service contract.
+
+### Gaps
+- No published US lease or RaaS rates for FlashBot. No named Florida dealer found beyond the national resellers. Extended-warranty pricing is unknown.
+
+## 7. Hotel deployments, utilisation, outcomes, reviews
+
+### Takeaway
+Named deployments are mostly outside the US: Parkhotel Eisenstadt in Austria, Atour Hotels in China, a Shigatse hotel in Tibet, and the planned Shenzhen CTID robot hotel. I found no named US hotel FlashBot deployment, no independent utilisation or ROI data, and no third-party reviews. RobotShop shows zero customer reviews.
+
+### Cited Findings
+- Parkhotel Eisenstadt (Austria) runs 5 Pudu robots, including FlashBot (Max per Pudu), delivering towels, toiletries, and meals to rooms by elevator. No quantified outcomes are given (vendor case study) — [Pudu case study](https://www.pudurobotics.com/en/case-studies/pudu-parkhotel-austria); [ServiceRobotCo](https://servicerobotco.com/blog/parkhotel-austria-five-pudu-robots-for-cleaning-and-delivery)
+- Atour Hotels (China): FlashBot deployments reportedly passed 1,000 units within six months. This is a secondhand Substack claim attributed to the company and unverified — [Cricket's Continuum Substack](https://cricketscontinuum.substack.com/p/pudu-in-may-the-shape-of-dealer-channel)
+- A Shigatse hotel near Everest reportedly uses a "FlashBot Pro" for front-desk-to-room delivery. This comes from a GEO-style article and is low reliability — [pcnoks](https://www.pcnoks.com/hotel-delivery-at-5000-meters-how-flashbot-pro-supports-guest-service-near-everest-base-camp/)
+- Pudu and Shenzhen CTID plan a "full-scenario robot-serviced hotel", with trial operations by end-2026 and opening in 2027 (vendor announcement) — [RoboticFirms](https://www.roboticfirms.com/article/pudu-robotics-shenzhen-ctid-robot-serviced-hotel); [Interesting Engineering](https://interestingengineering.com/ai-robotics/world-first-hotel-robot-china-pudu)
+- Pudu company scale (vendor): about 80,000 units shipped across 60+ countries as of Oct 2024 — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-unveils-the-latest-version-of-flashbot-elevating-smart-building-delivery-to-a-new-level-302283409.html)
+- RobotShop's FlashBot listing has 0 customer reviews — [RobotShop](https://robotshop.com/products/robotlab-pudu-flashbot)
+- Reader and press scepticism about the FlashBot Arm's small wheels and stability (comments, not tests) — [New Atlas](https://newatlas.com/robotics/pudu-robotics-flashbot-arm-semi-humanoid-delivery-robot)
+
+### Inferences
+- FlashBot's real scale is in Chinese mid-scale hotel chains. US hotel references would have to come from RobotLAB or Pudu US directly. Request reference sites with matching elevator OEMs.
+
+### Gaps
+- No independent US case study, deliveries-per-day, uptime, or guest-satisfaction data. No documented failure reports. This is an absence of public data, not evidence of reliability.
+
+## 8. Brief comparison: Keenon W3, Relay+, Richtech
+
+### Takeaway
+FlashBot Max is the cheapest purchase option in this group, about $20k, and is the most cloud- and IoT-integration-dependent. Relay+ is a US-built, subscription-sold hotel specialist with over 1M deliveries claimed. Richtech's hotel robot is Skylark. Medbot is its elevator-enabled healthcare variant. Keenon W3 is covered in depth by another researcher.
+
+### Cited Findings
+- Relay+: rides elevators autonomously, US-based. Hotel Dive reports a subscription of about $75k over 3 years, maintenance included (about $2.1k/month). Relay 2 has a "10-gallon" payload. Relay claims over 1 million deliveries — [Hotel Dive](https://www.hoteldive.com/news/hotel-tech-in-robot-deliveries/689438/); [Korthos](https://korthosrobotics.com/research/relay-robotics-is-building-hotel-delivery-robots-into-guest-logistics). Other third-party estimates range from $1.5–2k/month — [Oxmaint](https://oxmaint.com/industries/hospitality/room-service-robots-hotel-maintenance)
+- Richtech: Skylark is its hotel room-service robot — [Richtech Skylark](https://richtechrobotics.com/skylark). Medbot, launched May 2024, is elevator-enabled with four storage spaces totalling 3.17 gal and is aimed at pharmacy and healthcare. No public price — [GlobalSpec](https://insights.globalspec.com/article/22734/new-robot-makes-pharmacy-deliveries); [Richtech Medbot](https://richtechrobotics.com/medbot)
+- FlashBot Max: about $20k, 2–4 compartments of about 21–44 L each (computed), 10 kg per layer, KONE/Otis cloud plus hardware elevator integration, cloud OpenAPI — see sections 1–6.
+
+### Inferences
+- For Hotel.OS dispatch, compare API maturity directly. Pudu has a documented cloud OpenAPI. Relay and Richtech API availability was not researched here.
+- FlashBot's compartments (up to 4) suit multi-drop runs better than single-bin robots. Relay's payload of about 38 L in one bin is similar to one FlashBot double compartment.
+
+### Gaps
+- Relay+ and Skylark full specs, APIs, and certifications were not covered in depth (outside this scope).
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

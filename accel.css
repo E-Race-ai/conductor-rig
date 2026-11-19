@@ -12,6 +12,7 @@ html[data-proj]{
 html[data-proj="fu"]{--acc:#00C8FF;--acc2:#5FD8FF;--cy:#00C8FF}
 html[data-proj="hub"]{--acc:#4D8BFF}
 html[data-proj="os"]{--acc:#D4A65A;--acc2:#E6C48A;--cy:#D4A65A}
+html[data-proj="aug"]{--acc:#9B7BFF;--acc2:#B9A2FF;--cy:#9B7BFF}
 html[data-proj]:not(.book) body{background:var(--bg);color:var(--text)}
 html[data-proj] body{font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
 html[data-proj] h1,html[data-proj] h2,html[data-proj] h3{font-family:var(--head)!important;letter-spacing:-.02em!important;font-weight:600!important}

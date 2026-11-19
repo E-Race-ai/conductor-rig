@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keenon C30 (carpet) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Keenon C30 (carpet) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Keenon KLEENBOT C30: Deep Dive for a ~1M sq ft Miami Mixed-Use Tower (Hotel.OS-dispatched)
+
+Research date: 2026-11-19. Convention: **[VENDOR]** = Keenon's own claim or a reseller repeating it; **[RESELLER]** = a distributor's own claim or interpretation; **[INDEPENDENT]** = third-party verification (very little found). No independent hands-on review, lab test, or named US hotel deployment of the C30 turned up.
+
+## Q1. Full specifications
+
+### Takeaway
+The C30 is a **dry-only, 3-in-1 (sweep + vacuum + dust-mop) robot**, roughly 49 x 52 x 75 cm and 35 kg, with a 61 cm cleaning width and a claimed 600 m²/h. It is positioned for carpet plus hard floor (marble to carpet). It has **no wet scrubbing and no water tank**. No auto-empty or water-exchange base station is documented, only a charging dock. Several figures conflict across sources, notably suction (11,000, 15,000 or 19,000 Pa), area per charge (1,500 or 2,500 m²) and noise (60 to 70 dB).
+
+### Cited Findings
+**Cleaning functions and floor types**
+- 3-in-1 dry cleaning: sweeping, vacuuming and dust mopping. There are two operating modes: manual map building, which uses an extendable push handle, and automated cleaning. Tasks are assigned remotely and tracked in the KEENON App. [VENDOR] [Keenon C30 product page](https://www.keenon.com/en/product/C30)
+- The release calls it a "3-in-1 dry cleaning robot" with "waterless cleaning with slip-prevention technology that removes embedded debris from carpets," safe in high-traffic areas, quiet, and able to auto-recharge and resume, which allows daytime cleaning. [VENDOR] [Keenon ISSA Pulire 2025 release](https://www.keenon.com/en/news/keenon-robotics-marks-european-debut-of-new-kleenbot-models-at-issa-pulire-2025)
+- "Tailored for premium settings such as hotels and offices, delivering a quieter, water-free dry-cleaning solution for surfaces ranging from marble to carpets." [VENDOR] [PR Newswire, Interclean Amsterdam 2026 (Apr 14, 2026)](https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html)
+- Keenon positions the C30 as the lineup's "specialized carpet care" option. [VENDOR] [Keenon C55 launch article (Nov 11, 2025)](https://www.keenon.com/en/news/double-the-strength-built-for-medium-and-large-spaces-keenon-robotics-unveils-cleaning-robot-c55)
+- A Korean release for CLEAN KOREA SHOW 2025 described it as specialized in carpet cleaning, with a 3-in-1 function that removes deep-seated dust. [VENDOR] [theteams.kr](https://www.theteams.kr/news/detail/3450)
+- **Contradictory or unreliable reseller content.** A UK reseller blog says the C30 "sweep[s], scrub[s], vacuum[s] and dr[ies]," does "hard floors only," needs a "manual water top-up," and cleans 1,500 m²/hr with a 4 h battery. This conflicts with every Keenon source, which describe a dry-only robot at 600 m²/h with 6 to 10 h runtime. Treat that page as erroneous. [RESELLER, unreliable] [Freshmango Robotics blog](https://freshmangorobotics.co.uk/blog/best-cleaning-robots-for-hotels)
+- One dealer comparison claims "carpet extraction with a dedicated roller system." That implies wet extraction, which no Keenon source supports. It is likely marketing paraphrase. [RESELLER, unreliable] [DandyGadget comparison](https://dandygadget.com/keenon-c55-vs-c40-vs-c30-cleaning-robot-comparison/)
+
+**Dimensions, weight and performance**
+- Dimensions (W x D x H) are 49.0 x 52.0 x 75.0 cm (19.29 x 20.47 x 29.53 in) without the dust mop. Weight is 35 kg (77 lb) with battery. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- With the dust-push attachment the robot measures 49 x 61 x 75 cm. [RESELLER] [Pentagone Robotics](https://www.pentagone-robotics.com/en/robots/keenon-c30)
+- Weight without battery is 30 kg. [RESELLER] [Botirai](https://botirai.com/keenon-c30)
+- Maximum cleaning width is 61.0 cm. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- Cleaning efficiency is 600 m²/h (6,458 ft²/h), and coverage per full charge is up to 2,500 m². [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- Conflicting figures: TecStore UK lists 540 m²/h and 1,500 m² per charge, and a datasheet lists 1,500 m² per task under full charge with 11,000 Pa suction. These may be an earlier or regional spec revision. [RESELLER] (summarized in search snippets of [TecStore](https://www.tecstore.co.uk/product_info.php/cleaning-robots-keenon-c30-kleenbot-robot-c30-kleenbot-p-3637), which returned 403 on direct fetch, and of [RobotShop-hosted datasheet](https://cdn.robotshop.com/rbm/2282f665-ba37-4819-bd0a-f5a8b19d0c02/c/cc663dc8-e82d-4171-98a1-ab938ab3fa12/b4afb8a4_datasheet_c30.pdf))
+- Maximum suction is 19,000 Pa. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30); [ISSA Pulire release](https://www.keenon.com/en/news/keenon-robotics-marks-european-debut-of-new-kleenbot-models-at-issa-pulire-2025). The US reseller Useabot lists **15,000 Pa**. [RESELLER] [Useabot via fetch](https://www.useabot.com/products/kleenbot-c30-by-keenon-robotics)
+- Maximum moving speed is 0.8 m/s (2.63 ft/s). [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- Battery life is up to 6 h sweeping and vacuuming or up to 10 h dust mopping. Charge time is 5 to 6 h. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30). Botirai specifies that the charge time is measured from 15% to 100% with the robot powered on. [RESELLER] [Botirai](https://botirai.com/keenon-c30)
+- Minimum aisle is 65 cm and minimum turning width is 80 cm. [RESELLER] [Pentagone Robotics](https://www.pentagone-robotics.com/en/robots/keenon-c30)
+- Maximum slope is under 7° and maximum obstacle (threshold) height is 2 cm. [RESELLER] (search snippet of [TecStore](https://www.tecstore.co.uk/product_info.php/cleaning-robots-keenon-c30-kleenbot-robot-c30-kleenbot-p-3637); not confirmed on Keenon's page)
+- Noise is listed as "≤ 70 dB" by [Botirai](https://botirai.com/keenon-c30), 60 dB by [Automiq Robotics AU](https://www.automiqrobotics.com.au/products/kon-c30), 65 dB by [RobotsEuropa](https://www.robotseuropa.com/eu-it/Keenon-KLEENBOT-C30.htm), and 61 to 68 dB by a Spanish reseller ([any2cloud](https://www.any2cloud.com/kleenbot-c30-restaurantes)). [RESELLER, all from search snippets except Botirai]
+
+**Dust, water and consumables**
+- There is no water tank, since the robot is dry-only (consistent with "water-free" in the [Interclean 2026 release](https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html)).
+- Listed accessories and consumables are a dust bag, HEPA filter, mop pad, brush, side brush, squeegee blade, a "Six-month Consumable Kit for C30," and "G-Box" and "E-Box" accessories, which are undescribed. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- A 3.5 L dust box figure appears on one listing, but the search summary flagged that listing as possibly showing a smaller KLEENBOT model's specs. [RESELLER, low confidence] [Open Bot Solutions](https://openbotsolutions.com/product/keenon-c30-cleaning-robot/)
+
+**Base station**
+- Keenon describes only automatic return to the dock and recharge: "cleans up to 2,500 m² before automatically returning to the docking station." [RESELLER quoting vendor] [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-c30); [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- By contrast, the C40 sells in a "with workstation" SKU at $16,790. [RESELLER] [RobotsUSA Keenon cleaning page](https://www.robotsusa.com/Keenon-Cleaning-Robots.htm?cs_region=robotsusa)
+
+**Navigation sensors**
+- One listing gives LiDAR, stereo vision sensors, a collision sensor and an IMU, with LiDAR detection of 240° and ≤25 m. [RESELLER] (search snippet; [Sapherax datasheet PDF](http://sapherax.com/assets/downloads/kleenbot-c30-datasheet-en.pdf), whose text could not be extracted locally)
+- "3-depth stereo vision with intelligent obstacle avoidance." [RESELLER] [Botirai](https://botirai.com/keenon-c30)
+- Keenon's own C30 page does not list sensors. [Keenon C30 page](https://www.keenon.com/en/product/C30)
+
+### Inferences
+- The robot has no auto-empty station, so staff must empty the dust bag manually after each shift. The 6-month consumables kit suggests twice-yearly brush, filter and pad replacement.
+- A 61 cm width at 600 m²/h and 2,500 m² per charge means one robot covers about 27,000 ft² per charge. Real hotel throughput with furniture and trolleys is likely materially lower. Only a reseller estimate of 60 to 70% of headline exists, from the unreliable Freshmango page.
+- A 2 cm threshold limit and 65 cm minimum aisle should be checked against elevator sills, transition strips and ballroom airwall tracks.
+- It cannot address wet or sticky spills on lobby stone, which need a scrubber such as the C40 or C55.
+
+### Gaps
+- No official Keenon full datasheet with noise, slope, threshold, dust volume, sensor suite and IP rating was retrievable. The Sapherax and RobotShop PDFs could not be parsed.
+- The suction discrepancy (11k, 15k or 19k Pa) and the area-per-charge discrepancy (1.5k or 2.5k m²) are unresolved and may reflect hardware revisions.
+- Carpet pile-height limits and performance on hotel loop or cut pile are unpublished.
+- No C30 variants (for example a "C30 Pro") were found. Keenon's site lists only the C30 alongside the C20, C40 and C55.
+
+## Q2. Launch date and positioning vs C40 and C55
+
+### Takeaway
+The earliest dated public appearance found was a cameo in Keenon's March 31, 2025 humanoid release, followed by the European debut at ISSA Pulire in Milan (May 27 to 29, 2025). Keenon sells it as its carpet- and premium-space-focused dry cleaner below the C40 (hard-floor scrub-dryer) and C55 (large-area flagship).
+
+### Cited Findings
+- On March 31, 2025, Keenon's XMAN-R1 humanoid release lists the KLEENBOT C30 among robots the humanoid works with. [VENDOR] [AAP/Cision release](https://prod-ss.aap.com.au/aapreleases/cision20250331ae53406)
+- The C30, C40 and C20 had their European debut at ISSA Pulire 2025 in Milan, May 27 to 29, 2025. [VENDOR] [Keenon release](https://www.keenon.com/en/news/keenon-robotics-marks-european-debut-of-new-kleenbot-models-at-issa-pulire-2025)
+- **C40** is a 4-in-1 machine whose triple-brush design sweeps, vacuums and pushes dust, then dries. Its triple-roller sweeps and scrubs together, and it adapts to carpet, tile and hardwood. [VENDOR] [same release](https://www.keenon.com/en/news/keenon-robotics-marks-european-debut-of-new-kleenbot-models-at-issa-pulire-2025). Keenon targets it at mid-sized supermarkets, hotels, offices and hospitals, with dry-wet separation. [VENDOR] [Interclean 2026 release](https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html)
+- **C55** debuted in North America at ISSA North America on Nov 11, 2025. It targets spaces over 3,000 m² with sweeping, scrubbing and suction, 21,000 Pa suction, 2,376 m²/h, a 110 L tank, LiDAR plus stereo vision, a dock that charges, drains and refills, hot-swap dual batteries, and 5 cm obstacle climbing. [VENDOR] [Keenon C55 article](https://www.keenon.com/en/news/double-the-strength-built-for-medium-and-large-spaces-keenon-robotics-unveils-cleaning-robot-c55)
+
+### Inferences
+- Within Keenon's lineup, the C30 is the only model built for carpeted guest corridors and ballrooms. Lobby stone and back-of-house hard floors would fall to the C40 or C55.
+
+### Gaps
+- No China domestic launch date or dedicated C30 launch press release was found.
+
+## Q3. Multi-floor operation: elevators, per-floor maps, scheduling, zones
+
+### Takeaway
+No Keenon source documents elevator riding or multi-floor operation for the C30. Keenon's elevator integration is documented for its delivery robots. For a 1M sq ft tower, assume one robot per floor or zone with manual moves unless Keenon confirms otherwise in writing.
+
+### Cited Findings
+- Keenon's C30 page mentions only app task assignment and tracking, with no elevator or multi-floor feature. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- One reseller page shows a photo of the C30 in an elevator and notes "Subject to Elevator Compatibility." [RESELLER] (search snippet; source among [Herolifecare](https://herolifecare.com/products/kleenbot-c30) / [Automiq](https://www.automiqrobotics.com.au/products/kon-c30), not verified by fetch)
+- On Keenon's site, "Multi-Floor" appears only for the W3 hotel delivery robot, not for the cleaning line. [VENDOR] [Keenon C55 article page navigation](https://www.keenon.com/en/news/double-the-strength-built-for-medium-and-large-spaces-keenon-robotics-unveils-cleaning-robot-c55)
+- In April 2026 Keenon obtained Octa Robotics LCI (robot-building interface) certification for elevator operation in Japan, covering its service robots. Whether this covers KLEENBOT was not confirmed. [search snippet] [washinmura/idaeo item](https://aeo.washinmura.jp/ai/keenon-robotics%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/en/news/2026-04-23-keenons-service-robots-enhance-elevator-2)
+- RobotLAB, a US integrator, says Keenon elevator integration takes 2 to 3 days if the controller has an API. Otherwise it installs a relay-based cab caller, adding about a week. This refers to its Keenon delivery-robot line, which does not list the C30. [RESELLER] [RobotLAB Keenon page](https://www.robotlab.com/manufacturers/keenon/)
+- Mapping is built manually by pushing the robot with the extendable handle. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- Routes can be configured to keep a buffer around occupied guest corridors. [RESELLER, unreliable page] [Freshmango blog](https://freshmangorobotics.co.uk/blog/best-cleaning-robots-for-hotels)
+
+### Inferences
+- Scheduled cleaning is supported per Pentagone's "scheduled cleaning" use case ([Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-c30)). Zones and keep-outs are standard in Keenon's app but are not documented for the C30 specifically.
+
+### Gaps
+- No documentation was found on C30 elevator riding, per-floor map storage limits, cross-floor scheduling, virtual walls or keep-out zones.
+
+## Q4. Software: app, cloud, reporting, APIs, Open-RMF
+
+### Takeaway
+The C30 is managed through the KEENON App and cloud for remote tasking and tracking, with "report generation" claimed for the series. **No public Keenon API, SDK or Open-RMF adapter was found.** Direct Hotel.OS dispatch would require a negotiated, private Keenon integration.
+
+### Cited Findings
+- The robot supports remote task assignment and tracking via the KEENON App. [VENDOR] [Keenon C30 page](https://www.keenon.com/en/product/C30). Useabot adds that it "supports KEENON's App and cloud platform." [RESELLER] [Useabot](https://www.useabot.com/products/kleenbot-c30-by-keenon-robotics)
+- LiDAR navigation, remote management, report generation, autonomous docking and obstacle avoidance are shared across the C30, C40 and C55. [RESELLER] [DandyGadget](https://dandygadget.com/keenon-c55-vs-c40-vs-c30-cleaning-robot-comparison/)
+- "AI Patrol Inspection" identifies dry and wet debris and switches cleaning mode. Keenon does not tie this capability to a specific model. [VENDOR] [Interclean 2026 release](https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html)
+- No Keenon adapter appears in the Open-RMF community adapter list, and no Keenon developer portal or SDK was found. [search result] [open-rmf awesome_adapters](https://fr.github.com/open-rmf/awesome_adapters)
+- RobotLAB recommends single-vendor fleets per property and says firmware ships quarterly (major) and monthly (minor). [RESELLER] [RobotLAB Keenon page](https://www.robotlab.com/manufacturers/keenon/)
+
+### Gaps
+- Cloud data residency, API availability, webhook or event support, and report formats are all unknown. Ask Keenon (global@keenon.com, per search result) for a cloud API spec under NDA.
+
+## Q5. Safety, certifications and privacy
+
+### Takeaway
+The only certification stated is CE, from a French reseller. No UL or FCC listing for the C30 was found. Data and privacy terms are unpublished.
+
+### Cited Findings
+- Certification is CE ("compliant with European standards"). [RESELLER] [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-c30)
+- Searches turned up no FCC ID or UL certification for the C30, and Keenon's product pages do not list certifications. [search] [Keenon C30 page](https://www.keenon.com/en/product/C30)
+- The product is made in China. [search result summary] (product listings)
+- The robot has stereo-vision cameras ([Botirai](https://botirai.com/keenon-c30)), which matters for privacy in residential and guest areas.
+
+### Gaps
+- UL 3300 or UL 1017 status, FCC Part 15 grant, battery UL 2271 status, camera image retention and cloud privacy policy were not found. Check the FCC database under grantee "Keenon" and UL Product iQ, and request written documents. The Chinese-vendor cloud may draw scrutiny from residential HOA counsel or IT security.
+
+## Q6. US pricing, purchase or lease, distributors, warranty and service
+
+### Takeaway
+The US street price is about **$11,900** (Useabot), with a 5-year warranty listing. RaaS or lease pricing for the C30 was not found publicly.
+
+### Cited Findings
+- On RobotsUSA the C30 is $11,900 with free shipping and a "5-year warranty" listing. The C40 is $14,950, or $16,790 with workstation, and the C55 is $27,250 ("as low as" $23,925). The C20 is "coming soon." [RESELLER] [RobotsUSA Keenon cleaning page](https://www.robotsusa.com/Keenon-Cleaning-Robots.htm?cs_region=robotsusa)
+- RobotsEuropa sells the C30 "with 5 Year Warranty." [RESELLER] [RobotsEuropa](https://www.robotseuropa.com/eu-it/Keenon-KLEENBOT-C30.htm)
+- RobotShop Canada lists "Keenon C30 with 2 year Warranty - From Reliable Robots." The page returned 404 on fetch. [RESELLER] [RobotShop CA](https://ca.robotshop.com/products/reliablerobots-keenon-c30-with-2-year-warranty-from-reliable-robots)
+- Other US listings include Useabot ([Useabot](https://www.useabot.com/products/kleenbot-c30-by-keenon-robotics)), Airpuria ([Airpuria](https://airpuria.com/products/keenon-robot-kleenbot-c30-3-in-1-dry-cleaning)) and Open Bot Solutions ([Open Bot](https://openbotsolutions.com/product/keenon-c30-cleaning-robot/)).
+- In Europe the robot is offered for purchase, leasing and a "Premium" tier, with a site audit service. [RESELLER] [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-c30). Rental is available in Germany. [RESELLER] [OKMbot](https://okmbot.de/en/products/keenon-kleenbot-c30/)
+- RobotLAB offers RaaS on other Keenon models (T10 at $519/mo over 36 months, with warranty and maintenance included), but it does not list the C30. [RESELLER] [RobotLAB](https://www.robotlab.com/manufacturers/keenon/)
+
+### Inferences
+- The "5-year warranty" from RobotsUSA and RobotsEuropa appears to be a reseller-specific extended plan, given RobotShop CA's 2-year variant and RobotLAB's standard 2-year Keenon manufacturer warranty on the T10.
+
+### Gaps
+- Consumable kit pricing, a Miami-area authorized service partner, on-site SLA, and C30 RaaS monthly rate were not found.
+
+## Q7. Deployments, reviews and problems
+
+### Takeaway
+There are no named C30 deployments, independent reviews or documented failure reports. Evidence is limited to vendor and reseller marketing.
+
+### Cited Findings
+- Keenon cites "10 to 20+ robots" in single venues and a mixed fleet of 8 robots across 6 types at a franchised luxury hotel, without naming the hotel or models. [VENDOR] [Interclean 2026 release](https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html)
+- Keenon's site carries a hotel manager testimonial saying the robot "vacuums, sweeps, and mops simultaneously." This is vendor content, unnamed in the search summary. [VENDOR] [Keenon site](https://www.keenon.com/en)
+- A UK reseller says it "vacuums carpet during transit but does not replace deep carpet extraction." [RESELLER] [Freshmango blog](https://freshmangorobotics.co.uk/blog/best-cleaning-robots-for-hotels)
+
+### Gaps
+- No YouTube or press hands-on review, user forum complaints or US case study was found within the search budget.
+
+## Q8. Brief comparison: Pudu MT1 family / CC1 Pro, Avidbots, Gausium, Brain Corp
+
+### Takeaway
+The C30 is markedly cheaper (about $11.9k) than the Pudu MT1 Vac (about $20 to 21k). Both are dry carpet and hard-floor vacuums. Competitor details beyond the MT1 Vac were not researched here and are covered by other researchers.
+
+### Cited Findings
+- The Pudu MT1 Vac costs $20,000 to $21,000 at RobotLAB (RaaS from $440/mo), with a 55 cm suction path and AI carpet and hard-floor detection that auto-adjusts suction. [RESELLER] [RobotLAB MT1 Vac](https://www.robotlab.com/store/pudu-mt1-vac/). RobotShop CA lists it at $23,430. [RESELLER] [RobotShop CA](https://ca.robotshop.com/products/pudu-mt1-robotic-sweeper-vacuum)
+
+### Gaps
+- The Pudu CC1 Pro, Avidbots Kas/Neo, Gausium Phantas/Vacuum 40 and Brain Corp-powered machines were not compared here for lack of budget. Rely on the other researchers' notes.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

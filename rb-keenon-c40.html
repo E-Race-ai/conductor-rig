@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keenon C40 (4-in-1 cleaner) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Keenon C40 (4-in-1 cleaner) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Keenon KLEENBOT C40: deep dive for a large mixed-use Miami tower (as of Nov 2026)
+
+Labels used: **[VENDOR]** = Keenon's own claim; **[RESELLER]** = a dealer or retailer listing; **[3P-DOC]** = third-party write-up based on documents (no hands-on testing); **[INDEPENDENT]** = independent finding. No independent hands-on or lab test of the C40 was found (see Reviews).
+
+## 1. What the C40 is (identity, category, launch, positioning)
+
+### Takeaway
+"C40" means the **KLEENBOT C40**, a 4-in-1 autonomous commercial floor-cleaning robot (sweep, vacuum, scrub, dust-push/mop) for small to medium venues. It was announced globally on 31 Mar 2025 together with the C55 and C20 and the XMAN-R1 humanoid. It is a cleaning robot, not a delivery robot. Keenon still markets it actively, including an upgrade shown at CCE in March 2026 and an appearance at Interclean Amsterdam in April 2026.
+
+### Cited Findings
+- Keenon's product page describes the KLEENBOT C40 as a 4-in-1 cleaner (sweeping, vacuuming, scrubbing, dust pushing) with a triple-brush system **[VENDOR]** — [Keenon C40 product page](https://www.keenon.com/en/product/C40)
+- The launch release came out 31 Mar 2025 (PR Newswire/AAP), and Keenon's own news post is dated about 2 Apr 2025. It introduced the XMAN-R1 humanoid and the C40, C55 and C20, positioning the C40 for small to medium venues with a 65 cm minimum pass-through width, a 40 cm scrubbing path, a triple-brush system, and monitoring and scheduling through the Keenon App and Cloud Platform — [Keenon news](https://www.keenon.com/en/news/k); [AAP/Cision release](https://aap.com.au/aapreleases/cision20250331ae53406)
+- Lineup context: the C55 is the larger model (55 cm path, described as 2,376 m²/h and a 110 L tank), with its North American debut at ISSA North America, Las Vegas, on 11 Nov 2025. The C20 is a compact 35 cm model **[VENDOR]** — [PR Newswire C55 release](https://tools.prnewswire.com/en-us/live/20813/release/20251111EN18660)
+- A "C40 technology upgrade" was announced for CCE 2026 (23 Mar 2026), with no public changelog **[3P-DOC]** — [Anton Robots review](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- At Interclean Amsterdam 2026 (article dated 16 Apr 2026), the C40 was positioned "for mid-sized commercial settings including supermarkets, hotels, offices, and hospitals," highlighting a "dry-wet separation design" that addresses "odor caused by mixed waste" **[VENDOR, via ISSA]** — [ISSA industry news](https://www.issa.com/industry-news/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026/)
+- Name ambiguity: "C40" also appears in unrelated floor-scrubber names, such as the Cat C40R ride-on scrubber and the IPC CT40. Third-party sites also mention a "C40S", which Keenon's site does not confirm — [Asia Satellite listing](https://www.asiasatellite.co/KEENON-C40.htm); [Global Industrial Cat C40R](https://www.globalindustrial.com/p/cat-auto-ride-on-floor-scrubber-40-cleaning-path)
+
+### Inferences
+- For a 1M sq ft tower, the C40 is Keenon's **mid-tier** cleaner. The C55 is the large-area model and would better suit big lobby or back-of-house floor plates. The C40 fits corridors, residential lobbies, and retail frontage.
+
+### Gaps
+- No formal US launch date or US press release specific to the C40 was found.
+- The contents of the 2026 "technology upgrade" are not public.
+
+## 2. Full specifications
+
+### Takeaway
+Keenon's figures: 578×500×690 mm (616×550×690 mm with squeegee), 70 kg, 16 L clean / 11 L waste water, 8 L dust bag, 560 mm sweep and 400 mm scrub width, up to 1,100 m²/h, 5 h scrubbing / 12 h sweeping, 2 h charge, 5-second battery swap, 650 mm passage width, and ten sensors (LiDAR, dual stereo cameras, four line lasers, three ultrasonic). Several figures conflict across documents, notably waste tank, runtime, and tank volume.
+
+### Cited Findings
+- Dimensions are 578 × 500 × 690 mm without the squeegee and 616 × 550 × 690 mm with it. Weight is 70 kg (154.3 lb) including the battery **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Tanks: 16 L clean water, 11 L waste water (removable and washable), and an 8 L dust bag ("4–8 days of dust") **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+  - Conflict: other materials and dealers give the waste tank as **14 L** — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/); [FieldBots](https://fieldbots.com/keenon-kleenon-c40-integration/). Anton Robots also notes a "Water Tanks 60 L / 47 L" line on a product page that conflicts with 16/14 L — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/). One reseller lists a 180 L dirty tank, which is clearly erroneous — [Dominion Drones](https://www.dominiondrones.com/collections/robots/products/kleenbot-c40)
+  - The user manual gives a waste container of about 0.74 L — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/); FieldBots gives a 0.7 L trash bin — [FieldBots](https://fieldbots.com/keenon-kleenon-c40-integration/)
+- Modes are sweeping, vacuuming, scrubbing, and dust pushing. Cleaning width is 560 mm for sweeping (dual side brushes) and 400 mm for vacuuming and scrubbing **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Coverage is up to 1,100 m²/h (11,840 ft²/h) **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40). A dealer states it covers spaces up to 4,500 m² — [FieldBots](https://fieldbots.com/keenon-kleenon-c40-integration/)
+- Runtime is up to 5 h scrubbing and up to 12 h sweeping **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40). Conflict: a dealer gives "up to 5 hours scrubbing or 6 hours dust mopping" — [FieldBots](https://fieldbots.com/keenon-kleenon-c40-integration/). Anton Robots notes the runtime figures differ between the product page and manual versions — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Battery is DC 25.6 V, 50 Ah, with about a 2 h charge and a "5-second" battery swap **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Maximum suction is 23,500 Pa (adjustable), and the floor is dry about 30 s after scrubbing **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Maximum cleaning speed is 0.8 m/s (user manual) — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Sensors: "ten detection components," namely LiDAR, dual StereoVision cameras, four high-precision line lasers, and three ultrasonic modules. Navigation uses VSLAM path planning, auto carpet and hard-floor detection, and breakpoint-resume. Keenon claims it "easily handles crowds and irregular obstacles" **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40). Collision sensing and an RGB camera are also referenced — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Passage and environment limits come from the user manual, as summarised by Anton Robots — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/):
+  - minimum passage width 65 cm (Keenon page: 650 mm, the same value); minimum passage height 75 cm; minimum turning width 80 cm
+  - maximum obstacle or threshold height **15 mm**; maximum gap **35 mm**
+  - maximum non-cleaning gradient **< 8°**, with a more conservative safety note for uneven surfaces
+  - noise **≤ 70 dB**
+  - operating temperature 0–40 °C at 20–80% RH; indoor use only, no IP rating found
+  - carpet limited to short pile under 10 mm
+  - sensors may misbehave where walls are largely glass or transparent; stairs and escalators need protective measures
+- Workstation (optional): auto-charging after the task, automated fresh-water supply and waste-water drainage, and detergent ratio set in the app **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40). Some US listings sell the robot "without Workstation" — [Robotix Market](https://robotixmarket.com/products/keenon-kleenbot-c40-professional-commercial-cleaning-robot)
+- Maintenance: modular design, "35 seconds" of daily care, an 11.6" touchscreen, and sound and light alerts **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40). Anton Robots calls the 35 s a best case and lists daily tasks: clean sensors, clear hair from brushes, empty debris, clean the waste system, check squeegee and wheels, drain water when idle — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+
+### Inferences
+- **No self-emptying dust station** is described; the workstation handles water and charging only. Someone still has to change the dust bag and bin.
+- The 15 mm threshold limit and the glass-wall sensor caveat matter in a Miami tower with glass storefronts, elevator sills, and lobby transitions. Plan site acceptance tests for elevator-sill gaps (35 mm maximum) and glass-heavy lobby frontage.
+- 1,100 m²/h is a theoretical maximum. At a 400 mm scrub width and 0.8 m/s, the geometric limit is about 1,150 m²/h, so real scrub throughput in furnished or crowded spaces will be far lower.
+
+### Gaps
+- No official spec for self-emptying (it appears not to exist) or for workstation plumbing requirements and footprint.
+- No independent measurement of noise, runtime, or coverage.
+
+## 3. Multi-floor operation (elevators, maps, scheduling, zones)
+
+### Takeaway
+Keenon lists "IoT elevator and door auto-passing" and "multi-machine hybrid scheduling." Elevator riding requires site-specific IoT or elevator-controller integration. In Japan the C40 holds Octa Robotics' LCI elevator-linkage certification. Per-floor map and zone or keep-out details are not publicly documented.
+
+### Cited Findings
+- "IoT elevator and door auto-passing; multi-machine hybrid scheduling" **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Elevator and door passage via IoT integration "need site-specific infrastructure"; app and web features include breakpoint-resume and multi-machine scheduling **[3P-DOC]** — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Japan: Keenon obtained Octa Robotics' LCI certification for elevator integration. The target models are the C30 and C40 cleaners and the W3 delivery robot (Apr 2026) **[VENDOR, via search snippet; full page not retrievable]** — [Keenon JP elevator integration news (redirected listing)](https://aeo.washinmura.jp/ai/keenon-robotics%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/en/news/2026-04-23-keenons-service-robots-enhance-elevator)
+- US practice for Keenon robots (stated for the T10, but it describes the integrator's general method): if the elevator has a modern controller with an API, integration is a "2-3 day spec"; otherwise a relay-based cab caller emulates button presses, adding about a week **[RESELLER]** — [RobotLAB Keenon page](https://www.robotlab.com/manufacturers/keenon/)
+
+### Inferences
+- In a Miami high-rise, elevator integration will likely go through the elevator OEM's robot API (for example Otis Integrated Dispatch or KONE) or relay hardware installed by an integrator. Budget extra time and cost for this. LCI is a Japan-specific standard and does not transfer to the US.
+
+### Gaps
+- No public documentation on per-floor map count, keep-out zones or virtual walls, or calendar scheduling for the C40 specifically.
+- No US C40 elevator case study found.
+
+## 4. Software, cloud, APIs/SDK, Open-RMF
+
+### Takeaway
+Keenon provides app and web management covering tasks, status, remote dispatch, and cleaning reports. **No public Keenon API or SDK and no Open-RMF adapter for the C40 was found.** Dispatch from Hotel.OS would have to be negotiated with Keenon or an integrator.
+
+### Cited Findings
+- 24/7 management via app or web: task management, status monitoring, remote dispatch, and cleaning reports **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40)
+- Monitoring and scheduling run through the Keenon App and Cloud Platform **[VENDOR]** — [AAP/Cision launch release](https://aap.com.au/aapreleases/cision20250331ae53406)
+- FieldBots, a European fleet platform, claims "Level 1 Integration" with the C40 (undefined) and sells a Connect Plus SIM to keep the robot online, available in the EU, UK, Switzerland, Canada, and the US — [FieldBots](https://fieldbots.com/keenon-kleenon-c40-integration/)
+- The Open-RMF community adapter list includes KONE and Dormakaba but no Keenon entry; there are Pudu Open Platform API discussions on Open-RMF Discourse — [open-rmf/awesome_adapters](https://fr.github.com/open-rmf/awesome_adapters); [Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594)
+
+### Inferences
+- Pudu has a more visible third-party Open Platform API, which is a point in Pudu's favour for Hotel.OS integration. For Keenon, ask in the RFP for cloud API access (task dispatch, status webhooks, map and zone IDs), as well as data-residency terms.
+
+### Gaps
+- No API documentation, SDK, or developer portal from Keenon was found.
+- No information was found on data flows, cloud region, or camera-image retention (privacy).
+
+## 5. Safety, certifications, data/privacy
+
+### Takeaway
+No FCC, UL, CE, or IEC certification documentation for the C40 was found publicly. The only certification found is Japan's LCI elevator certification. The robot carries dual stereo cameras and an RGB camera and connects to Keenon's cloud.
+
+### Cited Findings
+- None of Keenon's pages, retailer listings, or trade-show pages reviewed mention FCC, CE, or UL marks; Keenon's contact for documentation is global@keenon.com — [Keenon C40 page](https://www.keenon.com/en/product/C40); [Interclean listing](https://www.intercleanshow.com/products-and-services/keenon-robotics-co-ltd/products/kleenbot-c40)
+- Camera hardware: dual StereoVision cameras **[VENDOR]** — [Keenon C40 page](https://www.keenon.com/en/product/C40); an RGB camera is also referenced — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Safety constraints: indoor only; no rain or washdown; protective measures needed at stairs, escalators, and open edges; slip risk from residual water warrants its own acceptance test **[3P-DOC]** — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+
+### Inferences
+- Because it is sold in the US, the radio modules are presumably FCC-authorized, but this is **unverified**. Request the FCC ID, UL 3300 or UL 1017/60335-2-72 status, and the declaration of conformity before purchase.
+- A Chinese-vendor cloud with onboard cameras in residential areas may raise privacy and procurement concerns. Ask for camera-data handling terms and an on-premises or offline option.
+
+### Gaps
+- Certification status for the US market and the data/privacy policy are both unconfirmed.
+
+## 6. US price, buying options, distributors, warranty, service, consumables
+
+### Takeaway
+Keenon publishes no list price. US resellers quote about **$18,000–$20,580** (a $11,900 outlier looks stale), with leases from about **$575/mo** (ProServBots) or about $1,667/mo over 12 months (Homery). The workstation may be sold separately. Warranty and consumables pricing are not published.
+
+### Cited Findings
+- Knoxlabs shows $19,600 but says "pricing on request," with financing via Ascentium Capital and a pre-order site review **[RESELLER]** — [Knoxlabs C40](https://www.knoxlabs.com/products/keenon-kleenbot-c40-cleaning-robot); in Aug 2026 Knoxlabs was recorded at $20,580 — [Grabarobot price guide](https://www.grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+- ProServBots lists $19,600, "as low as $575/mo," no money down, with leasing and RaaS "may be available" **[RESELLER]** — [ProServBots](https://proservbots.com/product/keenon-kleenbot-c40-robot/)
+- Homery lists $20,000 (or $1,666.67/mo over 12 months); Shop Appliances lists $20,000 **[RESELLER]** — [Homery](https://www.homery.com/product/keenon-c40); [ShopAppliances](https://www.shopappliances.com/products/keenon-c40)
+- Prices checked 15 Oct 2026 were about $18,000–$19,600 from Hero Robots and Knoxlabs, sold by quote — [Best Robots Compared](https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/)
+- Therobozone shows a $17,999 sale price; Robotsasia and Robotsinternational show $11,900, likely stale or a different configuration — [Therobozone](https://therobozone.com/collections/industrial-robotics); [Robots International](https://www.robotsinternational.com/Keenon.htm)
+- Australia lists A$18,990 — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Warranty: a European dealer advertises a "5 Year Warranty" (dealer offer, not a Keenon term) — [Robots Europa](https://www.robotseuropa.com/KEENON-C40.htm). For other Keenon robots, RobotLAB says the manufacturer warranty is 2 years, extendable to 3, 5, or 7 years, and RaaS includes warranty and maintenance — [RobotLAB Keenon](https://www.robotlab.com/manufacturers/keenon/)
+- Consumables (brushes, side brushes, squeegee blades, dust bags, HEPA and filtration, detergent) are listed, with **no prices published** — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+
+### Inferences
+- Pricing for a single unit is roughly $20k for the robot. Get quotes with and without the workstation, and include elevator integration. A multi-unit RaaS for a tower would come from Knoxlabs, ProServBots, Hero Robots, or RobotLAB, which already offers Keenon RaaS for other models.
+
+### Gaps
+- No official Keenon USA price list, C40 warranty term, consumables pricing, or Florida service-technician coverage was found.
+
+## 7. Reviews, tests, deployments, reported problems
+
+### Takeaway
+There are **no independent hands-on reviews or controlled tests**. Available reviews are compilations of documents. The main named hotel deployment is the Shangri-La Traders Hotel at Shanghai Hongqiao Airport (Oct 2025), as part of a Keenon fleet, with no published KPIs. No US hotel, airport, or mall C40 deployment was found.
+
+### Cited Findings
+- Anton Robots explicitly says it is "an independent, documentation-based buyer review, not a claim of hands-on laboratory testing" (fact-checked 11 Sep 2026); "no independent controlled study was found" — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- At the Shangri-La Traders Hotel at Shanghai Hongqiao (opened late Oct 2025), the C40 handles cleaning alongside the XMAN-R1, W3, S100, T10, and T3 — [Keenon x Shangri-La news](https://www.keenon.com/en/news/keenon-robotics-partners-with-shangri-la-group-to-create-the-worlds-first-smart-hotel-powered-by-universal-specialized-robots); [10 Minutes News for Hoteliers](https://en.10minhotel.com/2025/10/31/shangri-la-adds-humanoid-to-workforce-at-shanghai-hotel)
+- A case-study note says no KPIs, cost figures, or guest-satisfaction data appeared — [Horwath HTL case directory](https://workshop.horwathhtl.com/resources/case-studies/shangri-la-keenon-counter-pattern); Anton Robots likewise notes no C40-specific hours, m²/h, or intervention figures — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Interclean 2026's "8 robots across 6 types" hotel example is not tied to the C40 — [ISSA](https://www.issa.com/industry-news/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026/)
+- Limitations and problems reported (documentary, not field failures): inconsistencies in tank and runtime documentation; glass-wall sensor issues; 15 mm obstacle limit; carpet under 10 mm; 65 cm passage may not fit furnished rooms; residual-water slip risk; customer feedback is manufacturer-selected — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- Downsides listed: scrub runtime is shorter than sweep runtime, and price varies by reseller — [Best Robots Compared](https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/)
+
+### Gaps
+- No US references, no YouTube hands-on test with measured results, and no owner complaints were found. Ask resellers for US reference sites.
+
+## 8. Competitive comparison
+
+### Takeaway
+The closest rival is the **Pudu CC1 Pro**. It is similar 4-in-1 in concept, with AI spot scrubbing, 15/15 L tanks, and a 500 mm width, and is priced about $24–25k or $669/mo RaaS. That is pricier than the C40, but Pudu offers a more visible integration API. The Pudu MT1 Vac is a vacuum and sweep specialist for carpet and large areas. The Avidbots Neo 2 is a much larger scrubber (low $50k range). The Gausium Phantas is a smaller rival.
+
+### Cited Findings
+| Robot | Key figures | Price (US) | Source |
+|---|---|---|---|
+| Keenon C40 | 1,100 m²/h; 400/560 mm; 16/11(14) L; 5 h scrub; 70 kg; 65 cm passage | ~$18–20.6k | [Keenon](https://www.keenon.com/en/product/C40); resellers above |
+| Pudu CC1 Pro | 700–1,000 m²/h full coverage, 1,500–3,000 m²/h AI spot scrub; 15/15 L; 500 mm width; 50 Ah; ~3 h charge; scrub 5 h, silent mop 9 h | $24,000 or $669/mo RaaS (RobotLAB); ~$25k other seller | [Pudu CC1 Pro](https://www.pudurobotics.com/products/cc1-pro); [RobotLAB](https://www.robotlab.com/pudu-cc1-pro-robot) |
+| Pudu MT1 Vac | 55 cm suction path; up to 1,400 m²/h; 20 L dust; HEPA H11/H13; 3–6.5 h; 75 kg | $21,000 or $440/mo RaaS | [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum); [RobotLAB MT1 Vac](https://www.robotlab.com/pudu-mt1-vac) |
+| Avidbots Neo 2 | up to 3,900 m²/h; 1.35 m/s; LiDAR + 3D | low $50k range (excluding batteries, older quote); lease direct | [Qviro Neo 2](https://qviro.com/product/avidbots-corp/neo-2) |
+| Gausium Phantas | 540×440 mm footprint; 330 mm scrub; 4,300–7,500 ft²/h; 5–18 h | on request | [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/); [Best Robots Compared](https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/) |
+
+- The CC1 Pro needs about 70 cm minimum route clearance versus 65 cm for the C40, and it has AI spot scrubbing, a rear cleaning-performance camera, and floor-condition detection — [Anton Robots](https://antonrobots.com/keenon-kleenbot-c40-review/)
+- A third party characterises the C40 as offering "a similar 4-in-1 approach for less money" than the Pudu CC1 (about $27,999) — [Best Robots Compared](https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/)
+- Pudu's Open Platform API is discussed for Open-RMF integration — [Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594)
+
+### Inferences
+- For a Hotel.OS-dispatched fleet, integration openness may matter more than the roughly $4–5k price gap. Pudu currently has the more visible API story.
+- The C40 makes the most sense if the property standardises on Keenon delivery robots (T10 or W3) so that one vendor cloud and one elevator integration cover everything.
+- Brain Corp-powered machines (for example Tennant T380AMR or T7AMR) are ride-on or walk-behind class scrubbers. They suit large open lobbies better than a C40.
+
+### Gaps
+- No current specs or prices for Brain Corp-powered machines were gathered, and there is no head-to-head independent test between the C40 and the CC1 Pro.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

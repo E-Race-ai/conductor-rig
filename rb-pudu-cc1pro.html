@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pudu CC1 Pro (scrubber) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Pudu CC1 Pro (scrubber) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Pudu CC1 Pro commercial cleaning robot: deep dive for a 1M sq ft mixed-use Miami tower (as of Nov 2026)
+
+Source labels used below: **[VENDOR]** means Pudu's own material (product page, user manual, press release, or a Pudu-authored article). **[RESELLER]** means a distributor or retailer listing, which has a commercial interest. **[INDEPENDENT]** means third-party press or analysis. I found no independent lab tests or hands-on reviews of the CC1 Pro, so almost every performance figure here is a vendor claim.
+
+Key primary sources:
+- CC1 Pro product page: https://www.pudurobotics.com/en/products/cc1-pro
+- CC1 Pro User Manual (multilanguage PDF, model CCBC02): https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf
+- CC1 Pro launch press release, 27 May 2025: https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html
+
+---
+
+## 1. Full specifications
+
+### Takeaway
+The CC1 Pro is a compact 4-in-1 machine (sweep, scrub, carpet vacuum, dust mop) weighing 75 kg, with a 500 mm cleaning width, 15 L clean and dirty tanks, a 50 Ah LiFePO4 battery (about 5 h scrubbing, under 3 h to charge), and LiDAR plus visual SLAM navigation. Its rated coverage of 700–1,000 m²/h is suited to lobbies, corridors and back-of-house, not to large open-plan scrubbing.
+
+### Cited Findings
+
+**Core spec table [VENDOR, User Manual §2.4, model CCBC02]**, all from the [CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf):
+- Cleaning functions: "Sweeping, (Carpet) Vacuuming, Mopping, Scrubbing".
+- Dimensions: 629 × 552 × 695 mm (24.76 × 21.73 × 27.36 in).
+- Weight: 75 kg (165.35 lb). Enclosure material: PC+ABS.
+- Battery: lithium iron phosphate (LiFePO4), 50 Ah, operating voltage DC 23–29.2 V. Charger input AC 100–240 V, 50/60 Hz; output max 29.2 V / 15 A.
+- Charging time: < 3 h.
+- Runtime ("battery life"):
+
+  | Mode | Runtime |
+  |---|---|
+  | Scrubbing | 5 h |
+  | Sweeping + Vacuuming + Mopping | 5 h |
+  | Carpet Vacuuming | 4 h |
+  | Silent Mopping | 9 h |
+
+  These are lab figures, measured "with the low gear setting, starting from 100% battery and continuing until it reached 10%".
+- Cleaning width (with side brush): 500 mm (19.69 in).
+- Coverage rate: 700–1,000 m²/h in Cover Cleaning mode; 1,500–3,000 m²/h in Spot Cleaning mode.
+- Dustbin (vacuuming): 2.5 L by default, or 6 L with the expansion.
+- Water tanks: solution (clean) tank 15 L (3.96 gal); recovery (dirty) tank 15 L (3.96 gal).
+- Navigation: "Integrated lidar and visual SLAM positioning".
+- Cruise speed: 0.2–1.2 m/s, adjustable.
+- Working noise: < 70 dB.
+- Minimum path clearance: 70 cm (27.56 in). The manual's safety notes add that "A width greater than 75 cm is preferred for the robot to move smoothly through a long passage."
+- Maximum surmountable height: 20 mm. The safety notes limit protrusions such as thresholds and floor receptacles to 8 mm while cleaning and 20 mm when only passing through.
+- Maximum surmountable gap: 35 mm.
+- Maximum climbing angle: 8° when not cleaning. Cleaning is supported only on flat surfaces: "do not use the robot for cleaning on slopes visible to the naked eye (greater than 3°)". The robot should not be paused while moving uphill.
+- Floor types: "Terrazzo, marble, tiles, epoxy resin, sandstone, artificial stone, short-pile carpets, etc." Section 2.1 describes it as suitable for "hard floors or low pile carpet" and for "small and medium-sized scenarios" such as offices, hotels and retail.
+- Operating system and connectivity: Android; 4G, Wi-Fi and Bluetooth, with LoRa optional. A mobile app is supported. Operation is manual or auto.
+- Operating environment (including charging): 1–40 °C, RH ≤ 85%, altitude < 2,000 m. Storage: −20 to 60 °C.
+- Ingress rating: IPX4.
+- Display: 10.1-inch LCD. The handle is attached to the screen and is raised for manual pushing.
+- Sensors labeled on the component diagram: Emergency stop switch, RGBD (depth) camera, Ultrasonic radar, Lidar, Solid-state Lidar, RGB camera, Top-view camera.
+- Startup localization: the robot must be powered on "below or in front of the visual marker" at the startup location, and a positioning marker comes in the box.
+- Packing list: robot, charger, 2 power keys, 1 side brush, 1 squeegee, mopping-vacuuming part, 2 scrubbing brushes, 2 sweeping brushes, water filling pipe, nozzle, guide, and a positioning marker. The docking station is not included.
+
+**Product-page additions [VENDOR]**, from the [CC1 Pro product page](https://www.pudurobotics.com/en/products/cc1-pro):
+- Navigation described as "LiDAR + Visual Fusion Positioning" (VSLAM+), "without QR codes", with a claimed coverage of 5,000–8,000 m² per deployment.
+- Charging time listed as "About 3 h".
+- Communication: "Supports 4G, Wi-Fi, Bluetooth, E-gate & Elevator Control (Optional)".
+- Auto charging and water refill/drain: "Supported (Requires Optional Docking Station)".
+- "Omni-Sense" AI obstacle perception detects static and moving obstacles, with a recognition model that "expands over time".
+- Work Station functions: automatic water refill and drainage, automatic return to charge, and self-cleaning of the roller brush and squeegee.
+
+**Suction and noise [VENDOR / RESELLER]:**
+- 17,000 Pa maximum suction and "< 70 dB(A)" are listed on the [original CC1 product page](https://www.pudurobotics.com/products/puduCC1).
+- Reseller Tovrana/Sparkobot repeats 17,000 Pa for the CC1 Pro ([Sparkobot CC1 Pro review](https://sparkobot.pages.dev/the-clean-sheet/pudu-cc1-pro-review)).
+
+**Squeegee width [VENDOR]:**
+- The original CC1 lists 63 cm for the squeegee and mopping-vacuuming part, plus an 88 cm minimum turning width and 76 cm minimum passing height ([Pudu Academy CC1 overview](https://academy.pudutech.com/en/docs/chan-pin-jian-jie-url0)).
+- The CC1 Pro shares the same chassis dimensions, so these figures likely apply to it as well. That is an inference, not a published CC1 Pro spec.
+
+**Conflicting figures:**
+- **Runtime.** RobotLAB advertises "Up to 8 hours" ([RobotLAB store page](https://www.robotlab.com/store/pudu-cc1-pro-robot/)), which contradicts the manual's 5 h scrubbing and 9 h silent-mopping figures.
+- **Dimensions.** One search-result snippet listed the CC1 Pro at 630 × 626 × 667 mm, which conflicts with the manual's 629 × 552 × 695 mm. I could not verify the source page.
+
+### Inferences
+- **Coverage math for the tower.** 1,000,000 sq ft is about 92,900 m². At 700–1,000 m²/h over a 5 h scrub charge, one robot covers roughly 3,500–5,000 m² per charge, which is about 3.8–5.4% of the building's gross area.
+  - Only the hard-floor common areas (lobby, retail frontage, corridors, BOH) are realistic targets.
+  - A multi-robot fleet, one per elevator-served zone or one per few floors, would be required.
+  - The vendor's "5,000–8,000 m² per deployment" refers to map size, not per-hour productivity.
+- **Small 15 L tanks.** Scrubbing a large lobby will need several dock cycles per night. The optional workstation is effectively mandatory for unattended overnight operation.
+- **Threshold and slope limits.** The 8 mm cleaning threshold, the 3° cleaning-slope limit and the 75 cm preferred corridor width mean elevator sills and ramps need checking floor by floor. The manual limits threshold height but does not specify the elevator car–landing gap; its 35 mm gap figure is for gaps generally.
+- **Residential corridors.** The robot handles "short-pile carpets" only (vacuum mode). Thick hotel or residential corridor carpet is outside the CC1 Pro's design envelope.
+
+### Gaps
+- No official CC1 Pro figure for squeegee width, turning radius or passing height. The CC1 Pro manual omits them, though the CC1 figures likely carry over.
+- No published dB(A) at a stated distance, beyond "< 70 dB".
+- No CC1 Pro-specific workstation specs, such as plumbing requirements, footprint or drain flow.
+
+---
+
+## 2. What changed from the CC1 to the CC1 Pro, and launch dates
+
+### Takeaway
+The CC1 launched on 23 May 2023. The CC1 Pro, announced on 27 May 2025, keeps essentially the same chassis and hardware (same dimensions, weight, battery, tanks, width, speed and runtimes). It adds an AI perception and decision layer: a rear verification camera, AI spot scrubbing, liquid-stain and floor-type detection, component self-monitoring, Omni-Sense obstacle AI and expanded VSLAM+ map coverage. It also adds hardware options: self-cleaning roller brushes, a contour-adaptive brush chamber and metal mesh filters. Pudu later added a CC1 Pro Disc scrubber variant.
+
+### Cited Findings
+- **CC1 launch [VENDOR].** The CC1 was announced 23 May 2023 as "Clean and Clever, Four-in-1". It offered visual SLAM and laser SLAM and won the Red Dot Product Design Award 2023 ([Pudu CC1 launch news](https://www.pudurobotics.com/about/news/646c32df72337c00391e396b); [Newswire.ca](https://newswire.ca/news-releases/pudu-robotics-ushers-in-a-new-era-of-digital-cleaning-with-its-intelligent-commercial-cleaning-robot-pudu-cc1-842307890.html)).
+- **CC1 Pro launch [VENDOR].** The press release is dated 27 May 2025, Shenzhen ([PR Newswire](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html); [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_cc1_pro_ai_powered_autonomous_cleaning_robot/press_release); [Robotics & Automation News](https://roboticsandautomationnews.com/2025/05/28/pudu-robotics-launches-new-ai-powered-cleaning-robot-for-large-scale-commercial-use/91262/)).
+- **CC1 Pro additions per the launch release [VENDOR]** ([PR Newswire](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html)):
+  - Liquid-stain and floor-type detection that adapts cleaning intensity.
+  - A rear AI camera that verifies results in real time, marks stubborn stains on the map, re-cleans them and produces a post-task heat map.
+  - AI spot scrubbing, claimed to be "up to 3x greater" spot-scrubbing productivity.
+  - Image-recognition self-monitoring of brush and squeegee contamination, which triggers re-cleaning or alerts staff.
+  - VSLAM+ (Visual plus LiDAR SLAM) with no ceiling markers.
+  - Dashboards covering debris hotspots, persistent stains, task completion and maintenance frequency.
+  - Effective cleaning range "significantly expanded" to 5,000–8,000 m².
+  - IEC 63327 certification.
+  - Optional self-cleaning roller brushes, a contour-adaptive brush chamber and high-durability metal mesh filters.
+  - The release gives no side-by-side figures for the CC1.
+- **Hardware is the same [VENDOR].** The original CC1 (model CCBC01) specs match the CC1 Pro (CCBC02) almost line for line:
+  - 75 kg, 62.9 × 55.2 × 69.5 cm, 50 Ah, < 3 h charge, 500 mm width, 700–1,000 m²/h, 15 L / 15 L tanks.
+  - 20 mm height, 35 mm gap, 8° slope, 70 cm path clearance, < 70 dB, IPX4, LiDAR plus visual SLAM.
+  - Sources: [Pudu Academy CC1 overview](https://academy.pudutech.com/en/docs/chan-pin-jian-jie-url0) and the [CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf).
+  - Runtime figures (5/5/4/9 h) are identical on the [CC1 product page](https://www.pudurobotics.com/products/puduCC1).
+- **Three versions in the market [RESELLER].** RobotShop sells a "CC1", a "CC1 – NEW" and a "CC1 Pro" ([RobotShop CC1 NEW listing](https://ca.robotshop.com/products/pudu-cc1-new-intelligent-cleaning-robot-grey)) and publishes a version-comparison PDF ([RobotShop PDF](https://cdn.robotshop.com/media/P/Pud/RB-Pud-40/pdf/cc1-version-comparison.pdf), which returned HTTP 403 to my fetcher and was not read).
+- **One reseller's summary [RESELLER].** "improved AI functionality, enhanced system stability, and more flexible cleaning strategies" (search snippet from a retailer listing; the page was not independently verified).
+- **CC1 Pro Disc [VENDOR].** Pudu now lists an "AI-Native Mid-Size Disc Scrubber-Dryer Robot" (CC1 Pro Disc): scrubbing and polishing only, 69 Ah, about 4.5 h charge, up to 5.3 h scrubbing, 80 kg, 380 mm cleaning width, 68 cm path clearance, 15 L / 15 L tanks, "Lidar + 3D VSLAM", with the same rear AI camera and Omni-Sense ([Pudu CC1 Pro Disc page](https://www.pudurobotics.com/en/products/cc1-pro-disc)). No launch date is given on the page.
+- **CC1 market traction [VENDOR].**
+  - A Pudu Europe article dated January 2026 claims over 20,000 CC1 units sold, in "more than 80 countries", with over 60% of shipments to Europe and North America ([EuroShop / Pudu Europe article](https://www.euroshop-tradefair.com/en/Home/Company_News/The_Secret_to_Global_Scale_Why_PUDU_CC1_Dominates_the_Commercial_Cleaning_Robot_Market)).
+  - The original CC1 received a "Smart Drop" water-efficiency certification in December 2024 ([Pudu news](https://www.pudurobotics.com/about/news/675be7bd0767a20044b2ab20)).
+
+### Inferences
+- **What the Pro premium buys.** It pays for software and perception (spot detection, verification and reporting), not for more capacity, runtime or speed.
+- **Choosing between CC1 and CC1 Pro.** For a property that mainly needs scheduled scrubbing, a discounted CC1 might deliver similar floor coverage. The Pro's verification heat maps are most valuable where cleanliness evidence matters, such as public lobbies and retail frontage.
+
+### Gaps
+- No official Pudu side-by-side CC1 vs CC1 Pro table was readable (the RobotShop PDF was blocked).
+- No US launch event date (for example ISSA Show North America 2025) was confirmed. An [ISSA/Interclean listing](https://www.intercleanshow.com/products-and-services/pudu-robotics/products/pudu-cc1-pro-ai-powered-autonomous-4-in-1-cleaning-robot) exists but was not read.
+- No CC1 Pro Disc launch date was found.
+
+---
+
+## 3. Multi-floor operation: elevators, maps, scheduling, zones
+
+### Takeaway
+Elevator and e-gate control are optional add-ons ("E-gate & Elevator Control (Optional)"). Pudu's elevator integrations run through IoT modules or elevator-OEM cloud APIs such as Otis. Scheduling, hibernation calendars, map areas and maintenance points are documented. I could not find CC1 Pro-specific documentation for virtual walls, keep-out zones or multi-floor map switching, but Pudu's platform does support multi-floor operation for its delivery robots.
+
+### Cited Findings
+- **Product page [VENDOR].** Communication includes "E-gate & Elevator Control (Optional)". IoT management goes through the Pudu Link app, with "modular connection to existing processes" ([CC1 Pro product page](https://www.pudurobotics.com/en/products/cc1-pro)).
+- **Original CC1 [VENDOR].** The product page lists "Intelligent lift control" (no detail) and "Breakpoint resume", which continues a task after recharging ([CC1 product page](https://www.pudurobotics.com/products/puduCC1)).
+- **RobotLAB [RESELLER].** Lists the CC1 Pro as supporting "Multi-floor ... including elevator integration" and "Smart Pass" compatibility with elevator and door-opener integration ([RobotLAB store page](https://www.robotlab.com/store/pudu-cc1-pro-robot/)).
+- **Elevator-OEM integration precedent [VENDOR / INDEPENDENT].**
+  - In September 2023 Pudu linked its FlashBot delivery robot to elevators with Nippon Otis using Otis Integrated Dispatch, over cloud or local API ([Elevator World](https://elevatorworld.com/news/daily-news/delivery-robot-successfully-integrated-with-japan-elevator/); [Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-successfully-integrates-flashbot-with-elevators/)).
+  - That was a delivery robot. I found no published CC1 Pro and Otis, Schindler or KONE integration.
+- **Scheduling and zones per the CC1 Operation Guide V6 [VENDOR]** ([Pudu Academy CC1 Operation Guide V6](https://academy.pudutech.com/en/docs/PUDU-CC1-Operation-Guide-V6)):
+  - Scheduled tasks run at a preset time if positioning is normal and battery and water are sufficient.
+  - Hibernation periods can be set by date, and batch hibernation can be applied across a store's robots via Pudu Link and the Merchant Platform.
+  - Task creation includes a "Select Map Area" step.
+  - Maintenance points can be added during mapping; the robot drives to one and waits when it hits an error.
+  - "Special Scenes" presets are available in Sweeping and Scrubbing modes.
+  - The Operation Guide V6 page I read did not cover multi-floor map switching, virtual walls or keep-out zones. Pudu Academy also lists a CC1 Pro Operation Guide V2.0, which I did not access.
+
+### Inferences
+- **Elevators in the tower.** Riding elevators will likely require Pudu's optional elevator-control hardware or an integration with the building's elevator OEM's dispatch API, plus per-floor maps and startup markers.
+  - Budget for elevator-integration engineering and confirm the OEM in a Miami high-rise (Otis, Schindler, KONE or TK Elevator).
+  - Consider whether a dedicated service car or a time-of-day restriction is needed.
+- **Keep-out zones.** Virtual walls and keep-out zones are standard on Pudu's mapping tools for other models, but I did not verify them for the CC1 Pro. Request a demo of keep-out, slow-zone and per-zone mode configuration.
+
+### Gaps
+- No CC1 Pro documentation was found on how many maps or floors a robot can store, cross-floor task chaining, or elevator hardware SKUs and pricing.
+- No US reference site was found with the CC1 Pro riding elevators.
+
+---
+
+## 4. Software: Pudu app and cloud, reporting, APIs/SDK, Open-RMF
+
+### Takeaway
+The robot is managed through the Pudu Link app and Pudu's cloud and Merchant Platform, which provide cleaning reports, heat maps and maintenance dashboards. Third-party integration goes through the PUDU Open Platform, generally available since August 2023, which standardizes interfaces for remote access and control. No official Open-RMF fleet adapter for Pudu was found, and a community thread reports API limits on direct pose commands.
+
+### Cited Findings
+- **Reporting [VENDOR].**
+  - Post-task heat maps, debris-hotspot maps and stain locations.
+  - An operations dashboard covering task completion, maintenance frequency and equipment alerts.
+  - Sources: [CC1 Pro product page](https://www.pudurobotics.com/en/products/cc1-pro); [PR Newswire](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html).
+- **Self-cleaning records and reports [VENDOR].** Roller-brush self-cleaning records can be viewed on the device and on the cloud platform. Past cleaning reports are viewable on the robot under Settings ([CC1 Operation Guide V6](https://academy.pudutech.com/en/docs/PUDU-CC1-Operation-Guide-V6)).
+- **PUDU Open Platform [VENDOR].**
+  - Announced 29–30 August 2023 for "deeper integration and remote management of delivery and cleaning robots".
+  - It "standardizes development interfaces and protocols" for remote access, navigation control, analytics and integration with existing business systems; examples include "opening smart doors".
+  - The announcement does not name specific APIs or cleaning models.
+  - Sources: [Pudu news](https://www.pudurobotics.com/about/news/64eeb7cb13fc2f004432c9cd); [PR Newswire](https://prnewswire.com/news-releases/pudu-robotics-launches-open-platform-for-deeper-integration-and-remote-management-of-delivery-and-cleaning-robots-301910279.html). The developer portal is at [open-legacy.pudutech.com](https://open-legacy.pudutech.com/en) and [pudurobotics.com/open-platform](https://pudurobotics.com/open-platform) (not read).
+- **Open-RMF [INDEPENDENT, community].** An Open Robotics Discourse thread reports that the Pudu API returns robot position but offers "no possibility to send to the robot [x,y,theta]". The suggested workaround is a fleet adapter mapping RMF destinations to named Pudu waypoints ([Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594.md)).
+- **Partnerships [VENDOR / partner].** A ToolSense strategic partnership with Pudu exists for fleet and asset management ([ToolSense press](https://toolsense.io/press/strategic-partnership-pudu-robotics)); its details were not read.
+
+### Inferences
+- **What Hotel.OS can expect.** Likely: task dispatch to predefined maps and areas, status and position polling, and report retrieval via Pudu's cloud Open Platform. Unlikely: arbitrary coordinate-level motion commands.
+- **Open-RMF.** Integration would need a custom fleet adapter at the waypoint and task level. Get written API scope for the CC1 Pro specifically (task start/stop, schedules, map areas, elevator events, webhooks) before purchase.
+
+### Gaps
+- No public CC1 Pro API reference (endpoints, rate limits, webhooks, on-prem option) was retrieved.
+- Not confirmed whether cleaning-robot task APIs are exposed or whether elevator calls can be brokered by a third-party building OS.
+
+---
+
+## 5. Safety, certifications, data and privacy
+
+### Takeaway
+Pudu claims IEC 63327, the IEC standard for automatic floor-treatment machines. The manual includes FCC Part 15 Class B and ISED Canada statements. A Pudu dealer states TÜV SÜD America certification to US and Canadian safety standards, with the C-US mark, Class I and IPX4. I found no Pudu privacy documentation specific to the robot's cameras.
+
+### Cited Findings
+- **IEC 63327 [VENDOR]** ([CC1 Pro product page](https://www.pudurobotics.com/en/products/cc1-pro); [PR Newswire](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html)).
+- **FCC Part 15 Class B and Industry Canada RSS compliance statements, IPX4 [VENDOR]** ([CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf)).
+- **TÜV SÜD [RESELLER].** "independently certified by TUV SUD America to the US and Canadian safety standards for this equipment", carrying "the C US mark, Class I, and an IPX4 water resistance rating" ([Tovrana/Sparkobot certification page](https://sparkobot.pages.dev/the-clean-sheet/commercial-cleaning-robot-certification)). The page does not name the UL or CSA standard number.
+- **UL 3300 not confirmed.** I found no source confirming UL 3300 for the CC1 or CC1 Pro (search across Pudu and reseller pages).
+- **Manual safety constraints [VENDOR].** Do not operate above 40 °C or below 0 °C. Not suitable for stairs or large slopes; rails should be installed at stair edges and downward slopes. Not recommended on heavily greasy floors. Remove cables from the floor. Emergency stop switch on the robot. ([CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf))
+- **Cameras and connectivity [VENDOR].** The robot carries RGB, RGBD, top-view and rear AI cameras and uses 4G, Wi-Fi and Bluetooth ([CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf); [CC1 Pro product page](https://www.pudurobotics.com/en/products/cc1-pro)).
+
+### Inferences
+- **Privacy exposure.** A camera-equipped, cloud-connected robot built by a Shenzhen vendor and operating in residential corridors and a public lobby raises privacy and data-residency questions.
+  - Request Pudu's data processing terms, image retention and anonymization policy, whether images leave the device, and whether 4G can be disabled in favor of building Wi-Fi with network segmentation.
+  - Also check any procurement restrictions on PRC-origin connected devices that apply to the owner.
+- **Certificates to request.** The TÜV SÜD certificate number and standard (likely UL/CSA 60335-2-72 or similar) and the IEC 63327 test report. The dealer claim alone should not be relied on.
+
+### Gaps
+- No Pudu privacy whitepaper, SOC 2 or ISO 27001 statement, or GDPR/CCPA documentation specific to the CC1 Pro was found.
+- No CE declaration was retrieved, although the multilingual EU-language manual suggests EU sale.
+
+---
+
+## 6. US price, purchase/lease/RaaS, distributors, warranty, service, consumables
+
+### Takeaway
+US list prices cluster around $22,000–$24,000 for the robot alone. The docking station is extra; a self-cleaning dock is listed at about $2,900. RaaS is about $669/month at RobotLAB. Warranty is 12 months at retail. Main US channels include RobotLAB (national), RobotsUSA, ImageNet Consulting and Florida-based Tovrana/Sparkobot. Consumable list prices were not found.
+
+### Cited Findings
+- **RobotLAB [RESELLER].** Purchase $24,000; RaaS $669/mo; financing "from $503/mo" (the same page's FAQ says "financing from $669/mo", which is inconsistent); lease by quote. Nationwide delivery, on-site setup, training and service ([RobotLAB store page](https://www.robotlab.com/store/pudu-cc1-pro-robot/)).
+- **RobotsUSA [RESELLER].** List $23,995, current price $21,995, part number 10240-000015, 12-month warranty, ships in 7–14 business days ([RobotsUSA listing](https://www.robotsusa.com/PUDU-CC1-Pro-AI-Powered-Autonomous-Cleaning-Robot.htm)).
+- **Tovrana/Sparkobot [RESELLER, Florida].** Manufacturer MSRP $24,000. Dock, accessories and installation are quoted per site. Leases run 24–63 months with return, renew or buy at end of term ([Sparkobot CC1 Pro review](https://sparkobot.pages.dev/the-clean-sheet/pudu-cc1-pro-review)). This is relevant because Tovrana/Sparkobot is a Florida-based channel for a Miami property.
+- **Docking stations [RESELLER].**
+  - ImageNet Consulting lists a Pudu Self-Cleaning Docking Station at $2,899, with Docking Station, Self-Cleaning and Self-Cleaning Pro configurations ([ImageNet listing](https://shop.imagenetconsulting.com/products/pudu-self-cleaning-docking-station)).
+  - RobotShop Canada lists a CC1 docking station at $2,142.86 and a self-cleaning docking station at $2,854.29; the currency is likely CAD ([RobotShop dock](https://ca.robotshop.com/products/pudu-docking-station-cc1); [RobotShop self-cleaning dock](https://ca.robotshop.com/products/pudu-self-cleaning-docking-station-cc1-series)).
+- **Warranty [VENDOR].** The manual says Pudu provides free warranty within "the effective warranty period (the warranty period may vary for different components)". The after-sales hotline is in Shenzhen (+86 755-86952935, techservice@pudutech.com) ([CC1 Pro User Manual](https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf)).
+- **Consumable replacement intervals [VENDOR]** ([CC1 Operation Guide V6](https://academy.pudutech.com/en/docs/PUDU-CC1-Operation-Guide-V6)):
+  - Squeegee blades and dust-mop rake blades: every 1, 2 or 3 months for high, medium or low wear.
+  - Roller brushes: replace at the red wear indicator.
+  - Side brushes: replace when worn.
+  - Dust-box filter: replace if suction does not recover after cleaning.
+  - Mop cloth: clean daily.
+  - Filter sponge: replace if heavily soiled.
+- **Routine maintenance per the CC1 Pro manual [VENDOR].** Wipe wheels and clean sensors and LiDAR weekly. Flush the recovery tank, dustbin and water-filter chamber every 2–3 days. With an automated workstation, cleaning the inside of the dirty tank drops to 1–2 times per week ([CC1 Operation Guide V6](https://academy.pudutech.com/en/docs/PUDU-CC1-Operation-Guide-V6)).
+
+### Inferences
+- **Per-unit cost.** Robot ($22–24K) plus self-cleaning dock (about $2.9K) comes to roughly $25–27K per unit before elevator-integration hardware and installation. A 6–10 unit fleet for the tower's common areas would be about $150–270K capex, or about $4–7K/month on RaaS at $669/unit.
+- **Squeegee replacement load.** Blades every 1–2 months under heavy lobby use mean ongoing consumable logistics.
+
+### Gaps
+- No US list prices were found for brushes, squeegees, filters, the mop cloth or the elevator and e-gate module.
+- No Pudu-direct US price list, extended-warranty pricing or service-level terms (response time, loaner units) were found.
+- No confirmed Pudu-authorized service technicians in South Florida.
+
+---
+
+## 7. Reviews, independent tests, deployments, reported problems
+
+### Takeaway
+There are no independent tests or hands-on reviews of the CC1 Pro. Available "reviews" are reseller marketing. The CC1 platform has scale: Pudu claims over 20,000 units, including a 200-unit Denner retail fleet in Switzerland. The CC1 Pro's highest-profile hospitality placement is a planned 44-room robot-run hotel in Shenzhen, which trade press describes as unproven.
+
+### Cited Findings
+- **Reseller "review" [RESELLER].** Tovrana/Sparkobot's CC1 Pro review contains no test data. It lists limits: floor-only, 70 cm minimum clearance, poor fit for very small footprints, and the dock is a separate add-on ([Sparkobot CC1 Pro review](https://sparkobot.pages.dev/the-clean-sheet/pudu-cc1-pro-review)).
+- **Hospitality use case [RESELLER].** The same channel describes overnight cleaning of hotel lobbies, corridors and event spaces with a morning heat-map report ([Sparkobot hospitality](https://sparkobot.pages.dev/industries/hospitality)).
+- **Shenzhen robot-run hotel [INDEPENDENT press].**
+  - Robots: CC1 Pro and MT1 for floors, alongside T300, BellaBot Pro, KettyBot Pro and FlashBot.
+  - Size and site: 44 rooms on West Artificial Island, Shenzhen–Zhongshan Link.
+  - Status: unveiled June 2026, trial operations late 2026, first guests early 2027.
+  - GadgetReview calls it "Impressive Demo, Unproven Hotel" and recalls Henn-na Hotel's robot breakdowns.
+  - Source: [GadgetReview, 29 Jun 2026](https://www.gadgetreview.com/?p=389600).
+- **CC1 deployments [VENDOR].** Over 20,000 CC1 units sold; Denner fleet of 200 CC1s; continuous operation at unnamed New Zealand international airports; a German senior-living chain. Hotels and offices are cited only as segments ([EuroShop / Pudu Europe article, Jan 2026](https://www.euroshop-tradefair.com/en/Home/Company_News/The_Secret_to_Global_Scale_Why_PUDU_CC1_Dominates_the_Commercial_Cleaning_Robot_Market)).
+- **US convenience-store case [RESELLER].** RobotLAB publishes a CC1 case study at QT (QuikTrip) ([RobotLAB blog](https://www.robotlab.com/blog/pudu-cc1-at-qt-how-a-4-in-1-floor-cleaning-robot-delivers-real-roi-in-convenience-stores/)); I did not read it.
+- **Reported limitation [RESELLER].** A Russian-language reseller page notes the CC1 struggles with thick carpets and high thresholds (search snippet, [The Daily Workflow](https://thedailyworkflow.com/ru/robots/pudu-cc1)). This is consistent with the manual's short-pile-only and 8 mm cleaning-threshold limits.
+- **No complaint threads found.** Searches surfaced no Reddit or forum complaint threads for the CC1 or CC1 Pro.
+
+### Inferences
+- **Reference checks.** Treat performance claims as unverified. Require a site trial (2–4 weeks) on the Miami lobby stone, which is likely marble or terrazzo, and on elevator transitions. Ask for US hotel references running the CC1 Pro specifically, not the CC1.
+- **The real constraint.** Pudu's fleet scale suggests the hardware is mature, since the CC1 chassis has shipped since 2023. The Pro's AI features are about 18 months old in market and have no independent validation.
+
+### Gaps
+- No named US hotel, airport, mall or office deployment of the CC1 Pro was found.
+- No published downtime, MTBF or failure-mode data.
+- The ISSA and Interclean product listing was not read; no CES or ISSA trade-show hands-on reports were found.
+
+---
+
+## 8. Comparison with Pudu MT1, Keenon C40, Avidbots, Gausium and Brain Corp-powered scrubbers
+
+### Takeaway
+The CC1 Pro is a compact, mid-size 4-in-1 unit (500 mm width, 700–1,000 m²/h). Pudu's own reseller positions the MT1 range for very large open areas. Larger scrubbers from Avidbots (Neo), Gausium (Scrubber 75 / Phantas) and Brain Corp-powered OEM machines (Tennant T7AMR/T380AMR, Nilfisk) target higher m²/h on large hard floors. The comparison lines below are mostly not sourced this session; other researchers cover the MT1 and C40.
+
+### Cited Findings
+- **MT1 positioning [RESELLER].** The MT1 range is described as "a better starting point for very large open floor areas where four-mode versatility is more than needed" ([Sparkobot CC1 Pro review](https://sparkobot.pages.dev/the-clean-sheet/pudu-cc1-pro-review)).
+- **Pairing in practice [INDEPENDENT press].** The CC1 Pro and MT1 are deployed together for floor cleaning in Pudu's Shenzhen robot hotel ([GadgetReview](https://www.gadgetreview.com/?p=389600)).
+- **Keenon C40.** My search for C40 versus CC1 Pro specs returned nothing usable; this is covered by another researcher.
+
+### Inferences
+These lines are background context from prior knowledge, not verified this session. Verify them against the other researchers' notes.
+- **Pudu MT1 family.** Larger sweepers and vacuum-oriented machines for big open spaces such as parking areas and malls. The MT1 Vac is aimed at carpeted and indoor areas. Pick the CC1 Pro where scrubbing of hard floors is needed in tighter spaces.
+- **Keenon C40.** A 4-in-1 competitor in the same compact class (sweep, vacuum, scrub, mop) with a workstation. It is the most direct like-for-like alternative to the CC1 Pro.
+- **Avidbots Neo, Gausium and Brain Corp-powered scrubbers.**
+  - These are full-size autonomous ride-on or walk-behind class scrubbers with much larger tanks and wider paths (about 66–80+ cm), suited to large open lobbies, concourses and malls.
+  - Brain Corp's BrainOS runs on OEM machines such as Tennant and Nilfisk with US dealer service networks.
+  - Avidbots (Canada) offers Avidbots Command Center cloud reporting.
+  - Gausium (China) sells the compact Phantas 4-in-1 (a CC1 Pro analog) and the larger Scrubber 50/75.
+  - All are typically more expensive per unit than the CC1 Pro but clean far more m²/h for big hard-floor areas.
+- **Implication for the tower.** A mixed fleet may fit best: one or two large scrubbers (Brain Corp-powered or Avidbots) for the main lobby and retail concourse, and CC1 Pro or C40-class units for corridors, elevator lobbies, amenity floors and BOH.
+
+### Gaps
+- No sourced spec or price comparison was gathered this session for the Keenon C40, Avidbots Neo, Gausium Phantas or Scrubber 75, or Tennant and Brain Corp machines.
+- No independent head-to-head tests between these brands were found.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pudu MT1, MT1 Vac, MT1 Max · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Pudu MT1, MT1 Vac, MT1 Max · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Pudu MT1 Family (MT1, MT1 Vac, MT1 Max): deep dive for a ~1M sq ft Miami mixed-use tower
+
+Research date: 2026-11-19. "Vendor" means a figure from Pudu or a reseller repeating Pudu. "Independent" means a third party's own finding. Almost every number below is a vendor claim. I found no independent lab tests and no named US deployment with measured results.
+
+## Which MT1 variants exist, when each launched, and how they differ
+
+### Takeaway
+There are three MT1 variants: the **MT1** (sweeper, Sept 2024), the **MT1 Vac** (sweeper plus vacuum plus dust mop, July 2025, model MTBC02) and the **MT1 Max** (3D-LiDAR outdoor and semi-outdoor sweeper, Aug 2025, model MTBC03). I found no fourth variant as of Nov 2026. All three are **dry-only** machines. For wet scrubbing, Pudu's line is the CC1 / CC1 Pro, not the MT1.
+
+### Cited Findings
+- The MT1 launched via PR Newswire on 10 Sept 2024 as an "AI Powered Robotic Sweeper" for large-scale environments, with AI trash recognition and elevator/gate IoT integration (vendor) — [AAP / Cision release](https://www.aap.com.au/aapreleases/cision20240910ae01186)
+- The MT1 was shown at ISSA Show North America 2024 in Las Vegas (Nov 2024) as a newly launched product — [Pudu news](https://www.pudurobotics.com/about/news/6731be435136a4004356e31c)
+- The MT1 Vac launch was covered on 20 July 2025. The coverage says it "sits between" the wet-cleaning CC1 series and the original MT1 sweeper — [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries); [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-pudu-mt1-vac-ai-powered-robotic-sweeper--vacuum-sets-new-standard-for-commercial-dry-cleaning-302505407.html)
+- The MT1 Max was released from Shenzhen on 20 Aug 2025 as "the third model in the series, following the PUDU MT1 (2024) and the PUDU MT1 Vac (2025)" — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-mt1-max-ai-powered-3d-perception-robotic-sweeper-for-complex-large-scale-environments-302534300.html)
+- Model codes: MT1 Vac = MTBC02 — [MT1 Vac Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide); MT1 Max = MTBC03 — [MT1 Max Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+- Reseller SKUs: MT1 = 10250-000009 — [American Satellite](https://www.americansatellite.com/PUDU-MT1-AI-Powered-Robotic-Sweeper.htm); MT1 Vac = 10251-000003 — [Robots International](https://www.robotsinternational.com/PUDU-MT1-Vac-Al-powered-Robotic-Sweeper-Vacuum.htm); MT1 Max = 10252-000003 — [American Satellite](https://www.americansatellite.com/PUDU-MT1-Max-Al-powered-3D-Perception-Robotic-Sweeper.htm)
+- In March 2026 the MT1 Max was demonstrated outdoors at the Davos train station plaza (demo only) — [Robotics Tomorrow, Jul 2026](https://www.roboticstomorrow.com/news/2026/07/03/pudu-robotics-brings-physical-ai-into-everyday-life-at-davos-tech-summits-robot-city/26801/)
+
+**Naming confusion to flag**
+- One AI search summary said the MT1 Max launched "16 March 2026." The primary PR Newswire release is dated **20 Aug 2025**, which makes the March 2026 date most likely a mix-up with the Davos demo or a re-post.
+- The "MT1 Vac" is not just a vacuum. It sweeps (70 cm with side brushes), vacuums (55 cm suction path) and dust-mops — [Pudu MT1 Vac page](https://www.pudurobotics.com/en/products/mt1-vac)
+- One reseller title reads "PUDU MT1 Robotic Sweeper & Vacuum" for the base MT1 — [RobotShop CA](https://ca.robotshop.com/products/pudu-mt1-robotic-sweeper-vacuum). The base MT1 is a sweeper with high-flow negative-pressure dust control. It is not the dedicated vacuum (the MT1 Vac) — [Pudu MT1 page](https://www.pudurobotics.com/en/products/mt1)
+- "MT1" has no relation to the "Telo MT1" electric truck, which appears in search results.
+- Reseller pages list the MT1 Max as weighing 85 kg, but one listing also shows a 490 mm height. That height belongs to the MT1 and MT1 Vac; the Max is 675 mm tall because of its 3D LiDAR mast — [log-robot](https://log-robot.com/en/cleaning-robots/pudu-mt1-max) vs [Pudu MT1 Max page](https://www.pudurobotics.com/en/products/mt1-max)
+
+### Inferences
+- For a hotel tower whose public areas are mostly carpet plus hard-floor lobbies, the **MT1 Vac** is the only variant built for carpet. The MT1 suits large hard-floor areas such as the lobby, back-of-house, loading docks and garage. The MT1 Max targets the garage and semi-outdoor areas such as porte-cochère and covered drives. None of the three cleans guest rooms or corridors narrower than about 80–85 cm.
+
+### Gaps
+- I could not find any newer 2026 variant (for example an "MT1 Pro" or "MT1 Mini"). If one exists, it was not visible in the search results.
+- I did not find an official US launch date separate from the global launches.
+
+---
+
+## Per-variant specifications
+
+### Takeaway
+All three share an 840 × 600 mm footprint, a 75 cm minimum passage, a 0.2–1.2 m/s speed, a 20 mm obstacle limit and a 3° cleaning-slope limit. The Max is the largest and most productive (2,200 m²/h, 35 L, 5–10 h, IP54, 3D LiDAR). The Vac is the slowest (1,400 m²/h) but the only one built for carpet and HEPA filtration.
+
+### Cited Findings (all vendor figures unless noted)
+
+| Spec | MT1 | MT1 Vac | MT1 Max |
+|---|---|---|---|
+| Cleaning type | Dry sweep (dual-disc brushes, roller), negative-pressure dust control; no dust mop listed [1] | Sweep + vacuum + dust mop; optional vertical module for wall edges, upholstery and glass [2][4] | Dry sweep only; no wet cleaning [3][7] |
+| Dimensions | 840 × 600 × 490 mm [1] | 840 × 600 × 490 mm [2] | 840 × 600 × 675 mm [3] |
+| Weight | 65 kg [1] | 75 kg [2] | 85 kg [3] |
+| Cleaning width | 70 cm [1] | 55 cm vacuum; ~70 cm sweep with side brush [2][5] | 70 cm with side brush; 0 cm edge gap [3] |
+| Coverage rate | 1,800 m²/h standard; 6,000 m²/h spot mode [1] | Max 1,400 m²/h [2] | 2,200 m²/h cover; 7,000 m²/h spot [3] |
+| Bin / dust capacity | 35 L bin [1] | 6 L bin + 2 × 7 L dust bags (20 L total) [2] | 35 L [3] |
+| Battery | not listed [1] | 60 Ah, DC 23–29.2 V [5] | 60 Ah [3] |
+| Runtime | 4–8 h [1] | 3–6.5 h; 4 h standard sweep+vac on hard floor [2][5] | 5–10 h; 8 h standard [3] |
+| Charge time | < 3 h; "3 full-charge cycles per day" [1] | < 3.5 h [2][5] | < 3.5 h [3] |
+| Docking | Auto charging; optional Auto-Empty Station [1] | Auto charging station / charging pile; **no auto-empty listed** [2][5] | Auto charging + Auto-Empty Station [3] |
+| Navigation / sensors | VSLAM + marker + LiDAR SLAM; AI cameras for trash recognition; 3D depth [1] | VSLAM + marker + LiDAR SLAM; VSLAM, RGB and RGB-D cameras; AI floor-type recognition [2][5] | VSLAM + marker + **3D LiDAR** SLAM; multi-sensor fusion; 150 m detection; dual-chip compute; RGB/RGB-D cameras [3][6][7] |
+| Min passage | 75 cm [1] | 75 cm; >80 cm recommended for long corridors [5] | 75 cm; >85 cm recommended for long corridors [7] |
+| Noise | not listed | min 65 dB(A) (operation guide) [5] | < 75 dB(A) cleaning [7] |
+| Slope | not listed | 8° climb when not cleaning; no cleaning above 3° [5] | 8° climb when not cleaning; no cleaning above 3° [7] |
+| Threshold / gap | not listed | 20 mm obstacle; 30 mm gap [5] | 20 mm obstacle; < 50 mm speed bumps; 30 mm gap [7] |
+| Ingress protection | not listed | IPX3; flat indoor areas only [5] | IP54; outdoor/semi-outdoor; not in rain, snow or direct sun [3][7] |
+| Operating temp | n/a | −10 to 40 °C [5] | −10 to 45 °C [7] |
+| Floor types | Large hard floors (warehouses, airports, malls) [1][8] | Hardened floors + **short-pile and industrial carpet only** [5] | Hardened floors; avoid non-hardened ground, heavy oil, standing water [7] |
+| Filtration | filter-based dust control [1] | H11 (>98% @0.3 µm); optional H13 (99.97%) [2] | Self-cleaning filter via internal vibration [6] |
+
+Sources: [1] [Pudu MT1 page](https://www.pudurobotics.com/en/products/mt1) · [2] [Pudu MT1 Vac page](https://www.pudurobotics.com/en/products/mt1-vac) · [3] [Pudu MT1 Max page](https://www.pudurobotics.com/en/products/mt1-max) · [4] [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries) · [5] [MT1 Vac Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide) · [6] [MT1 Max PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-mt1-max-ai-powered-3d-perception-robotic-sweeper-for-complex-large-scale-environments-302534300.html) · [7] [MT1 Max Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide) · [8] [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/)
+
+- **Auto-Empty Station** (vendor): 760 × 2010 × 680 mm, 57.8 kg, 100–240 VAC, 1.5 A (max 10 A). It works with the "MT1, MT1 Max (paired with waste box)" and dumps into trash cans up to 1,350 mm tall. The MT1 Vac is **not** listed as compatible — [Pudu MT1 Max page](https://www.pudurobotics.com/en/products/mt1-max); [Pudu MT1 page](https://www.pudurobotics.com/en/products/mt1)
+- MT1 Vac claims (vendor):
+  - The twin-fan, dual-air-duct design is "industry-first" and raises suction "by up to 200%"; it can pick up 3 mm steel balls — [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries)
+  - It can run up to 10 days in a 1,000 m² carpeted area before emptying — [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries)
+  - It has a hand-vacuum extension and tool-free swaps of mop, bins and brushes — [Pudu MT1 Vac page](https://www.pudurobotics.com/en/products/mt1-vac)
+- MT1 Max safety features (vendor): a 1.2 m warning beacon, safety projection light, audible and visual alarms, a water-drop (rain) sensor that triggers a protective mode, and avoidance of vehicles, pedestrians and animals — [Pudu MT1 Max page](https://www.pudurobotics.com/en/products/mt1-max)
+- MT1 spot mode claims a "500% efficiency increase" (vendor) — [Pudu MT1 page](https://www.pudurobotics.com/en/products/mt1)
+- Noise conflict: the MT1 Vac guide gives "min 65 dB(A)." A generic Pudu Academy overview lists "<75 dB" without clearly naming the model — [Pudu Academy overview](https://academy.pudutech.com/en/docs/chan-pin-zhi-nan)
+- Runtime conflict: log-robot advertises 8 h for the MT1 Vac, while Pudu says 3–6.5 h — [log-robot MT1 Vac](https://log-robot.com/en/cleaning-robots/pudu-mt1-vac) vs [Pudu](https://www.pudurobotics.com/en/products/mt1-vac)
+
+### Inferences
+- The guides note that perception can struggle with black, mirrored or transparent surfaces, which is relevant to a glass-and-stone Miami lobby. This was raised in a desk review of the Max guide — [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/). Expect to need mapping work around storefront glass.
+- The 20 mm threshold limit means elevator sills, transition strips and lobby mats need checking.
+- At 490–675 mm tall and 65–85 kg, these robots fit public areas and back-of-house, not residential corridors with doors.
+- Rough productivity at vendor maximum rates: one MT1 at 1,800 m²/h (~19,400 sq ft/h) for 6 h covers about 116,000 sq ft per shift. Real-world rates are usually far below the vendor maximum.
+
+### Gaps
+- Base MT1 noise, slope, threshold and IP rating: the base MT1 operation guide was not retrieved.
+- Carpet pile-height limit for the MT1 Vac: the guide says only "short-pile and industrial."
+- Whether the MT1 Max climbs onto vehicle ramps in parking garages above 3°: the guide forbids cleaning there.
+
+---
+
+## Multi-floor operation, mapping, scheduling, zones and spot cleaning
+
+### Takeaway
+All MT1 variants advertise elevator and e-gate IoT integration and support map creation, editing and scheduling. Elevator riding needs an extra Pudu elevator-control hardware kit. "AI trash recognition + spot cleaning" is the main feature across the family.
+
+### Cited Findings
+- The product pages for all three list "IoT integration: Elevators, E-gates, PUDU Link" (vendor) — [MT1](https://www.pudurobotics.com/en/products/mt1); [MT1 Vac](https://www.pudurobotics.com/en/products/mt1-vac); [MT1 Max](https://www.pudurobotics.com/en/products/mt1-max)
+- The original MT1 launch release named IoT integration with elevators and gates for multi-floor cleaning — [AAP / Cision](https://www.aap.com.au/aapreleases/cision20240910ae01186)
+- Resellers sell a separate "PUDU Elevator Control System for MT1 / MT1 Vac" accessory. The listing returned 404 when fetched, so price and details are not confirmed — [RobotShop CA (search listing)](https://ca.robotshop.com/products/pudu-elevator-control-system-mt1-mt1-vac)
+- RobotLAB says the MT1 supports "Elevator and e-gate control" (reseller) — [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/)
+- Maps, scheduling and maintenance points:
+  - Maps are created and edited in Settings; maintenance points can be added during mapping — [MT1 Max Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+  - Scheduled tasks start if positioning and battery are OK. Sleep periods block them and can be set in batches via PUDU Link — [MT1 Vac Operation Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide)
+- Litter detection:
+  - The MT1 has "AI trash recognition: identifies trash types in real time" plus AI spot cleaning — [Pudu MT1](https://www.pudurobotics.com/en/products/mt1)
+  - The MT1 Vac has "Smart spot cleaning: detects trash during inspection and cleans it on the spot." It also recognizes floor material and adjusts suction and brush speed — [Pudu MT1 Vac](https://www.pudurobotics.com/en/products/mt1-vac)
+  - The MT1 Max has a separate spot-cleaning rate of up to 7,000 m²/h, meaning it patrols and cleans only the litter it detects — [Pudu MT1 Max](https://www.pudurobotics.com/en/products/mt1-max)
+- The MT1 Max claims coverage of up to 100,000 m² (vendor) — [Pudu MT1 Max](https://www.pudurobotics.com/en/products/mt1-max)
+
+### Inferences
+- Spot-cleaning mode (patrol and pick up only detected litter) fits a busy public lobby during operating hours better than full-coverage sweeps.
+
+### Gaps
+- The operation guides I fetched did not describe virtual walls, no-go zones or keep-out areas explicitly. The Max guide mentions selectable obstacle types only. Keep-out zones are standard in Pudu's cleaning UI, but I could not cite them for the MT1.
+- Elevator-kit price, supported elevator brands and per-floor map-switch behavior were not found.
+
+---
+
+## Software, cloud, APIs and Open-RMF
+
+### Takeaway
+Pudu offers the PUDU Link app/cloud and the **PUDU Open Platform** (launched Aug 2023), with APIs for delivery and cleaning robots. There is **no official Open-RMF adapter**. A community report says the API reads robot position but cannot accept arbitrary x/y goals, so Hotel.OS integration would work through named-waypoint and task-level commands.
+
+### Cited Findings
+- In Aug 2023, Pudu launched an Open Platform for "deeper integration and remote management of delivery and cleaning robots." It standardizes interfaces and protocols for distributors and developers — [Pudu news](https://www.pudurobotics.com/about/news/64eeb7cb13fc2f004432c9cd); [PR Newswire](https://prnewswire.com/news-releases/pudu-robotics-launches-open-platform-for-deeper-integration-and-remote-management-of-delivery-and-cleaning-robots-301910279.html)
+- The developer portal is at open.pudutech.com. It now offers an AI coding "skill" so coding assistants can work against PUDU APIs — [PUDU Open Platform](https://open.pudutech.com/en); [PUDU skill](https://open.pudutech.com/pudu-skill)
+- ToolSense, a third-party fleet/IoT platform, has an API integration that shows completed Pudu cleaning tasks, the areas cleaned and the protocols run — [ToolSense press](https://toolsense.io/press/strategic-partnership-pudu-robotics)
+- Open-RMF (community, Feb 2025): a user reading the Pudu docs found that the API can retrieve the robot's map position but cannot send an [x, y, θ] goal. The suggested workaround was to have the RMF fleet adapter send a destination name matching a waypoint on the robot. This is independent but anecdotal — [Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594)
+- PUDU Link provides fleet management, and the MT1 box includes a "perpetual software license" (reseller) — [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/)
+- RobotShop sells "Integration Services for Pudu MT1" as a line item — [RobotShop CA](https://ca.robotshop.com/products/integration-services-for-pudu-mt1)
+
+### Inferences
+- Hotel.OS would likely dispatch at the task/map/zone level (start a named cleaning task, read status, position and reports) through the Open Platform cloud API, not through fine-grained motion control. Elevator handoff would stay inside Pudu's own elevator kit unless Pudu exposes an elevator interface.
+
+### Gaps
+- Exact MT1 cleaning-API endpoints (task start/stop, report export, webhook events) were not verified in the docs.
+- No information found on API rate limits, local (on-prem) API or LAN-only operation.
+
+---
+
+## Safety, certifications and data/privacy
+
+### Takeaway
+Public documentation names **no specific UL, ETL, CE, FCC or IEC certificates** for any MT1. The guides mention only a "Certificate of Conformity" in the box, plus IPX3 (Vac) and IP54 (Max). All variants carry several RGB and RGB-D cameras and connect to the cloud over 4G or Wi-Fi.
+
+### Cited Findings
+- The packing lists include a "Certificate of Conformity" with no standards named — [MT1 Vac Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide); [MT1 Max Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+- A desk review found only IP54 and temperature ranges listed for the Max. It says explosive or hazardous environments need separate written certification — [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/)
+- The only Pudu FCC record that surfaced was for a different product (PT1, FCC ID 2AXDW-PT1) — [fcc.report](https://fcc.report/FCC-ID/2AXDW-PT1/4892123.pdf)
+- Cameras and connectivity:
+  - The MT1 Vac has VSLAM, RGB and RGB-D cameras; connectivity is 4G, Wi-Fi, Bluetooth, LoRa or 2.4G (optional). The guide gives no privacy or data-handling information — [MT1 Vac Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide)
+  - The MT1 Max has a VSLAM camera, RGB cameras and RGB-D cameras with fill light, plus 3D LiDAR — [MT1 Max Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+
+### Inferences
+- Before deploying in residential and retail common areas, the operator should get the UL 3300 (or equivalent) and FCC Part 15 documentation from Pudu US or the reseller. The operator should also get Pudu's data-processing terms, given the cameras and China-based cloud vendor. Some US entities face procurement scrutiny of Chinese-made connected devices; this is general context, not an MT1-specific finding.
+
+### Gaps
+- Not found: UL 3300 status, FCC IDs for MTBC02/MTBC03, Pudu privacy policy for camera data, data residency, and whether images are uploaded or processed on-device.
+
+---
+
+## US pricing, purchase, lease and RaaS, distributors, warranty, consumables
+
+### Takeaway
+US reseller prices are about **$17k–19k for the MT1**, about **$20k for the MT1 Vac** and about **$25k (up to ~$32.6k) for the MT1 Max**. Charging and auto-empty stations, the elevator kit and integration cost extra. RaaS is offered at about $400–560/month for the MT1 and Vac. Pudu publishes no MSRP.
+
+### Cited Findings
+- **MT1:**
+  - RobotLAB: $19,000 purchase or $529/mo RaaS; lease also offered. The box includes the robot, power cord and perpetual license, with the charging station sold separately — [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/)
+  - A search snippet attributed "$398/mo" RaaS for the MT1 and "$559/mo" for the MT1 Vac to RobotLAB; this conflicts with the $529 figure on the fetched page — [RobotLAB](https://www.robotlab.com/store/pudu-mt1-robot/)
+  - Other US resellers list it at $18,995 / $16,995 (SKU 10250-000009) — [American Satellite](https://www.americansatellite.com/PUDU-MT1-AI-Powered-Robotic-Sweeper.htm); [NASSCO](https://www.nasscoinc.com/item/10250-000009/PUDU/)
+- **MT1 Vac:** RobotLAB lists $20,000 — [RobotLAB MT1 Vac](https://www.robotlab.com/store/pudu-mt1-vac/)
+- **MT1 Max:**
+  - RobotLAB lists "starts at $25,000" with lease and RaaS on quote — [RobotLAB MT1 Max](https://www.robotlab.com/store/pudu-mt1-max/)
+  - An earlier search snippet showed "from $32,600 or RaaS $1,360/mo" on RobotLAB, so the price has varied — [RobotLAB](https://www.robotlab.com/store/pudu-mt1-max/)
+  - Other prices: about $24,995 at American Satellite — [American Satellite](https://www.americansatellite.com/PUDU-MT1-Max-Al-powered-3D-Perception-Robotic-Sweeper.htm); CA$32,142.86 at RobotShop Canada — [RobotShop CA](https://ca.robotshop.com/products/pudu-mt1-max-robotic-sweeper); A$39,380 incl. GST in Australia (checked Sept 2026) — [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/)
+- **Distributors (US):**
+  - RobotLAB says it is the "largest robotics integrator" and sells, deploys, trains and services nationwide — [RobotLAB](https://www.robotlab.com/store/pudu-mt1-robot/)
+  - Others: American Satellite, NASSCO, UCGHDD, Robots International, RobotShop and Filo CleanTech — [American Satellite](https://www.americansatellite.com/PUDU-MT1-AI-Powered-Robotic-Sweeper.htm); [NASSCO](https://www.nasscoinc.com/item/10250-000009/PUDU/); [UCGHDD](https://ucghdd.com/products/pudu-mt1-ai-powered-robotic-sweeper); [Filo CleanTech](https://filocleantech.com/products/pudmt1)
+- **Accessories sold separately:** MT1 charging station — [RobotShop](https://www.robotshop.com/es/products/estacion-carga-pudu-para-mt1); MT1 air filter — [RobotShop CA](https://ca.robotshop.com/products/pudu-air-filter-mt1)
+- **Warranty:** free warranty from the activation date "within the valid period," with periods varying by component. Exclusions are unauthorized repair, water or foreign-object ingress, collisions and drops. No term length is published in the guides — [MT1 Vac Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide); [MT1 Max Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+- **Consumable intervals, MT1 Vac** (vendor): side and roller brushes every 6–12 months; **air filter weekly**; **dust bag weekly**; rubber strips every 6–12 months; HEPA is non-washable — [MT1 Vac Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide)
+- **Consumable intervals, MT1 Max** (vendor): brushes every 6–12 months; air filter every 3–6 months (self-cleaning vibration); rubber strips every 6–12 months — [MT1 Max Guide](https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide)
+
+### Inferences
+- The MT1 Vac's weekly dust-bag and filter changes make it the most consumable-heavy variant. Budget 52+ bags and filters per robot per year.
+
+### Gaps
+- Consumable unit prices (brushes, filters, bags) were not captured. The RobotShop filter listing exists, but no price was retrieved.
+- Warranty length (commonly 12 months for Pudu, unverified), Pudu US direct pricing, and Florida or Miami service-technician coverage were not found.
+
+---
+
+## Reviews, independent tests, deployments and reported problems
+
+### Takeaway
+There are **no independent hands-on tests and no published, named US hotel, airport or mall deployments with measured outcomes** for any MT1 variant. Available material is press releases, trade-show demos, reseller copy and one marketplace desk review.
+
+### Cited Findings
+- Anton Robots' MT1 Max review is documentation-based ("not a claim of hands-on laboratory testing") and published by a robot marketplace. The limits it lists:
+  - Dry sweeper only.
+  - Not for rain, snow or direct sun.
+  - IP54 is not washdown-rated.
+  - No cleaning above 3°.
+  - Needs 75 cm passages (85 cm recommended).
+  - Struggles with black, mirrored or transparent surfaces.
+  - The 35 L bin may fill fast.
+  - "Public MT1 Max-specific case studies with independently measured ROI are limited."
+  - Source: [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/)
+- Demonstrations:
+  - The Pudu × Shenzhen CTID "full-scenario robot-serviced hotel" (Shenzhen–Zhongshan Link) used the CC1 Pro and MT1 in a signing demo, with trial operations planned for late 2026. This is a press release, not an outcome report — [Hospitality Net](https://www.hospitalitynet.org/news/4132730/pudu-robotics-and-shenzhen-ctid-co-ltd-launch-the-worlds-first-full-scenario-robot-serviced-hotel-project)
+  - MT1 Max demo at the Davos station plaza — [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2026/07/03/pudu-robotics-brings-physical-ai-into-everyday-life-at-davos-tech-summits-robot-city/26801/)
+- Target sites (vendor):
+  - MT1 Vac: airports, conference and exhibition spaces, large hotels, campuses, metro stations, casinos, offices and malls — [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries)
+  - MT1 Max: parking garages, semi-open atriums, hangars and MRO shops — [PR Newswire](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-mt1-max-ai-powered-3d-perception-robotic-sweeper-for-complex-large-scale-environments-302534300.html); [AviationPros](https://www.aviationpros.com/aircraft-maintenance-technology/mros-repair-shops/press-release/55311647/pudu-robotics-launches-ai-powered-3d-perception-robotic-sweeper)
+- US trade press coverage repeated vendor claims without testing: Buildings.com on the MT1 Vac — [Buildings.com](https://buildings.com/products/janitorial-sanitation-solutions/product/55312130/pudu-robotics-powered-by-ai-the-mt1-vac-autonomously-cleans-high-traffic-spaces); Spaces4Learning and New Equipment Digest on the MT1 Max — [Spaces4Learning](https://spaces4learning.com/articles/2025/08/26/pudu-mt1-max-floor-sweeper.aspx); [New Equipment Digest](https://www.newequipment.com/home/product/55311414/pudu-robotics-us-pudu-mt1-max-robotic-sweeper-adds-3d-perception-for-large-environments)
+
+### Inferences
+- Because no case data exists, a paid pilot (one MT1 Vac on lobby and ballroom carpet, one MT1 on back-of-house and garage hard floor) with measured m²/h and intervention counts is the only way to validate fit.
+
+### Gaps
+- No user complaints, failure reports, recalls or YouTube hands-on tests were found within this search budget.
+
+---
+
+## Comparison with Keenon C40, Pudu CC1 / CC1 Pro, Avidbots, Gausium and Brain Corp
+
+### Takeaway
+The MT1 family covers **dry, large-area** cleaning. The CC1 / CC1 Pro and the Keenon C40 are compact **wet/multi-function** scrubbers for smaller spaces. Avidbots (Kas, Neo) and Brain Corp-powered machines (Tennant, Nilfisk) are the established US incumbents. The closest like-for-like rival is the Gausium Beetle, a 3D-LiDAR sweeper.
+
+### Cited Findings
+- Pudu positions the MT1 Vac between the wet CC1 series and the dry MT1 — [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries)
+- A Pudu "MT1 vs CC1" comparison PDF (Sept 2024) exists on RobotShop's CDN — [RobotShop PDF](https://cdn.robotshop.com/media/P/Pud/RB-Pud-19/pdf/pudu-mti-vs-cc1-20240907-en-comparison.pdf); a CC1 version comparison (CC1 / New CC1 / CC1 Pro) is also available — [RobotShop PDF](https://cdn.robotshop.com/media/P/Pud/RB-Pud-40/pdf/cc1-version-comparison.pdf)
+- A reseller describes the CC1 as wet-process (sweep, scrub, vacuum and mop with water/detergent) at about 1,000 m²/h. This is a reseller claim — [gotbots247](https://gotbots247.pages.dev/robots/mt1-vac)
+- The Keenon C40 is "optimized for mixed flooring conditions," prioritizes efficiency and maneuverability, and is less powerful than the C55. This is a blog source; I found no numeric specs — [DandyGadget](https://dandygadget.com/?p=21405)
+- Gausium Beetle: 3D LiDAR, 75 cm width and 45 L bin, presented as the closest industrial rival to the MT1 Max (marketplace desk review) — [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/)
+- Tennant X16 Sweep: a much larger machine (816 kg, 150 L hopper, up to 4,621 m²/h), from the same desk review — [Anton Robots](https://antonrobots.com/pudu-mt1-max-review/)
+- RobotLAB prices for comparison: Gausium Vacuum 40 at $42,000 and SoftBank Whiz at $25,000, against the MT1 at $19,000 and the MT1 Vac at $20,000 — [RobotLAB MT1](https://www.robotlab.com/store/pudu-mt1-robot/)
+
+### Inferences
+- For a large hotel property, a likely fleet mix would be MT1 Vac units for carpeted public spaces, ballrooms and meeting levels; an MT1 or MT1 Max for the garage, loading dock and semi-outdoor drives; and CC1 Pro or Keenon C40-class units for wet-cleaning lobby stone, restrooms and F&B areas.
+- On price, the MT1 family undercuts Gausium Vacuum 40 and the typical Avidbots and Brain Corp scrubbers, which commonly cost $40k–60k+. That incumbent range is general market knowledge I did not verify in this session.
+
+### Gaps
+- Not verified this session: Keenon C40 specs and price, CC1 Pro specs and price, and Avidbots Kas or Brain Corp-powered vacuum specs and prices. These should come from the sibling Keenon / CC1 research notes.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

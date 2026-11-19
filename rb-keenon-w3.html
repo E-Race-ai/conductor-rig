@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keenon W3 (in-room delivery) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Keenon W3 (in-room delivery) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Keenon W3 (BUTLERBOT W3) hotel delivery robot: deep dive (as of Nov 2026)
+
+Research notes. Every figure below comes from vendor or reseller marketing unless it is marked **[independent]**. I could not retrieve Keenon's own W3 product page or spec sheet: keenon.com/en/products/w3 returned 404, and the only keenon.com search hit was a general hotel page. Spec figures are therefore triangulated across US and UK distributors, and the sources disagree on several of them.
+
+## 1. Product status and successor
+
+### Takeaway
+The W3 ("BUTLERBOT W3") is still Keenon's enclosed multi-compartment hotel delivery robot in late 2026. I found no announced W3 successor or "W3 Pro" variant. Keenon's 2026 launches went to humanoids (XMAN-R1) working alongside existing special-purpose bots.
+
+### Cited Findings
+- At WAIC 2026 (July 2026), Keenon showed its XMAN-R1 humanoid on front-of-house tasks. It framed the strategy as general-purpose humanoids paired with specialized robots, which keep doing high-frequency delivery and cleaning. No new hotel delivery model was announced. (Vendor PR) — [Manila Times / PR Newswire](https://www.manilatimes.net/2026/07/18/tmt-newswire/pr-newswire/global-commercial-service-robot-shipments-leader-keenon-puts-humanoids-to-work-at-waic-2026/2386862)
+- Keenon press release on a humanoid joining a hotel workforce in a "general-purpose + special-purpose robot collaboration model". (Vendor PR) — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html)
+- At a Shangri-La Traders Hotel deployment (late 2025), the W3 handled in-room deliveries alongside other Keenon models for luggage, cleaning and restaurant delivery. This was reported through search summaries of the release above; I did not verify it against the original page. — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html)
+- US distributors were still listing the W3 in 2026, including RobotLAB, RobotsUSA/Robots International and Knoxlabs. — [RobotLAB](https://www.robotlab.com/store/keenon-w3/); [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+
+### Inferences
+- An operator buying in 2026–27 is buying a platform launched around 2022–23. Ask Keenon whether a hardware refresh is coming and how long it commits to software support.
+
+### Gaps
+- I could not reach an official keenon.com W3 page or datasheet. The model's launch date was not confirmed from a primary source.
+
+## 2. Full specifications
+
+### Takeaway
+The W3 is a roughly 48 kg, 459 × 549 × 1081 mm robot. It carries 2–4 configurable enclosed compartments (about 90 L in total), with a 20 kg total payload and 10 kg per compartment. Cruise speed is up to 0.8 m/s, it needs a 70 cm minimum passage, and it runs about 9–12 h on a 6.5 h charge. Navigation fuses laser and visual SLAM, with stereo cameras and a collision bar. All of these are distributor-stated, and sources conflict on runtime, charge time, speed and weight.
+
+### Cited Findings
+- **Dimensions:** 459 × 549 × 1081 mm (18.1 × 21.6 × 42.6 in). — [RobotLAB](https://www.robotlab.com/store/keenon-w3/); also 45.9 × 54.9 × 108.1 cm — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- **Weight:** 48 kg (106 lb) with battery — [RobotLAB](https://www.robotlab.com/store/keenon-w3/); [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm). Contradicted by a 45 kg catalogue figure, which that page itself says has no model-specific source — [GrabaRobot](https://www.grabarobot.com/blog/keenon-robot-review-2026/)
+- **Compartments:** 2, 3 or 4, adjustable. Each is 390 × 385 × 300 mm, 90 L in total, with automatic compartment doors and continuous ventilation. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm); [RobotLAB](https://www.robotlab.com/store/keenon-w3/)
+- **Payload:** 20 kg (44 lb) total, 10 kg per compartment. — [RobotLAB](https://www.robotlab.com/store/keenon-w3/)
+- **Compartment access:** Each guest gets a unique PIN or a phone notification to open their compartment. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm). Guests open their assigned compartment with a code, and the robot returns to dock once the door closes. — [Fresh Mango Robotics (UK)](https://freshmangorobotics.co.uk/robots/w3). No source mentioned QR or face access.
+- **Speed:** cruise 0.1–0.8 m/s, max 0.8 m/s — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm); [RobotLAB](https://www.robotlab.com/store/keenon-w3/). Contradicted by 1.0 m/s, which Robots International attributes to "a distributor" and GrabaRobot's catalogue lists — [GrabaRobot](https://www.grabarobot.com/blog/keenon-robot-review-2026/)
+- **Battery runtime:** "Up to 12 hours" — [RobotLAB](https://www.robotlab.com/store/keenon-w3/). 9–12 h — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm). 8 h — [GrabaRobot](https://www.grabarobot.com/blog/keenon-robot-review-2026/)
+- **Charge time:** 6.5 h (15–100%) — [RobotLAB](https://www.robotlab.com/store/keenon-w3/). Robots International gives "5 to 6.5 hours" in one section. Battery cycle life is quoted as "20,000 hours" (sic). — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- **Dock:** The robot returns to its dock automatically after the shift or delivery. — [Fresh Mango Robotics](https://freshmangorobotics.co.uk/robots/w3). A RobotLAB comparison notes that it "requires a plug connection" (search summary). — [RobotLAB](https://www.robotlab.com/store/keenon-w3/)
+- **Navigation:** Laser, IMU, encoder and multi-sensor positioning, with laser SLAM fused with visual SLAM. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- **Obstacle avoidance:** Dual stereo vision with 120° wide-angle stereo cameras, plus a collision-sensing bar. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm). Another reseller describes 270° LiDAR plus dual stereo cameras (search summary, unverified). — [Hellogard](https://www.hellogard.com/keenon-w3)
+- **Minimum passage width:** 70 cm (27.6 in). **Max climbing angle:** 7°. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm); [RobotLAB](https://www.robotlab.com/store/keenon-w3/)
+- **Indoor only:** RobotLAB's table marks semi-outdoor use as not supported. — [RobotLAB](https://www.robotlab.com/store/keenon-w3/)
+- **Display:** 11.6-inch 1080p touchscreen for guest navigation, code entry and delivery status. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- **Operating system:** Linux for control and Android for interaction (search summary of an IPROS listing). — [IPROS](https://pr.www.ipros.com/en/KeenonRobotics/product/detail/2001487653)
+
+### Inferences
+- A 70 cm minimum passage is fine for hotel corridors. In a mixed-use tower, though, it will constrain back-of-house routes past carts or linen, and storefront lobby paths at peak times.
+- A 7° climbing limit and the absence of any published threshold height mean door saddles, elevator sill gaps and lobby ramps need a site survey.
+- 10 kg per compartment and about 39 × 38.5 × 30 cm per bay suit amenities and room-service trays, but not bulk linen or luggage.
+
+### Gaps
+- No source gave a threshold or step height, a door-crossing specification, voice or TTS details, or an exact battery chemistry and capacity.
+- I found no official Keenon datasheet to resolve the speed (0.8 vs 1.0 m/s), runtime (8 vs 12 h) and weight (45 vs 48 kg) conflicts.
+
+## 3. Elevator, door and access-control integration
+
+### Takeaway
+The W3 rides elevators through an IoT and elevator-control interface, not a mechanical arm. Keenon has partnered with KONE, whose API platform it uses. For elevators without an API, US integrators install a relay-based cab caller. Distributors also claim access-control gate integration. The building's elevator system must be integrated, and this is the main deployment risk.
+
+### Cited Findings
+- The W3 calls elevators automatically and delivers on all floors through an API platform built with KONE Elevator Group, already in use at Galen Science Park in Singapore. (Vendor PR, Mar 31 2023) — [Automated Warehouse](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- The W3 "supports elevator riding, access-control gate integration and remote robot calling". Elevator control is IoT-based with no human escort. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- US integrator claim: if the elevator has a modern controller with an API, integration is "a 2–3 day spec". If not, they install "a relay-based cab caller that emulates a button press", which adds about a week. — [RobotLAB (search summary)](https://www.robotlab.com/manufacturers/keenon/)
+- Sources describe the elevator flow as: call the lift through the building's elevator IoT interface, board, select the floor, exit, go to the room. One source states that the hotel's elevator system must be integrated. — [search summary across Sedona Technology / Clover Robotics listings](https://sedonatec.com/keenon-butlerbot-w3/)
+- The first hotel service robot in New Zealand to ride lifts autonomously to guest floors was a W3 at M Social Auckland ("H.A.R.I."). — [Elevator World](https://elevatorworld.com/news/daily-news/keenon-robotics-brings-autonomous-robot-to-new-zealand); [Hospitality Business NZ](https://hospitalitybusiness.co.nz/?p=47975)
+- Keenon publishes an elevator control solution video. — [YouTube: Keenon Robotics Elevator Control Solution Introduction](https://www.youtube.com/watch?v=8bDj5DG-97k)
+- **[independent, CEO interview]** Keenon's CEO described why elevators are hard: a robot pressing buttons "doesn't know which door will open", indicator lights vary, and crowded cars make it hard to exit before the doors close. — [KR-Asia](https://kr-asia.com/dont-operate-in-a-vacuum-keenon-robotics-ceo-on-surviving-industry-shakeouts)
+- **[independent press, not W3-specific]** A Chinese hotel delivery robot "insists on standing in the middle" of crowded elevators to keep the maximum distance from the doors and walls, which irritates guests. — [36Kr](https://eu.36kr.com/en/p/3462277011576193)
+
+### Inferences
+- A tower with separate hotel, residential and possibly freight or service elevator banks will need a destination-dispatch-aware integration with the OEM (KONE, Otis, Schindler, TK Elevator) for each bank the robot uses. Budget for OEM API licensing, which is often paid separately to the elevator OEM, and confirm the robot is restricted to service cars.
+- Multi-floor maps are implied by multi-floor delivery. Keenon's map tooling is installer-run: the premises are mapped once at installation. — [Fresh Mango](https://freshmangorobotics.co.uk/robots/w3)
+
+### Gaps
+- I found no public list of supported elevator OEMs for the W3 beyond KONE.
+- I found no details of automatic door opener protocols (dry contact vs. API), or of whether Keenon's IoT module is UL-listed for US elevator controller connection under ASME A17.1.
+
+## 4. Guest-delivery flow and PMS integration
+
+### Takeaway
+Staff load the robot and enter room numbers on the touchscreen or in the app. The robot rides to the floor and notifies the guest, and the guest opens their compartment by PIN or code. Keenon-related materials say the robots connect with telephones so they can call the room, but I found no documented PMS (Opera, etc.) or guest-messaging integration.
+
+### Cited Findings
+- Delivery drivers can enter their phone number and then the room number on the touchscreen. The W3 carries orders for multiple rooms at once from kitchens, vending machines and outside restaurants, as a 24/7 room service. (Vendor PR) — [Automated Warehouse](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- Keenon materials say the robots "connect with elevators and telephones", so they can call the guest room on arrival (search summary). — [Robots Asia Keenon](https://www.robotsasia.com/Keenon.htm?cs_region=robotsasia)
+- Reseller materials list a "room call integration" feature without further detail. — [Sedona Technology](https://sedonatec.com/keenon-butlerbot-w3/)
+- Guests get a unique PIN or a phone notification. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- Staff dispatch with one tap on the touchscreen. — [Fresh Mango](https://freshmangorobotics.co.uk/robots/w3)
+
+### Inferences
+- The room-phone call most likely runs through a PBX trunk or SIP integration. Confirm compatibility with the property's PBX (Mitel or Avaya type) during the site survey.
+
+### Gaps
+- I found no evidence of certified integrations with Oracle OPERA, Mews, Agilysys, Intelity, Canary, Alice/Actabl or similar guest-messaging platforms.
+
+## 5. Software, fleet scheduling and third-party dispatch (Hotel.OS)
+
+### Takeaway
+Keenon provides an app and a cloud platform (the "KEENON Platform") for dispatch, monitoring and notifications. I found no public open API, SDK or Open-RMF support, so dispatch from Hotel.OS would need a custom or partner API negotiated with Keenon.
+
+### Cited Findings
+- Cloud monitoring runs through the KEENON Platform. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- Through the app and cloud, staff can dispatch tasks, track real-time progress and receive notifications from a mobile device. Keenon's App and Cloud Platform is offered as a smartphone app and a web dashboard (stated for KLEENBOT; search summary). — [Robots International Keenon Cleaning](https://www.robotsinternational.com/Keenon-Cleaning-Robots.htm)
+- **[independent]** I found no official public Keenon API or SDK. The only GitHub hit is an auto-generated API Evangelist stub, not Keenon documentation. — [GitHub api-evangelist/keenon-robotics](https://github.com/api-evangelist/keenon-robotics)
+- DINERBOT units can take instructions from a restaurant order management system, which points to some integration interface, though none is documented publicly. — [RobotsUSA Keenon](https://www.robotsusa.com/Keenon.htm?cs_region=robotsusa)
+
+### Inferences
+- For Hotel.OS dispatch, require a written commitment to a dispatch API (REST or webhook: create task, status, compartment events, errors, elevator state) before purchase. Otherwise Hotel.OS sits outside the loop.
+- No source mentioned Open-RMF. Treat it as unsupported unless Keenon confirms.
+
+### Gaps
+- No API documentation, rate limits, or data-residency terms for the Keenon cloud were found.
+- Multi-robot scheduling and traffic management details were also missing.
+
+## 6. Safety, certifications and privacy
+
+### Takeaway
+Keenon says nearly all its products carry CB-scheme safety certification. I found no evidence of UL 3300 certification for any Keenon robot, or a specific FCC ID or CE file for the W3. For a US commercial high-rise this is a material diligence item, because OSHA added UL 3300 to the NRTL program at the end of 2025.
+
+### Cited Findings
+- Keenon states that "nearly all KEENON robotic products have received globally recognized safety certification — CB certification". — [Keenon About](https://www.keenon.com/en/about/index.html)
+- UL 3300 covers service, communication, information, education and entertainment (SCIEE) robots. — [UL](https://www.ul.com/services/consumer-and-commercial-robots)
+- On Dec 31 2025, OSHA added UL 3300 to the NRTL list of appropriate test standards. In March 2026, UL announced Simbe's Tally as certified to UL 3300. Keenon is not named. — [UL news](https://www.ul.com/news/ul-solutions-grants-first-global-certification-public-facing-robot-simbes-tally-autonomous)
+- Robots International files the W3 under an "FCC" category but lists no certification for the model. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+- Enclosed, closed compartments protect items during unattended service. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm)
+
+### Inferences
+- The robot carries stereo cameras, has a cloud connection, and comes from a Chinese manufacturer. Expect scrutiny from residential HOA, condo boards and corporate IT over camera data handling and cloud data flows, and request an on-prem or data-minimization option.
+
+### Gaps
+- No W3 FCC ID, UL 3300 or UL 2271 battery certification, or privacy and data-processing documentation was found.
+- No Keenon public statements on camera retention were found.
+
+## 7. US price, acquisition models, distributors, warranty and service
+
+### Takeaway
+US list prices range from about $17,900 to $29,600, and RaaS is around $829/month on a 36-month term from RobotLAB. Warranty claims range from unstated to 5 years. Keenon has a US office in Irvine, CA, and sells through distributors such as RobotLAB, Knoxlabs and RobotsUSA/Robots International.
+
+### Cited Findings
+- RobotLAB: from $29,600 purchase; RaaS $829/mo (36 mo); purchase, lease and RaaS offered; warranty not stated; nationwide deploy, train and service. — [RobotLAB W3](https://www.robotlab.com/store/keenon-w3/); [RobotLAB Hotels](https://www.robotlab.com/industries/hotels/)
+- Robots International / RobotsUSA: $17,900, buy now pay later, 60-month (5-year) warranty, delivery in 2–4 weeks. Another RobotsUSA listing shows $29,600. — [Robots International](https://www.robotsinternational.com/Keenon-BUTLERBOT-W3.htm); [RobotsUSA](https://www.robotsusa.com/Keenon-Delivery-Robots.htm)
+- Knoxlabs: $19,600 list, ships in 10–15 days. — [Knoxlabs](https://www.knoxlabs.com/products/keenon-butlerbot-w3-delivery-robot)
+- Airpuria: $19,000 (search summary). — [Airpuria](https://airpuria.com/products/keenon-robotics-butlerbot-w3-for-private-and-multi-floor-services)
+- UK reference: £23,591.44 excluding VAT. — [SmartUK](https://www.smartuk.net/automated-ai-delivery-robots/keenon-w3-room-service-butlerbot/). Fresh Mango offers purchase, monthly RaaS or a hybrid, and a £295 demo. — [Fresh Mango](https://freshmangorobotics.co.uk/robots/w3)
+- Keenon opened its US office in Irvine, CA, in July 2022. — [Automated Warehouse](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- A general hardware range of $8K–22K is cited for Keenon models. — [RoboticsBiz](https://roboticsbiz.com/8-service-robots-hotels-and-restaurants-are-actually-deploying-at-scale-in-2026/)
+
+### Inferences
+- The roughly $12K list-price spread suggests heavy dealer discounting. The $29.6K RobotLAB figure likely bundles installation, elevator integration and support. Get itemized quotes for the robot, elevator kit or OEM API, mapping, and annual software or cloud fees.
+
+### Gaps
+- No Keenon-direct US MSRP was found.
+- Software subscription fees and SLA response times were not published.
+
+## 8. Hotel deployments, outcomes and reported problems
+
+### Takeaway
+The named deployments I found are mostly in Asia-Pacific: Wyndham's APAC supplier deal (2023), M Social Auckland, Shangri-La Traders and Galen Science Park. Claimed US hotel deployments are unnamed or unverified. I found no independent utilization data for the W3. Reported issues centre on elevators in older buildings and guest interference.
+
+### Cited Findings
+- Wyndham made Keenon its designated supplier of commercial service robots in Asia-Pacific (Mar 2023). No unit counts were given. — [Automated Warehouse](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- M Social Hotel Auckland deployed a W3 named "H.A.R.I.". — [Hospitality Business NZ](https://hospitalitybusiness.co.nz/?p=47975); [Elevator World](https://elevatorworld.com/news/daily-news/keenon-robotics-brings-autonomous-robot-to-new-zealand)
+- A Keenon LinkedIn post (via TipRanks) cites hotel deployments in markets including the US, Japan, Spain, Australia and Vietnam. It names no US hotels. — [TipRanks](https://www.tipranks.com/news/private-companies/keenon-robotics-expands-specialized-automation-solutions-in-global-hospitality)
+- Keenon delivery robots are said to be in 10,000+ hotels and 25,000+ restaurants (secondary, unverified). — [RoboticsBiz](https://roboticsbiz.com/8-service-robots-hotels-and-restaurants-are-actually-deploying-at-scale-in-2026/)
+- An SEO review site claims more than 5,000 W3 or hotel units and use by Hilton, Marriott, Aloft and Yotel. These claims are unsourced and unverified. — [Robotomated](https://robotomated.com/explore/consumer/keenon-w3)
+- RobotLAB's Four Seasons Maui case study (12 floors, deliveries in under 8 minutes on average, night staff moved off runner duty) does not specify the robot model. It should not be attributed to the W3. — [RobotLAB Hotels](https://www.robotlab.com/industries/hotels/)
+- Common issues listed are elevator compatibility in older buildings and guests stopping or touching the robot. — [Robotomated (search summary)](https://robotomated.com/explore/consumer/keenon-w3)
+
+### Inferences
+- Expect to be an early or reference US W3 site at this scale. Require named US hotel references running multi-bank elevators before purchase.
+
+### Gaps
+- No Hotel Management, Skift or Hospitality Net case study with W3 utilization (deliveries per day, labour hours saved) was found.
+- No Keenon HKEX prospectus data was retrieved.
+
+## 9. Brief comparison: Pudu, Relay Robotics, Richtech
+
+### Takeaway
+Pudu's FlashBot (Max) undercuts the W3 at about $20K or $559/month RaaS, with published KONE and Otis integration. Relay Robotics (US, ex-Savioke) has the longest US hotel track record and integrates with multiple elevator OEMs. I found no current Richtech hotel room-delivery product data.
+
+### Cited Findings
+- **Pudu FlashBot Max:** from $20,000, RaaS $559/mo (36 mo), 2–4 secure compartments, KONE and Otis elevator integration, VSLAM+ navigation. — [RobotLAB Hotels](https://www.robotlab.com/industries/hotels/). Base FlashBot list price is $28,000, or "from $20,000". — [RobotLAB FlashBot](https://www.robotlab.com/store/flashbot-delivery-robot-for-hotels)
+- **Relay+ (2021):** a mechanical elevator button pusher, so no electronic connection to the elevator controller. Available as Relay+4 (four addressable drawers) and Relay+S (open shelves). — [Robotics 24/7](https://robotics247.com/article/savioke_releases_revised_relay_service_robot_hotels_offices_hospitals); [The Robot Report](https://www.therobotreport.com/rbr50-company-2022/savioke-relay-features-new-mechanical-elevator-interface-and-knocks-down-a-major-hurdle-to-product-acceptance/)
+- **Relay2 (June 2023):** dropped the button pusher for cloud elevator integration supporting Otis, Schindler, TK, Mitsubishi, KONE and others. Capacity doubled to 10 gallons. — [Hotel Technology News](https://hoteltechnologynews.com/2023/06/relay-robotics-rolls-out-its-new-hotel-delivery-robot-featuring-a-larger-payload-and-upgraded-elevator-integration/); [Elevator World](https://elevatorworld.com/news/daily-news/relay-robotics-debuts-upgraded-elevator-integrated-delivery-robot-in-manhattan)
+- **Relay pricing:** conflicting figures of $1,500–2,000/mo lease versus $20–30K purchase. — [Oxmaint](https://oxmaint.com/industries/hospitality/room-service-robots-hotel-maintenance); [Robot Review Desk](https://robotreviewdesk.com/guides/most-useful-business-robots-2026/)
+- **Richtech:** the only priced item found was the Matradee L restaurant robot at $18,000. No hotel room-delivery model was found. — [Hong Chiang guide](https://www.hong-chiang.com.tw/en/blog/restaurant-delivery-robot-buyers-guide.html)
+
+### Inferences
+- Measured against Hotel.OS and multi-OEM elevator needs, Relay (a US company with multi-OEM elevator support) is the lower-integration-risk benchmark. The W3 competes on compartment count and price.
+- Ask every vendor the same questions: a dispatch API, UL 3300 status, and multi-bank elevator support.
+
+### Gaps
+- No BellaBot Pro hotel-kit specs were found in this pass.
+- Relay+ is superseded by Relay2. Current Relay pricing and Open-RMF support were not found.
+- No Richtech hotel delivery data was found.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

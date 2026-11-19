@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keenon hotel line-up · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Keenon hotel line-up · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Keenon Robotics: hotel-relevant service robots (as of Nov 2026)
+
+Scope note: Keenon C40 is covered by another researcher and is mentioned here only for context. Research date: 2026-11-19. Most figures are vendor or reseller claims. I found almost no independently verified performance data. "Prior/possibly discontinued" marks models that appear older or are no longer actively sold in the US.
+
+## 1. Which current Keenon models fit hotels?
+
+### Takeaway
+Keenon's current site (Nov 2026) lists cleaning (C20/C30/C40/C55), catering/delivery (T3, T8, T9, T10, T11, W3), heavy-load (S100, S300) and humanoid (XMAN-R1/F1/L1) lines. For a hotel staff-augmentation layer, the core picks are the W3 (in-room delivery, elevator riding), the S100 (luggage/linen), the T10/T9/T3 (F&B outlets), the C30/C55 (carpet and hard-floor cleaning) and, as an experimental option, the XMAN-R1 greeter. I found no W3 successor model.
+
+### Cited Findings
+- The Keenon site navigation currently lists: Cleaning C55, C40, C30, C20; Catering T11, T8, T9, T3, W3, T10; Heavy Load S300, S100; Humanoid XMAN-R1, XMAN-F1, XMAN-L1; Healthcare X101, M102; Home Keenmow K1 — [Keenon T10 page](https://www.keenon.com/en/product/T10)
+- Keenon's reference hotel deployment uses XMAN-R1 (humanoid greeter), W3 (in-room delivery), S100 (luggage transport), C40 (cleaning) and T10 + T3 (restaurant food delivery). It is at Shangri-La Traders Hotel, Shanghai Hongqiao Airport (press release, Oct 31, 2025). No unit counts or outcome metrics were given — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html)
+- At WAIC 2026 (July 2026), Keenon demoed a hotel laundry workflow: humanoids loaded and operated washers and folded garments, and a DINERBOT T9 handled delivery. It was a demo, not a deployment — [PR Newswire](http://www.prnewswire.com/news-releases/global-commercial-service-robot-shipments-leader-keenon-puts-humanoids-to-work-at-waic-2026-302828931.html)
+- XMAN-R1 was unveiled in March 2025 alongside new KLEENBOT models — [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2025/03/31/keenon-robotics-marks-a-new-milestone-with-the-unveiling-of-the-humanoid-robot-xman-r1-and-the-latest-kleenbot-additions/24530/). It was shown at CES 2026 as a "humanoid butler" for the US, together with the Keenmow K1 mower — [Interesting Engineering](https://interestingengineering.com/ai-robotics/keenon-debuts-humanoid-butler-us)
+- **T8: prior/possibly discontinued in the US.** RobotLAB lists it as quote-only and its page "may be discontinued". Grabarobot could not verify the circulating $5,500 and $11,000 prices — [Grabarobot price guide 2026](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+- C40 (context only): the C40 is compatible with Keenon's App and Cloud Platform for real-time monitoring and task scheduling — [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2025/03/31/keenon-robotics-marks-a-new-milestone-with-the-unveiling-of-the-humanoid-robot-xman-r1-and-the-latest-kleenbot-additions/24530/)
+
+### Inferences
+- The "Smart Hotel" stack Keenon sells is W3 + S100 + T-series + C-series + optional humanoid. This maps directly onto a Hotel.OS staff-augmentation layer: room service and amenities, bell/luggage, F&B, and housekeeping floors.
+- Treat the humanoids (XMAN series) as showcase or pilot hardware. No specs, US price or measured hotel outcomes were found.
+
+### Gaps
+- No spec pages were fetched for the T11, S300, C20 or XMAN-F1/L1. Their hotel suitability is unassessed.
+- No evidence of a W3 successor (e.g., a "W4") as of Nov 2026.
+
+## 2. Per-model specifications
+
+### Takeaway
+All figures below come from Keenon's own product pages unless noted, so they are vendor claims. The W3 is the only purpose-built room-delivery robot: 20 kg payload, up to 4 enclosed compartments, needs a 70 cm passage. The S100 carries 100 kg+ but needs a 90 cm passage, which matters in hotel corridors and elevator cabs.
+
+### Cited Findings
+
+**BUTLERBOT W3 (in-room delivery)** — [Keenon W3](https://www.keenon.com/en/product/W3)
+- Dimensions are 45.9 x 54.9 x 108.1 cm (W x D x H). Weight is 48 kg.
+- Total payload is 20 kg. There are up to 4 independently accessible compartments ("1 dispatch, 4 locations served"), with automatic doors.
+- Max speed is 0.8 m/s. Battery lasts up to 12 h, and charging takes 6.5 h. Slope limit is 7°. Minimum passage width is 70 cm.
+- Keenon names only "3D obstacle avoidance" and publishes no sensor list. It markets the elevator feature as "IoT Elevator Rider".
+- Listed accessories are Charging Pile, E-Box, T-Box, Robot Access Control Module, G-BOX, Air Box and Notification Bell (function not explained).
+- RobotLAB describes the compartments as "independently accessible and lockable", with about 90 L total capacity and 10 kg per layer. It gives the charge time as 6.5 h from 15% to 100% — [RobotLAB W3](https://www.robotlab.com/store/keenon-w3/)
+- **Spec conflict:** a reseller listing gives 60 kg and 538 × 534 × 1052 mm for "one variant", and a UK spec sheet lists a 48V 12Ah battery with cabins of 390 x 385 x 300 mm — [search summary of RobotLAB/SmartUK listings](https://www.smartuk.net/wp-content/uploads/products/documents/Keenon-W3-Room-Service-Butlerbot-Spec-Sheet.pdf). Use the Keenon page figures (48 kg).
+
+**DINERBOT T10 (F&B / lobby delivery)** — [Keenon T10](https://www.keenon.com/en/product/T10)
+- Dimensions are 48.6 x 55.5 x 139.9 cm. Weight is 58 kg. Payload is 40 kg on open trays, with AI tray detection.
+- Max speed is 1 m/s. Battery lasts 9–12.5 h, and charging takes 5.5 h (15–100%). Slope limit is 5°. Minimum passage width is 59 cm.
+- Sensors are 4 stereo vision sensors, VSLAM and 1 RGB camera. It has a 23.8" screen.
+- The page lists multi-robot dispatching, collision-free fleet coordination and mixed-fleet collaboration. It does not mention elevator support.
+
+**DINERBOT T9 / T9 Pro**
+- T9: 40 kg load capacity, 10 kg per layer — [Keenon T9](https://www.keenon.com/en/product/T9). A reseller lists 4 trays and up to 18 h runtime — [Knoxlabs T9](https://www.knoxlabs.com/products/keenon-dinerbot-t9-delivery-robot)
+- T9 Pro (Japan launch): 40 kg load, 12 h runtime, 70 cm minimum passage, VSLAM navigation. Up to 20 robots can work together — [Livedoor News (JP)](https://news.livedoor.com/article/detail/24840802/)
+
+**DINERBOT T8 (prior/possibly discontinued in the US)**
+- 20 kg total load, 55 cm minimum passage, up to 15 h battery (Keenon specs as cited by Grabarobot) — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+
+**DINERBOT T3 (enclosed-cabin delivery)**
+- 180 L cabin volume. Its automatic doors are step-activated and password-secured, which makes it relevant for secure item delivery — [therobotwarehouse T3 listing](https://therobotwarehouse.odoo.com/shop/keenon-dinerbot-t3-safe-and-hygienic-delivery-robot-2) (reseller). Keenon's T3 page exists at [keenon.com/jp/product/T3](https://www.keenon.com/jp/product/T3) but its figures were not extracted.
+
+**S100 (heavy load: luggage, linen, F&B carts)** — [Keenon S100](https://www.keenon.com/en/product/S100)
+- Dimensions are 925 × 640 × 1282 mm. Weight is 87.5 kg. The loading platform is 865 × 600 × 800 mm.
+- Payload is 100 kg+. Max speed is 1 m/s. Battery lasts 8 h (loads under 100 kg). Charging takes 2.5 h (0–100%), or a battery swap takes about 15 s.
+- Minimum passage width is 90 cm.
+- Navigation uses LiDAR SLAM with stereo vision fusion and dual LiDAR + VSLAM. It has triple emergency stops.
+- Accessories include an industrial pager center and pager buttons, a notification bell, G-BOX, E-Box, T-Box and a shelf. The page does not mention elevator capability.
+- **Spec conflict:** Grabarobot quotes a 6 h battery for the S100 — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+
+**KLEENBOT C30 (dry cleaner: carpet, sweep/vacuum/dust-mop)**
+- Keenon claims up to 2,500 m² per full charge — [Keenon C30 (CN)](https://keenon.com/cn/product/C30). It is positioned for carpet care — [Keenon C30](https://www.keenon.com/en/product/C30)
+- Reseller figures: 49 × 52 × 75 cm, about 35 kg, about 61 cm cleaning width, 6 h (sweep/vacuum) or 10 h (dust mop) runtime, 5–6 h charge, 0.8 m/s, 600 m²/h, 19,000 Pa suction — [Asiasatellite C30](https://www.asiasatellite.co/vi/keenon-c30-kleenbot-c30.htm). The Japanese distributor also lists 490 × 520 × 750 mm — [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/kleenbot/index.html)
+
+**KLEENBOT C55 (scrubber for medium and large hard floors: lobbies, BOH, parking/ballroom)** — [Keenon C55](https://www.keenon.com/en/product/C55)
+- Dimensions are 850 × 860 × 1082 mm. Weight is 150 kg. Scrub width is 550 mm.
+- Keenon claims a theoretical maximum of 2,376 m²/h.
+- Runtime is 5 h, with a hot-swap battery change of about 5 s for 24/7 operation. Charging takes 4 h.
+- The clean water tank holds 60 L and the waste tank 47 L. The same page also says "110L", which conflicts.
+- Sensors are multi-line LiDAR plus 4 stereo vision sensors. Keenon lists "IoT Elevator and Gate Interconnection".
+- An optional workstation plumbs into the building for auto charge, fill and drain.
+- It was launched in March 2025 and shown at ISSA North America in November 2025 — [Keenon news](https://www.keenon.com/en/news/double-the-strength-built-for-medium-and-large-spaces-keenon-robotics-unveils-cleaning-robot-c55); [ANP](https://persportaal.anp.nl/artikel/CSN-111125150/-keenon-robotics-unveils-c55-cleaning-robot-at-issa-north-america-expo-showcases-full-scene-portfolio)
+
+### Inferences
+- The S100's 90 cm passage width and 1282 mm length should be checked against hotel elevator cab depth and door widths before it is specified for multi-floor luggage runs.
+- The W3's 6.5 h charge against 12 h runtime suggests one W3 can't cover 24/7 alone without opportunity charging. Plan an N+1 fleet for overnight room service.
+
+### Gaps
+- Keenon publishes no sensor list for the W3 and no locking or authentication details (PIN or otherwise).
+- Keenon-official figures for T3 runtime, speed and dimensions, and for C30 runtime and charge time, were not obtained.
+
+## 3. Elevator, door and guest-notification integration
+
+### Takeaway
+The W3 and C55 are marketed with IoT elevator riding, and the C55 with gate interconnection. Integration is through Keenon-supplied hardware accessories (E-Box/T-Box/G-BOX, "Robot Access Control Module") and elevator-OEM partnerships (KONE API, KONE/OTIS per reseller). There is no public specification of the protocol. I found no Keenon-documented guest-room phone call feature.
+
+### Cited Findings
+- The W3 "can ride the elevator for item delivery" ("IoT Elevator Rider"). Accessories include E-Box, T-Box, G-BOX and Robot Access Control Module — [Keenon W3](https://www.keenon.com/en/product/W3)
+- The C55 lists "IOT Elevator and Gate Interconnection", with no further specification — [Keenon C55](https://www.keenon.com/en/product/C55)
+- The W3 calls elevators and delivers to all floors through an API platform Keenon built with KONE Elevator Group, already used at Galen Science Park, Singapore (2023 article) — [Automated Warehouse Online](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- RobotLAB lists KONE/OTIS elevator integration for the W3 (reseller claim) — [RobotLAB W3 via search](https://www.robotlab.com/store/keenon-w3/)
+- A New Zealand hotel deployment was reported as the first hotel service robot in NZ to ride elevators autonomously to guest floors — [Elevator World](https://elevatorworld.com/?p=59697)
+- Keenon reportedly obtained LCI elevator-integration certification from Octa Robotics for the Japanese market (April 2026). This claim is seen only in a search-result snippet. The source page redirected to an empty profile and could not be confirmed — [washinmura/idaeo snippet](https://aeo.washinmura.jp/ai/keenon-robotics%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/en/news/2026-04-23-keenons-service-robots-enhance-elevator)
+- The S100 ships with an industrial pager center, pager buttons and a notification bell for calling or notifying. Its page does not mention elevator riding — [Keenon S100](https://www.keenon.com/en/product/S100)
+
+### Inferences
+- Expect elevator integration to be a site project: a Keenon IoT box at the elevator controller, or the OEM cloud API (KONE/OTIS) where available. It is not a standard interface Hotel.OS could drive directly. If Hotel.OS already owns elevator dispatch (e.g., via KONE/Otis APIs), coordinate with Keenon so two systems don't contend for the car.
+- Guest notification (phone ring, SMS on arrival) was not documented. Assume it requires Keenon/PMS customization or Hotel.OS handling it from robot status events, if those are exposed.
+
+### Gaps
+- No public documentation of the IoT elevator module's protocol, supported controllers, or US code compliance (ASME A17.1 interfacing).
+- No documentation of access-control door integration beyond the accessory name, and none of room-phone notification.
+
+## 4. Fleet management and APIs
+
+### Takeaway
+Keenon runs a closed ecosystem: a robot app plus Keenon Cloud/web dashboard, with multi-robot dispatch among Keenon robots. As of late 2026 there is no public developer API, SDK or developer portal, and I found no Open-RMF support. Third-party dispatch from Hotel.OS would need a private partner or API agreement negotiated with Keenon. This contrasts with Pudu, which publishes an Open Platform.
+
+### Cited Findings
+- API Evangelist profile (first profiled 2026-07-17, updated 2026-10-06): Keenon has "no public developer API, developer portal, or OpenAPI", scored 0/100 agent readiness, described as "a hardware-and-solutions company" (secondary directory) — [API Evangelist](https://providers.apievangelist.com/providers/keenon-robotics/)
+- The C55 offers 24/7 digital management via app or webpage: task management, status notifications, remote monitoring, cleaning reports, multi-machine collaboration — [Keenon C55](https://www.keenon.com/en/product/C55)
+- The T10 offers multi-robot dispatching, collision-free fleet coordination and mixed-fleet collaboration with other Keenon models — [Keenon T10](https://www.keenon.com/en/product/T10)
+- The T9 Pro can run up to 20 robots cooperatively in one site — [Livedoor News (JP)](https://news.livedoor.com/article/detail/24840802/)
+- The C40 works with the Keenon App and Cloud Platform for real-time monitoring and task scheduling — [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2025/03/31/keenon-robotics-marks-a-new-milestone-with-the-unveiling-of-the-humanoid-robot-xman-r1-and-the-latest-kleenbot-additions/24530/)
+- The KONE elevator integration is described as an "API platform" built jointly with KONE. That is elevator-side, not a robot dispatch API — [Automated Warehouse Online](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- Keenon also promotes "KOM" AI models: KOM2.0, claimed as the first VLA model for the service industry (Oct 2025), and KOM 3.0 at WRC 2026. These are vendor claims — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html); [Keenon news](https://www.keenon.com/en/news/)
+
+### Inferences
+- For Hotel.OS to dispatch Keenon robots, the realistic options are: (a) negotiate a partner cloud API with Keenon (contact global@keenon.com); (b) integrate at the call-button or pager layer (Keenon pager accessories); (c) keep Keenon Cloud as the sub-dispatcher and have Hotel.OS hand off tasks. This is a material integration risk compared with vendors that have open APIs.
+
+### Gaps
+- No evidence either way on whether a private or partner API exists. No Open-RMF, VDA 5050 or MassRobotics interoperability statements were found.
+
+## 5. US pricing, purchase/lease/RaaS, distributors, warranty
+
+### Takeaway
+US prices are distributor-quoted and inconsistent. They range roughly from $13.5k to $20.6k for a T10, and from $14k to $29.6k for a W3. The main US channels are RobotLAB (purchase, 36-month RaaS, rental, financing) and Knoxlabs. Keenon has had a US office in Irvine, CA, since 2022. Standard RobotLAB warranty is 12 months.
+
+### Cited Findings
+- W3 at RobotLAB: "starting at $29,600", available by purchase, lease or RaaS — [RobotLAB W3](https://www.robotlab.com/store/keenon-w3/). A RobotLAB snippet elsewhere shows "From $13,990" — [RobotLAB search result](https://www.robotlab.com/?p=10714). Grabarobot gives $989/mo RaaS for the W3 and lists Knoxlabs at $20,580 (likely a placeholder) — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/). Other listings: $19,000 (US reseller) and £24,219 ex VAT (UK) — [American Satellite](https://www.americansatellite.us/Keenon-BUTLERBOT-W3.htm); [Advantage Catering](https://www.advantage-catering-equipment.co.uk/products/keenon-w3-room-service-butlerbot)
+- T10: RobotLAB $18,400 or $13,500 (its own page conflicts). RaaS is $519, $542 or $619/mo on a 36-month term (sources differ). Knoxlabs lists $20,580 — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/); [RobotLAB T10](https://www.robotlab.com/hospitality-robots/store/keenon-t10-robot)
+- T9: Knoxlabs $16,400 or $17,220; Airpuria $11,500. T9 Pro: $7,000 to $15,999 across resellers — [Knoxlabs T9](https://www.knoxlabs.com/products/keenon-dinerbot-t9-delivery-robot); [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/); [Airpuria T9](https://airpuria.com/products/keenon-robot-dinetbot-t9)
+- S100 and C40: Knoxlabs $20,580 each, which Grabarobot considers a likely catalog placeholder — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+- RobotLAB RaaS works out to about 3.3–3.4% of purchase price per month, or about 120–122% of the cash price over 36 months — [Grabarobot](https://grabarobot.com/blog/keenon-robotics-price-guide-2026/)
+- RobotLAB also offers fully managed rentals with a 1-month minimum, and financing via Ascentium and Conners including lease-to-own. Early termination of RobotLAB-financed deals costs 50% of the remaining balance — [RobotLAB services](https://www.robotlab.com/services/); [RobotLAB terms](https://www.robotlab.com/legal/terms/)
+- Warranty (RobotLAB): 12 months on the robot. Battery and charger coverage is 12 months on the standard plan but 3 months on the Basic, Silver and Gold tiers. Extended warranty adds 1 year and excludes batteries. Opening the shell voids the warranty — [RobotLAB service plans](https://www.robotlab.com/service-and-support-plans)
+- Keenon opened a US office in Irvine, CA, in July 2022 — [Automated Warehouse Online](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+
+### Inferences
+- Get a single dated written quote covering model, purchase price, RaaS rate and term, elevator kit and installation, and the service SLA. Elevator IoT hardware and installation are not included in any listed price.
+
+### Gaps
+- No Keenon-direct US price list. No pricing found for C30, C55, T3 or XMAN-R1. No Keenon factory warranty terms or US field-service coverage map.
+
+## 6. Notable hotel deployments and outcomes
+
+### Takeaway
+Named hotel deployments are mostly in Asia-Pacific: Shangri-La Traders Hongqiao, Shangri-La Hong Kong, Japanese hotels, and an NZ hotel. They are backed by a 2023 Wyndham Asia-Pacific supplier deal and Chinese chains Jinjiang and Dongcheng. I found no named US hotel deployment and no published quantified outcomes; everything is vendor-reported.
+
+### Cited Findings
+- Shangri-La Traders Hotel, Shanghai Hongqiao Airport: XMAN-R1, W3, S100, C40, T10, T3 deployed. No metrics given (Oct 2025) — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html)
+- Keenon cites 8 robots of 6 types in one hotel, Trader Hotel / Shangri-La (vendor claim, via search summaries of the 2026 WAIC and Yanko Design coverage) — [PR Newswire WAIC 2026](http://www.prnewswire.com/news-releases/global-commercial-service-robot-shipments-leader-keenon-puts-humanoids-to-work-at-waic-2026-302828931.html); [Yanko Design](https://www.yankodesign.com/2026/06/15/keenon-humanoid-pours-drinks-at-gcs-2026-100000-others-run-hotels/amp/)
+- Wyndham Hotel Group named Keenon its designated commercial service robot supplier for Asia-Pacific (March 2023). No unit counts or terms were given. Keenon also partners with Jinjiang and Dongcheng hotels — [Automated Warehouse Online](https://www.automatedwarehouseonline.com/keenon-robotics-partners-with-wyndham-hotel-group/)
+- A Japanese hotel manager said they adopted the W3 because the hotel has two buildings and front-desk staff found item delivery burdensome (anecdotal) — [search summary, Keenon/hospitality coverage](https://www.under30ceo.com/keenon-robotics-is-betting-americas-labor-crisis-is-the-opening-it-has-been-waiting-for/)
+- A New Zealand hotel deployment had autonomous elevator riding to guest floors — [Elevator World](https://elevatorworld.com/?p=59697)
+- Company scale claims: more than 100,000 cumulative units in 60+ countries, and "global commercial service robot shipments leader" — [PR Newswire APAC](https://www.prnewswire.com/apac/news-releases/keenon-humanoid-robot-joins-hotel-workforce-pioneering-worlds-first-general-purpose--special-purpose-robot-collaboration-model-302599869.html); [PR Newswire WAIC 2026](http://www.prnewswire.com/news-releases/global-commercial-service-robot-shipments-leader-keenon-puts-humanoids-to-work-at-waic-2026-302828931.html)
+- An industry analysis notes Keenon has no confirmed unit counts, no named multi-property contracts, no quantified operator ROI and no audited financials (secondary; quality uncertain) — [Sparkco](https://sparkco.ai/blog/service-robot-hospitality-industry-deployment)
+
+### Inferences
+- For a US property, Keenon hotel references would have to come from RobotLAB or Keenon US directly. Request named US hotel references with elevator integration before committing.
+
+### Gaps
+- No named US hotel or chain deployment found. No independent outcome data (deliveries per day, labor hours saved, guest satisfaction) for any Keenon hotel deployment.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

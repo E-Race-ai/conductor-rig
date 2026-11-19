@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pudu T150 / T300 / T600 (heavy load) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Pudu T150 / T300 / T600 (heavy load) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Pudu Robotics T-Series Industrial Delivery Robots (T150 / T300 / T600): Deep Dive for a Hotel Back-of-House Transport Evaluation (as of Nov 2026)
+
+Labels used: **[Vendor]** = Pudu or reseller marketing/spec claim; **[Independent]** = third-party reporting or observation; **[Reseller]** = a distributor listing (commercial, but not Pudu itself). Almost everything about the T-series is vendor-sourced. I found no independent performance testing.
+
+## 1. Which T-series models exist, when they launched, and how they differ
+
+### Takeaway
+The current family has three payload classes, each in two variants, so six SKUs in all. The T300 launched first (April 2024, Standard + Lifting). The T600 followed in July 2025 (Upright/standard + Underride). The T150 came last (January 2026, Standard + Lifting). Variants differ mainly in lifting/jacking (60 mm) versus a fixed top. The T600 Underride is a 255 mm-tall under-rack chassis. I found no separate towing-only model, but the T300 is described as able to tow a cart.
+
+### Cited Findings
+- **T300**: announced April 22, 2024 and debuted at Hannover Messe 2024. It was Pudu's first industrial robot. [Independent trade press relaying the release] — [SiliconANGLE](https://siliconangle.com/2024/04/22/pudu-robotics-rolls-robots-navigating-industrial-environments); [IoT World Today](https://www.iotworldtoday.com/robotics/service-robotics-company-launches-first-industrial-model-hannover-2024); [PR Newswire](https://prnewswire.com/news-releases/pudu-robotics-expands-into-industrial-robotics-market-with-launch-of-pudu-t300-302121906.html)
+- T300 variants: **T300 Standard (model WTID01)** and **T300 Lifting (model WTIDL1)**. [Vendor] — [Pudu T300 page](https://www.pudurobotics.com/en/products/pudut300)
+- At launch the T300 was described with "standard, lifting, and shelf modes" and could "tow a cart". [Vendor, via press] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- **T600 Series**: announced July 24, 2025 as the heavy-payload follow-on to the T300. It has two versions. The **T600 (standard/"Upright")** has a touchscreen, an ergonomic handlebar and control buttons for occasional manual use. The **T600 Underride** is a "low-profile chassis" AMR that drives beneath racks or shelves, lifts them and transports them. [Vendor] — [PR Newswire, Jul 24 2025](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-t600-series-to-redefine-heavy-payload-industrial-delivery-302512952.html); [Robotics 24/7](https://www.robotics247.com/article/pudu_robotics_launches_pudu_t600_series_of_industrial_delivery_robots)
+- Pudu product-page model codes: **T600 Upright = WTIDL2** and **T600 Underride = WTIDU2**. [Vendor] — [Pudu T600 page](https://www.pudurobotics.com/en/products/pudut600)
+- **T150**: announced January 9, 2026 as a light-payload, entry-level model for manufacturing and warehouse material delivery. Variants are **T150 Lifting (WTIDL0)** and **T150 Standard (WTID00)**. Pudu claims setup "in 60 mins or less". [Vendor] — [AAP/Cision release, Jan 9 2026](https://www.aap.com.au/aapreleases/cision20260109ae59908/); [Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-launches-t150-light-payload-warehouse-delivery-robot/); [Pudu T150 page](https://www.pudurobotics.com/en/products/pudut150)
+- One Russian-language listing gives the T150 payload as 120 kg rather than 150 kg. This is an outlier. — [The Daily Workflow](https://thedailyworkflow.com/ru/robots/pudu-t150)
+
+### Inferences
+- The T150 and T300 share the same 835 × 500 × 1350 mm body and 65/81 kg weights. The T150 looks like a de-rated, cheaper T300 rather than a new platform.
+- The model codes follow one scheme: WTID = standard, WTIDL = lifting, WTIDU = underride, and the last digit is the payload class (0 = 150 kg, 1 = 300 kg, 2 = 600 kg).
+
+### Gaps
+- I found no 2026 announcement of any other T-series model, such as a dedicated tugger/tow version, a "T300 Pro", or a T600 refresh.
+- I found no published tow rating (kg) or hitch specification for any T model, although "tow a cart" is mentioned for the T300.
+
+## 2. Per-model hardware specifications
+
+### Takeaway
+Every model runs at up to 1.2 m/s, has a 30 Ah battery, a 2 h charge from 0 to 90%, about 12 h runtime unloaded, and a 0–40 °C operating range. Payload is 150, 300 or 600 kg. Minimum passage width is 60 cm (T150/T300), 65 cm (Underride) or 70 cm (T600 Upright). Thresholds are 20 mm on the T150/T300 and only 10 mm on the T600. **No source publishes a slope or ramp rating for any T model**, and resellers describe the operating surface as "indoor flat ground".
+
+### Cited Findings
+
+**Spec table (Pudu product pages unless noted). All figures are [Vendor].**
+
+| | T150 Std / Lifting | T300 Std / Lifting | T600 Upright | T600 Underride |
+|---|---|---|---|---|
+| Dimensions (L×W×H) | 835×500×1350 mm | 835×500×1350 mm | 960×500×1350 mm | 845×500×255 mm |
+| Robot weight | 65 kg / 81 kg | 65 kg / 81 kg | 112 kg | 94 kg |
+| Max payload | 150 kg | 300 kg | 600 kg | 600 kg |
+| Lift / jacking stroke | Lifting: 60 mm | Lifting: 60 mm | 60 mm | 60 mm |
+| Speed | 0.2–1.2 m/s | up to 1.2 m/s | 0.2–1.2 m/s | 0.2–1.2 m/s |
+| Battery | 30 Ah | 30 Ah (RobotLAB) | 30 Ah | 30 Ah |
+| Runtime | 12 h no load | 12 h no load / 8 h full load | 12 h no load | 12 h no load |
+| Charge | 2 h (0–90%) | 2 h (0–90%) | 2 h (0–90%) | 2 h (0–90%) |
+| Navigation | VSLAM + LiDAR; dual RGBD cameras; 360° dual LiDAR | VSLAM + LiDAR SLAM | VSLAM + LiDAR SLAM | LiDAR SLAM only |
+| Min. passage | 60 cm | 60 cm (Lifting: "determined by load size") | 70 cm | 65 cm |
+| Threshold / gap | 20 mm / 35 mm | 20 mm / 35 mm | 10 mm / 35 mm | 10 mm / 35 mm |
+| Operating temp | 0–40 °C | 0–40 °C (RobotLAB) | 0–40 °C | 0–40 °C |
+| Ground projection / power-assist handle | — | — | Yes / Yes | No / No |
+
+Sources: [Pudu T150](https://www.pudurobotics.com/en/products/pudut150); [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [Pudu T600](https://www.pudurobotics.com/en/products/pudut600); [RobotLAB T300](https://www.robotlab.com/store/pudu-t300/)
+
+- **Conflict on T300 loaded runtime:** Pudu's page says 8 h at full load. RobotsUSA and RobotLAB say about 6 h at full load, and RobotLAB's own FAQ admits that "some published figures cite 8 hours". — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [RobotsUSA](https://www.robotsusa.com/Pudu-Industrial-Delivery-Robots.htm?cs_region=robotsusa); [RobotLAB](https://www.robotlab.com/store/pudu-t300/)
+- **Conflict on T300 threshold:** the product page says 20 mm. Launch coverage said 1.7 cm (0.7 in) thresholds and 3.3 cm gutters. — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- **Conflict on T600 Upright dimensions and weight:** RobotsUSA lists 835×500×1350 mm and 105 kg. Pudu lists 960×500×1350 mm and 112 kg. — [RobotsUSA](https://www.robotsusa.com/Pudu-Industrial-Delivery-Robots.htm?cs_region=robotsusa); [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+- T300 sensors: LiDAR, depth cameras, collision-protection edges/sensors, emergency-stop buttons, and visual recognition for follow mode. Signalling uses indicator and traffic-signal lights, customizable buttons and audible alerts. The robot can reverse to get away from obstacles. [Vendor] — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- T300 navigation is "VSLAM+" fusing laser and visual SLAM with real-time map updates. It works under ceilings up to 30 m and maps areas up to 200,000 m² (about 2.1M sq ft). [Vendor] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- The T300 offers automatic recharging and user-swappable batteries for 24/7 operation, plus a "map-and-go" mode that works without a network. [Vendor] — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [SiliconANGLE](https://siliconangle.com/2024/04/22/pudu-robotics-rolls-robots-navigating-industrial-environments)
+- T600 features: real-time dynamic obstacle avoidance, single-lane/dual-lane traffic switching in narrow aisles, and an "integrated disaster response module". Ground projection indicators are on the standard version only. [Vendor] — [PR Newswire T600](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-t600-series-to-redefine-heavy-payload-industrial-delivery-302512952.html)
+- T600 "Rack Group Recognition" identifies target storage locations and does autonomous pick-and-place of racks. No specific rack or cart models are listed. [Vendor] — [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+- The T300 is pitched for cargo such as raw materials, cardboard boxes, material bins and racks. [Vendor] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- Reseller accessory: a "PUDU Robotics T300 Shelving Unit" (part PUD21510-000194) is sold separately. — [Filo Cleantech](https://filocleantech.com/products/pud21510-000194)
+- RobotLAB describes the operating surface as "indoor flat ground". [Reseller] — [RobotLAB](https://www.robotlab.com/store/pudu-t300/)
+
+### Inferences
+- A 60 mm lift stroke means the Lifting/Underride variants need purpose-built or retrofitted carts with matching ground clearance and docking features (the robot drives under and jacks). Standard hotel linen carts and room-service carts would not work without modification. Whether Pudu's rack recognition works with arbitrary carts is not documented.
+- The 10 mm threshold on the T600 is tight for older elevator sills and service-corridor transitions. The T150/T300 at 20 mm are more tolerant.
+- The missing slope rating matters for a Miami tower with garage, dock and loading ramps. Assume flat-floor only until Pudu provides a figure in writing.
+- With a 6–8 h loaded runtime, high-duty 24/7 linen operations would need opportunistic charging or battery swaps.
+
+### Gaps
+- Slope/gradient rating for any model: none published in any source.
+- Positioning/docking accuracy, sensor field of view and obstacle-detection height, IP rating, noise level: not published.
+- Tow capacity and hitch hardware: not published.
+- Cart or shelf dimensions compatible with the lift: not published. The Pudu T300 intro PDF (Solstice AV, June 2025) returned 404.
+
+## 3. Elevator, door and multi-floor operation
+
+### Takeaway
+Every T model supports elevator control, e-gate/turnstile and access-door control, and call pagers through Pudu's IoT modules. The T600 adds "idle elevator priority scheduling" across multi-car banks. The elevator integrations are proprietary: Pudu IoT boxes or OEM APIs, not an open standard.
+
+### Cited Findings
+- T300: "elevator access and elevator control integration", e-gate/turnstile control, remote call with pager, and management through the Pudu Link app. [Vendor] — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300)
+- T300 IoT features: secure door access, elevator control, self-configuring network, and app-based material requests. [Vendor] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- T600: real-time scheduling "identifies and prioritizes idle elevators". "Modular IoT connectivity" supports access control, elevator rides and goods call buttons. [Vendor] — [PR Newswire T600](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-t600-series-to-redefine-heavy-payload-industrial-delivery-302512952.html); [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+- T150: elevator control is supported through IoT integration, with no further detail given. [Vendor] — [Pudu T150](https://www.pudurobotics.com/en/products/pudut150)
+- Hotel demo: at the Pudu–Shenzhen CTID robot-hotel signing, a T300 carried heavy luggage and "autonomously operated elevators". Trial operations are planned for late 2026. [Vendor/press] — [Hospitality Net](https://www.hospitalitynet.org/news/4132730/pudu-robotics-and-shenzhen-ctid-co-ltd-launch-the-worlds-first-full-scenario-robot-serviced-hotel-project); [The AI Insider](https://theaiinsider.tech/2026/06/01/pudu-robotics-partnering-to-develop-full-scenario-robot-serviced-hotel/)
+- Precedent for OEM elevator APIs: Pudu's FlashBot was integrated with Otis's dispatch API in Japan. [Independent trade press] — [Automated Warehouse](https://www.automatedwarehouseonline.com/pudu-robotics-successfully-integrates-flashbot-with-elevators/)
+
+### Inferences
+- In a 1M sq ft tower with separate service and residential elevator banks, expect a site-specific elevator integration project (Pudu IoT relay box per car, or an OEM cloud API such as Otis, KONE or Schindler). It will need security sign-off from the elevator contractor.
+
+### Gaps
+- I found no published list of elevator OEMs that Pudu has certified for T-series use in the US.
+- Behavior under an elevator fire-service recall, and how residents share cars with the robot, are not documented.
+
+## 4. Software: Pudu platform, fleet scheduling, APIs/SDK, Open-RMF, VDA 5050
+
+### Takeaway
+Pudu offers a cloud **Open Platform (open.pudutech.com)** with a US cluster and an OpenAPI covering delivery dispatch, call tasks, lifting, scheduling, maps and analytics. That is the realistic hook for Hotel.OS dispatch. The **T600 explicitly supports VDA 5050** and on-premises or private-cloud deployment. I found no published Open-RMF fleet adapter for Pudu.
+
+### Cited Findings
+- Pudu's public GitHub skill `pudu-openapi-skill` calls the Pudu cloud OpenAPI. It covers robot status, delivery and transport (multi-point), errands, lifting and tray, cruise, call tasks, task scheduling, map service, logs, analytics and "risk avoidance". T300 disaster-evacuation task dispatch is named explicitly. Authentication uses an ApiAppKey/ApiAppSecret from the Pudu Open Platform. Clusters are cn, sea, de and **us**. [Vendor] — [GitHub pudu-robotics/skills](https://github.com/pudu-robotics/skills)
+- A 2026 interoperability guide describes the PUDU Open Platform API, PUDU Link fleet management, OTA updates and lift integration via an IoT module. [Independent secondary] — [EasyToClean](https://easytoclean.co/en/insights/cleaning-robot-interoperability-lifts-api-vda-5050-fleets-2026/)
+- The T300 uses a "proprietary distributed scheduling system" plus PUDUlink remote management, with "third-party API compatibility". [Vendor] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- PUDU Scheduler coordinates up to 20 robots per fleet. [Reseller] — [RobotLAB](https://www.robotlab.com/store/pudu-t300/)
+- T600: VDA 5050 compatible "enabling collaborative scheduling with other compliant robots and systems". On-prem or private-cloud deployment keeps data within internal networks. [Vendor] — [Pudu T600](https://www.pudurobotics.com/en/products/pudut600); [PR Newswire T600](https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-t600-series-to-redefine-heavy-payload-industrial-delivery-302512952.html)
+- Open-RMF: the community adapter list includes lift adapters (KONE, Octa, QuikSync) but none for Pudu. An older Open Robotics forum thread reported Pudu's API could read robot position but not send pose commands, which may now be outdated. [Independent] — [open-rmf/awesome_adapters](https://github.com/open-rmf/awesome_adapters); [Open Robotics Discourse](https://discourse.openrobotics.org/t/robot-integration-623/44594)
+
+### Inferences
+- Hotel.OS can probably dispatch point-to-point T-series tasks (A→B, call-to-location, lifting tasks) through the cloud OpenAPI. It cannot directly path-plan or traffic-manage the robots, because Pudu's scheduler keeps control of motion. For an operator wanting a single brain, VDA 5050 on the T600 is the more standard interface. Whether VDA 5050 is available on the T150/T300 is not stated.
+- Cloud dependence (US cluster) and data residency should be checked against the property's IT and security policy. The T600's on-prem option is the reference point.
+
+### Gaps
+- VDA 5050 version and whether it covers the T150/T300: not stated.
+- API rate limits, webhook/event support, SLA, and whether the API is included in the purchase price or licensed separately: not found.
+- No Open-RMF adapter was found, so one would need custom development.
+
+## 5. Safety and certifications
+
+### Takeaway
+Pudu claims ISO 3691-4 compliance for the T-series. The T300 holds **CE-MD and CE-RED certificates from TÜV SÜD** (March 2025), covering EN ISO 3691-4 and EN 1175, and the T150 claims "industrial-specific CE". **I found no evidence of UL 3100, ANSI/A3 R15.08 or UL 3300 certification for any T model**, nor of FCC grants in the searches run.
+
+### Cited Findings
+- The T300 obtained CE-MD (Machinery Directive) and CE-RED (Radio Equipment Directive) certificates from TÜV SÜD, validating compliance with EN ISO 3691-4 and EN 1175. The release says this will "streamline expansion into North America" but names no North American standard. [Vendor] — [Robotics Tomorrow, Mar 10 2025](https://roboticstomorrow.com/news/2025/03/10/pudu-robotics-pudu-t300-achieves-ce-md-and-ce-red-certifications-empowering-global-smart-manufacturing-with-international-safety-standards/24399); [Antara](https://en.antaranews.com/news/348761/pudu-robotics-pudu-t300-achieves-ce-md-and-ce-red-certifications)
+- T150: complies with ISO 3691-4 and holds industrial-specific CE certification. [Vendor] — [Pudu T150](https://www.pudurobotics.com/en/products/pudut150)
+- T300 product page: "complies with ISO 3691-4". [Vendor] — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300)
+- The T600 product page and launch release list no certifications. — [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+- A search for "UL 3100", "ANSI/A3 R15.08" and "UL 3300" with Pudu returned only a cleaning-robot (CC1 Pro) UL 60335/cTUVus claim from a secondary blog, and nothing for the T-series. — [Sparkobot](https://sparkobot.pages.dev/the-clean-sheet/commercial-cleaning-robot-certification)
+
+### Inferences
+- For a US building with public lobby and residential occupancy, the AHJ, insurer and elevator inspector may ask for a NRTL listing (e.g., UL 3100 / UL 1740-type evaluation) or R15.08 conformance. Neither is documented here, so this is a procurement condition to require in writing.
+
+### Gaps
+- FCC ID / Part 15 grants for T-series radios were not verified.
+- No UL or ETL listing was found for any T model.
+
+## 6. US pricing, purchase/lease/RaaS, distributors, warranty, service
+
+### Takeaway
+US list prices run from about **$13.5K (T150)** through **$18.8–21K (T300)** to **about $23–24K (T600 Underride and Upright)**. RobotLAB claims US-exclusive Pudu distribution and offers T300 RaaS from **$589/month (36 months)** and a $199/month service plan. I found no stated warranty term.
+
+### Cited Findings
+- RobotsUSA: T150 Light-Payload **$13,500**; T300 Standard **$18,800**; T600 Underride **$22,995**; T600 Heavy-Payload **$23,995**. Financing pages are linked but no terms are given. [Reseller] — [RobotsUSA](https://www.robotsusa.com/Pudu-Industrial-Delivery-Robots.htm?cs_region=robotsusa); [RobotsUSA T150](https://www.robotsusa.com/PUDU-T150-Light-Payload-Industrial-Delivery-Robot.htm?cs_region=robotsusa)
+- RobotLAB T300: **$20,990** (body/FAQ) versus **$21,000** (header). RaaS from **$589/mo (36 mo)**. RobotLAB claims US-exclusive distribution rights for Pudu. [Reseller] — [RobotLAB T300](https://www.robotlab.com/store/pudu-t300/); [RobotLAB delivery category](https://www.robotlab.com/store/category/delivery/)
+- RobotLAB Standard service plan: **$199/mo per unit**, covering support, software updates, parts and labor, and loaner units. It is bundled automatically with RaaS. [Reseller] — [RobotLAB search result summary](https://www.robotlab.com/store/pudu-t300/)
+- RobotShop: T300 with lift at **$20,160** including tariffs. UCG Underground Supplies: T300 at **$20,000**. [Reseller] — [RobotShop](https://www.robotshop.com/products/pudu-t300-industrial-delivery-robot-with-lift); [UCG](https://ucghdd.com/products/pudu-t300-industrial-dlivery-robot)
+- A 2026 AMR cost article repeats the $589/mo figure and names RobotLAB as the US dealer. [Independent secondary] — [Physical AI Lab](https://physicalailab.io/en/amr-cost-price-integration-tco-2026/)
+- Other listed resellers include Tekmark Group and Reliable Robots (Canada). — [Tekmark](https://tekmarkgroup.com/distribution-partners/pudu-robotics/PUDU-t300/); [Reliable Robots](https://www.reliablerobots.ca/tseriesfamily)
+
+### Inferences
+- Multiple US resellers sell Pudu despite RobotLAB's "exclusive" claim, so the exclusivity may be partial or channel-specific. Verify who carries the service obligation.
+- Hardware is cheap compared with hospital AMRs (see §8). Elevator/IoT integration, custom carts and API integration are likely to dominate total cost.
+
+### Gaps
+- Warranty length (factory or dealer): not found anywhere.
+- Prices for elevator IoT modules, chargers, spare batteries and lift carts: not found.
+- RaaS pricing for the T150 and T600: not found.
+
+## 7. Deployments, reviews and problems
+
+### Takeaway
+Published deployments are factory/EMS and warehouse sites. Named examples are Ennoconn (Pudu case study) and Sunwoda, both on vendor-originated material. The only hotel use is a **planned** Pudu–Shenzhen CTID "full-scenario robot hotel" (trials slated for late 2026). I found **no US hotel or hospital T-series deployment, no independent review, and no documented field problems**. That absence is itself a risk signal for a lead-customer role.
+
+### Cited Findings
+- Ennoconn Technologies runs the T300 on five core EMS production routes. Pudu claims "24/7 autonomous logistics" and "zero material delays". [Vendor case study] — [Pudu news](https://www.pudurobotics.com/en/news/pudu-t300-amr-powers-ennoconn-ems-logistics-case-study)
+- Sunwoda Electronic (battery maker) deployed the T300 between production stages. [Secondary, vendor-derived] — [TechBullion](https://techbullion.com/industrial-amrs-in-2026-which-ones-can-you-trust/)
+- Claimed 3PL results in Ho Chi Minh City: −34% forklift trips, −27% picker walking, +19% UPH. This sits on an unofficial Vercel-hosted page, so it is **unverified**. — [pudu-landing.vercel.app](https://pudu-landing.vercel.app/)
+- Pudu-linked materials claim 1–2 year ROI and up to 200% UPH gains. [Vendor] — [Kuby.ai blog](https://kuby.ai/blogs/infos/pudu-t300-smarter-warehouse-material-movement)
+- Pudu's interview claim: industrial robots run more than 200 delivery tasks per day, against about 70 for foodservice robots. Pudu had shipped more than 70,000 units company-wide as of 2024. [Vendor] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- A company-wide figure of more than 120,000 cumulative shipments and roughly doubled revenue in 2025 is repeated by a reseller blog. [Reseller] — [Automation Hub](https://www.automationhub.com/blogs/news/how-pudu-robotics-scaled-to-120-000-units-and-what-it-means-for-automation-hub-customers)
+- Hotel: Pudu lists linen and luggage transport as T300 hospitality scenarios. The Shenzhen CTID robot hotel (West Artificial Island, Shenzhen–Zhongshan Link) plans trial operation in late 2026, and a T300 demonstrated luggage and elevator rides. [Vendor/press] — [Pudu hospitality](https://www.pudurobotics.com/en/solutions/hospitality); [Hospitality Net](https://www.hospitalitynet.org/news/4132730/pudu-robotics-and-shenzhen-ctid-co-ltd-launch-the-worlds-first-full-scenario-robot-serviced-hotel-project); [Interesting Engineering](https://interestingengineering.com/ai-robotics/world-first-hotel-robot-china-pudu)
+
+### Inferences
+- The T-series is a 2024+ industrial product with factory-floor references. For hotel linen and waste, the buyer would be an early adopter in the US.
+
+### Gaps
+- No independent reviews, YouTube teardown or field-reliability data were found within the research budget.
+- No US customer references were found for any T model.
+
+## 8. Fit for hotel linen/waste transport, and brief comparison (Keenon S100/S300, Aethon TUG, OTTO)
+
+### Takeaway
+**Strengths:** the T-series is inexpensive (about $13.5–24K), has ample payload (150–600 kg), fits 60 cm passages, and offers elevator and door IoT, an OpenAPI with a US cluster, and VDA 5050 on the T600. **Weaknesses:** no published slope rating, 10–20 mm thresholds, no hotel-cart ecosystem (carts must be adapted to the 60 mm jack or the shelf/tow modes), no US safety listing, and no US hospitality references. Aethon TUG is the proven hospital/hotel cart-tug at several times the price. OTTO is factory-floor oriented.
+
+### Cited Findings
+- Aethon TUG T3: **1,000 lb** payload (T3XL **1,400 lb**), 10 h runtime with intermittent charging. [Vendor] — [Aethon healthcare](https://aethon.com/healthcare-eu/)
+- Aethon markets the TUG T3 (and ZENA) to hospitality. [Vendor] — [Aethon hospitality brochure](https://aethon.com/wp-content/uploads/2024/01/Aethon_Brochure_Hospitality_ZENAandT3_Web.pdf)
+- TUG pricing: an older report gives $105,000 purchase or $1,500/month lease. Current listings show RaaS of $4,500–8,000/month. These conflict, and current pricing is quote-only through Stryker. [Independent, dated] — [Machine Design](https://www.machinedesign.com/archive/robots-making-rounds); [Robotomated](https://robotomated.com/learn/medical/healthcare-robotics-buying-guide-2026)
+- OTTO 100 (Rockwell/Clearpath): 150 kg payload, 2 m/s, 740 × 550 × 308 mm. No public price. [Vendor/press] — [OTTO 100](https://ottomotors.com/100/); [IEEE Spectrum](https://spectrum.ieee.org/amp/miniaturized-sibling-of-otto-material-handling-robot-joins-clearpath-fleet-2650274029); [Hesco OTTO comparison](https://blog.hesconet.com/otto-amr-comparison-100-600-1200-1500-lifter)
+- Keenon S100/S300: covered by another researcher. Not researched here.
+
+### Inferences
+- **Linen (clean and soiled):** the T300 Lifting or T600 Underride under custom linen carts or roll cages is the most plausible configuration. A 300 kg class easily covers wet soiled-linen carts. Validate the cart design (60 mm lift, 50 cm width) with Pudu.
+- **Room-service carts:** room-service carts are tall and tippy, with liquids. Jacking a cart with 60 mm of stroke and 1.2 m/s acceleration is untested in hotel settings. Prefer the T300 Standard with a fixed tray or shelf, or a dedicated service robot.
+- **Waste/trash:** feasible to the loading dock if routes are flat. Dock ramps are a likely blocker given no slope rating. Odor and spillage containment is a cart-design question.
+- **Public lobby and residential floors:** the T-series is industrial (ISO 3691-4 assumes a controlled zone). Running it among guests and residents raises a safety-standard mismatch. Restrict it to BOH corridors and service elevators unless Pudu supplies US public-space certification.
+- **Hotel.OS dispatch:** the OpenAPI (US cluster) supports task-level dispatch now. The T600's VDA 5050 offers a vendor-neutral path. For mixed fleets (Keenon plus Pudu), expect to build adapters.
+- **Cost framing:** about $21K per T300 or $589/mo RaaS, against TUG at about $105K or $4.5K+/mo. Pudu is roughly 5–8× cheaper in hardware, at the cost of hospitality-specific maturity.
+
+### Gaps
+- No head-to-head tests of Pudu T-series against TUG or OTTO in hotels.
+- No published Pudu hotel linen cart accessory was found.
+
+## 9. SEENON identification, and T-series top modules/accessories (addendum)
+
+### Takeaway
+**I found no evidence that "SEENON" is a Pudu brand, OEM, white-label or distributor name, and no evidence that any AMR vendor called SEENON exists.** Exact-match searches for "Seenon" robots, AMRs, delivery and laundry returned nothing relevant. The closest real names are **KEENON** (Pudu's main Chinese rival, which makes the S100/S300 industrial delivery robots covered by the other researcher), **SEER Robotics** (a Chinese AMR chassis/controller maker) and **SEEN·E Shenyi Robotics** (an industrial robot firm that debuted in August 2026). "SEENON" is one letter off "KEENON", so the most likely explanation is a misread KEENON logo, or a knock-off or rebadge of a KEENON-style chassis. I could not see the user's photo, so this is an inference, not a confirmation. On form factor: a *low* wheeled base carrying a bin does **not** match the T150 or T300, which are 1350 mm-tall bodies with a touchscreen and handle. The only low-profile Pudu T model is the **T600 Underride** (255 mm tall), which carries racks it has jacked up, not a fixed bin.
+
+### Cited Findings
+- Exact-match web searches for "Seenon" plus robot, delivery, laundry or chassis returned no SEENON company or product. The nearest matches were SEER Robotics, KEENON and SEEN·E Shenyi Robotics. [Independent search result] — [SEER Robotics](https://seer-robotics.ai/en/blog/precision-navigation-for-dynamic-warehouse-environments); [KEENON](https://www.keenon.com/en); [SEEN·E Shenyi Robotics (Baidu wiki)](https://baike.baidu.com/en/item/SEEN%C2%B7E%20Shenyi%20Robotics/5419543)
+- No Pudu page, press release or reseller page found during this research mentions SEENON. Pudu's known OEM-like channel is in Japan: **HCI Ltd. sells a "T300"** with a 300 kg load, a 10.1-inch touchscreen, a handle and "PUDU SLAM", marketed for hotel linen, amenities and laundry transport. It carries the HCI name and not SEENON. [Reseller] — [HCI on IPROS](https://pr.mono.ipros.com/en/hci-ltd/product/detail/2001616848)
+- Other hotel linen AMR vendors that came up while searching (none called SEENON) include Sankyo Seiki "Star" (600 kg), MiloX, Autoxing and Aethon. — [Sankyo Seiki on IPROS](https://pr.mono.ipros.com/en/sankyo-seiki/product/detail/2001644206/); [Hotel Management on MiloX](https://www.hotelmanagement.net/tech/milo-x-robotics-targets-hotels-service-automation); [Autoxing](https://en.autoxing.com/news/strategic-implementation-of-autonomous-logistics-robots-for-back-of-house-efficiency)
+- Pudu T150 and T300 bodies measure 835 × 500 × 1350 mm. The T600 Underride is 845 × 500 × 255 mm. [Vendor] — [Pudu T300](https://www.pudurobotics.com/en/products/pudut300); [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+
+**T-series top modules / accessories relevant to swapping payloads**
+- Pudu's hospitality page gives the T300 a **300 kg payload and 400 kg towing capacity**, with "direct loading, lifting, and towing for hotel carts and equipment". Modular attachments include **luggage racks**. Use cases include linen and luggage. [Vendor] — [Pudu hospitality](https://www.pudurobotics.com/solutions/hospitality)
+- Search-result summary of a Pudu T300 Product Intro PDF (dated 2025-03-03, hosted by an Israeli reseller): four T300 configurations, **Standard 65 kg, Shelf 103 kg, Lifting 81 kg, Towing 90 kg**. The first three are rated for 300 kg. **Towing is rated 400 kg using a 200 kg counterweight**. I could not extract the PDF text myself (it is image-based), so treat these figures as **unverified**. — [Czapnik T300 Product Intro PDF](https://www.czapnik.co.il/wp-content/uploads/2026/08/PUDU-T300-Product-Intro.-20250303-1.pdf)
+- Launch coverage described the T300 as having "standard, lifting, and shelf modes" and able to tow a cart. [Vendor via press] — [The Robot Report](https://www.therobotreport.com/pudu-t300-marks-pudus-move-from-service-to-industrial-robots/)
+- **PUDU T300 Lifting Rack** (per a RobotShop listing, as summarized by search): 900 × 660 × 308 mm, max rack height 1300 mm, recommended rack length 700–1000 mm and width 500–800 mm. The robot auto-recognizes, docks and lifts the rack, then releases it automatically. The page later returned 404, so this is **unverified**. — [RobotShop T300 Lifting Rack](https://ca.robotshop.com/products/pudu-t300-lifting-rack)
+- **T300 Shelving Unit** accessory, part PUD21510-000194. [Reseller] — [Filo Cleantech](https://filocleantech.com/products/pud21510-000194)
+- A reseller describes the T300 as one chassis with swappable top modules. [Secondary, unverified] — [Sparkobot](https://sparkobot.pages.dev/robots/industrial)
+- The T600 offers "Rack Group Recognition" for autonomous pick-and-place of racks. [Vendor] — [Pudu T600](https://www.pudurobotics.com/en/products/pudut600)
+- **Correction to §1:** besides the Standard and Lifting SKUs on Pudu's product page, the T300 has also been marketed with Shelf and Towing configurations (400 kg tow). The "no dedicated towing model" statement in §1 should be read with this in mind.
+
+### Inferences
+- The T300's swappable payloads are best understood as **(a)** a flat top or shelving unit carrying bins or totes, **(b)** a Lifting version that jacks a separate, freestanding rack or cart (the Lifting Rack), and **(c)** a Towing version or kit (400 kg). The model codes (WTID01 versus WTIDL1) and the weight differences suggest that Lifting versus Standard is a factory hardware difference. Converting a Standard into a Lifting robot in the field is unlikely. Shelf and tow attachments may be bolt-on.
+- For hotel linen, the strongest Pudu pattern is **one T300 Lifting robot with a pool of linen racks or carts built to the Lifting Rack footprint** (500–800 mm wide, 700–1000 mm long, ≤1300 mm tall). That lets one robot shuttle many carts, rather than carrying one fixed bin.
+- If the user's photo shows a low chassis with a bin mounted directly on top, it is more consistent with a KEENON industrial chassis, an Underride-style jacking AMR under a bin cart, or a third-party/unknown brand than with a T150 or T300.
+
+### Gaps
+- SEENON identity remains unconfirmed. Next steps: zoom in on the logo, look for an FCC ID or nameplate on the chassis, and ask the user where the photo came from. Searching 1688/Alibaba for "SEENON AMR" may also help.
+- Official Pudu accessory catalog, prices, and whether linen-specific carts are offered: not found.
+- The Shelf/Towing variant figures and the Lifting Rack dimensions need confirmation from a Pudu or RobotLAB datasheet.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>

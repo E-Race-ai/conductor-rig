@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" data-proj="aug"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keenon S100 and S300 (heavy load) · Staff Augmentation</title>
+<meta name="description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:title" content="Keenon S100 and S300 (heavy load) · Staff Augmentation"><meta property="og:description" content="Staff Augmentation (PRJ-04) research: Pudu and Keenon hotel robots, integration, security and regulation.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="staff-augmentation.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Assist</small>Staff Augmentation</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="staff-augmentation.html">Overview</a><a href="staff-augmentation.html#modules">Payload modules</a><a href="staff-augmentation.html#fleet">Robots</a><a href="robot-research.html" aria-current="page">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+:root{--bg:#070B16;--panel:#0E131E;--line:#1C2433;--text:#E9EDF5;--dim:#8E98AC;--cy:#4D8BFF;--ac:#7FA6FF;--grad:linear-gradient(100deg,#4D8BFF,#7FA6FF 40%,#8E9AB5 70%,#C8D1E3);color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:16px/1.7 IBM Plex Sans,system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"IBM Plex Sans","Arial Narrow",sans-serif;text-transform:uppercase;line-height:1;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);margin:.2em 0 .4em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:32px;margin:2em 0 .5em;border-top:1px solid var(--line);padding-top:.8em}h3{font-size:22px;margin:1.6em 0 .4em}
+a{color:var(--cy)}p,li{color:#C9D0DD}strong{color:var(--text)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--panel);padding:.1em .35em;border-radius:4px}
+pre{background:var(--panel);padding:16px;border-radius:3px;overflow-x:auto}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+blockquote{border-left:3px solid var(--ac);margin:1em 0;padding:.2em 1em;color:var(--dim)}
+.back{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.cards{display:grid;gap:12px;margin-top:24px}.card{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px 20px}
+.card:hover{border-color:var(--ac)}.card b{color:var(--text);font-size:18px}.card span{display:block;color:var(--dim);font-size:14px;margin-top:4px}
+.card i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
+.proj{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-top:20px}
+</style><div class="wrap"><a class="back" href="robot-research.html">← Staff Augmentation research</a><article id="doc"></article></div><script type="text/markdown" id="md"># Keenon Robotics S100 and S300: Heavy-Load Delivery Robots for a Mixed-Use Miami Tower (research as of 2026-11-19)
+
+Source-quality legend: **[Vendor]** = Keenon's own site or press release; **[Dist]** = distributor or reseller listing (often copies vendor data, sometimes with errors); **[Indep]** = independent trade press or analyst. No independent bench tests, user reviews, or long-term reliability data were found for either model.
+
+## 1. What the S100 and S300 are (category, launch, positioning, naming ambiguity)
+
+### Takeaway
+Both are Keenon "Series S" heavy-load indoor delivery AMRs. The S100 is a 100 kg+ fixed-shelf courier. The S300 is a 300 kg shelf-lifting (jacking) "go-under" robot that docks under mobile racks. The S300 launched around October 2025. No exact S100 launch date was found, but it was in field use by February 2025. "S100" also names unrelated products, so searches need the "Keenon" qualifier.
+
+### Cited Findings
+- Keenon's official S100 page describes "100kg+ Load Capacity", LiDAR SLAM plus stereo vision, and plug-and-play setup with a pre-installed OS and App. [Vendor] — [Keenon S100](https://www.keenon.com/en/product/S100)
+- Keenon markets the S300 as "A Single Touch Lifts 300 kg, Making Heavy Delivery Easy", with a shelfless structure and a lifting platform. [Vendor] — [Keenon S300](https://www.keenon.com/en/product/S300); [Keenon S300 (JP)](https://www.keenon.com/jp/product/S300)
+- The S300 is called the "high-capacity counterpart to the KEENON S100 within Keenon's Series S heavy-load delivery platform". [Dist] — [Asia Satellite S300](https://www.asiasatellite.co/KEENON-S300.htm)
+- **S300 launch timing:** The China Mobile Robot Alliance (CMRA) "Mobile Robot New Product Catalog in October", dated 5 Nov 2025, says Keenon "recently" released the S300, a "heavy-duty intelligent handling robot" with 300 kg capacity. [Indep/trade] — [CMRA](https://cnmra.com/mobile-robot-new-product-catalog-in-october/). A Keenon YouTube video, "NEW! KEENON S300", was about 405 days old in search results on 2026-11-19, which puts it around October 2025. [Vendor] — [YouTube](https://www.youtube.com/watch?v=rbSBAt1Hlvk)
+- **S100 timeline:** It was deployed at Furama Hotel Chiang Mai, with a launch ceremony in February 2025. [Indep/trade, vendor-sourced] — [IoT M2M Council](https://iotm2mcouncil.org/iot-library/news/smart-building-construction-news/keenon-robots-service-thailand-hotel/). A distributor datasheet filename, "datasheet_s100-shelf_202410", suggests an Oct 2024 datasheet revision. [Dist] — [RobotShop CDN PDF](https://cdn.robotshop.com/rbm/2282f665-ba37-4819-bd0a-f5a8b19d0c02/a/a3d6d705-e52f-4b4f-98a4-3ed740ce88b3/4a5eed8a_datasheet_s100-shelf_202410.pdf) (filename only; the fetch returned 403)
+- **Naming ambiguity:** Some aggregators label the robots "GuideBot S100" or "GuideBot S300". [Dist/aggregator] — [chipsilicon S100](https://chipsilicon.pages.dev/robots/keenon/guidebot-s100). Some resellers call the S100 "CourierBot S100". [Dist] — [Knoxlabs](https://www.knoxlabs.com/products/keenon-courierbot-s100-delivery-robot). An unrelated "S100 series" construction-elevator drive also comes up in searches. — [Hoplong catalog](https://img.hoplongtech.com/hoplong/catalogue/bien-tan/intelligent-control-system-s100-series-catalog.pdf)
+- Target sites per vendor and distributors: factories, warehouses, hospitals, hotels, and large commercial facilities. [Dist] — [Pentagone Robotics S300](https://www.pentagone-robotics.com/en/robots/keenon-s300); the S100 for "Transporting suitcases at hotels" — [Shirai Denshi (JP distributor)](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html)
+
+### Inferences
+- These are light-industrial, service-grade AMRs from a restaurant and hotel delivery-robot maker, not industrial AMRs in the class of OTTO or MiR. The S300 is a jacking robot like Pudu's T300 lift variant or Geek+/Hai-style shelf movers.
+- With roughly 13 months on the market, the S300 has little field history, especially in the US.
+
+### Gaps
+- No official Keenon press release giving exact S100 or S300 launch dates was found.
+- It is unclear whether the "GuideBot" naming is official or an aggregator artifact.
+
+## 2. Specifications
+
+### Takeaway
+S100: about 925 × 640 × 1282 mm, 87.5 kg, 100 kg+ payload on a fixed 865 × 600 × 800 mm shelf, 1 m/s, 8 h runtime, 2.5 h charge, swappable battery. S300: 115 kg, 300 kg payload, 230 mm-high chassis that lifts racks up to 1200 × 1200 mm, about 1 m/s unloaded, 6 h at full load, 3.5 h charge, auto-charge. Both need a 90 cm minimum passage. Slope and threshold limits are mostly unpublished; one distributor gives a slope of 5° or less for the S300. Neither robot tows.
+
+### Cited Findings — S100
+| Spec | Value | Source |
+|---|---|---|
+| Dimensions (W×D×H) | 925 × 640 × 1282 mm (36.42 × 25.20 × 50.47 in) | [Keenon S100](https://www.keenon.com/en/product/S100) [Vendor]; one JP distributor lists 620 mm instead of 640 mm — [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html) |
+| Weight incl. battery | 87.5 kg (192.9 lb) | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Max payload | 100 kg+ (220 lb+). One reseller says 120 kg. | [Keenon S100](https://www.keenon.com/en/product/S100); 120 kg claim per search snippet of [Airpuria](https://airpuria.com/products/keenon-robot-s100-industrial-robot) [Dist, unverified] |
+| Loading platform | 865 × 600 × 800 mm | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Standard capacity | 4 standard material boxes of 600 × 400 × 350 mm | [Romanian distributor brochure](https://aparaturafiscala.ro/img/downloads/brosura-curier-keenon-s100.pdf) [Dist] |
+| Max speed | 1 m/s. One distributor says 0.8 m/s. | [Keenon S100](https://www.keenon.com/en/product/S100); 0.8 m/s per search snippet (distributor) [conflict] |
+| Battery life | 8 h for loads under 100 kg ("vary by use and settings") | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Charge time | 2.5 h, 0 to 100% | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Charging modes | Charging pile, adapter, battery swap in 15 s. Pitched as enabling 24 h operation. | [Keenon S100](https://www.keenon.com/en/product/S100); [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html) |
+| Navigation | LiDAR SLAM + stereo vision fusion; "3D vision, dual LiDAR, VSLAM"; triple e-stops | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Other sensors | 360° obstacle avoidance, bumper sensors, 10.1 in touchscreen | [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html) [Dist] |
+| Stereo cameras | x3 | Distributor brochure via search snippet — [aparaturafiscala.ro](https://aparaturafiscala.ro/img/downloads/brosura-curier-keenon-s100.pdf) |
+| Min passage width | 90 cm (listed by Keenon as 29.53 in, which actually converts to 75 cm) "without rotation". Another source says 75 cm. | [Keenon S100](https://www.keenon.com/en/product/S100); 75 cm per distributor snippet [conflict, see Inferences] |
+| Accessories | Pager Center-Industrial, Pager Button-Industrial, Notification Bell, G-BOX, S100 Shelf, E-Box, T-Box | [Keenon S100](https://www.keenon.com/en/product/S100) |
+| Slope / threshold / gap | Not published on the official page or found anywhere | — |
+
+### Cited Findings — S300
+| Spec | Value | Source |
+|---|---|---|
+| Dimensions (W×D×H) | 925 × 640 × 1282 mm per the Keenon table, the same as the S100. Distributors give 92.5 × 62 × 128.2 cm. | [Keenon S300](https://www.keenon.com/en/product/S300) [Vendor]; [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300) [Dist] |
+| Weight incl. battery | 115 kg (253.5 lb) | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Max payload | 300 kg (661 lb), lifted "with a single touch" | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Lift / shelf | Shelfless lifting platform of 860 × 600 mm. Compatible rack up to 1200 × 1200 mm. Chassis 230 mm high, so it drives under racks. | [Keenon S300](https://www.keenon.com/en/product/S300); [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300) |
+| Lift stroke height | Not published | — |
+| Speed | 1 m/s (3.6 km/h) unloaded; 0.8 m/s (2.88 km/h) fully loaded | [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300) [Dist]; [Robots International](https://www.robotsinternational.com/KEENON-S300.htm) [Dist] |
+| Runtime | Up to 6 h at full load | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Charge | 3.5 h fast charge (0 to 100%). Automatic, manual, and battery-swap options. | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Battery | DC 48 V, 15 Ah, ternary lithium (NMC) | [Robots International](https://www.robotsinternational.com/KEENON-S300.htm) [Dist] |
+| Min passage | 90 cm without rotation. Minimum U-turn width of 110–120 cm "across manufacturer documents, to be verified against shelf configuration". | [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300) [Dist] |
+| Slope | ≤5° | [Robots International](https://www.robotsinternational.com/KEENON-S300.htm) [Dist] |
+| Environment | 0–45 °C, 5–95% RH; 4G and Wi-Fi | [Robots International](https://www.robotsinternational.com/KEENON-S300.htm) [Dist] |
+| Sensors / safety | Dual LiDAR, stereo vision, 3D vision, VSLAM; three e-stops; millisecond route replanning | [Keenon S300](https://www.keenon.com/en/product/S300); CMRA claims it can "anticipate and brake within milliseconds" with "zero collision risk" (vendor marketing relayed) — [CMRA](https://cnmra.com/mobile-robot-new-product-catalog-in-october/) |
+| Delivery modes | Loop, direct, multi-point, transport | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Offline operation | Path planning and task execution on the device, with no central control or external Wi-Fi/5G | [Keenon S300](https://www.keenon.com/en/product/S300) |
+| Deployment | VSLAM mapping in about 1 day versus 3–6 months "traditionally"; no magnetic tape or QR codes | [Keenon S300](https://www.keenon.com/en/product/S300) [Vendor claim] |
+| Threshold / gap | Not published | — |
+
+### Inferences
+- **Passage-width unit error:** Keenon's S100 page pairs "90 cm" with "29.53 in", but 29.53 in is 75 cm. Either the 90 cm figure or the inch conversion is wrong. Plan for 90 cm clear width, plus more for turning: the S300 distributor suggests 110–120 cm for a U-turn.
+- **Suspect S300 dimensions:** Keenon's S300 table copies the S100's 925 × 640 × 1282 mm, including the 1282 mm height. That is implausible for a 230 mm-high go-under chassis, so the table is probably a copy-paste error. A real S300 footprint and height must be obtained from Keenon.
+- **Towing:** Neither model is marketed as a tugger. The S100 carries on a fixed shelf or box modules. The S300 jacks a rack of up to 1200 × 1200 mm, so the operator would need Keenon-compatible racks or carts with matching leg clearance. The vendor shows the shelf as an accessory sold separately — [Asia Satellite](https://www.asiasatellite.co/KEENON-S300.htm).
+- **Fit with linen carts:** Standard hotel linen and soiled-linen carts are wheeled bins, not leg-type racks. Using the S300 means either fitting custom racks or confirming that existing carts have the ground clearance and leg spacing the 230 mm chassis needs. No such compatibility data was found.
+- **Slope and thresholds:** A slope of 5° or less is modest. Elevator sills, loading-dock ramps, and lobby transitions need site surveys.
+
+### Gaps
+- Official threshold height, gap-crossing, and slope figures for the S100, and an official slope figure for the S300.
+- S300 lift stroke, real height and footprint, and turning radius.
+- IP rating for both; battery cycle life.
+- The full S100 datasheet PDF, which RobotShop's CDN blocked with a 403.
+
+## 3. Elevator, door, and multi-floor operation
+
+### Takeaway
+Distributors say the S100 supports elevator, gate, and door integration through separately sold control modules that require professional installation. The S300 lists "optional elevator integration." Keenon publishes no elevator-OEM partner list (KONE, Otis, Schindler, TK) and no technical details for the S-series.
+
+### Cited Findings
+- S100: "Linked functions for elevator use, gate passage, and remote calling"; "interconnection with elevators and security gates". [Dist] — [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html)
+- A US reseller says the "Elevator Control / Automatic Door Control Modules are Sold Separately — professional elevator installation is required." [Dist] — per search snippet of [Knoxlabs S100](https://www.knoxlabs.com/products/keenon-courierbot-s100-delivery-robot) (a direct fetch returned 429)
+- S300: "optional elevator integration". [Dist] — [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300)
+- Keenon's official S100 and S300 pages do not mention elevators. [Vendor] — [S100](https://www.keenon.com/en/product/S100); [S300](https://www.keenon.com/en/product/S300)
+- For Keenon's T10 hotel robot, US integrator RobotLAB says elevator integration takes about 2–3 days with modern controllers that have an API. Older elevators need a relay-based cab caller that emulates button presses, which adds about a week. RobotLAB also recommends "a single-vendor fleet per property" when brands are mixed. [Dist/integrator] — [RobotLAB Keenon](https://www.robotlab.com/manufacturers/keenon/)
+- At Furama Chiang Mai, the trade article describes the elevator interface only for the Butlerbot handling cross-floor delivery. It does not say whether the S100 rides elevators there. [Indep/trade] — [IoT M2M Council](https://iotm2mcouncil.org/iot-library/news/smart-building-construction-news/keenon-robots-service-thailand-hotel/)
+
+### Inferences
+- The RobotLAB relay or API approach for the T10 likely applies to the S-series as well, since they share Keenon's IoT accessory ecosystem. This is not confirmed.
+- In a 1M sq ft tower with a dedicated service-elevator bank, the S100 (about 0.59 m² footprint, over 87 kg plus load) and the S300 (rack up to 1.44 m², up to 415 kg gross) affect cab capacity and robot-alone-in-cab policies. Confirm the elevator OEM's robot interface, such as a KONE or Otis robot API, versus relay retrofits.
+
+### Gaps
+- No Keenon-published elevator-OEM certifications or partner list.
+- No information on whether S-series robots support access-control or badge-reader integration for BOH doors.
+- No confirmed S100 multi-floor deployment with technical detail.
+
+## 4. Software, fleet scheduling, and third-party dispatch (APIs, Open-RMF, VDA 5050)
+
+### Takeaway
+Keenon runs its own App and Cloud Platform for monitoring and scheduling. One distributor claims S300 multi-robot scheduling of up to 20 units. No public developer API, SDK, Open-RMF adapter, or VDA 5050 support was found. That is a significant risk for dispatch by Hotel.OS. Pudu, by contrast, runs a public Open Platform.
+
+### Cited Findings
+- Keenon robots use the "KEENON App and Cloud Platform for real-time monitoring and task scheduling". This was stated for the C40, and the S-series appears to share the stack. [Indep/trade] — [Robotics Tomorrow, Mar 2025](https://www.roboticstomorrow.com/news/2025/03/31/keenon-robotics-marks-a-new-milestone-with-the-unveiling-of-the-humanoid-robot-xman-r1-and-the-latest-kleenbot-additions/24530/)
+- S300 multi-robot scheduling: "up to 20 devices". [Dist] — [Robots International](https://www.robotsinternational.com/KEENON-S300.htm)
+- The S300 runs path planning and tasks on the device, with no central control or external network needed. [Vendor] — [Keenon S300](https://www.keenon.com/en/product/S300)
+- Calling methods include a pager center, pager buttons, and a notification bell (S100 accessories), plus smartphone remote calling. [Vendor] — [Keenon S100](https://www.keenon.com/en/product/S100); [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html). One reseller sells a "Keenon Control Center Gateway for S100". [Dist] — [RobotShop CA](https://ca.robotshop.com/products/reliablerobots-keenon-control-center-gateway-s100)
+- API Evangelist's profile, scored Oct 2026, says Keenon publishes "no public developer API, developer portal, or OpenAPI". [Indep, but an automated or AI-assisted profile] — [API Evangelist](https://providers.apievangelist.com/providers/keenon-robotics/)
+- Pudu runs a public Open Platform for developers. [Vendor, competitor] — [PUDU Open Platform](https://open.pudutech.com/en)
+- No search results connect Keenon to Open-RMF or VDA 5050. — search of the Open Robotics discourse and VDA 5050 literature, e.g. [Open-RMF + VDA5050 thread](https://discourse.openrobotics.org/t/open-rmf-questions-from-a-real-integration-with-a-diff-robot-vda5050/54057)
+
+### Inferences
+- Integrating with Hotel.OS would probably mean negotiating partner or private API access with Keenon. Otherwise the options are emulating call buttons, for example triggering the Pager Center over IoT, or building a custom Open-RMF fleet adapter on whatever interface Keenon exposes. Make written API access, with documented endpoints for task dispatch, status, and telemetry, a contract precondition.
+- The on-device, offline design (S300) adds resilience but complicates central orchestration.
+
+### Gaps
+- Whether Keenon offers a private or partner API for the S-series in the US, and what it covers.
+- Whether S100 and S300 can be co-scheduled with Keenon's T10 or W3 in one fleet manager.
+
+## 5. Safety and certifications (UL 3100, ISO 3691-4, ANSI/A3 R15.08, CE, FCC)
+
+### Takeaway
+Only CE is cited, by one EU distributor for the S300. No evidence was found of UL 3100, ISO 3691-4, or ANSI/A3 R15.08 certification for either model, nor an FCC ID record. For US deployment in a building with public areas, this is a key due-diligence item.
+
+### Cited Findings
+- S300: "Certification: CE". [Dist] — [Pentagone](https://www.pentagone-robotics.com/en/robots/keenon-s300)
+- Keenon's official S100 and S300 pages list no certifications. [Vendor] — [S100](https://www.keenon.com/en/product/S100); [S300](https://www.keenon.com/en/product/S300)
+- A search for Keenon plus UL 3100 returned only generic UL and SGS pages. UL describes UL 3100 as the outline of investigation for automated mobile platforms (AMPs) and says AMR evaluation to it supports "acceptance by code authorities". — [UL: UL 3100](https://www.ul.com/resources/safety-first-ul-3100-automated-electrical-equipment)
+- Safety features per vendor: dual LiDAR, 3D vision, VSLAM, triple e-stops, and bumpers per a distributor. [Vendor/Dist] — [Keenon S100](https://www.keenon.com/en/product/S100); [Shirai Denshi](https://www.shiraidenshi.co.jp/homepage/en/robotics/product/s100/index.html)
+
+### Inferences
+- A Miami AHJ, insurers, or the building's elevator contractor may ask for UL 3100 or a NRTL listing, particularly for a 415 kg gross S300 in public or residential corridors. Ask Keenon for test reports and FCC IDs. The 4G and Wi-Fi radios would need FCC authorization for US sale.
+
+### Gaps
+- FCC ID, UL or ETL listing, ISO 3691-4 or R15.08 conformity, and battery UL 2271 or UN38.3 documentation were all not found.
+
+## 6. US pricing, purchase, lease or RaaS, distributors, warranty, and service
+
+### Takeaway
+Keenon publishes no MSRP. US reseller listings put the S100 at about $19,000–22,000. The S300 appears at $13,995–18,500 on a distributor network of questionable reliability, and at €16,800 plus VAT in the EU. RobotLAB is the largest US Keenon integrator, with a Miami location and RaaS programs, but it does not list the S100 or S300. Warranty claims range from a 2-year manufacturer warranty to 5-year distributor packages.
+
+### Cited Findings
+- S100 US reseller prices: Airpuria $19,000 and $22,000 on two pages; Reach.dog $19,000 (marked down from $22,000.93); Knoxlabs $19,600; The Robot Warehouse "SRP $9,500–$12,500", which it describes as estimates. [Dist] — via search snippets: [Airpuria](https://airpuria.com/products/keenon-robot-s100-industrial-robot), [Reach.dog](https://reach.dog/shop/useabot/products/s100-by-keenon-robotics), [Knoxlabs](https://www.knoxlabs.com/products/keenon-courierbot-s100-delivery-robot), [The Robot Warehouse](https://therobotwarehouse.odoo.com/shop/keenon-s100-heavy-load-courier-robot-4)
+- S100 at RobotShop Canada (Reliable Robots): $29,999 with a "2 year Warranty", probably CAD, special order in 2–6 weeks. [Dist] — [RobotShop CA](https://ca.robotshop.com/products/reliablerobots-keenon-s100-with-2-year-warranty-from-reliable-robots) (via search snippet; the page later returned 404)
+- S300: $18,500 USD with a "5 Year Warranty" (60 months) and buy-now-pay-later. [Dist] — [Robots International](https://www.robotsinternational.com/KEENON-S300.htm). Also US$13,995 on a sister site. [Dist] — [Asia Satellite](https://www.asiasatellite.co/KEENON-S300.htm). EU: "from 16,800 € (plus VAT, instruction and transportation costs / shelf shown is an accessory (not included))" per search snippet. [Dist]
+- RobotLAB (Southlake, TX; 20+ locations including Miami) sells Keenon T10 at $18,400 or $519/mo RaaS over 36 months, and W3 at $29,600 or $829/mo RaaS over 36 months. RaaS includes warranty and maintenance. The T10 has a 2-year manufacturer warranty, with 3-, 5-, or 7-year extended plans. RobotLAB offers local deployment, same-day service, and firmware updates tested before rollout. The S100 and S300 are not listed. [Dist/integrator] — [RobotLAB Keenon](https://www.robotlab.com/manufacturers/keenon/)
+- Keenon contact for product information: global@keenon.com. — [Robotics Tomorrow](https://www.roboticstomorrow.com/news/2025/03/31/keenon-robotics-marks-a-new-milestone-with-the-unveiling-of-the-humanoid-robot-xman-r1-and-the-latest-kleenbot-additions/24530/)
+- Keenon showed a humanoid "butler" at CES 2026 in the US, which indicates continued US market focus. [Indep] — [Interesting Engineering](https://interestingengineering.com/ces-2026/keenon-debuts-humanoid-butler-us)
+
+### Inferences
+- The "satellite" storefront network (asiasatellite, canadasatellite, europasatellite, robotsinternational) shows inconsistent prices and formatting, and its 5-year warranty is a seller package, not a Keenon warranty. Price quotes should come from Keenon US or an authorized integrator such as RobotLAB.
+- Budget roughly $20k per S100 and $18–25k per S300, plus elevator and door modules, racks or carts, charging piles, and integration. These are inferred estimates, not quotes.
+
+### Gaps
+- Official US MSRP; Keenon direct RaaS pricing for the S-series; whether RobotLAB or another authorized US partner supports the S100 or S300; parts lead times in Florida.
+
+## 7. Deployments, reviews, and problems
+
+### Takeaway
+Documented S100 use is in hotels outside the US: Furama Chiang Mai, Thailand, February 2025, and Shangri-La Traders Shanghai Hongqiao, October 2025, for luggage, linen, and supplies. No S300 deployments, US deployments of either model, independent reviews, or problem reports were found. Outcome data comes only from the vendor.
+
+### Cited Findings
+- Furama Hotel Chiang Mai (Feb 2025): the S100 "with its heavy-duty capacity of over 100kg" handles "bulky items such as hotel linens, luggage and supplies", supporting back-of-house and guest-facing deliveries. No robot count or measured outcomes are given. [Indep/trade, vendor-sourced] — [IoT M2M Council](https://iotm2mcouncil.org/iot-library/news/smart-building-construction-news/keenon-robots-service-thailand-hotel/)
+- Shangri-La Traders, Shanghai Hongqiao (Oct 2025): the S100 handles luggage within a fleet of XMAN-R1, C40, S100, T10, T3, and W3 robots. [Vendor] — [Keenon news](https://www.keenon.com/en/news/keenon-robotics-partners-with-shangri-la-group-to-create-the-worlds-first-smart-hotel-powered-by-universal-specialized-robots); [PR Newswire Asia](https://en.prnasia.com/releases/apac/keenon-humanoid-robot-joins-hotel-workforce-pioneering-world-s-first-general-purpose-special-purpose-robot-collaboration-model-509473.shtml)
+- A Horwath HTL case-study review calls that architecture credible but the outcome unverified. It also flags Keenon's claims of 15 years, 100,000+ units, and 60+ countries as unverified independently. [Indep] — [Horwath HTL](https://workshop.horwathhtl.com/resources/case-studies/shangri-la-keenon-counter-pattern)
+- Hospital and factory use appears only in reseller copy, e.g. "Light industry: S100 moving parts and materials between stations". [Dist] — [Knoxlabs blog](https://www.knoxlabs.com/blogs/articles/keenon-service-robots-compared?view=articles-hub)
+
+### Inferences
+- The S-series is unproven in US hospitality, and in high-rise residential mixed-use buildings in general. A pilot with defined KPIs (trips per day, mean time between interventions, elevator success rate) is warranted.
+
+### Gaps
+- No user reviews, failure reports, or independent performance data.
+- No count of S100 or S300 units deployed in the US.
+
+## 8. Fit for hotel linen and waste transport versus alternatives
+
+### Takeaway
+For a 1M sq ft tower, the S100 suits mid-volume clean linen, amenities, and supply runs in standard 90 cm+ BOH corridors. The S300 is the only Keenon option for whole-cart moves, but only with compatible lift racks. Neither has published UL 3100 certification, an open API, or wet or waste-specific features, all of which matter for Hotel.OS dispatch and for waste. Pudu offers comparable products with a public Open Platform. Aethon TUG is the mature towing and cart option with long hospital and US track records. Specs for the competitors were not researched here.
+
+### Cited Findings
+- The S100 handles hotel linen, luggage, and supplies (Furama). — [IoT M2M Council](https://iotm2mcouncil.org/iot-library/news/smart-building-construction-news/keenon-robots-service-thailand-hotel/)
+- S300 rack compatibility of up to 1200 × 1200 mm, with a 230 mm chassis. — [Keenon S300](https://www.keenon.com/en/product/S300)
+- The S100 warns not to charge a wet robot. — [Keenon S100](https://www.keenon.com/en/product/S100)
+- Pudu has a public developer Open Platform, versus no public Keenon API. — [PUDU Open Platform](https://open.pudutech.com/en); [API Evangelist](https://providers.apievangelist.com/providers/keenon-robotics/)
+
+### Inferences
+- **Linen:** Open-shelf S100 payloads are fine for clean linen. Soiled linen and waste raise hygiene and odor concerns, so enclosed bins or carts moved by an S300 are preferable to open shelves. The S300's 300 kg capacity covers a full soiled-linen cart.
+- **Waste:** Wet waste conflicts with the "do not charge a wet robot" warning and with the unknown IP rating. Prefer a cart-based S300 or TUG flow that keeps the robot body away from the waste.
+- **Room service and amenities:** The S100 is overkill and has an open, unsecured shelf. Keenon's enclosed T10 or W3, or Relay, fit better for guest-facing deliveries in residential and hotel corridors.
+- **Dispatch by Hotel.OS:** Pudu's open platform is a structural advantage over Keenon for third-party orchestration. Confirm this against the Pudu research notes.
+
+### Gaps
+- Pudu T300/T600, Aethon TUG, OTTO, and Relay specs, prices, and certifications were outside this note's search budget. They should come from parallel research.
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>
