@@ -2,8 +2,8 @@
 <html lang="en" data-proj="hub"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Accelerate Robotics · Engineering program</title>
-<meta name="description" content="Accelerate Robotics engineering program AR-PGM-001: building-scale reality capture (Site Capture, FU-SYS-001) and on-premise fleet compute (The Brain, CD-SYS-001). Requirements, architecture, data pipeline, risks and verification.">
-<meta property="og:title" content="Accelerate Robotics · Engineering program"><meta property="og:description" content="Accelerate Robotics engineering program AR-PGM-001: building-scale reality capture (Site Capture, FU-SYS-001) and on-premise fleet compute (The Brain, CD-SYS-001). Requirements, architecture, data pipeline, risks and verification.">
+<meta name="description" content="Accelerate Robotics engineering program AR-PGM-001: The Brain, an agentic engineering platform (central context, sandboxed agents, hybrid frontier/local model routing), and Site Capture, building-scale reality capture. Requirements, architecture, risks and verification.">
+<meta property="og:title" content="Accelerate Robotics · Engineering program"><meta property="og:description" content="Accelerate Robotics engineering program AR-PGM-001: The Brain, an agentic engineering platform (central context, sandboxed agents, hybrid frontier/local model routing), and Site Capture, building-scale reality capture. Requirements, architecture, risks and verification.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,6 +76,16 @@
 .pipe dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:12.5px;line-height:1.4}
 .pipe dt{font:500 11px/1.5 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
 .pipe dd{margin:0;color:var(--dim);font-family:var(--mono);font-size:12px}
+.em{margin-top:16px;border:1px solid var(--line);background:var(--panel)}
+.em>div{display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1.25fr);border-top:1px solid var(--line)}
+.em>div:first-child{border-top:0}
+.em>div>*{padding:11px 16px;min-width:0;font-size:13.5px;line-height:1.45}
+.em>div>span:nth-child(2){color:var(--faint)}
+.em>div>span:nth-child(3){color:var(--text);border-left:2px solid #4D8BFF;background:rgba(77,139,255,.05)}
+.em b{font:500 11.5px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.em .em-h>span{font:600 11px/1.4 var(--mono)!important;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)!important;background:none!important}
+.em .em-h>span:nth-child(3){color:#4D8BFF!important}
+@media (max-width:640px){.em>div{grid-template-columns:1fr}.em>div>*{padding:8px 14px}.em .em-h>span:first-child{display:none}.em>div>span:nth-child(3){border-left:2px solid #4D8BFF}}
 .pipe-cap{font:12px/1.5 var(--mono);color:var(--faint);margin-top:8px}
 .hx-lede{font-size:17px!important;color:#C3CCDD!important;max-width:64ch!important;line-height:1.6}
 .pj h2{font-family:var(--head)!important}
@@ -105,28 +115,37 @@
   <div class="hx-head">
     <div>
       <div class="hx-code">Accelerate Robotics · Engineering program</div>
-      <h1>Building-scale reality capture <em>and fleet compute</em></h1>
-      <p class="hx-lede">Accelerate Robotics deploys and operates service-robot fleets in large hospitality and healthcare buildings. Running autonomy at that scale depends on two things most deployments improvise: a survey-controlled 3D model of the building, and dedicated compute to build that model and coordinate the fleet.</p>
-      <p>This program builds both in-house: a quadruped-mounted mobile reality capture system (PRJ-02) and an on-premise processing and orchestration node (PRJ-01). This workspace is the engineering record: requirements, architecture, budgets, risks and verification for each.</p>
+      <h1>Agentic engineering <em>and building-scale reality capture</em></h1>
+      <p class="hx-lede">Accelerate Robotics deploys and operates service-robot fleets in large hospitality and healthcare buildings. This program builds the two internal capabilities that operation runs on: a controlled platform for building software with AI agents, and a system for capturing survey-grade 3D models of every building the fleet enters.</p>
+      <p><b>PRJ-01 The Brain</b> is the agentic engineering platform: business-unit leads direct sandboxed AI agents against a central context store, with frontier models for aggressive development and local compute for sensitive material. <b>PRJ-02 Site Capture</b> is a quadruped-mounted mobile reality capture system; its data is processed on the Brain. This workspace is the engineering record for both.</p>
     </div>
     <table class="rev" aria-label="Document revision">
       <tr><td>Doc</td><td>AR-PGM-001</td></tr>
-      <tr><td>Rev</td><td>E · 2026-11-19</td></tr>
-      <tr><td>Status</td><td>Gen-0 / procurement</td></tr>
+      <tr><td>Rev</td><td>F · 2026-11-19</td></tr>
+      <tr><td>Status</td><td>Procurement / Gen-0</td></tr>
       <tr><td>Workstreams</td><td>PRJ-01 · PRJ-02</td></tr>
     </table>
   </div>
 
   <div class="kpi" aria-label="Program parameters">
+    <div><b>C0–C3</b><span>Data classes routed to frontier or local models</span></div>
     <div><b>92,900<small>m²</small></b><span>Site #1 floor area (1.0 M sq ft)</span></div>
     <div><b>15–50<small>mm</small></b><span>Target LOA20 at 2σ, building-wide (est.)</span></div>
     <div><b>1.3–1.8<small>TB</small></b><span>Raw capture per site (est.)</span></div>
     <div><b>7–10</b><span>Battery missions per site, 15–20 min SLAM segments</span></div>
-    <div><b>67<small>TOPS</small></b><span>Edge logger, Jetson Orin Nano Super</span></div>
-    <div><b>16C<small>/ 128 GB</small></b><span>Processing node, EPYC 9175F, ECC DDR5</span></div>
+    <div><b>16C<small>/ 128 GB</small></b><span>Platform node, EPYC 9175F, ECC DDR5</span></div>
   </div>
 
-  <div class="sec-h"><h2>Data pipeline</h2><p>Acquisition to fleet maps. Field and back end are joined by verified media, not a network link.</p></div>
+  <div class="sec-h"><h2>Engineering model</h2><p>PRJ-01 · from unstructured AI-assisted coding to a controlled methodology.</p></div>
+  <div class="em">
+    <div class="em-h"><span></span><span>Unstructured (“vibe coding”)</span><span>Agentic engineering on the Brain</span></div>
+    <div><b>Context</b><span>Re-typed per chat, lost between sessions</span><span>Central, versioned context brain shared by every agent</span></div>
+    <div><b>Execution</b><span>Laptop with broad credentials</span><span>Per-unit sandboxes, scoped credentials, no production access</span></div>
+    <div><b>Models</b><span>Whatever is open; sensitive data pasted into cloud chat</span><span>Routed by data class: frontier APIs for speed, local models for confidential work</span></div>
+    <div><b>Control</b><span>Accepted if it appears to run</span><span>Lead-owned spec → agent implementation → tests → review gate → merge, fully audited</span></div>
+  </div>
+
+  <div class="sec-h"><h2>Site Capture data pipeline</h2><p>PRJ-02 acquisition to fleet maps, processed on PRJ-01. Joined by verified media, not a network link.</p></div>
   <div class="pipe" aria-label="Data pipeline">
     <div style="--c:#00C8FF"><span class="n">01 · ACQUIRE</span><h3>Mobile capture</h3><div class="w">PRJ-02 · on site, offline</div>
       <dl><dt>Carrier</dt><dd>Unitree Go2 X (Gen-0)</dd><dt>Sensors</dt><dd>Survey LiDAR + IMU · 4K · 360° 5.7K30</dd><dt>Logger</dt><dd>Jetson Orin Nano Super · MCAP</dd><dt>Time</dt><dd>PTP master on logger</dd></dl></div>
@@ -146,8 +165,8 @@
     <section class="pj con" aria-labelledby="pj1">
       <div class="pj-h"><span class="id">PRJ-01 · THE BRAIN</span><span class="st"><i></i>Parts decided · ordering</span></div>
       <h2 id="pj1">The Brain</h2>
-      <div class="sub">Processing &amp; orchestration node · CD-SYS-001</div>
-      <p class="purpose">Single-socket AMD EPYC 9175F (Zen 5, 16 cores, 512 MB L3) on SP5 with 128 GB ECC DDR5, an RTX 5070 Ti and 15.36 TB of enterprise U.3 NVMe. Two workloads: concurrent agent orchestration with local inference, and offline SLAM optimisation, registration and QA for capture jobs.</p>
+      <div class="sub">Agentic engineering platform · CD-SYS-001</div>
+      <p class="purpose">The company's controlled environment for agentic software engineering: central context brain, per-unit agent sandboxes, a model router that keeps confidential data on local compute, review gates and a full audit trail. Runs on a single-socket AMD EPYC 9175F node (16 Zen 5 cores, 128 GB ECC DDR5, RTX 5070 Ti, 15.36 TB U.3 NVMe), which also processes Site Capture jobs.</p>
       <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
       <div class="specs">
@@ -162,7 +181,7 @@
         <tr><th>Next gate</th><td>G0: EPS check (board 3× EPS vs PSU 2× EPS cables) + order before the price guarantee ends Thu Nov 19. Then G2: NAS ≥ 40 TB before the first client capture.</td></tr>
         <tr><th>Team</th><td>Accelerate program team</td></tr>
       </table>
-      <div class="links"><a class="p" href="conductor.html">Open The Brain →</a><a href="conductor.html#req">Requirements</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
+      <div class="links"><a class="p" href="conductor.html">Open The Brain →</a><a href="conductor.html#role">Operating model</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
     </section>
 
     <section class="pj fu" aria-labelledby="pj2">
@@ -191,9 +210,9 @@
 
   <div class="sec-h"><h2>Design constraints</h2><p>Applied to both workstreams from Gen-0.</p></div>
   <div class="trust">
-    <div><b>No runtime network dependency</b><span>Acquisition is air-gapped: carrier cellular modem removed, Bluetooth off, firmware frozen. Data leaves site on physical media only.</span></div>
-    <div><b>Verifiable data lineage</b><span>SHA-256 manifest per segment at each hand-off (logger → field drive → processing node → archive). Two verified copies before demobilisation.</span></div>
-    <div><b>Measured accuracy, not claimed</b><span>Accuracy is reported as USIBD LOA at 2σ from residuals against independent checkpoints. Planning figures are marked est. until measured.</span></div>
+    <div><b>Sensitive data stays on premises</b><span>Confidential work is routed to local models only; capture acquisition is air-gapped and leaves site on verified media.</span></div>
+    <div><b>Everything is auditable</b><span>Every agent prompt, tool call and diff is logged; every capture segment carries a SHA-256 manifest from logger to archive.</span></div>
+    <div><b>Gated, not trusted</b><span>No agent change reaches main without tests and human review. Capture accuracy is reported as USIBD LOA at 2σ against independent checkpoints.</span></div>
     <div><b>Privacy in the pipeline</b><span>Occupied areas excluded by schedule. People in 360° imagery blurred before delivery (target). Imagery is a visual layer, never a measurement source.</span></div>
   </div>
 

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-proj="con" data-rev="CD-SYS-001 · Rev B · 2026-11-18"><head><meta charset="utf-8">
+<html lang="en" data-proj="con" data-rev="CD-SYS-001 · Rev C · 2026-11-19"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Brain · Accelerate Robotics</title>
-<meta name="description" content="The Brain (CD-SYS-001): processing and orchestration node for the Accelerate Robotics fleet program. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
-<meta property="og:title" content="The Brain · Accelerate Robotics"><meta property="og:description" content="The Brain (CD-SYS-001): processing and orchestration node for the Accelerate Robotics fleet program. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
+<meta name="description" content="The Brain (CD-SYS-001): Accelerate Robotics agentic engineering platform — central context, sandboxed agents, hybrid frontier/local model routing. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
+<meta property="og:title" content="The Brain · Accelerate Robotics"><meta property="og:description" content="The Brain (CD-SYS-001): Accelerate Robotics agentic engineering platform — central context, sandboxed agents, hybrid frontier/local model routing. EPYC 9175F, 128 GB ECC, RTX 5070 Ti, 15.36 TB Kioxia. Requirements, interfaces, pipeline, risks and BOM.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/a-cpu.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/a-cpu.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -547,7 +547,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <a class="mark" href="#top">THE BRAIN<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#role">Role</a><a class="keep" href="#req">Requirements</a><a href="#hw">Hardware</a><a href="#if">Interfaces</a><a href="#perf">Performance</a><a href="#pipe">Pipeline</a><a href="#store">Storage</a><a href="#sec">Security</a><a href="#build">Build</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a>
+      <a class="keep" href="#role">Operating model</a><a class="keep" href="#req">Requirements</a><a href="#hw">Hardware</a><a href="#if">Interfaces</a><a href="#perf">Performance</a><a href="#pipe">Pipeline</a><a href="#store">Storage</a><a href="#sec">Security</a><a href="#build">Build</a><a href="#roadmap">Roadmap</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a>
     </div>
   </div>
 </nav>
@@ -555,13 +555,13 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <header class="fu-hd" id="top">
   <div class="wrap hg">
     <div>
-      <div class="kicker">PRJ-01 · The Brain · CD-SYS-001 · Rev B · 2026-11-18</div>
-      <h1>The Brain<span>Processing and orchestration node for the Accelerate fleet program</span></h1>
-      <p class="lede-c">A single-socket Zen 5 server node with two workloads: concurrent agent orchestration with local inference, and offline SLAM optimisation, registration and QA that turn Site Capture data into the point clouds and route maps the fleet runs on.</p><p class="spec">Codename Conductor · AMD EPYC 9175F · ASRock Rack TURIND8X-2T · 128 GB DDR5-5600 ECC RDIMM<br>RTX 5070 Ti 16 GB · 2× Kioxia CD6-R 7.68 TB U.3 · Leadex VII 1200 W · Antec 900</p>
+      <div class="kicker">PRJ-01 · The Brain · CD-SYS-001 · Rev C · 2026-11-19</div>
+      <h1>The Brain<span>Agentic engineering platform: central context, sandboxed agents, hybrid model routing</span></h1>
+      <p class="lede-c">The controlled environment in which Accelerate builds its software. Business-unit leads direct teams of AI agents against one shared, versioned context store. Frontier models drive aggressive development on non-sensitive work; local models on this machine handle sensitive material that must not leave the building. Every agent runs in a sandbox, every change passes a review gate, and every action is logged.</p><p class="spec">Codename Conductor · AMD EPYC 9175F · ASRock Rack TURIND8X-2T · 128 GB DDR5-5600 ECC RDIMM<br>RTX 5070 Ti 16 GB · 2× Kioxia CD6-R 7.68 TB U.3 · Leadex VII 1200 W · Antec 900</p>
       <div class="ms-tw"><table class="ms-t n">
         <tbody>
           <tr><th style="width:36%">Configuration</th><td>Baseline (Option A, decided 2026-11-17) <span class="chip ver">ordering</span></td></tr>
-          <tr><th>Roles</th><td>(1) Agent orchestration and local inference · (2) Processing engine for PRJ-02 Site Capture data</td></tr>
+          <tr><th>Roles</th><td>(1) Agentic engineering platform: context brain, agent sandboxes, local inference · (2) Processing engine for PRJ-02 Site Capture data</td></tr>
           <tr><th>Budget</th><td class="m">≈ $14,037 all-in (Micro Center $9,062.85 incl. 7% tax + Amazon ≈ $4,974)</td></tr>
           <tr><th>Next gate</th><td>G0: confirm EPS input requirement (board 3× EPS vs PSU 2× EPS cables), then order before the price guarantee ends Thu 2026-11-19</td></tr>
           <tr><th>Owner</th><td>Accelerate program team</td></tr>
@@ -577,13 +577,93 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="role">
   <div class="wrap">
     <div class="kicker">CD-SYS-001 · 1.0</div>
-    <h2>Role and workloads</h2>
-    <p class="lead">The Brain (codename Conductor) is a single-socket server-class tower with two workloads. It runs concurrent coding agents and local language models, and it is the processing engine for Site Capture: raw LiDAR, 360° and 4K video come in on field media, and registered point clouds, tours and QA reports go out. The hand-off between the projects is files, not a live link.</p>
+    <h2>Operating model: agentic engineering</h2>
+    <p class="lead">The Brain (codename Conductor) is the platform for a controlled engineering methodology. Unstructured AI-assisted development (“vibe coding”) does not scale past one person and cannot be trusted with sensitive data. The Brain replaces it with agentic engineering: business-unit leads specify and accept the work, AI agents execute it in sandboxes against a central context store, and a routing policy decides which data may reach frontier models and which stays on local compute. It is also the processing engine for Site Capture (W-3 to W-6).</p>
+    <h3 class="ms-h3"><i>1.1</i>Methodology comparison</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%">Dimension</th><th style="width:38%">Unstructured (“vibe coding”)</th><th>Agentic engineering on the Brain</th></tr></thead>
+      <tbody>
+        <tr><th>Context</th><td>Re-typed into each chat; lost between sessions</td><td>Central, versioned context brain: repos, specs, architecture decisions, runbooks, decision log</td></tr>
+        <tr><th>Execution</th><td>Developer laptop with broad credentials</td><td>Per-unit sandboxes: containers, scoped credentials, no production access by default</td></tr>
+        <tr><th>Model use</th><td>Whatever tool is open; sensitive data pasted into cloud chat</td><td>Policy routing by data class: frontier APIs for non-sensitive work, local models for confidential material</td></tr>
+        <tr><th>Quality</th><td>Accepted if it appears to run</td><td>Spec → plan → implement → tests → review gate → merge</td></tr>
+        <tr><th>Ownership</th><td>Individual and unrepeatable</td><td>Lead owns the outcome and acceptance; platform team owns the guardrails</td></tr>
+        <tr><th>Audit</th><td>None</td><td>Every prompt, tool call and diff logged, append-only</td></tr>
+        <tr><th>Throughput</th><td>One person, one thread</td><td>Many agents in parallel per business unit, bounded by RAM (CD-REQ-001)</td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>1.2</i>Logical architecture</h3>
+    <figure class="ms-fig">
+      <div class="sc"><svg viewBox="0 0 1080 450" role="img" aria-label="Agentic engineering platform: business-unit leads, control plane, context brain, model router, sandboxes, review gate and audit log" style="min-width:760px" font-family="IBM Plex Mono, monospace" font-size="12">
+        <rect width="1080" height="450" fill="url(#cgrid)"/>
+        <g stroke="#A3AEC6" stroke-width="1.5" fill="none">
+          <line x1="215" y1="80" x2="215" y2="104"/><line x1="445" y1="80" x2="445" y2="104"/><line x1="675" y1="80" x2="675" y2="104"/><line x1="905" y1="80" x2="905" y2="104"/>
+          <line x1="215" y1="104" x2="905" y2="104"/><line x1="540" y1="104" x2="540" y2="140"/>
+          <line x1="320" y1="180" x2="380" y2="180"/><line x1="700" y1="180" x2="760" y2="180"/>
+          <polyline points="870,165 885,165 885,148 900,148"/><polyline points="870,195 885,195 885,232 900,232"/>
+          <line x1="540" y1="220" x2="540" y2="250"/><line x1="215" y1="250" x2="905" y2="250"/>
+          <line x1="215" y1="250" x2="215" y2="272"/><line x1="445" y1="250" x2="445" y2="272"/><line x1="675" y1="250" x2="675" y2="272"/><line x1="905" y1="250" x2="905" y2="272"/>
+          <line x1="215" y1="328" x2="215" y2="350"/><line x1="445" y1="328" x2="445" y2="350"/><line x1="675" y1="328" x2="675" y2="350"/><line x1="905" y1="328" x2="905" y2="350"/>
+          <line x1="215" y1="350" x2="905" y2="350"/><line x1="560" y1="350" x2="560" y2="372"/>
+          <polyline points="350,397 60,397 60,230"/>
+        </g>
+        <line x1="905" y1="350" x2="905" y2="372" stroke="#A3AEC6" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <g fill="#0C1324" stroke="#5B6470" stroke-width="1.5">
+          <rect x="120" y="30" width="190" height="50"/><rect x="350" y="30" width="190" height="50"/><rect x="580" y="30" width="190" height="50"/><rect x="810" y="30" width="190" height="50"/>
+          <rect x="760" y="140" width="110" height="80"/><rect x="900" y="122" width="160" height="52"/>
+          <rect x="120" y="272" width="190" height="56"/><rect x="350" y="272" width="190" height="56"/><rect x="580" y="272" width="190" height="56"/><rect x="810" y="272" width="190" height="56"/>
+          <rect x="350" y="372" width="420" height="50"/><rect x="810" y="372" width="190" height="50"/>
+        </g>
+        <rect x="380" y="140" width="320" height="80" fill="#0C1324" stroke="#4D8BFF" stroke-width="2"/>
+        <rect x="40" y="130" width="280" height="100" fill="#0C1324" stroke="#7FA6FF" stroke-width="2"/>
+        <rect x="900" y="206" width="160" height="52" fill="#0C1324" stroke="#7FA6FF" stroke-width="1.5"/>
+        <g fill="#EEF2FA" text-anchor="middle">
+          <text x="215" y="52">Operations lead</text><text x="445" y="52">Finance lead</text><text x="675" y="52">Sales &amp; BD lead</text><text x="905" y="52">Field engineering lead</text>
+          <text x="540" y="172">Control plane / orchestrator</text>
+          <text x="180" y="160">Central context brain</text>
+          <text x="815" y="176">Model</text><text x="815" y="192">router</text>
+          <text x="980" y="144">Frontier APIs</text><text x="980" y="228">Local inference</text>
+          <text x="215" y="296">Sandbox · Ops</text><text x="445" y="296">Sandbox · Finance</text><text x="675" y="296">Sandbox · Sales</text><text x="905" y="296">Sandbox · Field</text>
+          <text x="560" y="394">Review gate → Git main</text><text x="905" y="394">Audit log</text>
+        </g>
+        <g fill="#A3AEC6" text-anchor="middle" font-size="11">
+          <text x="215" y="69">spec · priority · accept</text><text x="445" y="69">spec · priority · accept</text><text x="675" y="69">spec · priority · accept</text><text x="905" y="69">spec · priority · accept</text>
+          <text x="540" y="192">task queue · policy · routing</text><text x="540" y="207">agent lifecycle · budgets</text>
+          <text x="180" y="181">repos · specs · ADRs</text><text x="180" y="197">runbooks · decision log</text><text x="180" y="213">local vector index</text>
+          <text x="980" y="162">C0–C1 only</text><text x="980" y="246">C2 · RTX 5070 Ti</text>
+          <text x="215" y="314">container · scoped creds</text><text x="445" y="314">container · scoped creds</text><text x="675" y="314">container · scoped creds</text><text x="905" y="314">container · scoped creds</text>
+          <text x="560" y="411">tests · policy checks · human approval</text><text x="905" y="411">append-only</text>
+          <text x="72" y="390" text-anchor="start">decisions → context</text>
+        </g>
+        <g fill="#6F7B97" font-size="10.5">
+          <text x="120" y="20">BUSINESS-UNIT LEADS · OWN OUTCOMES</text><text x="120" y="243">AGENT SANDBOXES · NO PRODUCTION ACCESS BY DEFAULT</text>
+        </g>
+      </svg></div>
+      <figcaption>Agentic engineering platform, logical architecture. Leads direct work; agents execute only inside sandboxes; the router enforces the data-class policy; nothing reaches main without passing the review gate; every prompt, tool call and diff is written to the audit log.</figcaption>
+    </figure>
+    <h3 class="ms-h3"><i>1.3</i>Model routing policy</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:14%">Class</th><th style="width:30%">Examples</th><th>Permitted models</th><th style="width:20%">Enforcement</th><th style="width:10%">Status</th></tr></thead>
+      <tbody>
+        <tr><th class="m">C0 Public</th><td>Open-source code, public docs</td><td>Frontier APIs, local</td><td>None required</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">C1 Internal</th><td>Product code, internal tooling, non-sensitive docs</td><td>Frontier APIs under zero-data-retention terms; local</td><td>Router allow-list, API key per unit</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th class="m">C2 Confidential</th><td>Financials, contracts, HR, client facility data, Site Capture datasets</td><td>Local models on the Brain only</td><td>Context labels + router policy + sandbox egress firewall</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th class="m">C3 Restricted</th><td>Credentials, secrets, personal health or payment data</td><td>No model access; redacted or synthetic only</td><td>Secret scanning, vault, deny rules</td><td><span class="chip proc">target</span></td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>1.4</i>Roles and responsibilities</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Role</th><th>Responsibility</th><th style="width:26%">Authority</th></tr></thead>
+      <tbody>
+        <tr><th>Business-unit lead</th><td>Writes the spec and priorities for the unit; reviews output against acceptance criteria</td><td>Accepts or rejects; sets unit budget</td></tr>
+        <tr><th>Agents</th><td>Plan, implement, test and document inside the unit sandbox using the context brain</td><td>Propose changes only; no merge, no production credentials</td></tr>
+        <tr><th>Platform team</th><td>Operates the Brain: context curation, routing policy, sandboxes, CI, audit</td><td>Owns guardrails; approves merges to shared systems</td></tr>
+        <tr><th>Reviewer</th><td>Human approval at the review gate for code touching shared systems or C2 data</td><td>Blocks merge</td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>1.5</i>Workloads</h3>
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:24%">Workload</th><th>Description</th><th style="width:22%">Primary resource</th><th style="width:20%">Sizing basis</th></tr></thead>
       <tbody>
-        <tr><th>W-1 Agent orchestration</th><td>Concurrent coding agents, tool servers, containers; frontier models via cloud APIs</td><td class="m">RAM capacity, cores</td><td class="m">24 GB reserve + ~7 GB/agent (est.)</td></tr>
-        <tr><th>W-2 Local inference</th><td>Models that fit 16 GB VRAM (8B–20B class); larger MoE models in GPU + RAM hybrid mode</td><td class="m">VRAM, memory bandwidth</td><td class="m">gpt-oss-20b ≈ 14–15.5 GB</td></tr>
+        <tr><th>W-1 Agent orchestration</th><td>Sandboxed agent sessions per business unit, orchestrator, tool (MCP) servers, context store and index; frontier models via cloud APIs</td><td class="m">RAM capacity, cores</td><td class="m">24 GB reserve + ~7 GB/agent (est.)</td></tr>
+        <tr><th>W-2 Local inference</th><td>Class C2 (confidential) work, embeddings and routing. Models that fit 16 GB VRAM (8B–20B class); larger MoE models in GPU + RAM hybrid mode</td><td class="m">VRAM, memory bandwidth</td><td class="m">gpt-oss-20b ≈ 14–15.5 GB</td></tr>
         <tr><th>W-3 SLAM optimisation</th><td>Offline bundle adjustment and multi-session merge of Site Capture segments (GLIM / HBA)</td><td class="m">GPU (CUDA), RAM</td><td class="m">30–45 segments per 1M sq ft (est.)</td></tr>
         <tr><th>W-4 Registration &amp; QA</th><td>Register merged clouds to survey control; checkpoint residuals; LOA report</td><td class="m">CPU, RAM</td><td class="m">2.3–3.7 B pts at 10 mm (est.)</td></tr>
         <tr><th>W-5 360° stitching &amp; colourisation</th><td>Insta360 X4 batch stitch (Media SDK, Linux), frame extraction, point colourisation</td><td class="m">NVDEC, GPU, storage I/O</td><td class="m">≈ 60–90 GB/h of 8K video</td></tr>
@@ -596,7 +676,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <div class="kicker">CD-SYS-001 · 2.0</div>
     <h2>Requirements</h2>
-    <p class="lead">Each requirement has a target, a verification method and a status. Targets marked est. are planning calculations from the research reports and are verified at burn-in or on Site Capture pilot data.</p>
+    <p class="lead">Each requirement has a target, a verification method and a status. CD-REQ-014 to 018 govern the agentic engineering platform. Targets marked est. are planning calculations from the research reports and are verified at burn-in, platform acceptance or on Site Capture pilot data.</p>
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:11%">ID</th><th>Requirement</th><th style="width:24%">Target</th><th style="width:20%">Verification</th><th style="width:11%">Status</th></tr></thead>
       <tbody>
@@ -613,6 +693,11 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><th class="m">CD-REQ-011</th><td>Out-of-band management isolated</td><td class="m">BMC on management VLAN only; default credentials changed</td><td>Network audit</td><td><span class="chip open">at build</span></td></tr>
         <tr><th class="m">CD-REQ-012</th><td>Client data encrypted at rest</td><td class="m">Full-disk encryption on data volumes and NAS (target)</td><td>Configuration audit</td><td><span class="chip open">target</span></td></tr>
         <tr><th class="m">CD-REQ-013</th><td>Processing turnaround per 1M sq ft job</td><td class="m">TBD from pilot</td><td>Pilot timing</td><td><span class="chip open">TBD</span></td></tr>
+        <tr><th class="m">CD-REQ-014</th><td>Agent execution isolated per business unit</td><td class="m">Container sandbox, scoped credentials, no production access by default</td><td>Sandbox escape and credential-scope test</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">CD-REQ-015</th><td>C2 data never sent to external model APIs</td><td class="m">0 C2-labelled requests in egress log</td><td>Egress firewall + router log audit, monthly</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th class="m">CD-REQ-016</th><td>Complete audit trail of agent activity</td><td class="m">100% of prompts, tool calls and diffs logged, append-only</td><td>Log reconciliation against Git history</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th class="m">CD-REQ-017</th><td>Central context store versioned and retrievable</td><td class="m">Git-backed; local index; retrieval ≤ 1 s p95 (est.)</td><td>Retrieval benchmark on the context corpus</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">CD-REQ-018</th><td>No unreviewed merge to shared systems</td><td class="m">Tests pass + human approval on 100% of merges to main</td><td>Branch protection audit</td><td><span class="chip open">design</span></td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -1011,6 +1096,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t n">
       <thead><tr><th style="width:12%">Rev</th><th style="width:18%">Date</th><th>Change</th></tr></thead>
       <tbody>
+        <tr><th class="m">C</th><td class="m">2026-11-19</td><td>Primary role restated as the agentic engineering platform: methodology comparison, logical architecture, model routing policy (C0–C3), roles; CD-REQ-014 to 018 added.</td></tr>
         <tr><th class="m">B</th><td class="m">2026-11-18</td><td>Accelerate Robotics rebrand: presented as The Brain, the orchestration and processing core behind “one brain, many bots”; Site Capture naming.</td></tr>
         <tr><th class="m">A</th><td class="m">2026-11-18</td><td>First issue as system specification. Replaces the showcase page. Adds the capture-processing role, requirements, interfaces, pipeline, storage, security, roadmap and risk register.</td></tr>
         <tr><th class="m">—</th><td class="m">2026-11-17</td><td>Option A selected; Antec 900 enclosure added.</td></tr>
