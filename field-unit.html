@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev F · 2026-11-18"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev G · 2026-11-19"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Site Capture · Accelerate Robotics</title>
-<meta name="description" content="Accelerate Site Capture (PRJ-02): white-glove property data capture, step one of every Accelerate Robotics deployment. Survey-controlled LiDAR + 360° imagery for hotels, resorts, care facilities and hospitals, with a full technical specification.">
-<meta property="og:title" content="Site Capture · Accelerate Robotics"><meta property="og:description" content="Accelerate Site Capture (PRJ-02): white-glove property data capture, step one of every Accelerate Robotics deployment. Survey-controlled LiDAR + 360° imagery for hotels, resorts, care facilities and hospitals, with a full technical specification.">
+<meta name="description" content="Accelerate Site Capture (PRJ-02, FU-SYS-001): a quadruped-mounted mobile reality capture system for building-scale survey. Survey-controlled LiDAR, 4K and 360° imagery, segment-based SLAM and checkpoint QA, with the full technical specification.">
+<meta property="og:title" content="Site Capture · Accelerate Robotics"><meta property="og:description" content="Accelerate Site Capture (PRJ-02, FU-SYS-001): a quadruped-mounted mobile reality capture system for building-scale survey. Survey-controlled LiDAR, 4K and 360° imagery, segment-based SLAM and checkpoint QA, with the full technical specification.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -513,7 +513,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <a class="mark" href="#top">SITE CAPTURE<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#service">Service</a><a href="#hosp">Operations</a><a class="keep" href="#trust">Trust</a><a href="#deliver">Deliverables</a><a href="#conops">ConOps</a><a href="#req">Requirements</a><a href="#arch">Architecture</a><a href="#payload">Payload</a><a href="#power">Power</a><a href="#data">Data</a><a href="#qa">QA/QC</a><a href="#sec">Security</a><a href="#safety">Safety</a><a href="#sop">SOPs</a><a href="#vv">V&amp;V</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a><a href="#roadmap">Roadmap</a>
+      <a class="keep" href="#service">Scope</a><a href="#hosp">Constraints</a><a class="keep" href="#trust">Data controls</a><a href="#deliver">Deliverables</a><a href="#conops">ConOps</a><a href="#req">Requirements</a><a href="#arch">Architecture</a><a href="#payload">Payload</a><a href="#power">Power</a><a href="#data">Data</a><a href="#qa">QA/QC</a><a href="#sec">Security</a><a href="#safety">Safety</a><a href="#sop">SOPs</a><a href="#vv">V&amp;V</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a><a href="#roadmap">Roadmap</a>
     </div>
   </div>
 </nav>
@@ -521,12 +521,12 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <header class="fu-hd" id="top">
   <div class="wrap hg">
     <div>
-      <div class="kicker">PRJ-02 · Accelerate Site Capture · FU-SYS-001 · Rev F · 2026-11-18</div>
-      <h1>Site Capture<span>White-glove property data capture — step one of every Accelerate deployment</span></h1>
-      <p class="lede-c">We map the whole property — every floor, corridor, elevator lobby, back-of-house area and service route — so your robots start on known ground and your team never has to think about it.</p><p class="spec">Survey-controlled LiDAR + 360° imagery · hotels, resorts, care facilities, hospitals<br>Carrier: Unitree Go2 X (Gen-0, air-gapped) · Logger: Jetson Orin Nano Super · Processing: PRJ-01 The Brain</p>
+      <div class="kicker">PRJ-02 · Accelerate Site Capture · FU-SYS-001 · Rev G · 2026-11-19</div>
+      <h1>Site Capture<span>Mobile reality capture system for building-scale survey</span></h1>
+      <p class="lede-c">A quadruped-mounted LiDAR and imaging payload that produces a survey-controlled 3D record of an entire property — floors, corridors, elevator lobbies, back-of-house and service routes — as the reference map for robot fleet deployment.</p><p class="spec">Survey-controlled LiDAR + 360° imagery · hotels, resorts, care facilities, hospitals<br>Carrier: Unitree Go2 X (Gen-0, air-gapped) · Logger: Jetson Orin Nano Super · Processing: PRJ-01 The Brain</p>
       <div class="ms-tw"><table class="ms-t n">
         <tbody>
-          <tr><th style="width:38%">Onboarding step</th><td>1 of 6 · Site capture</td></tr>
+          <tr><th style="width:38%">Program role</th><td>Stage 2 of 6 in the deployment sequence</td></tr>
           <tr><th>Configuration</th><td>Gen-0 validation <span class="chip ver">active</span></td></tr>
           <tr><th>Site #1</th><td class="m">1,000,000 sq ft (≈92,900 m²)</td></tr>
           <tr><th>Accuracy class</th><td>USIBD LOA at 2σ (95%): LOA20 building-wide (est.) · LOA30 zones via payload or TLS · <b>Required LOA: client TBD</b></td></tr>
@@ -543,35 +543,35 @@ footer li{break-inside:avoid;margin-bottom:6px}
 
 <section class="band svc" id="service" data-num="S1">
   <div class="wrap">
-    <div class="kicker">Accelerate Site Capture · The service</div>
-    <h2>We do the hard part. Your team stays on guests.</h2>
-    <p class="lead">Every Accelerate deployment starts with a map of the property. Site Capture produces it: a survey-controlled digital record of every floor, corridor, elevator lobby, back-of-house area and service route. <b>We bring the robot, the sensors, the survey control, the processing and the QA.</b> Your team gives us an escort and a quiet window. That is the whole ask.</p>
-    <ol class="jy" aria-label="Onboarding journey">
+    <div class="kicker">FU-SYS-001 · Service definition</div>
+    <h2>Deployment sequence and scope split</h2>
+    <p class="lead">Site Capture is stage 2 of the six-stage Accelerate deployment sequence. It produces the reference model that every later stage depends on: route planning, dock placement, elevator integration and fleet commissioning. Accelerate supplies the capture system, survey control, processing and QA; the property supplies access, an escort and capture windows.</p>
+    <ol class="jy" aria-label="Deployment sequence">
       <li><span class="n">01</span><b>Discovery</b><small>Walkthrough with the GM, engineering and security. Capture windows, privacy rules and data terms agreed in writing.</small></li>
       <li class="on"><span class="n">02</span><b>Site capture</b><small>Overnight or low-occupancy, escorted, fully offline. Survey targets set a day ahead. 5–10 days per 1M sq ft (est.).</small></li>
       <li><span class="n">03</span><b>Processing &amp; QA</b><small>On the Brain: segments merged, registered to survey control, checked against independent checkpoints.</small></li>
       <li><span class="n">04</span><b>Digital twin &amp; route map</b><small>Point cloud, 360° walkthrough, floor and route maps, elevator and door inventory.</small></li>
       <li><span class="n">05</span><b>Robot deployment</b><small>The fleet is commissioned on known ground — routes, docks and elevator stops planned from the twin.</small></li>
-      <li><span class="n">06</span><b>Run &amp; maintain</b><small>We operate the fleet: charging, troubleshooting, repairs. Repeat captures keep the maps current.</small></li>
+      <li><span class="n">06</span><b>Run &amp; maintain</b><small>Fleet operations: charging, fault response, repair. Periodic re-capture keeps the maps current.</small></li>
     </ol>
     <div class="ms-grid">
       <div class="ms-tw"><table class="ms-t n">
-        <thead><tr><th>We handle</th></tr></thead>
+        <thead><tr><th>Accelerate scope</th></tr></thead>
         <tbody>
           <tr><td>Survey control network, targets, setup and teardown</td></tr>
           <tr><td>Robot, sensors, batteries, charging and a two-person crew</td></tr>
           <tr><td>Processing, registration, accuracy checks and the QA report</td></tr>
-          <tr><td>Secure handling of every byte, from robot to archive</td></tr>
-          <tr><td>Turning the capture into the fleet's routes and integration plan</td></tr>
+          <tr><td>Chain of custody from logger to archive (SHA-256 manifests)</td></tr>
+          <tr><td>Route graph, dock placement and elevator integration plan from the model</td></tr>
         </tbody></table></div>
       <div class="ms-tw"><table class="ms-t n">
-        <thead><tr><th>Your team provides</th></tr></thead>
+        <thead><tr><th>Property scope</th></tr></thead>
         <tbody>
           <tr><td>One escort with access to the areas in scope</td></tr>
           <tr><td>Agreed capture windows (overnight or low occupancy)</td></tr>
           <tr><td>Lights on and doors open in the zone being captured</td></tr>
-          <tr><td>IT and security sign-off on our data-handling statement</td></tr>
-          <tr><td>The accuracy level your deliverable needs (we help you choose)</td></tr>
+          <tr><td>IT and security sign-off on the data-handling statement</td></tr>
+          <tr><td>Required LOA per deliverable (set at discovery)</td></tr>
         </tbody></table></div>
     </div>
   </div>
@@ -579,16 +579,16 @@ footer li{break-inside:avoid;margin-bottom:6px}
 
 <section class="band svc" id="hosp" data-num="S2">
   <div class="wrap">
-    <div class="kicker">Accelerate Site Capture · Hospitality operations</div>
-    <h2>Invisible to guests</h2>
-    <p class="lead">A capture should never be part of the guest experience. We schedule around occupancy, stay out of guest spaces unless you invite us in, and keep the footprint to one compact robot and a two-person crew.</p>
+    <div class="kicker">FU-SYS-001 · Service definition</div>
+    <h2>Operating constraints in occupied buildings</h2>
+    <p class="lead">Capture runs inside operating hotels and hospitals. The constraints below govern scheduling, footprint and safety. <b>Baseline</b> = in the procedure now; <b>target</b> = required before the first client capture.</p>
     <div class="ms-tw"><table class="ms-t">
-      <thead><tr><th style="width:24%">Topic</th><th>How we operate</th><th style="width:16%">Status</th></tr></thead>
+      <thead><tr><th style="width:24%">Constraint</th><th>Implementation</th><th style="width:16%">Status</th></tr></thead>
       <tbody>
         <tr><th>Capture windows</th><td>Overnight and low-occupancy blocks, zone by zone, planned with the GM, chief engineer and security lead. Back-of-house first; public areas when they are empty.</td><td><span class="chip base">baseline</span></td></tr>
-        <tr><th>Guest privacy</th><td>No guest-room interiors unless you request them. People in 360° imagery are blurred before delivery. Imagery is a visual layer — never used to identify anyone.</td><td><span class="chip proc">target</span></td></tr>
-        <tr><th>Footprint</th><td>One Go2-class robot, one pilot, one spotter, one escort. Equipment staged in a back-of-house room you assign.</td><td><span class="chip base">baseline</span></td></tr>
-        <tr><th>Staff burden</th><td>One escort per shift. We set targets, run the capture, swap batteries, move media and clean up.</td><td><span class="chip base">baseline</span></td></tr>
+        <tr><th>Guest privacy</th><td>No guest-room interiors unless in scope. People in 360° imagery are blurred before delivery. Imagery is a visual layer — never used to identify anyone.</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th>Footprint</th><td>One Go2-class robot, one pilot, one spotter, one escort. Equipment staged in a back-of-house room assigned by the property.</td><td><span class="chip base">baseline</span></td></tr>
+        <tr><th>Property staffing</th><td>One escort per shift. Crew handles targets, capture, battery swaps, media transfer and teardown.</td><td><span class="chip base">baseline</span></td></tr>
         <tr><th>Safety</th><td>Exclusion zone around the robot, e-stop within reach, no operation in occupied corridors, carried between floors rather than on guest stairs.</td><td><span class="chip base">baseline</span></td></tr>
         <tr><th>Interruptions</th><td>Any staff request pauses capture at the next segment boundary; the segment is re-run, not compromised.</td><td><span class="chip base">baseline</span></td></tr>
       </tbody></table></div>
@@ -597,44 +597,44 @@ footer li{break-inside:avoid;margin-bottom:6px}
 
 <section class="band svc" id="trust" data-num="S3">
   <div class="wrap">
-    <div class="kicker">Accelerate Site Capture · Trust ecosystem</div>
-    <h2>Your property data, protected</h2>
-    <p class="lead">Onboarding starts with your building's data, so it is held to the same standard as the rest of the Accelerate relationship. Every control below is stated as it stands today: <b>baseline</b> means in the procedure now; <b>target</b> means planned before the first client capture.</p>
+    <div class="kicker">FU-SYS-001 · Service definition</div>
+    <h2>Data protection controls</h2>
+    <p class="lead">A capture is a complete geometric and visual record of the property, so it is handled as sensitive client data from acquisition to archive. <b>Baseline</b> = in the procedure now; <b>target</b> = required before the first client capture.</p>
     <div class="ms-tw"><table class="ms-t">
-      <thead><tr><th style="width:26%">Control</th><th>What it means for you</th><th style="width:14%">Status</th></tr></thead>
+      <thead><tr><th style="width:26%">Control</th><th>Implementation</th><th style="width:14%">Status</th></tr></thead>
       <tbody>
-        <tr><th>Offline capture</th><td>Nothing connects to your network. The robot logs to its own on-board drive; guest and corporate Wi-Fi are never joined.</td><td><span class="chip base">baseline</span></td></tr>
+        <tr><th>Offline capture</th><td>No connection to property networks. The logger writes to on-board NVMe; guest and corporate Wi-Fi are never joined.</td><td><span class="chip base">baseline</span></td></tr>
         <tr><th>Air-gapped carrier</th><td>Cellular modem removed, Bluetooth off, firmware frozen, cloud features unused.</td><td><span class="chip base">baseline</span></td></tr>
-        <tr><th>Chain of custody</th><td>SHA-256 manifests at every hand-off: robot → field drive → the Brain → archive. Two verified copies before we leave site.</td><td><span class="chip base">baseline</span></td></tr>
-        <tr><th>Encryption &amp; access</th><td>Encrypted field media and storage at rest; named-user access to your project only.</td><td><span class="chip proc">target</span></td></tr>
-        <tr><th>Client IT sign-off</th><td>A data-handling and device statement for your IT and security team before day one (checklist in 8.0).</td><td><span class="chip base">baseline</span></td></tr>
-        <tr><th>Ownership &amp; retention</th><td>You own the capture and the deliverables. Retention and deletion follow your contract terms.</td><td><span class="chip open">TBD per contract</span></td></tr>
-        <tr><th>Insurance</th><td>Professional and general liability with scanning and robotic operations endorsed, at the limits your contract requires (typically $0.5–1M professional liability).</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th>Chain of custody</th><td>SHA-256 manifests at every hand-off: robot → field drive → the Brain → archive. Two verified copies before demobilisation.</td><td><span class="chip base">baseline</span></td></tr>
+        <tr><th>Encryption &amp; access</th><td>Encrypted field media and storage at rest; named-user access scoped per project.</td><td><span class="chip proc">target</span></td></tr>
+        <tr><th>Client IT sign-off</th><td>A data-handling and device statement for the property IT and security team before day one (checklist in 8.0).</td><td><span class="chip base">baseline</span></td></tr>
+        <tr><th>Ownership &amp; retention</th><td>Client owns the capture and deliverables. Retention and deletion per contract.</td><td><span class="chip open">TBD per contract</span></td></tr>
+        <tr><th>Insurance</th><td>Professional and general liability with scanning and robotic operations endorsed, at contract-required limits (typically $0.5–1M professional liability).</td><td><span class="chip proc">target</span></td></tr>
         <tr><th>Safety approach</th><td>Risk assessment informed by ISO 3691-4 and ANSI/A3 R15.08 principles. No claim of certification.</td><td><span class="chip base">baseline</span></td></tr>
       </tbody></table></div>
-    <div class="ms-call"><span class="lbl">Platform, stated plainly</span>The Gen-0 carrier is a Unitree Go2 X. Unitree appears on the U.S. DoD Section 1260H list, and the FCC added foreign-made robots to its Covered List in July 2026. We operate the carrier fully air-gapped, and production carrier selection follows a security gate (G3). Some federal, defense and critical-infrastructure sites will not accept it — we will tell you before we mobilise, and offer a wearable-scanner alternative.</div>
+    <div class="ms-call"><span class="lbl">Carrier supply-chain risk</span>The Gen-0 carrier is a Unitree Go2 X. Unitree appears on the U.S. DoD Section 1260H list, and the FCC added foreign-made robots to its Covered List in July 2026. The carrier is operated fully air-gapped, and production carrier selection follows a security gate (G3). Some federal, defense and critical-infrastructure sites will not accept it; this is flagged before mobilisation, with a wearable-scanner alternative.</div>
   </div>
 </section>
 
 <section class="band svc" id="deliver" data-num="S4">
   <div class="wrap">
-    <div class="kicker">Accelerate Site Capture · Deliverables</div>
-    <h2>What you receive</h2>
-    <p class="lead">A verified record of your property that keeps paying off — for the robot fleet, for engineering and for every renovation that follows.</p>
+    <div class="kicker">FU-SYS-001 · Service definition</div>
+    <h2>Deliverables and accuracy statements</h2>
+    <p class="lead">Outputs per job and the accuracy statement attached to each. Measured accuracy (residuals at checkpoints) and represented accuracy (of derived products) are reported separately.</p>
     <div class="ms-tw"><table class="ms-t">
-      <thead><tr><th style="width:26%">Deliverable</th><th>What it is for</th><th style="width:30%">Accuracy statement</th></tr></thead>
+      <thead><tr><th style="width:26%">Deliverable</th><th>Content</th><th style="width:30%">Accuracy statement</th></tr></thead>
       <tbody>
         <tr><th>Property digital twin</th><td>Registered point cloud of the whole property (E57 / LAS / RCP), viewable in a browser.</td><td>LOA20 building-wide (est.); per-zone LOA in the QA report</td></tr>
-        <tr><th>360° walkthrough</th><td>Every corridor and back-of-house route as a navigable tour for teams who cannot be on site.</td><td>Visual layer; not a measurement source</td></tr>
-        <tr><th>Floor &amp; route maps</th><td>The maps the robot fleet runs on: routes, docks, charging points, no-go zones.</td><td>Derived from the registered cloud</td></tr>
+        <tr><th>360° walkthrough</th><td>Corridors and back-of-house routes as a navigable 360° tour for remote review.</td><td>Visual layer; not a measurement source</td></tr>
+        <tr><th>Floor &amp; route maps</th><td>2D occupancy grid and route graph for the fleet: routes, docks, charging points, keep-out zones.</td><td>Derived from the registered cloud</td></tr>
         <tr><th>Elevator &amp; door inventory</th><td>Every elevator, door and threshold on the robot routes, documented for integration planning.</td><td>Located in the twin; integration details confirmed on site</td></tr>
-        <tr><th>Accuracy (QA) report</th><td>Proof of what the data is worth: residuals against independent survey checkpoints.</td><td>USIBD LOA at 95% (2σ), measured and represented stated separately</td></tr>
+        <tr><th>Accuracy (QA) report</th><td>Residuals against independent survey checkpoints, per zone.</td><td>USIBD LOA at 95% (2σ), measured and represented stated separately</td></tr>
         <tr><th>Options</th><td>Photoreal 3D (Gaussian splats) and Revit models for design and renovation teams.</td><td>Represented accuracy, stated separately</td></tr>
       </tbody></table></div>
   </div>
 </section>
 
-<div class="spec-div" id="spec"><div class="wrap"><span>Technical specification</span><b>FU-SYS-001 · Mobile Reality Capture System (MRCS) · Rev F</b><small>For the Accelerate program team and client engineering reviewers. Sections 1.0–14.0 define how the service above is built, verified and operated.</small></div></div>
+<div class="spec-div" id="spec"><div class="wrap"><span>Technical specification</span><b>FU-SYS-001 · Mobile Reality Capture System (MRCS) · Rev G</b><small>For the Accelerate program team and client engineering reviewers. Sections 1.0–14.0 specify how the system is built, verified and operated.</small></div></div>
 
 <section class="band" id="conops">
   <div class="wrap">
@@ -1126,7 +1126,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><td class="m">C</td><td class="m">2026-11-18</td><td>Engineering documentation style</td></tr>
         <tr><td class="m">D</td><td class="m">2026-11-18</td><td>Building #1 capture mission added</td></tr>
         <tr><td class="m">E</td><td class="m">2026-11-18</td><td>Restructured as MRCS system document; arm moved to R&amp;D backlog; Gen-0/1/2 roadmap</td></tr>
-        <tr class="hi"><td class="m">F</td><td class="m">2026-11-18</td><td>Accelerate Robotics rebrand: Site Capture service story, hospitality operations, trust ecosystem and client deliverables ahead of the technical specification</td></tr>
+        <tr><td class="m">F</td><td class="m">2026-11-18</td><td>Accelerate Robotics rebrand: Site Capture service story, hospitality operations, trust ecosystem and client deliverables ahead of the technical specification</td></tr>
+        <tr class="hi"><td class="m">G</td><td class="m">2026-11-19</td><td>Service definition (S1–S4) restated in specification register: scope split, operating constraints, data protection controls, deliverables and accuracy statements</td></tr>
       </tbody></table></div>
   </div>
 </section>

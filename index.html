@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" data-proj="hub"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Accelerate Robotics · Program workspace</title>
-<meta name="description" content="Accelerate Robotics program workspace. One brain, many bots: The Brain (orchestration and processing core) and Site Capture (white-glove property data capture for client onboarding).">
-<meta property="og:title" content="Accelerate Robotics · Program workspace"><meta property="og:description" content="Accelerate Robotics program workspace. One brain, many bots: The Brain (orchestration and processing core) and Site Capture (white-glove property data capture for client onboarding).">
+<title>Accelerate Robotics · Engineering program</title>
+<meta name="description" content="Accelerate Robotics engineering program AR-PGM-001: building-scale reality capture (Site Capture, FU-SYS-001) and on-premise fleet compute (The Brain, CD-SYS-001). Requirements, architecture, data pipeline, risks and verification.">
+<meta property="og:title" content="Accelerate Robotics · Engineering program"><meta property="og:description" content="Accelerate Robotics engineering program AR-PGM-001: building-scale reality capture (Site Capture, FU-SYS-001) and on-premise fleet compute (The Brain, CD-SYS-001). Requirements, architecture, data pipeline, risks and verification.">
 <meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/3d/renders/fu-gen1-hero-1200.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,25 @@
 .intg .if{font:12px/1.6 var(--mono);color:var(--faint);margin-top:6px}
 .hx-foot{margin-top:28px;border-top:1px solid var(--line);padding-top:14px;font:11.5px/1.6 var(--mono);color:var(--faint)}
 .hx-head h1{font-family:var(--head)!important;font-size:clamp(36px,5vw,60px)!important;letter-spacing:-.025em!important;line-height:1.02!important}
-.hx-head h1 em{font-style:normal;background:linear-gradient(100deg,#4D8BFF,#00C8FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hx-head h1 em{font-style:normal;color:var(--dim)}
+.kpi{margin-top:26px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);background:var(--panel)}
+@media (max-width:1000px){.kpi{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.kpi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi>div{padding:14px 16px;border-left:1px solid var(--line);border-top:1px solid var(--line);margin:-1px 0 0 -1px;min-width:0}
+.kpi b{display:block;font:500 22px/1.15 var(--mono);color:var(--text);letter-spacing:-.02em;white-space:nowrap}
+.kpi b small{font-size:12px;color:var(--dim);margin-left:3px;letter-spacing:0}
+.kpi span{display:block;font-size:12.5px;color:var(--dim);margin-top:5px;line-height:1.35}
+.pipe{margin-top:16px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line)}
+@media (max-width:1100px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.pipe{grid-template-columns:1fr}}
+.pipe>div{position:relative;padding:16px 16px 14px;border-left:1px solid var(--line);border-top:1px solid var(--line);margin:-1px 0 0 -1px;min-width:0;border-top:2px solid var(--c)}
+.pipe .n{font:600 11px/1 var(--mono);letter-spacing:.1em;color:var(--c)}
+.pipe h3{font:600 16px/1.25 var(--head)!important;margin:8px 0 2px!important}
+.pipe .w{font:500 11.5px/1.3 var(--mono);color:var(--faint);margin-bottom:10px}
+.pipe dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:12.5px;line-height:1.4}
+.pipe dt{font:500 11px/1.5 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
+.pipe dd{margin:0;color:var(--dim);font-family:var(--mono);font-size:12px}
+.pipe-cap{font:12px/1.5 var(--mono);color:var(--faint);margin-top:8px}
 .hx-lede{font-size:17px!important;color:#C3CCDD!important;max-width:64ch!important;line-height:1.6}
 .pj h2{font-family:var(--head)!important}
 .pj .sub{margin:2px 18px 0;font:500 12.5px/1.4 var(--mono);color:var(--pa);letter-spacing:.02em}
@@ -86,32 +104,50 @@
 <main class="hx" id="top">
   <div class="hx-head">
     <div>
-      <div class="hx-code">Accelerate Robotics · Program workspace</div>
-      <h1>One brain. <em>Many bots.</em></h1>
-      <p class="hx-lede">Accelerate Robotics is the full-service operator for robots in the built environment — hotels, resorts, care facilities and hospitals. We deploy, run and maintain every robot, so your team stays focused on guests. The hard part was never the robot. It is everything around it — and that is what we do.</p>
-      <p>This workspace documents the two workstreams behind that promise. One team runs both; each keeps its own plan, budget, bill of materials and research.</p>
+      <div class="hx-code">Accelerate Robotics · Engineering program</div>
+      <h1>Building-scale reality capture <em>and fleet compute</em></h1>
+      <p class="hx-lede">Accelerate Robotics deploys and operates service-robot fleets in large hospitality and healthcare buildings. Running autonomy at that scale depends on two things most deployments improvise: a survey-controlled 3D model of the building, and dedicated compute to build that model and coordinate the fleet.</p>
+      <p>This program builds both in-house: a quadruped-mounted mobile reality capture system (PRJ-02) and an on-premise processing and orchestration node (PRJ-01). This workspace is the engineering record: requirements, architecture, budgets, risks and verification for each.</p>
     </div>
     <table class="rev" aria-label="Document revision">
       <tr><td>Doc</td><td>AR-PGM-001</td></tr>
-      <tr><td>Rev</td><td>D · 2026-11-18</td></tr>
-      <tr><td>Owner</td><td>Program team</td></tr>
-      <tr><td>Workstreams</td><td>2 active</td></tr>
+      <tr><td>Rev</td><td>E · 2026-11-19</td></tr>
+      <tr><td>Status</td><td>Gen-0 / procurement</td></tr>
+      <tr><td>Workstreams</td><td>PRJ-01 · PRJ-02</td></tr>
     </table>
   </div>
 
-  <div class="jr" aria-label="Capture, Brain, Fleet">
-    <div style="--c:#00C8FF"><span class="n">01 · CAPTURE</span><h3>We map the property</h3><p>Site Capture records every floor, corridor, elevator lobby, back-of-house area and service route — before a single robot arrives.</p></div>
-    <div style="--c:#4D8BFF"><span class="n">02 · BRAIN</span><h3>We build the digital twin</h3><p>The Brain turns raw capture into a survey-controlled point cloud, a 360° walkthrough and the route map the fleet runs on.</p></div>
-    <div style="--c:#A3AEC6"><span class="n">03 · FLEET</span><h3>We deploy, run, maintain</h3><p>Robots start on known ground. We handle the integration, the charging, the repairs — so the building just works.</p></div>
+  <div class="kpi" aria-label="Program parameters">
+    <div><b>92,900<small>m²</small></b><span>Site #1 floor area (1.0 M sq ft)</span></div>
+    <div><b>15–50<small>mm</small></b><span>Target LOA20 at 2σ, building-wide (est.)</span></div>
+    <div><b>1.3–1.8<small>TB</small></b><span>Raw capture per site (est.)</span></div>
+    <div><b>7–10</b><span>Battery missions per site, 15–20 min SLAM segments</span></div>
+    <div><b>67<small>TOPS</small></b><span>Edge logger, Jetson Orin Nano Super</span></div>
+    <div><b>16C<small>/ 128 GB</small></b><span>Processing node, EPYC 9175F, ECC DDR5</span></div>
   </div>
 
-  <div class="sec-h"><h2>Workstreams</h2><p>Same team · separate lanes · one hand-off: files from Capture into the Brain.</p></div>
+  <div class="sec-h"><h2>Data pipeline</h2><p>Acquisition to fleet maps. Field and back end are joined by verified media, not a network link.</p></div>
+  <div class="pipe" aria-label="Data pipeline">
+    <div style="--c:#00C8FF"><span class="n">01 · ACQUIRE</span><h3>Mobile capture</h3><div class="w">PRJ-02 · on site, offline</div>
+      <dl><dt>Carrier</dt><dd>Unitree Go2 X (Gen-0)</dd><dt>Sensors</dt><dd>Survey LiDAR + IMU · 4K · 360° 5.7K30</dd><dt>Logger</dt><dd>Jetson Orin Nano Super · MCAP</dd><dt>Time</dt><dd>PTP master on logger</dd></dl></div>
+    <div style="--c:#00C8FF"><span class="n">02 · CONTROL</span><h3>Survey tie-in</h3><div class="w">PRJ-02 · per segment</div>
+      <dl><dt>Network</dt><dd>Targets every 30–50 m</dd><dt>Segments</dt><dd>15–20 min, open + close on control</dd><dt>Custody</dt><dd>SHA-256 manifest, 2 copies</dd></dl></div>
+    <div style="--c:#4D8BFF"><span class="n">03 · PROCESS</span><h3>Global optimisation</h3><div class="w">PRJ-01 · back end</div>
+      <dl><dt>SLAM</dt><dd>GLIM / HBA offline</dd><dt>Steps</dt><dd>Merge · register · colourise</dd><dt>Working set</dt><dd>4.5–9 TB on 15.36 TB NVMe</dd></dl></div>
+    <div style="--c:#4D8BFF"><span class="n">04 · VERIFY</span><h3>QA / QC</h3><div class="w">PRJ-01 · per job</div>
+      <dl><dt>Method</dt><dd>Residuals vs independent checkpoints</dd><dt>Spec</dt><dd>USIBD LOA at 2σ (95%)</dd><dt>Report</dt><dd>Per-zone measured LOA</dd></dl></div>
+    <div style="--c:#A3AEC6"><span class="n">05 · PUBLISH</span><h3>Fleet-ready outputs</h3><div class="w">Program · hand-off</div>
+      <dl><dt>Cloud</dt><dd>E57 / LAS / RCP</dd><dt>Maps</dt><dd>2D occupancy + route graph</dd><dt>Layers</dt><dd>360° tour · elevator/door inventory</dd></dl></div>
+  </div>
+  <p class="pipe-cap">Estimates (est.) are planning figures from the program research; they are replaced by measured values at the G1 pilot.</p>
+
+<div class="sec-h"><h2>Workstreams</h2><p>One team, two specifications, one file-based interface.</p></div>
   <div class="prj">
     <section class="pj con" aria-labelledby="pj1">
       <div class="pj-h"><span class="id">PRJ-01 · THE BRAIN</span><span class="st"><i></i>Parts decided · ordering</span></div>
       <h2 id="pj1">The Brain</h2>
-      <div class="sub">Orchestration &amp; capture-processing core</div>
-      <p class="purpose">The “one brain” behind many bots. A single-socket AMD EPYC system that orchestrates AI agents and local models, and turns raw Site Capture data into registered point clouds, walkthroughs and accuracy reports. Specification CD-SYS-001 Rev A.</p>
+      <div class="sub">Processing &amp; orchestration node · CD-SYS-001</div>
+      <p class="purpose">Single-socket AMD EPYC 9175F (Zen 5, 16 cores, 512 MB L3) on SP5 with 128 GB ECC DDR5, an RTX 5070 Ti and 15.36 TB of enterprise U.3 NVMe. Two workloads: concurrent agent orchestration with local inference, and offline SLAM optimisation, registration and QA for capture jobs.</p>
       <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
       <div class="specs">
@@ -132,8 +168,8 @@
     <section class="pj fu" aria-labelledby="pj2">
       <div class="pj-h"><span class="id">PRJ-02 · SITE CAPTURE</span><span class="st"><i></i>Gen-0 validation</span></div>
       <h2 id="pj2">Accelerate Site Capture</h2>
-      <div class="sub">White-glove property data capture · step one of onboarding</div>
-      <p class="purpose">Before any robot deploys, we map the whole property on a discreet schedule — survey-controlled LiDAR plus 360° imagery — and hand the client a verified digital record of their building. Gen-0 carrier: Unitree Go2 X under air-gapped controls. Site #1: 1,000,000 sq ft (≈92,900 m²).</p>
+      <div class="sub">Mobile reality capture system (MRCS) · FU-SYS-001</div>
+      <p class="purpose">Survey LiDAR, 4K and 360° imagery on a quadruped carrier, time-synchronised and logged on a Jetson Orin Nano Super. Segment-based SLAM tied to a survey control network for building-scale accuracy. Gen-0 carrier: Unitree Go2 X, air-gapped. Site #1: 1,000,000 sq ft (≈92,900 m²).</p>
       <figure><img src="3d/renders/fu-gen1-hero-1200.jpg" srcset="3d/renders/fu-gen1-hero-1200.jpg 1200w, 3d/renders/fu-gen1-hero.jpg 2400w" sizes="(max-width:900px) 100vw, 45vw" data-full="3d/renders/fu-gen1-hero.jpg" alt="Go2 X carrier with the Gen-1 capture payload (CAD render)" loading="lazy"><figcaption>Fig. 2 — Gen-1 capture configuration on the Go2 X carrier (CAD render). Go2 geometry: Unitree Robotics, unitree_mujoco (BSD-3-Clause).</figcaption></figure>
       <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 18</div><div class="now"><b>Gen-0</b>validation</div><div><b>Gen-1</b>payload</div><div><b>Gen-2</b>carrier</div></div>
       <div class="specs">
@@ -149,25 +185,25 @@
         <tr><th>Next gate</th><td>G1 Pilot day: capture rate (m²/h) + checkpoint RMSE on one 5,000–10,000 m² zone. G0 rear-port access test first.</td></tr>
         <tr><th>Team</th><td>Accelerate program team</td></tr>
       </table>
-      <div class="links"><a class="p" href="field-unit.html">Open Site Capture →</a><a href="field-unit.html#trust">Trust &amp; privacy</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
+      <div class="links"><a class="p" href="field-unit.html">Open Site Capture →</a><a href="field-unit.html#arch">Architecture</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
     </section>
   </div>
 
-  <div class="sec-h"><h2>Built on trust</h2><p>Onboarding starts with your property data. We treat it that way.</p></div>
+  <div class="sec-h"><h2>Design constraints</h2><p>Applied to both workstreams from Gen-0.</p></div>
   <div class="trust">
-    <div><b>Offline by design</b><span>Capture never touches the property network. Robot Bluetooth and cellular modem off, guest Wi-Fi never joined, everything logged on board.</span></div>
-    <div><b>Chain of custody</b><span>SHA-256 checksums at every hand-off — robot, field drive, the Brain, archive. Two copies before we leave site.</span></div>
-    <div><b>Guest privacy</b><span>Overnight and low-occupancy windows. People blurred in imagery. No guest-room interiors unless you ask for them.</span></div>
-    <div><b>Your sign-off first</b><span>Client IT and security review before day one. Your data, your retention terms. Access controls and encryption at rest are program targets.</span></div>
+    <div><b>No runtime network dependency</b><span>Acquisition is air-gapped: carrier cellular modem removed, Bluetooth off, firmware frozen. Data leaves site on physical media only.</span></div>
+    <div><b>Verifiable data lineage</b><span>SHA-256 manifest per segment at each hand-off (logger → field drive → processing node → archive). Two verified copies before demobilisation.</span></div>
+    <div><b>Measured accuracy, not claimed</b><span>Accuracy is reported as USIBD LOA at 2σ from residuals against independent checkpoints. Planning figures are marked est. until measured.</span></div>
+    <div><b>Privacy in the pipeline</b><span>Occupied areas excluded by schedule. People in 360° imagery blurred before delivery (target). Imagery is a visual layer, never a measurement source.</span></div>
   </div>
 
   <aside class="intg" id="meet" aria-label="Integration: processing pipeline">
     <span class="hx-code">Integration · Capture → Brain → Fleet</span>
-    <div><b>Where the workstreams meet.</b> Site Capture logs raw LiDAR (MCAP), 360° and 4K video on site with no network. The Brain ingests it, runs SLAM optimisation and segment merging, registers to survey control, colourises and publishes the deliverables — then the same maps carry the fleet. The hand-off is verified files, not a live link.
+    <div><b>Interface PRJ-02 → PRJ-01.</b> Site Capture logs raw LiDAR (MCAP), 360° and 4K video on site with no network. The Brain ingests it, runs SLAM optimisation and segment merging, registers to survey control, colourises and publishes the deliverables — then the same maps carry the fleet. The hand-off is verified files, not a live link.
       <div class="if">Interface: raw MCAP + .insv / video files + control coordinates → The Brain NVMe → NAS (40–60 TB, planned). Later: live fleet orchestration over the property network, after client IT approval.</div></div>
   </aside>
 
-  <footer class="hx-foot">Accelerate Robotics · Miami, FL · One brain. Many bots. · Internal program workspace — not a public offering. Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics; Hesai; TheRobotStudio; Wikimedia Commons contributors (see each workstream's credits). Shown for identification; trademarks belong to their owners.</footer>
+  <footer class="hx-foot">Accelerate Robotics · Miami, FL · AR-PGM-001 engineering program record — not a public offering. Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics; Hesai; TheRobotStudio; Wikimedia Commons contributors (see each workstream's credits). Shown for identification; trademarks belong to their owners.</footer>
 </main>
 
 </body></html>

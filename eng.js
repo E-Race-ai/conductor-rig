@@ -38,8 +38,8 @@
     tabs.forEach(function(a){ if (a !== cur) nx.push([wsName, a.textContent, a.getAttribute('href'), getComputedStyle(D.querySelector('.ar-bar')).getPropertyValue('--c')]); });
     sw.forEach(function(a){ if (!a.classList.contains('on')) nx.push([a.textContent === 'Program' ? 'Accelerate Robotics' : 'Other workstream', a.textContent === 'Program' ? 'Program home' : a.textContent, a.getAttribute('href'), a.style.getPropertyValue('--c')]); });
     if (nx.length && proj !== 'hub' && D.querySelector('.ar-bar')) {
-      var box = D.createElement('nav'); box.className = 'ar-next'; box.id = 'next'; box.setAttribute('aria-label', 'Where next');
-      box.innerHTML = '<h2>Where next</h2><div class="g"></div>';
+      var box = D.createElement('nav'); box.className = 'ar-next'; box.id = 'next'; box.setAttribute('aria-label', 'Related documents');
+      box.innerHTML = '<h2>Related documents</h2><div class="g"></div>';
       nx.forEach(function(n){ var a = D.createElement('a'); a.href = n[2]; a.style.setProperty('--c', n[3] || '#4D8BFF'); a.innerHTML = '<small></small><b></b>'; a.firstChild.textContent = n[0]; a.lastChild.textContent = n[1]; box.lastChild.appendChild(a); });
       var ft = D.querySelector('body > footer, footer.foot, .wrap > footer'); if (ft && ft.parentNode) ft.parentNode.insertBefore(box, ft); else D.body.appendChild(box);
     }
