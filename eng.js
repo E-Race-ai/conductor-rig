@@ -32,6 +32,36 @@
     var tv = false; function topv(){ tv = false; top.classList.toggle('show', scrollY > 900); }
     addEventListener('scroll', function(){ if (!tv) { tv = true; raf(topv); } }, { passive: true }); topv();
 
+    /* project dock + pager + keyboard: move between projects from anywhere */
+    (function(){
+      var sws = [].slice.call(D.querySelectorAll('.ar-switch a')).filter(function(a){ return a.getAttribute('href') !== './'; });
+      if (!sws.length) return;
+      var SHORT = { 'Site Capture': 'Capture', 'The Brain': 'Brain', 'Hotel.OS': 'Hotel.OS', 'Robotics': 'Robotics' };
+      var P = sws.map(function(a){ var t = a.querySelector('.sw-t'), sm = t && t.querySelector('small'); var nm = t ? t.lastChild.textContent : a.textContent;
+        return { href: a.getAttribute('href'), name: nm, short: SHORT[nm] || nm, role: sm ? sm.textContent : '', c: a.style.getPropertyValue('--c'), on: a.classList.contains('on') }; });
+      var idx = -1; P.forEach(function(p, i){ if (p.on) idx = i; });
+      var prev = idx >= 0 ? P[(idx - 1 + P.length) % P.length] : null, next = idx >= 0 ? P[(idx + 1) % P.length] : null;
+      var dock = D.createElement('nav'); dock.className = 'ar-dock' + (idx < 0 ? ' hub' : ''); dock.setAttribute('aria-label', 'Projects');
+      var h = '';
+      if (prev) h += '<a class="dk-arr" href="' + prev.href + '" title="Previous project: ' + prev.name + ' ( [ )" aria-label="Previous project: ' + prev.name + '">‹</a>';
+      h += '<a class="dk-home" href="./" title="Program home" aria-label="Program home">⌂</a>';
+      P.forEach(function(p, i){ h += '<a class="dk-p' + (i === idx ? ' on' : '') + '" href="' + p.href + '" style="--c:' + p.c + '"' + (i === idx ? ' aria-current="page"' : '') + '><i></i><span class="dk-n">' + p.name + '</span><span class="dk-s">' + p.short + '</span></a>'; });
+      if (next) h += '<a class="dk-arr" href="' + next.href + '" title="Next project: ' + next.name + ' ( ] )" aria-label="Next project: ' + next.name + '">›</a>';
+      dock.innerHTML = h; D.body.appendChild(dock);
+      var dv = false; function dockv(){ dv = false; dock.classList.toggle('show', scrollY > 420 || root.scrollHeight <= innerHeight + 40); }
+      addEventListener('scroll', function(){ if (!dv) { dv = true; raf(dockv); } }, { passive: true }); dockv();
+      D.addEventListener('keydown', function(e){
+        if (e.metaKey || e.ctrlKey || e.altKey || /input|textarea|select/i.test((e.target.tagName || '')) || e.target.isContentEditable) return;
+        if (e.key === '[' && prev) location.href = prev.href; else if (e.key === ']' && next) location.href = next.href;
+      });
+      if (idx >= 0) {
+        var pg = D.createElement('nav'); pg.className = 'ar-pager'; pg.setAttribute('aria-label', 'Previous and next project');
+        var card = function(p, dir){ return '<a class="pg-' + dir + '" href="' + p.href + '" style="--c:' + p.c + '"><small>' + (dir === 'prev' ? '‹ Previous project' : 'Next project ›') + '</small><b>' + p.name + '</b><span>' + p.role + '</span></a>'; };
+        pg.innerHTML = card(prev, 'prev') + card(next, 'next');
+        var ft1 = D.querySelector('body > footer, footer.foot, .wrap > footer'); if (ft1 && ft1.parentNode) ft1.parentNode.insertBefore(pg, ft1); else D.body.appendChild(pg);
+      }
+    })();
+
     /* end of page: big "where next" buttons built from the header nav */
     var cur = D.querySelector('.ar-tabs a[aria-current]'), tabs = [].slice.call(D.querySelectorAll('.ar-tabs a')), sw = [].slice.call(D.querySelectorAll('.ar-switch a'));
     var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'Hotel.OS', aug: 'Robotics' }[proj];
