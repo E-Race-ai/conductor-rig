@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en" data-proj="aug" data-rev="RB-FC-001 · Rev A · 2026-11-19" data-sub="PRJ-04 · Robotics · Floor care"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Floor care · Robotics · Accelerate Robotics</title>
+<meta name="description" content="Robotics floor care (RB-FC-001): full profiles of the Pudu CC1 Pro, Pudu MT1 / MT1 Vac / MT1 Max and Keenon C40 / C30 cleaning robots: specifications, surfaces, head-to-head comparison, overnight operations and fit for The Grand, Miami.">
+<meta property="og:title" content="Floor care · Robotics · Accelerate Robotics"><meta property="og:description" content="Robotics floor care (RB-FC-001): full profiles of the Pudu CC1 Pro, Pudu MT1 / MT1 Vac / MT1 Max and Keenon C40 / C30 cleaning robots: specifications, surfaces, head-to-head comparison, overnight operations and fit for The Grand, Miami.">
+<meta property="og:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:image" content="https://e-race-ai.github.io/conductor-rig/img/aug-s100-luggage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B16"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%0A  %3Cdefs%3E%0A    %3ClinearGradient id=%22hub%22 x1=%220%22 y1=%220%22 x2=%2232%22 y2=%2232%22 gradientUnits=%22userSpaceOnUse%22%3E%0A      %3Cstop offset=%220%22 stop-color=%22%2300d4ff%22/%3E%0A      %3Cstop offset=%221%22 stop-color=%22%230055ff%22/%3E%0A    %3C/linearGradient%3E%0A  %3C/defs%3E%0A  %3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0e1a%22/%3E%0A  %3Cg stroke=%22%2300d4ff%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 opacity=%220.55%22%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%228%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%228%22  y2=%2224%22/%3E%0A    %3Cline x1=%2216%22 y1=%2216%22 x2=%2224%22 y2=%2224%22/%3E%0A  %3C/g%3E%0A  %3Cg fill=%22%2300d4ff%22%3E%0A    %3Ccircle cx=%228%22  cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%228%22  r=%222.3%22/%3E%0A    %3Ccircle cx=%228%22  cy=%2224%22 r=%222.3%22/%3E%0A    %3Ccircle cx=%2224%22 cy=%2224%22 r=%222.3%22/%3E%0A  %3C/g%3E%0A  %3Ccircle cx=%2216%22 cy=%2216%22 r=%224.5%22 fill=%22url%28%23hub%29%22/%3E%0A%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"><link rel="stylesheet" href="eng.css"><link rel="stylesheet" href="accel.css"><script src="eng.js"></script>
+</head><body style="margin:0">
+<div class="ar-bar" role="banner" style="--c:#9B7BFF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="robotics.html" style="--c:#9B7BFF" class="on" aria-current="true"><i></i><span class="sw-t"><small>Fleet</small>Robotics</span></a></nav><nav class="ar-tabs" aria-label="Pages in this workstream"><a href="robotics.html">Overview</a><a href="robotics-floorcare.html" aria-current="page">Floor care</a><a href="robotics-spec.html">Specification</a><a href="robot-research.html">Research</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<style>
+/* Layout: one dark "clean room" world. Full-bleed bands, each with a centered 1200px stage; hero = live silicon wafer; then numbers, die, exploded build, agent orchestra, proof, airflow, spec sheet. */
+:root{
+  --bg:#070B16; --bg2:#0A0E17; --panel:#0E131E; --line:#1C2433; --text:#E9EDF5; --dim:#8E98AC; --faint:#586178;
+  --cy:#4D8BFF; --vi:#7FA6FF; --pk:#8E9AB5; --au:#C8D1E3;
+  --film:linear-gradient(100deg,var(--cy) 0%,var(--vi) 38%,var(--pk) 66%,var(--au) 100%);
+  --display:"IBM Plex Sans","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--bg)}
+a{color:var(--cy)}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:clamp(72px,10vw,140px);position:relative}
+.band + .band{border-top:1px solid var(--line)}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.92;letter-spacing:.005em;margin:0;text-wrap:balance;text-transform:uppercase}
+h2{font-size:clamp(44px,7vw,96px)}
+h3{font-size:clamp(24px,2.4vw,32px);font-weight:700}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);display:flex;gap:10px;align-items:center}
+.kicker::before{content:"";width:28px;height:1px;background:var(--film)}
+.film{background:var(--film);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--dim);max-width:60ch;margin:18px 0 0}
+.lead b{color:var(--text);font-weight:600}
+.src{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.02em}
+.src a{color:var(--dim)}
+
+/* nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.mark{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.08em;text-decoration:none;color:var(--text)}
+.mark span{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--film);margin-left:6px;vertical-align:2px}
+.navlinks{display:flex;gap:18px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.navlinks a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
+.navlinks a:hover{color:var(--text)}
+@media (max-width:720px){.navlinks a:not(.keep){display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(48px,7vw,96px) clamp(40px,6vw,80px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{position:relative;z-index:2;font-size:clamp(72px,10.5vw,150px);font-weight:900;line-height:.82;letter-spacing:-.005em}
+.hero .sub{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.2vw,40px);line-height:1;text-transform:uppercase;margin-top:18px;color:var(--text)}
+.wafer-box{position:relative;z-index:1;aspect-ratio:1;max-width:620px;width:100%;justify-self:center}
+.wafer-box canvas{width:100%;height:100%;display:block}
+.wafer-tag{position:absolute;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.06em}
+.boot{margin-top:28px;font-family:var(--mono);font-size:13px;color:var(--dim);display:grid;gap:4px;min-height:132px}
+.boot div::before{content:"› ";color:var(--cy)}
+.boot b{color:var(--text);font-weight:500}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:3px;font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--line);color:var(--text);background:var(--panel)}
+.btn.prime{background:var(--film);color:#070B16;border:0}
+.btn:hover{transform:translateY(-1px)}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px}
+@media (max-width:900px){.nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.num{background:var(--bg);padding:28px 22px 24px;display:grid;gap:6px;min-width:0;position:relative;overflow:hidden}
+.num b{font-family:var(--display);font-weight:900;font-size:clamp(56px,7vw,104px);line-height:.85;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.num b small{font-size:.38em;font-weight:700;margin-left:4px;color:var(--dim)}
+.num span{font-weight:700;font-size:14px}
+.num p{margin:0;color:var(--dim);font-size:13px;line-height:1.45}
+.num::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--film);transform-origin:left;transform:scaleX(var(--fill,1))}
+
+/* silicon */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center;margin-top:40px}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.die svg{width:100%;height:auto;display:block;max-width:520px;margin:0 auto}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.facts li{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.facts li b{font-family:var(--display);font-size:30px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.facts li span{color:var(--dim);font-size:14px}
+.facts li span strong{color:var(--text);font-weight:600}
+.fabric{stroke-dasharray:6 10;animation:flow 1.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.core{animation:blink 3.2s ease-in-out infinite}
+@keyframes off-blink{0%,100%{opacity:.55}50%{opacity:1}}
+
+/* exploded build */
+.xp{height:260vh;position:relative}
+.xp-stage{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));height:calc(100vh - 56px);height:calc(100svh - 56px);display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:860px){.xp{height:220vh}.xp-stage{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);align-items:start;padding-top:16px}}
+.xp-copy h2{font-size:clamp(40px,5vw,72px)}
+.xp-svg{width:100%;height:100%;min-height:0}
+.xp-svg svg{width:100%;height:100%;display:block}
+.xp-svg text{font-family:var(--mono);font-size:22px;fill:var(--text)}
+.xp-svg .lbl-sub{fill:var(--dim);font-size:17px}
+.fan{transform-box:fill-box;transform-origin:center;animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.xp-meter{margin-top:20px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.xp-meter i{display:block;height:100%;background:var(--film);width:0%}
+.xp-state{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:8px}
+
+/* orchestra */
+.orch{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:40px}
+@media (max-width:860px){.orch{grid-template-columns:1fr}}
+.orch canvas{width:100%;aspect-ratio:1.15;display:block;border:1px solid var(--line);border-radius:3px;background:radial-gradient(circle at 50% 50%,#101828 0%,var(--bg) 70%)}
+.big{font-family:var(--display);font-weight:900;font-size:clamp(88px,12vw,160px);line-height:.8}
+.stack{display:grid;gap:22px}
+.stack p{margin:0;color:var(--dim)}
+.stack p b{color:var(--text)}
+
+/* bars */
+.bars{display:grid;gap:18px;margin-top:28px}
+.bar-row{display:grid;gap:6px}
+.bar-top{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.bar-top span:last-child{font-family:var(--mono);color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{height:14px;border-radius:3px;background:var(--panel);overflow:hidden;position:relative}
+.track i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--film);width:var(--w)}
+.track i.old{background:var(--faint)}
+.pair{display:grid;gap:5px}
+.pair .who{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px);margin-top:40px}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:clamp(20px,3vw,32px);min-width:0}
+.stat-strip{display:flex;flex-wrap:wrap;gap:24px 40px;margin-top:24px}
+.stat-strip div{display:grid}
+.stat-strip b{font-family:var(--display);font-size:44px;font-weight:800;line-height:1}
+.stat-strip span{font-size:12px;color:var(--dim);font-family:var(--mono)}
+
+/* airflow */
+.air svg{width:100%;height:auto;display:block}
+.air text{font-family:var(--mono);font-size:15px;fill:var(--dim)}
+.gauges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+@media (max-width:640px){.gauges{grid-template-columns:1fr}}
+.gauge{display:grid;justify-items:center;gap:6px;text-align:center}
+.gauge svg{width:150px;height:150px}
+.gauge b{font-family:var(--display);font-size:30px;font-weight:800}
+.gauge span{font-size:12px;color:var(--dim);max-width:24ch}
+
+/* spec sheet */
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+.spec{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px;display:grid;gap:10px;align-content:start;position:relative;overflow:hidden}
+.spec::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--film);opacity:.7}
+.spec .role{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.spec h3{font-size:26px}
+.spec ul{margin:0;padding-left:18px;color:var(--dim);font-size:14px;display:grid;gap:3px}
+.spec ul b{color:var(--text);font-weight:600}
+
+footer{padding-block:64px 48px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+footer ol{columns:2 320px;column-gap:40px;padding-left:18px;font-size:12.5px}
+footer li{break-inside:avoid;margin-bottom:6px}
+.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.pre{opacity:.001;transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){.fabric,.core,.fan{animation:none}.reveal,.reveal.pre{opacity:1;transform:none;transition:none}}
+
+
+/* ---- v2: part chapters on lab plates + sourced bill of materials ---- */
+.chapters{display:grid;gap:clamp(56px,8vw,120px);margin-top:56px}
+.chap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.chap:nth-child(even) .plate-wrap{order:2}
+@media (max-width:860px){.chap{grid-template-columns:1fr}.chap:nth-child(even) .plate-wrap{order:0}}
+.plate-wrap{perspective:1200px}
+.plate{position:relative;aspect-ratio:4/3;border-radius:3px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 40%,#FFFFFF 0%,#EEF1F6 60%,#D9DFE8 100%);
+  box-shadow:0 40px 80px -30px rgba(77,139,255,.25),0 20px 40px -20px rgba(0,0,0,.6);
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease;will-change:transform}
+.plate img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;mix-blend-mode:multiply;filter:saturate(1.05) contrast(1.03)}
+.plate::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 60%);transform:translateX(var(--sheen,-60%));transition:transform .4s ease;pointer-events:none}
+.plate.dark{background:radial-gradient(120% 90% at 50% 40%,#1A2233 0%,#0B0F18 70%)}
+.plate.dark img{mix-blend-mode:normal;border-radius:3px;inset:10%;width:80%;height:80%}
+.plate.dark .plate-tag,.plate.dark .plate-credit{color:#8E98AC}
+.thumb.dark{background:#0B0F18}.thumb.dark img{mix-blend-mode:normal}
+.plate .ph{position:absolute;inset:0;display:grid;place-items:center;color:#5B6478;font-family:var(--mono);font-size:13px;text-align:center;padding:20px}
+.plate-tag{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#3B4458;text-transform:uppercase;z-index:1}
+.plate-credit{position:absolute;right:14px;bottom:10px;font-family:var(--mono);font-size:10px;color:#6B7487;z-index:1}
+.chap .idx{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+.chap h3{font-size:clamp(34px,4.2vw,58px);margin-top:10px;line-height:.92}
+.chap .why{color:var(--dim);margin:14px 0 0;max-width:52ch}
+.chap .why b{color:var(--text);font-weight:600}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:20px}
+.kv div{background:var(--bg2);padding:12px 14px;display:grid;gap:2px;min-width:0}
+.kv b{font-family:var(--display);font-size:26px;font-weight:800;line-height:1}
+.kv span{font-size:12px;color:var(--dim)}
+.buy{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;padding:5px 10px;border-radius:3px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.chip.mc{border-color:#E4002B66;color:#FF8A9B}
+.chip.amz{border-color:#FF990066;color:#FFC266}
+.chip.oth{border-color:#4D8BFF66;color:var(--cy)}
+.chip i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.btn.sm{padding:9px 14px;font-size:13px}
+/* BOM */
+.bom-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:24px;margin-top:40px;align-items:start}
+@media (max-width:960px){.bom-grid{grid-template-columns:1fr}}
+.lines{display:grid;gap:10px}
+.line{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:12px 16px 12px 12px}
+.line.off{opacity:.45}
+.line.ref{background:transparent;border-style:dashed}
+.thumb{width:76px;height:76px;border-radius:3px;background:radial-gradient(#fff,#E6EAF0);display:grid;place-items:center;overflow:hidden}
+.thumb img{width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply}
+.thumb span{font-family:var(--mono);font-size:10px;color:#5B6478}
+.line h4{margin:0;font-size:15px;font-weight:700;line-height:1.3}
+.line h4 a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
+.line h4 a:hover{border-bottom-color:var(--cy)}
+.line .meta{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:6px;align-items:center;font-size:12px;color:var(--dim)}
+.line .alt{font-size:12px;color:var(--faint);margin-top:4px}
+.line .alt a{color:var(--dim)}
+.line .px{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.line .px b{display:block;font-size:17px;color:var(--text);font-weight:500}
+.line .px small{color:var(--faint);font-size:11px;display:block;white-space:normal;max-width:22ch;margin-left:auto}
+@media (max-width:560px){.line{grid-template-columns:56px minmax(0,1fr)}.thumb{width:56px;height:56px}.line .px{grid-column:2;text-align:left}.line .px small{margin-left:0;max-width:none}}
+.opt-toggle{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim);margin-top:8px;cursor:pointer}
+.opt-toggle input{accent-color:#7FA6FF;width:16px;height:16px}
+.sum{position:sticky;top:calc(72px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:20px;display:grid;gap:12px}
+.sum h3{font-size:28px}
+.sum table{width:100%;border-collapse:collapse;font-size:14px}
+.sum td{padding:7px 0;border-bottom:1px dashed var(--line)}
+.sum td:last-child{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sum tr.tot td{border-bottom:0;border-top:1px solid var(--text);font-weight:700;font-size:16px;padding-top:10px}
+.sum .grand{font-family:var(--display);font-size:56px;font-weight:900;line-height:.9}
+.group-h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:18px 0 4px;display:flex;align-items:center;gap:10px}
+.group-h::after{content:"";flex:1;height:1px;background:var(--line)}
+
+
+
+
+/* ---- Option A vs B ---- */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:44px}
+@media (max-width:760px){.duo{grid-template-columns:1fr}}
+.opt-card{border:1px solid var(--line);border-radius:3px;padding:clamp(20px,3vw,32px);background:var(--panel);display:grid;gap:10px;position:relative;overflow:hidden;min-width:0}
+.opt-card.b{border-color:#7FA6FF66;background:linear-gradient(160deg,#151A2B 0%,var(--panel) 60%)}
+.opt-card .letter{font-family:var(--display);font-weight:900;font-size:120px;line-height:.75;position:absolute;right:18px;top:14px;opacity:.12}
+.opt-card .who{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.opt-card h3{font-size:clamp(30px,3.4vw,44px)}
+.opt-card .price{font-family:var(--display);font-size:clamp(48px,6vw,76px);font-weight:900;line-height:.9}
+.opt-card .price small{font-size:.32em;font-weight:600;color:var(--dim);margin-left:6px}
+.opt-card ul{margin:4px 0 0;padding-left:18px;color:var(--dim);font-size:14px;display:grid;gap:3px}
+.opt-card ul b{color:var(--text);font-weight:600}
+.versus{margin-top:48px;display:grid;gap:14px}
+.vs-row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:16px;align-items:center}
+@media (max-width:640px){.vs-row{grid-template-columns:1fr;gap:6px}}
+.vs-row .l{font-weight:700;font-size:14px}
+.vs-row .l small{display:block;font-weight:400;color:var(--faint);font-size:12px}
+.vs-bars{display:grid;gap:5px}
+.vs-bar{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(70px,auto);gap:10px;align-items:center;font-family:var(--mono);font-size:12.5px}
+.vs-bar .k{color:var(--dim);font-weight:500}
+.vs-bar .t{height:12px;border-radius:3px;background:var(--bg2);overflow:hidden;position:relative}
+.vs-bar .t i{position:absolute;inset:0 auto 0 0;border-radius:3px;width:var(--w)}
+.vs-bar.a .t i{background:#5B6478}
+.vs-bar.b .t i{background:var(--film)}
+.vs-bar .v{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.qt{width:100%;border-collapse:collapse;min-width:760px;font-size:14px}
+.qt th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px;border-bottom:1px solid var(--line);font-weight:500}
+.qt td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.qt td.n{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.qt td small{display:block;color:var(--faint);font-size:12px;margin-top:2px}
+.qt tr.tot td{border-top:1px solid var(--text);font-weight:700;border-bottom:0}
+.qt .up{color:#8E9AB5}.qt .dn{color:#4D8BFF}
+.tbl{overflow-x:auto;margin-top:40px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.stackbar{display:flex;height:44px;border-radius:3px;overflow:hidden;margin-top:18px;border:1px solid var(--line)}
+.stackbar div{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#070B16;font-weight:600;min-width:0;overflow:hidden;white-space:nowrap}
+.legend2{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--dim)}
+.legend2 i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.verdicts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+@media (max-width:900px){.verdicts{grid-template-columns:1fr}}
+.verdict{border:1px solid var(--line);border-radius:3px;padding:22px;display:grid;gap:8px;align-content:start;background:var(--bg2)}
+.verdict.pick{border-color:#C8D1E388;background:linear-gradient(160deg,#1E1A10 0%,var(--bg2) 70%)}
+.verdict h4{margin:0;font-family:var(--display);font-size:26px;text-transform:uppercase;font-weight:800}
+.verdict p,.verdict li{color:var(--dim);font-size:14px;margin:0}
+.verdict ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.flag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+
+
+/* ===== v3 plain-English layer ===== */
+.ab-toggle{display:inline-flex;border:1px solid var(--line);border-radius:3px;padding:3px;background:var(--panel);gap:2px}
+.ab-toggle button{all:unset;cursor:pointer;padding:7px 14px;border-radius:3px;font:700 13px/1 var(--body);color:var(--dim);white-space:nowrap}
+.ab-toggle button[aria-pressed="true"]{background:var(--film);color:#070B16}
+.ab-toggle button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* tour */
+.tour{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);align-items:start;margin-top:34px}
+@media (max-width:860px){.tour{grid-template-columns:1fr}}
+.rig{position:relative;background:radial-gradient(120% 90% at 60% 30%,#121a2a,var(--bg2));border:1px solid var(--line);border-radius:3px;padding:14px}
+.rig svg{width:100%;height:auto;display:block;max-height:560px}
+.rig [data-part]{cursor:pointer;transition:opacity .25s,filter .25s}
+.rig.focus [data-part]:not(.on){opacity:.28}
+.rig [data-part].on{filter:drop-shadow(0 0 8px rgba(77,139,255,.75))}
+.rig .hs{cursor:pointer}
+.rig .hs circle.ring{fill:#070B16;stroke:url(#filmS);stroke-width:2}
+.rig .hs text{font:700 13px var(--mono);fill:var(--text);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.rig .hs.on circle.ring{fill:url(#filmS);stroke:#fff}
+.rig .hs.on text{fill:#070B16}
+.rig .pulse{fill:none;stroke:var(--cy);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:hsPulse 2.4s ease-out infinite}
+@keyframes off-hsPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+@keyframes fanSpin{to{transform:rotate(360deg)}}
+.rig .fan{transform-box:fill-box;transform-origin:center;animation:fanSpin 2.2s linear infinite}
+.rig .flow{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+@media (prefers-reduced-motion:reduce){.rig .pulse,.rig .fan,.rig .flow{animation:none}}
+.rig-hint{position:absolute;left:18px;bottom:14px;font:500 11px var(--mono);color:var(--faint);letter-spacing:.06em}
+
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.pcard .ph{background:#F3F4F7;aspect-ratio:16/10;display:grid;place-items:center;position:relative;overflow:hidden}
+.pcard .ph img{width:88%;height:88%;object-fit:contain;transition:opacity .3s,transform .5s}
+.pcard .ph.swap img{opacity:0;transform:scale(.96)}
+.pcard .ph .tag{position:absolute;left:12px;top:12px;font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:#070B16;color:#fff;padding:5px 9px;border-radius:3px}
+.pcard .ph.dark{background:#050505}
+.pcard .ph .noimg{font:800 64px var(--display);color:#c9ced8}
+.pcard .bd{padding:22px 22px 18px;display:grid;gap:14px}
+.pcard h3{font-size:clamp(28px,3vw,40px)}
+.pcard .model{font:500 13px var(--mono);color:var(--dim);margin-top:4px}
+.pcard .what{font-size:17px;line-height:1.55;margin:0}
+.pcard .like{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:3px;padding:12px 14px;margin:0;color:var(--dim);font-size:15px}
+.pcard .like b{color:var(--text)}
+.pcard .like .ico{font-size:22px;line-height:1}
+.pcard .big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pcard .big b{font:900 clamp(44px,5vw,64px)/1 var(--display)}
+.pcard .big span{color:var(--dim);font-size:14px}
+.pcard .vs{font-size:13px;color:var(--faint);font-family:var(--mono)}
+.tour-nav{display:flex;align-items:center;gap:10px;padding:0 22px 20px;flex-wrap:wrap}
+.tour-nav .dots{display:flex;gap:6px;margin-right:auto}
+.tour-nav .dots button{all:unset;cursor:pointer;width:9px;height:9px;border-radius:50%;background:var(--line)}
+.tour-nav .dots button[aria-current="true"]{background:var(--cy);width:22px;border-radius:3px}
+.tour-nav .step{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:3px;padding:9px 16px;font:700 13px var(--body);color:var(--text);background:var(--bg2)}
+.tour-nav .step.prime{background:var(--film);color:#070B16;border-color:transparent}
+.tour-nav .step:focus-visible,.tour-nav .dots button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* fit: what can it run */
+.fit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:34px}
+@media (max-width:860px){.fit-grid{grid-template-columns:1fr}}
+.fitc{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px}
+.fitc h3{font-size:clamp(24px,2.4vw,30px)}
+.fitc .q{color:var(--dim);margin:8px 0 16px;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chips button{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:3px;padding:9px 12px;background:var(--bg2);display:grid;gap:2px}
+.chips button b{font:700 14px var(--body);color:var(--text)}
+.chips button small{font:500 11px var(--mono);color:var(--faint)}
+.chips button[aria-pressed="true"]{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy) inset;background:color-mix(in srgb,var(--cy) 10%,var(--bg2))}
+.chips button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.meter{display:grid;gap:4px;margin-top:14px}
+.meter .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.meter .row b{font-weight:700}
+.meter .row span{color:var(--dim);font-family:var(--mono);font-size:12px;white-space:nowrap}
+.bar{position:relative;height:16px;border-radius:3px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;transition:width .6s cubic-bezier(.2,.8,.2,1),background .3s}
+.bar i.ok{background:linear-gradient(90deg,#2FA37A,#4D8BFF)}
+.bar i.no{background:repeating-linear-gradient(135deg,#F87171 0 8px,#8E9AB5 8px 16px)}
+.meter .vd{font-size:13px;font-weight:600}
+.meter .vd.ok{color:#6EE7B7}.meter .vd.no{color:#FCA5A5}
+.slider{display:flex;align-items:center;gap:14px;margin:4px 0 18px}
+.slider input{flex:1;accent-color:#7FA6FF;height:28px}
+.slider output{font:900 44px/1 var(--display);min-width:2.2ch;text-align:right}
+.agents-viz{display:flex;flex-wrap:wrap;gap:4px;min-height:24px;margin-bottom:6px}
+.agents-viz i{width:14px;height:14px;border-radius:4px;background:var(--film);animation:pop .3s ease-out}
+@keyframes off-pop{from{transform:scale(0)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.agents-viz i{animation:none}.bar i{transition:none}}
+.fit-note{margin-top:14px;font-size:13px;color:var(--faint)}
+
+/* build day */
+.day-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-top:30px;scrollbar-width:thin}
+.day{scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.day .ph{background:#F3F4F7;aspect-ratio:4/3;display:grid;place-items:center;position:relative}
+.day .ph img{width:84%;height:84%;object-fit:contain}
+.day .ph .n{position:absolute;left:10px;top:10px;width:34px;height:34px;border-radius:50%;background:#070B16;color:#fff;display:grid;place-items:center;font:800 16px var(--mono)}
+.day .ph .t{position:absolute;right:10px;top:12px;font:700 11px var(--mono);background:#fff;color:#070B16;border-radius:3px;padding:4px 8px;border:1px solid #d8dbe2}
+.day .ph .emoji{font-size:64px}
+.day .bd{padding:16px 16px 18px;display:grid;gap:8px}
+.day h4{margin:0;font:800 22px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.day p{margin:0;font-size:14.5px;color:var(--dim)}
+.day .warn{font-size:13px;color:#FDE68A;background:rgba(201,206,212,.08);border:1px solid rgba(201,206,212,.25);border-radius:3px;padding:8px 10px}
+.day-bar{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.day-bar i{display:block;height:100%;width:0;background:var(--film)}
+.day-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px;font:500 12px var(--mono);color:var(--faint)}
+.day-arrows{display:flex;gap:8px}
+.day-arrows button{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;color:var(--text);font-size:18px}
+.day-arrows button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* jargon decoder */
+.jg{border-bottom:1.5px dotted color-mix(in srgb,var(--cy) 70%,transparent);cursor:help;text-decoration:none}
+.jg:focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:2px}
+#jgpop{position:fixed;z-index:60;max-width:300px;background:#F5F7FB;color:#070B16;border-radius:3px;padding:12px 14px;box-shadow:0 18px 50px rgba(0,0,0,.5);font:500 14px/1.45 var(--body);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
+#jgpop.show{opacity:1;transform:none}
+#jgpop b{display:block;font:800 13px var(--mono);letter-spacing:.04em;margin-bottom:3px;color:#5B21B6}
+.jg-pill{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:9px 14px;font:600 12px var(--body);color:var(--dim);box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center;transition:opacity .4s}
+.jg-pill i{font-style:normal;border-bottom:1.5px dotted var(--cy);color:var(--text)}
+.jg-pill button{all:unset;cursor:pointer;color:var(--faint);padding:0 2px}
+.jg-pill.gone{opacity:0;pointer-events:none}
+
+/* sparkle pass: RAM grid + data path */
+.ramgrid{display:grid;gap:6px;margin:14px 0 6px}
+.ramgrid .dimm{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center}
+.ramgrid .dimm>span{font:600 10px var(--mono);color:var(--faint);letter-spacing:.08em;width:52px}
+.ramgrid .cells{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:2px;padding:4px;border-radius:5px;background:#0B1019;border:1px solid var(--line);position:relative}
+.ramgrid .cells::after{content:"";position:absolute;left:46%;top:-1px;bottom:-1px;width:4px;background:var(--bg)}
+.ramgrid i{display:block;height:11px;border-radius:2px;background:#1A2233;transition:background-color .35s,box-shadow .35s;transition-delay:var(--d,0s)}
+.ramgrid i.os{background:#56627A}
+.ramgrid .lg{display:flex;flex-wrap:wrap;gap:12px;font:600 11px var(--mono);color:var(--dim);margin-top:4px}
+.ramgrid .lg b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.ramgrid .over{color:#F87171;font-weight:700}
+.dpath{margin-top:36px;border:1px solid var(--line);border-radius:3px;background:#080B12;padding:10px;overflow:hidden}
+.dpath svg{display:block;width:100%;height:auto}
+.dpath .nd rect{fill:#0E131E;stroke:#2A3448;stroke-width:2;transition:stroke .3s}
+.dpath .nd.on rect{stroke:#4D8BFF}
+.dpath text{font-family:var(--mono);text-anchor:middle}
+.dpath .t1{font-size:15px;font-weight:700;fill:#E9EDF5}.dpath .t2{font-size:11px;fill:#8E98AC}.dpath .bw{font-size:12px;font-weight:700;fill:#4D8BFF}
+.dp-cap{display:flex;gap:12px;align-items:baseline;margin-top:14px;min-height:48px;color:#C9D0DD}
+.dp-cap b{font:800 12px var(--mono);color:#070B16;background:var(--film);border-radius:3px;padding:4px 10px;white-space:nowrap}
+
+</style><style>
+/* PRJ-02 Field Unit · MRCS engineering document */
+.ms-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+@media (max-width:860px){.ms-grid{grid-template-columns:1fr}}
+.ms-h3{font:600 17px/1.3 var(--body);margin:40px 0 6px;color:var(--text);text-transform:none;letter-spacing:0}
+.ms-h3 i{font:500 12px/1 var(--mono);color:var(--cy);font-style:normal;margin-right:10px}
+.ms-p{color:var(--dim);font-size:15px;max-width:80ch;margin:6px 0 0}
+.ms-tw{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+.ms-t{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.45;min-width:620px}
+.ms-t.n{min-width:0}
+.ms-t th,.ms-t td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+.ms-t thead th{font:600 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.015)}
+.ms-t tbody tr:last-child td,.ms-t tbody tr:last-child th{border-bottom:0}
+.ms-t .m,.ms-t td.m{font-family:var(--mono);font-size:12.5px;color:var(--text)}
+.ms-t tbody th{font-weight:600;color:var(--text);font-family:var(--body)}
+.ms-t tbody th.m{font-family:var(--mono)}
+.ms-t .hi td,.ms-t .hi th{background:rgba(77,139,255,.06)}
+.ms-t .sub td{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.02)}
+.chip{display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:4px 6px;border-radius:2px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.chip.base{color:#070B16;background:#A3AEC6;border-color:#A3AEC6}
+.chip.proc{color:#070B16;background:var(--cy);border-color:var(--cy)}
+.chip.def{color:var(--faint)}
+.chip.ver{color:var(--cy);border-color:var(--cy)}
+.chip.open{color:#E5B567;border-color:#6B5A36}
+.chip.ok{color:#7FB89A;border-color:#2F5A45}
+.ms-call{margin-top:16px;border:1px solid var(--cy);border-left-width:3px;border-radius:3px;padding:12px 14px;font-size:14px;background:rgba(77,139,255,.05)}
+.ms-call .lbl{color:var(--cy);font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
+.ms-fig{margin:18px 0 0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:14px}
+.ms-fig .sc{overflow-x:auto}
+.ms-fig svg{display:block;width:100%;height:auto;min-width:640px}
+.ms-fig figcaption{font-size:12.5px;color:var(--faint);margin-top:8px}
+.ph-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+@media (max-width:900px){.ph-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ph-grid figure{margin:0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:10px}
+.ph{aspect-ratio:4/3;background:#E9ECEF;border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ph.dk{background:#0B1222}
+.ph img{width:100%;height:100%;object-fit:contain;display:block}
+.ph-grid figcaption{font-size:12px;color:var(--faint);margin-top:8px;line-height:1.4}
+.ph-grid figcaption b{color:var(--text);font-weight:600;display:block;font-size:12.5px}
+.ms-seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+@media (max-width:860px){.ms-seg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ms-seg{grid-template-columns:1fr}}
+.ms-seg>div{padding:14px;border-right:1px solid var(--line);min-width:0}
+.ms-seg>div:last-child{border-right:0}
+@media (max-width:860px){.ms-seg>div{border-bottom:1px solid var(--line)}}
+.ms-seg .lv{font:600 11px/1 var(--mono);letter-spacing:.08em;color:var(--cy);text-transform:uppercase}
+.ms-seg h4{margin:6px 0 2px;font:600 15px/1.25 var(--body);text-transform:none;letter-spacing:0}
+.ms-seg p{margin:4px 0 0;font-size:12.5px;color:var(--dim);line-height:1.45}
+.ms-seg svg{width:100%;max-width:200px;height:auto;margin-top:10px;display:block}
+.ms-flowline{stroke-dasharray:4 6;animation:msflow 2.4s linear infinite}
+@keyframes msflow{to{stroke-dashoffset:-20}}
+.ms-pipe{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:stretch}
+.ms-step{flex:1 1 118px;min-width:0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:10px 12px}
+.ms-step .n{font:600 11px/1 var(--mono);color:var(--cy)}
+.ms-step b{display:block;font-size:13.5px;margin-top:5px;line-height:1.3}
+.ms-step small{display:block;color:var(--dim);font-size:12px;margin-top:4px;line-height:1.4}
+.ms-step.gate{border-color:var(--cy)}
+.ms-bn{display:inline-block;margin-top:6px;font:600 10.5px/1.3 var(--mono);color:#F5B544;border:1px solid rgba(245,181,68,.45);border-radius:2px;padding:2px 5px}
+.ck{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:16px}
+.ck>div{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:14px}
+.ck h4{margin:0 0 8px;font:600 13px/1.3 var(--mono);color:var(--cy);text-transform:none;letter-spacing:.02em}
+.ck ol{margin:0;padding-left:20px;font-size:13px;color:var(--dim);line-height:1.5}
+.ck li{margin:3px 0}
+.ck li::marker{color:var(--faint);font-family:var(--mono);font-size:11px}
+.fu-hd{padding-block:clamp(44px,6vw,80px) 36px}
+.fu-hd .hg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.fu-hd .hg{grid-template-columns:1fr}}
+.fu-hd h1{font:600 clamp(36px,5vw,56px)/1.05 var(--body);margin:12px 0 0;text-transform:none;letter-spacing:-.01em}
+.fu-hd h1 span{display:block;font-size:.5em;color:#A3AEC6;font-weight:500;margin-top:8px}
+.fu-hd .spec{font:500 13px/1.6 var(--mono);color:var(--dim);margin-top:14px}
+.fu-hd .ph{aspect-ratio:4/3;background:#070B16;border:1px solid var(--line)}
+.fu-hd .ph img{object-fit:cover}
+.fu-hd .src{margin-top:6px}
+.fu-hd .lede-c{font-size:18px;line-height:1.55;color:#C3CCDD;margin:16px 0 0;max-width:58ch}
+.svc{background:linear-gradient(180deg,rgba(0,200,255,.035),transparent 60%)}
+.svc h2{font-size:clamp(26px,3vw,36px)!important;letter-spacing:-.02em!important}
+.svc .lead b{color:var(--text)}
+.jy{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);background:var(--panel)}
+@media (max-width:1100px){.jy{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.jy{grid-template-columns:1fr}}
+.jy li{padding:14px 14px 16px;border-left:1px solid var(--line);border-top:1px solid var(--line);margin:-1px 0 0 -1px;min-width:0;position:relative}
+.jy li .n{font:600 11px/1 var(--mono);color:var(--faint);letter-spacing:.08em}
+.jy li b{display:block;font:600 15px/1.25 var(--head);margin-top:8px;color:var(--text)}
+.jy li small{display:block;font-family:var(--body)!important;font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+.jy li.on{background:rgba(0,200,255,.07);box-shadow:inset 0 2px 0 var(--acc)}
+.jy li.on .n{color:var(--acc)}
+.spec-div{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:26px 0}
+.spec-div span{display:block;font:600 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.spec-div b{display:block;font:600 22px/1.25 var(--head);margin-top:8px;color:var(--text)}
+.spec-div small{display:block;font-family:var(--body)!important;color:var(--dim);font-size:13.5px;margin-top:6px}
+</style><style>
+/* PRJ-04 Robotics · Floor care · RB-FC-001 (shares .ms-* classes; new classes use the fc- prefix) */
+.fu-hd .lede-c{font-size:18px;line-height:1.55;color:#C3CCDD;margin:16px 0 0;max-width:60ch}
+.ms-t .hi td,.ms-t .hi th{background:rgba(155,123,255,.07)}
+.fc-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:0}
+.fc-sum div{background:#0F1216;padding:14px 16px}
+.fc-sum b{display:block;font:600 24px/1.1 var(--body);color:var(--text)}
+.fc-sum span{font:500 11.5px/1.3 var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.fc-key{display:flex;flex-wrap:wrap;gap:8px 14px;margin:14px 0 0;font:500 12px/1.4 var(--mono);color:var(--dim)}
+.fc-src{display:inline-block;font:600 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;border:1px solid #2A3658;color:#A3AEC6;white-space:nowrap;vertical-align:1px}
+.fc-src.v{color:#9B7BFF;border-color:#3B3170}
+.fc-src.r{color:#D4A65A;border-color:#5A4626}
+.fc-src.d{color:#7FB4C8;border-color:#28485A}
+.fc-src.i{color:#2FD39A;border-color:#1E5A45}
+.fc-src.x{color:#8E9AB5;border-color:#2A3658}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:12px;margin-top:22px}
+.fc-card{border:1px solid var(--line);background:#0F1216;padding:16px 16px 14px;display:flex;flex-direction:column;gap:8px}
+.fc-card small{font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#9B7BFF}
+.fc-card b{font:600 17px/1.25 var(--body);color:var(--text)}
+.fc-card p{margin:0;color:var(--dim);font-size:14px;line-height:1.45}
+.fc-card p em{font-style:normal;color:var(--text)}
+.fc-card .q{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font:500 12.5px/1.35 var(--mono);color:var(--text)}
+.fc-card .q em{font-style:normal;color:var(--faint)}
+.fc-card.alt small{color:#A3AEC6}
+.fc-pro{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:start;margin-top:20px}
+@media (max-width:860px){.fc-pro{grid-template-columns:minmax(0,1fr)}}
+.fc-pro .rb-stage{margin:0}
+.fc-credit{margin:8px 0 0;font:12px/1.4 var(--mono);color:var(--faint)}
+.fc-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px}
+@media (max-width:760px){.fc-two{grid-template-columns:minmax(0,1fr)}}
+.fc-box{border:1px solid var(--line);background:#0F1216;padding:14px 16px}
+.fc-box h4{margin:0 0 8px;font:600 11.5px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.fc-box ul,.fc-box ol{margin:0;padding-left:18px;color:#C3CCDD;font-size:14.5px;line-height:1.5}
+.fc-box li{margin:0 0 6px}
+.fc-box li:last-child{margin-bottom:0}
+.fc-box.plus h4{color:#2FD39A}.fc-box.minus h4{color:#F5B544}
+.fc-mx td.c,.fc-mx th.c{text-align:center;font-family:var(--mono)}
+.fc-mx td.c{font-size:16px}
+.fc-mx .y{color:#9B7BFF}.fc-mx .p{color:#A3AEC6}.fc-mx .n{color:#2A3756}.fc-mx .u{color:#6F7B97;font-size:13px}
+.fc-note{color:var(--faint);font-size:12.5px;line-height:1.5;margin-top:8px}
+.fc-srcl{columns:2 320px;column-gap:28px;margin:12px 0 0;padding-left:18px;font-size:14px;line-height:1.5}
+.fc-srcl li{break-inside:avoid;margin:0 0 6px;color:var(--dim)}
+.fc-srcl a{overflow-wrap:anywhere}
+.ms-t td,.ms-t th{overflow-wrap:break-word}
+</style>
+
+<nav class="top" aria-label="Sections"><div class="wrap"><a class="mark" href="#top">FLOOR CARE<span></span></a><div class="navlinks"><a class="keep" href="#lineup">Line-up</a><a class="keep" href="#cc1pro">CC1 Pro</a><a class="keep" href="#mt1">MT1 family</a><a class="keep" href="#c40">C40</a><a href="#c30">C30</a><a class="keep" href="#surfaces">Surfaces</a><a class="keep" href="#headtohead">Head-to-head</a><a href="#ops">Operations</a><a href="#sources">Sources</a></div></div></nav>
+
+<header class="fu-hd" id="top">
+  <div class="wrap hg">
+    <div>
+      <div class="kicker">PRJ-04 · Robotics · Floor care · RB-FC-001 · Rev A · 2026-11-19</div>
+      <h1>Floor care<span>Robot profiles for overnight floor care at The Grand: Pudu CC1 Pro, Pudu MT1 family, Keenon C40 and C30</span></h1>
+      <p class="lede-c">Floor care takes the largest share of robot hours at The Grand, Miami (≈ 1,000,000 sq ft of condominium, two hotel operations and lobby retail). The planned set is nine robots: four Pudu CC1 Pro scrubbers for lobby stone, restrooms and back of house, four Pudu MT1 Vac units for carpeted corridors and ballrooms, and one Pudu MT1 sweeper for the garage and dock. The Keenon C40 is the main alternative scrubber; the Keenon C30 is the smaller dry-only option. All vendors are candidates under evaluation. Almost every figure on this page is a vendor or reseller claim; no independent hands-on test of any of these robots was found.</p>
+      <p class="spec">Planned: 4 × CC1 Pro · 4 × MT1 Vac · 1 × MT1<br>Alternatives: Keenon C40 (scrubber) · Keenon C30 (dry carpet) · MT1 Max (semi-outdoor)</p>
+      <div class="ms-tw"><table class="ms-t">
+        <thead><tr><th style="width:22%">Robot</th><th>Pudu CC1 Pro</th><th>Pudu MT1 Vac</th><th>Pudu MT1</th><th>Keenon C40</th></tr></thead>
+        <tbody>
+          <tr><th>Job</th><td>Wet scrub, sweep, carpet vacuum, dust mop</td><td>Sweep, vacuum, dust mop (dry)</td><td>Dry sweep, large hard floor</td><td>Sweep, vacuum, scrub, dust push</td></tr>
+          <tr><th>Width</th><td class="m">500 mm</td><td class="m">550 mm vac · ≈ 700 mm sweep</td><td class="m">700 mm</td><td class="m">400 mm scrub · 560 mm sweep</td></tr>
+          <tr><th>Coverage (vendor max)</th><td class="m">700–1,000 m²/h</td><td class="m">1,400 m²/h</td><td class="m">1,800 m²/h</td><td class="m">1,100 m²/h</td></tr>
+          <tr><th>Tanks / dust</th><td class="m">15 L / 15 L · 2.5 L bin</td><td class="m">6 L bin + 2 × 7 L bags</td><td class="m">35 L bin</td><td class="m">16 L / 11 L · 8 L bag</td></tr>
+          <tr><th>Runtime</th><td class="m">5 h scrub · 9 h silent mop</td><td class="m">3–6.5 h</td><td class="m">4–8 h</td><td class="m">5 h scrub · 12 h sweep</td></tr>
+          <tr><th>Weight</th><td class="m">75 kg</td><td class="m">75 kg</td><td class="m">65 kg</td><td class="m">70 kg</td></tr>
+          <tr><th>Min. passage</th><td class="m">70 cm</td><td class="m">75 cm</td><td class="m">75 cm</td><td class="m">65 cm</td></tr>
+          <tr><th>API</th><td>Pudu Open Platform</td><td>Pudu Open Platform</td><td>Pudu Open Platform</td><td>None public</td></tr>
+          <tr><th>US price (reseller)</th><td class="m">$22–24k · $669/mo</td><td class="m">≈ $20–21k</td><td class="m">$17–19k · $529/mo</td><td class="m">≈ $15–20.6k</td></tr>
+          <tr><th>At The Grand</th><td>Planned × 4 <span class="chip open">selected</span></td><td>Planned × 4 <span class="chip open">selected</span></td><td>Planned × 1 <span class="chip open">selected</span></td><td>Alternative</td></tr>
+        </tbody></table></div>
+    </div>
+    <figure style="margin:0">
+      <div class="fc-sum">
+        <div><b>9</b><span>planned floor-care robots</span></div>
+        <div><b>4</b><span>CC1 Pro · hard floor wet</span></div>
+        <div><b>4</b><span>MT1 Vac · carpet</span></div>
+        <div><b>1</b><span>MT1 · garage, dock</span></div>
+        <div><b>0</b><span>independent tests found</span></div>
+        <div><b>28 Jul 2026</b><span>FCC cut-off for authorised models</span></div>
+      </div>
+      <figcaption>Floor care at a glance. Quantities are the current plan for Site 1 and are confirmed after the pilot. Figures are vendor or US reseller claims gathered in November 2026.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="band" id="lineup">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 1.0</div>
+    <h2>Line-up at a glance</h2>
+    <p class="lead">Six robots from two vendors. Three are in the plan for The Grand; the others are kept as alternatives or are not selected. Wet work on hard floors needs a scrubber (CC1 Pro or C40); the MT1 family and the C30 are dry-only.</p>
+    <div class="fc-grid">
+      <div class="fc-card"><small>Pudu · 4-in-1 scrubber</small><b>CC1 Pro</b><p>Wet scrub and dry with recovery, plus sweep, short-pile carpet vacuum and dust mop. A rear camera checks results and re-cleans missed stains.</p><p><em>Best on:</em> marble, terrazzo, tile, epoxy, artificial stone.</p><div class="q">Lobby stone, restrooms, BOH · planned × 4</div></div>
+      <div class="fc-card"><small>Pudu · dry sweeper</small><b>MT1</b><p>Large-area dry sweeper with a 35 L bin, AI litter detection and spot mode. Optional auto-empty station.</p><p><em>Best on:</em> large hardened floors: dock, garage, service corridors.</p><div class="q">Garage and dock · planned × 1</div></div>
+      <div class="fc-card"><small>Pudu · sweeper and vacuum</small><b>MT1 Vac</b><p>Sweep, vacuum and dust mop with twin fans and H11 filtration (H13 optional). Detects floor type and adjusts suction.</p><p><em>Best on:</em> short-pile and industrial carpet, hard floors.</p><div class="q">Carpet corridors, ballrooms · planned × 4</div></div>
+      <div class="fc-card alt"><small>Pudu · 3D-LiDAR sweeper</small><b>MT1 Max</b><p>Largest MT1: 3D LiDAR, IP54, 35 L bin, warning beacon. Built for semi-outdoor and garage areas.</p><p><em>Best on:</em> parking decks, covered drives, semi-open atriums.</p><div class="q">Alternative for covered drives · not in plan</div></div>
+      <div class="fc-card alt"><small>Keenon · 4-in-1 scrubber</small><b>KLEENBOT C40</b><p>Sweep, vacuum, scrub and dust push with a triple-brush system and dry-wet separation. Optional water workstation; battery swap.</p><p><em>Best on:</em> mid-size hard floors; carpet under 10 mm pile.</p><div class="q">Main alternative to CC1 Pro</div></div>
+      <div class="fc-card alt"><small>Keenon · dry 3-in-1</small><b>KLEENBOT C30</b><p>Sweep, vacuum and dust mop, no water. Light (35 kg) and low cost; no documented elevator riding or API.</p><p><em>Best on:</em> carpet and marble in single-floor zones.</p><div class="q">Smaller alternative to MT1 Vac · not selected</div></div>
+    </div>
+    <div class="fc-key"><span>Basis of each figure:</span><span><span class="fc-src v">Vendor</span> vendor page, manual or release</span><span><span class="fc-src r">Reseller</span> dealer listing</span><span><span class="fc-src d">Desk review</span> third-party document review, no testing</span><span><span class="fc-src i">Independent</span> third-party finding</span><span><span class="fc-src x">Inference</span> program-team derivation</span></div>
+  </div>
+</section>
+
+<section class="band" id="cc1pro">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 2.0</div>
+    <h2>Pudu CC1 Pro</h2>
+    <p class="lead">A compact 4-in-1 commercial cleaning robot (model CCBC02) announced on 27 May 2025. It keeps the chassis, battery, tanks and runtimes of the original CC1 (May 2023) and adds an AI layer: a rear verification camera, AI spot scrubbing, liquid-stain and floor-type detection, brush and squeegee self-monitoring and expanded VSLAM+ mapping. The Pro premium pays for perception and reporting, not for more capacity or speed. Pudu states over 20,000 CC1-platform units sold.</p>
+    <div class="fc-pro">
+      <div>
+        <h3 class="ms-h3"><i>2.1</i>Specifications</h3>
+        <div class="ms-tw"><table class="ms-t">
+          <thead><tr><th style="width:28%">Parameter</th><th>Value</th><th style="width:16%">Basis</th></tr></thead>
+          <tbody>
+            <tr><th>Cleaning functions</th><td>Sweeping, carpet vacuuming, mopping (incl. silent mopping), scrubbing</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Dimensions</th><td class="m">629 × 552 × 695 mm</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Weight</th><td class="m">75 kg</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Cleaning width</th><td class="m">500 mm with side brush · squeegee width not published (CC1: 63 cm)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Coverage rate</th><td class="m">700–1,000 m²/h cover · 1,500–3,000 m²/h spot</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Map size</th><td class="m">5,000–8,000 m² per deployment</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Tanks / dust</th><td class="m">15 L clean · 15 L recovery · dustbin 2.5 L (6 L with expansion)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Suction</th><td class="m">17,000 Pa (stated for original CC1; repeated for Pro by a reseller)</td><td><span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Battery</th><td class="m">LiFePO4 · 50 Ah · DC 23–29.2 V</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Runtime</th><td class="m">Scrub 5 h · sweep + vac + mop 5 h · carpet vac 4 h · silent mop 9 h (low gear, 100→10%)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Charge time</th><td class="m">&lt; 3 h (manual) · about 3 h (product page)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Battery swap</th><td>Not published</td><td>—</td></tr>
+            <tr><th>Docking / workstation</th><td>Optional, not in the box. Auto charging, water refill and drain, self-cleaning of roller brush and squeegee. Self-cleaning dock listed at $2,899. Plumbing, drain flow and footprint not published.</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Auto-empty (dust)</th><td>Not published</td><td>—</td></tr>
+            <tr><th>Sensors</th><td>LiDAR, solid-state LiDAR, RGB-D camera, RGB camera, top-view camera, rear AI camera, ultrasonic radar, emergency stop</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Navigation</th><td>LiDAR + visual SLAM (VSLAM+), no ceiling markers or QR codes; must be powered on at the supplied visual marker</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>AI functions</th><td>Liquid-stain and floor-type detection; rear camera verifies, re-cleans and maps stains; post-task heat map; AI spot scrub ("up to 3x" spot productivity); Omni-Sense obstacle perception</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Speed</th><td class="m">0.2–1.2 m/s</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Passage</th><td class="m">70 cm min · &gt; 75 cm preferred in long passages</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Thresholds / gaps</th><td class="m">8 mm while cleaning · 20 mm passing · 35 mm gap</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Slope</th><td class="m">No cleaning above 3° · 8° climb when not cleaning</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Multi-floor / elevator</th><td>"E-gate &amp; Elevator Control (Optional)". No published CC1 Pro integration with an elevator OEM; maps per robot not published</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Surfaces</th><td>Terrazzo, marble, tile, epoxy resin, sandstone, artificial stone, short-pile carpet</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Noise</th><td class="m">&lt; 70 dB (no measuring distance stated)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Environment</th><td class="m">IPX4 · 1–40 °C · RH ≤ 85% · altitude &lt; 2,000 m</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Safety</th><td>Emergency stop; not for stairs or large slopes (rails at stair edges); not for heavily greasy floors; remove floor cables</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Connectivity / API</th><td>Android; 4G, Wi-Fi, Bluetooth, LoRa optional; Pudu Link app and cloud; PUDU Open Platform API (task and waypoint level; community report: no arbitrary x, y, θ goals)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src i">Independent</span></td></tr>
+            <tr><th>Price (US)</th><td class="m">$24,000 or $669/mo RaaS (RobotLAB) · $21,995, list $23,995 (RobotsUSA) · MSRP $24,000 (Florida channel)</td><td><span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Warranty</th><td>12 months (RobotsUSA); manual: period varies by component</td><td><span class="fc-src r">Reseller</span> <span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Certifications</th><td>IEC 63327 (vendor claim); FCC Part 15 Class B and ISED statements in manual, FCC ID not retrieved; TÜV SÜD America C-US, Class I (reseller claim, standard not named); UL 3300 not confirmed</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+          </tbody></table></div>
+      </div>
+      <div>
+        <figure class="rb-stage" style="--c:#00C8FF;--h:300px"><span class="rb-tag">Pudu CC1 Pro</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/fc-cc1pro-cut.webp" alt="Pudu CC1 Pro cleaning robot, front view" loading="lazy"></div><figcaption><b>CC1 Pro</b><span>4-in-1 · 500 mm · 75 kg</span></figcaption></figure>
+        <p class="fc-credit">Product image: Pudu Robotics.</p>
+        <div class="fc-box plus" style="margin-top:14px"><h4>Strengths</h4><ul>
+          <li>Only planned robot that wet-scrubs and dries hard floors; recovery tank equals clean tank (15 / 15 L).</li>
+          <li>Rear camera, stain map and heat map give cleaning evidence per run, useful for public lobby and retail frontage.</li>
+          <li>Documented compliance trail is the strongest of the set: IEC 63327 claim, FCC and ISED statements, IPX4.</li>
+          <li>PUDU Open Platform gives Hotel.OS a task-level dispatch path.</li>
+          <li>Mature chassis: CC1 platform shipping since 2023 at scale (vendor claim).</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="fc-two">
+      <div class="fc-box minus"><h4>Limitations and known issues</h4><ul>
+        <li>No independent test or hands-on review found; all performance figures are vendor claims.</li>
+        <li>Small tanks: a large lobby needs several dock cycles a night, so the workstation is effectively required for unattended runs.</li>
+        <li>8 mm threshold while cleaning, 3° cleaning slope, 75 cm preferred passage: elevator sills and ramps need floor-by-floor checks.</li>
+        <li>Short-pile carpet only; thick corridor carpet is outside its envelope. A reseller page reports the CC1 struggles with thick carpet and high thresholds.</li>
+        <li>Pudu's cloud robot-management API had a cross-tenant authorisation flaw (disclosed Aug 2025, fixed within days, no CVE); the CC1 was among the named models.</li>
+        <li>Conflicting runtime: RobotLAB advertises "up to 8 hours" against the manual's 5 h scrub.</li>
+      </ul></div>
+      <div class="fc-box"><h4>Fit for The Grand</h4><ul>
+        <li>Planned × 4: lobby and retail stone, restrooms, back-of-house vinyl and epoxy.</li>
+        <li>At vendor maximum, one robot covers 3,500–5,000 m² per 5 h scrub charge; four cover about 14,000–20,000 m² per charge cycle. Real rates in furnished space are lower and are measured in the pilot.</li>
+        <li>Glass storefronts on the retail frontage: test sensors before relying on them.</li>
+        <li>Florida reseller channel exists (Tovrana/Sparkobot); no Pudu-authorised South Florida technician confirmed.</li>
+      </ul></div>
+    </div>
+    <div class="fc-box" style="margin-top:12px"><h4>Open questions for the vendor</h4><ol>
+      <li>FCC ID and grant date for CCBC02; confirm authorisation before 28 Jul 2026 (FCC DA 26-786).</li>
+      <li>Workstation water supply, drain, power and footprint; self-cleaning vs standard dock.</li>
+      <li>Squeegee width, turning width and passing height for the Pro (CC1 values: 63 cm, 88 cm, 76 cm).</li>
+      <li>Elevator control kit: SKU, price, supported OEMs at The Grand; maps and floors per robot.</li>
+      <li>Open Platform scope for the CC1 Pro: task start and stop, schedules, map areas, elevator events, webhooks, rate limits, private-cloud option.</li>
+      <li>TÜV SÜD certificate number and standard; IEC 63327 test report; camera-image retention and data residency.</li>
+      <li>US hotel references running the CC1 Pro (not the CC1); warranty term and service SLA.</li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="band" id="mt1">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 3.0</div>
+    <h2>Pudu MT1 family: MT1, MT1 Vac, MT1 Max</h2>
+    <p class="lead">Three dry-only machines on a shared 840 × 600 mm footprint: the MT1 sweeper (10 Sep 2024), the MT1 Vac sweeper-vacuum (July 2025, model MTBC02) and the MT1 Max 3D-LiDAR sweeper for semi-outdoor use (20 Aug 2025, model MTBC03). None of them scrubs. Pudu positions the MT1 Vac between the wet CC1 series and the dry MT1. The MT1 Vac is the only variant built for carpet; the MT1 and MT1 Max are for large hard floors, garages and covered drives.</p>
+    <div class="fc-pro">
+      <div>
+        <h3 class="ms-h3"><i>3.1</i>Variant comparison</h3>
+        <div class="ms-tw"><table class="ms-t">
+          <thead><tr><th style="width:22%">Parameter</th><th>MT1</th><th>MT1 Vac</th><th>MT1 Max</th></tr></thead>
+          <tbody>
+            <tr><th>Launch · model</th><td class="m">Sep 2024</td><td class="m">Jul 2025 · MTBC02</td><td class="m">Aug 2025 · MTBC03</td></tr>
+            <tr><th>Cleaning</th><td>Dry sweep (dual disc brushes, roller), negative-pressure dust control</td><td>Sweep, vacuum, dust mop; optional vertical module (wall edges, upholstery, glass)</td><td>Dry sweep only</td></tr>
+            <tr><th>Dimensions</th><td class="m">840 × 600 × 490 mm</td><td class="m">840 × 600 × 490 mm</td><td class="m">840 × 600 × 675 mm</td></tr>
+            <tr><th>Weight</th><td class="m">65 kg</td><td class="m">75 kg</td><td class="m">85 kg</td></tr>
+            <tr><th>Cleaning width</th><td class="m">700 mm</td><td class="m">550 mm vac · ≈ 700 mm sweep</td><td class="m">700 mm · 0 cm edge gap</td></tr>
+            <tr><th>Coverage</th><td class="m">1,800 m²/h · spot 6,000</td><td class="m">max 1,400 m²/h</td><td class="m">2,200 m²/h · spot 7,000</td></tr>
+            <tr><th>Bin / dust</th><td class="m">35 L bin</td><td class="m">6 L bin + 2 × 7 L bags (20 L)</td><td class="m">35 L</td></tr>
+            <tr><th>Filtration</th><td>Filter-based dust control</td><td>H11 (&gt; 98% at 0.3 µm); H13 optional (99.97%)</td><td>Self-cleaning filter (internal vibration)</td></tr>
+            <tr><th>Suction</th><td>Not published</td><td>Twin fans; "up to 200%" more suction (vendor, no Pa figure)</td><td>Not published</td></tr>
+            <tr><th>Battery</th><td>Not published</td><td class="m">60 Ah · DC 23–29.2 V</td><td class="m">60 Ah</td></tr>
+            <tr><th>Runtime</th><td class="m">4–8 h</td><td class="m">3–6.5 h · 4 h std hard floor</td><td class="m">5–10 h · 8 h std</td></tr>
+            <tr><th>Charge</th><td class="m">&lt; 3 h · "3 cycles a day"</td><td class="m">&lt; 3.5 h</td><td class="m">&lt; 3.5 h</td></tr>
+            <tr><th>Docking</th><td>Auto charging; optional Auto-Empty Station</td><td>Auto charging; no auto-empty listed</td><td>Auto charging + Auto-Empty Station</td></tr>
+            <tr><th>Sensors / navigation</th><td>VSLAM + marker + LiDAR SLAM; AI cameras (litter); 3D depth</td><td>VSLAM + marker + LiDAR SLAM; RGB and RGB-D cameras; floor-type recognition</td><td>VSLAM + marker + 3D LiDAR SLAM; 150 m detection; RGB, RGB-D</td></tr>
+            <tr><th>Min. passage</th><td class="m">75 cm</td><td class="m">75 cm · &gt; 80 cm long corridors</td><td class="m">75 cm · &gt; 85 cm long corridors</td></tr>
+            <tr><th>Threshold / gap</th><td>Not published</td><td class="m">20 mm · 30 mm gap</td><td class="m">20 mm · &lt; 50 mm speed bumps · 30 mm gap</td></tr>
+            <tr><th>Slope</th><td>Not published</td><td class="m">No cleaning &gt; 3° · 8° climb</td><td class="m">No cleaning &gt; 3° · 8° climb</td></tr>
+            <tr><th>Noise</th><td>Not published</td><td class="m">min 65 dB(A)</td><td class="m">&lt; 75 dB(A)</td></tr>
+            <tr><th>Ingress · temp.</th><td>Not published</td><td class="m">IPX3 · −10 to 40 °C · flat indoor only</td><td class="m">IP54 · −10 to 45 °C · not in rain, snow, direct sun</td></tr>
+            <tr><th>Surfaces</th><td>Large hard floors</td><td>Hardened floors; short-pile and industrial carpet only</td><td>Hardened floors; not non-hardened ground, heavy oil, standing water</td></tr>
+            <tr><th>Multi-floor</th><td colspan="3">All three list "IoT integration: Elevators, E-gates, PUDU Link"; elevator riding needs a separate Pudu elevator-control kit (price not confirmed)</td></tr>
+            <tr><th>Connectivity / API</th><td colspan="3">4G, Wi-Fi, Bluetooth; LoRa or 2.4G optional (Vac); PUDU Link; PUDU Open Platform API (task and waypoint level)</td></tr>
+            <tr><th>Price (US)</th><td class="m">$19,000 or $529/mo (RobotLAB) · $16,995–18,995</td><td class="m">$20,000 (RobotLAB) · $21,000, $440/mo</td><td class="m">from $25,000 (RobotLAB) · $24,995</td></tr>
+            <tr><th>Certifications</th><td colspan="3">No UL, ETL, CE, FCC or IEC certificate named in public documents; packing lists include a "Certificate of Conformity". FCC IDs for MTBC02 and MTBC03 not found</td></tr>
+          </tbody></table></div>
+        <p class="fc-note">All values <span class="fc-src v">Vendor</span> (Pudu product pages and operation guides) except prices <span class="fc-src r">Reseller</span>. MT1 Vac $21,000 and $440/mo come from RobotLAB as cited in the C40 and C30 notes; the MT1 note records $20,000, and a search snippet showed $559/mo.</p>
+      </div>
+      <div>
+        <figure class="rb-stage" style="--c:#9B7BFF;--h:300px"><span class="rb-tag">Pudu MT1 Vac</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/fc-mt1vac-cut.webp" alt="Pudu MT1 Vac sweeper and vacuum robot, front view with side brushes" loading="lazy"></div><figcaption><b>MT1 Vac</b><span>sweep · vacuum · dust mop</span></figcaption></figure>
+        <p class="fc-credit">Product image: Pudu Robotics. The MT1 and MT1 Vac share the same body; the MT1 Max adds a 3D LiDAR mast.</p>
+        <div class="fc-box plus" style="margin-top:14px"><h4>Strengths</h4><ul>
+          <li>MT1 Vac is the only planned robot built for carpet; floor-type recognition adjusts suction and brush speed.</li>
+          <li>H11 filtration with an H13 option for guest corridors and ballrooms.</li>
+          <li>Vendor claim: up to 10 days in a 1,000 m² carpeted area before emptying.</li>
+          <li>MT1 has the highest rate of the planned set (1,800 m²/h) and a 35 L bin; auto-empty available.</li>
+          <li>AI litter detection and spot mode suit patrols of busy areas between full sweeps.</li>
+          <li>Same Pudu cloud and API as the CC1 Pro: one vendor integration for the planned fleet.</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="fc-two">
+      <div class="fc-box minus"><h4>Limitations and known issues</h4><ul>
+        <li>Dry-only. No variant can lift wet spills or scrub.</li>
+        <li>Perception can struggle with black, mirrored or transparent surfaces (reported in a desk review of the Max guide); expect mapping work around storefront glass.</li>
+        <li>Large footprint: 75 cm minimum passage, 80–85 cm recommended; not for guest rooms or residential corridors with doors.</li>
+        <li>MT1 Vac: no auto-empty; dust bag and air filter are weekly changes, about 52 of each per robot per year.</li>
+        <li>MT1 Vac carpet pile limit is "short-pile and industrial" only, with no height in mm.</li>
+        <li>Base MT1 noise, slope, threshold and IP rating not published (operation guide not retrieved).</li>
+        <li>No independent tests and no named US deployment with measured results.</li>
+      </ul></div>
+      <div class="fc-box"><h4>Fit for The Grand</h4><ul>
+        <li>MT1 Vac × 4: carpeted guest corridors, ballrooms and meeting levels, overnight and after event strike. At vendor maximum one robot covers 4,200–9,100 m² per charge.</li>
+        <li>MT1 × 1: garage and loading dock. Ramps above 3° are excluded from cleaning; at vendor maximum 7,200–14,400 m² per charge.</li>
+        <li>MT1 Max (alternative): covered drives and porte-cochère, where IP54 and the warning beacon matter.</li>
+        <li>Check elevator sills, transition strips and airwall tracks against the 20 mm limit.</li>
+      </ul></div>
+    </div>
+    <div class="fc-box" style="margin-top:12px"><h4>Open questions for the vendor</h4><ol>
+      <li>FCC IDs and grant dates for MT1, MTBC02 and MTBC03 (pre-28 Jul 2026 authorisation required).</li>
+      <li>MT1 Vac maximum carpet pile height and performance on hotel cut and loop pile.</li>
+      <li>Base MT1 threshold, slope, noise and IP rating; whether it may run in an open-air garage level.</li>
+      <li>Elevator-control kit for MT1 / MT1 Vac: price, supported OEMs, per-floor map switching.</li>
+      <li>Keep-out zones and virtual walls in the MT1 mapping tools.</li>
+      <li>Auto-Empty Station compatibility with the MT1 Vac (not listed); charging-station price.</li>
+      <li>Consumable unit prices (bags, filters, brushes) and warranty term.</li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="band" id="c40">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 4.0</div>
+    <h2>Keenon KLEENBOT C40</h2>
+    <p class="lead">A 4-in-1 commercial cleaner (sweep, vacuum, scrub, dust push) with a triple-brush system, announced on 31 Mar 2025 with the C55 and C20. Keenon positions it for mid-size supermarkets, hotels, offices and hospitals and highlights a dry-wet separation design to limit odour from mixed waste. A technology upgrade was announced in March 2026 with no public changelog. It is the most direct like-for-like alternative to the CC1 Pro. No independent hands-on or lab test was found.</p>
+    <div class="fc-pro">
+      <div>
+        <h3 class="ms-h3"><i>4.1</i>Specifications</h3>
+        <div class="ms-tw"><table class="ms-t">
+          <thead><tr><th style="width:28%">Parameter</th><th>Value</th><th style="width:16%">Basis</th></tr></thead>
+          <tbody>
+            <tr><th>Cleaning functions</th><td>Sweeping, vacuuming, scrubbing, dust pushing; triple brush</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Dimensions</th><td class="m">578 × 500 × 690 mm · 616 × 550 × 690 mm with squeegee</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Weight</th><td class="m">70 kg incl. battery</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Cleaning width</th><td class="m">560 mm sweep (dual side brushes) · 400 mm vacuum and scrub</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Coverage rate</th><td class="m">up to 1,100 m²/h · dealer: areas up to 4,500 m²</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Tanks / dust</th><td class="m">16 L clean · 11 L waste (14 L in other sources) · 8 L dust bag ("4–8 days") · ≈ 0.74 L waste container</td><td><span class="fc-src v">Vendor</span> <span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Suction</th><td class="m">max 23,500 Pa, adjustable · floor dry ≈ 30 s after scrub</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Battery</th><td class="m">DC 25.6 V · 50 Ah · "5-second" battery swap</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Runtime</th><td class="m">up to 5 h scrub · up to 12 h sweep (dealer: 6 h dust mop; manual versions differ)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Charge time</th><td class="m">≈ 2 h</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Docking / workstation</th><td>Optional workstation: auto charging, fresh-water supply, waste-water drain, detergent ratio set in app. Some US listings sell the robot without it. Plumbing and footprint not published</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Auto-empty (dust)</th><td>None described; dust bag and bin are emptied by staff</td><td><span class="fc-src x">Inference</span></td></tr>
+            <tr><th>Sensors</th><td>LiDAR, dual stereo cameras, four line lasers, three ultrasonic modules ("ten detection components"); collision sensing and RGB camera also referenced</td><td><span class="fc-src v">Vendor</span> <span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Navigation</th><td>VSLAM path planning; auto carpet and hard-floor detection; breakpoint resume</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Speed</th><td class="m">max 0.8 m/s cleaning</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Passage / turning</th><td class="m">65 cm passage · 75 cm height · 80 cm turning width</td><td><span class="fc-src v">Vendor</span> <span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Thresholds / gaps</th><td class="m">15 mm obstacle · 35 mm gap</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Slope</th><td class="m">&lt; 8° when not cleaning; cleaning slope not published</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Multi-floor / elevator</th><td>"IoT elevator and door auto-passing; multi-machine hybrid scheduling"; needs site-specific integration. Octa Robotics LCI elevator certification in Japan (Apr 2026), not applicable in the US</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Surfaces</th><td>Hard floors; carpet, tile and hardwood (vendor release); carpet limited to short pile under 10 mm (manual)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Noise</th><td class="m">≤ 70 dB</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Environment</th><td class="m">Indoor only · 0–40 °C · 20–80% RH · no IP rating found</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Safety</th><td>Protective measures needed at stairs, escalators and open edges; residual-water slip risk warrants an acceptance test</td><td><span class="fc-src d">Desk review</span></td></tr>
+            <tr><th>Connectivity / API</th><td>Keenon App and cloud: tasks, status, remote dispatch, cleaning reports. No public API, SDK or Open-RMF adapter</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Display / care</th><td>11.6″ touchscreen; sound and light alerts; "35 seconds" of daily care (a desk review calls this best case)</td><td><span class="fc-src v">Vendor</span></td></tr>
+            <tr><th>Price (US)</th><td class="m">$18,000–20,580 (Knoxlabs, ProServBots, Homery, Hero Robots) · $14,950, or $16,790 with workstation (RobotsUSA) · lease from $575/mo</td><td><span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Warranty</th><td>Not published by Keenon. Dealer offers range to 5 years; RobotLAB states 2 years standard for other Keenon models</td><td><span class="fc-src r">Reseller</span></td></tr>
+            <tr><th>Certifications</th><td>No FCC, UL, CE or IEC documentation found; only the Japanese LCI elevator certification</td><td><span class="fc-src v">Vendor</span></td></tr>
+          </tbody></table></div>
+      </div>
+      <div>
+        <figure class="rb-stage" style="--c:#A3AEC6;--h:300px"><span class="rb-tag">Keenon C40</span><div class="rb-floor"></div><div class="rb-glow"></div><div class="rb-img"><img src="img/fc-c40-cut.webp" alt="Keenon KLEENBOT C40 cleaning robot, front view" loading="lazy"></div><figcaption><b>KLEENBOT C40</b><span>4-in-1 · 400 / 560 mm · 70 kg</span></figcaption></figure>
+        <p class="fc-credit">Product image: Keenon Robotics, via a US reseller listing.</p>
+        <div class="fc-box plus" style="margin-top:14px"><h4>Strengths</h4><ul>
+          <li>Narrowest passage of the scrubbers (65 cm vs 70 cm for the CC1 Pro).</li>
+          <li>Larger clean tank (16 L) and dust bag (8 L); 5-second battery swap allows a second shift without waiting on charge.</li>
+          <li>Shorter charge (≈ 2 h) and higher stated suction (23,500 Pa).</li>
+          <li>Lower street price, about $4–5k less per unit than the CC1 Pro.</li>
+          <li>One vendor cloud if the property standardises on Keenon delivery robots.</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="fc-two">
+      <div class="fc-box minus"><h4>Limitations and known issues</h4><ul>
+        <li>No public API or SDK; Hotel.OS dispatch would need a negotiated Keenon or integrator agreement.</li>
+        <li>No US certification documentation found (FCC, UL, CE); FCC authorisation status unverified.</li>
+        <li>Sensors may misbehave where walls are largely glass or transparent (user manual).</li>
+        <li>15 mm obstacle limit; carpet under 10 mm pile only; indoor only, no IP rating.</li>
+        <li>Inconsistent documentation: waste tank 11 L vs 14 L, a "60 L / 47 L" line, runtime figures that differ between page and manual.</li>
+        <li>1,100 m²/h is a geometric ceiling (400 mm × 0.8 m/s ≈ 1,150 m²/h); real scrub throughput is far lower.</li>
+        <li>No US hotel deployment found; the named hotel site (Shangri-La Traders, Shanghai Hongqiao) has no published KPIs.</li>
+      </ul></div>
+      <div class="fc-box"><h4>Fit for The Grand</h4><ul>
+        <li>Alternative to the CC1 Pro for lobby, restroom and back-of-house scrubbing; not in the current plan.</li>
+        <li>Best case is corridors, residential lobbies and retail frontage; Keenon's C55 is the larger model for big open floor plates.</li>
+        <li>Glass-heavy lobby frontage and elevator-sill gaps need a site acceptance test.</li>
+        <li>Selection would require written API access and FCC authorisation evidence first.</li>
+      </ul></div>
+    </div>
+    <div class="fc-box" style="margin-top:12px"><h4>Open questions for the vendor</h4><ol>
+      <li>FCC ID and grant date; UL 3300 or UL 1017 / 60335-2-72 status; declaration of conformity.</li>
+      <li>Cloud API access for task dispatch, status webhooks, map and zone IDs; data residency and camera-image handling; offline option.</li>
+      <li>Confirmed waste-tank volume and runtime for the current (2026 upgrade) hardware; contents of the upgrade.</li>
+      <li>Workstation plumbing, drain and footprint; price with and without workstation.</li>
+      <li>Cleaning slope limit; per-floor maps, keep-out zones, scheduling.</li>
+      <li>US elevator integration reference; US hotel, airport or mall reference sites; Florida service coverage.</li>
+      <li>Warranty term from Keenon, consumable prices.</li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="band" id="c30">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 5.0</div>
+    <h2>Keenon KLEENBOT C30</h2>
+    <p class="lead">A dry-only 3-in-1 robot (sweep, vacuum, dust mop) with no water tank, shown publicly from 31 Mar 2025 and launched in Europe at ISSA Pulire, May 2025. Keenon positions it as the "specialized carpet care" model for premium settings such as hotels and offices, "from marble to carpets". It is the low-cost counterpart to the MT1 Vac. Several figures conflict across sources.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Parameter</th><th>Value</th><th style="width:16%">Basis</th></tr></thead>
+      <tbody>
+        <tr><th>Cleaning functions</th><td>Sweeping, vacuuming, dust mopping; no water, no scrub</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Dimensions · weight</th><td class="m">490 × 520 × 750 mm (490 × 610 × 750 with dust push) · 35 kg (30 kg without battery)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Cleaning width</th><td class="m">610 mm max</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Coverage</th><td class="m">600 m²/h · up to 2,500 m² per charge (other listings: 540 m²/h, 1,500 m²)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Suction</th><td class="m">19,000 Pa (resellers: 15,000 or 11,000 Pa)</td><td><span class="fc-src v">Vendor</span> <span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Dust capacity</th><td>Not published (one 3.5 L listing, low confidence)</td><td>—</td></tr>
+        <tr><th>Runtime · charge</th><td class="m">6 h sweep and vacuum · 10 h dust mop · charge 5–6 h</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Docking</th><td>Charging dock only; no auto-empty</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Sensors / navigation</th><td>Not on Keenon's page. Reseller: LiDAR (240°, ≤ 25 m), stereo vision, collision sensor, IMU. Map built by pushing the robot</td><td><span class="fc-src r">Reseller</span> <span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Passage · threshold · slope</th><td class="m">65 cm aisle · 80 cm turning · 2 cm obstacle · &lt; 7°</td><td><span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Noise</th><td class="m">60–70 dB depending on listing</td><td><span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Multi-floor</th><td>No elevator riding documented by Keenon</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Connectivity / API</th><td>Keenon App and cloud; no public API</td><td><span class="fc-src v">Vendor</span></td></tr>
+        <tr><th>Price · warranty</th><td class="m">$11,900 (RobotsUSA) · 2- or 5-year warranty depending on reseller</td><td><span class="fc-src r">Reseller</span></td></tr>
+        <tr><th>Certifications</th><td>CE (French reseller); no FCC or UL listing found</td><td><span class="fc-src r">Reseller</span></td></tr>
+      </tbody></table></div>
+    <div class="fc-two">
+      <div class="fc-box plus"><h4>Strengths</h4><ul>
+        <li>Lowest price of the set (about $11.9k) and lightest (35 kg).</li>
+        <li>Built for carpet and premium hard floors; 65 cm aisle.</li>
+        <li>Long runtime (6–10 h) for daytime or long overnight runs.</li>
+      </ul></div>
+      <div class="fc-box minus"><h4>Limitations and fit</h4><ul>
+        <li>No documented elevator riding: one robot per floor or zone, moved by staff.</li>
+        <li>No API, no auto-empty, slow 5–6 h charge, 600 m²/h.</li>
+        <li>Cannot deal with wet or sticky spills on stone.</li>
+        <li>Not selected for The Grand; candidate only for single-floor carpeted zones if cost decides.</li>
+      </ul></div>
+    </div>
+    <div class="fc-box" style="margin-top:12px"><h4>Open questions for the vendor</h4><ol>
+      <li>Official datasheet: dust volume, sensors, noise, slope, threshold, IP rating; which suction and area figures apply to current hardware.</li>
+      <li>Carpet pile-height limit; elevator support; FCC ID and grant date; RaaS rate.</li>
+    </ol></div>
+  </div>
+</section>
+
+<section class="band" id="surfaces">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 6.0</div>
+    <h2>Surface × robot matrix</h2>
+    <p class="lead">Which robot can clean which floor at The Grand, derived from the published floor types, carpet limits, slope and threshold figures and ingress ratings in the research notes.</p>
+    <div class="ms-tw"><table class="ms-t fc-mx">
+      <thead><tr><th style="width:22%">Surface</th><th class="c">CC1 Pro</th><th class="c">MT1</th><th class="c">MT1 Vac</th><th class="c">MT1 Max</th><th class="c">C40</th><th class="c">C30</th></tr></thead>
+      <tbody>
+        <tr><th>Stone, marble, terrazzo</th><td class="c y">●</td><td class="c p">○</td><td class="c p">○</td><td class="c p">○</td><td class="c y">●</td><td class="c p">○</td></tr>
+        <tr><th>Tile</th><td class="c y">●</td><td class="c p">○</td><td class="c p">○</td><td class="c p">○</td><td class="c y">●</td><td class="c p">○</td></tr>
+        <tr><th>Sealed concrete, epoxy</th><td class="c y">●</td><td class="c y">●</td><td class="c p">○</td><td class="c y">●</td><td class="c p">○</td><td class="c p">○</td></tr>
+        <tr><th>Low-pile carpet</th><td class="c p">○</td><td class="c n">–</td><td class="c y">●</td><td class="c n">–</td><td class="c p">○</td><td class="c y">●</td></tr>
+        <tr><th>High-pile carpet</th><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c u">?</td></tr>
+        <tr><th>Rugs (loose)</th><td class="c p">○</td><td class="c n">–</td><td class="c p">○</td><td class="c n">–</td><td class="c p">○</td><td class="c p">○</td></tr>
+        <tr><th>Restrooms (wet)</th><td class="c y">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c y">●</td><td class="c n">–</td></tr>
+        <tr><th>Garage, covered outdoor</th><td class="c n">–</td><td class="c p">○</td><td class="c n">–</td><td class="c y">●</td><td class="c n">–</td><td class="c n">–</td></tr>
+        <tr><th>Ramps, thresholds</th><td class="c p">○</td><td class="c u">?</td><td class="c p">○</td><td class="c p">○</td><td class="c p">○</td><td class="c p">○</td></tr>
+      </tbody></table></div>
+    <p class="fc-note">● strong · ○ usable · – unsuitable · ? not published. Basis: stone and tile are rated ● only for robots that wet-scrub and list the floor type (CC1 Pro: terrazzo, marble, tile, epoxy; C40: tile, hard floors); dry robots are ○. Sealed concrete is ● for the CC1 Pro (epoxy listed) and for MT1 and MT1 Max (hardened floors, warehouses, garages). Low-pile carpet is ● for the carpet-focused MT1 Vac and C30 and ○ for the CC1 Pro (4 h carpet vacuum mode) and C40 (pile under 10 mm). No robot publishes support for high-pile carpet; the C30 pile limit is unpublished. Rugs: no vendor guidance; ○ means carpet-capable with an obstacle limit of 8–20 mm, so loose and fringed rugs stay keep-out zones until tested. Restrooms need wet recovery, so only scrubbers qualify. Garage: MT1 Max is IP54 and rated for semi-outdoor use; the base MT1 is planned for the garage but publishes no IP rating; CC1 Pro, MT1 Vac and C40 are indoor-only. Ramps and thresholds: every robot listed can pass 8° (C30 under 7°) but none cleans above 3° where stated; thresholds are 8 mm cleaning / 20 mm passing (CC1 Pro), 20 mm (MT1 Vac, Max), 15 mm (C40), 2 cm (C30, reseller).</p>
+  </div>
+</section>
+
+<section class="band" id="headtohead">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 7.0</div>
+    <h2>Head-to-head</h2>
+    <p class="lead">The two scrubber choices for lobby stone, restrooms and back of house, then the two dry carpet choices. No independent head-to-head test exists for either pair.</p>
+    <h3 class="ms-h3"><i>7.1</i>Scrubbers: Pudu CC1 Pro vs Keenon C40</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Criterion</th><th>Pudu CC1 Pro</th><th>Keenon C40</th></tr></thead>
+      <tbody>
+        <tr><th>Functions</th><td>Scrub, sweep, carpet vacuum, mop</td><td>Scrub, sweep, vacuum, dust push</td></tr>
+        <tr><th>Width</th><td class="m">500 mm</td><td class="m">400 mm scrub · 560 mm sweep</td></tr>
+        <tr><th>Coverage (vendor)</th><td class="m">700–1,000 m²/h · spot 1,500–3,000</td><td class="m">up to 1,100 m²/h</td></tr>
+        <tr><th>Clean / recovery tank</th><td class="m">15 L / 15 L</td><td class="m">16 L / 11 L (or 14 L)</td></tr>
+        <tr><th>Dust</th><td class="m">2.5 L bin (6 L option)</td><td class="m">8 L bag</td></tr>
+        <tr><th>Suction</th><td class="m">17,000 Pa (CC1 figure)</td><td class="m">23,500 Pa</td></tr>
+        <tr><th>Scrub runtime · charge</th><td class="m">5 h · &lt; 3 h</td><td class="m">5 h · ≈ 2 h · 5 s battery swap</td></tr>
+        <tr><th>Weight</th><td class="m">75 kg</td><td class="m">70 kg</td></tr>
+        <tr><th>Passage</th><td class="m">70 cm (75 cm preferred)</td><td class="m">65 cm</td></tr>
+        <tr><th>Threshold · gap</th><td class="m">8 mm cleaning, 20 mm passing · 35 mm</td><td class="m">15 mm · 35 mm</td></tr>
+        <tr><th>Noise · ingress</th><td class="m">&lt; 70 dB · IPX4</td><td class="m">≤ 70 dB · no IP rating found</td></tr>
+        <tr class="hi"><th>Result verification</th><td>Rear AI camera, stain re-clean, heat map, component self-monitoring</td><td>Cleaning reports; no camera verification published</td></tr>
+        <tr><th>Workstation</th><td>Optional: refill, drain, charge, self-cleaning brush and squeegee (≈ $2.9k)</td><td>Optional: refill, drain, charge, detergent dosing</td></tr>
+        <tr><th>Elevator</th><td>Optional e-gate and elevator control</td><td>IoT elevator and door passing; site integration needed</td></tr>
+        <tr class="hi"><th>API for Hotel.OS</th><td>PUDU Open Platform (task level)</td><td>None public; negotiate</td></tr>
+        <tr class="hi"><th>Certification evidence</th><td>IEC 63327 claim; FCC Part 15 and ISED statements; TÜV SÜD C-US (reseller)</td><td>None found</td></tr>
+        <tr><th>Security record</th><td>Aug 2025 cloud API flaw, fixed; Security Response Center set up</td><td>No published research (absence of evidence)</td></tr>
+        <tr><th>US price</th><td class="m">$22–24k + dock · $669/mo</td><td class="m">$15–20.6k · lease from $575/mo</td></tr>
+        <tr><th>Hotel reference</th><td>Shenzhen robot hotel (trial late 2026); CC1 platform 20,000+ units (vendor)</td><td>Shangri-La Traders, Shanghai Hongqiao (no KPIs)</td></tr>
+      </tbody></table></div>
+    <div class="ms-call"><span class="lbl">Recommendation</span>Keep the Pudu CC1 Pro as the scrubber for The Grand. It has a published API for Hotel.OS dispatch, the only certification evidence of the two, IPX4, camera verification that produces evidence for lobby and retail cleaning, and the same vendor cloud as the MT1 Vac and MT1. The C40 is cheaper by roughly $4–5k per unit, fits a 65 cm passage, carries more clean water and swaps batteries in seconds; it becomes a valid choice only if Keenon provides written API access and FCC and safety documentation, or if the property standardises on Keenon delivery robots. Both need a site trial on the lobby stone, glass frontage and elevator sills before purchase.</div>
+    <h3 class="ms-h3"><i>7.2</i>Dry carpet: Pudu MT1 Vac vs Keenon C30</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Criterion</th><th>Pudu MT1 Vac</th><th>Keenon C30</th></tr></thead>
+      <tbody>
+        <tr><th>Functions</th><td>Sweep, vacuum, dust mop</td><td>Sweep, vacuum, dust mop</td></tr>
+        <tr><th>Width</th><td class="m">550 mm vac · ≈ 700 mm sweep</td><td class="m">610 mm</td></tr>
+        <tr><th>Coverage (vendor)</th><td class="m">1,400 m²/h</td><td class="m">600 m²/h</td></tr>
+        <tr><th>Dust · filter</th><td class="m">6 L + 2 × 7 L bags · H11 / H13</td><td class="m">Not published · HEPA (consumable)</td></tr>
+        <tr><th>Runtime · charge</th><td class="m">3–6.5 h · &lt; 3.5 h</td><td class="m">6–10 h · 5–6 h</td></tr>
+        <tr><th>Weight · size</th><td class="m">75 kg · 840 × 600 mm</td><td class="m">35 kg · 490 × 520 mm</td></tr>
+        <tr><th>Passage · threshold</th><td class="m">75 cm · 20 mm</td><td class="m">65 cm · 2 cm (reseller)</td></tr>
+        <tr class="hi"><th>Multi-floor</th><td>Elevator and e-gate IoT integration (kit)</td><td>None documented</td></tr>
+        <tr class="hi"><th>API</th><td>PUDU Open Platform</td><td>None public</td></tr>
+        <tr><th>US price</th><td class="m">≈ $20–21k</td><td class="m">≈ $11.9k</td></tr>
+      </tbody></table></div>
+    <div class="ms-call"><span class="lbl">Recommendation</span>Keep the MT1 Vac for guest corridors and ballrooms. Corridors span many floors, so elevator riding and Hotel.OS dispatch decide the choice, and the C30 documents neither. The MT1 Vac also claims more than twice the area rate and H11 filtration. The C30 costs about $8–9k less and fits tighter spaces; it remains an option for a single-floor carpeted zone that a robot never leaves.</div>
+  </div>
+</section>
+
+<section class="band" id="ops">
+  <div class="wrap">
+    <div class="kicker">RB-FC-001 · 8.0</div>
+    <h2>Overnight operations</h2>
+    <p class="lead">Robots run their zones between roughly 22:00 and 06:30 and dock themselves, but every unit still needs daily attention from staff. Intervals below are from the vendor operation guides and manuals unless marked.</p>
+    <h3 class="ms-h3"><i>8.1</i>Maintenance by robot</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:16%">Robot</th><th>Every shift / daily</th><th>Weekly or every few days</th><th>Periodic consumables</th></tr></thead>
+      <tbody>
+        <tr><th>CC1 Pro</th><td>Clean mop cloth; empty dustbin; check stain and alert report</td><td>Flush recovery tank, dustbin and water-filter chamber every 2–3 days (inner dirty tank 1–2 × a week with workstation); wipe wheels, clean sensors and LiDAR weekly</td><td>Squeegee and rake blades every 1, 2 or 3 months (high, medium, low wear); roller brushes at wear indicator; side brushes when worn; dust-box filter and sponge as needed</td></tr>
+        <tr><th>MT1 Vac</th><td>Check bin; empty if used on hard-floor litter</td><td>Change dust bag and air filter weekly</td><td>Side and roller brushes, rubber strips every 6–12 months; HEPA is not washable</td></tr>
+        <tr><th>MT1</th><td>Empty 35 L bin, or auto-empty to a waste can</td><td>Not published for base MT1</td><td>Not published for base MT1 (MT1 Max: brushes and strips 6–12 months, filter 3–6 months)</td></tr>
+        <tr><th>C40</th><td>Clean sensors, clear hair from brushes, empty debris, clean waste system, check squeegee and wheels, drain water when idle <span class="fc-src d">Desk review</span></td><td>Change 8 L dust bag ("4–8 days")</td><td>Brushes, side brushes, squeegee blades, dust bags, HEPA, detergent; no prices published</td></tr>
+        <tr><th>C30</th><td>Empty dust bag manually</td><td>Not published</td><td>"Six-month consumable kit" (bag, HEPA, mop pad, brushes)</td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>8.2</i>Infrastructure per robot</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%">Item</th><th>CC1 Pro × 4</th><th>MT1 Vac × 4</th><th>MT1 × 1</th></tr></thead>
+      <tbody>
+        <tr><th>Station</th><td>Workstation: refill, drain, charge, self-clean brush and squeegee</td><td>Charging station</td><td>Charging station; optional Auto-Empty Station</td></tr>
+        <tr><th>Water</th><td>Supply line to each workstation (spec not published)</td><td>None</td><td>None</td></tr>
+        <tr><th>Drain</th><td>Waste-water drain at each workstation (spec not published)</td><td>None</td><td>None</td></tr>
+        <tr><th>Power</th><td>Charger AC 100–240 V, 50/60 Hz; output 29.2 V / 15 A max</td><td>Not published</td><td>Auto-Empty Station 100–240 VAC, 1.5 A (10 A max)</td></tr>
+        <tr><th>Space</th><td>Not published</td><td>Not published</td><td>Auto-Empty Station 760 × 2,010 × 680 mm, 57.8 kg; waste can up to 1,350 mm tall</td></tr>
+        <tr><th>Site</th><td colspan="3">Startup marker per map (CC1 Pro); elevator-control kit or OEM API per served bank; robot network on a segmented VLAN or SSID; stations in back-of-house rooms near the zones they serve <span class="fc-src x">Inference</span></td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>8.3</i>Indicative cost of the planned set</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Line</th><th>Purchase (reseller list)</th><th>RaaS (reseller)</th></tr></thead>
+      <tbody>
+        <tr><th>CC1 Pro × 4</th><td class="m">$88–96k + docks ≈ $11.6k</td><td class="m">$2,676/mo</td></tr>
+        <tr><th>MT1 Vac × 4</th><td class="m">$80–84k + charging stations (price not published)</td><td class="m">$1,760–2,236/mo</td></tr>
+        <tr><th>MT1 × 1</th><td class="m">$17–19k + charging station (price not published)</td><td class="m">$398–529/mo</td></tr>
+        <tr class="hi"><th>Total</th><td class="m">≈ $197–211k before stations, elevator integration and installation</td><td class="m">≈ $4.8–5.4k/mo</td></tr>
+      </tbody></table></div>
+    <p class="fc-note">Program-team arithmetic from reseller listings, November 2026; excludes consumables, elevator kits, plumbing and tariffs. Reseller prices vary widely and RaaS terms are quoted per site.</p>
+    <h3 class="ms-h3"><i>8.4</i>What staff still do</h3>
+    <div class="fc-two">
+      <div class="fc-box"><h4>Every night</h4><ul>
+        <li>Clear cables, signage and loose items from robot zones before runs.</li>
+        <li>Empty dust bins and bags; detergent top-up where no workstation dosing.</li>
+        <li>Respond to stuck or error alerts; a robot waits at its maintenance point.</li>
+        <li>Spills during service, spot treatment, edges and corners, stairs and escalators, glass, guest rooms.</li>
+        <li>Move furniture for ballroom runs after event strike.</li>
+      </ul></div>
+      <div class="fc-box"><h4>Weekly and by exception</h4><ul>
+        <li>Sensor and LiDAR cleaning, wheel wipe-down, tank flushes.</li>
+        <li>Consumable swaps on schedule; track stock by robot.</li>
+        <li>Review heat maps and missed-area reports; adjust zones in Hotel.OS.</li>
+        <li>During fire recall, elevators return to the recall floor; staff clear any robot from lobby egress paths <span class="fc-src x">Inference</span>.</li>
+      </ul></div>
+    </div>
+    <div class="ms-call"><span class="lbl">Regulatory gate</span>FCC Public Notice DA 26-786 (28 Jul 2026) added foreign-produced advanced robotic devices to the Covered List. Models authorised before that date may still be imported, sold and used, and a waiver (DA 26-789) allows security and compatibility software updates until at least 1 Jan 2029. Before purchase, verify the FCC ID and grant date for each model, and contract for spare parts, batteries and firmware support through 2029 and beyond.</div>
+  </div>
+</section>
+
+<section class="band" id="sources" data-appx="A">
+  <div class="wrap">
+    <div class="kicker">Appendix A</div>
+    <h2>Sources</h2>
+    <p class="ms-p">Research library: Pudu and Keenon hotel robots (notes on the CC1 Pro, MT1 family, Keenon C40 and C30, and integration, security and regulation), November 2026. Figures are vendor or reseller claims unless marked. Product images: Pudu Robotics (CC1 Pro, MT1 Vac); Keenon Robotics via a US reseller listing (C40). Trademarks belong to their owners.</p>
+    <h3 class="ms-h3"><i>A.1</i>Pudu CC1 Pro</h3>
+    <ul class="fc-srcl">
+      <li><a href="https://www.pudurobotics.com/en/products/cc1-pro" target="_blank" rel="noopener">Pudu CC1 Pro product page</a></li>
+      <li><a href="https://resource-wangsu.helplook.net/docker_production/r7bv6l/article/FknXLV8f/attachments/PUDU_CC1_Pro_User_Manual_multilanguage.pdf" target="_blank" rel="noopener">CC1 Pro User Manual (PDF)</a></li>
+      <li><a href="https://www.prnewswire.com/apac/news-releases/pudu-robotics-launches-its-latest-ai-powered-autonomous-cleaning-robot--pudu-cc1-pro-302465778.html" target="_blank" rel="noopener">CC1 Pro launch release, PR Newswire, 27 May 2025</a></li>
+      <li><a href="https://www.pudurobotics.com/products/puduCC1" target="_blank" rel="noopener">Pudu CC1 product page</a></li>
+      <li><a href="https://academy.pudutech.com/en/docs/chan-pin-jian-jie-url0" target="_blank" rel="noopener">Pudu Academy CC1 overview</a></li>
+      <li><a href="https://academy.pudutech.com/en/docs/PUDU-CC1-Operation-Guide-V6" target="_blank" rel="noopener">Pudu CC1 Operation Guide V6</a></li>
+      <li><a href="https://www.pudurobotics.com/en/products/cc1-pro-disc" target="_blank" rel="noopener">Pudu CC1 Pro Disc page</a></li>
+      <li><a href="https://www.euroshop-tradefair.com/en/Home/Company_News/The_Secret_to_Global_Scale_Why_PUDU_CC1_Dominates_the_Commercial_Cleaning_Robot_Market" target="_blank" rel="noopener">Pudu Europe on CC1 scale, Jan 2026</a></li>
+      <li><a href="https://www.robotlab.com/store/pudu-cc1-pro-robot/" target="_blank" rel="noopener">RobotLAB CC1 Pro listing</a></li>
+      <li><a href="https://www.robotsusa.com/PUDU-CC1-Pro-AI-Powered-Autonomous-Cleaning-Robot.htm" target="_blank" rel="noopener">RobotsUSA CC1 Pro listing</a></li>
+      <li><a href="https://sparkobot.pages.dev/the-clean-sheet/pudu-cc1-pro-review" target="_blank" rel="noopener">Tovrana/Sparkobot CC1 Pro review</a></li>
+      <li><a href="https://sparkobot.pages.dev/the-clean-sheet/commercial-cleaning-robot-certification" target="_blank" rel="noopener">Tovrana/Sparkobot certification page</a></li>
+      <li><a href="https://shop.imagenetconsulting.com/products/pudu-self-cleaning-docking-station" target="_blank" rel="noopener">ImageNet Pudu self-cleaning docking station</a></li>
+      <li><a href="https://www.gadgetreview.com/?p=389600" target="_blank" rel="noopener">GadgetReview on the Shenzhen robot hotel, Jun 2026</a></li>
+    </ul>
+    <h3 class="ms-h3"><i>A.2</i>Pudu MT1 family</h3>
+    <ul class="fc-srcl">
+      <li><a href="https://www.pudurobotics.com/en/products/mt1" target="_blank" rel="noopener">Pudu MT1 product page</a></li>
+      <li><a href="https://www.pudurobotics.com/en/products/mt1-vac" target="_blank" rel="noopener">Pudu MT1 Vac product page</a></li>
+      <li><a href="https://www.pudurobotics.com/en/products/mt1-max" target="_blank" rel="noopener">Pudu MT1 Max product page</a></li>
+      <li><a href="https://academy.pudutech.com/en/docs/PUDU-MT1-Vac-Operation-Guide" target="_blank" rel="noopener">MT1 Vac Operation Guide</a></li>
+      <li><a href="https://academy.pudutech.com/en/docs/PUDU-MT1-Max-Operation-Guide" target="_blank" rel="noopener">MT1 Max Operation Guide</a></li>
+      <li><a href="https://www.aap.com.au/aapreleases/cision20240910ae01186" target="_blank" rel="noopener">MT1 launch release, Sep 2024</a></li>
+      <li><a href="https://www.robotics247.com/article/pudu_robotics_launches_pudu_mt1_vac_ai_powered_robotic_sweeper_and_vacuum/industries" target="_blank" rel="noopener">Robotics 24/7 on the MT1 Vac, Jul 2025</a></li>
+      <li><a href="https://www.prnewswire.com/news-releases/pudu-robotics-launches-pudu-mt1-max-ai-powered-3d-perception-robotic-sweeper-for-complex-large-scale-environments-302534300.html" target="_blank" rel="noopener">MT1 Max launch release, Aug 2025</a></li>
+      <li><a href="https://antonrobots.com/pudu-mt1-max-review/" target="_blank" rel="noopener">Anton Robots MT1 Max desk review</a></li>
+      <li><a href="https://www.robotlab.com/store/pudu-mt1-robot/" target="_blank" rel="noopener">RobotLAB MT1 listing</a></li>
+      <li><a href="https://www.robotlab.com/store/pudu-mt1-vac/" target="_blank" rel="noopener">RobotLAB MT1 Vac listing</a></li>
+      <li><a href="https://www.robotlab.com/store/pudu-mt1-max/" target="_blank" rel="noopener">RobotLAB MT1 Max listing</a></li>
+      <li><a href="https://www.americansatellite.com/PUDU-MT1-AI-Powered-Robotic-Sweeper.htm" target="_blank" rel="noopener">American Satellite MT1 listing</a></li>
+      <li><a href="https://www.hospitalitynet.org/news/4132730/pudu-robotics-and-shenzhen-ctid-co-ltd-launch-the-worlds-first-full-scenario-robot-serviced-hotel-project" target="_blank" rel="noopener">Hospitality Net on the Pudu × Shenzhen CTID hotel</a></li>
+    </ul>
+    <h3 class="ms-h3"><i>A.3</i>Keenon C40 and C30</h3>
+    <ul class="fc-srcl">
+      <li><a href="https://www.keenon.com/en/product/C40" target="_blank" rel="noopener">Keenon C40 product page</a></li>
+      <li><a href="https://www.keenon.com/en/product/C30" target="_blank" rel="noopener">Keenon C30 product page</a></li>
+      <li><a href="https://aap.com.au/aapreleases/cision20250331ae53406" target="_blank" rel="noopener">Keenon launch release, 31 Mar 2025</a></li>
+      <li><a href="https://www.keenon.com/en/news/keenon-robotics-marks-european-debut-of-new-kleenbot-models-at-issa-pulire-2025" target="_blank" rel="noopener">Keenon at ISSA Pulire 2025</a></li>
+      <li><a href="https://www.issa.com/industry-news/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026/" target="_blank" rel="noopener">ISSA on Keenon at Interclean 2026</a></li>
+      <li><a href="https://www.prnewswire.com/news-releases/keenon-robotics-showcased-autonomous-cleaning-innovation-at-interclean-amsterdam-2026-302742234.html" target="_blank" rel="noopener">Keenon Interclean 2026 release</a></li>
+      <li><a href="https://www.keenon.com/en/news/double-the-strength-built-for-medium-and-large-spaces-keenon-robotics-unveils-cleaning-robot-c55" target="_blank" rel="noopener">Keenon C55 launch article</a></li>
+      <li><a href="https://antonrobots.com/keenon-kleenbot-c40-review/" target="_blank" rel="noopener">Anton Robots C40 desk review</a></li>
+      <li><a href="https://fieldbots.com/keenon-kleenon-c40-integration/" target="_blank" rel="noopener">FieldBots C40 integration page</a></li>
+      <li><a href="https://www.knoxlabs.com/products/keenon-kleenbot-c40-cleaning-robot" target="_blank" rel="noopener">Knoxlabs C40 listing</a></li>
+      <li><a href="https://proservbots.com/product/keenon-kleenbot-c40-robot/" target="_blank" rel="noopener">ProServBots C40 listing</a></li>
+      <li><a href="https://www.homery.com/product/keenon-c40" target="_blank" rel="noopener">Homery C40 listing</a></li>
+      <li><a href="https://bestrobotscompared.com/business-robots/keenon-kleenbot-c40/" target="_blank" rel="noopener">Best Robots Compared on the C40</a></li>
+      <li><a href="https://www.robotsusa.com/Keenon-Cleaning-Robots.htm" target="_blank" rel="noopener">RobotsUSA Keenon cleaning robots</a></li>
+      <li><a href="https://www.robotlab.com/manufacturers/keenon/" target="_blank" rel="noopener">RobotLAB Keenon page</a></li>
+      <li><a href="https://www.keenon.com/en/news/keenon-robotics-partners-with-shangri-la-group-to-create-the-worlds-first-smart-hotel-powered-by-universal-specialized-robots" target="_blank" rel="noopener">Keenon × Shangri-La hotel news</a></li>
+      <li><a href="https://www.pentagone-robotics.com/en/robots/keenon-c30" target="_blank" rel="noopener">Pentagone Robotics C30 page</a></li>
+      <li><a href="https://botirai.com/keenon-c30" target="_blank" rel="noopener">Botirai C30 page</a></li>
+      <li><a href="https://www.useabot.com/products/kleenbot-c30-by-keenon-robotics" target="_blank" rel="noopener">Useabot C30 listing</a></li>
+    </ul>
+    <h3 class="ms-h3"><i>A.4</i>Integration, security and regulation</h3>
+    <ul class="fc-srcl">
+      <li><a href="https://www.pudurobotics.com/about/news/64eeb7cb13fc2f004432c9cd" target="_blank" rel="noopener">PUDU Open Platform announcement, Aug 2023</a></li>
+      <li><a href="https://open.pudutech.com/en" target="_blank" rel="noopener">PUDU Open Platform portal</a></li>
+      <li><a href="https://discourse.openrobotics.org/t/robot-integration-623/44594" target="_blank" rel="noopener">Open Robotics Discourse: Pudu integration thread</a></li>
+      <li><a href="https://github.com/open-rmf/awesome_adapters" target="_blank" rel="noopener">Open-RMF awesome_adapters</a></li>
+      <li><a href="https://pentester.ca/blog/hacked-biggest-chinese-robot-company" target="_blank" rel="noopener">Researcher disclosure of the Pudu API flaw, Aug 2025</a></li>
+      <li><a href="https://www.theregister.com/2025/08/29/pudu_robots_hackable/" target="_blank" rel="noopener">The Register on the Pudu API flaw</a></li>
+      <li><a href="https://docs.fcc.gov/public/attachments/DA-26-786A1.pdf" target="_blank" rel="noopener">FCC Public Notice DA 26-786</a></li>
+      <li><a href="https://www.morganlewis.com/pubs/2026/08/fcc-adds-foreign-produced-advanced-robotic-devices-and-power-inverters-to-covered-list-opens-conditional-approval-process" target="_blank" rel="noopener">Morgan Lewis on DA 26-786 and DA 26-789</a></li>
+      <li><a href="https://www.techtimes.com/articles/330290/20261109/pudu-robotics-puts-one-ai-model-three-robots-fcc-has-banned-its-humanoid-quadruped-us-markets.htm" target="_blank" rel="noopener">Tech Times on Pudu and the FCC action, Nov 2026</a></li>
+    </ul>
+  </div>
+</section>
+
+</body></html>
