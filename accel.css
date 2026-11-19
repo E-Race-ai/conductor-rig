@@ -354,7 +354,7 @@ html[data-proj] .bf-top h3{font:600 28px/1.1 "Space Grotesk",Inter,sans-serif!im
 
 /* ===== Swim lanes ===== */
 .ar-lane{background:#070B16;border-bottom:1px solid #1C2640;position:relative;z-index:28}
-.ln-row{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.25fr repeat(4,1fr);gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));box-sizing:border-box}
+.ln-row{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));box-sizing:border-box}
 .ln-h{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:10px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 7%,#0B1222)}
 .ln-h small{font:600 10px/1.2 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
 .ln-h>b{font:600 17px/1.2 "Space Grotesk",Inter,sans-serif;color:#fff}
