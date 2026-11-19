@@ -12,7 +12,7 @@
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="3d/hotel-twin.js"></script>
 </head><body style="margin:0">
-<div class="ar-bar" role="banner" style="--c:#0055FF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Workstream"><a href="./" style="--c:#A3AEC6" class="on" aria-current="true"><i></i>Program</a><a href="conductor.html" style="--c:#4D8BFF"><i></i>The Brain</a><a href="field-unit.html" style="--c:#00C8FF"><i></i>Site Capture</a><a href="hotel-os.html" style="--c:#D4A65A"><i></i>Hotel.OS</a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
+<div class="ar-bar" role="banner" style="--c:#0055FF"><div class="ar-row"><a class="ar-wm" href="./" aria-label="Accelerate Robotics program home"><i></i><b>Accelerate Robotics</b></a><nav class="ar-switch" aria-label="Projects, in data-flow order"><a href="./" style="--c:#A3AEC6" class="on" aria-current="true"><i></i><span class="sw-t">Program</span></a><a href="field-unit.html" style="--c:#00C8FF"><i></i><span class="sw-t"><small>Capture</small>Site Capture</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="conductor.html" style="--c:#4D8BFF"><i></i><span class="sw-t"><small>Process · build</small>The Brain</span></a><span class="sw-arr" aria-hidden="true">→</span><a href="hotel-os.html" style="--c:#D4A65A"><i></i><span class="sw-t"><small>Operate</small>Hotel.OS</span></a></nav><span class="ar-exp">link stops working Fri, Nov 20, 7:00 PM ET</span></div></div>
 <style>
 .hx{max-width:1180px;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 72px max(16px,env(safe-area-inset-left,0px))}
 .hx-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px}
@@ -119,6 +119,13 @@
 .sec-h{margin-top:44px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .sec-h h2{font:600 24px/1.2 var(--head)!important;margin:0!important;letter-spacing:-.015em!important}
 .sec-h p{margin:0;color:var(--dim);font-size:14px}
+.sm{margin-top:16px;border:1px solid var(--line);background:#080D1A;border-radius:3px;overflow:hidden}
+.sm-sc{overflow-x:auto}.sm-sc svg{display:block;width:100%;min-width:760px;height:auto}
+.sm-node:hover rect:first-child{fill:#121C35}
+.sm-edge text{text-decoration:underline;text-decoration-color:#3A4A70;text-underline-offset:3px}.sm-edge:hover text{fill:#fff}
+.sm-leg{display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 16px;border-top:1px solid var(--line);font:500 12px/1.3 var(--mono);color:var(--dim)}
+.sm-leg span::before{content:"";display:inline-block;width:14px;height:2px;background:var(--c);margin-right:8px;vertical-align:4px}
+.sm-leg em{font-style:normal;color:var(--faint);margin-left:auto}
 </style>
 
 <main class="hx" id="top">
@@ -187,30 +194,23 @@
   </div>
   <p class="pipe-cap">Estimates (est.) are planning figures from the program research; they are replaced by measured values at the G1 pilot.</p>
 
-<div class="sec-h"><h2>Workstreams</h2><p>One team, three specifications. Capture builds the model, Hotel.OS runs the building, the Brain builds the software.</p></div>
-  <div class="prj">
-    <section class="pj con" aria-labelledby="pj1">
-      <div class="pj-h"><span class="id">PRJ-01 · THE BRAIN</span><span class="st"><i></i>Parts decided · ordering</span></div>
-      <h2 id="pj1">The Brain</h2>
-      <div class="sub">Agentic engineering platform · CD-SYS-001</div>
-      <p class="purpose">The company's controlled environment for agentic software engineering: central context brain, per-unit agent sandboxes, a model router that keeps confidential data on local compute, review gates and a full audit trail. Runs on a single-socket AMD EPYC 9175F node (16 Zen 5 cores, 128 GB ECC DDR5, RTX 5070 Ti, 15.36 TB U.3 NVMe), which also processes Site Capture jobs.</p>
-      <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
-      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
-      <div class="specs">
-        <div><b>16<small>C</small></b><span>EPYC 9175F</span></div>
-        <div><b>128<small>GB</small></b><span>DDR5 ECC</span></div>
-        <div><b>16<small>GB</small></b><span>VRAM, 5070 Ti</span></div>
-        <div><b>15.36<small>TB</small></b><span>U.3 NVMe</span></div>
-      </div>
-      <table class="kv">
-        <tr><th>Platform</th><td><span class="m">EPYC 9175F · ASRock Rack TURIND8X-2T · SP5</span></td></tr>
-        <tr><th>Budget</th><td><span class="m">≈ $14,037</span> all-in <small>(Micro Center $9,063 incl. tax + Amazon drives ≈ $4,974)</small></td></tr>
-        <tr><th>Next gate</th><td>G0: EPS check (board 3× EPS vs PSU 2× EPS cables) + order before the price guarantee ends Thu Nov 19. Then G2: NAS ≥ 40 TB before the first client capture.</td></tr>
-        <tr><th>Team</th><td>Accelerate program team</td></tr>
-      </table>
-      <div class="links"><a class="p" href="conductor.html">Open The Brain →</a><a href="conductor.html#role">Operating model</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
-    </section>
+<div class="sec-h" id="map"><h2>How the projects connect</h2><p>Three separate projects, one loop: each one’s output is the next one’s input. Click a project or a hand-off.</p></div>
+  <div class="sm"><div class="sm-sc"><svg viewBox="0 0 1180 430" role="img" aria-label="System map: Site Capture feeds The Brain and Hotel.OS; The Brain feeds Hotel.OS; Hotel.OS feeds back to both" font-family="IBM Plex Mono,monospace">
+<defs><marker id="sm-a-00C8FF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00C8FF"/></marker><marker id="sm-a-4D8BFF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D8BFF"/></marker><marker id="sm-a-D4A65A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D4A65A"/></marker><pattern id="smg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#111A30"/></pattern></defs>
+<rect width="1180" height="430" fill="url(#smg)"/>
+<path id="sme1" d="M280,190 L465,190" fill="none" stroke="#00C8FF" stroke-width="2" opacity=".85" marker-end="url(#sm-a-00C8FF)"/><circle r="4.5" fill="#00C8FF"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#sme1"/></animateMotion></circle><a href="conductor.html#pipe" class="sm-edge"><text x="372" y="178" fill="#DDE4F2" font-size="12" text-anchor="middle">raw LiDAR · 360° + 4K</text></a>
+<path id="sme2" d="M715,190 L900,190" fill="none" stroke="#4D8BFF" stroke-width="2" opacity=".85" marker-end="url(#sm-a-4D8BFF)"/><circle r="4.5" fill="#4D8BFF"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#sme2"/></animateMotion></circle><a href="hotel-os.html#twin" class="sm-edge"><text x="807" y="178" fill="#DDE4F2" font-size="12" text-anchor="middle">twin T2–T4 · software</text></a>
+<path id="sme3" d="M155,150 C155,40 1025,40 1025,146" fill="none" stroke="#00C8FF" stroke-width="2" opacity=".85" marker-end="url(#sm-a-00C8FF)"/><circle r="4.5" fill="#00C8FF"><animateMotion dur="5.5s" repeatCount="indefinite"><mpath href="#sme3"/></animateMotion></circle><a href="hotel-os.html#walk" class="sm-edge"><text x="590" y="58" fill="#DDE4F2" font-size="12" text-anchor="middle">T1 registered capture + walkthrough imagery → Hotel.OS</text></a>
+<path id="sme4" d="M900,240 L715,240" fill="none" stroke="#D4A65A" stroke-width="2" stroke-dasharray="6 5" opacity=".85" marker-end="url(#sm-a-D4A65A)"/><circle r="4.5" fill="#D4A65A"><animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#sme4"/></animateMotion></circle><a href="conductor.html#role" class="sm-edge"><text x="807" y="262" fill="#DDE4F2" font-size="12" text-anchor="middle">events · corrections</text></a>
+<path id="sme5" d="M1025,274 C1025,390 155,390 155,278" fill="none" stroke="#D4A65A" stroke-width="2" stroke-dasharray="6 5" opacity=".85" marker-end="url(#sm-a-D4A65A)"/><circle r="4.5" fill="#D4A65A"><animateMotion dur="5.5s" repeatCount="indefinite"><mpath href="#sme5"/></animateMotion></circle><a href="field-unit.html#conops" class="sm-edge"><text x="590" y="405" fill="#DDE4F2" font-size="12" text-anchor="middle">re-capture requests for changed zones → Site Capture</text></a>
+<a href="field-unit.html" class="sm-node"><rect x="30" y="150" width="250" height="124" rx="14" fill="#0B1222" stroke="#00C8FF" stroke-width="2"/><rect x="30" y="150" width="250" height="4" rx="2" fill="#00C8FF"/><text x="50" y="182" fill="#00C8FF" font-size="11" letter-spacing="1.3">PRJ-02 · CAPTURE</text><text x="50" y="214" fill="#fff" font-size="24" font-family="Space Grotesk,Inter,sans-serif" font-weight="600">Site Capture</text><text x="50" y="242" fill="#A3AEC6" font-size="11.5">Go2 X · LiDAR · 360° + 4K</text><text x="260" y="214" fill="#00C8FF" font-size="18" text-anchor="end">→</text></a>
+<a href="conductor.html" class="sm-node"><rect x="465" y="150" width="250" height="124" rx="14" fill="#0B1222" stroke="#4D8BFF" stroke-width="2"/><rect x="465" y="150" width="250" height="4" rx="2" fill="#4D8BFF"/><text x="485" y="182" fill="#4D8BFF" font-size="11" letter-spacing="1.3">PRJ-01 · PROCESS · BUILD</text><text x="485" y="214" fill="#fff" font-size="24" font-family="Space Grotesk,Inter,sans-serif" font-weight="600">The Brain</text><text x="485" y="242" fill="#A3AEC6" font-size="11.5">EPYC · agents · SLAM · local AI</text><text x="695" y="214" fill="#4D8BFF" font-size="18" text-anchor="end">→</text></a>
+<a href="hotel-os.html" class="sm-node"><rect x="900" y="150" width="250" height="124" rx="14" fill="#0B1222" stroke="#D4A65A" stroke-width="2"/><rect x="900" y="150" width="250" height="4" rx="2" fill="#D4A65A"/><text x="920" y="182" fill="#D4A65A" font-size="11" letter-spacing="1.3">PRJ-03 · OPERATE</text><text x="920" y="214" fill="#fff" font-size="24" font-family="Space Grotesk,Inter,sans-serif" font-weight="600">Hotel.OS</text><text x="920" y="242" fill="#A3AEC6" font-size="11.5">twin · tasks · robots · GM view</text><text x="1130" y="214" fill="#D4A65A" font-size="18" text-anchor="end">→</text></a>
+</svg></div>
+    <div class="sm-leg"><span style="--c:#00C8FF">Capture data</span><span style="--c:#4D8BFF">Processed twin + software</span><span style="--c:#D4A65A">Feedback from operations</span><em>Solid: forward flow · dashed: feedback</em></div></div>
 
+  <div class="sec-h"><h2>Workstreams</h2><p>In flow order. One team, three specifications.</p></div>
+  <div class="prj">
     <section class="pj fu" aria-labelledby="pj2">
       <div class="pj-h"><span class="id">PRJ-02 · SITE CAPTURE</span><span class="st"><i></i>Gen-0 validation</span></div>
       <h2 id="pj2">Accelerate Site Capture</h2>
@@ -232,6 +232,28 @@
         <tr><th>Team</th><td>Accelerate program team</td></tr>
       </table>
       <div class="links"><a class="p" href="field-unit.html">Open Site Capture →</a><a href="field-unit.html#arch">Architecture</a><a href="fu-build-plan.html">Build plan</a><a href="field-unit-research.html">Research</a></div>
+    </section>
+
+    <section class="pj con" aria-labelledby="pj1">
+      <div class="pj-h"><span class="id">PRJ-01 · THE BRAIN</span><span class="st"><i></i>Parts decided · ordering</span></div>
+      <h2 id="pj1">The Brain</h2>
+      <div class="sub">Agentic engineering platform · CD-SYS-001</div>
+      <p class="purpose">The company's controlled environment for agentic software engineering: central context brain, per-unit agent sandboxes, a model router that keeps confidential data on local compute, review gates and a full audit trail. Runs on a single-socket AMD EPYC 9175F node (16 Zen 5 cores, 128 GB ECC DDR5, RTX 5070 Ti, 15.36 TB U.3 NVMe), which also processes Site Capture jobs.</p>
+      <figure><img src="img/a-cpu.jpg" alt="AMD EPYC 9005 series processor" loading="lazy"><figcaption>Fig. 1 — AMD EPYC 9005 series (Turin), the selected CPU family. Source: AMD.</figcaption></figure>
+      <div class="phase" aria-label="Phase"><div class="done"><b>Research</b>Nov 15</div><div class="done"><b>Decided</b>Nov 17</div><div class="now"><b>Ordering</b>by Nov 19</div><div><b>Build</b>next</div></div>
+      <div class="specs">
+        <div><b>16<small>C</small></b><span>EPYC 9175F</span></div>
+        <div><b>128<small>GB</small></b><span>DDR5 ECC</span></div>
+        <div><b>16<small>GB</small></b><span>VRAM, 5070 Ti</span></div>
+        <div><b>15.36<small>TB</small></b><span>U.3 NVMe</span></div>
+      </div>
+      <table class="kv">
+        <tr><th>Platform</th><td><span class="m">EPYC 9175F · ASRock Rack TURIND8X-2T · SP5</span></td></tr>
+        <tr><th>Budget</th><td><span class="m">≈ $14,037</span> all-in <small>(Micro Center $9,063 incl. tax + Amazon drives ≈ $4,974)</small></td></tr>
+        <tr><th>Next gate</th><td>G0: EPS check (board 3× EPS vs PSU 2× EPS cables) + order before the price guarantee ends Thu Nov 19. Then G2: NAS ≥ 40 TB before the first client capture.</td></tr>
+        <tr><th>Team</th><td>Accelerate program team</td></tr>
+      </table>
+      <div class="links"><a class="p" href="conductor.html">Open The Brain →</a><a href="conductor.html#role">Operating model</a><a href="build-book.html">Build book</a><a href="research.html">Research</a></div>
     </section>
 
     <section class="pj os" aria-labelledby="pj3">
@@ -278,11 +300,7 @@
     <div><b>Privacy in the pipeline</b><span>Occupied areas excluded by schedule. People in 360° imagery blurred before delivery (target). Imagery is a visual layer, never a measurement source.</span></div>
   </div>
 
-  <aside class="intg" id="meet" aria-label="Integration: processing pipeline">
-    <span class="hx-code">Integration · Capture → Brain → Fleet</span>
-    <div><b>Interface PRJ-02 → PRJ-01.</b> Site Capture logs raw LiDAR (MCAP), 360° and 4K video on site with no network. The Brain ingests it, runs SLAM optimisation and segment merging, registers to survey control, colourises and publishes the deliverables — then the same maps carry the fleet. The hand-off is verified files, not a live link.
-      <div class="if">Interface: raw MCAP + .insv / video files + control coordinates → The Brain NVMe → NAS (40–60 TB, planned). Later: live fleet orchestration over the property network, after client IT approval.</div></div>
-  </aside>
+  
 
   <footer class="hx-foot">Accelerate Robotics · Miami, FL · AR-PGM-001 engineering program record — not a public offering. Product photos: AMD; ASUS; ASRock Rack (via Scan Computers); CDW; Antec; NVIDIA; Unitree Robotics; AgileX Robotics; Hesai; TheRobotStudio; Wikimedia Commons contributors (see each workstream's credits). Shown for identification; trademarks belong to their owners.</footer>
 </main>

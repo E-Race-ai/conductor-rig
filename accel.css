@@ -285,3 +285,41 @@ html[data-proj] .ui-h{font:600 clamp(30px,3.6vw,44px)/1.05 "Space Grotesk",Inter
 .tb-col h6{font:600 11.5px/1 Inter!important;color:#A3AEC6;display:flex;justify-content:space-between;margin-bottom:3px!important}.tb-col h6 em{font-style:normal;color:#6F7B97}
 .tb-card{padding:9px;border-radius:8px;background:#0E1628;border-top:2px solid var(--c)}.tb-card b{display:block;font:600 11px/1.2 "IBM Plex Mono",monospace}.tb-card span{font-size:11.5px;color:#A3AEC6}
 @media (max-width:700px){.ui-tab .dev-screen{width:340px;height:auto}.tb-board{grid-template-columns:1fr 1fr}.tb-top span:not(.tb-k){display:none}}
+
+/* ===== Flow navigation: projects in data-flow order ===== */
+.ar-switch{align-items:center}
+.ar-switch a{min-height:44px}
+.sw-t{display:flex;flex-direction:column;line-height:1.1}
+.sw-t small{font:600 9.5px/1.2 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--c);opacity:.95}
+.ar-switch a.on .sw-t small{color:#04101F;opacity:.7}
+.sw-arr{color:#4A5778;font:500 14px/1 Inter;padding:0 1px}
+@media (max-width:900px){.sw-arr{display:none}}
+@media (max-width:520px){.ar-switch{grid-template-columns:1fr 1fr}.sw-t small{font-size:8.5px}}
+/* upstream / downstream rail on each project overview */
+.ar-flow{background:linear-gradient(180deg,#060A14,#080D1A);border-bottom:1px solid #1C2640;position:relative;z-index:29}
+.fl-row{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:stretch;padding:12px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));box-sizing:border-box}
+.fl-side{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fl-side>b{font:600 10px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#6F7B97;margin-bottom:2px}
+.fl-out>b{text-align:right}
+.fl-me{align-self:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 22px;border-radius:12px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 10%,#0B1222);position:relative;min-width:150px;text-align:center}
+.fl-me small{font:600 10px/1.2 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.fl-me b{font:600 19px/1.2 "Space Grotesk",Inter,sans-serif;color:#fff;margin-top:3px}
+.fl-me::before,.fl-me::after{content:"";position:absolute;top:50%;width:14px;height:1.5px;background:#3A4A70}
+.fl-me::before{right:100%}.fl-me::after{left:100%}
+html[data-proj] a.fl-chip{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:9px;background:#0B1222;border:1px solid #24304F;text-decoration:none!important;color:#DDE4F2!important;transition:border-color .15s,background .15s;position:relative}
+.fl-chip.in{border-left:3px solid var(--c)}
+.fl-chip.out{border-right:3px solid var(--c);text-align:right}
+html[data-proj] a.fl-chip:hover{border-color:var(--c);background:#101A33}
+.fl-chip small{font:600 10px/1.2 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.fl-chip span{font-size:12.5px;line-height:1.35}
+.fl-chip.in small::before{content:"← "}.fl-chip.out small::after{content:" →"}
+.fl-side:not(:has(.fl-chip))::after{content:"Property access · survey control network";font-size:12.5px;color:#6F7B97;padding:8px 12px;border:1px dashed #24304F;border-radius:9px}
+@media (max-width:900px){
+  .fl-row{grid-template-columns:1fr;gap:10px}
+  .fl-me{order:-1;flex-direction:row;gap:10px;justify-content:flex-start;padding:10px 14px}.fl-me b{margin:0;font-size:16px}
+  .fl-me::before,.fl-me::after{display:none}
+  .fl-out>b{text-align:left}.fl-chip.out{text-align:left;border-right:1px solid #24304F;border-left:3px solid var(--c)}
+}
+/* end-of-page flow footer */
+.ar-next .g.flow{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.ar-next a p{margin:2px 0 0;font-size:13px;color:#A3AEC6;line-height:1.4}

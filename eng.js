@@ -35,11 +35,20 @@
     /* end of page: big "where next" buttons built from the header nav */
     var cur = D.querySelector('.ar-tabs a[aria-current]'), tabs = [].slice.call(D.querySelectorAll('.ar-tabs a')), sw = [].slice.call(D.querySelectorAll('.ar-switch a'));
     var nx = [], wsName = { con: 'The Brain', fu: 'Site Capture', os: 'Hotel.OS' }[proj];
+    var flows = [].slice.call(D.querySelectorAll('.ar-flow a.fl-chip'));
+    if (flows.length) {
+      var fb = D.createElement('nav'); fb.className = 'ar-next'; fb.setAttribute('aria-label', 'Connected projects');
+      fb.innerHTML = '<h2>How this project connects</h2><div class="g flow"></div>';
+      flows.forEach(function(c){ var a = D.createElement('a'); a.href = c.getAttribute('href'); a.style.setProperty('--c', c.style.getPropertyValue('--c'));
+        a.innerHTML = '<small></small><b></b><p></p>'; var sm = c.querySelector('small').textContent.split(' · ');
+        a.firstChild.textContent = sm[0]; a.children[1].textContent = sm[1]; a.lastChild.textContent = c.querySelector('span').textContent; fb.lastChild.appendChild(a); });
+      var ft0 = D.querySelector('body > footer, footer.foot, .wrap > footer'); if (ft0 && ft0.parentNode) ft0.parentNode.insertBefore(fb, ft0); else D.body.appendChild(fb);
+    }
     tabs.forEach(function(a){ if (a !== cur) nx.push([wsName, a.textContent, a.getAttribute('href'), getComputedStyle(D.querySelector('.ar-bar')).getPropertyValue('--c')]); });
-    sw.forEach(function(a){ if (!a.classList.contains('on')) nx.push([a.textContent === 'Program' ? 'Accelerate Robotics' : 'Other workstream', a.textContent === 'Program' ? 'Program home' : a.textContent, a.getAttribute('href'), a.style.getPropertyValue('--c')]); });
+    sw.forEach(function(a){ if (!a.classList.contains('on')) { var t = a.querySelector('.sw-t'), sm = t && t.querySelector('small'), nm = t ? t.lastChild.textContent : a.textContent; nx.push([sm ? sm.textContent : 'Accelerate Robotics', nm === 'Program' ? 'Program home' : nm, a.getAttribute('href'), a.style.getPropertyValue('--c')]); } });
     if (nx.length && proj !== 'hub' && D.querySelector('.ar-bar')) {
       var box = D.createElement('nav'); box.className = 'ar-next'; box.id = 'next'; box.setAttribute('aria-label', 'Related documents');
-      box.innerHTML = '<h2>Related documents</h2><div class="g"></div>';
+      box.innerHTML = '<h2>' + (flows.length ? 'More in this program' : 'Related documents') + '</h2><div class="g"></div>';
       nx.forEach(function(n){ var a = D.createElement('a'); a.href = n[2]; a.style.setProperty('--c', n[3] || '#4D8BFF'); a.innerHTML = '<small></small><b></b>'; a.firstChild.textContent = n[0]; a.lastChild.textContent = n[1]; box.lastChild.appendChild(a); });
       var ft = D.querySelector('body > footer, footer.foot, .wrap > footer'); if (ft && ft.parentNode) ft.parentNode.insertBefore(box, ft); else D.body.appendChild(box);
     }
