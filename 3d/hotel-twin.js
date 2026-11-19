@@ -4,13 +4,18 @@
    Auto-mounts every [data-hotel-twin] element. */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const C = { bg: 0x070B16, cloudLo: 0x0B3D91, cloudHi: 0x00C8FF, wall: 0x7FA6FF, slab: 0x0C1324, gold: 0xD4A65A,
   outlet: 0xD4A65A, switch: 0xEEF2FA, fixture: 0xFFE2A8, safety: 0xFF6B5E, robot: 0x00C8FF, hk: 0x2FD39A, sec: 0xFF6B5E, fac: 0xD4A65A, rob: 0x00C8FF, staff: 0xEEF2FA };
 
 /* ---------- building definition (metres) ---------- */
-const NF = 6, FH = 5.2, WH = 3.0, LX = 32, CZ = 1.5, DZ = 9.5;   // floors, exploded floor pitch, wall height, half length, corridor half width, half depth
+const PH = 6.5, PX = 44, PZ = 16;   // podium: lobby + storefronts
+const NF = 8, FH = 5.2, WH = 3.0, LX = 32, CZ = 1.5, DZ = 9.5;   // floors, exploded floor pitch, wall height, half length, corridor half width, half depth
 function plan() {
   const walls = [];        // [x1,z1,x2,z2]
   const rooms = [];        // {x0,x1,z0,z1,side,kind}
@@ -161,6 +166,38 @@ function build(scene, P) {
     const p = new THREE.Points(g, new THREE.PointsMaterial({ color: C.staff, size: 9, sizeAttenuation: false, map: dot, transparent: true, depthWrite: false, opacity: 1 }));
     L.ops[f].add(p); staff.push(p);
   });
+  /* podium (index NF): double-height lobby, storefronts on the street side, two hotel receptions */
+  {
+    const pw = [[-PX, -PZ, PX, -PZ], [-PX, PZ, PX, PZ], [-PX, -PZ, -PX, PZ], [PX, -PZ, PX, PZ], [-PX + 4, 9, PX - 4, 9]];
+    for (let x = -PX + 4; x <= PX - 4; x += 8) pw.push([x, 9, x, PZ]);
+    [[-14, -4], [8, -4]].forEach(([x, z]) => pw.push([x, z, x + 7, z], [x + 7, z, x + 7, z + 1.2], [x + 7, z + 1.2, x, z + 1.2], [x, z + 1.2, x, z]));
+    const yb = -PH, pos = [], col = [], lp = [];
+    pw.forEach(([x1, z1, x2, z2]) => {
+      const len = Math.hypot(x2 - x1, z2 - z1), n = Math.floor(len * PH * 6);
+      for (let i = 0; i < n; i++) { const t = R(), y = R() * PH; pos.push(x1 + (x2 - x1) * t, yb + y, z1 + (z2 - z1) * t); tmp.copy(cLo).lerp(cHi, y / PH * .85 + R() * .15); const k = .55 + R() * .45; col.push(tmp.r * k, tmp.g * k, tmp.b * k); }
+      lp.push(x1, yb, z1, x2, yb, z2, x1, yb + PH, z1, x2, yb + PH, z2, x1, yb, z1, x1, yb + PH, z1);
+    });
+    for (let i = 0; i < 2 * PX * 2 * PZ * 1.6; i++) { pos.push((R() * 2 - 1) * PX, yb, (R() * 2 - 1) * PZ); tmp.copy(cLo); const k = .4 + R() * .4; col.push(tmp.r * k, tmp.g * k, tmp.b * k); }
+    stats.points += pos.length / 3; stats.walls += pw.length;
+    ['cloud', 'traj', 'model', 'objects', 'ops'].forEach(n => { const g = new THREE.Group(); g.userData.y0 = yb; L[n].push(g); });
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+    L.cloud[NF].add(new THREE.Points(g, new THREE.PointsMaterial({ size: .11, vertexColors: true, map: dot, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 1 })));
+    const sl = new THREE.Mesh(new THREE.BoxGeometry(2 * PX, .25, 2 * PZ), new THREE.MeshBasicMaterial({ color: C.slab, transparent: true, opacity: .95 })); sl.position.y = yb - .13; L.model[NF].add(sl);
+    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(lp, 3));
+    L.model[NF].add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: C.wall, transparent: true, opacity: .9 })));
+    const sf = [], fx = [], sw = [];
+    for (let x = -PX + 8; x <= PX - 4; x += 8) { sf.push([x - 4, yb + .3, 9.05], [x - 2, yb + .3, PZ - .05]); fx.push([x - 4, yb + PH - .05, 12.5], [x - 4, yb + PH - .05, 6]); sw.push([x - 1, yb + 1.2, 9.05]); }
+    for (let x = -PX + 4; x < PX; x += 6) fx.push([x, yb + PH - .05, -6], [x, yb + PH - .05, 0]);
+    [[C.outlet, 9, sf], [C.fixture, 7, fx], [C.switch, 8, sw]].forEach(([c, sz, arr]) => {
+      stats[c === C.outlet ? 'outlets' : c === C.fixture ? 'fixtures' : 'switches'] += arr.length;
+      const og = new THREE.BufferGeometry(); og.setAttribute('position', new THREE.Float32BufferAttribute(arr.flat(), 3));
+      L.objects[NF].add(new THREE.Points(og, new THREE.PointsMaterial({ color: c, size: sz, sizeAttenuation: false, map: dot, transparent: true, depthWrite: false, opacity: 1 })));
+    });
+    // operator zones (T5): retail strip, operator A + B receptions; tower floors tinted by operator, residential excluded
+    const zone = (x0, x1, z0, z1, y, c, o) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: o, side: THREE.DoubleSide, depthWrite: false })); m.rotation.x = -Math.PI / 2; m.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); return m; };
+    L.ops[NF].add(zone(-PX, PX, 9, PZ, yb + .03, 0xB07CFF, .22), zone(-PX, 0, -PZ, 9, yb + .03, C.wall, .14), zone(0, PX, -PZ, 9, yb + .03, C.gold, .14));
+    for (let f = 0; f < NF; f++) { const c = f < 3 ? C.wall : f < 5 ? C.gold : 0x6F7B97; L.ops[f].add(zone(-LX, LX, -DZ, DZ, f * FH + .02, c, f < 5 ? .13 : .07)); }
+  }
   Object.values(L).forEach(arr => arr.forEach(g => scene.add(g)));
   return { L, stats, tasks, robots, staff };
 }
@@ -171,7 +208,7 @@ const MODES = {
   t3: { k: 'T3', name: 'Object layer', d: 'Every outlet, switch, fixture and life-safety device, located in 3D and given an asset ID.', o: { cloud: .06, traj: 0, model: .55, objects: 1, ops: 0 } },
   t5: { k: 'T5', name: 'Live operations', d: 'Tasks pinned to objects, robots on the route graph, staff on shift — one map for every department.', o: { cloud: 0, traj: 0, model: .5, objects: .3, ops: 1 } },
 };
-MODES.walk = { k: 'WALK', name: 'Walk the property', d: 'First-person walk through floor 3: 360° imagery registered to the LiDAR, so every pixel resolves to a 3D point, a room and an asset.', o: { cloud: .35, traj: 0, model: .8, objects: 1, ops: 1 } };
+MODES.walk = { k: 'WALK', name: 'Walk the property', d: 'First-person walk through floor 4: 360° imagery registered to the LiDAR, so every pixel resolves to a 3D point, a room and an asset.', o: { cloud: .35, traj: 0, model: .8, objects: 1, ops: 1 } };
 const ORDER = ['t1', 't2', 't3', 't5', 'walk'];
 
 function mount(el) {
@@ -181,16 +218,16 @@ function mount(el) {
   catch (e) { el.classList.add('ht-fail'); return null; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setClearColor(C.bg, 1);
   const stage = el.querySelector('.ht-stage') || el; stage.appendChild(renderer.domElement);
-  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(C.bg, 90, 190);
+  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(C.bg, 110, 230);
   const cam = new THREE.PerspectiveCamera(32, 1, .5, 600);
   const narrow = () => el.clientWidth < 640;
-  const homePos = new THREE.Vector3(), homeTgt = new THREE.Vector3(0, (NF - 1) * FH / 2, 0);
-  const home = () => { cam.position.set(narrow() ? -80 : -56, narrow() ? 56 : 40, narrow() ? 90 : 62); };
+  const homePos = new THREE.Vector3(), homeTgt = new THREE.Vector3(0, (NF - 1) * FH / 2 - PH / 2, 0);
+  const home = () => { cam.position.set(narrow() ? -112 : -86, narrow() ? 64 : 46, narrow() ? 124 : 96); };
   home();
-  homePos.copy(cam.position); const ctl = new OrbitControls(cam, renderer.domElement); if (matchMedia('(pointer: coarse)').matches && narrow()) { ctl.enabled = false; renderer.domElement.style.touchAction = 'pan-y'; } ctl.target.set(0, (NF - 1) * FH / 2, 0); ctl.enableDamping = true; ctl.dampingFactor = .08;
+  homePos.copy(cam.position); const ctl = new OrbitControls(cam, renderer.domElement); if (matchMedia('(pointer: coarse)').matches && narrow()) { ctl.enabled = false; renderer.domElement.style.touchAction = 'pan-y'; } ctl.target.copy(homeTgt); ctl.enableDamping = true; ctl.dampingFactor = .08;
   ctl.minDistance = 25; ctl.maxDistance = 220; ctl.maxPolarAngle = Math.PI * .49; ctl.autoRotate = !REDUCED; ctl.autoRotateSpeed = .35;
   // ground grid
-  const grid = new THREE.GridHelper(220, 88, 0x1C2640, 0x111A30); grid.position.y = -.25; grid.material.transparent = true; grid.material.opacity = .55; scene.add(grid);
+  const grid = new THREE.GridHelper(220, 88, 0x1C2640, 0x111A30); grid.position.y = -PH - .3; grid.material.transparent = true; grid.material.opacity = .55; scene.add(grid);
   const P = plan(), B = build(scene, P);
 
   // HUD
@@ -202,7 +239,7 @@ function mount(el) {
   if (tl) tl.innerHTML = B.tasks.map(t => `<li style="--c:#${new THREE.Color({ Facilities: C.fac, Housekeeping: C.hk, Security: C.sec, Robotics: C.rob }[t.d]).getHexString()}"><b>${t.id}</b><span>${t.d} · F${t.f + 1}</span><em>${t.t}</em></li>`).join('');
 
   const cur = {}; Object.keys(MODES.t1.o).forEach(k => (cur[k] = 0));
-  const grow = new Array(NF).fill(1); let scan = 1, walkT = 0, flyHome = false, prevMode = 't1'; const WALKF = 2;
+  const grow = new Array(NF + 1).fill(1); let scan = 1, walkT = 0, flyHome = false, prevMode = 't1'; const WALKF = 3;
   let mode = 't1', focus = -1, auto = !REDUCED, tAuto = 0, dogT = 0;
   const btns = [...el.querySelectorAll('[data-ht-mode]')], fbtns = [...el.querySelectorAll('[data-ht-floor]')], playBtn = $('[data-ht-play]'), bar = $('.ht-prog i');
   const setMode = (m, user) => {
@@ -222,7 +259,13 @@ function mount(el) {
   ctl.addEventListener('start', () => { ctl.autoRotate = false; });
   setMode('t1');
 
-  const resize = () => { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
+  let composer = null, bloom = null;
+  if (!matchMedia('(pointer: coarse)').matches && !/nobloom/.test(location.search)) {
+    try { composer = new EffectComposer(renderer); composer.addPass(new RenderPass(scene, cam));
+      bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), .5, .35, .32); composer.addPass(bloom); composer.addPass(new OutputPass()); } catch (e) { composer = null; }
+    if (composer) { const lc = new THREE.Color(C.bg).convertSRGBToLinear(); renderer.setClearColor(lc, 1); }
+  }
+  const resize = () => { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); if (composer) { composer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); composer.setSize(w, h); } };
   new ResizeObserver(resize).observe(stage); resize();
 
   let vis = true, last = performance.now(), raf = 0;
@@ -254,9 +297,9 @@ function mount(el) {
     const dp = curve.getPointAt(dogT); dog.position.copy(dp); dog.position.y += .2; dog.material.opacity = cur.traj; dogHalo.material.opacity = cur.traj * .8; dog.visible = cur.traj > .02;
     sweeps.forEach(r => { const ph = ((t * .45 + r.userData.o) % 1); r.position.copy(dog.position); r.position.y -= .15; r.scale.setScalar(.5 + ph * 9); r.material.opacity = (1 - ph) * .7 * cur.traj; r.visible = cur.traj > .02; });
     // floors assemble (T2) and the cloud fills in like a live scan (T1)
-    if (scan < 1) { scan = Math.min(1, scan + dt / 2.6); B.L.cloud.forEach(g => g.children.forEach(pt => { const n = pt.geometry.attributes.position.count; pt.geometry.setDrawRange(0, Math.floor(n * (1 - Math.pow(1 - scan, 2)))); })); }
+    if (scan < 1) { scan = Math.min(1, scan + dt / 2.6); B.L.cloud.forEach(g => g.children.forEach(pt => { if (!pt.geometry.attributes.position) return; const n = pt.geometry.attributes.position.count; pt.geometry.setDrawRange(0, Math.floor(n * (1 - Math.pow(1 - scan, 2)))); })); }
     B.L.model.forEach((g, f) => { if (grow[f] < 1) { const d = f * .14; grow[f] = Math.min(1, grow[f] + dt / .9 * (mode === 't2' && (tAuto > d || !auto) ? 1 : 0)); }
-      const e = 1 - Math.pow(1 - grow[f], 3), y0 = f * FH; g.scale.y = Math.max(.001, e); g.position.y = y0 * (1 - e); });
+      const e = 1 - Math.pow(1 - grow[f], 3), y0 = g.userData.y0 ?? f * FH; g.scale.y = Math.max(.001, e); g.position.y = y0 * (1 - e); });
     // robots
     B.robots.forEach(r => {
       const s = (Math.sin((t + r.ph) * r.speed * .25) + 1) / 2; r.m.position.set(r.x0 + (r.x1 - r.x0) * s, r.f * FH + .45, r.z);
@@ -271,7 +314,8 @@ function mount(el) {
       if (flyHome) { const k3 = 1 - Math.pow(.03, dt); cam.position.lerp(homePos, k3); ctl.target.lerp(homeTgt, k3); if (cam.position.distanceTo(homePos) < .5) flyHome = false; }
       ctl.update();
     }
-    renderer.render(scene, cam);
+    if (bloom && /bloom0/.test(location.search)) bloom.strength = 0; else if (bloom) bloom.strength = ({ t1: .75, t2: .45, t3: .3, t5: .4, walk: .3 })[mode] ?? .4;
+    if (composer) composer.render(); else renderer.render(scene, cam);
     raf = requestAnimationFrame(loop);
   }
   raf = requestAnimationFrame(loop);
