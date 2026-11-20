@@ -94,7 +94,7 @@ function mount(root) {
   camera.position.set(74, 34, 92);
   const controls = new OrbitControls(camera, canvas);
   controls.target.copy(mid); controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = 14; controls.maxDistance = 190; controls.maxPolarAngle = Math.PI * .49;
-  controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .35;
+  controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .2;
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), .35, .3, .7); composer.addPass(bloom);
@@ -181,7 +181,7 @@ function mount(root) {
   const pathL = new THREE.Line(new THREE.BufferGeometry(), pathM); pathL.frustumCulled = false; scene.add(pathL);
 
   /* ---------- simulation state ---------- */
-  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 4, paused: false, sel: fleet[0], follow: false, tour: true, tourT: 0, tourI: 0,
+  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 1, paused: false, sel: fleet[0], follow: false, tour: true, tourT: 0, tourI: 0,
     deliveries: 37, delivTimes: [372, 405, 388, 512, 298, 446, 331, 690, 402, 365, 958, 420, 384, 451, 309, 377], lift: 52, base: 4180, log: [] };
   /* GM metrics. Assumptions (est.) are shown on the page next to the dashboards. */
   const EST = { rate: 22, delivMin: 12, lugMin: 15, linenMin: 20, m2h: 400, fleetMo: 12900, fleetN: 20, target: 900 };
@@ -329,7 +329,7 @@ function mount(root) {
       r.arrow.position.set(Math.sin(r.yaw) * 2.35, .08, Math.cos(r.yaw) * 2.35); r.arrow.rotation.set(Math.PI / 2, 0, -r.yaw); r.arrow.visible = r.speed > .05;
       const sel = r === S.sel; r.ring.scale.setScalar(sel ? 1.25 + Math.sin(time * 5) * .1 : 1);
       // LiDAR ping while moving
-      r.pingT += .016; const ph = (r.pingT % 1.6) / 1.6; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .28 : 0;
+      r.pingT += .016; const ph = (r.pingT % 2.8) / 2.8; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .18 : 0;
       // glowing trail
       const lp = r.trailPts[r.trailPts.length - 1];
       if (!lp || Math.hypot(lp.x - r.x, lp.z - r.z) > .5 || Math.abs(lp.y - y) > .3) { r.trailPts.push(new THREE.Vector3(r.x, y + .12, r.z)); if (r.trailPts.length > 48) r.trailPts.shift(); r.trail.geometry.dispose(); r.trail.geometry = new THREE.BufferGeometry().setFromPoints(r.trailPts.length > 1 ? r.trailPts : [r.trailPts[0], r.trailPts[0]]); }
@@ -496,7 +496,7 @@ function mount(root) {
     V('fleet').textContent = `${chg} charging · 0 faults`;
     const ex = exceptions(); V('att').textContent = ex.length; V('att').parentElement.classList.toggle('hot', ex.some(e => e.lv === 'amber'));
     V('atts').textContent = ex.length ? ex[0].id + ' · ' + ex[0].t.split(' · ')[0].toLowerCase() : 'nothing needs staff';
-    V('speed').textContent = S.paused ? 'simulated · paused' : `simulated · ${S.scale}× speed`;
+    V('speed').textContent = S.paused ? 'simulated · paused' : S.scale === 1 ? 'simulated · real time' : `simulated · ${S.scale}× speed`;
     /* needs attention */
     D('att').innerHTML = ex.length ? ex.map(e => `<li class="${e.lv}" style="--c:${e.c}"><b>${e.id}</b><span>${e.t}</span><em>${e.a}</em></li>`).join('')
       : '<li class="ok"><b>All clear</b><span>No robot needs a person right now. Exceptions appear here as they happen.</span><em></em></li>';
@@ -559,22 +559,22 @@ function mount(root) {
     const rdt = Math.min(.1, (now - last) / 1000); last = now;
     if (!S.paused) { const dt = rdt * S.scale, n = Math.ceil(dt / .2); for (let i = 0; i < n; i++) sim(dt / n); }
     if (S.tour) {
-      if (!S.tourAt) S.tourAt = now - 11000;
-      if (now - S.tourAt > 14000) {
+      if (!S.tourAt) S.tourAt = now - 19000;
+      if (now - S.tourAt > 22000) {
         S.tourAt = now;
         const score = o => (/LIFT/.test(o.mode) ? 3 : /DELIVER|DOOR/.test(o.mode) ? 2.5 : /CLEAN/.test(o.mode) ? 2 : /CHARG|IDLE/.test(o.mode) ? 0 : 1) + R();
         const cand = fleet.filter(o => o !== S.sel).sort((a, b) => score(b) - score(a));
-        select(cand[0], true, true); controls.autoRotate = !REDUCED; controls.autoRotateSpeed = 1.1;
+        select(cand[0], true, true); controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .35;
       }
     }
     const r = S.sel;
     if (S.follow) {
       const y = (r.liftY != null ? r.liftY : r.f) * FH;
-      const goal = new THREE.Vector3(r.x, y + 1, r.z), delta = goal.clone().sub(controls.target).multiplyScalar(Math.min(1, rdt * 2.5));
+      const goal = new THREE.Vector3(r.x, y + 1, r.z), delta = goal.clone().sub(controls.target).multiplyScalar(Math.min(1, rdt * 1.1));
       controls.target.add(delta); camera.position.add(delta);
-      const dist = camera.position.distanceTo(controls.target); if (dist > 46) camera.position.lerp(controls.target, Math.min(1, rdt * 1.5) * (1 - 40 / dist));
+      const dist = camera.position.distanceTo(controls.target); if (dist > 46) camera.position.lerp(controls.target, Math.min(1, rdt * .6) * (1 - 40 / dist));
     } else if (camGoal) {
-      camera.position.lerp(camGoal.pos, Math.min(1, rdt * 2)); controls.target.lerp(camGoal.tgt, Math.min(1, rdt * 2));
+      camera.position.lerp(camGoal.pos, Math.min(1, rdt * .9)); controls.target.lerp(camGoal.tgt, Math.min(1, rdt * .9));
       if (camera.position.distanceTo(camGoal.pos) < .5) camGoal = null;
     }
     controls.update();
@@ -627,7 +627,7 @@ function buildUI(root) {
             <button type="button" data-a="whole">Building</button>
             <button type="button" data-a="follow" aria-pressed="false">Follow</button>
             <span class="fl-sep"></span>
-            <button type="button" data-s="1" aria-pressed="false">1×</button><button type="button" data-s="4" aria-pressed="true">4×</button><button type="button" data-s="12" aria-pressed="false">12×</button>
+            <button type="button" data-s="1" aria-pressed="true">1×</button><button type="button" data-s="2" aria-pressed="false">2×</button><button type="button" data-s="4" aria-pressed="false">4×</button>
             <button type="button" data-a="pause" aria-pressed="false" aria-label="Pause">❚❚</button>
           </div>
           <div class="fl-cap"><small>Following</small><b></b><span></span><em></em></div>
