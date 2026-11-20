@@ -469,7 +469,7 @@ function mount(root) {
     ui.cap.querySelector('em').textContent = `${nice(r.mode)} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)} · battery ${Math.round(r.battery)}%`;
   }
   /* ---------- GM operations dashboards ---------- */
-  const C4 = { delivery: '#5FA8E8', luggage: '#C9A35C', linen: '#8F84D6', clean: '#5BBF8E' };
+  const C4 = { delivery: '#4FB8FF', luggage: '#D4A65A', linen: '#9B7BFF', clean: '#2FD39A' };
   const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
   function exceptions() {
     const out = [];
@@ -519,7 +519,7 @@ function mount(root) {
     let dd = '';
     [0, 5, 10, 15, 20].forEach(v => { const y = dB - v / dmax * (dB - 10); dd += `<line x1="26" x2="${dW}" y1="${y}" y2="${y}" stroke="#1A2236"/><text x="20" y="${y + 4}" text-anchor="end" class="ax">${v}</text>`; });
     dd += `<line x1="26" x2="${dW}" y1="${ty}" y2="${ty}" stroke="#D98C6A" stroke-dasharray="4 4"/><text x="${dW}" y="${ty - 5}" text-anchor="end" class="tg">target 15</text>`;
-    dt.forEach((v, i) => { const mm = Math.min(dmax, v / 60), hh = mm / dmax * (dB - 10); dd += `<rect x="${30 + i * bw2 + 2}" y="${dB - hh}" width="${bw2 - 4}" height="${hh}" fill="${v > EST.target ? '#D98C6A' : '#5FA8E8'}" opacity="${i === dt.length - 1 ? 1 : .8}"/>`; });
+    dt.forEach((v, i) => { const mm = Math.min(dmax, v / 60), hh = mm / dmax * (dB - 10); dd += `<rect x="${30 + i * bw2 + 2}" y="${dB - hh}" width="${bw2 - 4}" height="${hh}" fill="${v > EST.target ? '#FF6B5E' : '#4FB8FF'}" opacity="${i === dt.length - 1 ? 1 : .8}"/>`; });
     dd += `<text x="30" y="${dB + 22}" class="dl">median ${(dt.slice().sort((a, b) => a - b)[8] / 60).toFixed(1)} min · ${dt.filter(v => v > EST.target).length} over target</text>`;
     D('deliv').innerHTML = dd;
     /* requests by type */
@@ -541,7 +541,7 @@ function mount(root) {
     D('cards').innerHTML = fleet.map(r => `<div class="rc" style="--c:${r.k.c};--m:${MODEC(r.mode)}"><div class="rc-img">${IMG[r.model] ? `<img src="${IMG[r.model]}" alt="">` : '<svg viewBox="0 0 40 40"><rect x="11" y="5" width="18" height="26" rx="6"/><rect x="14" y="9" width="12" height="8" rx="2"/></svg>'}</div><div class="rc-t"><b>${r.id}</b><span>${r.model}</span></div><em class="rc-s">${SHORT(r.mode).toLowerCase()}</em><div class="rc-b"><i><u style="width:${r.battery}%;background:${r.battery < 25 ? '#E07A5F' : r.battery < 45 ? '#D9A441' : '#5BBF8E'}"></u></i><span>${Math.round(r.battery)}%</span></div><p>${r.task ? r.task.label : 'Idle'} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)}</p></div>`).join('');
     /* availability per robot */
     D('util').innerHTML = fleet.map(r => { const u = r.util || { work: 1, charge: 0, idle: 0 }, t = u.work + u.charge + u.idle;
-      return `<div class="ur"><b>${r.id}</b><i><u style="width:${u.work / t * 100}%;background:#5BBF8E"></u><u style="width:${u.charge / t * 100}%;background:#5FA8E8"></u><u style="width:${u.idle / t * 100}%;background:#2C3550"></u></i><span>${Math.round(u.work / t * 100)}%</span></div>`; }).join('');
+      return `<div class="ur"><b>${r.id}</b><i><u style="width:${u.work / t * 100}%;background:#2FD39A"></u><u style="width:${u.charge / t * 100}%;background:#4FB8FF"></u><u style="width:${u.idle / t * 100}%;background:#2C3550"></u></i><span>${Math.round(u.work / t * 100)}%</span></div>`; }).join('');
   }
   select(fleet[0], false, true);
 
@@ -647,7 +647,7 @@ function buildUI(root) {
       </div>
     </div>
     <div class="fa-pane" data-pane="req">
-      <section class="d"><header><div><b>Requests and jobs today</b><span>by hour</span></div><ul class="d-leg"><li style="--c:#5FA8E8">Deliveries</li><li style="--c:#C9A35C">Luggage</li><li style="--c:#8F84D6">Linen</li><li style="--c:#5BBF8E">Floor-care zones</li></ul></header><svg data-d="hourly" viewBox="0 0 660 220"></svg></section>
+      <section class="d"><header><div><b>Requests and jobs today</b><span>by hour</span></div><ul class="d-leg"><li style="--c:#4FB8FF">Deliveries</li><li style="--c:#D4A65A">Luggage</li><li style="--c:#9B7BFF">Linen</li><li style="--c:#2FD39A">Floor-care zones</li></ul></header><svg data-d="hourly" viewBox="0 0 660 220"></svg></section>
       <div class="fa-2">
         <section class="d"><header><div><b>Response time</b><span>last 16 deliveries · minutes</span></div></header><svg data-d="deliv" viewBox="0 0 320 170"></svg></section>
         <section class="d"><header><div><b>Requests by type</b><span>today</span></div></header><div data-d="types" class="d-types"></div></section>
@@ -659,7 +659,7 @@ function buildUI(root) {
     </div>
     <div class="fa-pane" data-pane="fleet">
       <div data-d="cards" class="d-cards"></div>
-      <section class="d"><header><div><b>Availability today</b><span>share of time</span></div><ul class="d-leg"><li style="--c:#5BBF8E">On task</li><li style="--c:#5FA8E8">Charging</li><li style="--c:#3A4560">Idle or waiting</li></ul></header><div data-d="util" class="d-util"></div></section>
+      <section class="d"><header><div><b>Availability today</b><span>share of time</span></div><ul class="d-leg"><li style="--c:#2FD39A">On task</li><li style="--c:#4FB8FF">Charging</li><li style="--c:#3A4560">Idle or waiting</li></ul></header><div data-d="util" class="d-util"></div></section>
     </div>
   </div>
     </div></div>
