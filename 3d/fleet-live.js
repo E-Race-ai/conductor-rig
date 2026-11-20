@@ -182,7 +182,14 @@ function mount(root) {
 
   /* ---------- simulation state ---------- */
   const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 4, paused: false, sel: fleet[0], follow: false, tour: !REDUCED, tourT: 0, tourI: 0,
-    deliveries: 37, delivTimes: [372, 405, 388], lift: 52, base: 4180, log: [] };
+    deliveries: 37, delivTimes: [372, 405, 388, 512, 298, 446, 331, 690, 402, 365, 958, 420, 384, 451, 309, 377], lift: 52, base: 4180, log: [] };
+  /* GM metrics. Assumptions (est.) are shown on the page next to the dashboards. */
+  const EST = { rate: 22, delivMin: 12, lugMin: 15, linenMin: 20, m2h: 400, fleetMo: 12900, fleetN: 20, target: 900 };
+  const HRS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  const M = { lug: 34, lin: 13, ontime: 36, total: 37, hourly: {},
+    seed: { delivery: [2, 3, 4, 3, 2, 3, 4, 3, 2, 3, 3, 5], luggage: [3, 4, 2, 1, 2, 3, 5, 6, 4, 2, 1, 1], linen: [1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 0], clean: [0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 2, 1] } };
+  HRS.forEach((h, i) => { M.hourly[h] = { delivery: M.seed.delivery[i], luggage: M.seed.luggage[i], linen: M.seed.linen[i], clean: M.seed.clean[i] }; });
+  const bump = k => { const h = Math.floor(S.clock / 3600) % 24; (M.hourly[h] = M.hourly[h] || { delivery: 0, luggage: 0, linen: 0, clean: 0 })[k]++; ui.dirtyDash = true; };
   const fmt = s => { s = Math.floor(s) % 86400; return [s / 3600, (s % 3600) / 60, s % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':'); };
   const log = (r, msg, lvl) => { S.log.unshift({ t: fmt(S.clock), id: r ? r.id : 'Hotel.OS', c: r ? r.k.c : '#D4A65A', msg, lvl }); S.log.length = Math.min(S.log.length, 40); ui.dirtyLog = true; };
   let taskN = 412; const tid = () => `T-1120-${String(++taskN).padStart(4, '0')}`;
@@ -222,7 +229,7 @@ function mount(root) {
       fn(r, () => { r.task = { id: tid(), label: `Deliver ${items} → ${q.label}` }; r.taskStart = S.t; log(r, `order ${r.task.id}: ${items} for ${q.label}`); });
       dwell(r, 7, 'LOADING AT DESK');
       go(r, q, 'DELIVERING');
-      dwell(r, 10 + R() * 9, 'AT DOOR · GUEST PIN', () => { S.deliveries++; r.tasks++; const dtm = (S.t - r.taskStart) * 1; S.delivTimes.push(dtm); if (S.delivTimes.length > 20) S.delivTimes.shift(); log(r, `delivered to ${q.label} · ${Math.round(dtm / 60)} min ${Math.round(dtm % 60)} s`, 'ok'); r.task = { id: r.task.id, label: 'Return to front desk' }; });
+      dwell(r, 10 + R() * 9, 'AT DOOR · GUEST PIN', () => { S.deliveries++; r.tasks++; const dtm = (S.t - r.taskStart) * 1; M.total++; if (dtm <= EST.target) M.ontime++; bump('delivery'); S.delivTimes.push(dtm); if (S.delivTimes.length > 16) S.delivTimes.shift(); log(r, `delivered to ${q.label} · ${Math.round(dtm / 60)} min ${Math.round(dtm % 60)} s`, 'ok'); r.task = { id: r.task.id, label: 'Return to front desk' }; });
       go(r, DESK, 'RETURNING');
     } else if (r.kind === 'luggage') {
       if (Math.hypot(r.x - ENTR.x, r.z - ENTR.z) > 1 || r.f !== 0) { go(r, ENTR, 'RETURNING'); return; }
@@ -230,7 +237,7 @@ function mount(root) {
       fn(r, () => { r.task = { id: tid(), label: `Luggage → ${q.label}` }; r.taskStart = S.t; log(r, `luggage check-in: 2 bags for ${q.label}`); });
       dwell(r, 9, 'LOADING LUGGAGE');
       go(r, q, 'DELIVERING');
-      dwell(r, 12, 'AT DOOR · GUEST', () => { r.tasks++; log(r, `luggage delivered to ${q.label}`, 'ok'); r.task = { id: r.task.id, label: 'Return to entrance' }; });
+      dwell(r, 12, 'AT DOOR · GUEST', () => { r.tasks++; M.lug++; bump('luggage'); log(r, `luggage delivered to ${q.label}`, 'ok'); r.task = { id: r.task.id, label: 'Return to entrance' }; });
       go(r, ENTR, 'RETURNING');
     } else if (r.kind === 'linen') {
       const f = 1 + Math.floor(R() * (NF - 1));
@@ -238,7 +245,7 @@ function mount(root) {
       fn(r, () => { r.task = { id: tid(), label: `Clean linen rack → L${f + 1} back of house` }; log(r, `linen run to L${f + 1}: clean rack out, soiled rack back`); });
       dwell(r, 6, 'LIFTING RACK');
       go(r, BOH(f), 'DELIVERING');
-      dwell(r, 9, 'SWAPPING RACK', () => { r.tasks++; log(r, `rack swapped on L${f + 1}`, 'ok'); r.task = { id: r.task.id, label: 'Soiled linen → laundry (L1)' }; });
+      dwell(r, 9, 'SWAPPING RACK', () => { r.tasks++; M.lin++; bump('linen'); log(r, `rack swapped on L${f + 1}`, 'ok'); r.task = { id: r.task.id, label: 'Soiled linen → laundry (L1)' }; });
       go(r, BOH(0), 'RETURNING');
       dwell(r, 6, 'UNLOADING');
     } else {
@@ -255,7 +262,7 @@ function mount(root) {
       fn(r, () => { r.task = { id: tid(), label: `Clean ${zone}` }; r.zoneArea = 0; log(r, `started zone: ${zone}`); });
       if (Math.hypot(r.x - start.x, r.z - start.z) > .5) r.steps.push({ t: 'move', i: 0, pts: [{ x: start.x, z: start.z }], mode: 'TO ZONE' });
       r.steps.push({ t: 'move', i: 0, pts, mode: 'CLEANING', clean: true });
-      dwell(r, 14, 'ZONE COMPLETE', () => { r.tasks++; log(r, `zone complete · ${Math.round(r.zoneArea)} m² · 100% coverage`, 'ok'); if (r.cov) r.cov.count = 0; });
+      dwell(r, 14, 'ZONE COMPLETE', () => { r.tasks++; r.zonesDone = (r.zonesDone || 0) + 1; bump('clean'); log(r, `zone complete · ${Math.round(r.zoneArea)} m² · 100% coverage`, 'ok'); if (r.cov) r.cov.count = 0; });
       r.planAt = { f: F, x: pts[pts.length - 1].x, z: pts[pts.length - 1].z, xd: pts[pts.length - 1].x };
     }
   }
@@ -292,6 +299,8 @@ function mount(root) {
     else if (s.t === 'charge') { r.mode = 'CHARGING'; r.speed = 0; r.battery = Math.min(100, r.battery + dt * .45); if (r.battery >= s.until) r.steps.shift(); }
     else if (s.t === 'fn') { r.steps.shift(); s.f(); }
     r.battery = Math.max(3, r.battery - dt * (moving ? r.k.drain : r.mode === 'CHARGING' ? 0 : .008));
+    const u = r.util || (r.util = { work: 900 + R() * 600, charge: 120 + R() * 200, idle: 60 + R() * 160 });
+    if (/CHARG/.test(r.mode)) u.charge += dt; else if (/WAITING FOR LIFT|IDLE|COMPLETE/.test(r.mode)) u.idle += dt; else u.work += dt;
     r.loc = Math.max(.9, Math.min(.995, r.loc + (R() - .5) * .004 + (.975 - r.loc) * .02));
   }
   function stepCars(dt) {
@@ -343,11 +352,17 @@ function mount(root) {
   }
   function labels() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
-    fleet.forEach(r => {
+    const placed = [];
+    const order = fleet.slice().sort((a, b) => (b === S.sel) - (a === S.sel));
+    order.forEach(r => {
       tmpV.copy(r.mesh.position); tmpV.y += ((r.spr.scale.y || 3) + .6) * (r.zk || 1); tmpV.project(camera);
-      const el = r.lab; const vis = tmpV.z < 1;
+      const el = r.lab, x = (tmpV.x * .5 + .5) * w, y = (-tmpV.y * .5 + .5) * h;
+      let vis = tmpV.z < 1 && x > 30 && x < w - 30 && y > 64 && y < h - 6;
+      const bw = 78, bh = 22;
+      if (vis && r !== S.sel && placed.some(p => Math.abs(p.x - x) < bw && Math.abs(p.y - y) < bh)) vis = false;
+      if (vis) placed.push({ x, y });
       el.style.display = vis ? '' : 'none';
-      if (vis) el.style.transform = `translate(${(tmpV.x * .5 + .5) * w}px,${(-tmpV.y * .5 + .5) * h}px) translate(-50%,-100%)`;
+      if (vis) el.style.transform = `translate(${x}px,${y}px) translate(-50%,-100%)`;
       el.classList.toggle('sel', r === S.sel);
     });
     for (let f = 0; f < NF; f++) {
@@ -361,8 +376,8 @@ function mount(root) {
   fleet.forEach(r => {
     const lab = document.createElement('button'); lab.type = 'button'; lab.className = 'fl-lab'; lab.style.setProperty('--c', r.k.c); lab.textContent = r.id;
     lab.onclick = () => select(r, true); ui.labels.appendChild(lab); r.lab = lab;
-    const row = document.createElement('button'); row.type = 'button'; row.className = 'fl-row'; row.style.setProperty('--c', r.k.c);
-    row.innerHTML = `<i></i><b>${r.id}</b><em>${r.model}</em><span class="fl-mode"></span><span class="fl-fl"></span><span class="fl-bat"><u></u></span>`;
+    const row = document.createElement('button'); row.type = 'button'; row.className = 'fl-rbt'; row.style.setProperty('--c', r.k.c);
+    row.innerHTML = `<i></i><b>${r.id}</b><em>${r.model.replace(/^(Pudu|Keenon) /, '')}</em><span class="fl-mode"></span><span class="fl-fl"></span><span class="fl-bat"><u></u></span>`;
     row.onclick = () => select(r, true); ui.list.appendChild(row); r.row = row;
   });
   function stopTour() { if (!S.tour) return; S.tour = false; ui.tourBtn.setAttribute('aria-pressed', 'false'); controls.autoRotate = false; }
@@ -386,6 +401,7 @@ function mount(root) {
     if (best) select(best, true);
   });
 
+  const SHORT = m => /CHARG/.test(m) ? 'CHARGING' : /WAITING FOR LIFT/.test(m) ? 'WAIT LIFT' : /IN LIFT/.test(m) ? 'IN LIFT' : /BOARDING|EXITING/.test(m) ? 'LIFT' : /DOOR/.test(m) ? 'AT DOOR' : /TO DOCK/.test(m) ? 'TO DOCK' : /CLEAN/.test(m) ? 'CLEANING' : /COMPLETE/.test(m) ? 'ZONE DONE' : /LOAD|LIFTING|SWAP|UNLOAD/.test(m) ? 'HANDLING' : /RETURN/.test(m) ? 'RETURNING' : /DELIVER/.test(m) ? 'DELIVERING' : /ZONE/.test(m) ? 'TO ZONE' : m.split(' ')[0];
   const MODEC = m => /CHARG/.test(m) ? '#3FD08A' : /CLEAN/.test(m) ? '#3FD08A' : /LIFT/.test(m) ? '#B49CFF' : /WAIT|DOOR|LOAD|SWAP|LIFTING|UNLOAD|COMPLETE/.test(m) ? '#F2B544' : /DOCK/.test(m) ? '#FF8A5B' : '#38D0FF';
   function spark(cv, arr, max, color) {
     const g = cv.getContext('2d'), w = cv.width = cv.clientWidth * 2, h = cv.height = cv.clientHeight * 2; g.clearRect(0, 0, w, h);
@@ -425,22 +441,19 @@ function mount(root) {
   }
   function renderList() {
     fleet.forEach(r => {
-      const md = r.row.querySelector('.fl-mode'); md.textContent = r.mode.replace(/ · .*$/, ''); md.style.setProperty('--m', MODEC(r.mode));
+      const md = r.row.querySelector('.fl-mode'); md.textContent = SHORT(r.mode); md.style.setProperty('--m', MODEC(r.mode));
       r.row.querySelector('.fl-fl').textContent = r.liftY != null ? 'lift' : `L${r.f + 1}`;
       const b = r.row.querySelector('.fl-bat u'); b.style.width = r.battery + '%'; b.style.background = r.battery < 25 ? '#FF8A5B' : r.battery < 45 ? '#F2B544' : '#3FD08A';
       r.row.title = `${r.id} · ${r.mode} · battery ${Math.round(r.battery)}%`;
       r.lab.style.setProperty('--m', MODEC(r.mode));
     });
     const active = fleet.filter(r => !/CHARG|IDLE/.test(r.mode)).length;
-    const avg = S.delivTimes.reduce((a, b) => a + b, 0) / S.delivTimes.length;
-    const area = S.base + fleet.reduce((a, r) => a + (r.kind === 'clean' ? r.area : 0), 0) - 3000;
-    ui.kpi.active.textContent = `${active} / ${fleet.length}`; ui.kpi.deliv.textContent = S.deliveries; ui.kpi.avg.textContent = `${Math.floor(avg / 60)} min ${String(Math.round(avg % 60)).padStart(2, '0')} s`;
-    ui.kpi.area.textContent = `${Math.round(area).toLocaleString()} m²`; ui.kpi.lift.textContent = S.lift;
+    ui.kpi.active.textContent = `${active} / ${fleet.length}`;
     ui.clock.textContent = fmt(S.clock);
   }
   function renderLog() {
     if (!ui.dirtyLog) return; ui.dirtyLog = false;
-    ui.log.innerHTML = S.log.slice(0, 7).map(e => `<li class="${e.lvl || ''}" style="--c:${e.c}"><time>${e.t}</time><b>${e.id}</b><span>${e.msg}</span></li>`).join('');
+    ui.log.innerHTML = S.log.slice(0, 5).map(e => `<li class="${e.lvl || ''}" style="--c:${e.c}"><time>${e.t}</time><b>${e.id}</b><span>${e.msg}</span></li>`).join('');
   }
   function renderCap() {
     const r = S.sel, on = S.follow;
@@ -450,13 +463,98 @@ function mount(root) {
     ui.cap.querySelector('span').textContent = r.task ? r.task.label : r.mode;
     ui.cap.querySelector('em').textContent = `${r.mode} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)} · battery ${Math.round(r.battery)}%`;
   }
+  /* ---------- GM dashboards ---------- */
+  const money = v => '$' + Math.round(v).toLocaleString();
+  const C4 = { delivery: '#38D0FF', luggage: '#F2B544', linen: '#B49CFF', clean: '#3FD08A' };
+  const hoursHist = [];
+  function metrics() {
+    const area = S.base + fleet.reduce((a, r) => a + (r.kind === 'clean' ? r.area : 0), 0) - 3000;
+    const guest = S.deliveries * EST.delivMin / 60, bell = M.lug * EST.lugMin / 60, hk = M.lin * EST.linenMin / 60 + area / EST.m2h;
+    const total = guest + bell + hk;
+    return { area, guest, bell, hk, total, value: total * EST.rate };
+  }
+  const ease = (el, v, f) => { const o = el._v == null ? v : el._v; const n = o + (v - o) * .35; el._v = Math.abs(v - n) < .01 ? v : n; el.textContent = f(el._v); };
+  function renderDash() {
+    const m = metrics(), V = ui.V, D = ui.D;
+    hoursHist.push(m.total); if (hoursHist.length > 60) hoursHist.shift();
+    ease(V('hours'), m.total, v => v.toFixed(1) + ' h'); V('shifts').textContent = `today · ≈ ${(m.total / 8).toFixed(1)} staff shifts (est.)`;
+    ease(V('value'), m.value, money);
+    V('req').textContent = S.deliveries + M.lug;
+    const h = Math.floor(S.clock / 3600) % 24, cur = M.hourly[h] || {};
+    V('reqh').textContent = `handled by robots today · +${(cur.delivery || 0) + (cur.luggage || 0)} this hour`;
+    const ot = M.ontime / M.total; V('ontime').textContent = (ot * 100).toFixed(1) + ' %'; V('ontimes').textContent = `${M.ontime} of ${M.total} within 15 min`;
+    const C = 2 * Math.PI * 26;
+    V('ring').innerHTML = `<circle cx="32" cy="32" r="26" fill="none" stroke="#1B2438" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="#3FD08A" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C * ot} ${C}" transform="rotate(-90 32 32)" style="filter:drop-shadow(0 0 4px #3FD08A)"/>`;
+    V('faults').textContent = `${fleet.filter(r => /CHARG/.test(r.mode)).length} charging · 0 faults`;
+    V('speed').textContent = S.paused ? 'simulated · paused' : `simulated · ${S.scale}× speed`;
+    if (hoursHist.length > 1) { const lo = Math.min(...hoursHist), hi = Math.max(...hoursHist) + .01; const pts = hoursHist.map((v, i) => `${(i / (hoursHist.length - 1) * 200).toFixed(1)},${(36 - (v - lo) / (hi - lo) * 32).toFixed(1)}`).join(' ');
+      V('hspark').innerHTML = `<defs><linearGradient id="hsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3FD08A" stop-opacity=".45"/><stop offset="1" stop-color="#3FD08A" stop-opacity="0"/></linearGradient></defs><polygon points="0,40 ${pts} 200,40" fill="url(#hsg)"/><polyline points="${pts}" fill="none" stroke="#3FD08A" stroke-width="2"/>`; }
+
+    /* hourly stacked bars */
+    const hrs = HRS.slice(); if (!hrs.includes(h)) { hrs.push(h); hrs.shift(); }
+    const W = 660, H = 230, L = 34, B = 200, bw = (W - L - 10) / hrs.length;
+    const tot = hrs.map(x => { const o = M.hourly[x] || {}; return (o.delivery || 0) + (o.luggage || 0) + (o.linen || 0) + (o.clean || 0); });
+    const ymax = Math.max(8, Math.ceil(Math.max(...tot) / 4) * 4);
+    let g = `<defs>${Object.entries(C4).map(([k, c]) => `<linearGradient id="hb-${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".55"/></linearGradient>`).join('')}</defs>`;
+    for (let i = 0; i <= 4; i++) { const y = B - (B - 14) * i / 4; g += `<line x1="${L}" x2="${W - 6}" y1="${y}" y2="${y}" stroke="#1B2438"/><text x="${L - 8}" y="${y + 4}" text-anchor="end" class="ax">${Math.round(ymax * i / 4)}</text>`; }
+    hrs.forEach((x, i) => {
+      const o = M.hourly[x] || {}; let y = B; const now = x === h, X = L + i * bw + bw * .16, w = bw * .68;
+      ['clean', 'linen', 'luggage', 'delivery'].forEach(k => { const v = o[k] || 0; if (!v) return; const hh = v / ymax * (B - 14); y -= hh; g += `<rect x="${X}" y="${y}" width="${w}" height="${Math.max(0, hh - 1.5)}" rx="2" fill="url(#hb-${k})"${now ? ' class="now"' : ''}/>`; });
+      g += `<text x="${X + w / 2}" y="${B + 18}" text-anchor="middle" class="ax${now ? ' axn' : ''}">${String(x).padStart(2, '0')}:00</text>`;
+      if (now) g += `<text x="${X + w / 2}" y="${y - 8}" text-anchor="middle" class="nowl">now · ${tot[i]}</text><rect x="${X - 3}" y="14" width="${w + 6}" height="${B - 14}" rx="4" fill="none" stroke="#38D0FF" stroke-opacity=".35" stroke-dasharray="3 4"/>`;
+    });
+    D('hourly').innerHTML = g;
+
+    /* donut: hours by team */
+    const parts = [['Housekeeping', m.hk, '#3FD08A', 'floor care + linen'], ['Guest services', m.guest, '#38D0FF', 'in-room deliveries'], ['Bell desk', m.bell, '#F2B544', 'luggage runs']];
+    let a0 = -Math.PI / 2, dg = ''; const R0 = 46, r0 = 31;
+    parts.forEach(([n, v, c]) => { const a1 = a0 + v / m.total * Math.PI * 2 - .03; const p = (a, r) => `${(60 + r * Math.cos(a)).toFixed(2)},${(60 + r * Math.sin(a)).toFixed(2)}`; const big = a1 - a0 > Math.PI ? 1 : 0;
+      dg += `<path d="M${p(a0, R0)} A${R0} ${R0} 0 ${big} 1 ${p(a1, R0)} L${p(a1, r0)} A${r0} ${r0} 0 ${big} 0 ${p(a0, r0)} Z" fill="${c}" style="filter:drop-shadow(0 0 4px ${c}88)"/>`; a0 = a1 + .03; });
+    dg += `<text x="60" y="58" text-anchor="middle" class="dn-v">${m.total.toFixed(1)}</text><text x="60" y="72" text-anchor="middle" class="dn-l">hours</text>`;
+    D('donut').innerHTML = dg;
+    D('dleg').innerHTML = parts.map(([n, v, c, d]) => `<li style="--c:${c}"><b>${v.toFixed(1)} h</b><span>${n}</span><em>${d}</em></li>`).join('');
+
+    /* delivery times vs 15-min target */
+    const dt = S.delivTimes.slice(-16), dW = 320, dB = 140, dmax = 20, bw2 = (dW - 30) / 16;
+    let dd = `<line x1="26" x2="${dW}" y1="${dB - 15 / dmax * (dB - 10)}" y2="${dB - 15 / dmax * (dB - 10)}" stroke="#FF8A5B" stroke-dasharray="5 4"/><text x="${dW - 2}" y="${dB - 15 / dmax * (dB - 10) - 5}" text-anchor="end" class="tg">15-min target</text>`;
+    [0, 5, 10, 15, 20].forEach(v => { const y = dB - v / dmax * (dB - 10); dd += `<text x="20" y="${y + 4}" text-anchor="end" class="ax">${v}</text>`; });
+    dt.forEach((v, i) => { const mm = Math.min(dmax, v / 60), hh = mm / dmax * (dB - 10), late = v > EST.target, last = i === dt.length - 1;
+      dd += `<rect x="${30 + i * bw2 + 2}" y="${dB - hh}" width="${bw2 - 4}" height="${hh}" rx="2" fill="${late ? '#FF8A5B' : '#38D0FF'}" opacity="${last ? 1 : .8}"${last ? ' class="now"' : ''}/>`; });
+    const avg = dt.reduce((a, b) => a + b, 0) / dt.length / 60;
+    dd += `<text x="30" y="${dB + 22}" class="dl">average <tspan class="dlv">${avg.toFixed(1)} min</tspan> · ${Math.round((1 - avg / 15) * 100)}% faster than target</text>`;
+    D('deliv').innerHTML = dd;
+
+    /* floor care by floor */
+    const cleaners = {}; fleet.filter(r => r.kind === 'clean').forEach(r => { cleaners[r.floor] = r; });
+    const done = { 2: '20:10', 3: '20:55' }, sched = { 5: '01:00', 7: '02:30' };
+    let fl = '';
+    for (let f = NF - 1; f >= 0; f--) {
+      const r = cleaners[f]; let pct, st, c;
+      if (r) { pct = Math.min(1, (r.zoneArea || 0) / 132); const pass = (r.zonesDone || 0) + 1; st = /CHARG|DOCK/.test(r.mode) ? `${r.id} · charging` : `${r.id} · ${Math.round(pct * 100)}%${pass > 1 ? ' · pass ' + pass : ''}`; c = '#3FD08A'; }
+      else if (done[f]) { pct = 1; st = `done ${done[f]}`; c = '#2E8F63'; }
+      else { pct = 0; st = `scheduled ${sched[f]}`; c = '#3A4560'; }
+      fl += `<div class="fr${r ? ' live' : ''}" style="--c:${c}"><b>${f ? 'L' + (f + 1) : 'L1'}</b><i><u style="width:${(pct * 100).toFixed(1)}%"></u></i><span>${st}</span></div>`;
+    }
+    D('floors').innerHTML = fl;
+
+    /* utilisation per robot */
+    D('util').innerHTML = fleet.map(r => { const u = r.util || { work: 1, charge: 0, idle: 0 }, t = u.work + u.charge + u.idle;
+      return `<div class="ur" style="--c:${r.k.c}"><b>${r.id}</b><i><u style="width:${u.work / t * 100}%;background:#3FD08A"></u><u style="width:${u.charge / t * 100}%;background:#38D0FF"></u><u style="width:${u.idle / t * 100}%;background:#3A4560"></u></i><span>${Math.round(u.work / t * 100)}%</span></div>`; }).join('');
+
+    /* monthly outlook */
+    const hrsDay = Math.max(.1, ((S.clock / 3600) % 24) - 6), perDay = m.value / hrsDay * 18, mo = perDay * 30, cost = EST.fleetMo * fleet.length / EST.fleetN, x = mo / cost;
+    D('outlook').innerHTML = `<div class="ol"><div><small>Labour value of work done</small><b class="olv">${money(Math.round(mo / 100) * 100)}</b><span>per month · ${Math.round(m.total / hrsDay * 18 * 30).toLocaleString()} staff hours</span></div>
+      <div><small>Fleet cost, pro-rated</small><b class="olc">${money(Math.round(cost / 100) * 100)}</b><span>per month · ${fleet.length} of ≈ ${EST.fleetN} robots</span></div>
+      <div class="olbar"><i style="width:${Math.min(100, 100 / x)}%"></i><u></u></div>
+      <p><b>${x.toFixed(1)}×</b> the fleet cost in staff time, on these assumptions</p></div>`;
+  }
   select(fleet[0], false, true);
 
   /* ---------- loop ---------- */
   if (!S.tour) ui.tourBtn.setAttribute('aria-pressed', 'false');
   let lowQ = /Android|iPad|iPhone|Mobile/.test(navigator.userAgent) && (navigator.hardwareConcurrency || 4) <= 8, qN = 0, qT = 0;
   if (lowQ) renderer.setPixelRatio(Math.min(devicePixelRatio, 1.25));
-  let visible = true, running = false, last = performance.now(), uiT = 0, histT = 0;
+  let visible = true, running = false, last = performance.now(), uiT = 0, histT = 0, dashT = 9;
   const kick = () => { if (!running && visible) { running = true; last = performance.now(); requestAnimationFrame(frame); } };
   new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; kick(); }), { rootMargin: '120px' }).observe(root);
   const resize = () => { const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w / 2, h / 2); camera.aspect = w / h; camera.updateProjectionMatrix(); };
@@ -491,6 +589,7 @@ function mount(root) {
     uiT += rdt; histT += rdt;
     if (histT > .5) { histT = 0; fleet.forEach(o => { o.hist.bat.push(o.battery); o.hist.spd.push(o.speed); if (o.hist.bat.length > 90) { o.hist.bat.shift(); o.hist.spd.shift(); } }); }
     if (uiT > .25) { uiT = 0; renderList(); renderDetail(false); renderLog(); renderCap(); }
+    dashT += rdt; if (dashT > 1) { dashT = 0; renderDash(); }
     requestAnimationFrame(frame);
   }
   kick();
@@ -498,13 +597,13 @@ function mount(root) {
 
 function buildUI(root) {
   root.innerHTML = `
-  <div class="fl-kpis">
-    <div><small>Robots working</small><b data-kpi="active">–</b></div>
-    <div><small>Deliveries tonight</small><b data-kpi="deliv">–</b></div>
-    <div><small>Avg delivery time</small><b data-kpi="avg">–</b></div>
-    <div><small>Floor cleaned tonight</small><b data-kpi="area">–</b></div>
-    <div><small>Lift rides by robots</small><b data-kpi="lift">–</b></div>
-    <div class="fl-clock"><small>Site time · simulated</small><b data-clock>–</b></div>
+  <div class="fl-val">
+    <div class="v v-hero"><small>Staff hours returned</small><b data-v="hours">–</b><span data-v="shifts"></span><svg class="v-spark" data-v="hspark" viewBox="0 0 200 40" preserveAspectRatio="none"></svg></div>
+    <div class="v"><small>Labour value</small><b data-v="value">–</b><span>today, at $22 / h (est.)</span></div>
+    <div class="v"><small>Guest requests</small><b data-v="req">–</b><span data-v="reqh"></span></div>
+    <div class="v v-ring"><svg data-v="ring" viewBox="0 0 64 64"></svg><div><small>On time</small><b data-v="ontime">–</b><span data-v="ontimes"></span></div></div>
+    <div class="v"><small>Robots working</small><b data-kpi="active">–</b><span data-v="faults"></span></div>
+    <div class="v v-clock"><small>Site time</small><b data-clock>–</b><span data-v="speed">4× speed</span></div>
   </div>
   <div class="fl-main">
     <div class="fl-view">
@@ -527,12 +626,22 @@ function buildUI(root) {
       <div class="fl-detail" aria-live="off"></div>
     </aside>
   </div>
+  <div class="fl-dash">
+    <section class="d d-wide"><header><div><b>Tasks completed today</b><span>by hour · current hour fills live</span></div><ul class="d-leg"><li style="--c:#38D0FF">Delivery</li><li style="--c:#F2B544">Luggage</li><li style="--c:#B49CFF">Linen</li><li style="--c:#3FD08A">Floor-care zones</li></ul></header><svg data-d="hourly" viewBox="0 0 660 230"></svg></section>
+    <section class="d d-out"><header><div><b>Monthly outlook</b><span>the 8 robots shown · est.</span></div></header><div data-d="outlook"></div></section>
+    <section class="d"><header><div><b>Hours returned to teams</b><span>today · est.</span></div></header><div class="d-donut"><svg data-d="donut" viewBox="0 0 120 120"></svg><ul data-d="dleg"></ul></div></section>
+    <section class="d"><header><div><b>Delivery time vs target</b><span>last 16 deliveries · minutes</span></div></header><svg data-d="deliv" viewBox="0 0 320 170"></svg></section>
+    <section class="d d-fl"><header><div><b>Floor care tonight</b><span>corridors and lobby, by floor</span></div></header><div data-d="floors" class="d-floors"></div></section>
+    <section class="d d-full"><header><div><b>Robot utilisation today</b><span>share of time working · charging · idle</span></div><ul class="d-leg"><li style="--c:#3FD08A">Working</li><li style="--c:#38D0FF">Charging</li><li style="--c:#3A4560">Idle / waiting</li></ul></header><div data-d="util" class="d-util"></div></section>
+  </div>
+  <div class="fl-cta"><div><b>See this running in your building</b><span>Start with a 16-week pilot, measured on these same dashboards · ≈ $4.5k / month (est.)</span></div><a href="#next">See the pilot plan →</a></div>
+  <p class="fl-assume">Model assumptions (est.): loaded labour $22 / h · staff minutes saved per task: delivery 12, luggage 15, linen run 20 · manual floor care 400 m² / h · fleet cost ≈ $12.9k / month for ≈ 20 robots, pro-rated to the 8 shown. Hours returned are staff time freed for other work, not guaranteed payroll savings.</p>
   <div class="fl-logw"><div class="fl-ph"><b>Event stream</b><span>Hotel.OS fleet adapter</span></div><ol class="fl-log"></ol></div>`;
   const q = s => root.querySelector(s);
   return {
     canvas: q('canvas'), labels: q('.fl-labels'), list: q('.fl-list'), detail: q('.fl-detail'), log: q('.fl-log'), clock: q('[data-clock]'),
     followBtn: q('[data-a="follow"]'), tourBtn: q('[data-a="tour"]'), cap: q('.fl-cap'), wholeBtn: q('[data-a="whole"]'), pauseBtn: q('[data-a="pause"]'), speedBtns: [...root.querySelectorAll('[data-s]')],
-    kpi: { active: q('[data-kpi="active"]'), deliv: q('[data-kpi="deliv"]'), avg: q('[data-kpi="avg"]'), area: q('[data-kpi="area"]'), lift: q('[data-kpi="lift"]') },
+    kpi: { active: q('[data-kpi="active"]') }, V: k => q(`[data-v="${k}"]`), D: k => q(`[data-d="${k}"]`), dirtyDash: true,
     floorLabs: Array.from({ length: NF }, (_, f) => { const e = document.createElement('span'); e.className = 'fl-flab'; e.textContent = f ? `L${f + 1}` : 'L1 lobby'; q('.fl-flabs').appendChild(e); return e; }),
     dirtyLog: true,
   };
