@@ -94,7 +94,7 @@ function mount(root) {
   camera.position.set(74, 34, 92);
   const controls = new OrbitControls(camera, canvas);
   controls.target.copy(mid); controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = 14; controls.maxDistance = 190; controls.maxPolarAngle = Math.PI * .49;
-  controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .2;
+  controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .25;
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), .35, .3, .7); composer.addPass(bloom);
@@ -181,7 +181,7 @@ function mount(root) {
   const pathL = new THREE.Line(new THREE.BufferGeometry(), pathM); pathL.frustumCulled = false; scene.add(pathL);
 
   /* ---------- simulation state ---------- */
-  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 1, paused: false, sel: fleet[0], follow: false, tour: true, tourT: 0, tourI: 0,
+  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 2, paused: false, sel: fleet[0], follow: false, tour: true, tourT: 0, tourI: 0,
     deliveries: 37, delivTimes: [372, 405, 388, 512, 298, 446, 331, 690, 402, 365, 958, 420, 384, 451, 309, 377], lift: 52, base: 4180, log: [] };
   /* GM metrics. Assumptions (est.) are shown on the page next to the dashboards. */
   const EST = { rate: 22, delivMin: 12, lugMin: 15, linenMin: 20, m2h: 400, fleetMo: 12900, fleetN: 20, target: 900 };
@@ -329,7 +329,7 @@ function mount(root) {
       r.arrow.position.set(Math.sin(r.yaw) * 2.35, .08, Math.cos(r.yaw) * 2.35); r.arrow.rotation.set(Math.PI / 2, 0, -r.yaw); r.arrow.visible = r.speed > .05;
       const sel = r === S.sel; r.ring.scale.setScalar(sel ? 1.25 + Math.sin(time * 5) * .1 : 1);
       // LiDAR ping while moving
-      r.pingT += .016; const ph = (r.pingT % 2.8) / 2.8; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .18 : 0;
+      r.pingT += .016; const ph = (r.pingT % 2.2) / 2.2; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .18 : 0;
       // glowing trail
       const lp = r.trailPts[r.trailPts.length - 1];
       if (!lp || Math.hypot(lp.x - r.x, lp.z - r.z) > .5 || Math.abs(lp.y - y) > .3) { r.trailPts.push(new THREE.Vector3(r.x, y + .12, r.z)); if (r.trailPts.length > 48) r.trailPts.shift(); r.trail.geometry.dispose(); r.trail.geometry = new THREE.BufferGeometry().setFromPoints(r.trailPts.length > 1 ? r.trailPts : [r.trailPts[0], r.trailPts[0]]); }
@@ -390,7 +390,7 @@ function mount(root) {
     fleet.forEach(o => o.row.classList.toggle('sel', o === r));
     r.hist.bat.length = r.hist.spd.length = 0; renderDetail(true);
   }
-  ui.tourBtn.onclick = () => { S.tour = !S.tour; ui.tourBtn.setAttribute('aria-pressed', String(S.tour)); if (S.tour) { S.tourAt = 1; } else controls.autoRotate = false; };
+  ui.tourBtn.onclick = () => { S.tour = !S.tour; ui.tourBtn.setAttribute('aria-pressed', String(S.tour)); if (S.tour) { S.tourAt = 1; S.follow = false; ui.followBtn.setAttribute('aria-pressed', 'false'); wholeView(); controls.autoRotate = !REDUCED; } else controls.autoRotate = false; };
   ui.followBtn.onclick = () => { stopTour(); S.follow = !S.follow; ui.followBtn.setAttribute('aria-pressed', String(S.follow)); controls.autoRotate = !S.follow && !REDUCED; if (!S.follow) wholeView(); };
   ui.wholeBtn.onclick = () => { stopTour(); S.follow = false; ui.followBtn.setAttribute('aria-pressed', 'false'); controls.autoRotate = !REDUCED; wholeView(); };
   ui.speedBtns.forEach(b => b.onclick = () => { S.scale = +b.dataset.s; S.paused = false; ui.speedBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b))); ui.pauseBtn.setAttribute('aria-pressed', 'false'); });
@@ -461,9 +461,9 @@ function mount(root) {
     ui.log.innerHTML = S.log.slice(0, 5).map(e => `<li class="${e.lvl || ''}" style="--c:${e.c}"><time>${e.t}</time><b>${e.id}</b><span>${e.msg}</span></li>`).join('');
   }
   function renderCap() {
-    const r = S.sel, on = S.follow;
+    const r = S.sel, on = S.follow || S.tour;
     ui.cap.classList.toggle('on', on); if (!on) return;
-    ui.cap.style.setProperty('--c', r.k.c);
+    ui.cap.style.setProperty('--c', r.k.c); ui.cap.querySelector('small').textContent = S.follow ? 'Following' : 'Spotlight';
     ui.cap.querySelector('b').textContent = `${r.id} · ${r.model}`;
     ui.cap.querySelector('span').textContent = r.task ? r.task.label : r.mode;
     ui.cap.querySelector('em').textContent = `${nice(r.mode)} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)} · battery ${Math.round(r.battery)}%`;
@@ -495,7 +495,7 @@ function mount(root) {
     const chg = fleet.filter(r => /CHARG/.test(r.mode)).length;
     V('fleet').textContent = `${chg} charging · 0 faults`;
     const ex = exceptions(); V('att').textContent = ex.length; V('att').parentElement.classList.toggle('hot', ex.some(e => e.lv === 'amber'));
-    V('atts').textContent = ex.length ? ex[0].id + ' · ' + ex[0].t.split(' · ')[0].toLowerCase() : 'nothing needs staff';
+    V('atts').textContent = ex.length ? ex[0].id + ' · ' + ex[0].t.split(' · ')[0] : 'nothing needs staff';
     V('speed').textContent = S.paused ? 'simulated · paused' : S.scale === 1 ? 'simulated · real time' : `simulated · ${S.scale}× speed`;
     /* needs attention */
     D('att').innerHTML = ex.length ? ex.map(e => `<li class="${e.lv}" style="--c:${e.c}"><b>${e.id}</b><span>${e.t}</span><em>${e.a}</em></li>`).join('')
@@ -559,22 +559,28 @@ function mount(root) {
     const rdt = Math.min(.1, (now - last) / 1000); last = now;
     if (!S.paused) { const dt = rdt * S.scale, n = Math.ceil(dt / .2); for (let i = 0; i < n; i++) sim(dt / n); }
     if (S.tour) {
-      if (!S.tourAt) S.tourAt = now - 19000;
-      if (now - S.tourAt > 22000) {
+      if (!S.tourAt) S.tourAt = now - 10000;
+      if (now - S.tourAt > 12000) {
         S.tourAt = now;
         const score = o => (/LIFT/.test(o.mode) ? 3 : /DELIVER|DOOR/.test(o.mode) ? 2.5 : /CLEAN/.test(o.mode) ? 2 : /CHARG|IDLE/.test(o.mode) ? 0 : 1) + R();
         const cand = fleet.filter(o => o !== S.sel).sort((a, b) => score(b) - score(a));
-        select(cand[0], true, true); controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .35;
+        select(cand[0], false, true); controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .25;
       }
     }
     const r = S.sel;
+    if (S.tour && !S.follow && !camGoal) {   // god's view: stay on the whole building, drift toward the highlighted robot's floor
+      const ry = (r.liftY != null ? r.liftY : r.f) * FH, goalT = new THREE.Vector3(r.x * .25, mid.y * .6 + ry * .4, r.z * .25);
+      const dT = goalT.sub(controls.target).multiplyScalar(Math.min(1, rdt * .5)); controls.target.add(dT); camera.position.add(dT);
+      const want = wholePos().length(), have = camera.position.distanceTo(controls.target);
+      if (Math.abs(have - want) > 2) camera.position.sub(controls.target).multiplyScalar(1 + (want / have - 1) * Math.min(1, rdt * .6)).add(controls.target);
+    }
     if (S.follow) {
       const y = (r.liftY != null ? r.liftY : r.f) * FH;
-      const goal = new THREE.Vector3(r.x, y + 1, r.z), delta = goal.clone().sub(controls.target).multiplyScalar(Math.min(1, rdt * 1.1));
+      const goal = new THREE.Vector3(r.x, y + 1, r.z), delta = goal.clone().sub(controls.target).multiplyScalar(Math.min(1, rdt * 1.8));
       controls.target.add(delta); camera.position.add(delta);
       const dist = camera.position.distanceTo(controls.target); if (dist > 46) camera.position.lerp(controls.target, Math.min(1, rdt * .6) * (1 - 40 / dist));
     } else if (camGoal) {
-      camera.position.lerp(camGoal.pos, Math.min(1, rdt * .9)); controls.target.lerp(camGoal.tgt, Math.min(1, rdt * .9));
+      camera.position.lerp(camGoal.pos, Math.min(1, rdt * 1.4)); controls.target.lerp(camGoal.tgt, Math.min(1, rdt * 1.4));
       if (camera.position.distanceTo(camGoal.pos) < .5) camGoal = null;
     }
     controls.update();
@@ -627,7 +633,7 @@ function buildUI(root) {
             <button type="button" data-a="whole">Building</button>
             <button type="button" data-a="follow" aria-pressed="false">Follow</button>
             <span class="fl-sep"></span>
-            <button type="button" data-s="1" aria-pressed="true">1×</button><button type="button" data-s="2" aria-pressed="false">2×</button><button type="button" data-s="4" aria-pressed="false">4×</button>
+            <button type="button" data-s="1" aria-pressed="false">1×</button><button type="button" data-s="2" aria-pressed="true">2×</button><button type="button" data-s="4" aria-pressed="false">4×</button>
             <button type="button" data-a="pause" aria-pressed="false" aria-label="Pause">❚❚</button>
           </div>
           <div class="fl-cap"><small>Following</small><b></b><span></span><em></em></div>
