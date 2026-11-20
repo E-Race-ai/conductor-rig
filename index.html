@@ -178,6 +178,70 @@
 @keyframes lqFlowV{to{background-position:0 16px}}
 @keyframes lqSpin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.lq *,.lq *::before{animation:none!important}}
+.al{display:grid;grid-template-columns:215px minmax(0,1fr) 278px;gap:28px;margin-top:20px;padding:24px;border:1px solid var(--line);border-radius:3px;background:radial-gradient(800px 500px at 50% 45%,#10213F 0%,#0A1226 50%,#060A14 100%)}
+.al-h{display:flex;flex-direction:column;gap:3px;margin-bottom:12px}
+.al-h b{font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#F2F5FA}
+.al-h span{font-size:12.5px;color:var(--faint)}
+.al-col{display:flex;flex-direction:column;gap:10px}
+.al-sys,.al-role{position:relative;display:flex;gap:11px;align-items:flex-start;padding:10px 11px;border:1px solid #1E2A44;border-radius:3px;background:rgba(10,16,32,.85)}
+.al-sys svg,.al-role svg{flex:0 0 30px;width:30px;height:30px;padding:6px;border-radius:3px;background:color-mix(in srgb,var(--c) 16%,transparent);fill:none;stroke:var(--c);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.al-sys b,.al-role b{display:block;font-size:13.5px;line-height:1.25;color:#F2F5FA}
+.al-sys span{display:block;margin-top:2px;font:500 11px/1.35 var(--mono);color:#8FA0C0}
+.al-role{border-left:3px solid var(--c)}
+.al-role em{display:block;margin-top:1px;font:500 10px/1.3 var(--mono);font-style:normal;color:#8FA0C0}
+.al-role{padding:9px 11px;gap:10px}
+.al-role svg{flex-basis:26px;width:26px;height:26px;padding:5px}
+.al-role span{display:flex;align-items:center;gap:7px;margin-top:5px;padding:4px 7px;white-space:nowrap;border-radius:3px;background:rgba(255,255,255,.04);font:500 11.5px/1.25 var(--mono);color:#E8EDF6}
+.al-role>div{min-width:0;flex:1}
+.al-role span i{flex:0 0 7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);animation:alPulse 1.8s ease-in-out infinite}
+/* animated feeds into and out of the middle */
+.al-sys::after,.al-role::before{content:"";position:absolute;top:50%;width:30px;height:2px;background:linear-gradient(90deg,var(--c) 50%,transparent 0) 0 0/10px 2px;opacity:.75;animation:alFeed .8s linear infinite}
+.al-sys::after{right:-31px}
+.al-role::before{left:-34px}
+.al-mid{display:flex;flex-direction:column;gap:12px;min-width:0}
+.al-layer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border-radius:3px;border:1px solid rgba(212,166,90,.45);background:linear-gradient(90deg,rgba(212,166,90,.16),rgba(212,166,90,.04));font:500 12px/1.3 var(--mono);color:#E8D9B8}
+.al-chip{padding:5px 10px;border-radius:3px;background:#D4A65A;color:#1A1206;font-weight:600;letter-spacing:.04em}
+.al-stage{position:relative;border-radius:3px;overflow:hidden;border:1px solid #1E2A44;aspect-ratio:1600/1153;box-shadow:inset 0 0 80px rgba(0,0,0,.5)}
+.al-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.al-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(212,166,90,.10),transparent 30%),repeating-linear-gradient(0deg,rgba(212,166,90,.05) 0 1px,transparent 1px 22px)}
+.al-pin{position:absolute;z-index:2;width:0;height:0}
+.al-pin i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;border:2px solid var(--d);box-shadow:0 0 0 0 var(--d);animation:alRing 2s ease-out infinite}
+.al-pin span{position:absolute;top:-13px;left:22px;white-space:nowrap;padding:5px 9px;border-radius:3px;background:rgba(8,13,26,.9);border:1px solid color-mix(in srgb,var(--d) 60%,transparent);font:500 11.5px/1.2 var(--mono);color:#F2F5FA;box-shadow:0 6px 18px -6px #000}
+.al-pin span::before{content:"";position:absolute;right:100%;top:50%;width:14px;height:1px;background:var(--d)}
+.al-pin.al-l span{left:auto;right:22px}
+.al-pin.al-l span::before{right:auto;left:100%}
+.al-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.al-facts div{padding:9px 11px;border-radius:3px;border:1px solid #1E2A44;background:rgba(10,16,32,.7)}
+.al-facts b{display:block;font-size:12.5px;line-height:1.3;color:#F2F5FA}
+.al-facts span{display:block;margin-top:3px;font:500 10.5px/1.3 var(--mono);color:#8FA0C0}
+/* timeline */
+.tl{margin-top:16px;padding:18px 22px 20px;border:1px solid var(--line);border-radius:3px;background:#080D1A}
+.tl-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.tl-h b{font-size:16px;color:#F2F5FA}.tl-h span{font:500 11px/1 var(--mono);color:var(--faint)}
+.tl ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
+.tl ol::before{content:"";position:absolute;left:8px;right:8px;top:7px;height:2px;background:linear-gradient(90deg,#7FA7FF,#D4A65A 30%,#FF6B5B 60%,#3FD08A 80%,#D4A65A)}
+.tl li{position:relative;padding:26px 14px 0 0}
+.tl li::before{content:"";position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#080D1A;border:3px solid var(--c);box-shadow:0 0 10px var(--c)}
+.tl time{display:block;font:600 11.5px/1 var(--mono);color:var(--c);margin-bottom:6px}
+.tl li b{display:block;font-size:14px;color:#F2F5FA;margin-bottom:3px}
+.tl li span{display:block;font-size:12.5px;line-height:1.45;color:var(--dim)}
+@keyframes alFeed{to{background-position:10px 0}}
+@keyframes alPulse{50%{opacity:.35}}
+@keyframes alRing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--d) 70%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@media (prefers-reduced-motion:reduce){.al *,.al *::before,.al *::after{animation:none!important}}
+@media (max-width:1100px){
+  .al{grid-template-columns:1fr;gap:18px;padding:16px}
+  .al-mid{order:1}.al-in{order:0}.al-out{order:2}
+  .al-in,.al-out{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .al-h{grid-column:1/-1;margin-bottom:2px}
+  .al-sys::after,.al-role::before{display:none}
+  .al-facts{grid-template-columns:1fr 1fr}
+  .tl ol{grid-template-columns:1fr;gap:14px}
+  .tl ol::before{left:7px;right:auto;top:8px;bottom:8px;width:2px;height:auto;background:linear-gradient(180deg,#7FA7FF,#D4A65A 30%,#FF6B5B 60%,#3FD08A 80%,#D4A65A)}
+  .tl li{padding:0 0 0 30px}
+  .al-pin span{font-size:10px;padding:3px 6px}
+}
+@media (max-width:560px){.al-in,.al-out{grid-template-columns:1fr}}
 .lq-m{display:none}
 @media (max-width:900px){
   .lq-m{display:flex;align-items:center;gap:10px;justify-self:start;margin-left:22px;font:500 12px/1 var(--mono);color:#E8EDF6}
@@ -297,6 +361,58 @@
     <div class="lq-hub" aria-hidden="true"><div class="lq-ring"></div><div class="lq-core"><svg viewBox="0 0 64 64"><path d="M12 20l20-9 20 9v25l-20 9-20-9z"/><path d="M12 20l20 9 20-9M32 29v25M12 32.5l20 9 20-9" opacity=".55"/></svg><b>One shared <br>digital twin</b><span>used by all four</span></div></div>
   </div>
   <p class="lq-note"><b>Then the loop closes:</b> robots and staff report what has changed, such as a moved wall, a new room or a blocked corridor, and Site Capture re-scans only that area so the model stays current.</p>
+
+  <div class="sec-h" id="alive"><h2>Inside the building: Hotel.OS comes alive</h2><p>The software layer sits on the 3D model, so every room, door and machine has an address. Requests and alarms from the hotel’s systems become tasks at an exact place, and go to the person or robot responsible.</p></div>
+  <div class="al">
+    <div class="al-col al-in">
+      <div class="al-h"><b>Systems in</b><span>What the hotel already runs</span></div>
+      <div class="al-sys" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><div><b>Property management (PMS)</b><span>bookings · check-outs · room status</span></div></div>
+      <div class="al-sys" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10.5 18.5h3"/></svg><div><b>Guest app, phone and texts</b><span>“two more towels, please”</span></div></div>
+      <div class="al-sys" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg><div><b>Building systems</b><span>HVAC · door access · alarms</span></div></div>
+      <div class="al-sys" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M12 3v18M9 9l-1.5 2h3zM15 15l1.5-2h-3z"/></svg><div><b>Elevators</b><span>robot rides between floors</span></div></div>
+      <div class="al-sys" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.5 9h-13z"/><circle cx="8" cy="19.5" r="1.3"/><circle cx="16" cy="19.5" r="1.3"/></svg><div><b>Restaurant and bar (POS)</b><span>room-service orders</span></div></div>
+    </div>
+
+    <div class="al-mid">
+      <div class="al-layer"><span class="al-chip">Hotel.OS layer</span><span>Tasks · AI routing · integrations · robot dispatch</span></div>
+      <div class="al-stage">
+        <img src="img/alive-twin.webp" alt="Live operations view of the digital twin: tasks pinned to rooms and floors" loading="lazy">
+        <div class="al-pin" style="left:25.5%;top:16.6%;--d:#FF6B5B"><i></i><span>RM 1204 · towels requested</span></div>
+        <div class="al-pin" style="left:49.5%;top:23.2%;--d:#38D0FF"><i></i><span>Floor 11 · robot amenity run</span></div>
+        <div class="al-pin al-l" style="left:39.4%;top:51.3%;--d:#F2B544"><i></i><span>Plant room · HVAC alarm</span></div>
+        <div class="al-pin" style="left:46.1%;top:52.9%;--d:#3FD08A"><i></i><span>L5 corridor · scrub done</span></div>
+        <div class="al-pin" style="left:30.6%;top:74.9%;--d:#FF6B5B"><i></i><span>Stair B · door held open</span></div>
+      </div>
+      <div class="al-facts">
+        <div><b>Every place has an address</b><span>room, door, asset, outlet</span></div>
+        <div><b>One queue for every department</b><span>with response targets</span></div>
+        <div><b>Nearest qualified person or robot</b><span>chosen automatically</span></div>
+        <div><b>Proof on the spot</b><span>NFC tap or photo closes the job</span></div>
+      </div>
+    </div>
+
+    <div class="al-col al-out">
+      <div class="al-h"><b>Work out</b><span>Who gets it, on what device</span></div>
+      <div class="al-role" style="--c:#FF6B5B"><svg viewBox="0 0 24 24"><path d="M3 18v-6h18v6M3 15h18M5 12V8a2 2 0 0 1 2-2h4v6"/></svg><div><b>Housekeeping</b><em>Sonim XP5plus</em><span><i></i>RM 1204 · towels · 10 min</span></div></div>
+      <div class="al-role" style="--c:#F2B544"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 1-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 1 5.3-5.3l-2.5 2.5-2-.5-.5-2z"/></svg><div><b>Engineering</b><em>XP Pro Thermal</em><span><i></i>Plant room · HVAC alarm</span></div></div>
+      <div class="al-role" style="--c:#38D0FF"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg><div><b>Security</b><em>Sonim XP5plus</em><span><i></i>Stair B · door held open</span></div></div>
+      <div class="al-role" style="--c:#7FA7FF"><svg viewBox="0 0 24 24"><path d="M5 17h14M7 17a5 5 0 0 1 10 0M12 9V7"/><circle cx="12" cy="6" r="1"/></svg><div><b>Front desk</b><em>Rhino C65</em><span><i></i>Late check-out 1507 · OK</span></div></div>
+      <div class="al-role" style="--c:#9B7BFF"><svg viewBox="0 0 24 24"><rect x="7" y="4" width="10" height="13" rx="3"/><path d="M9.5 8h5M8 20h8"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg><div><b>Robots</b><em>W3 · CC1 Pro · S100</em><span><i></i>Amenity run · floor 11</span></div></div>
+      <div class="al-role" style="--c:#D4A65A"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><div><b>General manager</b><em>Rhino T105</em><span><i></i>Building live · on target</span></div></div>
+    </div>
+  </div>
+
+  <div class="tl" aria-label="One guest request, end to end">
+    <div class="tl-h"><b>One request, end to end</b><span>Illustrative timings</span></div>
+    <ol>
+      <li style="--c:#7FA7FF"><time>21:42:05</time><b>Guest asks</b><span>Texts “two more towels, please” from Room 1204.</span></li>
+      <li style="--c:#D4A65A"><time>21:42:06</time><b>Task created</b><span>Hotel.OS pins it to Room 1204 on the model and sets a 15-minute target.</span></li>
+      <li style="--c:#D4A65A"><time>21:42:08</time><b>Right person chosen</b><span>The nearest attendant on floor 12 is picked automatically; a robot can take it overnight.</span></li>
+      <li style="--c:#FF6B5B"><time>21:42:20</time><b>Accepted</b><span>Their handset buzzes; one key press accepts it and shows the way.</span></li>
+      <li style="--c:#3FD08A"><time>21:49:31</time><b>Done, with proof</b><span>An NFC tap at the door confirms they were there and closes the task.</span></li>
+      <li style="--c:#D4A65A"><time>21:49:40</time><b>Everyone sees it</b><span>Guest gets “delivered”; the GM board shows 7 min 35 s against 15.</span></li>
+    </ol>
+  </div>
 
   <div class="sec-h" id="lanes"><h2>Swim lanes</h2><p>Each project runs in its own lane: its own team, vendors, plans and prototypes. Lanes meet only at the hand-offs marked ↗.</p></div><div class="sl"><div class="sl-sc"><div class="sl-grid"><div class="sl-head"><div></div><div><small>Stage 1</small>Qualify</div><div><small>Stage 2</small>Prototype · build</div><div><small>Stage 3</small>Pilot</div><div><small>Stage 4</small>First site live · The Grand</div><div><small>Stage 5</small>Scale · Hilton Thesis</div></div><div class="sl-lane" style="--c:#00C8FF"><a class="sl-h" href="field-unit.html"><small>PRJ-02 · Capture</small><b>Site Capture</b><span>5 vendors · 5 roles</span></a><div class="sl-c"><p>G0 rear-port access test; payload parts</p></div><div class="sl-c"><p>Gen-0 rig, Gen-1 payload prototype</p></div><div class="sl-c"><p>G1 pilot day: 5–10k m² zone, checkpoint RMSE</p><i>pilot data → Brain</i></div><div class="sl-c"><p>Full capture of The Grand (≈1M sq ft)</p><i>maps → Robotics</i></div><div class="sl-c"><p>Thesis capture; re-capture service</p></div></div><div class="sl-lane" style="--c:#4D8BFF"><a class="sl-h" href="conductor.html"><small>PRJ-01 · Process · build</small><b>The Brain</b><span>5 vendors · 4 roles</span></a><div class="sl-c"><p>G0 order (EPS check)</p></div><div class="sl-c"><p>Build, burn-in, agent platform and routing policy</p></div><div class="sl-c"><p>Process pilot-day data</p></div><div class="sl-c"><p>The Grand twin T2–T4 processed</p><i>twin → Hotel.OS</i></div><div class="sl-c"><p>NAS, GPU upgrade, multi-site</p></div></div><div class="sl-lane" style="--c:#D4A65A"><a class="sl-h" href="hotel-os.html"><small>PRJ-03 · Operate</small><b>Hotel.OS</b><span>5 vendors · 5 roles</span></a><div class="sl-c"><p>H0 scope, PMS access per operation</p></div><div class="sl-c"><p>Twin viewer, GM console, task engine prototypes</p></div><div class="sl-c"><p>P0 spine with first departments</p></div><div class="sl-c"><p>P1 fleet dispatch on the twin at The Grand</p><i>dispatch → Robotics</i></div><div class="sl-c"><p>P3 Thesis, multi-property</p><i>re-capture → Site Capture</i></div></div><div class="sl-lane" style="--c:#9B7BFF"><a class="sl-h" href="robotics.html"><small>PRJ-04 · Fleet</small><b>Robotics</b><span>6 vendors · 4 roles</span></a><div class="sl-c"><p>A0 vendor API, FCC IDs, elevator survey</p></div><div class="sl-c"><p>Rack and module prototypes, W3 wrap</p></div><div class="sl-c"><p>A1 BOH pilot (W3, T300, CC1 Pro, MT1 Vac)</p></div><div class="sl-c"><p>Fleet live at The Grand</p><i>status → Hotel.OS</i></div><div class="sl-c"><p>A3 scale; Thesis fleet</p></div></div></div></div><div class="sl-foot"><em>Stages are a planning sequence, not committed dates.</em></div></div>
 
