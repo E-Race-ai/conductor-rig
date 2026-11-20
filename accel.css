@@ -594,7 +594,7 @@ th.ar-sortable:hover{color:#EEF2FA}
   html.toc-open .ar-toc-bk{display:block;position:fixed;inset:0;z-index:189;background:rgba(3,6,12,.6)}
 }
 @media print{
-  .ar-bar,.ar-dock,.ar-pager,.ar-next,.ar-top,.eng-motion,.eng-toc,nav.top,#eng-bar,.ar-tbar,.ar-anc,.ar-sx,.ar-flow,.ht-ctl,.ar-cbtn,.ar-sbtn{display:none!important}
+  .ar-bar,.ar-dock,.ar-pager,.ar-next,.ar-top,.eng-motion,.eng-toc,nav.top,#eng-bar,.ar-tbar,.ar-anc,.ar-sx,.ar-flow,.ht-ctl,.ar-cbtn,.ar-sbtn,.ar-tbtn{display:none!important}
   html,body{background:#fff!important}
   html[data-proj] body *{color:#111!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important}
   html[data-proj] table,html[data-proj] th,html[data-proj] td{border-color:#bbb!important}
@@ -606,3 +606,20 @@ th.ar-sortable:hover{color:#EEF2FA}
 
 /* Installed app (home-screen icon): hide the public-link expiry notice; the app keeps working offline */
 @media (display-mode: standalone), (display-mode: fullscreen) { .ar-exp { display: none !important; } }
+
+/* ---------- light mode ----------
+   WHY an inversion: page diagrams carry ~1,700 hard-coded dark-theme colours; inverting the rendered page and
+   rotating hue by 180° keeps every accent's hue while turning graphite surfaces into paper. Photos, renders,
+   3D canvases and photo backgrounds are inverted back so they look exactly as shot. */
+html.theme-light{filter:invert(1) hue-rotate(180deg);background:#0B0D10}
+html.theme-light :is(img,video,canvas,picture,iframe,[style*="background-image:url("],[style*="background-image: url("],[data-hotel-twin],[data-fu-viewer]){filter:invert(1) hue-rotate(180deg)}
+/* 3D viewers stay in their dark studio look, labels included; anything inside an already re-inverted block is left alone */
+html.theme-light :is([data-hotel-twin],[data-fu-viewer],[style*="background-image:url("],[style*="background-image: url("]) :is(img,video,canvas,picture,iframe,[style*="background-image:url("]){filter:none}
+html.theme-light .ar-sx,html.theme-light .ar-dock{box-shadow:none}
+html.theme-anim,html.theme-anim body{transition:filter .25s ease}
+@media print{html.theme-light{filter:none}}
+.ar-tbtn{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;background:#0E1526;border:1px solid #2A3658;color:#C9D3E8;font:500 13px/1 "IBM Plex Sans",system-ui,sans-serif;cursor:pointer;border-radius:3px;margin-right:8px;white-space:nowrap}
+.ar-tbtn:hover{border-color:var(--c,#5B8CFF);color:#fff}
+.ar-tbtn.float{position:fixed;top:12px;right:118px;z-index:62}
+.dk-theme svg{display:block;margin:auto}
+@media (max-width:560px){.ar-tbtn span{display:none}.ar-tbtn{padding:0 9px}}

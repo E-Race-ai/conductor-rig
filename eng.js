@@ -294,6 +294,21 @@
     var row = D.querySelector('.ar-bar .ar-row'), exp = row && row.querySelector('.ar-exp');
     if (row) row.insertBefore(sb, exp || null); else { sb.classList.add('float'); D.body.appendChild(sb); }
 
+    /* ---------- light / dark theme (remembered per device; applied in <head> before first paint) ---------- */
+    var SUN = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg>';
+    var MOON = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z" fill="currentColor"/></svg>';
+    var isLight = function(){ return root.classList.contains('theme-light'); };
+    var themeBtns = [];
+    var paintT = function(){ themeBtns.forEach(function(b){ var l = isLight(); b.innerHTML = (l ? MOON : SUN) + (b.classList.contains('dk-tool') ? '' : '<span>' + (l ? 'Dark' : 'Light') + '</span>');
+      b.setAttribute('aria-label', l ? 'Switch to dark mode' : 'Switch to light mode'); b.title = (l ? 'Dark mode' : 'Light mode') + ' ( L )'; b.setAttribute('aria-pressed', l ? 'true' : 'false'); }); };
+    var setTheme = function(light){ root.classList.add('theme-anim'); root.classList.toggle('theme-light', light);
+      try { localStorage.setItem('ar-theme', light ? 'light' : 'dark'); } catch (e) {}
+      var mc = D.querySelector('meta[name="theme-color"]'); if (mc) mc.setAttribute('content', light ? '#F4F2EF' : '#0B0D10');
+      paintT(); setTimeout(function(){ root.classList.remove('theme-anim'); }, 400); };
+    var tb = el('button', 'ar-tbtn', ''); tb.type = 'button'; tb.onclick = function(){ setTheme(!isLight()); }; themeBtns.push(tb);
+    if (row) row.insertBefore(tb, sb); else { tb.classList.add('float'); D.body.appendChild(tb); }
+    if (isLight()) { var mc0 = D.querySelector('meta[name="theme-color"]'); if (mc0) mc0.setAttribute('content', '#F4F2EF'); }
+
     /* ---------- shortcuts help ---------- */
     var hp = el('div', 'ar-sx ar-help'); hp.setAttribute('role', 'dialog'); hp.setAttribute('aria-modal', 'true'); hp.setAttribute('aria-label', 'Keyboard shortcuts');
     hp.innerHTML = '<div class="sx-box"><div class="hp-h"><b>Keyboard shortcuts</b><button type="button" aria-label="Close">Close ✕</button></div><dl>'
@@ -302,6 +317,7 @@
       + '<dt><kbd>g</kbd> then <kbd>h</kbd></dt><dd>Program home</dd>'
       + '<dt><kbd>c</kbd></dt><dd>Contents for this page</dd>'
       + '<dt><kbd>t</kbd></dt><dd>Back to top</dd>'
+      + '<dt><kbd>L</kbd></dt><dd>Switch light / dark mode</dd>'
       + '<dt><kbd>?</kbd></dt><dd>This help</dd>'
       + '<dt><kbd>Esc</kbd></dt><dd>Close any panel</dd></dl><p class="hp-n">Tables: click a column heading to sort; long tables have a filter and Copy as CSV. Section headings: click # to copy a link.</p></div>';
     D.body.appendChild(hp);
@@ -322,8 +338,11 @@
     var dock = D.querySelector('.ar-dock');
     if (dock) {
       var ds = el('button', 'dk-tool', '⌕'); ds.type = 'button'; ds.title = 'Search ( / )'; ds.setAttribute('aria-label', 'Search'); ds.onclick = openS; dock.appendChild(ds);
+      var dt = el('button', 'dk-tool dk-theme', ''); dt.type = 'button'; dt.onclick = function(){ setTheme(!isLight()); }; themeBtns.push(dt); dock.appendChild(dt);
       if (toc) { var dc = el('button', 'dk-tool dk-toc', '☰'); dc.type = 'button'; dc.title = 'Contents ( c )'; dc.setAttribute('aria-label', 'Contents'); dc.onclick = function(){ toggleC(!root.classList.contains('toc-open')); }; dock.appendChild(dc); }
     }
+
+    paintT();
 
     /* ---------- keys ---------- */
     var gPend = 0;
@@ -334,6 +353,7 @@
       if (e.key === '/') { e.preventDefault(); openS(); }
       else if (e.key === '?') { hp.classList.toggle('open'); }
       else if (e.key === 'c' && toggleC) toggleC(!root.classList.contains('toc-open'));
+      else if (e.key === 'l' || e.key === 'L') setTheme(!isLight());
       else if (e.key === 't') W.scrollTo({ top: 0, behavior: 'smooth' });
       else if (e.key === 'g') { gPend = Date.now(); }
       else if (e.key === 'h' && Date.now() - gPend < 900) location.href = './';
