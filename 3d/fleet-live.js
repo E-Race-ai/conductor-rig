@@ -97,7 +97,7 @@ function mount(root) {
   controls.autoRotate = !REDUCED; controls.autoRotateSpeed = .35;
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), .9, .5, .55); composer.addPass(bloom);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(512, 512), .35, .3, .7); composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
   /* floors */
@@ -158,14 +158,14 @@ function mount(root) {
     const tex = IMG[r.model] ? texL.load(IMG[r.model], t => { t.colorSpace = THREE.SRGBColorSpace; const a = t.image.width / t.image.height; spr.scale.set(H * a, H, 1); }) : w3Tex;
     const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false }));
     spr.center.set(.5, 0); spr.scale.set(H * .64, H, 1); spr.position.y = .05; spr.renderOrder = 12; g.add(spr);
-    const pool = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: .75, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending })); pool.renderOrder = 11;
-    pool.scale.set(7, 3.2, 1); pool.position.y = .2; g.add(pool);
+    const pool = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: .75, depthWrite: false, depthTest: false, blending: THREE.NormalBlending })); pool.renderOrder = 11;
+    pool.scale.set(5, 2.2, 1); pool.material.opacity = .35; pool.position.y = .2; g.add(pool);
     const ringM = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: .95, side: THREE.DoubleSide, depthWrite: false, depthTest: false });
-    const ring = new THREE.Mesh(new THREE.RingGeometry(1.5, 1.75, 48), ringM); ring.rotation.x = -Math.PI / 2; ring.position.y = .06; ring.renderOrder = 11; g.add(ring);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(1.55, 1.7, 48), ringM); ring.rotation.x = -Math.PI / 2; ring.position.y = .06; ring.renderOrder = 11; g.add(ring);
     const arrow = new THREE.Mesh(new THREE.ConeGeometry(.42, .9, 3), new THREE.MeshBasicMaterial({ color: col })); arrow.rotation.x = Math.PI / 2; arrow.position.set(0, .08, 2.35); arrow.scale.y = .25; g.add(arrow);
     const ping = new THREE.Mesh(pingGeo, new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0, depthWrite: false })); ping.position.y = .07;
     const pg = new THREE.Group(); pg.add(ping); scene.add(pg);
-    const trailG = new THREE.BufferGeometry(); const trail = new THREE.Line(trailG, new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: .75, blending: THREE.AdditiveBlending, depthWrite: false })); trail.frustumCulled = false; scene.add(trail);
+    const trailG = new THREE.BufferGeometry(); const trail = new THREE.Line(trailG, new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: .4, depthWrite: false })); trail.frustumCulled = false; scene.add(trail);
     r.mesh = g; r.ring = ring; r.spr = spr; r.pool = pool; r.arrow = arrow; r.ping = ping; r.pingG = pg; r.trail = trail; r.trailPts = []; r.pingT = R() * 2; scene.add(g);
     if (r.kind === 'clean') {
       r.cov = new THREE.InstancedMesh(covGeo, new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: .4, depthWrite: false }), 1800);
@@ -181,13 +181,15 @@ function mount(root) {
   const pathL = new THREE.Line(new THREE.BufferGeometry(), pathM); pathL.frustumCulled = false; scene.add(pathL);
 
   /* ---------- simulation state ---------- */
-  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 4, paused: false, sel: fleet[0], follow: false, tour: !REDUCED, tourT: 0, tourI: 0,
+  const S = { t: 0, clock: 21 * 3600 + 40 * 60, scale: 4, paused: false, sel: fleet[0], follow: false, tour: true, tourT: 0, tourI: 0,
     deliveries: 37, delivTimes: [372, 405, 388, 512, 298, 446, 331, 690, 402, 365, 958, 420, 384, 451, 309, 377], lift: 52, base: 4180, log: [] };
   /* GM metrics. Assumptions (est.) are shown on the page next to the dashboards. */
   const EST = { rate: 22, delivMin: 12, lugMin: 15, linenMin: 20, m2h: 400, fleetMo: 12900, fleetN: 20, target: 900 };
   const HRS = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
   const M = { lug: 34, lin: 13, ontime: 36, total: 37, hourly: {},
     seed: { delivery: [2, 3, 4, 3, 2, 3, 4, 3, 2, 3, 3, 5], luggage: [3, 4, 2, 1, 2, 3, 5, 6, 4, 2, 1, 1], linen: [1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 0], clean: [0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 2, 1] } };
+  M.types = { 'Towels and linen': 14, 'Amenity kits': 9, 'Snacks and water': 8, 'Chargers and other': 6, 'Luggage': 34 };
+  const TYPE = it => /towel|pillow/.test(it) ? 'Towels and linen' : /amenity|toothbrush/.test(it) ? 'Amenity kits' : /snack|water/.test(it) ? 'Snacks and water' : 'Chargers and other';
   HRS.forEach((h, i) => { M.hourly[h] = { delivery: M.seed.delivery[i], luggage: M.seed.luggage[i], linen: M.seed.linen[i], clean: M.seed.clean[i] }; });
   const bump = k => { const h = Math.floor(S.clock / 3600) % 24; (M.hourly[h] = M.hourly[h] || { delivery: 0, luggage: 0, linen: 0, clean: 0 })[k]++; ui.dirtyDash = true; };
   const fmt = s => { s = Math.floor(s) % 86400; return [s / 3600, (s % 3600) / 60, s % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':'); };
@@ -226,18 +228,18 @@ function mount(root) {
     if (r.kind === 'delivery') {
       if (Math.hypot(r.x - DESK.x, r.z - DESK.z) > 1 || r.f !== 0) { go(r, DESK, 'RETURNING'); return; }
       const q = randRoom(1), items = pick(['amenity kit', 'two bath towels', 'toothbrush set', 'phone charger', 'bottled water ×4', 'snack box', 'extra pillows']);
-      fn(r, () => { r.task = { id: tid(), label: `Deliver ${items} → ${q.label}` }; r.taskStart = S.t; log(r, `order ${r.task.id}: ${items} for ${q.label}`); });
+      fn(r, () => { r.task = { id: tid(), label: `Deliver ${items} → ${q.label}`, guest: q.label }; r.taskStart = S.t; log(r, `order ${r.task.id}: ${items} for ${q.label}`); });
       dwell(r, 7, 'LOADING AT DESK');
       go(r, q, 'DELIVERING');
-      dwell(r, 10 + R() * 9, 'AT DOOR · GUEST PIN', () => { S.deliveries++; r.tasks++; const dtm = (S.t - r.taskStart) * 1; M.total++; if (dtm <= EST.target) M.ontime++; bump('delivery'); S.delivTimes.push(dtm); if (S.delivTimes.length > 16) S.delivTimes.shift(); log(r, `delivered to ${q.label} · ${Math.round(dtm / 60)} min ${Math.round(dtm % 60)} s`, 'ok'); r.task = { id: r.task.id, label: 'Return to front desk' }; });
+      dwell(r, R() < .3 ? 70 + R() * 50 : 10 + R() * 9, 'AT DOOR · GUEST PIN', () => { S.deliveries++; r.tasks++; const dtm = (S.t - r.taskStart) * 1; M.total++; if (dtm <= EST.target) M.ontime++; bump('delivery'); M.types[TYPE(items)]++; S.delivTimes.push(dtm); if (S.delivTimes.length > 16) S.delivTimes.shift(); log(r, `delivered to ${q.label} · ${Math.round(dtm / 60)} min ${Math.round(dtm % 60)} s`, 'ok'); r.task = { id: r.task.id, label: 'Return to front desk' }; });
       go(r, DESK, 'RETURNING');
     } else if (r.kind === 'luggage') {
       if (Math.hypot(r.x - ENTR.x, r.z - ENTR.z) > 1 || r.f !== 0) { go(r, ENTR, 'RETURNING'); return; }
       const q = randRoom(1);
-      fn(r, () => { r.task = { id: tid(), label: `Luggage → ${q.label}` }; r.taskStart = S.t; log(r, `luggage check-in: 2 bags for ${q.label}`); });
+      fn(r, () => { r.task = { id: tid(), label: `Luggage → ${q.label}`, guest: q.label }; r.taskStart = S.t; log(r, `luggage check-in: 2 bags for ${q.label}`); });
       dwell(r, 9, 'LOADING LUGGAGE');
       go(r, q, 'DELIVERING');
-      dwell(r, 12, 'AT DOOR · GUEST', () => { r.tasks++; M.lug++; bump('luggage'); log(r, `luggage delivered to ${q.label}`, 'ok'); r.task = { id: r.task.id, label: 'Return to entrance' }; });
+      dwell(r, 12, 'AT DOOR · GUEST', () => { r.tasks++; M.lug++; M.types['Luggage']++; bump('luggage'); log(r, `luggage delivered to ${q.label}`, 'ok'); r.task = { id: r.task.id, label: 'Return to entrance' }; });
       go(r, ENTR, 'RETURNING');
     } else if (r.kind === 'linen') {
       const f = 1 + Math.floor(R() * (NF - 1));
@@ -299,6 +301,7 @@ function mount(root) {
     else if (s.t === 'charge') { r.mode = 'CHARGING'; r.speed = 0; r.battery = Math.min(100, r.battery + dt * .45); if (r.battery >= s.until) r.steps.shift(); }
     else if (s.t === 'fn') { r.steps.shift(); s.f(); }
     r.battery = Math.max(3, r.battery - dt * (moving ? r.k.drain : r.mode === 'CHARGING' ? 0 : .008));
+    if (r.mode === r._pm) r.modeT = (r.modeT || 0) + dt; else { r._pm = r.mode; r.modeT = 0; }
     const u = r.util || (r.util = { work: 900 + R() * 600, charge: 120 + R() * 200, idle: 60 + R() * 160 });
     if (/CHARG/.test(r.mode)) u.charge += dt; else if (/WAITING FOR LIFT|IDLE|COMPLETE/.test(r.mode)) u.idle += dt; else u.work += dt;
     r.loc = Math.max(.9, Math.min(.995, r.loc + (R() - .5) * .004 + (.975 - r.loc) * .02));
@@ -326,7 +329,7 @@ function mount(root) {
       r.arrow.position.set(Math.sin(r.yaw) * 2.35, .08, Math.cos(r.yaw) * 2.35); r.arrow.rotation.set(Math.PI / 2, 0, -r.yaw); r.arrow.visible = r.speed > .05;
       const sel = r === S.sel; r.ring.scale.setScalar(sel ? 1.25 + Math.sin(time * 5) * .1 : 1);
       // LiDAR ping while moving
-      r.pingT += .016; const ph = (r.pingT % 1.6) / 1.6; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .7 : 0;
+      r.pingT += .016; const ph = (r.pingT % 1.6) / 1.6; r.pingG.position.set(r.x, y, r.z); r.ping.scale.setScalar(1 + ph * 2.6); r.ping.material.opacity = r.speed > .1 ? (1 - ph) * .28 : 0;
       // glowing trail
       const lp = r.trailPts[r.trailPts.length - 1];
       if (!lp || Math.hypot(lp.x - r.x, lp.z - r.z) > .5 || Math.abs(lp.y - y) > .3) { r.trailPts.push(new THREE.Vector3(r.x, y + .12, r.z)); if (r.trailPts.length > 48) r.trailPts.shift(); r.trail.geometry.dispose(); r.trail.geometry = new THREE.BufferGeometry().setFromPoints(r.trailPts.length > 1 ? r.trailPts : [r.trailPts[0], r.trailPts[0]]); }
@@ -348,7 +351,7 @@ function mount(root) {
     // floor focus when following
     const focusF = S.follow ? (r.liftY != null ? Math.round(r.liftY) : r.f) : -1;
     floors.forEach((g, f) => { const k = focusF < 0 || f === focusF ? 1 : .22; g.userData.mats.forEach(([m, o]) => { m.opacity = o * k; }); });
-    fleet.forEach(o => { const vis = focusF < 0 || o.f === focusF || o.liftY != null; o.spr.material.opacity = vis ? 1 : .18; o.pool.material.opacity = vis ? .75 : .1; o.trail.material.opacity = vis ? .75 : .1; o.ring.material.opacity = vis ? .95 : .15; if (o.cov) o.cov.material.opacity = vis ? .4 : .08; });
+    fleet.forEach(o => { const vis = focusF < 0 || o.f === focusF || o.liftY != null; o.spr.material.opacity = vis ? 1 : .18; o.pool.material.opacity = vis ? .35 : .06; o.trail.material.opacity = vis ? .4 : .06; o.ring.material.opacity = vis ? .95 : .15; if (o.cov) o.cov.material.opacity = vis ? .4 : .08; });
   }
   function labels() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -393,7 +396,8 @@ function mount(root) {
   ui.speedBtns.forEach(b => b.onclick = () => { S.scale = +b.dataset.s; S.paused = false; ui.speedBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b))); ui.pauseBtn.setAttribute('aria-pressed', 'false'); });
   ui.pauseBtn.onclick = () => { S.paused = !S.paused; ui.pauseBtn.setAttribute('aria-pressed', String(S.paused)); };
   let camGoal = null;
-  function wholeView() { camGoal = { pos: new THREE.Vector3(74, 34, 92), tgt: mid.clone() }; }
+  const wholePos = () => { const k = camera.aspect < 1.25 ? .78 : camera.aspect < 1.6 ? .9 : 1; return new THREE.Vector3(74 * k, 34 * k + 6 * (1 - k), 92 * k); };
+  function wholeView() { camGoal = { pos: wholePos(), tgt: mid.clone() }; }
   canvas.addEventListener('pointerdown', () => { camGoal = null; stopTour(); });
   canvas.addEventListener('click', e => {
     const b = canvas.getBoundingClientRect(), mx = e.clientX - b.left, my = e.clientY - b.top; let best = null, bd = 30;
@@ -402,6 +406,7 @@ function mount(root) {
   });
 
   const SHORT = m => /CHARG/.test(m) ? 'CHARGING' : /WAITING FOR LIFT/.test(m) ? 'WAIT LIFT' : /IN LIFT/.test(m) ? 'IN LIFT' : /BOARDING|EXITING/.test(m) ? 'LIFT' : /DOOR/.test(m) ? 'AT DOOR' : /TO DOCK/.test(m) ? 'TO DOCK' : /CLEAN/.test(m) ? 'CLEANING' : /COMPLETE/.test(m) ? 'ZONE DONE' : /LOAD|LIFTING|SWAP|UNLOAD/.test(m) ? 'HANDLING' : /RETURN/.test(m) ? 'RETURNING' : /DELIVER/.test(m) ? 'DELIVERING' : /ZONE/.test(m) ? 'TO ZONE' : m.split(' ')[0];
+  const nice = m => (m.charAt(0) + m.slice(1).toLowerCase()).replace(/\bl(\d)/g, 'L$1').replace(/lift ([ab])\b/g, (x, c) => 'lift ' + c.toUpperCase()).replace(/→l(\d)/g, '→L$1').replace(/\bpin\b/, 'PIN');
   const MODEC = m => /CHARG/.test(m) ? '#3FD08A' : /CLEAN/.test(m) ? '#3FD08A' : /LIFT/.test(m) ? '#B49CFF' : /WAIT|DOOR|LOAD|SWAP|LIFTING|UNLOAD|COMPLETE/.test(m) ? '#F2B544' : /DOCK/.test(m) ? '#FF8A5B' : '#38D0FF';
   function spark(cv, arr, max, color) {
     const g = cv.getContext('2d'), w = cv.width = cv.clientWidth * 2, h = cv.height = cv.clientHeight * 2; g.clearRect(0, 0, w, h);
@@ -427,7 +432,7 @@ function mount(root) {
         </div>`;
     }
     const q = k => d.querySelector(`[data-k="${k}"]`);
-    const m = d.querySelector('.fl-d-mode'); m.textContent = r.mode; m.style.setProperty('--m', MODEC(r.mode));
+    const m = d.querySelector('.fl-d-mode'); m.textContent = nice(r.mode); m.style.setProperty('--m', MODEC(r.mode));
     q('task').textContent = r.task ? `${r.task.id} · ${r.task.label}` : 'Idle · awaiting dispatch';
     q('bat').textContent = `${r.battery.toFixed(1)} %`; q('spd').textContent = `${r.speed.toFixed(2)} m/s`;
     const lvl = r.liftY != null ? `lift · ${(r.liftY + 1).toFixed(1)}` : `L${r.f + 1}`;
@@ -461,92 +466,82 @@ function mount(root) {
     ui.cap.style.setProperty('--c', r.k.c);
     ui.cap.querySelector('b').textContent = `${r.id} · ${r.model}`;
     ui.cap.querySelector('span').textContent = r.task ? r.task.label : r.mode;
-    ui.cap.querySelector('em').textContent = `${r.mode} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)} · battery ${Math.round(r.battery)}%`;
+    ui.cap.querySelector('em').textContent = `${nice(r.mode)} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)} · battery ${Math.round(r.battery)}%`;
   }
-  /* ---------- GM dashboards ---------- */
-  const money = v => '$' + Math.round(v).toLocaleString();
-  const C4 = { delivery: '#38D0FF', luggage: '#F2B544', linen: '#B49CFF', clean: '#3FD08A' };
-  const hoursHist = [];
-  function metrics() {
-    const area = S.base + fleet.reduce((a, r) => a + (r.kind === 'clean' ? r.area : 0), 0) - 3000;
-    const guest = S.deliveries * EST.delivMin / 60, bell = M.lug * EST.lugMin / 60, hk = M.lin * EST.linenMin / 60 + area / EST.m2h;
-    const total = guest + bell + hk;
-    return { area, guest, bell, hk, total, value: total * EST.rate };
+  /* ---------- GM operations dashboards ---------- */
+  const C4 = { delivery: '#5FA8E8', luggage: '#C9A35C', linen: '#8F84D6', clean: '#5BBF8E' };
+  const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+  function exceptions() {
+    const out = [];
+    fleet.forEach(r => {
+      if (/AT DOOR/.test(r.mode) && r.modeT > 45) out.push({ lv: 'amber', id: r.id, c: r.k.c, t: `At ${r.task && r.task.guest ? r.task.guest : 'guest room'} · guest has not answered for ${mmss(r.modeT)}`, a: 'Call room' });
+      if (/WAITING FOR LIFT/.test(r.mode) && r.modeT > 25) out.push({ lv: 'info', id: r.id, c: r.k.c, t: `Waiting for lift ${r.mode.slice(-1)} · ${mmss(r.modeT)}`, a: 'Monitor' });
+      if (r.battery < 25 && !/CHARG/.test(r.mode)) out.push({ lv: 'amber', id: r.id, c: r.k.c, t: `Battery ${Math.round(r.battery)}% · ${/DOCK/.test(r.mode) ? 'returning to dock' : 'will dock after this task'}`, a: 'Auto' });
+    });
+    return out;
   }
-  const ease = (el, v, f) => { const o = el._v == null ? v : el._v; const n = o + (v - o) * .35; el._v = Math.abs(v - n) < .01 ? v : n; el.textContent = f(el._v); };
   function renderDash() {
-    const m = metrics(), V = ui.V, D = ui.D;
-    hoursHist.push(m.total); if (hoursHist.length > 60) hoursHist.shift();
-    ease(V('hours'), m.total, v => v.toFixed(1) + ' h'); V('shifts').textContent = `today · ≈ ${(m.total / 8).toFixed(1)} staff shifts (est.)`;
-    ease(V('value'), m.value, money);
-    V('req').textContent = S.deliveries + M.lug;
-    const h = Math.floor(S.clock / 3600) % 24, cur = M.hourly[h] || {};
-    V('reqh').textContent = `handled by robots today · +${(cur.delivery || 0) + (cur.luggage || 0)} this hour`;
-    const ot = M.ontime / M.total; V('ontime').textContent = (ot * 100).toFixed(1) + ' %'; V('ontimes').textContent = `${M.ontime} of ${M.total} within 15 min`;
-    const C = 2 * Math.PI * 26;
-    V('ring').innerHTML = `<circle cx="32" cy="32" r="26" fill="none" stroke="#1B2438" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="#3FD08A" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C * ot} ${C}" transform="rotate(-90 32 32)" style="filter:drop-shadow(0 0 4px #3FD08A)"/>`;
-    V('faults').textContent = `${fleet.filter(r => /CHARG/.test(r.mode)).length} charging · 0 faults`;
+    const V = ui.V, D = ui.D, h = Math.floor(S.clock / 3600) % 24;
+    /* value strip */
+    const open = fleet.filter(r => r.task && r.task.guest && /DELIVER|DOOR|LOAD/.test(r.mode));
+    V('open').textContent = open.length;
+    const oldest = open.reduce((m, r) => Math.max(m, S.t - r.taskStart), 0);
+    V('opens').textContent = open.length ? `oldest ${mmss(oldest)} · all with robots` : 'none waiting';
+    const avg = S.delivTimes.reduce((a, b) => a + b, 0) / S.delivTimes.length;
+    V('resp').textContent = `${(avg / 60).toFixed(1)} min`; V('resps').textContent = `target 15 min · ${(M.ontime / M.total * 100).toFixed(0)}% on time`;
+    const cl = fleet.filter(r => r.kind === 'clean'), fdone = 2 + cl.filter(r => (r.zonesDone || 0) > 0).length;
+    const pctAll = (2 + cl.reduce((a, r) => a + Math.min(1, (r.zonesDone ? 1 : (r.zoneArea || 0) / 132)), 0)) / NF;
+    V('fc').textContent = `${Math.round(pctAll * 100)}%`; V('fcs').textContent = `${fdone} of ${NF} floors done · ${cl.filter(r => /CLEAN/.test(r.mode)).length} cleaning now`;
+    const chg = fleet.filter(r => /CHARG/.test(r.mode)).length;
+    V('fleet').textContent = `${chg} charging · 0 faults`;
+    const ex = exceptions(); V('att').textContent = ex.length; V('att').parentElement.classList.toggle('hot', ex.some(e => e.lv === 'amber'));
+    V('atts').textContent = ex.length ? ex[0].id + ' · ' + ex[0].t.split(' · ')[0].toLowerCase() : 'nothing needs staff';
     V('speed').textContent = S.paused ? 'simulated · paused' : `simulated · ${S.scale}× speed`;
-    if (hoursHist.length > 1) { const lo = Math.min(...hoursHist), hi = Math.max(...hoursHist) + .01; const pts = hoursHist.map((v, i) => `${(i / (hoursHist.length - 1) * 200).toFixed(1)},${(36 - (v - lo) / (hi - lo) * 32).toFixed(1)}`).join(' ');
-      V('hspark').innerHTML = `<defs><linearGradient id="hsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3FD08A" stop-opacity=".45"/><stop offset="1" stop-color="#3FD08A" stop-opacity="0"/></linearGradient></defs><polygon points="0,40 ${pts} 200,40" fill="url(#hsg)"/><polyline points="${pts}" fill="none" stroke="#3FD08A" stroke-width="2"/>`; }
-
+    /* needs attention */
+    D('att').innerHTML = ex.length ? ex.map(e => `<li class="${e.lv}" style="--c:${e.c}"><b>${e.id}</b><span>${e.t}</span><em>${e.a}</em></li>`).join('')
+      : '<li class="ok"><b>All clear</b><span>No robot needs a person right now. Exceptions appear here as they happen.</span><em></em></li>';
     /* hourly stacked bars */
     const hrs = HRS.slice(); if (!hrs.includes(h)) { hrs.push(h); hrs.shift(); }
-    const W = 660, H = 230, L = 34, B = 200, bw = (W - L - 10) / hrs.length;
+    const W = 660, L = 30, B = 190, bw = (W - L - 6) / hrs.length;
     const tot = hrs.map(x => { const o = M.hourly[x] || {}; return (o.delivery || 0) + (o.luggage || 0) + (o.linen || 0) + (o.clean || 0); });
     const ymax = Math.max(8, Math.ceil(Math.max(...tot) / 4) * 4);
-    let g = `<defs>${Object.entries(C4).map(([k, c]) => `<linearGradient id="hb-${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".55"/></linearGradient>`).join('')}</defs>`;
-    for (let i = 0; i <= 4; i++) { const y = B - (B - 14) * i / 4; g += `<line x1="${L}" x2="${W - 6}" y1="${y}" y2="${y}" stroke="#1B2438"/><text x="${L - 8}" y="${y + 4}" text-anchor="end" class="ax">${Math.round(ymax * i / 4)}</text>`; }
+    let g = '';
+    for (let i = 0; i <= 4; i++) { const y = B - (B - 12) * i / 4; g += `<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="#1A2236" stroke-width="1"/><text x="${L - 8}" y="${y + 4}" text-anchor="end" class="ax">${Math.round(ymax * i / 4)}</text>`; }
     hrs.forEach((x, i) => {
-      const o = M.hourly[x] || {}; let y = B; const now = x === h, X = L + i * bw + bw * .16, w = bw * .68;
-      ['clean', 'linen', 'luggage', 'delivery'].forEach(k => { const v = o[k] || 0; if (!v) return; const hh = v / ymax * (B - 14); y -= hh; g += `<rect x="${X}" y="${y}" width="${w}" height="${Math.max(0, hh - 1.5)}" rx="2" fill="url(#hb-${k})"${now ? ' class="now"' : ''}/>`; });
-      g += `<text x="${X + w / 2}" y="${B + 18}" text-anchor="middle" class="ax${now ? ' axn' : ''}">${String(x).padStart(2, '0')}:00</text>`;
-      if (now) g += `<text x="${X + w / 2}" y="${y - 8}" text-anchor="middle" class="nowl">now · ${tot[i]}</text><rect x="${X - 3}" y="14" width="${w + 6}" height="${B - 14}" rx="4" fill="none" stroke="#38D0FF" stroke-opacity=".35" stroke-dasharray="3 4"/>`;
+      const o = M.hourly[x] || {}; let y = B; const now = x === h, X = L + i * bw + bw * .2, w = bw * .6;
+      ['clean', 'linen', 'luggage', 'delivery'].forEach(k => { const v = o[k] || 0; if (!v) return; const hh = v / ymax * (B - 12); y -= hh; g += `<rect x="${X}" y="${y}" width="${w}" height="${Math.max(0, hh - 1)}" fill="${C4[k]}" opacity="${now ? 1 : .82}"/>`; });
+      g += `<text x="${X + w / 2}" y="${B + 18}" text-anchor="middle" class="ax${now ? ' axn' : ''}">${String(x).padStart(2, '0')}</text>`;
+      if (now) g += `<text x="${X + w / 2}" y="${y - 7}" text-anchor="middle" class="nowl">${tot[i]} so far</text>`;
     });
     D('hourly').innerHTML = g;
-
-    /* donut: hours by team */
-    const parts = [['Housekeeping', m.hk, '#3FD08A', 'floor care + linen'], ['Guest services', m.guest, '#38D0FF', 'in-room deliveries'], ['Bell desk', m.bell, '#F2B544', 'luggage runs']];
-    let a0 = -Math.PI / 2, dg = ''; const R0 = 46, r0 = 31;
-    parts.forEach(([n, v, c]) => { const a1 = a0 + v / m.total * Math.PI * 2 - .03; const p = (a, r) => `${(60 + r * Math.cos(a)).toFixed(2)},${(60 + r * Math.sin(a)).toFixed(2)}`; const big = a1 - a0 > Math.PI ? 1 : 0;
-      dg += `<path d="M${p(a0, R0)} A${R0} ${R0} 0 ${big} 1 ${p(a1, R0)} L${p(a1, r0)} A${r0} ${r0} 0 ${big} 0 ${p(a0, r0)} Z" fill="${c}" style="filter:drop-shadow(0 0 4px ${c}88)"/>`; a0 = a1 + .03; });
-    dg += `<text x="60" y="58" text-anchor="middle" class="dn-v">${m.total.toFixed(1)}</text><text x="60" y="72" text-anchor="middle" class="dn-l">hours</text>`;
-    D('donut').innerHTML = dg;
-    D('dleg').innerHTML = parts.map(([n, v, c, d]) => `<li style="--c:${c}"><b>${v.toFixed(1)} h</b><span>${n}</span><em>${d}</em></li>`).join('');
-
-    /* delivery times vs 15-min target */
-    const dt = S.delivTimes.slice(-16), dW = 320, dB = 140, dmax = 20, bw2 = (dW - 30) / 16;
-    let dd = `<line x1="26" x2="${dW}" y1="${dB - 15 / dmax * (dB - 10)}" y2="${dB - 15 / dmax * (dB - 10)}" stroke="#FF8A5B" stroke-dasharray="5 4"/><text x="${dW - 2}" y="${dB - 15 / dmax * (dB - 10) - 5}" text-anchor="end" class="tg">15-min target</text>`;
-    [0, 5, 10, 15, 20].forEach(v => { const y = dB - v / dmax * (dB - 10); dd += `<text x="20" y="${y + 4}" text-anchor="end" class="ax">${v}</text>`; });
-    dt.forEach((v, i) => { const mm = Math.min(dmax, v / 60), hh = mm / dmax * (dB - 10), late = v > EST.target, last = i === dt.length - 1;
-      dd += `<rect x="${30 + i * bw2 + 2}" y="${dB - hh}" width="${bw2 - 4}" height="${hh}" rx="2" fill="${late ? '#FF8A5B' : '#38D0FF'}" opacity="${last ? 1 : .8}"${last ? ' class="now"' : ''}/>`; });
-    const avg = dt.reduce((a, b) => a + b, 0) / dt.length / 60;
-    dd += `<text x="30" y="${dB + 22}" class="dl">average <tspan class="dlv">${avg.toFixed(1)} min</tspan> · ${Math.round((1 - avg / 15) * 100)}% faster than target</text>`;
+    /* response time */
+    const dt = S.delivTimes.slice(-16), dW = 320, dB = 140, dmax = 20, bw2 = (dW - 30) / 16, ty = dB - 15 / dmax * (dB - 10);
+    let dd = '';
+    [0, 5, 10, 15, 20].forEach(v => { const y = dB - v / dmax * (dB - 10); dd += `<line x1="26" x2="${dW}" y1="${y}" y2="${y}" stroke="#1A2236"/><text x="20" y="${y + 4}" text-anchor="end" class="ax">${v}</text>`; });
+    dd += `<line x1="26" x2="${dW}" y1="${ty}" y2="${ty}" stroke="#D98C6A" stroke-dasharray="4 4"/><text x="${dW}" y="${ty - 5}" text-anchor="end" class="tg">target 15</text>`;
+    dt.forEach((v, i) => { const mm = Math.min(dmax, v / 60), hh = mm / dmax * (dB - 10); dd += `<rect x="${30 + i * bw2 + 2}" y="${dB - hh}" width="${bw2 - 4}" height="${hh}" fill="${v > EST.target ? '#D98C6A' : '#5FA8E8'}" opacity="${i === dt.length - 1 ? 1 : .8}"/>`; });
+    dd += `<text x="30" y="${dB + 22}" class="dl">median ${(dt.slice().sort((a, b) => a - b)[8] / 60).toFixed(1)} min · ${dt.filter(v => v > EST.target).length} over target</text>`;
     D('deliv').innerHTML = dd;
-
+    /* requests by type */
+    const tt = Object.entries(M.types).sort((a, b) => b[1] - a[1]), tmax = Math.max(...tt.map(x => x[1]));
+    D('types').innerHTML = tt.map(([n, v]) => `<div class="ty"><span>${n}</span><i><u style="width:${v / tmax * 100}%"></u></i><b>${v}</b></div>`).join('');
     /* floor care by floor */
-    const cleaners = {}; fleet.filter(r => r.kind === 'clean').forEach(r => { cleaners[r.floor] = r; });
+    const cleaners = {}; cl.forEach(r => { cleaners[r.floor] = r; });
     const done = { 2: '20:10', 3: '20:55' }, sched = { 5: '01:00', 7: '02:30' };
     let fl = '';
     for (let f = NF - 1; f >= 0; f--) {
-      const r = cleaners[f]; let pct, st, c;
-      if (r) { pct = Math.min(1, (r.zoneArea || 0) / 132); const pass = (r.zonesDone || 0) + 1; st = /CHARG|DOCK/.test(r.mode) ? `${r.id} · charging` : `${r.id} · ${Math.round(pct * 100)}%${pass > 1 ? ' · pass ' + pass : ''}`; c = '#3FD08A'; }
-      else if (done[f]) { pct = 1; st = `done ${done[f]}`; c = '#2E8F63'; }
-      else { pct = 0; st = `scheduled ${sched[f]}`; c = '#3A4560'; }
-      fl += `<div class="fr${r ? ' live' : ''}" style="--c:${c}"><b>${f ? 'L' + (f + 1) : 'L1'}</b><i><u style="width:${(pct * 100).toFixed(1)}%"></u></i><span>${st}</span></div>`;
+      const r = cleaners[f]; let pct, st, cls = '';
+      if (r) { const fin = (r.zonesDone || 0) > 0; pct = fin ? 1 : Math.min(1, (r.zoneArea || 0) / 132); st = /CHARG|DOCK/.test(r.mode) ? `${r.id} charging` : fin ? `done · ${r.id} on 2nd pass` : `${r.id} · ${Math.round(pct * 100)}%`; cls = fin ? 'done' : 'live'; }
+      else if (done[f]) { pct = 1; st = `done ${done[f]}`; cls = 'done'; }
+      else { pct = 0; st = `scheduled ${sched[f]}`; cls = 'sched'; }
+      fl += `<div class="fr ${cls}"><b>${f ? 'L' + (f + 1) : 'L1'}</b><i><u style="width:${(pct * 100).toFixed(1)}%"></u></i><span>${st}</span></div>`;
     }
     D('floors').innerHTML = fl;
-
-    /* utilisation per robot */
+    /* robot cards */
+    D('cards').innerHTML = fleet.map(r => `<div class="rc" style="--c:${r.k.c};--m:${MODEC(r.mode)}"><div class="rc-img">${IMG[r.model] ? `<img src="${IMG[r.model]}" alt="">` : '<svg viewBox="0 0 40 40"><rect x="11" y="5" width="18" height="26" rx="6"/><rect x="14" y="9" width="12" height="8" rx="2"/></svg>'}</div><div class="rc-t"><b>${r.id}</b><span>${r.model}</span></div><em class="rc-s">${SHORT(r.mode).toLowerCase()}</em><div class="rc-b"><i><u style="width:${r.battery}%;background:${r.battery < 25 ? '#E07A5F' : r.battery < 45 ? '#D9A441' : '#5BBF8E'}"></u></i><span>${Math.round(r.battery)}%</span></div><p>${r.task ? r.task.label : 'Idle'} · ${r.liftY != null ? 'in lift' : 'L' + (r.f + 1)}</p></div>`).join('');
+    /* availability per robot */
     D('util').innerHTML = fleet.map(r => { const u = r.util || { work: 1, charge: 0, idle: 0 }, t = u.work + u.charge + u.idle;
-      return `<div class="ur" style="--c:${r.k.c}"><b>${r.id}</b><i><u style="width:${u.work / t * 100}%;background:#3FD08A"></u><u style="width:${u.charge / t * 100}%;background:#38D0FF"></u><u style="width:${u.idle / t * 100}%;background:#3A4560"></u></i><span>${Math.round(u.work / t * 100)}%</span></div>`; }).join('');
-
-    /* monthly outlook */
-    const hrsDay = Math.max(.1, ((S.clock / 3600) % 24) - 6), perDay = m.value / hrsDay * 18, mo = perDay * 30, cost = EST.fleetMo * fleet.length / EST.fleetN, x = mo / cost;
-    D('outlook').innerHTML = `<div class="ol"><div><small>Labour value of work done</small><b class="olv">${money(Math.round(mo / 100) * 100)}</b><span>per month · ${Math.round(m.total / hrsDay * 18 * 30).toLocaleString()} staff hours</span></div>
-      <div><small>Fleet cost, pro-rated</small><b class="olc">${money(Math.round(cost / 100) * 100)}</b><span>per month · ${fleet.length} of ≈ ${EST.fleetN} robots</span></div>
-      <div class="olbar"><i style="width:${Math.min(100, 100 / x)}%"></i><u></u></div>
-      <p><b>${x.toFixed(1)}×</b> the fleet cost in staff time, on these assumptions</p></div>`;
+      return `<div class="ur"><b>${r.id}</b><i><u style="width:${u.work / t * 100}%;background:#5BBF8E"></u><u style="width:${u.charge / t * 100}%;background:#5FA8E8"></u><u style="width:${u.idle / t * 100}%;background:#2C3550"></u></i><span>${Math.round(u.work / t * 100)}%</span></div>`; }).join('');
   }
   select(fleet[0], false, true);
 
@@ -558,7 +553,7 @@ function mount(root) {
   const kick = () => { if (!running && visible) { running = true; last = performance.now(); requestAnimationFrame(frame); } };
   new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; kick(); }), { rootMargin: '120px' }).observe(root);
   const resize = () => { const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w / 2, h / 2); camera.aspect = w / h; camera.updateProjectionMatrix(); };
-  new ResizeObserver(resize).observe(canvas); resize();
+  new ResizeObserver(resize).observe(canvas); resize(); camera.position.copy(wholePos());
   function frame(now) {
     if (!visible) { running = false; return; }
     const rdt = Math.min(.1, (now - last) / 1000); last = now;
@@ -569,7 +564,7 @@ function mount(root) {
         S.tourAt = now;
         const score = o => (/LIFT/.test(o.mode) ? 3 : /DELIVER|DOOR/.test(o.mode) ? 2.5 : /CLEAN/.test(o.mode) ? 2 : /CHARG|IDLE/.test(o.mode) ? 0 : 1) + R();
         const cand = fleet.filter(o => o !== S.sel).sort((a, b) => score(b) - score(a));
-        select(cand[0], true, true); controls.autoRotate = true; controls.autoRotateSpeed = 1.1;
+        select(cand[0], true, true); controls.autoRotate = !REDUCED; controls.autoRotateSpeed = 1.1;
       }
     }
     const r = S.sel;
@@ -584,7 +579,7 @@ function mount(root) {
     }
     controls.update();
     placeMeshes(now / 1000); labels();
-    if (lowQ) renderer.render(scene, camera); else composer.render();
+    if (canvas.clientWidth) { if (lowQ) renderer.render(scene, camera); else composer.render(); }
     if (!lowQ && qN < 120) { qN++; if (qN === 30) qT = now; if (qN === 120 && 90000 / (now - qT) < 40) { lowQ = true; renderer.setPixelRatio(1); resize(); } }
     uiT += rdt; histT += rdt;
     if (histT > .5) { histT = 0; fleet.forEach(o => { o.hist.bat.push(o.battery); o.hist.spd.push(o.speed); if (o.hist.bat.length > 90) { o.hist.bat.shift(); o.hist.spd.shift(); } }); }
@@ -596,53 +591,85 @@ function mount(root) {
 }
 
 function buildUI(root) {
-  root.innerHTML = `
-  <div class="fl-val">
-    <div class="v v-hero"><small>Staff hours returned</small><b data-v="hours">–</b><span data-v="shifts"></span><svg class="v-spark" data-v="hspark" viewBox="0 0 200 40" preserveAspectRatio="none"></svg></div>
-    <div class="v"><small>Labour value</small><b data-v="value">–</b><span>today, at $22 / h (est.)</span></div>
-    <div class="v"><small>Guest requests</small><b data-v="req">–</b><span data-v="reqh"></span></div>
-    <div class="v v-ring"><svg data-v="ring" viewBox="0 0 64 64"></svg><div><small>On time</small><b data-v="ontime">–</b><span data-v="ontimes"></span></div></div>
-    <div class="v"><small>Robots working</small><b data-kpi="active">–</b><span data-v="faults"></span></div>
-    <div class="v v-clock"><small>Site time</small><b data-clock>–</b><span data-v="speed">4× speed</span></div>
-  </div>
-  <div class="fl-main">
-    <div class="fl-view">
-      <canvas aria-label="3D view of the hotel tower with robots moving between floors"></canvas>
-      <div class="fl-labels"></div><div class="fl-flabs"></div>
-      <div class="fl-ctl">
-        <button type="button" data-a="tour" aria-pressed="true">▶ Tour</button>
-        <button type="button" data-a="whole">Whole building</button>
-        <button type="button" data-a="follow" aria-pressed="false">Follow robot</button>
-        <span class="fl-sep"></span>
-        <button type="button" data-s="1" aria-pressed="false">1×</button><button type="button" data-s="4" aria-pressed="true">4×</button><button type="button" data-s="12" aria-pressed="false">12×</button>
-        <button type="button" data-a="pause" aria-pressed="false">❚❚</button>
-      </div>
-      <div class="fl-cap"><small>Now following</small><b></b><span></span><em></em></div>
-      <div class="fl-legend"><span style="--c:#38D0FF">Delivery</span><span style="--c:#F2B544">Luggage</span><span style="--c:#B49CFF">Linen</span><span style="--c:#3FD08A">Floor care</span><span style="--c:#D4A65A">Lifts</span></div>
+  const host = root;
+  host.innerHTML = `
+  <div class="fx">
+    <div class="fx-copy">
+      <small>Hotel.OS on the general manager's tablet</small>
+      <h3>The whole building, in one hand</h3>
+      <ul>
+        <li><b>Live map</b>Every robot, lift and floor, as it happens.</li>
+        <li><b>Needs attention</b>Only the moments that need a person.</li>
+        <li><b>Requests</b>Volume and response time against target.</li>
+        <li><b>Floors</b>Cleaning progress, floor by floor.</li>
+      </ul>
+      <p>Shown on a Rhino T105, the tablet in the Mobile Devices plan.</p>
     </div>
-    <aside class="fl-panel" aria-label="Fleet telemetry">
-      <div class="fl-ph"><b>Fleet</b><span>tap a robot to follow it</span></div>
-      <div class="fl-list"></div>
-      <div class="fl-detail" aria-live="off"></div>
-    </aside>
+    <div class="fx-dev"><div class="fx-scr">
+  <div class="fa">
+    <div class="fa-top"><div class="fa-prop"><span class="fa-logo"></span><div><b>The Grand</b><span>Operations</span></div></div><div class="fa-live"><i></i><span>Live</span><b data-clock>–</b></div></div>
+    <div class="fa-tabs" role="tablist"><button role="tab" data-tab="live" aria-selected="true">Live</button><button role="tab" data-tab="req" aria-selected="false">Requests</button><button role="tab" data-tab="floors" aria-selected="false">Floors</button><button role="tab" data-tab="fleet" aria-selected="false">Fleet</button></div>
+    <div class="fa-pane on" data-pane="live">
+      <div class="fl-val">
+        <div class="v"><small>Open requests</small><b data-v="open">–</b><span data-v="opens"></span></div>
+        <div class="v"><small>Avg response</small><b data-v="resp">–</b><span data-v="resps"></span></div>
+        <div class="v"><small>Floor care</small><b data-v="fc">–</b><span data-v="fcs"></span></div>
+        <div class="v"><small>Robots working</small><b data-kpi="active">–</b><span data-v="fleet"></span></div>
+        <div class="v v-att"><small>Needs attention</small><b data-v="att">–</b><span data-v="atts"></span></div>
+        <div class="v"><small>Shift</small><b>Night</b><span data-v="speed"></span></div>
+      </div>
+      <div class="fl-main">
+        <div class="fl-view">
+          <canvas aria-label="3D view of the hotel with robots moving between floors"></canvas>
+          <div class="fl-labels"></div><div class="fl-flabs"></div>
+          <div class="fl-ctl">
+            <button type="button" data-a="tour" aria-pressed="true">Tour</button>
+            <button type="button" data-a="whole">Building</button>
+            <button type="button" data-a="follow" aria-pressed="false">Follow</button>
+            <span class="fl-sep"></span>
+            <button type="button" data-s="1" aria-pressed="false">1×</button><button type="button" data-s="4" aria-pressed="true">4×</button><button type="button" data-s="12" aria-pressed="false">12×</button>
+            <button type="button" data-a="pause" aria-pressed="false" aria-label="Pause">❚❚</button>
+          </div>
+          <div class="fl-cap"><small>Following</small><b></b><span></span><em></em></div>
+          <div class="fl-legend"><span style="--c:#38D0FF">Delivery</span><span style="--c:#F2B544">Luggage</span><span style="--c:#B49CFF">Linen</span><span style="--c:#3FD08A">Floor care</span></div>
+        </div>
+      </div>
+      <section class="d d-att"><header><div><b>Needs attention</b><span>raised by the fleet</span></div></header><ul data-d="att" class="d-attl"></ul></section>
+      <div class="fl-panel">
+        <section class="d"><header><div><b>Robots</b><span>tap to follow</span></div></header><div class="fl-list"></div></section>
+        <div class="fl-detail"></div>
+      </div>
+    </div>
+    <div class="fa-pane" data-pane="req">
+      <section class="d"><header><div><b>Requests and jobs today</b><span>by hour</span></div><ul class="d-leg"><li style="--c:#5FA8E8">Deliveries</li><li style="--c:#C9A35C">Luggage</li><li style="--c:#8F84D6">Linen</li><li style="--c:#5BBF8E">Floor-care zones</li></ul></header><svg data-d="hourly" viewBox="0 0 660 220"></svg></section>
+      <div class="fa-2">
+        <section class="d"><header><div><b>Response time</b><span>last 16 deliveries · minutes</span></div></header><svg data-d="deliv" viewBox="0 0 320 170"></svg></section>
+        <section class="d"><header><div><b>Requests by type</b><span>today</span></div></header><div data-d="types" class="d-types"></div></section>
+      </div>
+      <section class="d"><header><div><b>Activity</b><span>from the fleet adapter</span></div></header><ol class="fl-log"></ol></section>
+    </div>
+    <div class="fa-pane" data-pane="floors">
+      <section class="d"><header><div><b>Floor care tonight</b><span>corridors and lobby</span></div></header><div data-d="floors" class="d-floors"></div></section>
+    </div>
+    <div class="fa-pane" data-pane="fleet">
+      <div data-d="cards" class="d-cards"></div>
+      <section class="d"><header><div><b>Availability today</b><span>share of time</span></div><ul class="d-leg"><li style="--c:#5BBF8E">On task</li><li style="--c:#5FA8E8">Charging</li><li style="--c:#3A4560">Idle or waiting</li></ul></header><div data-d="util" class="d-util"></div></section>
+    </div>
   </div>
-  <div class="fl-dash">
-    <section class="d d-wide"><header><div><b>Tasks completed today</b><span>by hour · current hour fills live</span></div><ul class="d-leg"><li style="--c:#38D0FF">Delivery</li><li style="--c:#F2B544">Luggage</li><li style="--c:#B49CFF">Linen</li><li style="--c:#3FD08A">Floor-care zones</li></ul></header><svg data-d="hourly" viewBox="0 0 660 230"></svg></section>
-    <section class="d d-out"><header><div><b>Monthly outlook</b><span>the 8 robots shown · est.</span></div></header><div data-d="outlook"></div></section>
-    <section class="d"><header><div><b>Hours returned to teams</b><span>today · est.</span></div></header><div class="d-donut"><svg data-d="donut" viewBox="0 0 120 120"></svg><ul data-d="dleg"></ul></div></section>
-    <section class="d"><header><div><b>Delivery time vs target</b><span>last 16 deliveries · minutes</span></div></header><svg data-d="deliv" viewBox="0 0 320 170"></svg></section>
-    <section class="d d-fl"><header><div><b>Floor care tonight</b><span>corridors and lobby, by floor</span></div></header><div data-d="floors" class="d-floors"></div></section>
-    <section class="d d-full"><header><div><b>Robot utilisation today</b><span>share of time working · charging · idle</span></div><ul class="d-leg"><li style="--c:#3FD08A">Working</li><li style="--c:#38D0FF">Charging</li><li style="--c:#3A4560">Idle / waiting</li></ul></header><div data-d="util" class="d-util"></div></section>
-  </div>
-  <div class="fl-cta"><div><b>See this running in your building</b><span>Start with a 16-week pilot, measured on these same dashboards · ≈ $4.5k / month (est.)</span></div><a href="#next">See the pilot plan →</a></div>
-  <p class="fl-assume">Model assumptions (est.): loaded labour $22 / h · staff minutes saved per task: delivery 12, luggage 15, linen run 20 · manual floor care 400 m² / h · fleet cost ≈ $12.9k / month for ≈ 20 robots, pro-rated to the 8 shown. Hours returned are staff time freed for other work, not guaranteed payroll savings.</p>
-  <div class="fl-logw"><div class="fl-ph"><b>Event stream</b><span>Hotel.OS fleet adapter</span></div><ol class="fl-log"></ol></div>`;
-  const q = s => root.querySelector(s);
+    </div></div>
+  </div>`;
+  const q = s => host.querySelector(s);
+  host.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
+    host.querySelectorAll('[data-tab]').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    host.querySelectorAll('[data-pane]').forEach(p => p.classList.toggle('on', p.dataset.pane === b.dataset.tab));
+    window.dispatchEvent(new Event('resize'));
+  });
   return {
     canvas: q('canvas'), labels: q('.fl-labels'), list: q('.fl-list'), detail: q('.fl-detail'), log: q('.fl-log'), clock: q('[data-clock]'),
-    followBtn: q('[data-a="follow"]'), tourBtn: q('[data-a="tour"]'), cap: q('.fl-cap'), wholeBtn: q('[data-a="whole"]'), pauseBtn: q('[data-a="pause"]'), speedBtns: [...root.querySelectorAll('[data-s]')],
+    followBtn: q('[data-a="follow"]'), wholeBtn: q('[data-a="whole"]'), pauseBtn: q('[data-a="pause"]'), speedBtns: [...host.querySelectorAll('[data-s]')],
+    tourBtn: q('[data-a="tour"]'), cap: q('.fl-cap'),
     kpi: { active: q('[data-kpi="active"]') }, V: k => q(`[data-v="${k}"]`), D: k => q(`[data-d="${k}"]`), dirtyDash: true,
-    floorLabs: Array.from({ length: NF }, (_, f) => { const e = document.createElement('span'); e.className = 'fl-flab'; e.textContent = f ? `L${f + 1}` : 'L1 lobby'; q('.fl-flabs').appendChild(e); return e; }),
+    floorLabs: Array.from({ length: NF }, (_, f) => { const e = document.createElement('span'); e.className = 'fl-flab'; e.textContent = f ? `L${f + 1}` : 'L1'; q('.fl-flabs').appendChild(e); return e; }),
     dirtyLog: true,
   };
 }
