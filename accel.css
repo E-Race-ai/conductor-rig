@@ -603,3 +603,6 @@ th.ar-sortable:hover{color:#EEF2FA}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555!important}
 }
 .hg>*,.fc-pro>*,.fc-two>*{min-width:0}
+
+/* Installed app (home-screen icon): hide the public-link expiry notice; the app keeps working offline */
+@media (display-mode: standalone), (display-mode: fullscreen) { .ar-exp { display: none !important; } }
