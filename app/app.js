@@ -1,6 +1,12 @@
 // Installable offline app: registers the service worker and shows a small status pill
 // ("Saving for offline", "Ready offline", "Offline · saved copy"). Built into public/app/app.js.
 (function () {
+  // Inside the native Android app every file is bundled, so no service worker and no public-link notice.
+  if (location.hostname === 'appassets.androidplatform.net') {
+    document.documentElement.classList.add('in-app');
+    const st = document.createElement('style'); st.textContent = '.ar-exp{display:none!important}'; document.head.appendChild(st);
+    return;
+  }
   if (!('serviceWorker' in navigator) || location.protocol === 'file:') return;
   let pill, hideT;
   function show(text, ok, stay) {
