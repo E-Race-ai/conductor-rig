@@ -74,7 +74,7 @@
       g.strokeStyle = 'rgba(212,166,90,.45)'; rr(g, 230, 40, 954, 540, 18); g.stroke(); g.restore();
       g.font = '600 10.5px "IBM Plex Mono", monospace'; g.textAlign = 'left'; g.fillStyle = COL.gold; g.fillText('ON PREMISES · THE BRAIN', 244, 34 + 22);
       g.fillStyle = COL.cyan; g.fillText('CLOUD · EGRESS C0–C1 ONLY', 914, 86 + 22);
-      g.fillStyle = COL.faint; g.fillText('BUSINESS-UNIT LEADS', 40, 80);
+      g.fillStyle = COL.faint; g.fillText('EVERY EMPLOYEE', 40, 80);
       g.fillText('AGENT SANDBOXES · NO PROD CREDENTIALS', 262, 498 + 18);
       // nodes
       N.leads.forEach(function (l, i) { box(l, COL.line, glow['l' + i] > 0); g.fillStyle = COL.text; g.font = '600 13.5px Inter, sans-serif'; g.textAlign = 'left'; g.fillText(l.t, l.x + 14, l.y + 25); g.fillStyle = COL.dim; g.font = '500 10.5px "IBM Plex Mono", monospace'; g.fillText('every employee · own device', l.x + 14, l.y + 43); });
