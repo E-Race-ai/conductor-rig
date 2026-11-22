@@ -223,7 +223,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
             <li><b>Cooler:</b> SilverStone XE360-SP5, top-mounted as exhaust</li>
             <li><b>Power:</b> Super Flower Leadex VII Platinum PRO 1200 W</li>
             <li><b>Case:</b> Antec 900, with 6 fans included</li>
-            <li><b>Storage:</b> 2× Kioxia CD6-R 7.68 TB U.3 (Amazon, the Expertly.Ai pick) + 2× MCIO→U.2 cables</li>
+            <li><b>Storage:</b> 2× Kioxia CD6-R 7.68 TB U.3 (Amazon) + 2× MCIO→U.2 cables</li>
           </ul>
           <p><b>Upgrade path:</b> 1) memory first: 4 more identical RDIMMs gives 256 GB on all 8 channels and twice the bandwidth; 2) GPU memory second: an RTX PRO 5000 48 GB or a second card (4 full x16 slots free); 3) a bigger PSU only when a second 300 W+ GPU goes in. <a href="#compare">Why A over B →</a></p>
         </div>
@@ -934,7 +934,7 @@ const FINDINGS = [
  {lvl:'info',t:'GPU goes in PCIE0, 2, 4 or 6, not 1 or 7',d:'On the TURIND8X-2T, slot 1 shares lanes with an MCIO port and an M.2 slot, and slot 7 (x8) with two MCIO ports. Keeping the GPU in an even slot means the U.3 drive cables never take its lanes.'},
  {lvl:'info',t:'The onboard video is VGA only',d:'It belongs to the AST2600 BMC. Do BIOS setup through the BMC web console (remote KVM) or a VGA monitor, then use the GPU for the desktop. Change the default BMC password on first login.'},
  {lvl:'ok',t:'The $5,999.99 bundle price is fair',d:'CPU ($3.0–3.7k street) plus board ($1.1–1.3k) is $4.1–5.0k, leaving $1.0–1.9k for 128 GB of RDIMM. That is at or below what the memory costs today.'},
- {lvl:'ok',t:'$2,449 per Kioxia CD6-R is market price',d:'~$319/TB with power-loss protection and 1 DWPD endurance (Expertly.Ai\'s pick; Micro Center doesn\'t carry enterprise U.3). HP-branded units are often server pulls: check SMART power-on hours on arrival and confirm the part number on HPE PartSurfer.'},
+ {lvl:'ok',t:'$2,449 per Kioxia CD6-R is market price',d:'~$319/TB with power-loss protection and 1 DWPD endurance (Micro Center doesn\'t carry enterprise U.3). HP-branded units are often server pulls: check SMART power-on hours on arrival and confirm the part number on HPE PartSurfer.'},
  {lvl:'ok',t:'Power fits a normal 15 A outlet today',d:'About 770 W peak inside the case, ~850 W at the wall, under the 1,440 W continuous limit of a 15 A circuit. Keep heaters and printers off that circuit. A second big GPU later means a 20 A circuit and a larger PSU. UPS: 1500 VA is tight, 2200 VA is recommended.'},
 ];
 
@@ -973,7 +973,7 @@ const DECISIONS = [
   {id:'aio',label:'SilverStone XE360-SP5 AIO (final)',d:'$379.99 · top exhaust in the Antec 900 · quieter under load · the pump is a failure point',apply:{cooler:'xe360sp5'}},
   {id:'air',label:'Arctic Freezer 4U-SP5 air (EPYC)',d:'~$80 (estimate) · rated 360 W · no pump · louder at full load',apply:{cooler:'freezer4usp5'}},
  ]},
- {id:'storage',q:'Buy both U.3 drives now?',decided:'two',ctx:'<b>Decided:</b> 2× Kioxia CD6-R 7.68 TB from Amazon (the Expertly.Ai pick; Micro Center doesn\'t carry enterprise U.3), plus 2× MCIO→U.2 cables. HP-branded units are often server pulls, so check SMART hours on arrival.',rec:'two',opts:[
+ {id:'storage',q:'Buy both U.3 drives now?',decided:'two',ctx:'<b>Decided:</b> 2× Kioxia CD6-R 7.68 TB from Amazon (Micro Center doesn\'t carry enterprise U.3), plus 2× MCIO→U.2 cables. HP-branded units are often server pulls, so check SMART hours on arrival.',rec:'two',opts:[
   {id:'two',label:'Buy both now (final)',d:'~$4,898 + cables · 15.4 TB enterprise storage',apply:{drive1:'cd6r768',drive2:'cd6r768'}},
   {id:'one',label:'Buy one, check it, then the second',d:'~$2,449 now · check SMART hours and warranty before ordering the next',apply:{drive1:'cd6r768',drive2:'none'}},
   {id:'m2',label:'Use the board\'s M.2 slots instead',d:'Gen5 M.2 reads faster for model loading · lower endurance · 8 TB prices have spiked too',apply:{drive1:'9100pro4',drive2:'none'}},
