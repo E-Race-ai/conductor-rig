@@ -1,5 +1,5 @@
 /* The Brain · live orchestration view (illustrative simulation).
-   Department leads -> control plane -> sandboxes -> model router -> frontier (C0/C1) or local (C2)
+   Employees -> control plane -> sandboxes -> model router -> frontier (C0/C1) or local (C2)
    -> review gate -> Git main -> context brain. Every hop writes to the audit log.
    Auto-mounts every [data-brain-flow] element. No dependencies. */
 (function () {
@@ -9,7 +9,7 @@
   var COL = { bg: '#070B16', grid: '#0F1830', line: '#24304F', text: '#EEF2FA', dim: '#8E9AB5', faint: '#5A6684',
     blue: '#4D8BFF', ctx: '#7FA6FF', gold: '#D4A65A', cyan: '#00C8FF', green: '#2FD39A', white: '#EEF2FA', red: '#FF6B5E' };
   var N = {
-    leads: [['Operations', 40, 96], ['Finance', 40, 196], ['Sales & BD', 40, 296], ['Field engineering', 40, 396]].map(function (a) { return { t: a[0], x: a[1], y: a[2], w: 170, h: 58 }; }),
+    leads: [['Operations staff', 40, 96], ['Finance & admin', 40, 196], ['Sales & BD', 40, 296], ['Engineering & field', 40, 396]].map(function (a) { return { t: a[0], x: a[1], y: a[2], w: 170, h: 58 }; }),
     ctx: { t: 'Central context brain', s: 'repos · specs · ADRs · decision log', x: 300, y: 64, w: 290, h: 92, c: COL.ctx },
     ctl: { t: 'Control plane', s: 'queue · policy · budgets · lifecycle', x: 300, y: 236, w: 290, h: 100, c: COL.blue },
     sb: [0, 1, 2, 3].map(function (i) { return { t: ['Ops', 'Finance', 'Sales', 'Field'][i], x: 262 + i * 96, y: 420, w: 86, h: 54 }; }),
@@ -77,7 +77,7 @@
       g.fillStyle = COL.faint; g.fillText('BUSINESS-UNIT LEADS', 40, 80);
       g.fillText('AGENT SANDBOXES · NO PROD CREDENTIALS', 262, 498 + 18);
       // nodes
-      N.leads.forEach(function (l, i) { box(l, COL.line, glow['l' + i] > 0); g.fillStyle = COL.text; g.font = '600 13.5px Inter, sans-serif'; g.textAlign = 'left'; g.fillText(l.t, l.x + 14, l.y + 25); g.fillStyle = COL.dim; g.font = '500 10.5px "IBM Plex Mono", monospace'; g.fillText('spec · priority · accept', l.x + 14, l.y + 43); });
+      N.leads.forEach(function (l, i) { box(l, COL.line, glow['l' + i] > 0); g.fillStyle = COL.text; g.font = '600 13.5px Inter, sans-serif'; g.textAlign = 'left'; g.fillText(l.t, l.x + 14, l.y + 25); g.fillStyle = COL.dim; g.font = '500 10.5px "IBM Plex Mono", monospace'; g.fillText('every employee · own device', l.x + 14, l.y + 43); });
       [['ctx', N.ctx], ['ctl', N.ctl], ['rt', N.rt], ['fr', N.fr], ['lo', N.lo], ['rg', N.rg], ['gm', N.gm]].forEach(function (a) { box(a[1], a[1].c, glow[a[0]] > 0); label(a[1], a[1].c); });
       N.sb.forEach(function (s, i) { box(s, COL.line, glow['s' + i] > 0); g.fillStyle = COL.text; g.font = '600 12.5px Inter, sans-serif'; g.textAlign = 'center'; g.fillText(s.t, cx(s), cy(s) - 2); g.fillStyle = COL.faint; g.font = '500 9.5px "IBM Plex Mono", monospace'; g.fillText('container', cx(s), cy(s) + 13); });
       // packets
