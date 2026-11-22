@@ -68,6 +68,8 @@ This decides the whole software stack. No one has publicly confirmed low-level c
 
 ## Step 2: Software on the Jetson
 
+**Full procedure:** [Jetson Orin Nano Super setup guide](fu-jetson-setup.html), covering flashing, firmware, first boot, SSH, NVMe, ROS 2, cameras, LiDAR and the acceptance checklist.
+
 - **NVMe SSD:** add a 1 TB NVMe SSD (~$80–120 est.) and boot from it, not microSD.
 - **JetPack 6.2:** flash it on Ubuntu 22.04 to unlock **Super mode** (67 TOPS, 25 W profile). It pairs with **ROS 2 Humble**, the version unitree_ros2 recommends. Pin CycloneDDS 0.10.x to match the robot.
 - **Containers:** run Docker with Isaac ROS containers as needed.
