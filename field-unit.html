@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev G · 2026-11-19"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev H · 2026-11-22"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Site Capture · Accelerate Robotics</title>
 <meta name="description" content="Accelerate Site Capture (PRJ-02, FU-SYS-001): a quadruped-mounted mobile reality capture system for building-scale survey. Survey-controlled LiDAR, 4K and 360° imagery, segment-based SLAM and checkpoint QA, with the full technical specification.">
@@ -516,7 +516,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <a class="mark" href="#top">SITE CAPTURE<span></span></a>
     <div class="navlinks">
-      <a class="keep" href="#service">Scope</a><a href="#hosp">Constraints</a><a class="keep" href="#trust">Data controls</a><a href="#deliver">Deliverables</a><a href="#conops">ConOps</a><a href="#req">Requirements</a><a href="#arch">Architecture</a><a href="#payload">Payload</a><a href="#power">Power</a><a href="#data">Data</a><a href="#qa">QA/QC</a><a href="#sec">Security</a><a href="#safety">Safety</a><a href="#sop">SOPs</a><a href="#vv">V&amp;V</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a><a href="#roadmap">Roadmap</a>
+      <a class="keep" href="#plan">Plan</a><a class="keep" href="#service">Scope</a><a href="#hosp">Constraints</a><a class="keep" href="#trust">Data controls</a><a href="#deliver">Deliverables</a><a href="#conops">ConOps</a><a href="#req">Requirements</a><a href="#arch">Architecture</a><a href="#payload">Payload</a><a href="#power">Power</a><a href="#data">Data</a><a href="#qa">QA/QC</a><a href="#sec">Security</a><a href="#safety">Safety</a><a href="#sop">SOPs</a><a href="#vv">V&amp;V</a><a href="#risk">Risks</a><a class="keep" href="#bom">BOM</a><a href="#roadmap">Roadmap</a>
     </div>
   </div>
 </nav>
@@ -1068,7 +1068,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t" style="min-width:860px">
       <thead><tr><th>Generation</th><th>Configuration</th><th>Purpose</th><th>Exit gate</th></tr></thead>
       <tbody>
-        <tr class="hi"><th>Gen-0 <span class="chip ver">active</span></th><td>Go2 X + Jetson Orin Nano Super + L2 + X4</td><td>Validate capture workflow: segmentation, sync, offload, QA</td><td><b>G0</b> rear-port access test (DDS topics exposed: result A/B) · <b>G1</b> pilot day passes §11</td></tr>
+        <tr class="hi"><th>Gen-0 <span class="chip ver">active</span></th><td>Go2 X + Jetson Orin Nano Super + Livox Mid-360S + BRIO + X4 + Pocket 3 (see project plan)</td><td>Validate capture workflow: segmentation, sync, offload, QA</td><td><b>G0</b> rear-port access test (DDS topics exposed: result A/B) · <b>G1</b> pilot day passes §11</td></tr>
         <tr><th>Gen-1</th><td>XT32-class LiDAR or Hovermap ST-X / BLK ARC + Blackfly S + X4 + ruggedized compute, PDB, M12</td><td>Production payload meeting the client LOA</td><td><b>G2</b> client LOA (FU-REQ-001) and security acceptance confirmed</td></tr>
         <tr><th>Gen-2</th><td>Carrier selected by pilot results: Go2 EDU/B2 vs Spot vs wearable-first hybrid</td><td>Production carrier for repeat captures</td><td><b>G3</b> carrier decision including compliance gate (1260H / FCC / client IT)</td></tr>
       </tbody></table></div>
@@ -1090,6 +1090,73 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><th>Survey control (cost)</th><td class="m">PLS crew $195–250/h</td><td class="m">$10k–30k (≈$45k multi-storey)</td></tr>
       </tbody></table></div>
     <p class="src" style="margin-top:8px">Market rates from published scanning price lists; smaller jobs quote $0.20–0.70/sq ft. Planning figures only.</p>
+  </div>
+</section>
+
+<section class="band" id="plan">
+  <div class="wrap">
+    <div class="kicker">FU-SYS-001 · Gen-0 project plan · status 2026-11-22</div>
+    <h2>Gen-0 payload: project plan</h2>
+    <p class="lead">Work packages to take the Gen-0 payload from bench to the G1 pilot day: Jetson Orin Nano Super compute, Livox Mid-360S LiDAR, Logitech BRIO, Insta360 X4 and DJI Osmo Pocket 3 on the Go2 X. Status reflects the first bench session on 2026-11-22. Sequence is a plan, not committed dates. Measured values come from that session; estimates are marked est.</p>
+    <div class="ms-seg">
+      <div><span class="lv">Compute</span><h4>Brought up <span class="chip ok">done</span></h4><p>Jetson Linux R36.4.7, MAXN SUPER, always-on, key-only SSH, monitoring.</p></div>
+      <div><span class="lv">Cameras</span><h4>3 connected <span class="chip ver">in progress</span></h4><p>All three stream to the Jetson. Load test 1 run; drops traced to USB 2 hub and microSD.</p></div>
+      <div><span class="lv">LiDAR</span><h4>Mid-360S selected <span class="chip open">to buy</span></h4><p>Lowest integration risk; PTP time sync; 9–27 V, 6.5 W.</p></div>
+      <div><span class="lv">Storage · power</span><h4>NVMe, battery <span class="chip open">blocking</span></h4><p>28 GB microSD is 85% full after a 5-min test. Field power: Omnicharge 20+ at 19 V.</p></div>
+    </div>
+
+    <h3 class="ms-h3"><i>15.1</i>Payload sensors and roles</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:18%">Sensor</th><th style="width:26%">Role</th><th>Connection and mode (measured 2026-11-22)</th><th style="width:22%">Time sync to LiDAR</th></tr></thead>
+      <tbody>
+        <tr><th>Livox Mid-360S</th><td>Primary mapping LiDAR with built-in IMU</td><td>Dedicated USB Gigabit Ethernet adapter on the Jetson (present); livox_ros_driver2 with the Mid-360S configuration. Not yet purchased</td><td>Jetson as PTPv2 master (software timestamps)</td></tr>
+        <tr><th>Logitech BRIO</th><td>Fixed, calibrated live camera: context and point-cloud colour</td><td>UVC MJPEG. Linked at USB 2, so capped at 1080p30; 4K30 needs a USB 3 link</td><td>Host frame timestamps plus a measured fixed offset</td></tr>
+        <tr><th>Insta360 X4</th><td>360° walkthrough and Gaussian-splat layer</td><td>Webcam mode: stitched 2880×1440 MJPEG at 30 fps over USB 2. Production: 8K/5.7K recorded on the camera, controlled through the Insta360 Camera SDK</td><td>Gyro track cross-correlated with LiDAR IMU, plus start/end markers</td></tr>
+        <tr><th>DJI Osmo Pocket 3</th><td>Operator inspection video; backup live camera</td><td>Webcam mode: MJPEG up to 3840×2160 at 30 fps over USB 2 (H.264 mode fails on the stock Linux driver). Must be re-armed in webcam mode after any power loss</td><td>LED flash and audio marker per segment</td></tr>
+      </tbody></table></div>
+
+    <h3 class="ms-h3"><i>15.2</i>Work packages</h3>
+    <div class="ms-tw"><table class="ms-t" style="min-width:860px">
+      <thead><tr><th style="width:5%">WP</th><th style="width:17%">Work package</th><th>Scope and deliverable</th><th style="width:11%">Status</th><th style="width:24%">Next action / exit check</th></tr></thead>
+      <tbody>
+        <tr><th class="m">1</th><td>Compute bring-up</td><td>JetPack 6.2.1 SD image, updated to Jetson Linux R36.4.7; MAXN SUPER; suspend, screen lock and USB autosuspend disabled; key-only SSH; jtop; stable camera device names</td><td><span class="chip ok">done</span></td><td>Bring-up guide published (fu-jetson-setup)</td></tr>
+        <tr><th class="m">2</th><td>Storage</td><td>Fit 1–2 TB NVMe; move the root filesystem off microSD; record to NVMe only</td><td><span class="chip open">blocking</span></td><td><span class="m">lsblk</span> shows root on nvme0n1; sustained write test</td></tr>
+        <tr><th class="m">3</th><td>Power</td><td>Omnicharge 20+ at 19 V DC to the Jetson barrel jack; separate regulated rail for the LiDAR (9–27 V); fuses and e-stop per §Power</td><td><span class="chip open">open</span></td><td>Measured runtime under full capture load; no under-voltage events</td></tr>
+        <tr><th class="m">4</th><td>Cameras</td><td>BRIO on a USB 3 link (4K modes visible); each camera on its own port; lock BRIO focus, exposure and white balance; apply for Insta360 SDK access; Pocket 3 webcam re-arm procedure</td><td><span class="chip ver">in progress</span></td><td><span class="m">lsusb -t</span> shows 5000M for BRIO; load test 2 with zero sequence gaps</td></tr>
+        <tr><th class="m">5</th><td>LiDAR</td><td>Purchase Mid-360S; build Livox-SDK2 and livox_ros_driver2; static IP on the USB Ethernet port; point-cloud and IMU topics at rated rate</td><td><span class="chip open">to buy</span></td><td><span class="m">ros2 topic hz</span> at 10 Hz point cloud and full IMU rate</td></tr>
+        <tr><th class="m">6</th><td>Time synchronisation</td><td>ptp4l master on the LiDAR port; camera-to-LiDAR offset measured with a Jetson-driven LED; X4 gyro-to-IMU alignment procedure</td><td><span class="chip open">open</span></td><td>LiDAR packets report PTP-synced timestamps; offset repeatable across runs</td></tr>
+        <tr><th class="m">7</th><td>Recording</td><td>ROS 2 Humble; rosbag2 MCAP on NVMe; camera JPEG frames passed through unchanged (no transcoding; Orin Nano has no hardware encoder)</td><td><span class="chip open">open</span></td><td>60-min bag with all topics, no drops; GB/h recorded</td></tr>
+        <tr><th class="m">8</th><td>SLAM and calibration</td><td>Live FAST-LIO2 or Point-LIO on the Jetson; camera intrinsics; camera-LiDAR extrinsics</td><td><span class="chip open">open</span></td><td>Loop closure on a bench lap; reprojection error recorded</td></tr>
+        <tr><th class="m">9</th><td>Mechanical integration</td><td>Rigid plate with fixed sensor extrinsics, harness, strain relief and cooling on the Go2 X; G0 rear-port access test</td><td><span class="chip open">open</span></td><td>Payload mass within budget; G0 result A or B recorded</td></tr>
+        <tr><th class="m">10</th><td>Validation</td><td>Load test 2 (5 min) on NVMe; 60-min battery soak; pilot day</td><td><span class="chip open">open</span></td><td><b>G1</b> pilot day passes §11 QA</td></tr>
+      </tbody></table></div>
+
+    <h3 class="ms-h3"><i>15.3</i>Load test 1 results (2026-11-22, bench, wall power, MAXN SUPER)</h3>
+    <p class="ms-p">300 s, MJPEG at top live mode, logged frame by frame. X4 stream written to microSD; BRIO stream discarded. The Pocket 3 was not connected for this run.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th>Stream</th><th>Mode</th><th>Avg fps (target 30)</th><th>Dropped frames</th><th>Data rate</th></tr></thead>
+      <tbody>
+        <tr><th>BRIO (USB 2)</th><td class="m">1920×1080 MJPEG</td><td class="m">27.8</td><td class="m">650 (7.2%)</td><td class="m">6.8 MB/s · 24.4 GB/h</td></tr>
+        <tr><th>Insta360 X4 → microSD</th><td class="m">2880×1440 MJPEG</td><td class="m">23.4</td><td class="m">1,580 (18.4%)</td><td class="m">8.5 MB/s · 30.6 GB/h</td></tr>
+        <tr><th>Pocket 3 (earlier 5 s sample)</th><td class="m">3840×2160 MJPEG</td><td class="m">≈30</td><td class="m">—</td><td class="m">≈25 MB/s · ≈90 GB/h (est.)</td></tr>
+      </tbody></table></div>
+    <div class="ms-tw"><table class="ms-t n">
+      <tbody>
+        <tr><th style="width:30%">CPU</th><td class="m">4.7% average, 37.5% peak</td></tr>
+        <tr><th>RAM</th><td class="m">1.54 GB average of 7.4 GB</td></tr>
+        <tr><th>Junction temperature</th><td class="m">46.8 → 47.2 °C</td></tr>
+        <tr><th>Module input power</th><td class="m">4.2 W average, 6.6 W peak</td></tr>
+        <tr><th>Finding</th><td>Compute has headroom. Drops are I/O: 1–4 s stalls hit both cameras at the same moments (shared onboard USB 2 hub); extra X4-only stalls match microSD write pauses. Fix: NVMe, USB 3 for the BRIO, separate ports, then load test 2.</td></tr>
+      </tbody></table></div>
+
+    <h3 class="ms-h3"><i>15.4</i>Sequence to G1</h3>
+    <div class="ms-seg">
+      <div><span class="lv">Step 1</span><h4>Unblock</h4><p>NVMe fitted (WP2); BRIO on USB 3 (WP4); Omnicharge at 19 V (WP3).</p></div>
+      <div><span class="lv">Step 2</span><h4>Sensors complete</h4><p>Mid-360S purchased and streaming (WP5); X4 SDK access; PTP sync (WP6).</p></div>
+      <div><span class="lv">Step 3</span><h4>Record and localise</h4><p>MCAP recording (WP7); live LiDAR odometry and calibration (WP8); load test 2 and 60-min soak (WP10).</p></div>
+      <div><span class="lv">Step 4</span><h4>On the robot</h4><p>Plate and harness on the Go2 X (WP9); G0 access test; G1 pilot day.</p></div>
+    </div>
+    <p class="src" style="margin-top:8px">Detail: <a href="fu-jetson-setup.html">Jetson setup guide</a> · <a href="fu-build-plan.html">Go2 X build plan</a>. Camera evaluation and full load-test data are kept in the program research reports.</p>
   </div>
 </section>
 
@@ -1131,7 +1198,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><td class="m">D</td><td class="m">2026-11-18</td><td>Building #1 capture mission added</td></tr>
         <tr><td class="m">E</td><td class="m">2026-11-18</td><td>Restructured as MRCS system document; arm moved to R&amp;D backlog; Gen-0/1/2 roadmap</td></tr>
         <tr><td class="m">F</td><td class="m">2026-11-18</td><td>Accelerate Robotics rebrand: Site Capture service story, hospitality operations, trust ecosystem and client deliverables ahead of the technical specification</td></tr>
-        <tr class="hi"><td class="m">G</td><td class="m">2026-11-19</td><td>Service definition (S1–S4) restated in specification register: scope split, operating constraints, data protection controls, deliverables and accuracy statements</td></tr>
+        <tr class="hi"><td class="m">H</td><td class="m">2026-11-22</td><td>Gen-0 project plan added: sensor roles, ten work packages with status, load test 1 results and sequence to G1. Gen-0 LiDAR changed from Unitree L2 to Livox Mid-360S</td></tr>
+        <tr><td class="m">G</td><td class="m">2026-11-19</td><td>Service definition (S1–S4) restated in specification register: scope split, operating constraints, data protection controls, deliverables and accuracy statements</td></tr>
       </tbody></table></div>
   </div>
 </section>
