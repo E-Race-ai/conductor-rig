@@ -1097,11 +1097,11 @@ footer li{break-inside:avoid;margin-bottom:6px}
   <div class="wrap">
     <div class="kicker">FU-SYS-001 · Gen-0 project plan · status 2026-11-22</div>
     <h2>Gen-0 payload: project plan</h2>
-    <p class="lead">Work packages to take the Gen-0 payload from bench to the G1 pilot day: Jetson Orin Nano Super compute, Livox Mid-360S LiDAR, Logitech BRIO, Insta360 X4 and DJI Osmo Pocket 3 on the Go2 X. Status reflects the first bench session on 2026-11-22. Sequence is a plan, not committed dates. Measured values come from that session; estimates are marked est.</p>
+    <p class="lead">Work packages taking the Gen-0 payload from bench to the G1 pilot day: Jetson Orin Nano Super compute, Livox Mid-360S LiDAR, Logitech BRIO, Insta360 X4 and DJI Osmo Pocket 3 on the Go2 X. Status reflects the first bench session on 2026-11-22. Sequence is a plan, not committed dates. Measured values come from that session; estimates are marked est.</p>
     <div class="ms-seg">
       <div><span class="lv">Compute</span><h4>Brought up <span class="chip ok">done</span></h4><p>Jetson Linux R36.4.7, MAXN SUPER, always-on, key-only SSH, monitoring.</p></div>
-      <div><span class="lv">Cameras</span><h4>3 connected <span class="chip ver">in progress</span></h4><p>All three stream to the Jetson. Load test 1 run; drops traced to USB 2 hub and microSD.</p></div>
-      <div><span class="lv">LiDAR</span><h4>Mid-360S selected <span class="chip open">to buy</span></h4><p>Lowest integration risk; PTP time sync; 9–27 V, 6.5 W.</p></div>
+      <div><span class="lv">Cameras</span><h4>3 connected <span class="chip ver">in progress</span></h4><p>All three enumerate and stream. Load test 1: frame drops; see 15.3.</p></div>
+      <div><span class="lv">LiDAR</span><h4>Mid-360S selected <span class="chip open">to buy</span></h4><p>Selected per LiDAR decision sheet (2026-11-21). PTPv2 sync; 9–27 V DC; 6.5 W.</p></div>
       <div><span class="lv">Storage · power</span><h4>NVMe, battery <span class="chip open">blocking</span></h4><p>28 GB microSD is 85% full after a 5-min test. Field power: Omnicharge 20+ at 19 V.</p></div>
     </div>
 
@@ -1156,6 +1156,35 @@ footer li{break-inside:avoid;margin-bottom:6px}
       <div><span class="lv">Step 3</span><h4>Record and localise</h4><p>MCAP recording (WP7); live LiDAR odometry and calibration (WP8); load test 2 and 60-min soak (WP10).</p></div>
       <div><span class="lv">Step 4</span><h4>On the robot</h4><p>Plate and harness on the Go2 X (WP9); G0 access test; G1 pilot day.</p></div>
     </div>
+    <h3 class="ms-h3"><i>15.5</i>As-built record: Gen-0 compute unit (2026-11-22)</h3>
+    <p class="ms-p">Every change made to the unit, in order. Re-run these steps to rebuild it from a blank card. Credentials are not recorded here.</p>
+    <div class="ms-tw"><table class="ms-t" style="min-width:860px">
+      <thead><tr><th style="width:4%">#</th><th style="width:20%">Step</th><th>Command or file</th><th style="width:26%">Result</th></tr></thead>
+      <tbody>
+        <tr><th class="m">1</th><td>Download image</td><td class="m">developer.nvidia.com/downloads/embedded/L4T/r36_Release_v4.4/jp62-r1-orin-nano-sd-card-image.zip</td><td>11,725,610,175 B zip; sd-blob.img 24,086,839,296 B; <span class="m">unzip -t</span> clean</td></tr>
+        <tr><th class="m">2</th><td>Write microSD (32 GB)</td><td>balenaEtcher 2.1.9 (arm64), "Flash from file", verify on. Raw <span class="m">dd</span> from a background process is blocked by macOS privacy controls</td><td>Card boots</td></tr>
+        <tr><th class="m">3</th><td>First boot (oem-config, on DisplayPort monitor)</td><td>User <span class="m">eric</span>, host <span class="m">eric-desktop</span>; APP partition 28324 MB (max); Chromium not installed; Ubuntu Pro skipped</td><td>Desktop; 25 W mode</td></tr>
+        <tr><th class="m">4</th><td>Network</td><td>Onboard Ethernet <span class="m">enP8p1s0</span> to office router, DHCP</td><td>192.168.1.166; MAC 74:25:54:da:e6:8d</td></tr>
+        <tr><th class="m">5</th><td>SSH key</td><td>ed25519 public key appended to <span class="m">~/.ssh/authorized_keys</span></td><td>Key login works</td></tr>
+        <tr><th class="m">6</th><td>Update</td><td class="m">sudo apt-get update &amp;&amp; sudo apt-get -y upgrade &amp;&amp; sudo reboot</td><td>545 packages; <span class="m">/etc/nv_tegra_release</span> R36 REVISION 4.7</td></tr>
+        <tr><th class="m">7</th><td>Power mode</td><td class="m">sudo nvpmodel -m 2</td><td><span class="m">nvpmodel -q</span>: MAXN_SUPER (persists across reboot)</td></tr>
+        <tr><th class="m">8</th><td>SSH keys only</td><td><span class="m">/etc/ssh/sshd_config.d/10-keys-only.conf</span>: <span class="m">PasswordAuthentication no</span>; <span class="m">systemctl reload ssh</span></td><td>Password login over SSH refused; local console login unchanged</td></tr>
+        <tr><th class="m">9</th><td>Camera device names</td><td><span class="m">/etc/udev/rules.d/99-fu-cameras.rules</span>: video4linux index 0 by USB ID → <span class="m">cam_pocket3</span> (2ca3:0023), <span class="m">cam_x4</span> (2e1a:0003), <span class="m">cam_brio</span> (046d:085e)</td><td><span class="m">/dev/cam_*</span> symlinks present</td></tr>
+        <tr><th class="m">10</th><td>Tools</td><td><span class="m">apt install v4l-utils python3-pip</span>; <span class="m">pip3 install jetson-stats</span> (7.3.0); <span class="m">jtop --install-service</span></td><td>jtop.service active</td></tr>
+        <tr><th class="m">11</th><td>Always-on</td><td><span class="m">systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target</span>; GNOME idle-delay 0, screen lock off, idle dim off, sleep-inactive-ac/battery nothing; <span class="m">/etc/udev/rules.d/50-usb-no-autosuspend.rules</span> (power/control=on); logind <span class="m">IdleAction=ignore</span></td><td>suspend.target masked; idle-delay 0</td></tr>
+        <tr><th class="m">12</th><td>Load-test harness</td><td><span class="m">~/loadtest/run.sh [seconds]</span> (v4l2-ctl per camera, tegrastats 1 s, df every 10 s); <span class="m">~/loadtest/an.py &lt;dir&gt;</span> (fps, sequence gaps, data rate, CPU/RAM/temp/power)</td><td>Load test 1 in <span class="m">~/loadtest/20261122-193215</span></td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3"><i>15.6</i>Known issues</h3>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:24%">Issue</th><th>Observed</th><th style="width:30%">Workaround / next step</th></tr></thead>
+      <tbody>
+        <tr><th>Pocket 3 drops off USB after power loss</th><td>Not enumerated after the unit lost power; requires power-on and selecting Webcam on the camera screen</td><td>Add to pre-run checklist; investigate powered USB to keep camera on</td></tr>
+        <tr><th>Pocket 3 H.264 over UVC</th><td>GStreamer v4l2src "not-negotiated"; v4l2-ctl REQBUFS invalid argument, at 4K and 1080p</td><td>Use MJPEG; libuvc-based source untested</td></tr>
+        <tr><th>BRIO limited to 1080p</th><td>Link negotiated at 480M; 4K modes not offered</td><td>USB 3 port/cable; confirm 5000M in <span class="m">lsusb -t</span></td></tr>
+        <tr><th>Frame drops under load</th><td>Load test 1: BRIO 7.2%, X4 18.4% dropped; simultaneous 1–4 s stalls</td><td>Separate ports; record to NVMe; repeat test</td></tr>
+        <tr><th>microSD capacity</th><td>85% used after a 5-min test (2.55 GB written)</td><td>NVMe (WP2)</td></tr>
+        <tr><th>Battery cut-out</th><td>Unit powered off when the power bank was depleted during bench work</td><td>Monitor pack level; runtime test under load (WP3)</td></tr>
+      </tbody></table></div>
     <p class="src" style="margin-top:8px">Detail: <a href="fu-jetson-setup.html">Jetson setup guide</a> · <a href="fu-build-plan.html">Go2 X build plan</a>. Camera evaluation and full load-test data are kept in the program research reports.</p>
   </div>
 </section>
