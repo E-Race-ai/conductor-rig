@@ -1,0 +1,1 @@
+{"file": "room_30000_clean.splat", "steps": 30000, "frames": 417, "trainer": "Brush 0.3.0 (Metal)", "max_resolution": 1920, "params": "max-splats 450k, opac-loss 1e-7, growth-grad 1e-4", "cleaned": "room crop +1.0 m, fog removed", "note": "default: cleaner than the 1,744-frame retrain (room_clean.splat, 2026-11-23: more floaters, same blur); same coordinate frame"}

@@ -1,0 +1,42 @@
+id,class,label,tag,status,space,x_m,y_m,z_m,height_m,source_method,source_capture,created,last_event,last_author
+AST-000001,survey.scale_marker,ArUco 0 (150 mm),MK-000,active,SPC-0001,-1.594,1.459,1.883,1.46,triangulated ArUco corners,CAP-20261123-01,2026-11-23T13:59:12.156475Z,2026-11-23T20:11:11.103302Z,pipeline
+AST-000002,survey.scale_marker,ArUco 1 (150 mm),MK-001,active,SPC-0001,0.552,1.57,-1.075,1.57,triangulated ArUco corners,CAP-20261123-01,2026-11-23T13:59:12.156671Z,2026-11-23T20:11:11.105615Z,pipeline
+AST-000003,equipment.camera,Rig BRIO 4K (fixed),CAM-BRIO,active,SPC-0001,0.291,1.843,-1.371,1.84,image registration into joint model,CAP-20261123-04,2026-11-23T13:59:12.156872Z,2026-11-23T20:11:11.107448Z,pipeline
+AST-000004,equipment.camera,Rig Pocket 3 (fixed),CAM-POCKET3,active,SPC-0001,0.245,1.025,0.165,1.02,image registration into joint model,CAP-20261123-04,2026-11-23T15:13:09.051174Z,2026-11-23T20:11:11.109205Z,pipeline
+AST-000005,equipment.camera,Rig X4 360° (main desk),CAM-X4,active,SPC-0001,0.08,1.597,-0.163,1.6,image registration into joint model,CAP-20261123-04,2026-11-23T15:13:09.052151Z,2026-11-23T20:11:11.110841Z,pipeline
+AST-000006,equipment,Computer mouse,B3-EQP-01,active,SPC-0001,0.593,0.749,0.581,0.75,360° viewpoint detection + AI visual review,,2026-11-23T19:29:59.333780Z,2026-11-23T20:11:11.112482Z,pipeline
+AST-000007,furniture.desk,"Desk (wall unit, cabinets)",B3-FUR-01,active,SPC-0001,-0.863,0.579,1.813,0.58,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.198731Z,2026-11-23T20:11:11.114106Z,pipeline
+AST-000008,other.wall_art,Picture frame,B3-ART-01,active,SPC-0001,-1.632,1.781,-0.212,1.78,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.202579Z,2026-11-23T20:11:11.115748Z,pipeline
+AST-000009,furniture.chair,Office chair,B3-FUR-02,active,SPC-0001,0.174,0.308,1.3,0.31,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.204268Z,2026-11-23T20:11:11.117764Z,pipeline
+AST-000010,furniture.storage,Rolling storage bin,B3-FUR-03,active,SPC-0001,-0.65,0.33,2.055,0.33,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.210805Z,2026-11-23T20:11:11.119683Z,pipeline
+AST-000011,furniture.chair,Office chair,,retired,SPC-0001,-2.074,0.873,-1.574,0.87,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.217708Z,2026-11-23T19:33:10.519332Z,AI review (Claude)
+AST-000012,furniture.desk,Desk (TV desk),B3-FUR-04,active,SPC-0001,0.103,1.121,-1.019,1.12,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.225528Z,2026-11-23T20:11:11.121829Z,pipeline
+AST-000013,other.wall_art,Picture frame,B3-ART-02,active,SPC-0001,-0.129,1.702,1.153,1.7,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.240041Z,2026-11-23T20:11:11.124706Z,pipeline
+AST-000014,furniture.desk,Desk (curved),B3-FUR-05,active,SPC-0001,0.755,0.843,0.054,0.84,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.249719Z,2026-11-23T20:11:11.127656Z,pipeline
+AST-000015,other.wall_art,Picture frame,B3-ART-03,active,SPC-0001,-1.388,1.851,2.091,1.85,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.266825Z,2026-11-23T20:11:11.130428Z,pipeline
+AST-000016,other.plant,Potted plant (snake plant),B3-DEC-01,active,SPC-0001,-2.517,1.059,0.642,1.06,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.289216Z,2026-11-23T20:11:11.132283Z,pipeline
+AST-000017,equipment.monitor,Computer monitor (curved),B3-EQP-02,active,SPC-0001,1.329,1.074,0.27,1.07,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.312724Z,2026-11-23T20:11:11.134886Z,pipeline
+AST-000018,equipment,Keyboard,B3-EQP-03,active,SPC-0001,0.435,0.725,0.416,0.72,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.346029Z,2026-11-23T20:11:11.136719Z,pipeline
+AST-000019,equipment,Keyboard,B3-EQP-04,active,SPC-0001,0.224,1.32,-0.821,1.32,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.366203Z,2026-11-23T20:11:11.139117Z,pipeline
+AST-000020,other,Globe,B3-DEC-02,active,SPC-0001,-0.163,1.237,2.958,1.24,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.401047Z,2026-11-23T20:11:11.140951Z,pipeline
+AST-000021,furniture.storage,Drawer cabinet,B3-FUR-06,active,SPC-0001,-1.296,0.631,-0.113,0.63,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.427031Z,2026-11-23T20:11:11.142996Z,pipeline
+AST-000022,other.wall_art,Picture frame,B3-ART-04,active,SPC-0001,-0.55,1.396,2.866,1.4,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.447764Z,2026-11-23T20:11:11.145284Z,pipeline
+AST-000023,it.computer,Computer (glass case),B3-IT-01,active,SPC-0001,-1.973,1.119,1.178,1.12,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.466295Z,2026-11-23T20:11:11.147219Z,pipeline
+AST-000024,it.computer,Laptop,B3-IT-02,active,SPC-0001,0.77,0.758,0.414,0.76,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.483612Z,2026-11-23T20:11:11.149287Z,pipeline
+AST-000025,other,Decorative branches (vase),B3-DEC-03,active,SPC-0001,-2.195,0.924,0.843,0.92,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.497562Z,2026-11-23T20:11:11.151163Z,pipeline
+AST-000026,equipment.display,Television,B3-EQP-05,active,SPC-0001,0.153,1.511,-1.408,1.51,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.503276Z,2026-11-23T20:11:11.152939Z,pipeline
+AST-000027,other.wall_art,Picture frame (tall),B3-ART-05,active,SPC-0001,-1.851,1.63,1.656,1.63,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.515339Z,2026-11-23T20:11:11.154852Z,pipeline
+AST-000028,equipment,Headphones,B3-EQP-06,active,SPC-0001,-0.734,1.093,2.511,1.09,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.540040Z,2026-11-23T20:11:11.156703Z,pipeline
+AST-000029,furniture.table,Side table (rolling),B3-FUR-07,active,SPC-0001,0.883,0.514,1.766,0.51,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.557384Z,2026-11-23T20:11:11.158653Z,pipeline
+AST-000030,hvac.diffuser,Air vent,B3-HVC-01,active,SPC-0001,-0.997,2.798,-0.928,2.8,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.575951Z,2026-11-23T20:11:11.160667Z,pipeline
+AST-000031,other.wall_art,Woven wall panel,B3-ART-06,active,SPC-0001,-1.33,1.201,2.039,1.2,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.586213Z,2026-11-23T20:11:11.162570Z,pipeline
+AST-000032,equipment,Computer mouse,B3-EQP-07,active,SPC-0001,0.291,1.366,-0.81,1.37,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.600338Z,2026-11-23T20:11:11.165334Z,pipeline
+AST-000033,access.door,Mirrored wardrobe door,B3-DOR-01,active,SPC-0001,-1.358,1.683,-1.106,1.68,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.611441Z,2026-11-23T20:11:11.167990Z,pipeline
+AST-000034,furniture.storage,Cabinet (desk base),B3-FUR-08,active,SPC-0001,-0.641,0.87,0.809,0.87,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.622867Z,2026-11-23T20:11:11.169992Z,pipeline
+AST-000035,access.door,Terrace sliding door,B3-DOR-02,active,SPC-0001,1.945,2.007,2.61,2.01,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.636322Z,2026-11-23T20:11:11.171797Z,pipeline
+AST-000036,other.wall_art,Wood slat wall panel,B3-ART-07,active,SPC-0001,0.497,1.857,-1.283,1.86,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.652418Z,2026-11-23T20:11:11.173469Z,pipeline
+AST-000037,electrical.switch,Light switch,B3-ELE-01,active,SPC-0001,-1.595,1.165,-0.347,1.17,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.669906Z,2026-11-23T20:11:11.175214Z,pipeline
+AST-000038,envelope.window,Window,B3-WIN-01,active,SPC-0001,0.794,1.652,-0.452,1.65,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.683768Z,2026-11-23T20:11:11.176896Z,pipeline
+AST-000039,furniture.storage,Aluminium cases (stacked),B3-FUR-09,active,SPC-0001,-1.6,0.427,0.927,0.43,360° viewpoint detection + AI visual review,,2026-11-23T19:32:14.702315Z,2026-11-23T20:11:11.179018Z,pipeline
+AST-000040,furniture,Desk,,active,SPC-0001,-2.572,0.409,0.434,0.41,detector+review,,2026-11-24T03:39:05.922048Z,2026-11-24T03:39:05.922048Z,Site lead
+AST-000041,furniture,Desk,,active,SPC-0001,-2.572,0.409,0.434,0.41,detector+review,,2026-11-24T03:39:05.934449Z,2026-11-24T03:39:05.934449Z,Site lead

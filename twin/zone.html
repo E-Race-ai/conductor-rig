@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en"><head><script>
+// Hotel.OS public demo: read-only snapshot. API calls are answered from data/; nothing is saved; no photos are published.
+window.HOS_DEMO = true;
+(function () {
+  const F = window.fetch.bind(window);
+  const BASE = location.href.replace(/[?#].*$/, '').replace(/[^/]*$/, '');
+  const map = u => {
+    u = String(u); if (u.startsWith(BASE)) u = u.slice(BASE.length); else if (u.startsWith(location.origin)) u = u.slice(location.origin.length);
+    if (/^\/api\/(stream)/.test(u)) return null;
+    let m = u.match(/^\/api\/(state|verify|meta|live|v1\/knowledge|v1\/spec)(\?.*)?$/); if (m) return 'data/api/' + m[1] + '.json';
+    m = u.match(/^\/api\/v1\/assets\/([\w-]+)\/knowledge/); if (m) return '#know:' + m[1];
+    m = u.match(/^scans\/(joint-1160|rig-092)\/([\w.-]+\.json|scan\.ply|zone\.ply)$/); if (m) return 'data/scans/' + m[1] + '/' + m[2];
+    if (u.startsWith('zone.json') || u.startsWith('plan_overlay.json') || u.startsWith('zone.ply')) return 'data/scans/rig-092/' + u.split('?')[0];
+    return u;
+  };
+  const ro = () => new Response(JSON.stringify({ error: 'Read-only demo: changes are not saved' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+  window.fetch = async (u, o) => {
+    if (o && o.method && o.method !== 'GET') { demoNote(); return ro(); }
+    const t = map(typeof u === 'string' ? u : u.url);
+    if (t === null || t === 'blocked') return new Response('', { status: 404 });
+    if (t.startsWith('#know:')) { const all = await F('data/api/v1/knowledge.json').then(r => r.json()); return new Response(JSON.stringify(all[t.slice(6)] || {}), { headers: { 'Content-Type': 'application/json' } }); }
+    return F(t, o);
+  };
+  window.EventSource = function () { this.close = () => {}; this.addEventListener = () => {}; };
+  let shown = 0; window.demoNote = () => { if (Date.now() - shown < 4000) return; shown = Date.now(); const d = document.getElementById('demoNote'); if (d) { d.classList.add('flash'); setTimeout(() => d.classList.remove('flash'), 900); } };
+})();
+</script>
+<style>
+#siteNav{display:flex;align-items:center;gap:2px;margin-left:10px;font:12.5px Inter,system-ui;white-space:nowrap}#siteNav a{color:#C9D3E6;text-decoration:none;padding:5px 8px;border-radius:6px}#siteNav a:hover{background:#141E33;color:#fff}#siteNav a.on{color:#E9B949}#siteNav span{margin-left:6px;padding:3px 8px;border:1px solid #2A3658;border-radius:999px;color:#8C98B3;font-size:11px}@media (max-width:1100px){#siteNav a[href*=fu-twin],#siteNav a[href*=hotel-os]{display:none}}@media (max-width:760px){#siteNav span{display:none}}
+#demoNote{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:90;background:rgba(7,11,22,.92);border:1px solid #2A3658;color:#C9D3E6;font:12px/1.4 Inter,system-ui;padding:7px 12px;border-radius:999px;max-width:calc(100vw - 32px);text-align:center;transition:border-color .2s,color .2s}
+#demoNote.flash{border-color:#E9B949;color:#F5D58A}#demoNote a{color:#7FD3FF}
+#whoChip,#recRooms,#nameRoom,#nameRoom+span,#exp a[href*="events.jsonl"]{display:none!important}
+</style><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel.OS Zone View</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070B16;--panel:#0B1120;--line:#1C2640;--ink:#EEF2FA;--mute:#A3AEC6;--faint:#6F7B97;--gold:#D4A65A}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.45 Inter,system-ui,sans-serif;overflow:hidden}
+header{position:fixed;left:0;right:0;top:0;height:52px;display:flex;align-items:center;gap:14px;padding:0 16px;border-bottom:1px solid var(--line);background:var(--panel);z-index:10}
+.brand b{font:700 15px Inter;letter-spacing:.14em;color:var(--gold)}.brand span{font:600 10.5px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-left:10px}
+.addr{font:500 12px "IBM Plex Mono",monospace;color:var(--faint)}.addr a{color:#A3AEC6;text-decoration:none;padding:3px 6px;border-radius:5px}.addr a:hover{background:#17223F;color:#fff}.addr b{color:var(--ink);font-weight:500}
+.sp{flex:1}.chip{font:500 11.5px "IBM Plex Mono",monospace;padding:4px 10px;border-radius:999px;border:1px solid #1f5a43;color:#2FD39A;white-space:nowrap}.chip.warn{border-color:#5c4a1c;color:#E9B949}
+#vp{position:fixed;left:0;right:340px;top:52px;bottom:0}#vp canvas{display:block;width:100%;height:100%}
+aside{position:fixed;right:0;top:52px;bottom:0;width:340px;border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:16px}
+.k10{font:600 10.5px/1.3 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+h2{margin:4px 0 2px;font:700 20px Inter}.mute{color:var(--mute)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.stats div{padding:10px;border:1px solid var(--line);border-radius:10px;background:#0D1424}.stats b{display:block;font:500 19px "IBM Plex Mono",monospace}.stats span{font:500 10.5px "IBM Plex Mono",monospace;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.row{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;cursor:pointer;font-size:12.5px}.row:hover{background:#17223F}.row i{width:10px;height:10px;border-radius:50%;flex:0 0 auto}.row b{margin-left:auto;font:500 11px "IBM Plex Mono",monospace;color:var(--faint)}
+.sw{width:30px;height:17px;border-radius:999px;background:#2A3658;position:relative;flex:0 0 30px;margin-left:auto}.sw i{position:absolute;left:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#8E9AB5;transition:transform .2s}.sw.on{background:#2FD39A55}.sw.on i{transform:translateX(13px);background:#2FD39A}
+.sec{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+button{font:inherit;color:var(--ink);background:#0B1120;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}button:hover{border-color:var(--gold)}button.pri{border-color:var(--gold);color:var(--gold)}
+#labels{position:fixed;left:0;right:340px;top:52px;bottom:0;pointer-events:none;overflow:hidden}
+.pin{position:absolute;transform:translate(-50%,calc(-100% - 20px));pointer-events:auto;cursor:pointer;font:600 11.5px Inter;padding:3px 9px 3px 7px;border-radius:999px;background:rgba(7,11,22,.88);border:1px solid color-mix(in srgb,currentColor 50%,transparent);white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.pin::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:20px;margin-left:-.75px;background:linear-gradient(currentColor,transparent)}.pin span{color:#EEF2FA}.pin i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:6px;background:currentColor}
+.pin.room{font:700 13px Inter;background:rgba(212,166,90,.14);border-color:#D4A65A;color:#D4A65A;transform:translate(-50%,-50%)}.pin.room::after{display:none}.pin.room span{color:#fff}
+#hint{position:fixed;left:12px;bottom:12px;padding:5px 11px;border-radius:999px;background:rgba(7,11,22,.75);border:1px solid var(--line);color:var(--mute);font:500 11.5px Inter;z-index:5}
+#load{position:fixed;inset:52px 340px 0 0;display:grid;place-items:center;color:var(--mute);z-index:6;background:var(--bg)}
+.card{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#0D1424;margin-top:10px;font-size:12.5px}
+#nm{position:fixed;inset:0;z-index:30;background:rgba(4,7,14,.55);display:grid;place-items:center}.nmb{width:min(460px,92vw);padding:18px;border-radius:12px;background:#0B1120;border:1px solid #2A3A5C}.nmb b{font:700 16px Inter}.nmb p{font-size:12px;margin:6px 0 10px}
+.nmg{display:flex;flex-wrap:wrap;gap:6px}.nmg button{font-size:12.5px;padding:6px 10px;border-radius:999px}.nmg button.on{background:#2FD39A;border-color:#2FD39A;color:#04101F}.nmg button:disabled{opacity:.35;cursor:not-allowed}.nmb input{width:100%;margin-top:8px;padding:9px;background:#070B16;border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit}
+.pin.room{border-color:#2FD39A;color:#2FD39A;background:rgba(47,211,154,.12)}.pin.tagdot{font-size:0;padding:0;width:12px;height:12px;border-radius:50%;background:#00C8FF;border:2px solid #070B16;box-shadow:0 0 10px #00C8FF;transform:translate(-50%,-50%)}.pin.tagdot::after{display:none}.pin.tagdot i,.pin.tagdot span{display:none}.pin.tagdot:hover{font-size:11px;width:auto;height:auto;padding:2px 8px;border-radius:999px;background:rgba(7,11,22,.92);color:#00C8FF}.pin.tagdot:hover span{display:inline;color:#fff}
+.pin.room.plan{border-color:#D4A65A;color:#D4A65A;background:rgba(7,11,22,.9);font:600 11.5px Inter;padding:3px 10px}.pin.room{background:rgba(7,11,22,.9)!important}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.181.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.181.0/examples/jsm/"}}</script>
+</head><body>
+<header><div class="brand"><b>HOTEL.OS</b><span>Zone view</span></div><nav id="siteNav" aria-label="Site"><a href="../index.html" title="Back to the Accelerate site">‹ Site</a><a href="index.html" data-p="index">Room</a><a href="zone.html" class="on">Whole unit</a><a href="../hotel-os.html">Spec</a><a href="../fu-twin.html">How it was built</a><span title="Read-only public snapshot: nothing you do here is saved">read-only</span></nav><nav class="addr">Bench site › Bench building › Level 1 › <b id="zname">Unit zone</b></nav><span class="sp"></span><span class="chip" id="regChip">registration …</span><a href="index.html"><button>Room view ›</button></a></header>
+<div id="vp"></div><div id="labels"></div><div id="load">Loading zone…</div><div id="hint">Drag to orbit · right-drag to pan · scroll to zoom · click a tag or room</div>
+<aside id="side"></aside>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SCAN='scans/'+((new URLSearchParams(location.search).get('scan'))||'rig-092').replace(/[^\w-]/g,'')+'/';
+const Z=await fetch(SCAN+'zone.json',{cache:'no-store'}).then(r=>r.json());
+const PO=await fetch(SCAN+'plan_overlay.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+const B3=await fetch('scans/joint-1160/twin.json').then(r=>r.ok?r.json():null).catch(()=>null);
+let ST=await fetch('/api/state').then(r=>r.ok?r.json():null).catch(()=>null);
+const host=$('#vp'), R=new THREE.WebGLRenderer({antialias:true}); R.setPixelRatio(Math.min(devicePixelRatio,2)); R.shadowMap.enabled=true; R.shadowMap.type=THREE.PCFSoftShadowMap; host.appendChild(R.domElement);
+const S=new THREE.Scene(); S.background=new THREE.Color(0x070B16); { const pm=new THREE.PMREMGenerator(R); S.environment=pm.fromScene(new RoomEnvironment(),.04).texture; S.environmentIntensity=.5; }
+const [x0,z0,x1,z1]=Z.bounds, cx=(x0+x1)/2, cz=(z0+z1)/2, ext=Math.max(x1-x0,z1-z0), fy=Z.floor_y;
+const cam=new THREE.OrthographicCamera(-1,1,1,-1,-200,200); const ctl=new OrbitControls(cam,R.domElement); ctl.target.set(cx,fy,cz); ctl.enableDamping=true; ctl.maxPolarAngle=1.3; ctl.screenSpacePanning=true;
+cam.position.set(cx-ext*.9,fy+ext*1.4,cz+ext*.9); cam.zoom=1; cam.lookAt(ctl.target);
+function size(){ const r=host.getBoundingClientRect(), a=r.width/r.height, h=window.__ext||ext*.62; R.setSize(r.width,r.height,false); cam.left=-h*a; cam.right=h*a; cam.top=h; cam.bottom=-h; cam.updateProjectionMatrix(); } addEventListener('resize',size); size();
+S.add(new THREE.HemisphereLight(0xFFFFFF,0x3A3F4A,.8)); const dl=new THREE.DirectionalLight(0xFFF6EA,2.4); dl.position.set(cx-6,fy+14,cz-8); dl.target.position.set(cx,fy,cz); dl.castShadow=true; dl.shadow.mapSize.set(2048,2048);
+Object.assign(dl.shadow.camera,{left:-ext,right:ext,top:ext,bottom:-ext,near:.5,far:60}); dl.shadow.bias=-.0004; dl.shadow.normalBias=.03; S.add(dl,dl.target);
+const std=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:o.r??.85,metalness:o.m??0,transparent:(o.op??1)<1,opacity:o.op??1});
+// ---- layers ----
+const LAY={plan:new THREE.Group(),walls:new THREE.Group(),floor:new THREE.Group(),scan:new THREE.Group(),path:new THREE.Group(),b3:new THREE.Group()}; Object.values(LAY).forEach(g=>S.add(g));
+// plinth
+{ const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0+.6,.14,z1-z0+.6),std(0x182033,{r:.95})); m.position.set(cx,fy-.08,cz); m.receiveShadow=true; S.add(m); }
+// walls: instanced 5 cm columns at the dollhouse cut, merged visually by AO-like shading
+const WH=1.1, C=Z.cell_m; { const m4=new THREE.Matrix4();
+  const run=(cells,h,mat,capCol)=>{ if(!cells?.length) return; const im=new THREE.InstancedMesh(new THREE.BoxGeometry(C*1.04,h,C*1.04),mat,cells.length); cells.forEach(([x,z],i)=>{ m4.makeTranslation(x,fy+h/2,z); im.setMatrixAt(i,m4); }); im.castShadow=mat.opacity>=1; im.receiveShadow=true; LAY.walls.add(im);
+    const cap=new THREE.InstancedMesh(new THREE.BoxGeometry(C*1.04,.012,C*1.04),new THREE.MeshBasicMaterial({color:capCol,transparent:mat.opacity<1,opacity:Math.min(1,mat.opacity+.2)}),cells.length); cells.forEach(([x,z],i)=>{ m4.makeTranslation(x,fy+h+.006,z); cap.setMatrixAt(i,m4); }); LAY.walls.add(cap); };
+  run(Z.walls,WH,std(0xE9ECF2,{r:.9}),0xFFFFFF);                          // seen: the scan has a vertical surface here
+  run(Z.edges,WH*.85,std(0xC9D3E6,{r:.9,op:.38}),0xC9D3E6); }            // inferred: edge of the captured free space
+// scan points (and floor tiles from points near the floor)
+const pg=await new PLYLoader().loadAsync(SCAN+'zone.ply'); $('#load').remove();
+{ const pos=pg.getAttribute('position'), col=pg.getAttribute('color'), n=pos.count, keep=[], kc=[], fl=new Map();
+  for(let i=0;i<n;i++){ const y=pos.getY(i); if(y<fy+.12){ const k=Math.round(pos.getX(i)/.1)+','+Math.round(pos.getZ(i)/.1); fl.set(k,(fl.get(k)||[0,0,0,0]).map((v,j)=>v+(j<3?col.array[i*3+j]:1))); } if(y<fy+WH+.2){ keep.push(pos.getX(i),y,pos.getZ(i)); kc.push(col.array[i*3],col.array[i*3+1],col.array[i*3+2]); } }
+  const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(keep,3)); g.setAttribute('color',new THREE.Float32BufferAttribute(kc,3));
+  LAY.scan.add(new THREE.Points(g,new THREE.PointsMaterial({size:.022,vertexColors:true,sizeAttenuation:true})));
+  // floor: 10 cm tiles where the scan saw floor, dilated once, coloured by what it saw
+  const cells=new Map(); if(Z.floor_cells) for(const [x,z] of Z.floor_cells){ const k=Math.round(x/.1)+','+Math.round(z/.1); cells.set(k,fl.get(k)||[180,177,170,1].map((v,j)=>j<3?v/255:1)); }
+  else for(const [k,v] of fl){ const [a,b]=k.split(',').map(Number); for(let da=-1;da<=1;da++) for(let db=-1;db<=1;db++){ const kk=(a+da)+','+(b+db); if(!cells.has(kk)||da===0&&db===0) cells.set(kk,v); } }
+  const im=new THREE.InstancedMesh(new THREE.BoxGeometry(.1,.01,.1),std(0xFFFFFF,{r:.9}),cells.size), m4=new THREE.Matrix4(), c=new THREE.Color(); let i=0;
+  for(const [k,v] of cells){ const [a,b]=k.split(',').map(Number); m4.makeTranslation(a*.1,fy-.005,b*.1); im.setMatrixAt(i,m4); c.setRGB(v[0]/v[3],v[1]/v[3],v[2]/v[3]).lerp(new THREE.Color(0xB4B1AA),.55); im.setColorAt(i,c); i++; }
+  im.receiveShadow=true; LAY.floor.add(im); Z.floorArea=(Z.floor_area_m2??(cells.size*.01)).toFixed(1); }
+// walk path
+{ const pts=Z.path.map(p=>new THREE.Vector3(p[0],fy+.03,p[2])); const g=new THREE.BufferGeometry().setFromPoints(pts); const l=new THREE.Line(g,new THREE.LineDashedMaterial({color:0xD4A65A,dashSize:.12,gapSize:.08})); l.computeLineDistances(); LAY.path.add(l); }
+// Bedroom 3, already in the same building frame: its measured floor outline
+if(B3){ const o=B3.floor_rect.map(p=>new THREE.Vector3(p[0],fy+.02,p[1])); const sh=new THREE.Shape(B3.floor_rect.map(p=>new THREE.Vector2(p[0],-p[1]))); const m=new THREE.Mesh(new THREE.ShapeGeometry(sh),new THREE.MeshBasicMaterial({color:0xD4A65A,transparent:true,opacity:.16,depthWrite:false})); m.rotation.x=-Math.PI/2; m.position.y=fy+.015; LAY.b3.add(m);
+  LAY.b3.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(o),new THREE.LineBasicMaterial({color:0xD4A65A}))); }
+// ---- clean architectural model from the plan rooms (Bedroom 3 from its measured walls) ----
+const ARCH=new THREE.Group(); S.add(ARCH); const ROOMFL=[]; const B3P=await fetch('scans/joint-1160/plan.json').then(r=>r.ok?r.json():null).catch(()=>null);
+const wallMat=std(0xE9ECF2,{r:.9}), capMat=new THREE.MeshBasicMaterial({color:0xFFFFFF}), glassMat=std(0x7FDBFF,{r:.1,op:.3});
+const seg=(a,b,mat,h=WH,th=.12)=>{ const dx=b[0]-a[0], dz=b[1]-a[1], L=Math.hypot(dx,dz); if(L<.05) return; const m=new THREE.Mesh(new THREE.BoxGeometry(L+th,h,th),mat); m.position.set((a[0]+b[0])/2,fy+h/2,(a[1]+b[1])/2); m.rotation.y=-Math.atan2(dz,dx); m.castShadow=mat.opacity>=1; m.receiveShadow=true; ARCH.add(m);
+  if(mat===wallMat){ const c=new THREE.Mesh(new THREE.BoxGeometry(L+th,.012,th),capMat); c.position.set(m.position.x,fy+h+.006,m.position.z); c.rotation.y=m.rotation.y; ARCH.add(c); } };
+const FLOORC={Bedroom:0xD9D2C6,Bath:0xC9D3DC,Closet:0xCFC8BC,Wardrobe:0xCFC8BC,Hall:0xE2DDD3,Corridor:0xE2DDD3,Den:0xD9D2C6,foyer:0xE2DDD3,elevator:0x9AA6B8,'W/D':0xC9D3DC,'A/C':0xB8C0CC,Powder:0xC9D3DC};
+const fcol=n=>{ for(const k in FLOORC) if(n.includes(k)) return FLOORC[k]; return 0xD9D2C6; };
+if(PO) for(const r of PO.rooms){ if(r.name==='Bedroom 3'&&B3P) continue; const P=r.poly_xz;
+  const sh=new THREE.Shape(P.map(([x,z])=>new THREE.Vector2(x,-z))); const fl=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.04,bevelEnabled:false}),std(fcol(r.name),{r:.95})); fl.rotation.x=-Math.PI/2; fl.position.y=fy-.04; fl.receiveShadow=true; fl.userData={room:r,c0:fcol(r.name)}; ARCH.add(fl); ROOMFL.push(fl);
+  for(let i=0;i<4;i++) seg(P[i],P[(i+1)%4],r.name.includes('elevator')?std(0x8E9AB5):wallMat); }
+if(B3P){ const sh=new THREE.Shape(B3P.outline.map(([x,z])=>new THREE.Vector2(x,-z))); const fl=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.04,bevelEnabled:false}),std(0xDCD6CB,{r:.95})); fl.rotation.x=-Math.PI/2; fl.position.y=fy-.04; fl.receiveShadow=true; ARCH.add(fl);
+  for(const w of B3P.walls) seg(w.a,w.b,w.kind==='wall'?wallMat:glassMat,WH,w.kind==='wall'?.14:.05); }
+// frame the camera and the base on the model itself (not on the scan's outliers)
+{ const bb=new THREE.Box3().setFromObject(ARCH); if(!bb.isEmpty()){ const c=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3()), e=Math.max(sz.x,sz.z);
+  ctl.target.set(c.x,fy,c.z); cam.position.set(c.x-e*.9,fy+e*1.3,c.z+e*.9); cam.lookAt(ctl.target); window.__ext=e*.62;
+  S.children.filter(o=>o.isMesh&&o.geometry?.type==='BoxGeometry'&&o.position.y<fy-.05).forEach(o=>{ o.scale.set((sz.x+1.2)/o.geometry.parameters.width,1,(sz.z+1.2)/o.geometry.parameters.depth); o.position.set(c.x,o.position.y,c.z); }); size(); } }
+let COV=false; const covCol=c=>c==null?0x5E6A82:c>=.7?0x2FD39A:c>=.35?0xE9B949:0xFF6B5E;
+function paintRooms(){ for(const fl of ROOMFL){ const r=fl.userData.room; fl.material.color.setHex(COV?covCol(r.scan_coverage):fl.userData.c0); fl.material.emissive?.setHex(fl.userData.room===SELROOM?0x3A2A08:0); } }
+let SELROOM=null; const rr=new THREE.Raycaster(); let rdn=null;
+R.domElement.addEventListener('pointerdown',e=>rdn=[e.clientX,e.clientY]);
+R.domElement.addEventListener('click',e=>{ if(PICK||!rdn||Math.hypot(e.clientX-rdn[0],e.clientY-rdn[1])>5) return; const r=R.domElement.getBoundingClientRect(); rr.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),cam);
+  const h=rr.intersectObjects(ROOMFL,false)[0]; if(!h) return; SELROOM=h.object.userData.room; paintRooms(); showRoom(SELROOM); });
+function showRoom(r){ const cov=r.scan_coverage, c=cov==null?'':cov>=.7?'#2FD39A':cov>=.35?'#E9B949':'#FF6B5E'; const sp=Object.values(ST?.spaces||{}).find(x=>x.name===r.name);
+  side(`<div class="card"><div class="k10">Room · from your floor plan</div><b style="font-size:16px">${esc(r.name)}</b>${r.dims?` <span class="mute">${esc(r.dims)}</span>`:''}<br>
+   <div style="margin:8px 0;display:flex;gap:14px"><div><b style="font-size:18px">${r.area_m2??'—'} m²</b><br><span class="mute" style="font-size:11px">PLAN AREA</span></div><div><b style="font-size:18px;color:${c}">${cov!=null?Math.round(cov*100)+' %':'—'}</b><br><span class="mute" style="font-size:11px">SCANNED</span></div><div><b style="font-size:18px">${(r.tags||[]).length}</b><br><span class="mute" style="font-size:11px">TAGS</span></div></div>
+   ${cov!=null&&cov<.5?`<p style="color:#E9B949;font-size:12px;margin:0 0 8px">Under half of this room was captured. Film a slow loop around it next.</p>`:''}
+   ${sp?`<p class="mute" style="font-size:12px">In the ledger as ${sp.id}.</p>`:'<p class="mute" style="font-size:12px">Not in the ledger yet.</p>'}
+   ${r.name==='Bedroom 3'||sp?.id==='SPC-0001'?'<a href="index.html"><button class="pri">Open room view ›</button></a>':''}</div>`); }
+// owner floor plan (digitised rooms) drawn on the floor in gold
+if(PO) for(const r of PO.rooms){ const pts=r.poly_xz.map(([x,z])=>new THREE.Vector3(x,fy+.03,z)); const l=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineDashedMaterial({color:0xFFD27A,dashSize:.18,gapSize:.1,depthTest:false})); l.computeLineDistances(); l.renderOrder=20; LAY.plan.add(l);
+  const sh=new THREE.Shape(r.poly_xz.map(([x,z])=>new THREE.Vector2(x,-z))); const m=new THREE.Mesh(new THREE.ShapeGeometry(sh),new THREE.MeshBasicMaterial({color:0xFFD27A,transparent:true,opacity:.07,depthWrite:false})); m.rotation.x=-Math.PI/2; m.position.y=fy+.02; LAY.plan.add(m); }
+// ---- labels ----
+const pins=[]; function pin(txt,pos,col,cls,fn){ const d=document.createElement('div'); d.className='pin '+(cls||''); d.style.color=col; d.innerHTML=(cls==='room'?'':'<i></i>')+'<span>'+esc(txt)+'</span>'; d.onclick=fn; $('#labels').appendChild(d); pins.push({d,pos}); return d; }
+Object.entries(Z.tags).sort().forEach(([k,p])=>{ const d=pin(k,new THREE.Vector3(p[0],p[1],p[2]),'#00C8FF','tagdot',()=>show({tag:k,p})); d.title=k; });
+const planPins=[]; if(PO) for(const r of PO.rooms){ if(r.name==='Bedroom 3') continue; if(/A\/C|W\/D|Closet|Corridor|elevator/.test(r.name)) continue; const d=pin(r.name,new THREE.Vector3(r.center_xz[0],fy+.05,r.center_xz[1]),'#FFD27A','room plan',()=>{}); d.title=r.dims||''; planPins.push(d); }
+if(B3){ const c=B3.floor_rect.reduce((s,p)=>[s[0]+p[0]/4,s[1]+p[1]/4],[0,0]); const sp=ST&&Object.values(ST.spaces)[0]; pin(sp?.name||'Bedroom 3',new THREE.Vector3(c[0],fy+.05,c[1]),'#D4A65A','room',()=>location.href='ledger.html'); }
+// ---- rooms recorded in the ledger (named in this view or elsewhere) ----
+const roomPins=[]; function drawRooms(){ roomPins.forEach(d=>d.remove()); roomPins.length=0; if(!ST) return;
+  for(const sp of Object.values(ST.spaces)){ const c=sp.geometry?.zone_point; if(!c) continue; const d=pin(sp.name,new THREE.Vector3(c[0],c[1]+.05,c[2]),'#2FD39A','room',()=>show({space:sp})); roomPins.push(d); } }
+drawRooms();
+// ---- side panel ----
+const reg=Z.registration||{}; const agree=reg.scale_agreement_pct;
+$('#regChip').textContent=reg.residual_rms_m!=null?`frame fit ${(reg.residual_rms_m*100).toFixed(1)} cm · scale check ${agree!=null?(agree>0?'+':'')+agree+' %':'—'}`:'unregistered'; if(agree==null||Math.abs(agree)>3) $('#regChip').classList.add('warn');
+let LON={cov:false,arch:true,plan:false,walls:false,floor:false,scan:false,path:true,b3:false,tags:true};
+function side(extra){ $('#side').innerHTML=`<div class="k10">Zone · Level 1</div><h2 id="zt">${esc(Z.name||'Unit zone')}</h2><div class="mute" style="font-size:12px">From the 360° walk (VID_092) and the phone walk (IMG_1163) · ${Z.stats.cameras} posed views</div>
+  <div class="stats"><div><b>${Z.floorArea} m²</b><span>floor seen</span></div><div><b>${Object.keys(Z.tags).length}</b><span>control tags</span></div><div><b>${(Z.ceiling_y-Z.floor_y).toFixed(2)} m</b><span>ceiling height</span></div><div><b>${(Z.stats.points/1000).toFixed(0)}k</b><span>scan points</span></div></div>
+  ${extra||''}
+  <div class="sec"><div class="k10">Rooms</div>${Object.values(ST?.spaces||{}).map(sp=>`<div class="row" data-sp="${sp.id}"><i style="background:${sp.id==='SPC-0001'?'#D4A65A':'#2FD39A'}"></i>${esc(sp.name)}<b>${sp.id}</b></div>`).join('')}
+    ${PO?`<div style="margin-top:8px"><button class="pri" id="recRooms">Record ${PO.rooms.filter(r=>!Object.values(ST?.spaces||{}).some(s=>s.name===r.name)).length} plan rooms in the ledger</button></div>`:''}
+    <div style="margin-top:8px"><button id="nameRoom">＋ Name a room</button> <span class="mute" style="font-size:11.5px">click its floor, pick the name from your plan</span></div></div>
+  <div class="sec"><div class="k10">Layers</div>${[['cov','Colour rooms by scan coverage','#2FD39A'],['arch','Unit model (from your floor plan)','#E9ECF2'],['plan','Plan room outlines','#FFD27A'],['walls','Scan evidence: walls','#8E9AB5'],['floor','Scan evidence: floor','#B4B1AA'],['scan','Scan points','#8E9AB5'],['path','Capture path','#D4A65A'],['b3','Bedroom 3 (measured room)','#D4A65A'],['tags','Control tags','#00C8FF']].map(([k,n,c])=>`<div class="row" data-l="${k}"><i style="background:${c}"></i>${n}<span class="sw ${LON[k]?'on':''}"><i></i></span></div>`).join('')}</div>
+  ${PO?`<div class="sec"><div class="k10">Plan vs scan</div><div class="card">Owner plan digitised from your image (±0.3 m) and anchored on Bedroom 3 (${(PO.anchor_residual_m*100).toFixed(1)} cm).<br>${Z.warp?`<b style="color:#2FD39A">Pulled onto the plan</b> with ${Object.keys(Z.warp.pairs).length} tags pinned to the positions you marked (thin-plate spline, Bedroom 3 fixed). Consistency check (each tag predicted from the others): ${Object.values(Z.warp.leave_one_out_m).map(v=>v.toFixed(1)).join(', ')} m. Unmarked: ${Object.keys(Z.tags).filter(t=>!Z.warp.pairs[t]).join(', ')}.`:'<b style="color:#E9B949">The scan drifts with distance from Bedroom 3.</b>'}</div></div>`:''}
+  <div class="sec"><div class="k10">Registration</div><div class="card">${esc(reg.method||'')}<br>Fit to Bedroom 3 markers: <b>${reg.residual_rms_m!=null?(reg.residual_rms_m*100).toFixed(1)+' cm RMS':'—'}</b><br>Scale from markers vs from ${Object.keys(Z.tags).length} control tags: <b>${agree!=null?(agree>0?'+':'')+agree+' %':'—'}</b>${reg.tag_scale_spread_pct!=null?` (tag spread ${reg.tag_scale_spread_pct} %)`:''}</div></div>
+  <div class="sec"><div class="k10">Control tags</div>${Object.entries(Z.tags).sort().map(([k,p])=>`<div class="row" data-t="${k}"><i style="background:#00C8FF"></i>${k}<b>${(p[1]-Z.floor_y).toFixed(2)} m up</b></div>`).join('')}</div>`;
+  document.querySelectorAll('[data-l]').forEach(r=>r.onclick=()=>{ const k=r.dataset.l; LON[k]=!LON[k]; apply(); side(extra); });
+  document.querySelectorAll('[data-t]').forEach(r=>r.onclick=()=>show({tag:r.dataset.t,p:Z.tags[r.dataset.t]}));
+  document.querySelectorAll('[data-sp]').forEach(r=>r.onclick=()=>show({space:ST.spaces[r.dataset.sp]}));
+  const rb=$('#recRooms'); if(rb) rb.onclick=async()=>{ let who=localStorage.getItem('ledger.author'); if(!who){ rb.insertAdjacentHTML('afterend','<div style="margin-top:6px;display:flex;gap:6px"><input id="recWho" placeholder="Your name (signs the record)" style="flex:1;padding:7px;background:#070B16;border:1px solid #1C2640;border-radius:8px;color:#EEF2FA"><button class="pri" id="recGo">Record</button></div>'); $('#recWho').focus(); $('#recGo').onclick=()=>{ const v=$('#recWho').value.trim(); if(!v) return; localStorage.setItem('ledger.author',v); rb.click(); }; return; } try{ localStorage.setItem('ledger.author',who); }catch(_){}
+    let n=0; for(const r of PO.rooms){ if(Object.values(ST.spaces).some(s=>s.name===r.name)) continue; const res=await fetch('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'space.created',data:{level:Object.keys(ST.levels)[0],name:r.name,kind:/Bath|Powder/.test(r.name)?'bathroom':/Closet|Wardrobe|W\/D|A\/C/.test(r.name)?'utility':/Hall|Corridor|foyer/.test(r.name)?'circulation':/elevator/.test(r.name)?'vertical':'room',plan_dims:r.dims||undefined,area_m2_plan:r.area_m2,scan_coverage:r.scan_coverage,geometry:{outline_xz:r.poly_xz,zone_point:[r.center_xz[0],Z.floor_y,r.center_xz[1]],source:'owner floor plan, digitised; anchored on Bedroom 3'}},author:who})}); if(res.ok) n++; }
+    ST=await fetch('/api/state').then(r=>r.json()); side(`<div class="card" style="border-color:#2FD39A"><b style="color:#2FD39A">✓ ${n} rooms recorded</b> · signed by ${esc(who)}<br><span class="mute" style="font-size:12px">Each is a ledger space with its plan outline and how much of it was scanned.</span></div>`); };
+  const nb=$('#nameRoom'); if(nb) nb.onclick=()=>{ PICK=true; R.domElement.style.cursor='crosshair'; $('#hint').textContent='Click the floor of the room you want to name · Esc cancels'; }; }
+function show(o){ if(o.space){ const sp=o.space, c=sp.geometry?.zone_point; if(c){ ctl.target.set(c[0],fy,c[2]); cam.zoom=2; cam.updateProjectionMatrix(); }
+    side(`<div class="card"><b>${esc(sp.name)}</b> · ${sp.id}<br>${c?`Building frame: ${c.map(v=>v.toFixed(2)).join(', ')} m<br>`:''}Named by ${esc(sp.history?.[0]?.author||'')}${sp.id==='SPC-0001'?'<br><a href="index.html" style="color:#D4A65A">Open the full room twin ›</a>':'<br><span class="mute">Room twin not built yet: capture this room with the rig or a phone walk.</span>'}</div>`); return; }
+  if(o.tag){ const p=o.p; ctl.target.set(p[0],fy,p[2]); cam.zoom=2.4; cam.updateProjectionMatrix(); side(`<div class="card"><b>${o.tag}</b> · MKS-1 control point (AprilTag 36h11, 150 mm)<br>Building frame: ${p.map(v=>v.toFixed(2)).join(', ')} m<br>Height above floor: ${(p[1]-fy).toFixed(2)} m ${p[1]-fy>=1.35&&p[1]-fy<=1.65?'<span style="color:#2FD39A">✓ within 1.40–1.60 m</span>':'<span style="color:#E9B949">outside 1.40–1.60 m</span>'}</div>`); } }
+function apply(){ roomPins.forEach(d=>d.style.display=''); ARCH.visible=LON.arch; COV=LON.cov; paintRooms(); LAY.plan.visible=LON.plan; planPins.forEach(d=>d.style.display=LON.plan?'':'none'); LAY.walls.visible=LON.walls; LAY.floor.visible=LON.floor; LAY.scan.visible=LON.scan; LAY.path.visible=LON.path; LAY.b3.visible=LON.b3; pins.forEach(p=>p.d.style.display=(p.d.classList.contains('plan')?(LON.arch||LON.plan):p.d.classList.contains('room')?true:LON.tags)?'':'none'); }
+side(); apply();
+let PICK=false; const ray=new THREE.Raycaster(), floorPlane=new THREE.Plane(new THREE.Vector3(0,1,0),-fy);
+const NAMES=['Bedroom 4','Bath','Closet','Private foyer','Private elevator lobby','W/D','Powder room','Hallway','Living area','Kitchen','Workshop','Second office','Sunset terrace'];
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&PICK){ PICK=false; R.domElement.style.cursor=''; $('#hint').textContent='Drag to orbit · right-drag to pan · scroll to zoom · click a tag or room'; } });
+let pdn=null; R.domElement.addEventListener('pointerdown',e=>pdn=[e.clientX,e.clientY]);
+R.domElement.addEventListener('click',async e=>{ if(!PICK||!pdn||Math.hypot(e.clientX-pdn[0],e.clientY-pdn[1])>5) return; const r=R.domElement.getBoundingClientRect();
+  ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),cam); const p=new THREE.Vector3(); if(!ray.ray.intersectPlane(floorPlane,p)) return;
+  PICK=false; R.domElement.style.cursor=''; $('#hint').textContent='Drag to orbit · right-drag to pan · scroll to zoom · click a tag or room';
+  const used=new Set(Object.values(ST.spaces).map(s=>s.name)); const box=document.createElement('div'); box.id='nm';
+  box.innerHTML=`<div class="nmb"><b>Name this room</b><p class="mute">At ${p.x.toFixed(2)}, ${p.z.toFixed(2)} m in the building frame. Names come from your floor plan.</p><div class="nmg">${NAMES.map(n=>`<button ${used.has(n)?'disabled title="already named"':''} data-n="${n}">${n}</button>`).join('')}</div>
+    <input id="nmo" placeholder="Or type a name"><input id="nmw" placeholder="Your name (signs the record)" value="${esc(localStorage.getItem('ledger.author')||'')}"><div style="display:flex;gap:8px;margin-top:10px"><button class="pri" id="nmOk">Record room</button><button id="nmX">Cancel</button></div><p id="nmE" style="color:#FF6B5E;font-size:12px;margin:8px 0 0"></p></div>`;
+  document.body.appendChild(box); let pickName=''; box.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ pickName=b.dataset.n; box.querySelectorAll('[data-n]').forEach(x=>x.classList.toggle('on',x===b)); $('#nmo').value=''; });
+  $('#nmX').onclick=()=>box.remove();
+  $('#nmOk').onclick=async()=>{ const name=($('#nmo').value.trim()||pickName), who=$('#nmw').value.trim(); if(!name){ $('#nmE').textContent='Pick or type a room name.'; return; } if(!who){ $('#nmE').textContent='Add your name: every record is signed.'; $('#nmw').focus(); return; }
+    try{ localStorage.setItem('ledger.author',who); }catch(_){}
+    const r=await fetch('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'space.created',data:{level:Object.keys(ST.levels)[0],name,kind:'room',geometry:{zone_point:[+p.x.toFixed(3),+fy.toFixed(3),+p.z.toFixed(3)],source:'named in zone view on scan '+SCAN.split('/')[1]}},author:who})}); const j=await r.json();
+    if(!r.ok){ $('#nmE').textContent='Not saved: '+(j.error||r.status); return; } box.remove(); ST=await fetch('/api/state').then(r=>r.json()); drawRooms(); apply(); side(`<div class="card" style="border-color:#2FD39A"><b style="color:#2FD39A">✓ ${esc(name)} recorded</b> · ${j.target}<br>Signed by ${esc(who)} · it now appears in the room list and the ledger.</div>`); }; });
+const v=new THREE.Vector3(); (function loop(){ requestAnimationFrame(loop); ctl.update(); R.render(S,cam); const r=host.getBoundingClientRect();
+  for(const p of pins){ v.copy(p.pos).project(cam); p.d.style.left=((v.x+1)/2*r.width)+'px'; p.d.style.top=((1-v.y)/2*r.height)+'px'; } })();
+window.__ready=true;
+</script></body></html>
