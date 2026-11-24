@@ -187,3 +187,4 @@ html[data-proj] .eng-toc{z-index:61}
 .ph-grid figure .ph:not(.dk){background:radial-gradient(120% 100% at 50% 35%,#ffffff 0%,#eef0f3 60%,#e2e5ea 100%);padding:clamp(10px,4%,22px)}
 .ph-grid figure .ph:not(.dk) img{filter:drop-shadow(0 10px 18px rgba(0,0,0,.18))}
 .ph-grid figure .ph.dk{background:radial-gradient(120% 100% at 50% 35%,#141D33 0%,#0C1324 70%,#0A1020 100%);padding:clamp(10px,4%,22px)}
+code{overflow-wrap:anywhere}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-proj="os" data-rev="HO-SYS-001 · Rev B · 2026-11-19"><head><meta charset="utf-8">
+<html lang="en" data-proj="os" data-rev="HO-SYS-001 · Rev C · 2026-11-23"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hotel.OS · Accelerate Robotics</title>
 <meta name="description" content="Hotel.OS (PRJ-03, HO-SYS-001): the Accelerate Robotics hotel operating system. An object-level digital twin of the whole building, down to every switch and outlet, from Site Capture; one task model, integration bus and AI engine connecting hotel staff, mobile devices, multi-vendor robot fleets and existing hotel systems. Scope, architecture, integrations, devices, requirements and roadmap.">
@@ -533,7 +533,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <header class="fu-hd" id="top">
   <div class="wrap hg">
     <div>
-      <div class="kicker">PRJ-03 · Hotel.OS · HO-SYS-001 · Rev B · 2026-11-19</div>
+      <div class="kicker">PRJ-03 · Hotel.OS · HO-SYS-001 · Rev C · 2026-11-23</div>
       <h1>Hotel.OS<span>Hotel operating system: one digital twin, one task model, every department</span></h1>
       <p class="lede-c">Hotel.OS is the orchestration layer for everything that happens in a building, by people and by robots. Each robot navigates locally on its own LiDAR SLAM; the digital twin gives robots and people one shared model of the building, mapped down to every switch and outlet; Hotel.OS assigns and tracks every task on it. Everyone sees the whole building, whatever their department and wherever they are, while their own role stays in focus.</p>
       <p class="spec">7 departments · 5 device models · 6 robot task types · 10 integration categories<br>Spatial model: PRJ-02 Site Capture · Built with: PRJ-01 The Brain (build time only)</p>
@@ -793,11 +793,11 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:10%">Tier</th><th style="width:22%">Content</th><th>Method</th><th style="width:22%">Output</th><th style="width:10%">Status</th></tr></thead>
       <tbody>
-        <tr><th class="m">T1</th><td>Registered point cloud, 360° and 4K imagery</td><td>Site Capture acquisition and survey-controlled registration; LOA20 building-wide, LOA30 zones where required</td><td>E57 / LAS + imagery with poses</td><td><span class="chip open">design</span></td></tr>
-        <tr><th class="m">T2</th><td>Floors, walls, openings, doors, rooms, vertical circulation</td><td>Scan-to-BIM segmentation with human QA; rooms keyed to PMS room numbers</td><td>IFC model; 2D floor plans; route graph</td><td><span class="chip open">design</span></td></tr>
-        <tr><th class="m">T3</th><td>Wall and ceiling devices, fixtures, life-safety and security devices</td><td>Object detection on 360° / 4K imagery, located in 3D from the point cloud; low-confidence detections reviewed by a technician</td><td>Classified objects with position, room, photo crop, confidence</td><td><span class="chip open">design</span></td></tr>
-        <tr><th class="m">T4</th><td>Asset identity and attributes</td><td>Stable asset ID per object; circuit and panel from panel schedules; model, warranty and service history from facility records</td><td>Asset registry (COBie-compatible export)</td><td><span class="chip open">design</span></td></tr>
-        <tr><th class="m">T5</th><td>Live operational layer</td><td>Tasks, robots, staff, zones and alarms bound to T2–T4 entities</td><td>Hotel.OS map views and APIs</td><td><span class="chip open">design</span></td></tr>
+        <tr><th class="m">T1</th><td>Registered point cloud, 360° and 4K imagery</td><td>Site Capture acquisition and survey-controlled registration; LOA20 building-wide, LOA30 zones where required</td><td>E57 / LAS + imagery with poses</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th class="m">T2</th><td>Floors, walls, openings, doors, rooms, vertical circulation</td><td>Scan-to-BIM segmentation with human QA; rooms keyed to PMS room numbers</td><td>IFC model; 2D floor plans; route graph</td><td><span class="chip open">partial</span></td></tr>
+        <tr><th class="m">T3</th><td>Wall and ceiling devices, fixtures, life-safety and security devices</td><td>Object detection on 360° / 4K imagery, located in 3D from the point cloud; low-confidence detections reviewed by a technician</td><td>Classified objects with position, room, photo crop, confidence</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th class="m">T4</th><td>Asset identity and attributes</td><td>Stable asset ID per object; circuit and panel from panel schedules; model, warranty and service history from facility records</td><td>Asset registry (COBie-compatible export)</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th class="m">T5</th><td>Live operational layer</td><td>Tasks, robots, staff, zones and alarms bound to T2–T4 entities</td><td>Hotel.OS map views and APIs</td><td><span class="chip ver">prototype</span></td></tr>
       </tbody></table></div>
     <h3 class="ms-h3"><i>3.2</i>Object classes in the twin</h3>
     <div class="ms-tw"><table class="ms-t">
@@ -834,8 +834,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:24%">Mechanism</th><th>Behaviour</th><th style="width:12%">Status</th></tr></thead>
       <tbody>
-        <tr><th>Field corrections</th><td>Staff flag an object as moved, missing or new from a mobile device; a twin-change request is reviewed before the model updates</td><td><span class="chip open">design</span></td></tr>
-        <tr><th>Work-order feedback</th><td>Replacements and repairs update asset attributes (model, date, technician)</td><td><span class="chip open">design</span></td></tr>
+        <tr><th>Field corrections</th><td>Staff flag an object as moved, missing or new from a mobile device; a twin-change request is reviewed before the model updates</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th>Work-order feedback</th><td>Replacements and repairs update asset attributes (model, date, technician)</td><td><span class="chip ver">prototype</span></td></tr>
         <tr><th>Partial re-capture</th><td>Renovated or changed zones re-captured by Site Capture and re-registered to the same control network; change detection against the prior version</td><td><span class="chip proc">target</span></td></tr>
         <tr><th>Versioning</th><td>Every twin release is versioned; tasks keep a reference to the version they were created on</td><td><span class="chip proc">target</span></td></tr>
       </tbody></table></div>
@@ -860,6 +860,30 @@ footer li{break-inside:avoid;margin-bottom:6px}
       </tbody></table></div>
     <h3 class="ms-h3"><i>3.8</i>General manager’s view</h3>
     <p class="ms-p">The GM sees the whole building at once: every floor, every open task, every robot, every alarm and staff coverage, with department KPIs alongside. Any item drills down from building to floor to room, and opens the walkthrough at the exact place the task concerns. Department leads see the same model filtered to their work; nobody runs a separate map.</p>
+    <h3 class="ms-h3" id="proto"><i>3.9</i>Prototype status: bench site, 2026-11-23</h3>
+    <p class="ms-p">The twin tiers and map actions above run end to end on a bench site: one residential unit used as a stand-in for a guest floor. Values below are measured on that unit unless marked est. Imagery of the bench site is withheld from this page.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:22%">Element</th><th>Measured state</th><th style="width:16%">Status</th></tr></thead>
+      <tbody>
+        <tr><th>T1 capture</th><td>Phone video and Insta360 X4 360° video posed together: 891 views, 64,937 points, 1.30 px reprojection error; 79.2 m² of floor and 2.70 m ceiling recovered</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th>Survey control</th><td>MKS-1 site set of 12 printed control tags (C-04 to C-15) hung on walls; unit model registered to the building frame at 1.5 cm RMS on two reference tags. Tag-derived scale and reference-tag scale disagree by 7.3 %; open until checked by tape</td><td><span class="chip open">open</span></td></tr>
+        <tr><th>T2 rooms</th><td>Owner floor plan digitised (±0.3 m est.) and fitted to the scan; scan pulled onto the plan with a thin-plate spline on 7 tag pairs, leave-one-out error 0.7–1.8 m. Per-room scan coverage is computed; two rooms not yet captured</td><td><span class="chip open">partial</span></td></tr>
+        <tr><th>T3 objects</th><td>54 object proposals from 783 located detections (open-vocabulary detector); each confirmed or rejected by a person, with every answer kept as training data</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th>T4 asset registry</th><td>39 assets in an append-only, hash-chained ledger (234 events, chain verified, 18/18 tests). COBie export (Facility, Floor, Space, Type, Component, Job)</td><td><span class="chip ver">prototype</span></td></tr>
+        <tr><th>T5 operations</th><td>Tasks anchored to assets with SLA due dates; role lenses; flag, room check, correction review and sign-in; HO-REQ compliance computed live from the ledger (5 pass, 3 partial, 1 fail, 2 not measured)</td><td><span class="chip ver">prototype</span></td></tr>
+      </tbody></table></div>
+    <h3 class="ms-h3" id="knowledge"><i>3.10</i>Item knowledge model</h3>
+    <p class="ms-p">Every asset carries what operations needs to know about it, resolved from its class: what it is, whether it is fixed or movable, its value tier, how critical it is, its preventive-maintenance and cleaning cadence, and any regulatory inspection or test. Each rule records its basis and whether that basis has been verified; a rule taken from memory is shown as unverified until checked against the code or standard. Multi-year inspections show "not on record" until a dated inspection is entered, rather than a guessed due date.</p>
+    <div class="ms-tw"><table class="ms-t">
+      <thead><tr><th style="width:22%">Attribute</th><th>Content</th><th style="width:26%">Source</th></tr></thead>
+      <tbody>
+        <tr><th>Classification</th><td>Class chain (e.g. furniture.seating.task_chair), Uniformat II element, hospitality class (FF&amp;E, OS&amp;E, building system)</td><td>Class profile library</td></tr>
+        <tr><th>Mobility</th><td>Fixed or movable; movable items are expected to change position and are re-located, not flagged as errors</td><td>Class profile</td></tr>
+        <tr><th>Value tier and criticality</th><td>Low / medium / high value; criticality 1–5 for prioritising work</td><td>Class profile; facility records override</td></tr>
+        <tr><th>Maintenance and cleaning</th><td>Task, interval, department; due dates computed from the last completed task</td><td>Class profile; manufacturer data where known</td></tr>
+        <tr><th>Regulatory</th><td>Inspection or test, interval, authority and basis (e.g. Florida elevator inspection, ch. 399 F.S.; milestone structural inspection, s. 553.899 F.S.; NFPA 10/25/72 cycles)</td><td>Statute or standard, marked verified or unverified</td></tr>
+      </tbody></table></div>
+    <p class="ms-p">Bench-site result: 38 assets profiled (10 fixed, 28 movable; 9 high, 15 medium, 14 low value), carrying 35 maintenance, 46 cleaning and 2 regulatory rules.</p>
   </div>
 </section>
 
@@ -1095,7 +1119,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
     <div class="ms-tw"><table class="ms-t">
       <thead><tr><th style="width:8%">Rev</th><th style="width:16%">Date</th><th>Change</th></tr></thead>
       <tbody>
-        <tr class="hi"><th class="m">B</th><td class="m">2026-11-19</td><td>Renamed from build.os to Hotel.OS; identifiers BO-* → HO-*; page moved to hotel-os.html. Interactive digital-twin model added, including first-person walk and role lenses. 2.1 three-layer orchestration architecture (local autonomy, shared world model, orchestration); 2.2 shared view, role focus; HO-REQ-018 to 020. Sections 3.6–3.8: walkthrough fidelity, facilities floor-plan registration, addressing precision, GM view; HO-REQ-014 to 017. Deployment sites (11.1): The Grand, Miami; Hilton Thesis Hotel, Miami. HO-REQ-013 multi-operator tenancy.</td></tr>
+        <tr class="hi"><th class="m">C</th><td class="m">2026-11-23</td><td>Tier status updated from the bench-site prototype (3.1, 3.5). Section 3.9 prototype status with measured values; section 3.10 item knowledge model (classification, mobility, value tier, maintenance, cleaning, regulatory rules with verified basis).</td></tr>
+        <tr><th class="m">B</th><td class="m">2026-11-19</td><td>Renamed from build.os to Hotel.OS; identifiers BO-* → HO-*; page moved to hotel-os.html. Interactive digital-twin model added, including first-person walk and role lenses. 2.1 three-layer orchestration architecture (local autonomy, shared world model, orchestration); 2.2 shared view, role focus; HO-REQ-018 to 020. Sections 3.6–3.8: walkthrough fidelity, facilities floor-plan registration, addressing precision, GM view; HO-REQ-014 to 017. Deployment sites (11.1): The Grand, Miami; Hilton Thesis Hotel, Miami. HO-REQ-013 multi-operator tenancy.</td></tr>
         <tr><th class="m">A.1</th><td class="m">2026-11-19</td><td>Section 3.0 added: building digital twin tiers T1–T5 down to switches and outlets, object classes, operations map, map actions (add, close out, tag, summon robot, deploy resources, full footprint), twin maintenance; HO-REQ-009 to 012; HO-R-08, 09.</td></tr>
         <tr><th class="m">A</th><td class="m">2026-11-19</td><td>First issue: scope, system context, core modules, AI engine, domain model, integration map, fleet orchestration, selected shift devices (Sonim XP Pro Thermal, XP5plus 5G, MegaConnect; Rhino C65, T105), data and deployment, requirements, KPIs, roadmap, risks.</td></tr>
       </tbody></table></div>

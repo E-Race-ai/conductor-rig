@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev H · 2026-11-22"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu" data-rev="FU-SYS-001 · Rev I · 2026-11-23"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Site Capture · Accelerate Robotics</title>
 <meta name="description" content="Accelerate Site Capture (PRJ-02, FU-SYS-001): a quadruped-mounted mobile reality capture system for building-scale survey. Survey-controlled LiDAR, 4K and 360° imagery, segment-based SLAM and checkpoint QA, with the full technical specification.">
@@ -524,7 +524,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <header class="fu-hd" id="top">
   <div class="wrap hg">
     <div>
-      <div class="kicker">PRJ-02 · Accelerate Site Capture · FU-SYS-001 · Rev G · 2026-11-19</div>
+      <div class="kicker">PRJ-02 · Accelerate Site Capture · FU-SYS-001 · Rev I · 2026-11-23</div>
       <h1>Site Capture<span>Mobile reality capture system for building-scale survey</span></h1>
       <p class="lede-c">A quadruped-mounted LiDAR and imaging payload that produces a survey-controlled 3D record of an entire property — floors, corridors, elevator lobbies, back-of-house and service routes — as the reference map for robot fleet deployment.</p><p class="spec">Survey-controlled LiDAR + 360° imagery · hotels, resorts, care facilities, hospitals<br>Carrier: Unitree Go2 X (Gen-0, air-gapped) · Logger: Jetson Orin Nano Super · Processing: PRJ-01 The Brain</p>
       <div class="ms-tw"><table class="ms-t n">
@@ -533,6 +533,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
           <tr><th>Configuration</th><td>Gen-0 validation <span class="chip ver">active</span></td></tr>
           <tr><th>Site #1</th><td>The Grand, Miami · mixed-use (condominium, hotel operations, lobby retail) · <span class="m">1,000,000 sq ft (≈92,900 m²)</span></td></tr>
           <tr><th>Accuracy class</th><td>USIBD LOA at 2σ (95%): LOA20 building-wide (est.) · LOA30 zones via payload or TLS · <b>Required LOA: client TBD</b></td></tr>
+          <tr><th>Bench site (2026-11-23)</th><td>Multi-room unit captured with phone + 360° video: <span class="m">891</span> posed views, <span class="m">79.2 m²</span> floor; 12 control tags (MKS-1) hung; registration <span class="m">1.5 cm</span> RMS; scale check <span class="m">+7.3 %</span> open. <a href="fu-twin.html#zone">Details</a></td></tr>
           <tr><th>Next gate</th><td>G1 Pilot day: capture rate (m²/h) + checkpoint RMSE</td></tr>
           <tr><th>Owner</th><td>Accelerate program team</td></tr>
         </tbody></table></div>
@@ -638,7 +639,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
   </div>
 </section>
 
-<div class="spec-div" id="spec"><div class="wrap"><span>Technical specification</span><b>FU-SYS-001 · Mobile Reality Capture System (MRCS) · Rev G</b><small>For the Accelerate program team and client engineering reviewers. Sections 1.0–14.0 specify how the system is built, verified and operated.</small></div></div>
+<div class="spec-div" id="spec"><div class="wrap"><span>Technical specification</span><b>FU-SYS-001 · Mobile Reality Capture System (MRCS) · Rev I</b><small>For the Accelerate program team and client engineering reviewers. Sections 1.0–14.0 specify how the system is built, verified and operated.</small></div></div>
 
 <section class="band" id="conops">
   <div class="wrap">
@@ -1131,7 +1132,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
         <tr><td class="m">D</td><td class="m">2026-11-18</td><td>Building #1 capture mission added</td></tr>
         <tr><td class="m">E</td><td class="m">2026-11-18</td><td>Restructured as MRCS system document; arm moved to R&amp;D backlog; Gen-0/1/2 roadmap</td></tr>
         <tr><td class="m">F</td><td class="m">2026-11-18</td><td>Accelerate Robotics rebrand: Site Capture service story, hospitality operations, trust ecosystem and client deliverables ahead of the technical specification</td></tr>
-        <tr class="hi"><td class="m">H</td><td class="m">2026-11-22</td><td>Gen-0 LiDAR changed from Unitree L2 to Livox Mid-360S; Gen-0 project plan issued as a separate document (fu-project-plan.html)</td></tr>
+        <tr class="hi"><td class="m">I</td><td class="m">2026-11-23</td><td>Bench-site status added to the summary (multi-room capture, MKS-1 control tags, registration and open scale check); details in the Digital twin page Rev B</td></tr>
+        <tr><td class="m">H</td><td class="m">2026-11-22</td><td>Gen-0 LiDAR changed from Unitree L2 to Livox Mid-360S; Gen-0 project plan issued as a separate document (fu-project-plan.html)</td></tr>
         <tr><td class="m">G</td><td class="m">2026-11-19</td><td>Service definition (S1–S4) restated in specification register: scope split, operating constraints, data protection controls, deliverables and accuracy statements</td></tr>
       </tbody></table></div>
   </div>

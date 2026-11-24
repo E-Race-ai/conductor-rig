@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-proj="fu" data-rev="Digital twin · Rev A · 2026-11-23" data-sub="PRJ-02 · Site Capture" class="doc"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu" data-rev="Digital twin · Rev B · 2026-11-23" data-sub="PRJ-02 · Site Capture" class="doc"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Digital twin & Building Ledger · Site Capture · Accelerate Robotics</title>
 <meta name="description" content="Building Ledger: append-only hash-chained record of the building, registered captures, photoreal twin, object tagging loop and the Hotel.OS v1 API, with measured results.">
@@ -517,7 +517,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <a class="keep" href="#status">Status</a><a class="keep" href="#arch">Architecture</a><a href="#capture">Capture</a><a href="#ledger">Ledger</a><a class="keep" href="#api">Hotel.OS API</a><a href="#tagging">Tagging</a><a href="#render">Rendering</a><a class="keep" href="#scale">Scale</a><a href="#next">Next</a>
 </div></div></nav>
 <header class="fu-hd" id="top"><div class="wrap">
-<div class="kicker">PRJ-02 · Site Capture · Digital twin &amp; Building Ledger · Rev A · 2026-11-23</div>
+<div class="kicker">PRJ-02 · Site Capture · Digital twin &amp; Building Ledger · Rev B · 2026-11-23</div>
 <h1>Building Ledger<span>The located, verifiable record that Hotel.OS runs on</span></h1>
 <p class="lede-c" style="max-width:72ch">Captures (rig or phone video) are reconstructed and registered into one building frame. The building, its spaces, assets, tasks and every change are recorded in an append-only, hash-chained ledger. Hotel.OS reads and writes it through a located API, and staff, robots and integrations stay in sync over a live event stream. Everything on this page was measured on the bench building on 2026-11-23. Camera-only geometry is not survey grade; LiDAR (Mid-360S) is next.</p>
 <p class="tw-cap">Imagery of the bench building is withheld from this page. The working twin runs on the local network.</p>
@@ -526,14 +526,14 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="status" data-num="1.0"><div class="wrap">
 <div class="kicker">Status</div><h2>Status at 2026-11-23</h2>
 <div class="tw-kpi">
-<div><span>Captures registered</span><b>3</b><small>joint model 417 / 421 frames · 49,849 points · 0.90 px</small></div>
-<div><span>Registration</span><b>2.4 mm</b><small>RMS on 182 reference cameras; markers 0.7 / 0.1 cm; floor −3.4 cm</small></div>
+<div><span>Unit zone (multi-room)</span><b>891 views</b><small>phone + 360° video in one model · 64,937 points · 1.30 px · 79.2 m² floor</small></div>
+<div><span>Zone registration</span><b>1.5 cm</b><small>RMS on 2 reference tags · scale check +7.3 % open</small></div>
+<div><span>Control tags</span><b>12</b><small>MKS-1 site set C-04 to C-15 printed and hung</small></div>
+<div><span>Room model</span><b>2.4 mm</b><small>RMS on 182 reference cameras (single room, joint model)</small></div>
+<div><span>Ledger</span><b>234 events</b><small>hash chain verified · 39 assets · 101 reviews · 18/18 tests</small></div>
+<div><span>Hotel.OS requirements</span><b>5 / 11</b><small>pass, computed live from the ledger · 3 partial · 1 fail · 2 not measured</small></div>
+<div><span>Item knowledge</span><b>38</b><small>assets profiled · 35 maintenance · 46 cleaning · 2 regulatory rules</small></div>
 <div><span>3D twin</span><b>60 fps</b><small>moving, 1.0× pixel ratio; p95 17.6 ms (M4 Pro, Chrome/Metal)</small></div>
-<div><span>Ledger</span><b>33 events</b><small>hash chain verified · 19 artifacts in immutable store · 12/12 tests</small></div>
-<div><span>Object tagging</span><b>54</b><small>proposals from 783 located detections in 139 photos (YOLO-World)</small></div>
-<div><span>Rig capture (5 min)</span><b>0.1–0.3 %</b><small>dropped · 3 cameras streamed to workstation · 23 MB/s</small></div>
-<div><span>Hotel.OS API</span><b>v1</b><small>locate · tasks · SSE stream · live layer · CSV / DXF export</small></div>
-<div><span>Staff app</span><b>ops</b><small>department queue · photo crosshair · one-tap start / complete</small></div>
 </div></div></section>
 
 <section class="band" id="arch" data-num="2.0"><div class="wrap">
@@ -616,6 +616,22 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <p class="tw-cap">Rejected after measurement: 360° panorama as backdrop (wrong parallax), top-down splat orthophoto (floor not seen from above), Apple Object Capture mesh (fragmented at room scale).</p>
 </div></section>
 
+<section class="band" id="zone" data-num="7.5"><div class="wrap">
+<div class="kicker">Unit zone</div><h2>Multi-room zone and floor-plan reconciliation (measured)</h2>
+<p class="lede-c" style="max-width:72ch">The second capture covers a whole residential unit rather than one room: a phone walkthrough and a 60-second Insta360 X4 walk, posed together as a camera rig (six perspective views cut from each 360° frame). The owner's floor plan is the reference for room names and extents; the scan supplies what is actually there.</p>
+<div class="ms-tw"><table class="ms-t" style="min-width:640px"><thead><tr><th style="width:26%">Item</th><th style="width:20%">Value</th><th>Note</th></tr></thead><tbody>
+<tr><th>Posed views</th><td class="m">891</td><td>64,937 points, 1.30 px mean reprojection error. Final bundle adjustment diverged; the model before it is used</td></tr>
+<tr><th>Floor and ceiling</th><td class="m">79.2 m² · 2.70 m</td><td>Floor recovered from scan points, capture path and visibility carving; largest connected area kept</td></tr>
+<tr><th>Scale from tags</th><td class="m">4.7 % spread</td><td>Across triangulated tag corners</td></tr>
+<tr><th>Registration to building frame</th><td class="m">1.5 cm RMS</td><td>Similarity fit on the two reference tags shared with the room model</td></tr>
+<tr><th>Scale check</th><td class="m">+7.3 %</td><td>Reference-tag scale vs tag-derived scale. Open: a tape measurement decides which is right</td></tr>
+<tr><th>Drift vs owner plan</th><td class="m">up to 2–3 m</td><td>Before correction, far from the reference room</td></tr>
+<tr><th>Plan reconciliation</th><td class="m">0.7–1.8 m</td><td>Leave-one-out error of a thin-plate spline on 7 tags pinned to marked positions. Two tag positions conflict and are being checked on site</td></tr>
+<tr><th>Room coverage</th><td class="m">per room</td><td>Computed for every plan room. Living / dining (0 %) and kitchen (9 %) not yet captured; their video is being reconstructed separately and tied in through three shared tags</td></tr>
+<tr><th>Single-photo 3D furniture</th><td class="m">not adopted</td><td>Image-to-3D (TripoSR) tested on four objects; shapes not usable. Furniture stays as measured footprints with photo-sampled colours</td></tr>
+</tbody></table></div>
+</div></section>
+
 <section class="band" id="scale" data-num="8.0"><div class="wrap">
 <div class="kicker">Scale</div><h2>Path to 1,000,000 sq ft / 10,000,000 ft³</h2>
 <div class="ms-tw"><table class="ms-t" style="min-width:720px"><thead><tr><th style="width:22%">Concern</th><th>Bench</th><th>Building design</th></tr></thead><tbody>
@@ -630,12 +646,22 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="next" data-num="9.0"><div class="wrap">
 <div class="kicker">Next</div><h2>Next actions</h2>
 <div class="ms-tw"><table class="ms-t"><thead><tr><th style="width:6%">#</th><th>Action</th><th style="width:28%">Unblocks</th></tr></thead><tbody>
-<tr><th class="m">1</th><td>Fit NVMe to the Jetson; BRIO on a USB 3 link</td><td>long captures; on-device AI (GPU PyTorch)</td></tr>
-<tr><th class="m">2</th><td>Mid-360S LiDAR: driver, network profiles and FAST-LIO2 are installed and waiting</td><td>survey-grade geometry, scan-to-BIM</td></tr>
-<tr><th class="m">3</th><td>Zone entity and zone-streaming viewer; SQLite ledger projection</td><td>building scale</td></tr>
-<tr><th class="m">4</th><td>Ledger on the Brain with SSO, roles and TLS; LAN access for shift devices</td><td>production use</td></tr>
-<tr><th class="m">5</th><td>Fine-tune the detector on reviewed labels (outlets, switches, life safety)</td><td>automatic tagging at scale</td></tr>
-<tr><th class="m">6</th><td>PMS room status, guest messaging and Open-RMF adapters</td><td>Hotel.OS integrations</td></tr>
+<tr><th class="m">1</th><td>Tape-measure two known spans in the unit</td><td>resolves the +7.3 % scale check</td></tr>
+<tr><th class="m">2</th><td>Confirm the two conflicting tag positions; re-fit the plan with all 12 tags</td><td>sub-metre plan reconciliation</td></tr>
+<tr><th class="m">3</th><td>Tie the living-room capture in through tags C-13 to C-15</td><td>full unit coverage</td></tr>
+<tr><th class="m">4</th><td>Mid-360S LiDAR: driver, network profiles and FAST-LIO2 are installed and waiting</td><td>survey-grade geometry; removes the scale question</td></tr>
+<tr><th class="m">5</th><td>Fit NVMe to the Jetson; BRIO on a USB 3 link</td><td>long captures; on-device AI</td></tr>
+<tr><th class="m">6</th><td>Ledger on the Brain with SSO, roles and TLS; SQLite projection</td><td>production use, building scale</td></tr>
+<tr><th class="m">7</th><td>Fine-tune the detector on reviewed labels (outlets, switches, life safety)</td><td>automatic tagging at scale</td></tr>
+<tr><th class="m">8</th><td>PMS room status, guest messaging and Open-RMF adapters</td><td>Hotel.OS integrations</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section class="band" id="rev" data-num="10.0"><div class="wrap">
+<div class="kicker">Record</div><h2>Revision history</h2>
+<div class="ms-tw"><table class="ms-t"><thead><tr><th style="width:8%">Rev</th><th style="width:16%">Date</th><th>Change</th></tr></thead><tbody>
+<tr class="hi"><th class="m">B</th><td class="m">2026-11-23</td><td>Status refreshed; section 7.5 multi-room unit zone and floor-plan reconciliation; next actions re-ordered</td></tr>
+<tr><th class="m">A</th><td class="m">2026-11-23</td><td>First issue</td></tr>
 </tbody></table></div>
 </div></section>
 

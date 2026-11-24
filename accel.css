@@ -879,3 +879,5 @@ html[data-proj] .fl small,.fl small{font-family:var(--sans)!important}
 .fl .fl-val .v:nth-last-child(-n+3){border-bottom:0}
 .fl .fl-val .v-att.hot{background:linear-gradient(180deg,rgba(212,166,90,.16),rgba(212,166,90,.04));border-color:var(--ln)}
 @container (max-width:620px){.fl .fl-val .v:nth-child(3n){border-right:1px solid var(--ln)}.fl .fl-val .v:nth-child(2n){border-right:0}.fl .fl-val .v:nth-last-child(-n+3){border-bottom:1px solid var(--ln)}.fl .fl-val .v:nth-last-child(-n+2){border-bottom:0}}
+
+.chip.ver{color:#00C8FF!important;border-color:#00C8FF!important}

@@ -329,7 +329,7 @@ The plan is to connect the cameras and the LiDAR directly to the Jetson. The boa
 - **Board** identified from photos as the Orin Nano Developer Kit, with two CSI camera ribbons fitted.
 - **Power** from an Omnicharge power bank through the barrel jack. Confirm that it is set to 19 V.
 - **USB:** the cable to the Mac was in a USB-A port, so the Mac never saw the Jetson. It must move to the USB-C port.
-- **Ethernet** direct to the Mac: link up at 1 Gb/s, an IPv6 link-local neighbour at `74:25:54:da:e6:8d`, no IPv4 address, no SSH. This is consistent with no bootable OS.
+- **Ethernet** direct to the Mac: link up at 1 Gb/s, an IPv6 link-local neighbour at `<mac>`, no IPv4 address, no SSH. This is consistent with no bootable OS.
 - **Display:** a DisplayPort cable was connected; the screen was black. No card was in the Jetson at the time.
 - **Card:** a 32 GB card was prepared, and the JetPack 6.2.1 image was downloaded and integrity-checked on the Mac. The card write (Step 2) is next.
 </script><script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script><script>const el=document.getElementById("doc"),src=document.getElementById("md").textContent;if(window.marked){el.innerHTML=marked.parse(src);el.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.appendChild(t);});el.querySelectorAll("a[href^='http']").forEach(a=>{a.target="_blank";a.rel="noopener";});const used={};el.querySelectorAll("h2,h3").forEach(h=>{let s=h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"s";if(used[s]){s+="-"+(++used[s]);}else used[s]=1;h.id=s;});}else{el.innerHTML="<pre></pre>";el.firstChild.textContent=src;}</script></body></html>
