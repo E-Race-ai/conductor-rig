@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-proj="fu" data-rev="Digital twin · Rev B · 2026-11-23" data-sub="PRJ-02 · Site Capture" class="doc"><head><meta charset="utf-8">
+<html lang="en" data-proj="fu" data-rev="Digital twin · Rev C · 2026-11-24" data-sub="PRJ-02 · Site Capture" class="doc"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Digital twin & Building Ledger · Site Capture · Accelerate Robotics</title>
 <meta name="description" content="Building Ledger: append-only hash-chained record of the building, registered captures, photoreal twin, object tagging loop and the Hotel.OS v1 API, with measured results.">
@@ -517,16 +517,16 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <a class="keep" href="#status">Status</a><a class="keep" href="#arch">Architecture</a><a href="#capture">Capture</a><a href="#ledger">Ledger</a><a class="keep" href="#api">Hotel.OS API</a><a href="#tagging">Tagging</a><a href="#render">Rendering</a><a class="keep" href="#scale">Scale</a><a href="#next">Next</a>
 </div></div></nav>
 <header class="fu-hd" id="top"><div class="wrap">
-<div class="kicker">PRJ-02 · Site Capture · Digital twin &amp; Building Ledger · Rev B · 2026-11-23</div>
+<div class="kicker">PRJ-02 · Site Capture · Digital twin &amp; Building Ledger · Rev C · 2026-11-24</div>
 <h1>Building Ledger<span>The located, verifiable record that Hotel.OS runs on</span></h1>
 <p class="lede-c" style="max-width:72ch">Captures (rig or phone video) are reconstructed and registered into one building frame. The building, its spaces, assets, tasks and every change are recorded in an append-only, hash-chained ledger. Hotel.OS reads and writes it through a located API, and staff, robots and integrations stay in sync over a live event stream. Everything on this page was measured on the bench building on 2026-11-23. Camera-only geometry is not survey grade; LiDAR (Mid-360S) is next.</p>
 <p class="tw-cap">Imagery of the bench building is withheld from this page. The working twin runs on the local network.</p>
 </div></header>
 
 <section class="band" id="status" data-num="1.0"><div class="wrap">
-<div class="kicker">Status</div><h2>Status at 2026-11-23</h2>
+<div class="kicker">Status</div><h2>Status at 2026-11-24</h2>
 <div class="tw-kpi">
-<div><span>Unit zone (multi-room)</span><b>891 views</b><small>phone + 360° video in one model · 64,937 points · 1.30 px · 79.2 m² floor</small></div>
+<div><span>Unit zone (multi-room)</span><b>891 views</b><small>phone + 360° video in one model · 64,937 points · 1.30 px · 118.6 m² floor with the living room added</small></div>
 <div><span>Zone registration</span><b>1.5 cm</b><small>RMS on 2 reference tags · scale check +7.3 % open</small></div>
 <div><span>Control tags</span><b>12</b><small>MKS-1 site set C-04 to C-15 printed and hung</small></div>
 <div><span>Room model</span><b>2.4 mm</b><small>RMS on 182 reference cameras (single room, joint model)</small></div>
@@ -627,7 +627,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <tr><th>Scale check</th><td class="m">+7.3 %</td><td>Reference-tag scale vs tag-derived scale. Open: a tape measurement decides which is right</td></tr>
 <tr><th>Drift vs owner plan</th><td class="m">up to 2–3 m</td><td>Before correction, far from the reference room</td></tr>
 <tr><th>Plan reconciliation</th><td class="m">0.7–1.8 m</td><td>Leave-one-out error of a thin-plate spline on 7 tags pinned to marked positions. Two tag positions conflict and are being checked on site</td></tr>
-<tr><th>Room coverage</th><td class="m">per room</td><td>Computed for every plan room. Living / dining (0 %) and kitchen (9 %) not yet captured; their video is being reconstructed separately and tied in through three shared tags</td></tr>
+<tr><th>Room coverage</th><td class="m">per room</td><td>Share of each plan room with measured floor. Living / dining 97 %, kitchen 86 % after the living-room walk was added; Bedroom 2 and its bath not yet captured</td></tr>
+<tr><th>Living room (separate walk)</th><td class="m">±0.3–0.5 m</td><td>IMG_1165: 229 of 243 views, 25,671 points, 0.67 px (incremental mapper; the first global-mapper run was distorted). Scale from C-13, C-14, C-15 agrees to 0.2 %. No views shared with the unit walk, so it is placed by fitting its walls to the owner plan (61 % of wall points within 0.3 m of the outline); floor and ceiling land at the unit's 2.70 m. Hand-marked star G1 was ~3 m off along its wall; C-13 was also sighted near the Bedroom 4 corridor on the 360° walk and is being checked</td></tr>
 <tr><th>Single-photo 3D furniture</th><td class="m">not adopted</td><td>Image-to-3D (TripoSR) tested on four objects; shapes not usable. Furniture stays as measured footprints with photo-sampled colours</td></tr>
 </tbody></table></div>
 </div></section>
@@ -648,7 +649,7 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <div class="ms-tw"><table class="ms-t"><thead><tr><th style="width:6%">#</th><th>Action</th><th style="width:28%">Unblocks</th></tr></thead><tbody>
 <tr><th class="m">1</th><td>Tape-measure two known spans in the unit</td><td>resolves the +7.3 % scale check</td></tr>
 <tr><th class="m">2</th><td>Confirm the two conflicting tag positions; re-fit the plan with all 12 tags</td><td>sub-metre plan reconciliation</td></tr>
-<tr><th class="m">3</th><td>Tie the living-room capture in through tags C-13 to C-15</td><td>full unit coverage</td></tr>
+<tr><th class="m">3</th><td>Capture Bedroom 2 and its bath; one walk from the hall through the living room to tie the living room to the unit model directly</td><td>full unit coverage; living room to centimetres</td></tr>
 <tr><th class="m">4</th><td>Mid-360S LiDAR: driver, network profiles and FAST-LIO2 are installed and waiting</td><td>survey-grade geometry; removes the scale question</td></tr>
 <tr><th class="m">5</th><td>Fit NVMe to the Jetson; BRIO on a USB 3 link</td><td>long captures; on-device AI</td></tr>
 <tr><th class="m">6</th><td>Ledger on the Brain with SSO, roles and TLS; SQLite projection</td><td>production use, building scale</td></tr>
@@ -660,7 +661,8 @@ footer li{break-inside:avoid;margin-bottom:6px}
 <section class="band" id="rev" data-num="10.0"><div class="wrap">
 <div class="kicker">Record</div><h2>Revision history</h2>
 <div class="ms-tw"><table class="ms-t"><thead><tr><th style="width:8%">Rev</th><th style="width:16%">Date</th><th>Change</th></tr></thead><tbody>
-<tr class="hi"><th class="m">B</th><td class="m">2026-11-23</td><td>Status refreshed; section 7.5 multi-room unit zone and floor-plan reconciliation; next actions re-ordered</td></tr>
+<tr class="hi"><th class="m">C</th><td class="m">2026-11-24</td><td>Living room and kitchen added from a separate phone walk (placed on the plan by its walls); coverage and floor area updated</td></tr>
+<tr><th class="m">B</th><td class="m">2026-11-23</td><td>Status refreshed; section 7.5 multi-room unit zone and floor-plan reconciliation; next actions re-ordered</td></tr>
 <tr><th class="m">A</th><td class="m">2026-11-23</td><td>First issue</td></tr>
 </tbody></table></div>
 </div></section>
