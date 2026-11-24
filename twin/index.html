@@ -1,7 +1,9 @@
 <!doctype html>
-<html lang="en"><head><script>
+<html lang="en"><head><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e1a'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23D4A65A'/%3E%3C/svg%3E">
+<script>
 // Hotel.OS public demo: read-only snapshot. API calls are answered from data/; nothing is saved; no photos are published.
 window.HOS_DEMO = true;
+try { if (!localStorage.getItem('ledger.author')) localStorage.setItem('ledger.author', 'Visitor'); } catch (e) {}
 (function () {
   const F = window.fetch.bind(window);
   const BASE = location.href.replace(/[?#].*$/, '').replace(/[^/]*$/, '');
@@ -14,9 +16,9 @@ window.HOS_DEMO = true;
     if (u.startsWith('zone.json') || u.startsWith('plan_overlay.json') || u.startsWith('zone.ply')) return 'data/scans/rig-092/' + u.split('?')[0];
     return u;
   };
-  const ro = () => new Response(JSON.stringify({ error: 'Read-only demo: changes are not saved' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+  const ro = () => new Response(JSON.stringify({ error: 'this is a read-only public snapshot, so nothing is saved. On a live property this would go straight to the team.' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
   window.fetch = async (u, o) => {
-    if (o && o.method && o.method !== 'GET') { demoNote(); return ro(); }
+    if (o && o.method && o.method !== 'GET') { demoNote(); setTimeout(() => { const m = document.getElementById('modal'); if (m && !m.hidden) document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); }, 1600); return ro(); }
     const t = map(typeof u === 'string' ? u : u.url);
     if (t === null || t === 'blocked') return new Response('', { status: 404 });
     if (t.startsWith('#know:')) { const all = await F('data/api/v1/knowledge.json').then(r => r.json()); return new Response(JSON.stringify(all[t.slice(6)] || {}), { headers: { 'Content-Type': 'application/json' } }); }
